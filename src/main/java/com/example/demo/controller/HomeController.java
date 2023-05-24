@@ -4,15 +4,12 @@ import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("home")
 public class HomeController {
 
-	@GetMapping("/home")
+	@GetMapping("/")
 	public String home() {
 		return "home";
 	}
-	@GetMapping("schedule")
-	public String getSchedule() {
-		return "schedule";
-	}
+	
 }
