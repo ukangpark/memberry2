@@ -25,7 +25,7 @@
 		</a>
 		<a class="item">
 			<i class="video play icon"></i>
-			호텔, 캠핑장장장
+			호텔, 캠핑
 		</a>
 	</div>
 	
