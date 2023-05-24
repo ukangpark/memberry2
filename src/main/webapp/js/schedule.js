@@ -19,6 +19,7 @@ function addTodo() {
 		del.style.border = "none";
 		del.style.float = "right";
 		del.style.right = "17px";
+		del.style.height = "60px";
 		del.style.marginTop = "10px";
 		del.style.cursor = "pointer";
 		del.addEventListener("click", deleteList);
@@ -38,3 +39,6 @@ function deleteList(e) {
 	removeOne.remove();
 }
 
+function allClearList(e) {
+	result.innerText = '';
+}
