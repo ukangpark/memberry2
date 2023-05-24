@@ -3,7 +3,7 @@ package com.example.demo.controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @org.springframework.stereotype.Controller
-@RequestMapping("map")
+@RequestMapping("/bery/petsitter")
 public class PetsitterController {
 	
 	@RequestMapping("mapTest")
