@@ -1,10 +1,16 @@
 package com.example.demo.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @org.springframework.stereotype.Controller
 @RequestMapping("/bery/petsitter")
 public class PetsitterController {
+	
+	//메인페이지 (로고 & 서치바 & 이미지 슬라이더)
+	@GetMapping("slider")
+	public void slider() {
+		
+	}
 	
 	@RequestMapping("mapTest")
 	public void map() {
