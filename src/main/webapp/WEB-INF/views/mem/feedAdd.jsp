@@ -15,10 +15,20 @@
 		<h1>새로운 스토리 추가해보세요!</h1>
 		<form action="" method="post">
 			<div>
-				제목 : </div>
-			<div></div>
-			<div></div>
-			<div></div>
+				제목 : <input type="text" name="title" />
+				</div>
+			<div>
+				본문 : <textarea name="content"></textarea>
+			</div>
+			<div>
+				작성자 : <input type="text" name="writer"/>
+			</div>
+			<div>
+				장소 태그 : <input type="text" name="location"/>
+			</div>
+			<div>
+				<input type="submit" value="추가" />
+			</div>
 		</form>
 	</div>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
