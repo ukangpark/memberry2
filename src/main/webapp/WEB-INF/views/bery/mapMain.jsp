@@ -39,6 +39,7 @@ div{
 
 </head>
 <body>
+
 	<h1>너와 함께(가제)</h1>
 	
 	<button style= "float : right"  class="ui basic button" onclick="location.href='/bery/mapMypage'">
