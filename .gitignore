@@ -1,6 +1,8 @@
 custom.properties
 application-API-KEY.properties
 
+application-API-KEY.properties
+
 HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
