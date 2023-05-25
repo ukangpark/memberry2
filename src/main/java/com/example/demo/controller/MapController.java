@@ -22,8 +22,8 @@ public class MapController {
 	}
 	
 	@GetMapping("mapMypage")
-	public String method1() {
-		return "bery/mapMypage";
+	public void method1() {
+		//return "bery/mapMypage";
 		
 	}
 }
