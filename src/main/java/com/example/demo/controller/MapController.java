@@ -11,6 +11,6 @@ public class MapController {
 	
 	@GetMapping("mapMain")
 	public void mapMain() {
-		
+		        
 	}
 }
