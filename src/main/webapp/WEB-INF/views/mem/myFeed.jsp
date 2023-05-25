@@ -37,13 +37,20 @@
 	
 	<h1>My Feed</h1>
 
+	</br>
+	
+	 <c:forEach items="${myFeedList }" var="myFeed">
 	 <div id="columns">
       <figure>
         <img src="//s3-us-west-2.amazonaws.com/s.cdpn.io/4273/cinderella.jpg">
-        <figcaption>Cinderella wearing European fashion of the mid-1860’s</figcaption>
+        <figcaption>
+        	<a href="/id/${myFeed.id }">
+        		${myFeed.title }
+        	</a>
+        </figcaption>
       </figure>
  
-      <figure>
+<!--       <figure>
         <img src="//s3-us-west-2.amazonaws.com/s.cdpn.io/4273/rapunzel.jpg">
         <figcaption>Rapunzel, clothed in 1820’s period fashion</figcaption>
       </figure>
@@ -81,8 +88,9 @@
       <figure>
         <img src="//s3-us-west-2.amazonaws.com/s.cdpn.io/4273/tiana.jpg">
         <figcaption>Tiana wearing the <i>robe de style</i> of the 1920’s</figcaption>
-      </figure>   
+      </figure> -->   
     </div>
+    </c:forEach>
 	
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
