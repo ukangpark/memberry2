@@ -11,72 +11,59 @@
 <title> 너와 함께</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="/js/semantic/semantic.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=${apiKey }&libraries=services"></script>
+<link rel = "stylesheet" href="/css/mapMain.css" />
 
-<style>
 
-#container{
-	display : inline-block;
-}
 
-div{
-	float : left;
-}
-
-#map{
-	width:1920px; 
-	height:800px;
-	position: relative;
-	z-index: 1;
-}
-
-#navbar{
-	position: absolute;
-	z-index: 2;
-}
-
-</style>
 
 </head>
 <body>
-
-	<h1>너와 함께(가제)</h1>
 	
-	<button style= "float : right"  class="ui basic button" onclick="location.href='/bery/mapMypage'">
-  <i class="icon user"></i>
-	  마이 페이지
+	<h1>너와 함께</h1>
+<%-- 이거는 왜 안뜨는걸까.. <i class="fa-duotone fa-paw" style="--fa-primary-color: #f9a9a9; --fa-secondary-color: #1f1f1f;"></i> --%>	
+	
+	
+	<button style= "float : right"  class="ui basic button" onclick="location.href='/map/mapMypage'">
+  <i class="icon star"></i>
+	  즐겨찾기
 	</button>
 
 	<div id="container">
 		<div id="navbar" class="ui compact vertical labeled icon menu">
-			<a class="item">
+			<a class="item" onclick="searchRest('서울 애견동반식당')">
 				<i class="utensils icon"></i>
 				식당 
 			</a>
-			<a class="item">
+			<a class="item" onclick="searchRest('서울 애견카페')">
 				<i class="coffee icon"></i>
 				카페 
 			</a>
-			<a class="item">
+			<a class="item" onclick="searchRest('서울 동물병원')">
 				<i class="hospital icon"></i>
-				약국, 병원 
+				병원 
 			</a>
-			<a class="item">
-				<i class="paw icon"></i>
-				호텔, 캠핑장
+			<a class="item" onclick="searchRest('서울 애견동반호텔')">
+				<i class="building icon" ></i>
+				호텔
+			</a>
+			<a class="item" onclick="searchRest('애견캠핑장')">
+				<i class="paw icon" ></i>
+				캠핑장
 			</a>
 		</div>
 		
 		
 		<div class="map_wrap">
 		<div id="map"></div>
-    <%-- <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div> --%>
+     <%-- <div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div> --%>
 
     <div id="menu_wrap" class="bg_white">
         <div class="option">
             <div>
                 <form onsubmit="searchPlaces(); return false;">
-                    키워드 : <input type="text" value="서울 애견 카페" id="keyword" size="15"> 
+                    키워드 : <input type="text" value="서울 애견동반식당" id="keyword" size="15"> 
                     <button type="submit">검색하기</button> 
                 </form>
             </div>
@@ -142,7 +129,7 @@ function placesSearchCB(data, status, pagination) {
         displayPlaces(data);
 
         // 페이지 번호를 표출합니다
-        displayPagination(pagination);
+        //displayPagination(pagination);
 
     } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
 
@@ -269,7 +256,7 @@ function removeMarker() {
 }
 
 // 검색결과 목록 하단에 페이지번호를 표시는 함수입니다
-function displayPagination(pagination) {
+/* function displayPagination(pagination) {
     var paginationEl = document.getElementById('pagination'),
         fragment = document.createDocumentFragment(),
         i; 
@@ -297,7 +284,7 @@ function displayPagination(pagination) {
         fragment.appendChild(el);
     }
     paginationEl.appendChild(fragment);
-}
+} */
 
 // 검색결과 목록 또는 마커를 클릭했을 때 호출되는 함수입니다
 // 인포윈도우에 장소명을 표시합니다
@@ -316,9 +303,15 @@ function removeAllChildNods(el) {
 }
 
 
-
-
-
+// 사이드바 버튼 누를때 리스트 뜨게 함수 설정 
+function searchRest(param){
+	
+	// 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
+    ps.keywordSearch( param, placesSearchCB); 
+    document.getElementById('keyword').value = param;
+    
+}
+ 
 	</script>
 	
 

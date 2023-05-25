@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.example.demo.service.MapService;
 
 @Controller
-@RequestMapping("bery")
+@RequestMapping("map")
 public class MapController {
 	
 	@Autowired
@@ -22,8 +22,8 @@ public class MapController {
 	}
 	
 	@GetMapping("mapMypage")
-	public String method1() {
-		return "bery/mapMypage";
+	public void method1() {
+		//return "bery/mapMypage";
 		
 	}
 }

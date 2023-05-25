@@ -1,34 +1,43 @@
 package com.example.demo.controller;
 
-import org.springframework.web.bind.annotation.*;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.example.demo.domain.Detail;
+import com.example.demo.domain.Host;
+import com.example.demo.service.PetsitterService;
 
 @org.springframework.stereotype.Controller
-@RequestMapping("/bery/petsitter")
+@RequestMapping("petsitter")
 public class PetsitterController {
 	
-	//메인페이지 (로고 & 서치바 & 이미지 슬라이더)
-	@GetMapping("slider")
-	public void slider() {
+	@Autowired
+	private PetsitterService petsitterService;
+	
+	@GetMapping("detail")
+	public void detail(@RequestParam("id") Integer boardId, Model model) {
+		// 서비스에서 map으로 반환한 것을 담았음 
+		Map<String, Object> info = petsitterService.selectById(boardId);
+		
+		model.addAllAttributes(info);		
+	}
+	
+	@GetMapping("apply")
+	public void applyForm() {
 		
 	}
 	
-	@RequestMapping("mapTest")
-	public void map() {
+	@PostMapping("apply")
+	public void applyProcess() {
 		
 	}
 	
-	@RequestMapping("main")
-	public void main() {
-		
-	}
 	
-	@RequestMapping("petsitterDetail")
-	public void petsitter() {
-		
-	}
-	
-	@RequestMapping("testCalendar")
-	public void test() {
-		 
-	}
 }
