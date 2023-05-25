@@ -32,5 +32,11 @@ public interface MyFeedMapper {
 			WHERE id = #{id}
 			""")
 	Feed selectById(Integer id);
+
+	@Insert("""
+			INSERT INTO File (feedId, fileName)
+			VALUES (#{feedId}, #{fileName})
+			""")
+	void insertFileName(Integer feedId, String fileName);
 	
 }
