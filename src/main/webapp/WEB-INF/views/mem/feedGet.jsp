@@ -19,7 +19,7 @@
 		<div class="mb-3">
 			<c:forEach items="${fileNameList }" var="fileName" >
 				<div class="mb-3">
-					<c:set var="bucketUrl" value="https://lilysbucket0503.s3.ap-northeast-2.amazonaws.com/ours" />
+					<c:set var="bucketUrl" value="https://lilysbucket0503.s3.ap-northeast-2.amazonaws.com/membery" />
 					<img class="img-thumnail img-fluid" src="${bucketUrl }/${feed.id }/${fileName }" alt="" />
 				</div>
 			</c:forEach>
