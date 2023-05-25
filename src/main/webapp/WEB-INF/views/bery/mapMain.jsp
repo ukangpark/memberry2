@@ -20,10 +20,15 @@
 
 </head>
 <body>
+<<<<<<< HEAD
 	
 	<h1>너와 함께</h1>
 <%-- 이거는 왜 안뜨는걸까.. <i class="fa-duotone fa-paw" style="--fa-primary-color: #f9a9a9; --fa-secondary-color: #1f1f1f;"></i> --%>	
 	
+=======
+
+	<h1>너와 함께(가제)</h1>
+>>>>>>> 2701a6769344fad49fa40e2c17dbbbfb72c93faf
 	
 	<button style= "float : right"  class="ui basic button" onclick="location.href='/bery/mapMypage'">
   <i class="icon star"></i>
