@@ -18,7 +18,7 @@
 		<br />
 		<form method="post" enctype="multipart/form-data">
 			<div>
-				 <input type="file" multiple name="files" accept="image" />
+				 <input type="file" multiple name="files" accept="image/*" />
 			</div>
 			<div>
 				제목 : <input type="text" name="title" />

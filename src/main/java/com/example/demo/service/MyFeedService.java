@@ -1,20 +1,32 @@
 package com.example.demo.service;
 
-import java.io.*;
-import java.util.*;
+import java.util.List;
 
-import org.springframework.beans.factory.annotation.*;
-import org.springframework.stereotype.*;
-import org.springframework.transaction.annotation.*;
-import org.springframework.web.multipart.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
-import com.example.demo.domain.*;
-import com.example.demo.mapper.*;
+import com.example.demo.domain.Feed;
+import com.example.demo.mapper.MyFeedMapper;
+
+import software.amazon.awssdk.core.sync.RequestBody;
+import software.amazon.awssdk.services.s3.S3Client;
+import software.amazon.awssdk.services.s3.model.ObjectCannedACL;
+import software.amazon.awssdk.services.s3.model.PutObjectAclRequest;
+import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 
 @Service
 @Transactional(rollbackFor = Exception.class)
 public class MyFeedService {
 
+	@Autowired
+	private S3Client s3;
+	
+	@Value("${aws.s3.bucketName}")
+	private String bucketName;
+	
 	@Autowired
 	private MyFeedMapper mapper;
 	
@@ -30,19 +42,16 @@ public class MyFeedService {
 		for (MultipartFile file : files) {
 			if (file.getSize() > 0) {
 				// S3 저장소 사용을 위한 키
-				String objectKey = "feed/" + feed.getId() + "/" + file.getOriginalFilename();
+				String objectKey = "membery/" + feed.getId() + "/" + file.getOriginalFilename();
+				PutObjectRequest por = PutObjectRequest.builder()
+						.bucket(bucketName)
+						.key(objectKey)
+						.acl(ObjectCannedACL.PUBLIC_READ)
+						.build();
+				RequestBody rb = RequestBody.fromInputStream(file.getInputStream(), file.getSize());
 				
-				// 파일 저장 (파일 시스템에)
-				// 폴더 만들기
-				String folder = "C:\\study\\upload\\" + feed.getId();
-				File targetFolder = new File(folder);
-				if (!targetFolder.exists()) {
-					targetFolder.mkdir();
-				}
+				s3.putObject(por, rb);
 				
-				String path = folder + "\\" + file.getOriginalFilename();
-				File target = new File(path);
-				file.transferTo(target);
 				// DB에 관련 정보 저장(insert)
 				mapper.insertFileName(feed.getId(),file.getOriginalFilename());
 			}

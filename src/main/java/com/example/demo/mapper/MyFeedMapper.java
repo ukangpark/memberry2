@@ -37,6 +37,6 @@ public interface MyFeedMapper {
 			INSERT INTO File (feedId, fileName)
 			VALUES (#{feedId}, #{fileName})
 			""")
-	void insertFileName(Integer feedId, String fileName);
+	Integer insertFileName(Integer feedId, String fileName);
 	
 }
