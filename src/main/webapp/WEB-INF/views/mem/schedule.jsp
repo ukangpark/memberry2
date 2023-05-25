@@ -1,5 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -407,7 +411,9 @@ img { vertical-align: top;}
 	</div>
 
 
-	<!----------------------------------------------------------------------  -->
+
+<my:navBar></my:navBar>
+
 
 	<div class="wrapper">
 		<h1>ToDoList</h1>
