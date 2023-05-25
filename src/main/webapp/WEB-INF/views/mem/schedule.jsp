@@ -24,10 +24,11 @@
 		
 	}
 	.calendarWrapper {
-		width: 50%;
+		width: 60%;
 		float: left;
+		margin: auto;
 	}
-	/* --------------------------------------------------------- */
+/* --달력 코드 복붙------------------------------------------------------- */
 	.clickBtn {
   width: 70px;
   height: 35px;
@@ -52,9 +53,12 @@ header > h1 {
   height: 100%;
   flex-grow: 1;
 }
-.fa-calendar-check {color: #fa709a; margin-right: 2%; vertical-align: middle;}
-header > h1 > span {color: #a7a7a7; font-size: 24px; font-weight: 400; vertical-align: bottom;}
+/* 달력 모양 */
+.fa-calendar-check {color: black; margin-right: 2%; vertical-align: middle;}
+/* 캘린더 텍스트 */
+header > h1 > span {color: grey; font-size: 24px; font-weight: 400; vertical-align: bottom;}
 .calendar_title { margin: 0 auto; flex-grow: 1;}
+/* 이전 달, 다음 달 넘어가는 버튼 */
 .calendar_title .prev , .next{
   width: 30px;
   height: 100%;
@@ -63,66 +67,59 @@ header > h1 > span {color: #a7a7a7; font-size: 24px; font-weight: 400; vertical-
   font-size: 20px;
   outline: none;
   color: #5c5c5c;
+  border-radius: 5px;
+  font-weight: 600;
 }
+/* 현재 달, 년 */
 .calendar_title .current-year-month {
   font-size: 24px;
   vertical-align: middle;
-  color: rgb(255, 82, 195);
+  color: black;
   display: inline-block;
   margin: 0 20px;
 }
 
-/* content left */
+/* content left : 현재 날짜, 요일*/
 .content-left {
   float: left;
   box-sizing: border-box;
   width: 20%;
 }
+
 .left-main {margin-top: 20%;}
 .left-main .main-wrap {
   text-align: center;
   font-weight: 700;
 }
+/* 오늘 요일 */
 .left-main .main-wrap .main-day {
   padding: 10% 0;
   font-size: 30px;
-  color: #F594D3;
+  color: grey;
 }
+/* 오늘 날짜 */
 .left-main .main-wrap .main-date {
   margin: 10% 0;
   font-size: 80px;
-  color: rgb(255, 82, 195);
+  color: black;
 }
-.left-main .todo-wrap {padding: 20% 0 10% 10%;}
-.left-main .todo-wrap .todo-title {
-  font-size: 40px;
-  font-weight: 600;
-  margin-bottom: 10%;
-  color: #5c5c5c;
-}
-.left-main .todo-wrap .input-form .input-box {
-  width: 90%;
-  height: 50px;
-  font-size: 20px;
-  border: 0;
-  border-bottom: 2px dashed rgb(255, 82, 195);
-  margin-bottom: 30px;
-  outline-style: none;
-}
-/* content right */
+
+
+/* content right달 - 력 본문 */
 .content-right {
   float: right;
   box-sizing: border-box;
   width: 80%;
 }
+/* 요일 테이블 헤드 */
 .content-right .day-of-week {
-  background: rgb(254, 194, 233);
+  background: #E2E2E2;
   width: 100%;
   height: 100%;
 }
 .content-right .day-of-week .dayHeader {
   display: inline-block;
-  width: calc(100% / 7.2);
+  width: calc(100% / 7.5);
   height: 100%;
   text-align: center;
   padding: 1%;
@@ -130,7 +127,9 @@ header > h1 > span {color: #a7a7a7; font-size: 24px; font-weight: 400; vertical-
   font-weight: 600;
   font-size: 18px;
 }
+/* 일요일 헤더: 빨간색 */
 .content-right .day-of-week .dayHeader.sun {color: #f02f2f;}
+/* 토요일 헤더 : 파란색 */
 .content-right .day-of-week .dayHeader.sat {color: #2208e7;}
 
 /* calendar body  */
@@ -143,7 +142,7 @@ header > h1 > span {color: #a7a7a7; font-size: 24px; font-weight: 400; vertical-
   border-bottom: 1px solid #e4e4e4;
   vertical-align: top;
   padding: 1%;
-  color: rgb(255, 0, 166);
+  color: black;
   overflow-y: auto;
 }
 #weekly > div.active {
@@ -155,82 +154,7 @@ header > h1 > span {color: #a7a7a7; font-size: 24px; font-weight: 400; vertical-
 .calendar-body #weekly > div:first-child {border-left: 1px solid #e4e4e4;}
 .calendar-body #weekly > div:last-child {border-right: 1px solid #e4e4e4;}
 
-/* todoList */
-.todoList {
-  margin-top: 10%;
-  font-size: 20px;
-}
-.todoList > li {position: relative;}
-.todoList > li > span{
-  white-space: nowrap;
-  width: 70%;
-  overflow: hidden;
-  display: block;
-  text-overflow: ellipsis;
-}
-.todoList > li+li {
-  margin-top: 5%;
-}
-.todoList > li > .del-data{
-  position: absolute;
-  top: 0; right: 5%;
-  width: 20%;
-  height: 25px;
-  background: none;
-  border: none;
-  font-size: 0px;
-}
-.todoList > li > .del-data::after, .todoList > li > .del-data::before{
-  content: '';
-  position: absolute;
-  top:0; left: 50%;
-  display: block;
-  width: 4px;
-  height: 18px;
-  background: rgb(255, 82, 195);
-}
-.todoList > li > .del-data::after, .closed::after {transform: rotate(45deg);}
-.todoList > li > .del-data::before, .closed::before{transform: rotate(-45deg);}
-.showList {
-  display: none;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: rgb(255, 38, 179);
-  width: 400px;
-  height: 300px;
-  z-index: 1;
-  border-radius: 20px;
-  overflow: hidden;
-}
-.closed {
-  position: absolute;
-  top: 5%; right: 5%; 
-  width: 40px; 
-  height: 40px;
-  font-size: 0;
-  background: none;
-  border: none;
-}
-.closed::after, .closed::before {
-  content: '';
-  position: absolute;
-  top: 14%; right: 44%;
-  width: 3px;
-  height: 25px;
-  background: #fff;
-}
-.listText {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  word-break:break-all;
-  width: 70%;
-  font-size: 20px;
-  color: #fff;
-}
+
 .createDate {
   position: absolute;
   bottom: 7%;
@@ -265,22 +189,17 @@ img { vertical-align: top;}
 	.header {
 		text-align: center;
 	}
-	.left{
-		height: 100vh;
-		width: 50%;
-		float: left;
-	}
 	
 
 	.warapper {
 		height: 100vh;
-		width: 50%;
+		width: 40%;
+		float: right;	
 		box-sizing: border-box;
 		margin : 120px auto;
 		max-width: 500px;
 		background: wheat;
 		padding: 25px;
-		float: right;	
 	}  
 	.wrapper h1 {
 		text-align: center;
@@ -288,6 +207,7 @@ img { vertical-align: top;}
 		margin-bottom: 30px;
 		font-weight: 700;
 		letter-spacing: 15px;
+		
 	}
 	.wrapper .inputField{
 		display: flex;
@@ -321,16 +241,17 @@ img { vertical-align: top;}
 	}
 	
 	.toDoList li {
-		width: 650px;
+		width: 550px;
 		list-style:none;
 		line-height: 40px;  /* 수직 가운데 정렬 */
 		position: relative; 
-		margin-bottom: 9px;
+		margin-bottom: 20px;
 		text-indent: 15px; /* 들여쓰기 */
 		background: rgb(241, 242, 241);
 		border-radius: 3px;
 		font-weight: 400;
 		cursor: pointer;
+		
 		
 		
 	}
@@ -364,72 +285,45 @@ img { vertical-align: top;}
 	 <div class="header">
 		<h1>header</h1>
 	</div>
-	 <div class="calendarWrapper">
-	<header>
+	 
+	<div class="calendarWrapper">
+		<header> 	
+			<h1>
+	    		<i class="far fa-calendar-check"></i>
+	   		 	<span>캘린더</span>
+	 		 </h1>
+			  <div class="calendar_title">
+			    <button class="prev">&#60;</button>
+			    <span class="current-year-month"></span>
+			    <button class="next">&#62;</button>
+			  </div>
+		</header>
+		<!-- 현재 날짜, 요일 -->
+		<section class="content-left">
+		  <div class="left-main">
+		    <div class="main-wrap">
+		      <div class="main-day"></div>
+		      <div class="main-date"></div>
+		    </div>
+		    <div class="bgblack"></div>
+		   </div>
+		</section>
+		<section class="content-right">
+		    <div class="day-of-week">
+		      <div class="dayHeader sun">Sun</div>
+		      <div class="dayHeader">Mon</div>
+		      <div class="dayHeader">Tue</div>
+		      <div class="dayHeader">Wed</div>
+		      <div class="dayHeader">Thu</div>
+		      <div class="dayHeader">Fri</div>
+		      <div class="dayHeader sat">Sat</div>
+		    </div>
+		    <div class="calendar-body"></div>
+		</section>
+ 	 </div>
+	
 	 	
-	 	<%-- <table class="table">
-	 		<thead>
-	 			<tr>
-	 				<th>일</th>
-	 				<th>월</th>
-	 				<th>화</th>
-	 				<th>수</th>
-	 				<th>목</th>
-	 				<th>금</th>
-	 				<th>토</th>
-	 			</tr>
-	 		</thead>
-	 		<tbody>
-			<c:forEach begin="1" end="5">
-	 			<tr>
-		 			<td>1</td>
-		 			<td>2</td>
-		 			<td>3</td>
-		 			<td>4</td>
-		 			<td>5</td>
-		 			<td>6</td>
-		 			<td>7</td>
-	 			</tr>
-			</c:forEach>	 		
-	 		</tbody>
-	 	</table> --%>
-	 	
-	<h1>
-    <i class="far fa-calendar-check"></i>
-    <span>캘린더</span>
-  </h1>
-  <div class="calendar_title">
-    <button class="prev">&#60;</button>
-    <span class="current-year-month"></span>
-    <button class="next">&#62;</button>
-  </div>
-</header>
-<section class="content-left">
-  <div class="left-main">
-    <div class="main-wrap">
-      <div class="main-day"></div>
-      <div class="main-date"></div>
-    </div>
-    
-      <div class="bgblack"></div>
-    </div>
-</section>
-<section class="content-right">
-    <div class="day-of-week">
-      <div class="dayHeader sun">Sun</div>
-      <div class="dayHeader">Mon</div>
-      <div class="dayHeader">Tue</div>
-      <div class="dayHeader">Wed</div>
-      <div class="dayHeader">Thu</div>
-      <div class="dayHeader">Fri</div>
-      <div class="dayHeader sat">Sat</div>
-    </div>
-    <div class="calendar-body"></div>
-</section>
-  </div>
-	 	
-	 	<!----------------------------------------------------------------------  -->
-	 </div>
+	<!----------------------------------------------------------------------  -->
 		
 	<div class="wrapper">
 		<h1>ToDoList</h1>
