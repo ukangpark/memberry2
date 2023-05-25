@@ -14,6 +14,16 @@
 
 	<div class="container-lg">
 		<h1>${feed.id }번 게시물</h1>
+		
+		<!-- 이미지 파일 출력 -->
+		<div class="mb-3">
+			<c:forEach items="${fileNameList }" var="fileName" >
+				<div class="mb-3">
+					<c:set var="bucketUrl" value="https://lilysbucket0503.s3.ap-northeast-2.amazonaws.com/ours" />
+					<img class="img-thumnail img-fluid" src="${bucketUrl }/${feed.id }/${fileName }" alt="" />
+				</div>
+			</c:forEach>
+		</div>
 		<div>
 			제목 : ${feed.title }
 		</div>
