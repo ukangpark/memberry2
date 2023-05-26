@@ -51,4 +51,10 @@ public class PetsitterController {
 		return "petsitter/list";
 	}
 	
+	
+	@GetMapping("regiForm")
+	public String regiForm() {
+		return "petsitter/regiForm";
+	}
+	
 }
