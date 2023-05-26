@@ -1,21 +1,18 @@
 package com.example.demo.service;
 
-import java.util.List;
+import java.util.*;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.stereotype.*;
+import org.springframework.transaction.annotation.*;
+import org.springframework.web.multipart.*;
 
-import com.example.demo.domain.Feed;
-import com.example.demo.mapper.MyFeedMapper;
+import com.example.demo.domain.*;
+import com.example.demo.mapper.*;
 
-import software.amazon.awssdk.core.sync.RequestBody;
-import software.amazon.awssdk.services.s3.S3Client;
-import software.amazon.awssdk.services.s3.model.ObjectCannedACL;
-import software.amazon.awssdk.services.s3.model.PutObjectAclRequest;
-import software.amazon.awssdk.services.s3.model.PutObjectRequest;
+import software.amazon.awssdk.core.sync.*;
+import software.amazon.awssdk.services.s3.*;
+import software.amazon.awssdk.services.s3.model.*;
 
 @Service
 @Transactional(rollbackFor = Exception.class)
@@ -30,15 +27,16 @@ public class MyFeedService {
 	@Autowired
 	private MyFeedMapper mapper;
 	
-	public List<Feed> listMyFeed() {
-		List<Feed> myFeed = mapper.selectAll();
-		return myFeed;
+	public List<File> listMyFeed() {
+		List<File> file = mapper.selectAll();
+		return file;
 	}
 
 	public boolean addFeed(Feed feed, MultipartFile[] files) throws Exception {
 		// 게시물 insert
 		int cnt = mapper.insert(feed);
 		
+		System.out.println(feed);
 		for (MultipartFile file : files) {
 			if (file.getSize() > 0) {
 				// S3 저장소 사용을 위한 키
@@ -60,8 +58,8 @@ public class MyFeedService {
 		return cnt == 1;
 	}
 
-	public Feed getFeed(Integer id) {
-		return mapper.selectById(id);
+	public Feed getPost(Integer feedId) {
+		return mapper.selectById(feedId);
 	}
 	
 	

@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.io.*;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.*;
@@ -10,6 +11,7 @@ import org.springframework.web.multipart.*;
 import org.springframework.web.servlet.mvc.support.*;
 
 import com.example.demo.domain.*;
+import com.example.demo.domain.File;
 import com.example.demo.service.*;
 
 @Controller
@@ -20,12 +22,13 @@ public class MyFeedController {
 	private MyFeedService service;
 
 	// 게시물 목록
-	@GetMapping({"/", "myFeed"})
+	@GetMapping("myFeed")
 	public String myFeed(Model model) {
-		List<Feed> myFeed = service.listMyFeed();
-		model.addAttribute("myFeedList", myFeed);
+		List<File> list = service.listMyFeed();
+		model.addAttribute("fileList", list);
 		
 		return "myFeed";
+		
 	}
 	
 	@GetMapping("feedAdd")
@@ -47,9 +50,9 @@ public class MyFeedController {
 	}
 	
 	// 클릭한 게시물 보기
-	@GetMapping("/id/{id}")
-	public String feed(@PathVariable("id") Integer id, Model model) {
-		Feed feed = service.getFeed(id);
+	@GetMapping("/feedId/{feedId}")
+	public String post(@PathVariable("feedId") Integer feedId, Model model) {
+		Feed feed = service.getPost(feedId);
 		model.addAttribute("feed", feed);
 		
 		return "feedGet";
