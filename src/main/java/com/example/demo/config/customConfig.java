@@ -1,12 +1,14 @@
 package com.example.demo.config;
 
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 
+import jakarta.annotation.*;
+import jakarta.servlet.*;
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
 import software.amazon.awssdk.auth.credentials.AwsCredentialsProvider;
 import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
@@ -21,6 +23,14 @@ public class customConfig {
 	private String accessKeyId;
 	@Value("${aws.secretAccessKeyId}")
 	private String secretAccessKey;
+	
+	@Autowired
+	private ServletContext application;
+	
+	@PostConstruct
+	public void init( ) {
+		application.setAttribute("bucketUrl","https://lilysbucket0503.s3.ap-northeast-2.amazonaws.com/membery");
+	}
 	
 	@Bean
 	public S3Client s3client() {

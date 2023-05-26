@@ -14,24 +14,31 @@
 <body>
 	<div class="container-lg">
 		<div class="col-12 col-md-8 col-lg-6">
-		<h1>새로운 스토리 추가해보세요!</h1>
+		<h1>새로운 스토리를 추가해보세요!</h1>
 		<br />
 		<form method="post" enctype="multipart/form-data">
+			<!-- 이미지 파일 업로드 -->
 			<div>
+				사진을 등록해보세요! <br />
 				 <input type="file" multiple name="files" accept="image/*" />
 			</div>
+			<br />
 			<div>
 				제목 : <input type="text" name="title" />
 				</div>
+			<br />	
 			<div>
 				본문 : <textarea name="content"></textarea>
 			</div>
+			<br />
 			<div>
 				작성자 : <input type="text" name="writer"/>
 			</div>
+			<br />
 			<div>
 				장소 태그 : <input type="text" name="location"/>
 			</div>
+			<br />
 			<div>
 				<input type="submit" value="추가" />
 			</div>
