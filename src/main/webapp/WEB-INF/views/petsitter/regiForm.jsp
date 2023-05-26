@@ -18,7 +18,7 @@
 	<form class="ui form">
 		<h4 class="ui dividing header">예약 신청서</h4>
 		<div class="field">
-			<label>이름</label>
+		<h4 class="ui header">이름</h4>
 			<div class="field">
 
 				<input type="text" name="booking[이름]">
@@ -26,7 +26,7 @@
 			</div>
 		</div>
 		<div class="field">
-			<label>생년월일</label>
+			<h4 class="ui header">생년월일</h4>
 			<div class="two fields">
 				<div class="field">
 					<select class="ui fluid dropdown">
@@ -104,7 +104,7 @@
 
 		<div>
 
-			<label>품종</label>
+			<h4 class="ui header">품종</h4>
 			<div class="field">
 
 				<input type="text" name="booking[품종]">
@@ -112,26 +112,27 @@
 			</div>
 
 
-			<label>성별</label>
+			<h4 class="ui header">성별</h4>
 			<div class="ui two item menu">
 
 				<a class="item">여자</a> <a class="item">남자</a>
 			</div>
 
-			<label>중성화</label>
+			<h4 class="ui header">중성화</h4>
 			<div class="ui two item menu">
 
 				<a class="item">네</a> <a class="item">아니오</a>
 			</div>
 
-			<label>배변훈련(배변패드)</label>
+
+			<h4 class="ui header">배변훈련(배변패드)</h4>
 			<div class="ui three item menu">
 
 				<a class="item">잘해요</a> <a class="item">미숙해요</a> <a class="item">실외배변</a>
 			</div>
 
 
-			<label>자주 다니는 동물병원 이름과 위치(동)</label>
+			<h4 class="ui header">자주 다니는 동물병원 이름과 위치(동)</h4>
 			<div class="field">
 
 				<input type="text" name="booking[동물병원]">
@@ -145,16 +146,59 @@
 
 
 
-			<h4 class="ui dividing header">전하고 싶은 말</h4>
+			<h4 class="ui header">전하고 싶은 말</h4>
 			<div class="field">
 
 				<textarea rows="2" placeholder="특이사항, 주의사항 등등 자유롭게 적어주세요"></textarea>
 			</div>
 
-			<div class="ui button" tabindex="0">예약 신청하기</div>
+	<!-- <div class="ui button" tabindex="0">예약 신청하기</div>  -->		
+
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  예약 신청하기
+</button>
+
+<!-- 결제 금액 Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">결제 금액</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        총 결제 금액은 000원입니다. 
+        
+        예약하시겠습니까?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#bookModal">예약하기</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- 최종 예약 Modal -->
+<div class="modal fade" id="bookModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+     
+      <div class="modal-body">
+       예약 신청이 완료되었습니다.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">확인</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 	</form>
-
-
 
 	<script>
 		$('.ui.radio.checkbox').checkbox();
