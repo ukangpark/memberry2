@@ -30,5 +30,9 @@ public class PetsitterService {
 		info.put("detail", detail);
 		return info;
 	}
+	
+	public void insertHost(Host host) {
+		petsitterMapper.insertHost(host);
+	}
 
 }

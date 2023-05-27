@@ -1,5 +1,6 @@
 package com.example.demo.mapper;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -18,5 +19,13 @@ public interface PetsitterMapper {
 			SELECT * FROM detail WHERE id = #{boardId}
 			""")
 	Detail selectDetailById(Integer boardId);
+	
+	@Insert("""
+			INSERT INTO host 
+			(hostName, phone, idNumber, si, gu, dong, address, houseType, pet, species, experience, photo)
+			VALUES
+			(#{hostName}, #{phone}, #{idNumber}, #{si}, #{gu}, #{dong}, #{address}, #{houseType}, #{pet}, #{species}, #{experience}, #{photo})
+			""")
+	Integer insertHost(Host host);
 
 }

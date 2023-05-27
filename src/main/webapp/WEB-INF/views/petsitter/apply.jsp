@@ -15,8 +15,12 @@
 <body>
 	<div class="w-50 p-3">
 		<h1>호스트 등록</h1>
-		<form id="applyForm" class="ui big form" method="post" action="">
+		<form id="applyForm" class="ui big form" method="post" action="/petsitter/apply">
 			<h2>1. 기본 정보</h2>
+			<div class="field">
+				<label for="photo">사진 등록</label>
+				<input id="photo" type="file" name="photo">
+			</div>
 			<div class="field">
 				<label for="hostName">이름</label>
 				<input id="hostName" type="text" name="hostName" placeholder="이름을 입력해주세요.">

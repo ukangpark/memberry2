@@ -37,11 +37,13 @@ public class PetsitterController {
 	
 	@GetMapping("apply")
 	public void applyForm() {
-		
+		//호스트 등록 폼으로 포워드
 	}
 	
 	@PostMapping("apply")
-	public void applyProcess() {
-		
+	public void applyProcess(Host host) {
+		//host 정보 받아서 추가
+		petsitterService.insertHost(host);
+		System.out.println(host);
 	}
 }
