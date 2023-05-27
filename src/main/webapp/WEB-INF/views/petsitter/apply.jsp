@@ -13,163 +13,173 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 </head>
 <body>
-	<div class="w-50 p-3">
-		<h1>호스트 등록</h1>
-		<form id="applyForm" class="ui big form" method="post" action="/petsitter/apply">
-			<h2>1. 기본 정보</h2>
-			<div class="field">
-				<label for="photo">사진 등록</label>
-				<input id="photo" type="file" name="photo">
-			</div>
-			<div class="field">
-				<label for="hostName">이름</label>
-				<input id="hostName" type="text" name="hostName" placeholder="이름을 입력해주세요.">
-			</div>
-			<div class="field">
-				<label for="phone">전화 번호</label>
-				<input id="phone" type="text" name="phone" placeholder="예)01012341234">
-			</div>
-			<div class="field">
-				<label for="idNumber">주민 번호</label>
-				<input id="idNumber" type="text" name="idNumber" placeholder="-를 빼고 입력해주세요.">
-			</div>
-			<div class="field">
-				<label>주소</label>
-				<div class="equal width fields">
+	<h1>호스트 등록</h1>
+	<div class="ui centered equal width grid">
+		<div class="eight wide column">
+			<div class="ui segment">
+				<form id="applyForm" class="ui big form" method="post" action="/petsitter/apply">
+					<h1>1. 기본 정보</h1>
 					<div class="field">
-						<select class="ui fluid search dropdown" name="si" id="si">
-							<option value="seoul">서울</option>
-							<option value="busan">부산</option>
-							<option value="daegu">대구</option>
-							<option value="incheon">인천</option>
-						</select>
+						<label for="photo">사진 등록</label>
+						<input id="photo" type="file" name="photo">
 					</div>
-					<label>시</label>
 					<div class="field">
-						<select class="ui fluid search dropdown" name="gu" id="gu">
-							<option value="jongno">종로</option>
-							<option value="gangseo">강서</option>
-							<option value="mapo">마포</option>
-						</select>
+						<label for="hostName">이름</label>
+						<input id="hostName" type="text" name="hostName" placeholder="이름을 입력해주세요.">
 					</div>
-					<label>구</label>
 					<div class="field">
-						<select class="ui fluid search dropdown" name="dong" id="dong">
-							<option value="naebalsan">내발산</option>
-							<option value="yumchang">염창</option>
-							<option value="hwago">화곡</option>
-						</select>
+						<label for="phone">전화번호</label>
+						<input id="phone" type="text" name="phone" placeholder="예)01012341234">
 					</div>
-					<label>동</label>
-				</div>
-			</div>
-			<div class="field">
-				<label for="address">상세 주소</label>
-				<input id="address" type="text" name="address">
-			</div>
-			<div class="inline fields">
-				<label>거주지 형태 : </label>
-				<div class="field">
-					<div class="ui radio checkbox">
-						<input id="10" type="radio" name="houseType" value="10">
-						<label for="10">10평 이하</label>
+					<div class="field">
+						<label for="idNumber">주민번호</label>
+						<input id="idNumber" type="text" name="idNumber" placeholder="-를 빼고 입력해주세요.">
 					</div>
-				</div>
-				<div class="field">
-					<div class="ui radio checkbox">
-						<input id="20" type="radio" name="houseType" value="20">
-						<label for="20">11 - 20평 이하</label>
+					<div class="field">
+						<label>주소</label>
+						<div class="equal width fields">
+							<div class="field">
+								<select class="ui fluid search dropdown" name="si" id="si">
+									<option value="seoul">서울</option>
+									<option value="busan">부산</option>
+									<option value="daegu">대구</option>
+									<option value="incheon">인천</option>
+								</select>
+							</div>
+							<label>시</label>
+							<div class="field">
+								<select class="ui fluid search dropdown" name="gu" id="gu">
+									<option value="jongno">종로</option>
+									<option value="gangseo">강서</option>
+									<option value="mapo">마포</option>
+								</select>
+							</div>
+							<label>구</label>
+							<div class="field">
+								<select class="ui fluid search dropdown" name="dong" id="dong">
+									<option value="naebalsan">내발산</option>
+									<option value="yumchang">염창</option>
+									<option value="hwago">화곡</option>
+								</select>
+							</div>
+							<label>동</label>
+						</div>
 					</div>
-				</div>
-				<div class="field">
-					<div class="ui radio checkbox">
-						<input id="30" type="radio" name="houseType" value="30">
-						<label for="30">21 - 30평 이하</label>
+					<div class="field">
+						<label for="address">상세 주소</label>
+						<input id="address" type="text" name="address">
 					</div>
-				</div>
-				<div class="field">
-					<div class="ui radio checkbox">
-						<input id="40" type="radio" name="houseType" value="40">
-						<label for="40">31평 이상</label>
+					<div class="inline fields">
+						<label>거주지 형태 : </label>
+						<div class="field">
+							<div class="ui radio checkbox">
+								<input id="10" type="radio" name="houseType" value="10">
+								<label for="10">10평 이하</label>
+							</div>
+						</div>
+						<div class="field">
+							<div class="ui radio checkbox">
+								<input id="20" type="radio" name="houseType" value="20">
+								<label for="20">11 - 20평 이하</label>
+							</div>
+						</div>
+						<div class="field">
+							<div class="ui radio checkbox">
+								<input id="30" type="radio" name="houseType" value="30">
+								<label for="30">21 - 30평 이하</label>
+							</div>
+						</div>
+						<div class="field">
+							<div class="ui radio checkbox">
+								<input id="40" type="radio" name="houseType" value="40">
+								<label for="40">31평 이상</label>
+							</div>
+						</div>
 					</div>
-				</div>
-			</div>
-			
 
-			<h2>2. 반려 경험 및 경력</h2>
-			<div class="inline fields">
-				<label for="fruit">반려 경험 유무 :</label>
-				<div class="field">
-					<div class="ui radio checkbox">
-						<input id="ok" type="radio" name="pet" value="true">
-						<label for="ok">있음</label>
-					</div>
-				</div>
-				<div class="field">
-					<div class="ui radio checkbox">
-						<input id="no" type="radio" name="pet" value="false">
-						<label for="no">없음</label>
-					</div>
-				</div>
-			</div>
-			<div class="inline fields">
-				<label>반려견 :</label>
-				<div class="field">
-					<div class="ui radio checkbox">
-						<input id="small" type="radio" name="species" value="small">
-						<label for="small">소형견</label>
-					</div>
-				</div>
-				<div class="field">
-					<div class="ui radio checkbox">
-						<input id="middle" type="radio" name="species" value="middle">
-						<label for="middle">중형견</label>
-					</div>
-				</div>
-				<div class="field">
-					<div class="ui radio checkbox">
-						<input id="big" type="radio" name="species" value="big">
-						<label for="big">대형견</label>
-					</div>
-				</div>
-			</div>
-			<div class="grouped fields">
-				<label>펫시터 활동 경력 :</label>
-				<div class="field">
-					<div class="ui radio checkbox">
-						<input id="past" type="radio" name="experience" value="past">
-						<label for="past">과거에 활동했지만, 현재는 활동하지 않음</label>
-					</div>
-				</div>
-				<div class="field">
-					<div class="ui radio checkbox">
-						<input id="present" type="radio" name="experience" value="present">
-						<label for="present">현재도 활동하고 있음</label>
-					</div>
-				</div>
-				<div class="field">
-					<div class="ui radio checkbox">
-						<input id="never" type="radio" name="experience" value="never">
-						<label for="never">펫시터로 활동을 해본 적이 없음</label>
-					</div>
-				</div>
-			</div>
-			<button class="ui button" type="button" id="applyButton" data-bs-toggle="modal" data-bs-target="#applyCheckModal">Submit</button>
-		</form>
-	</div>
 
-	<!-- Modal -->
-	<div class="modal fade" id="applyCheckModal" tabindex="-1" aria-labelledby="applyCheckModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h1 class="modal-title fs-5" id="applyCheckModalLabel">지원 등록</h1>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					<h1>2. 반려 경험 및 경력</h1>
+					<div class="inline fields">
+						<label for="fruit">반려 경험 유무 :</label>
+						<div class="field">
+							<div class="ui radio checkbox">
+								<input id="ok" type="radio" name="pet" value="true">
+								<label for="ok">있음</label>
+							</div>
+						</div>
+						<div class="field">
+							<div class="ui radio checkbox">
+								<input id="no" type="radio" name="pet" value="false">
+								<label for="no">없음</label>
+							</div>
+						</div>
+					</div>
+					<div class="inline fields">
+						<label>반려견 :</label>
+						<div class="field">
+							<div class="ui radio checkbox">
+								<input id="small" type="radio" name="species" value="small">
+								<label for="small">소형견</label>
+							</div>
+						</div>
+						<div class="field">
+							<div class="ui radio checkbox">
+								<input id="middle" type="radio" name="species" value="middle">
+								<label for="middle">중형견</label>
+							</div>
+						</div>
+						<div class="field">
+							<div class="ui radio checkbox">
+								<input id="big" type="radio" name="species" value="big">
+								<label for="big">대형견</label>
+							</div>
+						</div>
+					</div>
+					<div class="grouped fields">
+						<label>펫시터 활동 경력 :</label>
+						<div class="field">
+							<div class="ui radio checkbox">
+								<input id="past" type="radio" name="experience" value="past">
+								<label for="past">과거에 활동했지만, 현재는 활동하지 않음</label>
+							</div>
+						</div>
+						<div class="field">
+							<div class="ui radio checkbox">
+								<input id="present" type="radio" name="experience" value="present">
+								<label for="present">현재도 활동하고 있음</label>
+							</div>
+						</div>
+						<div class="field">
+							<div class="ui radio checkbox">
+								<input id="never" type="radio" name="experience" value="never">
+								<label for="never">펫시터로 활동을 해본 적이 없음</label>
+							</div>
+						</div>
+					</div>
+					<button class="ui button" type="button" id="applyButton" data-bs-toggle="modal" data-bs-target="#applyCheckModal">Submit</button>
+				</form>
+			</div>
+			<div class="extra content">
+				<div class="ui two buttons">
+					<div class="ui basic red button">등록하기</div>
+					<div class="ui basic green button">뒤로 돌아가기</div>
 				</div>
-				<div class="modal-body">호스트 지원 등록을 하시겠습니까?</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-					<button type="submit" class="btn btn-primary" form="applyForm">등록</button>
+			</div>
+
+			<!-- Modal -->
+			<div class="modal fade" id="applyCheckModal" tabindex="-1" aria-labelledby="applyCheckModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h1 class="modal-title fs-5" id="applyCheckModalLabel">지원 등록</h1>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">호스트 지원 등록을 하시겠습니까?</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+							<button type="submit" class="btn btn-primary" form="applyForm">등록</button>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

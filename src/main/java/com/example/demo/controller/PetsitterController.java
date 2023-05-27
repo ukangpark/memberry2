@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.domain.Detail;
 import com.example.demo.domain.Host;
@@ -41,9 +42,16 @@ public class PetsitterController {
 	}
 	
 	@PostMapping("apply")
-	public void applyProcess(Host host) {
+	public String applyProcess(Host host, RedirectAttributes rttr) {
 		//host 정보 받아서 추가
-		petsitterService.insertHost(host);
-		System.out.println(host);
+		int count = petsitterService.insertHost(host);
+		rttr.addFlashAttribute("host", host);
+		
+		return "redirect:/petsitter/hostMyPage";
+	}
+	
+	@GetMapping("hostMyPage")
+	public void hostMyPage() {
+		//호스트 마이페이지 포워드
 	}
 }

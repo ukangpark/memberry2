@@ -31,8 +31,10 @@ public class PetsitterService {
 		return info;
 	}
 	
-	public void insertHost(Host host) {
-		petsitterMapper.insertHost(host);
+	public Integer insertHost(Host host) {
+		int count = petsitterMapper.insertHost(host);
+		
+		return count;
 	}
 
 }

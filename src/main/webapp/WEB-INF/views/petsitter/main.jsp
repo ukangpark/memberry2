@@ -174,7 +174,7 @@ button {
 			<li><img src="https://image.dongascience.com/Photo/2020/03/5bddba7b6574b95d37b6079c199d7101.jpg" alt="사진8"></li>
 		</ul>
 	</div>
-
+	
 	<script src="/js/main.js"></script>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 	<script src="semantic/dist/semantic.min.js"></script>
