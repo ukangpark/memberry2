@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>상세페이</title>
+<title>펫시터 상세페이지</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="/js/semantic/semantic.min.css">
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
@@ -37,9 +37,7 @@
 				<div class="content">
 					<a class="header">${host.hostName }</a>
 					<div class="meta">
-						<span>주소 : ${host.address }</span> <br>
-						<span>번호 : ${host.phone }</span> <br>
-						<span>날짜 : ${host.inserted }</span>
+						<span>주소 : ${host.address }</span> <br> <span>번호 : ${host.phone }</span> <br> <span>날짜 : ${host.inserted }</span>
 					</div>
 					<div class="description">
 						<p>${detail.oneline }</p>
@@ -49,10 +47,8 @@
 
 				<!-- 달력 -->
 				<div class="content ui input">
-					<label for="calendarIcon">
-						<i class="calendar alternate outline icon"></i>
-					</label>
-					<input id="calendarIcon" style="width: 200px;" type="text" name="daterange" value="01/01/2018 - 01/15/2018" />
+					<label for="calendarIcon"> <i class="calendar alternate outline icon"></i>
+					</label> <input id="calendarIcon" style="width: 200px;" type="text" name="daterange" value="01/01/2018 - 01/15/2018" />
 				</div>
 			</div>
 		</div>
@@ -63,15 +59,18 @@
 		<div class="ui text container">
 			<p>${detail.body }</p>
 		</div>
+		<div>
+			<button class="ui inverted red button">예약</button>
+		</div>
 	</div>
+
 
 	<!-- 후기 -->
 	<div class="container" style="width: 800px; margin: 25px auto 50px;">
 		<div class="ui minimal comments">
 			<h3 class="ui dividing header">Comments</h3>
 			<div class="comment">
-				<a class="avatar">
-					<img src="https://www.walkerhillstory.com/wp-content/uploads/2020/09/2-1.jpg">
+				<a class="avatar"> <img src="https://www.walkerhillstory.com/wp-content/uploads/2020/09/2-1.jpg">
 				</a>
 				<div class="content">
 					<a class="author">Matt</a>
@@ -85,8 +84,7 @@
 				</div>
 			</div>
 			<div class="comment">
-				<a class="avatar">
-					<img src="https://www.walkerhillstory.com/wp-content/uploads/2020/09/2-1.jpg">
+				<a class="avatar"> <img src="https://www.walkerhillstory.com/wp-content/uploads/2020/09/2-1.jpg">
 				</a>
 				<div class="content">
 					<a class="author">Elliot Fu</a>
@@ -102,8 +100,7 @@
 				</div>
 				<div class="comments">
 					<div class="comment">
-						<a class="avatar">
-							<img src="https://www.walkerhillstory.com/wp-content/uploads/2020/09/2-1.jpg">
+						<a class="avatar"> <img src="https://www.walkerhillstory.com/wp-content/uploads/2020/09/2-1.jpg">
 						</a>
 						<div class="content">
 							<a class="author">Jenny Hess</a>
@@ -119,8 +116,7 @@
 				</div>
 			</div>
 			<div class="comment">
-				<a class="avatar">
-					<img src="https://www.walkerhillstory.com/wp-content/uploads/2020/09/2-1.jpg">
+				<a class="avatar"> <img src="https://www.walkerhillstory.com/wp-content/uploads/2020/09/2-1.jpg">
 				</a>
 				<div class="content">
 					<a class="author">Joe Henderson</a>
@@ -138,8 +134,7 @@
 					<textarea></textarea>
 				</div>
 				<div class="ui blue labeled submit icon button">
-					<i class="icon edit"></i>
-					Add Reply
+					<i class="icon edit"></i> Add Reply
 				</div>
 			</form>
 		</div>

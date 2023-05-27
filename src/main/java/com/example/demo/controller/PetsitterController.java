@@ -4,6 +4,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,12 +15,17 @@ import com.example.demo.domain.Detail;
 import com.example.demo.domain.Host;
 import com.example.demo.service.PetsitterService;
 
-@org.springframework.stereotype.Controller
+@Controller
 @RequestMapping("petsitter")
 public class PetsitterController {
 	
 	@Autowired
 	private PetsitterService petsitterService;
+	
+	@GetMapping("main")
+	public void main() {
+		
+	}
 	
 	@GetMapping("detail")
 	public void detail(@RequestParam("id") Integer boardId, Model model) {
@@ -38,6 +44,4 @@ public class PetsitterController {
 	public void applyProcess() {
 		
 	}
-	
-	
 }

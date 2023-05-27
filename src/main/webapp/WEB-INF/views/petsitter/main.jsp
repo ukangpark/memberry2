@@ -163,15 +163,15 @@ button {
 	</div>
 
 	<div class="slider">
-		<ul class="slide_gallery">
-			<li><img src="img/petplanet1.png" alt="사진1"></li>
-			<li><img src="img/petplanet2.png" alt="사진2"></li>
-			<li><img src="img/petplanet3.png" alt="사진3"></li>
-			<li><img src="img/petplanet4.png" alt="사진4"></li>
-			<li><img src="img/petplanet5.png" alt="사진5"></li>
-			<li><img src="img/petplanet6.png" alt="사진6"></li>
-			<li><img src="img/petplanet7.png" alt="사진7"></li>
-			<li><img src="img/petplanet8.png" alt="사진8"></li>
+		<ul class="slide_gallery">	
+			<li><img src="https://image.dongascience.com/Photo/2020/03/5bddba7b6574b95d37b6079c199d7101.jpg" alt="사진2"></li>
+			<li><img src="https://image.dongascience.com/Photo/2020/03/5bddba7b6574b95d37b6079c199d7101.jpg" alt="사진2"></li>
+			<li><img src="https://image.dongascience.com/Photo/2020/03/5bddba7b6574b95d37b6079c199d7101.jpg" alt="사진3"></li>
+			<li><img src="https://image.dongascience.com/Photo/2020/03/5bddba7b6574b95d37b6079c199d7101.jpg" alt="사진4"></li>
+			<li><img src="https://image.dongascience.com/Photo/2020/03/5bddba7b6574b95d37b6079c199d7101.jpg" alt="사진5"></li>
+			<li><img src="https://image.dongascience.com/Photo/2020/03/5bddba7b6574b95d37b6079c199d7101.jpg" alt="사진6"></li>
+			<li><img src="https://image.dongascience.com/Photo/2020/03/5bddba7b6574b95d37b6079c199d7101.jpg" alt="사진7"></li>
+			<li><img src="https://image.dongascience.com/Photo/2020/03/5bddba7b6574b95d37b6079c199d7101.jpg" alt="사진8"></li>
 		</ul>
 	</div>
 
@@ -180,5 +180,6 @@ button {
 	<script src="semantic/dist/semantic.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	
 </body>
 </html>
