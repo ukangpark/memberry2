@@ -26,8 +26,8 @@
 				<input id="phone" type="text" name="phone" placeholder="예)01012341234">
 			</div>
 			<div class="field">
-				<label for="IDnumber">주민 번호</label>
-				<input id="IDnumber" type="text" name="IDnumber" placeholder="-를 빼고 입력해주세요.">
+				<label for="idNumber">주민 번호</label>
+				<input id="idNumber" type="text" name="idNumber" placeholder="-를 빼고 입력해주세요.">
 			</div>
 			<div class="field">
 				<label>주소</label>
@@ -60,8 +60,8 @@
 				</div>
 			</div>
 			<div class="field">
-				<label for="detailAddress">상세 주소</label>
-				<input id="detailAddress" type="text" name="detailAddress">
+				<label for="address">상세 주소</label>
+				<input id="address" type="text" name="address">
 			</div>
 			<div class="inline fields">
 				<label>거주지 형태 : </label>
@@ -90,6 +90,7 @@
 					</div>
 				</div>
 			</div>
+			
 
 			<h2>2. 반려 경험 및 경력</h2>
 			<div class="inline fields">
