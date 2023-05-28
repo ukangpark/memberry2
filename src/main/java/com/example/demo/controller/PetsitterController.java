@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.example.demo.domain.Detail;
 import com.example.demo.domain.Host;
 import com.example.demo.service.PetsitterService;
+import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 
 @Controller
 @RequestMapping("petsitter")
@@ -56,12 +57,14 @@ public class PetsitterController {
 		//host 정보 받아서 추가
 		int count = petsitterService.insertHost(host);
 		rttr.addFlashAttribute("host", host);
-		return "redirect:/petsitter/hostMyPage/";
+		return "redirect:/petsitter/main";
 	}
 	
-	@GetMapping("hostMyPage/{hostId}")
-	public void hostMyPage(@PathVariable("hostId") Integer hostId) {
+	@GetMapping("hostMyPage")
+	public void hostMyPage(@RequestParam("id") Integer hostId, Model model) {
 		//호스트 마이페이지 포워드
+		Map<String, Object> info = petsitterService.selectById(hostId);
+		model.addAllAttributes(info);
 	}
 	
 	@PostMapping("hostModify")
@@ -72,7 +75,11 @@ public class PetsitterController {
 	}
 	
 	@GetMapping("hostList")
-	public void hostList() {
+	public void hostList(Model model) {
+		//호스트 리스트 포워드
+		List<Host> list = petsitterService.selectAll();
+		model.addAttribute("host", list);
+		
 		
 	}
 }

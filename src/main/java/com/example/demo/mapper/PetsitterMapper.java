@@ -13,9 +13,9 @@ import com.example.demo.domain.Host;
 public interface PetsitterMapper {
 	
 	@Select("""
-			SELECT * FROM Host WHERE id = #{hostId}
+			SELECT * FROM Host WHERE id = #{id}
 			""")
-	Host selectHostById(Integer hostId);
+	Host selectHostById(Integer id);
 	
 	@Select("""
 			SELECT * FROM Detail WHERE hostId = #{hostId}
