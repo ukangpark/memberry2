@@ -65,13 +65,24 @@ public class PetsitterController {
 		//호스트 마이페이지 포워드
 		Map<String, Object> info = petsitterService.selectById(hostId);
 		model.addAllAttributes(info);
+		System.out.println("modify -> mypage");
+	}
+	
+	@GetMapping("hostModify")
+	public void hostModifyForm(@RequestParam("id") Integer hostId, Model model) {
+		//호스트 정보 수정폼 포워드
+		Map<String, Object> info = petsitterService.selectById(hostId);
+		model.addAllAttributes(info);
+		
 	}
 	
 	@PostMapping("hostModify")
-	public void hostModifyProcess(Host host) {
-		System.out.println("modify working");
-		System.out.println(host);
+	public String hostModifyProcess(Host host) {
+		boolean ok = petsitterService.modifyById(host);
+		System.out.println("post modify working");
+		System.out.println(ok);
 		
+		return "redirect:/petsitter/hostMyPage?id=" + host.getId();
 	}
 	
 	@GetMapping("hostList")
@@ -79,7 +90,5 @@ public class PetsitterController {
 		//호스트 리스트 포워드
 		List<Host> list = petsitterService.selectAll();
 		model.addAttribute("host", list);
-		
-		
 	}
 }

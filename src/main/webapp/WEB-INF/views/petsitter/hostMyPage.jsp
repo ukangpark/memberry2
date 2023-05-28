@@ -21,7 +21,7 @@
 					<img class="left floated ui image" style="width: 50px;" src="https://kr.seaicons.com/wp-content/uploads/2015/06/person-icon.png">
 					<h1>${host.hostName }님 정보입니다. (${host.id })</h1>
 					<div>
-						<form action="/petsitter/hostModify" class="ui big form" id="checkForm" method="post">
+						<form class="ui big form" id="checkForm">
 							<div class="field">
 								<label>전화번호</label>
 								<input type="text" name="phone" value="${host.phone }" disabled>
@@ -76,7 +76,7 @@
 				<div class="ui three buttons">
 					<button id="deleteButton" class="ui red basic button">삭제하기</button>
 					<button class="ui blue basic button">게시글 등록하기</button>
-					<button form="checkForm" class="ui green basic button">수정하기</button>
+					<a href="/petsitter/hostModify?id=${host.id }" class="ui green basic button">수정하기</a>
 				</div>
 			</div>
 		</div>
@@ -88,7 +88,7 @@
 	<script src="semantic/dist/semantic.min.js"></script>
 	<script type="text/javascript">
 	$("#deleteButton").click(function() {
-		
+		console.log("click")
 	});
 	</script>
 </body>

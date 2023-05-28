@@ -21,10 +21,14 @@
 					<img class="left floated ui image" style="width: 50px;" src="https://kr.seaicons.com/wp-content/uploads/2015/06/person-icon.png">
 					<h1>${host.hostName }님정보입니다.</h1>
 					<div>
-						<form action="/petsitter/hostModify" class="ui big form" id="checkForm" method="post">
+						<form action="/petsitter/hostModify?id=${host.id }" class="ui big form" id="checkForm" method="post">
+							<div class="field">
+								<label>이름</label>
+								<input type="text" name="hostName" value="${host.hostName }">
+							</div>
 							<div class="field">
 								<label>전화번호</label>
-								<input type="text" name="phone" value="${host.phone }" disabled>
+								<input type="text" name="phone" value="${host.phone }">
 							</div>
 							<div class="field">
 								<label>주민번호</label>
@@ -34,42 +38,48 @@
 								<label>주소</label>
 								<div class="equal width fields">
 									<div class="field">
-										<input type="text" name="si" value="${host.si }시" disabled>
+										<input type="text" name="si" value="${host.si }시">
 									</div>
 									<div class="field">
-										<input type="text" name="gu" value="${host.gu }구" disabled>
+										<input type="text" name="gu" value="${host.gu }구">
 									</div>
 									<div class="field">
-										<input type="text" name="dong" value="${host.dong }동" disabled>
+										<input type="text" name="dong" value="${host.dong }동">
 									</div>
 								</div>
 							</div>
 							<div class="field">
 								<label>상세주소</label>
-								<input type="text" name="address" value="${host.address }" disabled>
+								<input type="text" name="address" value="${host.address }">
 							</div>
 							<div class="field">
 								<div class="equal width fields">
 									<div class="field">
 										<label>주거형태</label>
-										<input type="text" name="houseType" value="${host.houseType }" disabled>
+										<input type="text" name="houseType" value="${host.houseType }">
 									</div>
 									<div class="field">
 										<label>반려동물</label>
-										<input type="text" name="pet" value="${host.pet }" disabled>
+										<input type="text" name="pet" value="${host.pet }">
 									</div>
 									<div class="field">
 										<label>반려동물 크기</label>
-										<input type="text" name="species" value="${host.species }" disabled>
+										<input type="text" name="species" value="${host.species }">
 									</div>
 								</div>
 								<div class="field">
 									<label>펫시터 경험</label>
-									<input type="text" name="experience" value="${host.experience }" disabled>
+									<input type="text" name="experience" value="${host.experience }">
 								</div>
 							</div>
 						</form>
 					</div>
+				</div>
+			</div>
+			<div class="extra content">
+				<div class="ui two buttons">
+					<button class="ui red basic button">취소하기</button>
+					<button form="checkForm" class="ui green basic button">수정하기</button>
 				</div>
 			</div>
 		</div>

@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.example.demo.domain.Detail;
 import com.example.demo.domain.Host;
@@ -39,5 +40,22 @@ public interface PetsitterMapper {
 			SELECT * FROM Host
 			""")
 	List<Host> selectHostAll();
+
+	@Update("""
+			UPDATE Host
+			SET 
+				hostName = #{hostName},
+				phone = #{phone},
+				si = #{si},
+				gu = #{gu},
+				dong = #{dong},
+				address = #{address},
+				houseType = #{houseType},
+				pet = #{pet},
+				species = #{species},
+				experience = #{experience}
+			WHERE id = #{id}
+			""")
+	Integer modifyById(Host host);
 
 }

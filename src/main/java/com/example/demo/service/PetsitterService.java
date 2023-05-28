@@ -46,5 +46,10 @@ public class PetsitterService {
 		return count;
 	}
 
+	public boolean modifyById(Host host) {
+		Integer count = petsitterMapper.modifyById(host);
+		return count == 1;
+	}
+
 
 }
