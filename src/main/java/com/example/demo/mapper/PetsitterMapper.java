@@ -18,9 +18,9 @@ public interface PetsitterMapper {
 	Host selectHostById(Integer hostId);
 	
 	@Select("""
-			SELECT * FROM Detail WHERE id = #{boardId}
+			SELECT * FROM Detail WHERE id = #{hostId}
 			""")
-	Detail selectDetailById(Integer boardId);
+	Detail selectDetailById(Integer hostId);
 	
 	@Insert("""
 			INSERT INTO Host 

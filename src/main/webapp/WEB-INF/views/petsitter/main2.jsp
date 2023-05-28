@@ -29,12 +29,17 @@
 					</div>
 					<div class="description">경력 : ${host.experience }</div>
 					<div class="description">반려견 : ${host.pet }</div>
+
 				</div>
 				<div class="extra content">
-					<a>
+					<a class="inblock">
 						<i class="comment icon"></i>
 						댓글 개수 표시
 					</a>
+					<form class="right floated inblock" action="/petsitter/detail" id="idForm">
+						<input class="d-none" type="text" name="id" value="${host.id }">
+						<input class="ui primary button" type="submit" value="상세보기">
+					</form>
 				</div>
 			</div>
 		</c:forEach>
@@ -44,7 +49,6 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 	<script src="semantic/dist/semantic.min.js"></script>
-
 
 </body>
 </html>

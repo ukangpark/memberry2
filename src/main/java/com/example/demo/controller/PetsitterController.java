@@ -38,10 +38,10 @@ public class PetsitterController {
 	}
 	
 	@GetMapping("detail")
-	public void detail(@RequestParam("id") Integer boardId, Model model) {
+	public void detail(@RequestParam("id") Integer hostId, Model model) {
 		//detail로 포워드
 		// 쿼리스트링으로 받은 id값을 받아서 해당 상세페이지를 읽음
-		Map<String, Object> info = petsitterService.selectById(boardId);
+		Map<String, Object> info = petsitterService.selectById(hostId);
 		
 		model.addAllAttributes(info);		
 	}

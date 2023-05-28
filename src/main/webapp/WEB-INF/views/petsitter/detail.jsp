@@ -35,7 +35,7 @@
 					<img src="https://www.walkerhillstory.com/wp-content/uploads/2020/09/2-1.jpg">
 				</div>
 				<div class="content">
-					<a class="header">${host.hostName }</a>
+					<a class="header">${host.hostName } (${host.id })</a>
 					<div class="meta">
 						<span>주소 : ${host.address }</span> <br> <span>번호 : ${host.phone }</span> <br> <span>날짜 : ${host.inserted }</span>
 					</div>
