@@ -70,4 +70,9 @@ public class PetsitterController {
 		System.out.println(host);
 		
 	}
+	
+	@GetMapping("hostList")
+	public void hostList() {
+		
+	}
 }

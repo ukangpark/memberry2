@@ -18,7 +18,7 @@ public interface PetsitterMapper {
 	Host selectHostById(Integer hostId);
 	
 	@Select("""
-			SELECT * FROM Detail WHERE id = #{hostId}
+			SELECT * FROM Detail WHERE hostId = #{hostId}
 			""")
 	Detail selectDetailById(Integer hostId);
 	
