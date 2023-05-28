@@ -40,26 +40,26 @@
 						<div class="equal width fields">
 							<div class="field">
 								<select class="ui fluid search dropdown" name="si" id="si">
-									<option value="seoul">서울</option>
-									<option value="busan">부산</option>
-									<option value="daegu">대구</option>
-									<option value="incheon">인천</option>
+									<option value="서울">서울</option>
+									<option value="부산">부산</option>
+									<option value="대구">대구</option>
+									<option value="인천">인천</option>
 								</select>
 							</div>
 							<label>시</label>
 							<div class="field">
 								<select class="ui fluid search dropdown" name="gu" id="gu">
-									<option value="jongno">종로</option>
-									<option value="gangseo">강서</option>
-									<option value="mapo">마포</option>
+									<option value="종로">종로</option>
+									<option value="강서">강서</option>
+									<option value="마포">마포</option>
 								</select>
 							</div>
 							<label>구</label>
 							<div class="field">
 								<select class="ui fluid search dropdown" name="dong" id="dong">
-									<option value="naebalsan">내발산</option>
-									<option value="yumchang">염창</option>
-									<option value="hwago">화곡</option>
+									<option value="내발산">내발산</option>
+									<option value="염창">염창</option>
+									<option value="화곡">화곡</option>
 								</select>
 							</div>
 							<label>동</label>
@@ -73,25 +73,25 @@
 						<label>거주지 형태 : </label>
 						<div class="field">
 							<div class="ui radio checkbox">
-								<input id="10" type="radio" name="houseType" value="10">
+								<input id="10" type="radio" name="houseType" value="10평 이하">
 								<label for="10">10평 이하</label>
 							</div>
 						</div>
 						<div class="field">
 							<div class="ui radio checkbox">
-								<input id="20" type="radio" name="houseType" value="20">
+								<input id="20" type="radio" name="houseType" value="11 - 20평 이하">
 								<label for="20">11 - 20평 이하</label>
 							</div>
 						</div>
 						<div class="field">
 							<div class="ui radio checkbox">
-								<input id="30" type="radio" name="houseType" value="30">
+								<input id="30" type="radio" name="houseType" value="21 - 30평 이하">
 								<label for="30">21 - 30평 이하</label>
 							</div>
 						</div>
 						<div class="field">
 							<div class="ui radio checkbox">
-								<input id="40" type="radio" name="houseType" value="40">
+								<input id="40" type="radio" name="houseType" value="31평 이상">
 								<label for="40">31평 이상</label>
 							</div>
 						</div>
@@ -103,13 +103,13 @@
 						<label for="fruit">반려 경험 유무 :</label>
 						<div class="field">
 							<div class="ui radio checkbox">
-								<input id="ok" type="radio" name="pet" value="true">
+								<input id="ok" type="radio" name="pet" value="있음">
 								<label for="ok">있음</label>
 							</div>
 						</div>
 						<div class="field">
 							<div class="ui radio checkbox">
-								<input id="no" type="radio" name="pet" value="false">
+								<input id="no" type="radio" name="pet" value="없음">
 								<label for="no">없음</label>
 							</div>
 						</div>
@@ -118,19 +118,19 @@
 						<label>반려견 :</label>
 						<div class="field">
 							<div class="ui radio checkbox">
-								<input id="small" type="radio" name="species" value="small">
+								<input id="small" type="radio" name="species" value="소형견">
 								<label for="small">소형견</label>
 							</div>
 						</div>
 						<div class="field">
 							<div class="ui radio checkbox">
-								<input id="middle" type="radio" name="species" value="middle">
+								<input id="middle" type="radio" name="species" value="중형견">
 								<label for="middle">중형견</label>
 							</div>
 						</div>
 						<div class="field">
 							<div class="ui radio checkbox">
-								<input id="big" type="radio" name="species" value="big">
+								<input id="big" type="radio" name="species" value="대형견">
 								<label for="big">대형견</label>
 							</div>
 						</div>
@@ -139,30 +139,31 @@
 						<label>펫시터 활동 경력 :</label>
 						<div class="field">
 							<div class="ui radio checkbox">
-								<input id="past" type="radio" name="experience" value="past">
+								<input id="past" type="radio" name="experience" value="과거에 활동했지만, 현재는 활동하지 않음">
 								<label for="past">과거에 활동했지만, 현재는 활동하지 않음</label>
 							</div>
 						</div>
 						<div class="field">
 							<div class="ui radio checkbox">
-								<input id="present" type="radio" name="experience" value="present">
+								<input id="present" type="radio" name="experience" value="현재도 활동하고 있음">
 								<label for="present">현재도 활동하고 있음</label>
 							</div>
 						</div>
 						<div class="field">
 							<div class="ui radio checkbox">
-								<input id="never" type="radio" name="experience" value="never">
+								<input id="never" type="radio" name="experience" value="펫시터로 활동을 해본 적이 없음">
 								<label for="never">펫시터로 활동을 해본 적이 없음</label>
 							</div>
 						</div>
 					</div>
-					<button class="ui button" type="button" id="applyButton" data-bs-toggle="modal" data-bs-target="#applyCheckModal">Submit</button>
 				</form>
 			</div>
+
+			<!-- 버튼 -->
 			<div class="extra content">
 				<div class="ui two buttons">
-					<div class="ui basic red button">등록하기</div>
-					<div class="ui basic green button">뒤로 돌아가기</div>
+					<button class="ui basic red button" >뒤로 돌아가기</button>
+					<button class="ui basic green button" form="applyForm">등록하기</button>
 				</div>
 			</div>
 
@@ -188,5 +189,6 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 	<script src="semantic/dist/semantic.min.js"></script>
+	
 </body>
 </html>

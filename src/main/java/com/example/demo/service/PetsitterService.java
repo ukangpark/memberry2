@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,14 @@ public class PetsitterService {
 	
 	@Autowired
 	PetsitterMapper petsitterMapper;
+	
+	public List<Host> selectAll() {
+		
+		List<Host> host = petsitterMapper.selectHostAll();
+		
+		
+		return host;
+	}
 	
 	public Map<String, Object> selectById(Integer boardId) {
 		Map<String, Object> info = new HashMap<>();
@@ -36,5 +45,6 @@ public class PetsitterService {
 		
 		return count;
 	}
+
 
 }

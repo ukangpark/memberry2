@@ -1,5 +1,7 @@
 package com.example.demo.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -11,21 +13,31 @@ import com.example.demo.domain.Host;
 public interface PetsitterMapper {
 	
 	@Select("""
-			SELECT * FROM host WHERE id = #{hostId}
+			SELECT * FROM Host WHERE id = #{hostId}
 			""")
 	Host selectHostById(Integer hostId);
 	
 	@Select("""
-			SELECT * FROM detail WHERE id = #{boardId}
+			SELECT * FROM Detail WHERE id = #{boardId}
 			""")
 	Detail selectDetailById(Integer boardId);
 	
 	@Insert("""
-			INSERT INTO host 
+			INSERT INTO Host 
 			(hostName, phone, idNumber, si, gu, dong, address, houseType, pet, species, experience, photo)
 			VALUES
 			(#{hostName}, #{phone}, #{idNumber}, #{si}, #{gu}, #{dong}, #{address}, #{houseType}, #{pet}, #{species}, #{experience}, #{photo})
 			""")
 	Integer insertHost(Host host);
+	
+	@Select("""
+			SELECT * FROM Detail
+			""")
+	List<Detail> selectDetailAll();
+
+	@Select("""
+			SELECT * FROM Host
+			""")
+	List<Host> selectHostAll();
 
 }

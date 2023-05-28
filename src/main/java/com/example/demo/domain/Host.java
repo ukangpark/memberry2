@@ -14,7 +14,7 @@ public class Host {
 	private String gu;
 	private String dong;
 	private String address; 
-	private Integer houseType; 
+	private String houseType; 
 	private String pet; 
 	private String species; 
 	private String experience; 

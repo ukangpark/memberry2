@@ -13,13 +13,13 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 </head>
 <body>
-	<h1>호스트 마이페이지</h1>
+	<h1>수정 폼</h1>
 	<div class="ui centered equal width grid">
 		<div class="eight wide column">
 			<div class="ui segment">
 				<div class="content">
 					<img class="left floated ui image" style="width: 50px;" src="https://kr.seaicons.com/wp-content/uploads/2015/06/person-icon.png">
-					<h1>${host.hostName }님 정보입니다.</h1>
+					<h1>${host.hostName }님정보입니다.</h1>
 					<div>
 						<form action="/petsitter/hostModify" class="ui big form" id="checkForm" method="post">
 							<div class="field">
@@ -72,13 +72,6 @@
 					</div>
 				</div>
 			</div>
-			<div class="extra content">
-				<div class="ui three buttons">
-					<button id="deleteButton" class="ui red basic button">삭제하기</button>
-					<button class="ui blue basic button">게시글 등록하기</button>
-					<button form="checkForm" class="ui green basic button">수정하기</button>
-				</div>
-			</div>
 		</div>
 	</div>
 
@@ -86,10 +79,5 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 	<script src="semantic/dist/semantic.min.js"></script>
-	<script type="text/javascript">
-	$("#deleteButton").click(function() {
-		
-	});
-	</script>
 </body>
 </html>
