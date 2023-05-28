@@ -13,7 +13,7 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 </head>
 <body>
-	<h1>호스트 마이페이지</h1>
+	<br>
 	<div class="ui centered equal width grid">
 		<div class="eight wide column">
 			<div class="ui segment">

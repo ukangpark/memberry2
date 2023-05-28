@@ -13,8 +13,8 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 </head>
 <body>
-	<h1>호스트 리스트</h1>
 	<div class="container">
+		<h1>호스트 리스트</h1>
 		<table class="ui fixed single line celled table">
 			<thead>
 				<tr>

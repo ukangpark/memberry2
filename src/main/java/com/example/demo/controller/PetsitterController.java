@@ -65,7 +65,6 @@ public class PetsitterController {
 		//호스트 마이페이지 포워드
 		Map<String, Object> info = petsitterService.selectById(hostId);
 		model.addAllAttributes(info);
-		System.out.println("modify -> mypage");
 	}
 	
 	@GetMapping("hostModify")
@@ -79,8 +78,6 @@ public class PetsitterController {
 	@PostMapping("hostModify")
 	public String hostModifyProcess(Host host) {
 		boolean ok = petsitterService.modifyById(host);
-		System.out.println("post modify working");
-		System.out.println(ok);
 		
 		return "redirect:/petsitter/hostMyPage?id=" + host.getId();
 	}

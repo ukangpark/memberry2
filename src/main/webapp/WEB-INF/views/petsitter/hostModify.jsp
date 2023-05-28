@@ -13,7 +13,7 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 </head>
 <body>
-	<h1>수정 폼</h1>
+	<br>
 	<div class="ui centered equal width grid">
 		<div class="eight wide column">
 			<div class="ui segment">
@@ -22,6 +22,7 @@
 					<h1>${host.hostName }님정보입니다.</h1>
 					<div>
 						<form action="/petsitter/hostModify?id=${host.id }" class="ui big form" id="checkForm" method="post">
+							<h4 class="ui grey header">수정정보를 입력해주세요.</h4>
 							<div class="field">
 								<label>이름</label>
 								<input type="text" name="hostName" value="${host.hostName }">
@@ -38,13 +39,13 @@
 								<label>주소</label>
 								<div class="equal width fields">
 									<div class="field">
-										<input type="text" name="si" value="${host.si }시">
+										<input type="text" name="si" value="${host.si }">
 									</div>
 									<div class="field">
-										<input type="text" name="gu" value="${host.gu }구">
+										<input type="text" name="gu" value="${host.gu }">
 									</div>
 									<div class="field">
-										<input type="text" name="dong" value="${host.dong }동">
+										<input type="text" name="dong" value="${host.dong }">
 									</div>
 								</div>
 							</div>

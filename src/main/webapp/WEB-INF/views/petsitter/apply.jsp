@@ -13,12 +13,12 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 </head>
 <body>
-	<h1>호스트 등록</h1>
+	<br>
 	<div class="ui centered equal width grid">
 		<div class="eight wide column">
 			<div class="ui segment">
 				<form id="applyForm" class="ui big form" method="post" action="/petsitter/apply">
-					<h1>1. 기본 정보</h1>
+					<h1>호스트 등록</h1>
 					<div class="field">
 						<label for="photo">사진 등록</label>
 						<input id="photo" type="file" name="photo">
@@ -40,121 +40,67 @@
 						<div class="equal width fields">
 							<div class="field">
 								<select class="ui fluid search dropdown" name="si" id="si">
-									<option value="서울">서울</option>
-									<option value="부산">부산</option>
-									<option value="대구">대구</option>
-									<option value="인천">인천</option>
+									<option value="서울시">서울시</option>
+									<option value="부산시">부산시</option>
+									<option value="대구시">대구시</option>
+									<option value="인천시">인천시</option>
 								</select>
 							</div>
-							<label>시</label>
 							<div class="field">
 								<select class="ui fluid search dropdown" name="gu" id="gu">
-									<option value="종로">종로</option>
-									<option value="강서">강서</option>
-									<option value="마포">마포</option>
+									<option value="종로구">종로구</option>
+									<option value="강서구">강서구</option>
+									<option value="마포구">마포구</option>
 								</select>
 							</div>
-							<label>구</label>
 							<div class="field">
 								<select class="ui fluid search dropdown" name="dong" id="dong">
-									<option value="내발산">내발산</option>
-									<option value="염창">염창</option>
-									<option value="화곡">화곡</option>
+									<option value="내발산동">내발산동</option>
+									<option value="염창동">염창동</option>
+									<option value="화곡동">화곡동</option>
 								</select>
 							</div>
-							<label>동</label>
 						</div>
 					</div>
 					<div class="field">
 						<label for="address">상세 주소</label>
 						<input id="address" type="text" name="address">
 					</div>
-					<div class="inline fields">
-						<label>거주지 형태 : </label>
-						<div class="field">
-							<div class="ui radio checkbox">
-								<input id="10" type="radio" name="houseType" value="10평 이하">
-								<label for="10">10평 이하</label>
+					<div class="field">
+						<div class="equal width fields">
+							<div class="field">
+								<label for="houseType">거주지 형태 </label>
+								<select class="ui fluid search dropdown" name="houseType" id="houseType">
+									<option value="10평 이하">10평 이하</option>
+									<option value="11 - 20평 이하">11 - 20평 이하</option>
+									<option value="21 - 30평 이하">21 - 30평 이하</option>
+									<option value="31평 이상">31평 이상</option>
+								</select>
 							</div>
-						</div>
-						<div class="field">
-							<div class="ui radio checkbox">
-								<input id="20" type="radio" name="houseType" value="11 - 20평 이하">
-								<label for="20">11 - 20평 이하</label>
+							<div class="field">
+								<label for="pet">반려 경험 유무</label>
+								<select class="ui fluid search dropdown" name="pet" id="pet">
+									<option value="있음">있음</option>
+									<option value="없음">없음</option>
+								</select>
 							</div>
-						</div>
-						<div class="field">
-							<div class="ui radio checkbox">
-								<input id="30" type="radio" name="houseType" value="21 - 30평 이하">
-								<label for="30">21 - 30평 이하</label>
-							</div>
-						</div>
-						<div class="field">
-							<div class="ui radio checkbox">
-								<input id="40" type="radio" name="houseType" value="31평 이상">
-								<label for="40">31평 이상</label>
-							</div>
-						</div>
-					</div>
-
-
-					<h1>2. 반려 경험 및 경력</h1>
-					<div class="inline fields">
-						<label for="fruit">반려 경험 유무 :</label>
-						<div class="field">
-							<div class="ui radio checkbox">
-								<input id="ok" type="radio" name="pet" value="있음">
-								<label for="ok">있음</label>
-							</div>
-						</div>
-						<div class="field">
-							<div class="ui radio checkbox">
-								<input id="no" type="radio" name="pet" value="없음">
-								<label for="no">없음</label>
+							<div class="field">
+								<label for="species">반려견 크기</label>
+								<select class="ui fluid search dropdown" name="species" id="species">
+									<option value="소형견">소형견</option>
+									<option value="중형견">중형견</option>
+									<option value="대형견">대형견</option>
+								</select>
 							</div>
 						</div>
 					</div>
-					<div class="inline fields">
-						<label>반려견 :</label>
-						<div class="field">
-							<div class="ui radio checkbox">
-								<input id="small" type="radio" name="species" value="소형견">
-								<label for="small">소형견</label>
-							</div>
-						</div>
-						<div class="field">
-							<div class="ui radio checkbox">
-								<input id="middle" type="radio" name="species" value="중형견">
-								<label for="middle">중형견</label>
-							</div>
-						</div>
-						<div class="field">
-							<div class="ui radio checkbox">
-								<input id="big" type="radio" name="species" value="대형견">
-								<label for="big">대형견</label>
-							</div>
-						</div>
-					</div>
-					<div class="grouped fields">
-						<label>펫시터 활동 경력 :</label>
-						<div class="field">
-							<div class="ui radio checkbox">
-								<input id="past" type="radio" name="experience" value="과거에 활동했지만, 현재는 활동하지 않음">
-								<label for="past">과거에 활동했지만, 현재는 활동하지 않음</label>
-							</div>
-						</div>
-						<div class="field">
-							<div class="ui radio checkbox">
-								<input id="present" type="radio" name="experience" value="현재도 활동하고 있음">
-								<label for="present">현재도 활동하고 있음</label>
-							</div>
-						</div>
-						<div class="field">
-							<div class="ui radio checkbox">
-								<input id="never" type="radio" name="experience" value="펫시터로 활동을 해본 적이 없음">
-								<label for="never">펫시터로 활동을 해본 적이 없음</label>
-							</div>
-						</div>
+					<div class="field">
+						<label for="experience">펫시터 활동 경력</label>
+						<select class="ui fluid search dropdown" name="experience" id="experience">
+							<option value="과거에 활동했지만, 현재는 활동하지 않음">과거에 활동했지만, 현재는 활동하지 않음</option>
+							<option value="현재도 활동하고 있음">현재도 활동하고 있음</option>
+							<option value="펫시터로 활동을 해본 적이 없음">펫시터로 활동을 해본 적이 없음</option>
+						</select>
 					</div>
 				</form>
 			</div>
@@ -162,7 +108,7 @@
 			<!-- 버튼 -->
 			<div class="extra content">
 				<div class="ui two buttons">
-					<button class="ui basic red button" >뒤로 돌아가기</button>
+					<button class="ui basic red button">뒤로 돌아가기</button>
 					<button class="ui basic green button" form="applyForm">등록하기</button>
 				</div>
 			</div>
@@ -189,6 +135,6 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 	<script src="semantic/dist/semantic.min.js"></script>
-	
+
 </body>
 </html>
