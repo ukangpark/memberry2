@@ -41,13 +41,19 @@ public class PetsitterService {
 	}
 	
 	public Integer insertHost(Host host) {
-		int count = petsitterMapper.insertHost(host);
+		Integer count = petsitterMapper.insertHost(host);
 		
 		return count;
 	}
 
 	public boolean modifyById(Host host) {
 		Integer count = petsitterMapper.modifyById(host);
+		return count == 1;
+	}
+
+	public boolean deleteHostById(Integer hostId) {
+		Integer count = petsitterMapper.deleteHostById(hostId);
+		
 		return count == 1;
 	}
 

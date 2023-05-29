@@ -88,4 +88,10 @@ public class PetsitterController {
 		List<Host> list = petsitterService.selectAll();
 		model.addAttribute("host", list);
 	}
+	
+	@PostMapping("hostDelete")
+	public String hostDelete(Integer hostId) {
+		boolean ok = petsitterService.deleteHostById(hostId);
+		return "redirect:/petsitter/hostList";
+	}
 }

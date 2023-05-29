@@ -19,7 +19,7 @@
 			<div class="ui segment">
 				<div class="content">
 					<img class="left floated ui image" style="width: 50px;" src="https://kr.seaicons.com/wp-content/uploads/2015/06/person-icon.png">
-					<h1>${host.hostName }님 정보입니다. (${host.id })</h1>
+					<h1>${host.hostName }님정보입니다.(${host.id })</h1>
 					<div>
 						<form class="ui big form" id="checkForm">
 							<div class="field">
@@ -74,9 +74,33 @@
 			</div>
 			<div class="extra content">
 				<div class="ui three buttons">
-					<button id="deleteButton" class="ui red basic button">삭제하기</button>
+					<button data-bs-toggle="modal" data-bs-target="#deleteModal" class="ui red basic button">삭제하기</button>
 					<button class="ui blue basic button">게시글 등록하기</button>
 					<a href="/petsitter/hostModify?id=${host.id }" class="ui green basic button">수정하기</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- 삭제하기 정보 -->
+	<div class="d-none">
+		<form action="/petsitter/hostDelete" method="post" id="deleteButton">
+			<input type="text" name="hostId" value="${host.id }">
+		</form>
+	</div>
+
+	<!-- 삭제하기 모달 -->
+	<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="deleteModalLabel">삭제 확인</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">호스트 등록 정보를 정말 삭제하시겠습니까?</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소하기</button>
+					<button type="submit" class="btn btn-danger" form="deleteButton">삭제하기</button>
 				</div>
 			</div>
 		</div>
@@ -86,10 +110,6 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 	<script src="semantic/dist/semantic.min.js"></script>
-	<script type="text/javascript">
-	$("#deleteButton").click(function() {
-		console.log("click")
-	});
-	</script>
+	
 </body>
 </html>
