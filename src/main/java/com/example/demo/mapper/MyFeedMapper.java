@@ -23,10 +23,18 @@ public interface MyFeedMapper {
 	int insert(Feed feed);
 
 	@Select("""
-			SELECT * 
-			FROM Feed
-			WHERE id = #{id}
+			SELECT 
+				fd.id,
+				fd.title,
+				fd.content,
+				fd.writer,
+				fd.inserted,
+				fd.location,
+				fl.fileName
+			FROM Feed fd LEFT JOIN File fl ON fd.id = fl.feedId
+			WHERE fd.id = #{id}
 			""")
+	@ResultMap("feedResultMap")
 	Feed selectById(Integer id);
 	
 	@Insert("""
@@ -34,5 +42,36 @@ public interface MyFeedMapper {
 			VALUES (#{feedId}, #{fileName})
 			""")
 	Integer insertFileName(Integer feedId, String fileName);
+
+	@Update(""" 
+			UPDATE Feed
+			SET
+				title = #{title},
+				content = #{content},
+				writer = #{writer},
+				location = #{location}
+			WHERE 
+				id = #{id}
+			""")
+	int update(Feed feed);
+
+	@Delete("""
+			DELETE FROM Feed
+			WHERE id = #{id}
+			""")
+	int deleteById(Integer id);
+
+	@Select("""
+			SELECT fileName FROM File
+			WHERE feedId = #{feedId}
+			""")
+	List<String> selectFileNamesByFeedId(Integer feedId);
+
+	@Delete("""
+			DELETE FROM File
+			WHERE feedId = #{feedId}
+			""")
+	void deleteFileNameByFeedId(Integer feedId);
+
 
 }

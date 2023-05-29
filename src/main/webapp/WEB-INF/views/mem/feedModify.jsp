@@ -1,11 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core"%>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta charset="EUC-KR">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Insert title here</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
@@ -14,53 +14,50 @@
 </head>
 <body>
 
-	<my:navBar />
-
+	<my:navBar></my:navBar>
+	
 	<div class="container-lg">
-		<div class="col-12 col-md-8 col-lg-6">
-		<h1>ìƒˆë¡œìš´ ìŠ¤í† ë¦¬ë¥¼ ì¶”ê°€í•´ë³´ì„¸ìš”!</h1>
-		<br />
-		<form method="post" enctype="multipart/form-data" id="addForm">
-			<!-- ì´ë¯¸ì§€ íŒŒì¼ ì—…ë¡œë“œ -->
+		<h1>${feed.id  }¹ø °Ô½Ã¹° ¼öÁ¤ÇÏ±â</h1>
+		<form method="post">
+			<input type="hidden" name="id" value="${feed.id }" />
 			<div>
-				ì‚¬ì§„ì„ ë“±ë¡í•´ë³´ì„¸ìš”! <br />
+				»çÁøÀ» µî·ÏÇØº¸¼¼¿ä! <br />
 				 <input type="file" multiple name="files" accept="image/*" />
 			</div>
 			<br />
 			<div>
-				ì œëª©ì„ ì…ë ¥í•˜ì„¸ìš”  <input type="text" name="title" value="${feed.title }"/>
+				Á¦¸ñÀ» ¼öÁ¤ÇÏ¼¼¿ä  <input type="text" name="title" value="${feed.title }" />
 				</div>
 			<br />	
 			<div>
-				ë‚´ìš©ì„ ì…ë ¥í•˜ì„¸ìš”  <textarea name="content">${feed.content }</textarea>
+				³»¿ëÀ» ¼öÁ¤ÇÏ¼¼¿ä  <textarea name="content">${feed.content }</textarea>
 			</div>
 			<br />
 			<div>
-				ì‘ì„±ì  <input type="text" name="writer" value="${feed.writer }"/>
+				ÀÛ¼ºÀÚ  <input type="text" name="writer" value="${feed.writer }"/>
 			</div>
 			<br />
 			<div>
-				ì¥ì†Œë¥¼ íƒœê·¸í•˜ì„¸ìš”  <input type="text" name="location" value="${feed.location }"/>
+				ÀÛ¼ºÀÏ½Ã <input type="text" value="${feed.inserted }" readonly/>
 			</div>
 			<br />
+			<div>
+				Àå¼Ò¸¦ ÅÂ±×ÇÏ¼¼¿ä  <input type="text" name="location" value="${feed.location }"/>
+			</div>
+			<br />
+			<div>
+				<input type="submit" value="¼öÁ¤ÇÏ±â" />
 		</form>
-		<button type="submit" form="addForm" id="addButton">ì¶”ê°€í•˜ê¸°</button>
-		</div>
 	</div>
+
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>
-
-	<script type="text/javascript">
-		$("addButton").click(function(e) {
-			e.preventDefault();
-			
-			const res = confirm("ê²Œì‹œë¬¼ì„ ì¶”ê°€ í•˜ì‹œê² ìŠµë‹ˆê¹Œ?");
-			if (res) {
-				//ì„œë¸Œë°‹ ì‹¤í–‰
-				$("addForm").submit();
-			}
-		});
-	</script>
+	
+ 	<c:if test="${not empty param.fail }">
+		<script>
+			alert("°Ô½Ã¹°ÀÌ ¼öÁ¤µÇÁö ¾Ê¾Ò½À´Ï´Ù.");
+		</script>
+	</c:if> 
 </body>
 </html>

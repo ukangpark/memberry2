@@ -36,7 +36,6 @@ public class MyFeedService {
 		// 게시물 insert
 		int cnt = mapper.insert(feed);
 		
-		System.out.println(feed);
 		for (MultipartFile file : files) {
 			if (file.getSize() > 0) {
 				// S3 저장소 사용을 위한 키
@@ -51,16 +50,43 @@ public class MyFeedService {
 				s3.putObject(por, rb);
 				
 				// DB에 관련 정보 저장(insert)
-				mapper.insertFileName(feed.getId(),file.getOriginalFilename());
+				mapper.insertFileName(feed.getId(), file.getOriginalFilename());
 			}
 		}
 		
 		return cnt == 1;
 	}
 
-	public Feed getPost(Integer feedId) {
-		return mapper.selectById(feedId);
+	public Feed getPost(Integer id) {
+		return mapper.selectById(id);
 	}
-	
+
+	public boolean modify(Feed feed) {
+		int cnt = mapper.update(feed);
+		return cnt == 1;
+	}
+
+	public boolean remove(Integer id) {
+		//파일명 조회
+		List<String> fileNames = mapper.selectFileNamesByFeedId(id);
+		
+		// File 테이블의 데이터 지우기(외래키 제약 사항 위배 안 되게 하려고)
+		mapper.deleteFileNameByFeedId(id);
+		
+		// S3 bucket의 데이터 지우기
+		for(String fileName : fileNames) {
+			String objectKey = "membery/" + id + "/" + fileName;
+			DeleteObjectRequest dor = DeleteObjectRequest.builder()
+					.bucket(bucketName)
+					.key(objectKey)
+					.build();
+			s3.deleteObject(dor);
+		}
+		
+		// 마이피드 테이블의 데이터 지우기
+		int cnt = mapper.deleteById(id);
+		return false;
+	}
+
 	
 }
