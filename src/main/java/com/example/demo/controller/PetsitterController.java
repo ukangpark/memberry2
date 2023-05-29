@@ -7,20 +7,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.demo.domain.Detail;
 import com.example.demo.domain.Host;
-import com.example.demo.mapper.HostMapper;
 import com.example.demo.service.PetsitterService;
 
 @Controller
 @RequestMapping("petsitter")
 public class PetsitterController {
 	
-	@Autowired
-	private HostMapper mapper;
+	
 	
 	@Autowired
 	private PetsitterService petsitterService;
@@ -45,16 +45,17 @@ public class PetsitterController {
 	
 	@GetMapping("list")
 	public String petsitterList(Model model) {
-		List<Host> list = mapper.selectAll();
+		List<Host> list = petsitterService.listHost();
 		model.addAttribute("petsitterList", list);
 		
 		return "petsitter/list";
 	}
 	
 	
-	@GetMapping("regiForm")
+	@PostMapping("regiForm")
 	public String regiForm() {
 		return "petsitter/regiForm";
 	}
+	
 	
 }

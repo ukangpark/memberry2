@@ -1,5 +1,7 @@
 package com.example.demo.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -18,5 +20,19 @@ public interface PetsitterMapper {
 			SELECT * FROM detail WHERE id = #{boardId}
 			""")
 	Detail selectDetailById(Integer boardId);
+
+	// 외래키 설정하면 쿼리 변경해야함 
+	@Select("""
+			SELECT 
+				si,
+				gu,
+				dong,
+				Detail.title,
+				photo
+				
+			FROM Host, Detail
+			ORDER BY Detail.inserted DESC
+			""")
+	List<Host> selectAll();
 
 }
