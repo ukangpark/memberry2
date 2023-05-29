@@ -44,7 +44,7 @@
 						<span>날짜 : ${host.inserted }</span>
 					</div>
 					<div class="description">
-						<p>한 줄 소개 : ${detail.oneline }</p>
+						<p>한 줄 소개 : ${detail.title }</p>
 					</div>
 					<div class="extra">#매일 산책 가능 #샤워 가능 #간식 있음</div>
 				</div>

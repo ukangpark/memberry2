@@ -103,7 +103,9 @@ public class PetsitterController {
 	}
 	
 	@PostMapping("addDetail")
-	public void addDetailProcess() {
-		System.out.println("add process working");
+	public String addDetailProcess(Detail detail) {
+		boolean ok = petsitterService.insertDetail(detail);
+		
+		return "redirect:/petsitter/detail?id=" + detail.getHostId();
 	}
 }

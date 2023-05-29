@@ -15,9 +15,9 @@ import com.example.demo.domain.Host;
 public interface PetsitterMapper {
 	
 	@Select("""
-			SELECT * FROM Host WHERE id = #{id}
+			SELECT * FROM Host WHERE id = #{hostId}
 			""")
-	Host selectHostById(Integer id);
+	Host selectHostById(Integer hostId);
 	
 	@Select("""
 			SELECT * FROM Detail WHERE hostId = #{hostId}
@@ -62,6 +62,14 @@ public interface PetsitterMapper {
 	@Delete("""
 			DELETE FROM Host WHERE id = #{hostId}
 			""")
-	int deleteHostById(Integer hostId);
+	Integer deleteHostById(Integer hostId);
+	
+	@Insert("""
+			INSERT INTO Detail
+			(title, body, hostId)
+			VALUES
+			(#{title}, #{body}, #{hostId})
+			""")
+	Integer insertDetail(Detail detail);
 
 }

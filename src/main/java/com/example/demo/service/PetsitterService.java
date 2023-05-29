@@ -37,6 +37,7 @@ public class PetsitterService {
 		// map타입 변수 info에 넣음 
 		info.put("host", host);
 		info.put("detail", detail);
+		System.out.println("service working");
 		return info;
 	}
 	
@@ -54,6 +55,11 @@ public class PetsitterService {
 	public boolean deleteHostById(Integer hostId) {
 		Integer count = petsitterMapper.deleteHostById(hostId);
 		
+		return count == 1;
+	}
+
+	public boolean insertDetail(Detail detail) {
+		Integer count = petsitterMapper.insertDetail(detail);
 		return count == 1;
 	}
 

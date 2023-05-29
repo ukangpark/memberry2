@@ -24,8 +24,8 @@
 						<input id="photo" type="file" name="photo" multiple>
 					</div>
 					<div class="field">
-						<label for="body">제목</label>
-						<input id="body" type="text" name="body" placeholder="제목을 입력해주세요.">
+						<label for="title">제목</label>
+						<input id="title" type="text" name="title" placeholder="제목을 입력해주세요.">
 					</div>
 					<div class="field">
 						<label for="body">소개글</label>
