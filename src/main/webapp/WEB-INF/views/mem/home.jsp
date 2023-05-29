@@ -13,9 +13,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css">
 
 <style>
-div.feed {
-	display: inline;
-}
+
 </style>
 
 </head>
@@ -23,133 +21,135 @@ div.feed {
 
 	<my:navBar />
 
-	<div class="ui link cards">
-		<div class="card">
-			<div class="image">
-				<img src="/images/loki.jpeg">
-			</div>
-			<div class="content">
-				<div class="header">로키</div>
-				<div class="meta">
-					<a>멋째이 로키</a>
+	<div class="ui center aligned container" id="container">
+		<div class="ui link cards">
+			<div class="card">
+				<div class="image">
+					<img src="/images/loki.jpeg">
 				</div>
-				<div class="description">오늘 로키는 멋째이 선구리를 썼다.</div>
-			</div>
-			<div class="extra content">
-				<span class="right floated"> Joined in 2013 </span> <span> <i class="user icon"></i> 75 Friends
-				</span>
-			</div>
-		</div>
-		<div class="card">
-			<div class="image">
-				<img src="/images/cat.jpeg">
-			</div>
-			<div class="content">
-				<div class="header">Molly</div>
-				<div class="meta">
-					<span class="date">Coworker</span>
+				<div class="content">
+					<div class="header">로키</div>
+					<div class="meta">
+						<a>멋째이 로키</a>
+					</div>
+					<div class="description">오늘 로키는 멋째이 선구리를 썼다.</div>
 				</div>
-				<div class="description">Molly is a personal assistant living in Paris.</div>
-			</div>
-			<div class="extra content">
-				<span class="right floated"> Joined in 2011 </span> <span> <i class="user icon"></i> 35 Friends
-				</span>
-			</div>
-		</div>
-		<div class="card">
-			<div class="image">
-				<img src="/images/yj.JPG">
-			</div>
-			<div class="content">
-				<div class="header">Elyse</div>
-				<div class="meta">
-					<a>Coworker</a>
+				<div class="extra content">
+					<span class="right floated"> Joined in 2013 </span> <span> <i class="user icon"></i> 75 Friends
+					</span>
 				</div>
-				<div class="description">Elyse is a copywriter working in New York.</div>
 			</div>
-			<div class="extra content">
-				<span class="right floated"> Joined in 2014 </span> <span> <i class="user icon"></i> 151 Friends
-				</span>
-			</div>
-		</div>
-		<div class="card">
-			<div class="image">
-				<img src="/images/cat2.jpeg">
-			</div>
-			<div class="content">
-				<div class="header">Elyse</div>
-				<div class="meta">
-					<a>Coworker</a>
+			<div class="card">
+				<div class="image">
+					<img src="/images/cat.jpeg">
 				</div>
-				<div class="description">Elyse is a copywriter working in New York.</div>
-			</div>
-			<div class="extra content">
-				<span class="right floated"> Joined in 2014 </span> <span> <i class="user icon"></i> 151 Friends
-				</span>
-			</div>
-		</div>
-		<div class="card">
-			<div class="image">
-				<img src="/images/js.JPG">
-			</div>
-			<div class="content">
-				<div class="header">Elyse</div>
-				<div class="meta">
-					<a>Coworker</a>
+				<div class="content">
+					<div class="header">Molly</div>
+					<div class="meta">
+						<span class="date">Coworker</span>
+					</div>
+					<div class="description">Molly is a personal assistant living in Paris.</div>
 				</div>
-				<div class="description">Elyse is a copywriter working in New York.</div>
-			</div>
-			<div class="extra content">
-				<span class="right floated"> Joined in 2014 </span> <span> <i class="user icon"></i> 151 Friends
-				</span>
-			</div>
-		</div>
-		<div class="card">
-			<div class="image">
-				<img src="/images/yj2.JPG">
-			</div>
-			<div class="content">
-				<div class="header">Elyse</div>
-				<div class="meta">
-					<a>Coworker</a>
+				<div class="extra content">
+					<span class="right floated"> Joined in 2011 </span> <span> <i class="user icon"></i> 35 Friends
+					</span>
 				</div>
-				<div class="description">Elyse is a copywriter working in New York.</div>
 			</div>
-			<div class="extra content">
-				<span class="right floated"> Joined in 2014 </span> <span> <i class="user icon"></i> 151 Friends
-				</span>
-			</div>
-		</div>
-		<div class="card">
-			<div class="image">
-				<img src="/images/js2.JPG">
-			</div>
-			<div class="content">
-				<div class="header">Elyse</div>
-				<div class="meta">
-					<a>Coworker</a>
+			<div class="card">
+				<div class="image">
+					<img src="/images/yj.JPG">
 				</div>
-				<div class="description">Elyse is a copywriter working in New York.</div>
-			</div>
-			<div class="extra content">
-				<span class="right floated"> Joined in 2014 </span> <span> <i class="user icon"></i> 151 Friends
-				</span>
-			</div>
-		</div>
-		<div class="card">
-			<div class="image">
-				<img src="/images/dog5.jpeg">
-			</div>
-			<div class="content">
-				<div class="header">Elyse</div>
-				<div class="meta">
-					<a>Coworker</a>
+				<div class="content">
+					<div class="header">Elyse</div>
+					<div class="meta">
+						<a>Coworker</a>
+					</div>
+					<div class="description">Elyse is a copywriter working in New York.</div>
 				</div>
-				<div class="description">Elyse is a copywriter working in New York.</div>
+				<div class="extra content">
+					<span class="right floated"> Joined in 2014 </span> <span> <i class="user icon"></i> 151 Friends
+					</span>
+				</div>
 			</div>
-			<div class="extra content">
-				<span class="right floated"> Joined in 2014 </span> <span> <i class="user icon"></i> 151 Friends
-				</span>
+			<div class="card">
+				<div class="image">
+					<img src="/images/cat2.jpeg">
+				</div>
+				<div class="content">
+					<div class="header">Elyse</div>
+					<div class="meta">
+						<a>Coworker</a>
+					</div>
+					<div class="description">Elyse is a copywriter working in New York.</div>
+				</div>
+				<div class="extra content">
+					<span class="right floated"> Joined in 2014 </span> <span> <i class="user icon"></i> 151 Friends
+					</span>
+				</div>
+			</div>
+			<div class="card">
+				<div class="image">
+					<img src="/images/js.JPG">
+				</div>
+				<div class="content">
+					<div class="header">Elyse</div>
+					<div class="meta">
+						<a>Coworker</a>
+					</div>
+					<div class="description">Elyse is a copywriter working in New York.</div>
+				</div>
+				<div class="extra content">
+					<span class="right floated"> Joined in 2014 </span> <span> <i class="user icon"></i> 151 Friends
+					</span>
+				</div>
+			</div>
+			<div class="card">
+				<div class="image">
+					<img src="/images/yj2.JPG">
+				</div>
+				<div class="content">
+					<div class="header">Elyse</div>
+					<div class="meta">
+						<a>Coworker</a>
+					</div>
+					<div class="description">Elyse is a copywriter working in New York.</div>
+				</div>
+				<div class="extra content">
+					<span class="right floated"> Joined in 2014 </span> <span> <i class="user icon"></i> 151 Friends
+					</span>
+				</div>
+			</div>
+			<div class="card">
+				<div class="image">
+					<img src="/images/js2.JPG">
+				</div>
+				<div class="content">
+					<div class="header">Elyse</div>
+					<div class="meta">
+						<a>Coworker</a>
+					</div>
+					<div class="description">Elyse is a copywriter working in New York.</div>
+				</div>
+				<div class="extra content">
+					<span class="right floated"> Joined in 2014 </span> <span> <i class="user icon"></i> 151 Friends
+					</span>
+				</div>
+			</div>
+			<div class="card">
+				<div class="image">
+					<img src="/images/dog5.jpeg">
+				</div>
+				<div class="content">
+					<div class="header">Elyse</div>
+					<div class="meta">
+						<a>Coworker</a>
+					</div>
+					<div class="description">Elyse is a copywriter working in New York.</div>
+				</div>
+				<div class="extra content">
+					<span class="right floated"> Joined in 2014 </span> <span> <i class="user icon"></i> 151 Friends
+					</span>
+				</div>
 			</div>
 		</div>
 	</div>
