@@ -37,7 +37,6 @@ public class PetsitterService {
 		// map타입 변수 info에 넣음 
 		info.put("host", host);
 		info.put("detail", detail);
-		System.out.println("service working");
 		return info;
 	}
 	
