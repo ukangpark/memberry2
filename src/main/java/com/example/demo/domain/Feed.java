@@ -1,6 +1,7 @@
 package com.example.demo.domain;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import lombok.Data;
 
@@ -12,4 +13,5 @@ public class Feed {
 	private String writer;
 	private LocalDateTime inserted;
 	private String location;
+	private List<String> fileName;
 }
