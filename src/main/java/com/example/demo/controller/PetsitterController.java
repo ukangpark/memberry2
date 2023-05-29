@@ -77,6 +77,7 @@ public class PetsitterController {
 	
 	@PostMapping("hostModify")
 	public String hostModifyProcess(Host host) {
+		//호스트 정보 수정 과정
 		boolean ok = petsitterService.modifyById(host);
 		
 		return "redirect:/petsitter/hostMyPage?id=" + host.getId();
@@ -91,7 +92,18 @@ public class PetsitterController {
 	
 	@PostMapping("hostDelete")
 	public String hostDelete(Integer hostId) {
+		// 호스트 정보 삭제 과정
 		boolean ok = petsitterService.deleteHostById(hostId);
 		return "redirect:/petsitter/hostList";
+	}
+	
+	@GetMapping("addDetail")
+	public void detailForm(Integer hostId) {
+		// 상세페이지 view 포워드
+	}
+	
+	@PostMapping("addDetail")
+	public void addDetailProcess() {
+		System.out.println("add process working");
 	}
 }

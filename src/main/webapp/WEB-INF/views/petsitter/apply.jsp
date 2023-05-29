@@ -39,7 +39,7 @@
 						<label>주소</label>
 						<div class="equal width fields">
 							<div class="field">
-								<select class="ui fluid search dropdown" name="si" id="si">
+								<select class="ui dropdown" name="si" id="si">
 									<option value="서울시">서울시</option>
 									<option value="부산시">부산시</option>
 									<option value="대구시">대구시</option>
@@ -47,14 +47,14 @@
 								</select>
 							</div>
 							<div class="field">
-								<select class="ui fluid search dropdown" name="gu" id="gu">
+								<select class="ui dropdown" name="gu" id="gu">
 									<option value="종로구">종로구</option>
 									<option value="강서구">강서구</option>
 									<option value="마포구">마포구</option>
 								</select>
 							</div>
 							<div class="field">
-								<select class="ui fluid search dropdown" name="dong" id="dong">
+								<select class="ui dropdown" name="dong" id="dong">
 									<option value="내발산동">내발산동</option>
 									<option value="염창동">염창동</option>
 									<option value="화곡동">화곡동</option>

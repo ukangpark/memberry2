@@ -75,11 +75,18 @@
 			<div class="extra content">
 				<div class="ui three buttons">
 					<button data-bs-toggle="modal" data-bs-target="#deleteModal" class="ui red basic button">삭제하기</button>
-					<button class="ui blue basic button">게시글 등록하기</button>
+					<button form="detailFormButton" class="ui blue basic button">상세페이지 등록하기</button>
 					<a href="/petsitter/hostModify?id=${host.id }" class="ui green basic button">수정하기</a>
 				</div>
 			</div>
 		</div>
+	</div>
+	
+	<!-- 상세페이지 등록 정보 -->
+	<div class="d-none">
+		<form action="/petsitter/addDetail" id="detailFormButton">
+			<input type="text" name="hostId" value="${host.id }">
+		</form>
 	</div>
 	
 	<!-- 삭제하기 정보 -->
