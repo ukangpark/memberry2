@@ -73,5 +73,12 @@ public interface MyFeedMapper {
 			""")
 	void deleteFileNameByFeedId(Integer feedId);
 
+	@Delete("""
+			DELETE FROM File
+			WHERE feedId = #{feedId}
+				AND fileName = #{fileName}
+			""")
+	void deleteFileNameByFeedIdAndFileName(Integer feedId, String fileName);
+
 
 }
