@@ -14,7 +14,7 @@
 </head>
 <body>
 
-<h1> 마이페이지 </h1>
+<h1> 즐겨찾기 </h1>
 
 
 <div class="ui pointing menu">
