@@ -63,6 +63,8 @@ function showMain() {
   mainDate.innerHTML = today.getDate();
 }
 
+
+
 function makeElement(firstDate) {
   let weekly = 100;
   let dateSet = 1;
@@ -76,6 +78,11 @@ function makeElement(firstDate) {
       if (i === 0 && j < firstDate.getDay() || dateSet > pageYear[firstDate.getMonth()]) {
         // 만약 해당 칸에 날짜가 없으면 div엘리먼트만 생성한다.
         let dateEl = document.createElement('div');
+        //dateEl.innerHTML =
+        //해당 날짜에 맞는 todolist 표시
+        //if(todoListElem == currentDate) {
+			//dateEl.innerText = showList;
+		//} 
         weeklyEl.appendChild(dateEl);
       } else {
         // 해당 칸에 날짜가 있으면 div엘리먼트 생성 후 해당 날짜 넣어주기
@@ -89,6 +96,7 @@ function makeElement(firstDate) {
     }
     weekly++;
     calendarBody.appendChild(weeklyEl);
+   
   }
   // 현재 내가 선택한 날짜가 있으면 이전 달, 다음 달로 넘어가도 화면에 보여주기 위해 써줌
   let clickedDate = document.getElementsByClassName(today.getDate());
