@@ -20,16 +20,12 @@
 
 </head>
 <body>
-
 	
 	<h1>너와 함께</h1>
 <%-- 이거는 왜 안뜨는걸까.. <i class="fa-duotone fa-paw" style="--fa-primary-color: #f9a9a9; --fa-secondary-color: #1f1f1f;"></i> --%>	
-
-
-	<h1>너와 함께(가제)</h1>
-
 	
-	<button style= "float : right"  class="ui basic button" onclick="location.href='/bery/mapMypage'">
+	
+	<button style= "float : right"  class="ui basic button" onclick="location.href='/map/mapMypage'">
   <i class="icon star"></i>
 	  즐겨찾기
 	</button>
@@ -137,7 +133,7 @@ function placesSearchCB(data, status, pagination) {
 
     } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
 
-        alert('검색 결과가 존재하지 않습니다.......');
+        alert('검색 결과가 존재하지 않습니다.');
         return;
 
     } else if (status === kakao.maps.services.Status.ERROR) {
@@ -299,7 +295,7 @@ function displayInfowindow(marker, title) {
     infowindow.open(map, marker);
 }
 
- // 검색결과 목록의 자식 Element를 제거하는 함수입니다
+ // 검색결과 목록의 자식 Element를 제거하는 함수
 function removeAllChildNods(el) {   
     while (el.hasChildNodes()) {
         el.removeChild (el.lastChild);
@@ -310,7 +306,7 @@ function removeAllChildNods(el) {
 // 사이드바 버튼 누를때 리스트 뜨게 함수 설정 
 function searchRest(param){
 	
-	// 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
+	// 장소검색 객체를 통해 키워드로 장소검색을 요청
     ps.keywordSearch( param, placesSearchCB); 
     document.getElementById('keyword').value = param;
     

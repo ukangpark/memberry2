@@ -1,34 +1,61 @@
 package com.example.demo.controller;
 
-import org.springframework.web.bind.annotation.*;
+import java.util.List;
+import java.util.Map;
 
-@org.springframework.stereotype.Controller
-@RequestMapping("/bery/petsitter")
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.example.demo.domain.Detail;
+import com.example.demo.domain.Host;
+import com.example.demo.service.PetsitterService;
+
+@Controller
+@RequestMapping("petsitter")
 public class PetsitterController {
 	
-	//메인페이지 (로고 & 서치바 & 이미지 슬라이더)
-	@GetMapping("slider")
-	public void slider() {
+	
+	
+	@Autowired
+	private PetsitterService petsitterService;
+	
+	@GetMapping("detail")
+	public void detail(@RequestParam("id") Integer boardId, Model model) {
+		// 서비스에서 map으로 반환한 것을 담았음 
+		Map<String, Object> info = petsitterService.selectById(boardId);
+		
+		model.addAllAttributes(info);		
+	}
+	
+	@GetMapping("apply")
+	public void applyForm() {
 		
 	}
 	
-	@RequestMapping("mapTest")
-	public void map() {
+	@PostMapping("apply")
+	public void applyProcess() {
 		
 	}
 	
-	@RequestMapping("main")
-	public void main() {
+	@GetMapping("list")
+	public String petsitterList(Model model) {
+		List<Host> list = petsitterService.listHost();
+		model.addAttribute("petsitterList", list);
 		
+		return "petsitter/list";
 	}
 	
-	@RequestMapping("petsitterDetail")
-	public void petsitter() {
-		
+	
+	@GetMapping("regiForm")
+	public String regiForm() {
+		return "petsitter/regiForm";
 	}
 	
-	@RequestMapping("testCalendar")
-	public void test() {
-		 
-	}
+	
 }
