@@ -13,13 +13,20 @@
 	text-align: center;
 }
 
+.ui.tiny.image {
+	border-radius: 50%;
+	height: 70px;
+	width: 70px;
+
+}
+
 </style>
 
 <div class="ui fluid right aligned container" id="container">
 	<div class="ui fixed top sticky">
 		<div class="ui dropdown" id="profile">
 			<h4>
-				<img class="ui tiny circular image" src="/images/genieLoki.jpeg">로키맘
+				<img class="ui tiny image" src="/images/genieLoki.jpeg">로키맘
 			</h4>
 			<div class="ui vertical menu">
 				<div class="item">
