@@ -73,7 +73,7 @@ public class MyFeedService {
 		// File 테이블의 데이터 지우기(외래키 제약 사항 위배 안 되게 하려고)
 		mapper.deleteFileNameByFeedId(id);
 		
-		// S3 bucket의 데이터 지우기
+		// S3 bucket의 파일(객체) 지우기
 		for(String fileName : fileNames) {
 			String objectKey = "membery/" + id + "/" + fileName;
 			DeleteObjectRequest dor = DeleteObjectRequest.builder()

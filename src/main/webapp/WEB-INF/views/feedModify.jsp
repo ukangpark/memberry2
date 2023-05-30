@@ -18,11 +18,23 @@
 	
 	<div class="container-lg">
 		<h1>${feed.id  }번 게시물 수정하기</h1>
+		<br />
+		
 		<form method="post">
 			<input type="hidden" name="id" value="${feed.id }" />
+			
+			<div class="mb-3">
+			<c:forEach items="${feed.fileName }" var="fileName" >
+				<div class="mb-3">
+					<img class="img-thumnail img-fluid" src="${bucketUrl }/${feed.id }/${fileName }" alt="" />
+				</div>
+			</c:forEach>
+		</div>
+			
 			<div>
-				사진을 등록해보세요! <br />
-				 <input type="file" multiple name="files" accept="image/*" />
+				사진을 새로 등록해보세요! <br />
+				<input type="file" multiple name="files" accept="image/*" />
+				 
 			</div>
 			<br />
 			<div>

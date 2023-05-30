@@ -11,7 +11,7 @@ public interface MyFeedMapper {
 	
 	@Select("""
 			SELECT feedId, fileName FROM File
-			ORDER BY id DESC
+			GROUP BY FeedId ORDER BY id DESC
 			""")
 	List<File> selectAll();
 
