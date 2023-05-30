@@ -91,17 +91,17 @@
 				<label for="weight">몸무게</label>
 				<div class="field">
 					<div class="ui radio checkbox">
-						<input type="radio" name="weight" tabindex="0" class="hidden"> <label>소형견 ( 7kg 미만 )</label>
+						<input type="radio" name="price" tabindex="0" class="hidden" value="30,000"> <label>소형견 ( 7kg 미만 )</label>
 					</div>
 				</div>
 				<div class="field">
 					<div class="ui radio checkbox">
-						<input type="radio" name="weight" tabindex="0" class="hidden"> <label>중형견 ( 7 ~ 14.9kg)</label>
+						<input type="radio" name="price" tabindex="0" class="hidden"> <label>중형견 ( 7 ~ 14.9kg)</label>
 					</div>
 				</div>
 				<div class="field">
 					<div class="ui radio checkbox">
-						<input type="radio" name="weight" tabindex="0" class="hidden"> <label>대형견 ( 15kg 이상 )</label>
+						<input type="radio" name="price" tabindex="0" class="hidden"> <label>대형견 ( 15kg 이상 )</label>
 					</div>
 				</div>
 			</div>
@@ -184,6 +184,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
+      <!-- 달력 칸수 곱해서 금액산출 -->
         총 결제 금액은 000원입니다. 
         
         예약하시겠습니까?

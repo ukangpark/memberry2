@@ -52,7 +52,7 @@ public class PetsitterController {
 	}
 	
 	
-	@PostMapping("regiForm")
+	@GetMapping("regiForm")
 	public String regiForm() {
 		return "petsitter/regiForm";
 	}
