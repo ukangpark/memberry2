@@ -133,6 +133,7 @@ inputBtn.addEventListener('click', function (e) {
   insertTodo(inputValue);
 });
 
+  const liEl = document.createElement('li');
 function insertTodo(text) {
   let todoObj = {
     todo: text,
@@ -143,7 +144,6 @@ function insertTodo(text) {
   } else {
     DATA[currentDate].push(todoObj);
   }
-  const liEl = document.createElement('li');
   const spanEl = document.createElement('span');
   const delBtn = document.createElement('button');
   delBtn.innerText = "DEL";
@@ -285,8 +285,7 @@ function addTodo() {
 	if(addList.value == false) {
 		alert("내용을 입력하세요.");
 	} else {
-		let checkBox = document.createElement("input");
-		checkBox.type = "checkbox";
+		;
 		let list = document.createElement("li");
 		let del = document.createElement("button");
 		list.innerHTML = addList.value;
@@ -299,6 +298,7 @@ function addTodo() {
 		del.style.right = "17px";
 		del.style.height = "30px";
 		del.style.marginTop = "10px";
+		del.style.border = "solid 2px";
 		del.style.cursor = "pointer";
 		
 		//삭제 버튼 클릭시 리스트 지우는 함수 실행
