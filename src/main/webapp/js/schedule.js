@@ -1,3 +1,24 @@
+// --------------------data----------------
+let DATA = {
+  // todolist 목록 
+};
+
+Date.prototype.format = function () {  // 현재 날짜 보기좋게 출력 / 사용방법: newDate().format() 으로 사용가능
+  var yyyy = this.getFullYear();
+  var month = (this.getMonth() + 1);
+  var dd = this.getDate();
+  var format = [yyyy, month, dd].join('-');
+  return format;
+}
+
+
+Date.prototype.format2 = function () {  // 현재 날짜 보기좋게 출력 / 사용방법: newDate().format() 으로 사용가능
+  var yyyy = this.getFullYear();
+  var month = (this.getMonth() + 1);
+  var format = [yyyy, month].join('-');
+  return format;
+}
+// -----------------------------------main--------------------
 window.onload = function () {
 
 let today = new Date();
@@ -13,7 +34,6 @@ const createDate = document.querySelector('.createDate');
 const bgblack = document.querySelector('.bgblack');
 const closedBtn = document.querySelector('.closed');
 let currentDate;
-
 
 
 buildCalendar();
@@ -159,6 +179,7 @@ function insertTodo(text) {
   todoObj.id = DATA[currentDate].length;
   save();
   inputBox.value = '';
+
 }
 
 function redrawLi() {
@@ -186,14 +207,14 @@ function redrawLi() {
     }
   }
 }
- 
+
 // 다음달,이전달 다른날, 첫 로드 될 때 마다 todo 목록이 있으면(if로 조건문 처리) 다 지우고 다시 그려주는 함수 
 function resetInsert() {
   let storeObj = localStorage.getItem(currentDate);
-  if (storeObj !== null) {  //일정 리스트에 값이 있다면
-  	let liEl = document.querySelectorAll('LI');
-   for (let i = 0; i < liEl.length; i++) {
-     inputList.removeChild(liEl[i]);  //liEl > (span>text) + delBtn
+  if (storeObj !== null) {
+    let liEl = document.querySelectorAll('LI');
+    for (let i = 0; i < liEl.length; i++) {
+      inputList.removeChild(liEl[i]);
     }
     // parse 해주기 전에는 localStorage는 string만 가져오니까 parse해준다.
     const parsed = JSON.parse(localStorage.getItem(currentDate));
@@ -230,6 +251,7 @@ function delWork(e) {
   });
   DATA[currentDate] = cleanToDos;
   save();
+
 }
 
 function showTodo(e){
@@ -248,78 +270,4 @@ function save() {
   localStorage.setItem(currentDate, JSON.stringify(DATA[currentDate]));
 }
 
-}
-
-	//------Data-------------------------------------------
-	let DATA = {
-  // todolist 목록 
-};
-
-Date.prototype.format = function () {  // 현재 날짜 보기좋게 출력 / 사용방법: newDate().format() 으로 사용가능
-  var yyyy = this.getFullYear();
-  var month = (this.getMonth() + 1);
-  var dd = this.getDate();
-  var format = [yyyy, month, dd].join('-');
-  return format;
-}
-
-Date.prototype.format2 = function () {  // 현재 날짜 보기좋게 출력 / 사용방법: newDate().format() 으로 사용가능
-  var yyyy = this.getFullYear();
-  var month = (this.getMonth() + 1);
-  var format = [yyyy, month].join('-');
-  return format;
-}
-
-// ---------------------------------------------------------------
-// To Do List
-
-// 버튼
-const addBtn = document.getElementById('addBtn');
-//할 일 입력
-let addList = document.getElementById('addList');
-let result = document.getElementById('result');
-
-//할 일 추가 시
-function addTodo() {
-	//입력창에 값이 비어있는 경우
-	if(addList.value == false) {
-		alert("내용을 입력하세요.");
-	} else {
-		let checkBox = document.createElement("input");
-		checkBox.type = "checkbox";
-		let list = document.createElement("li");
-		let del = document.createElement("button");
-		list.innerHTML = addList.value;
-		result.appendChild(list);  //리스트에 입력한 할일 추가
-		list.appendChild(del);  //추가한 할일에 삭제버튼 추가
-		del.innerText = "X";  //삭제버튼에 X텍스트
-		del.style.fontSize = "20px";
-		del.style.border = "none";
-		del.style.float = "right";
-		del.style.right = "17px";
-		del.style.height = "30px";
-		del.style.marginTop = "10px";
-		del.style.cursor = "pointer";
-		
-		//삭제 버튼 클릭시 리스트 지우는 함수 실행
-		del.addEventListener("click", deleteList);  
-		del.style.positoin = "relative";
-		
-		// 할일 입력창 초기화
-		addList.value = "";
-		// 커서 입력창에 깜빡임
-		addList.focus();  
-		
-	}
-}
-
-//할 일 목록 삭제 시
-function deleteList(e) {
-	//선택한 목록 한개만 지우기(부모 객체를 지움)
-	let removeOne = e.target.parentElement;   
-	removeOne.remove();
-}
-//목록 전체 삭제
-function allClearList(e) {
-	result.innerText = '';
 }

@@ -26,7 +26,9 @@
 	<div class="ui fixed top sticky">
 		<div class="ui dropdown" id="profile">
 			<h4>
+
 				<img class="ui tiny image" src="/images/genieLoki.jpeg">로키맘
+
 			</h4>
 			<div class="ui vertical menu">
 				<div class="item">
@@ -34,6 +36,7 @@
 						<input type="text" placeholder="Search...">
 					</div>
 				</div>
+
 				<a class="${current eq 'home' ? 'active' : '' } item" href="/home" data-tab="tab-home"> 홈피드 </a>
 				<a class="${current eq 'myFeed' ? 'active' : '' } item" href="/myFeed"> 마이피드 </a>
 				<a class="${current eq 'schedule' ? 'active' : '' } item" href="/schedule" data-tab="tab-schedule"> 스케줄달력 </a>
@@ -52,6 +55,7 @@
 				<a class="${current eq 'login' ? 'active' : '' } item" href="/login"> 로그인 </a>
 				<a class="${current eq 'signup' ? 'active' : '' } item" href="/signup"> 회원가입 </a>
 				<a class="${current eq 'logout' ? 'active' : '' } item" href="/logout"> 로그아웃 </a>
+
 			</div>
 		</div>
 	</div>

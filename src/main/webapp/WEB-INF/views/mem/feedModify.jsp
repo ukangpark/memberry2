@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core"%>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
 <!DOCTYPE html>
 <html>
@@ -14,25 +14,23 @@
 </head>
 <body>
 
-	<my:navBar />
-
+	<my:navBar></my:navBar>
+	
 	<div class="container-lg">
-		<div class="col-12 col-md-8 col-lg-6">
-		<h1>새로운 스토리를 추가해보세요!</h1>
-		<br />
-		<form method="post" enctype="multipart/form-data" id="addForm">
-			<!-- 이미지 파일 업로드 -->
+		<h1>${feed.id  }번 게시물 수정하기</h1>
+		<form method="post">
+			<input type="hidden" name="id" value="${feed.id }" />
 			<div>
 				사진을 등록해보세요! <br />
 				 <input type="file" multiple name="files" accept="image/*" />
 			</div>
 			<br />
 			<div>
-				제목을 입력하세요  <input type="text" name="title" value="${feed.title }"/>
+				제목을 수정하세요  <input type="text" name="title" value="${feed.title }" />
 				</div>
 			<br />	
 			<div>
-				내용을 입력하세요  <textarea name="content">${feed.content }</textarea>
+				내용을 수정하세요  <textarea name="content">${feed.content }</textarea>
 			</div>
 			<br />
 			<div>
@@ -40,27 +38,26 @@
 			</div>
 			<br />
 			<div>
+				작성일시 <input type="text" value="${feed.inserted }" readonly/>
+			</div>
+			<br />
+			<div>
 				장소를 태그하세요  <input type="text" name="location" value="${feed.location }"/>
 			</div>
 			<br />
+			<div>
+				<input type="submit" value="수정하기" />
 		</form>
-		<button type="submit" form="addForm" id="addButton">추가하기</button>
-		</div>
 	</div>
+
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>
-
-	<script type="text/javascript">
-		$("addButton").click(function(e) {
-			e.preventDefault();
-			
-			const res = confirm("게시물을 추가 하시겠습니까?");
-			if (res) {
-				//서브밋 실행
-				$("addForm").submit();
-			}
-		});
-	</script>
+	
+ 	<c:if test="${not empty param.fail }">
+		<script>
+			alert("게시물이 수정되지 않았습니다.");
+		</script>
+	</c:if> 
 </body>
 </html>
