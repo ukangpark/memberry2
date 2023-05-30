@@ -120,30 +120,36 @@
 			<div class="btn-group" role="group" aria-label="Basic radio toggle button group" style="width:1090px">
   		<input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
   		<label class="btn btn-outline-secondary" for="btnradio1">여자</label>
-
   		<input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
   		<label class="btn btn-outline-secondary" for="btnradio2">남자</label>
+		</div>
 
-</div>
 
-
-			<%-- <div class="ui two item menu">
-
-				<a class="item">여자</a> <a class="item">남자</a>
-			</div>--%>
-
+	
 			<h4 class="ui header">중성화</h4>
-			<div class="ui two item menu">
+			<div class="btn-group" role="group" aria-label="Basic radio toggle button group" style="width:1090px">
+  		<input type="radio" class="btn-check" name="btnradio1" id="btnradio3" autocomplete="off" checked>
+  		<label class="btn btn-outline-secondary" for="btnradio3">네</label>
 
-				<a class="item">네</a> <a class="item">아니오</a>
-			</div> 
+  		<input type="radio" class="btn-check" name="btnradio1" id="btnradio4" autocomplete="off">
+  		<label class="btn btn-outline-secondary" for="btnradio4">아니오</label>
+  		</div>
+			
+			
+			
 
 
 			<h4 class="ui header">배변훈련(배변패드)</h4>
-			<div class="ui three item menu">
-
-				<a class="item">잘해요</a> <a class="item">미숙해요</a> <a class="item">실외배변</a>
-			</div>
+			<div class="btn-group" role="group" aria-label="Basic radio toggle button group" style="width:1090px">
+  		<input type="radio" class="btn-check" name="btnradio2" id="btnradio5" autocomplete="off" checked>
+  		<label class="btn btn-outline-secondary" for="btnradio5">잘해요</label>
+  		<input type="radio" class="btn-check" name="btnradio2" id="btnradio6" autocomplete="off">
+  		<label class="btn btn-outline-secondary" for="btnradio6">미숙해요</label>
+  		<input type="radio" class="btn-check" name="btnradio2" id="btnradio7" autocomplete="off">
+  		<label class="btn btn-outline-secondary" for="btnradio7">실외배변</label>
+		</div>
+			
+	
 
 
 			<h4 class="ui header">자주 다니는 동물병원 이름과 위치(동)</h4>
@@ -154,19 +160,12 @@
 			</div>
 
 
-
-
-
-
-
-
 			<h4 class="ui header">전하고 싶은 말</h4>
 			<div class="field">
 
 				<textarea rows="2" placeholder="특이사항, 주의사항 등등 자유롭게 적어주세요"></textarea>
 			</div>
 
-	<!-- <div class="ui button" tabindex="0">예약 신청하기</div>  -->		
 
 
 <!-- Button trigger modal -->

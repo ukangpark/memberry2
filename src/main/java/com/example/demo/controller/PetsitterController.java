@@ -84,6 +84,7 @@ public class PetsitterController {
 		
 		return "redirect:/petsitter/hostMyPage?id=" + host.getId();
 	}
+	// 펫시터 전체목록보기
 	@GetMapping("list")
 	public String petsitterList(Model model) {
 		List<Host> list = petsitterService.listHost();
