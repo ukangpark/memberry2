@@ -312,12 +312,12 @@ img { vertical-align: top;}
 						<input type="text" placeholder="일정을 작성하세요!!" class="input-box" />
 						<button type="submit" class="input-btn clickBtn">추가</button>
 					</form>
-					<!-- <ul class="todoList"></ul>
+					<ul class="todoList"></ul>
 					<div class="showList">
 						<span class="listText"></span> <span class="createDate"></span>
 						<button class="closed">닫기</button>
 					</div>
-					<div class="bgblack"></div> -->
+					<div class="bgblack"></div>
 				</div>
 			</div>
 		</section>
@@ -331,14 +331,7 @@ img { vertical-align: top;}
 				<div class="dayHeader">Fri</div>
 				<div class="dayHeader sat">Sat</div>
 			</div>
-			<div class="calendar-body">
-			<ul class="todoList"></ul>
-					<div class="showList">
-						<span class="listText"></span> <span class="createDate"></span>
-						<button class="closed">닫기</button>
-					</div>
-					<div class="bgblack"></div>
-			</div>
+			<div class="calendar-body"></div>
 		</section>
 	</div>
 

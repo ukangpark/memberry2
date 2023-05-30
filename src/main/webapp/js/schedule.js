@@ -1,14 +1,13 @@
-//-------------------data-------------------
+// --------------------data----------------
 let DATA = {
   // todolist 목록 
 };
 
-// 현재 날짜 보기좋게 출력 / 사용방법: newDate().format() 으로 사용가능
-Date.prototype.format = function () {  
-  var yyyy = this.getFullYear();  //해당 연도 가져오기
-  var month = (this.getMonth() + 1); //해당 달 가져옴
+Date.prototype.format = function () {  // 현재 날짜 보기좋게 출력 / 사용방법: newDate().format() 으로 사용가능
+  var yyyy = this.getFullYear();
+  var month = (this.getMonth() + 1);
   var dd = this.getDate();
-  var format = [yyyy, month, dd].join('-');  //문자열로 합치기
+  var format = [yyyy, month, dd].join('-');
   return format;
 }
 
@@ -18,9 +17,7 @@ Date.prototype.format2 = function () {  // 현재 날짜 보기좋게 출력 / �
   var format = [yyyy, month].join('-');
   return format;
 }
-
-// -----------------main----------------------------------------
-
+// -----------------------------------main--------------------
 window.onload = function () {
 
 let today = new Date();
@@ -185,7 +182,7 @@ function insertTodo(text) {
 
 function redrawLi() {
   // 다른 날짜를 클릭했을때 그 전에 작성한 totolist목록을 먼저 다 지우기 위해 li와 span을 찾아와 for문으로 지워주고 다시 그려준다.
-  let liEl = document.querySelectorAll('.todo-wrap > li');
+  let liEl = document.querySelectorAll('LI');
   for (let i = 0; i < liEl.length; i++) {
     inputList.removeChild(liEl[i]);
   }
@@ -271,6 +268,3 @@ function save() {
 }
 
 }
-
-// ---------------------------------------------------------------
-
