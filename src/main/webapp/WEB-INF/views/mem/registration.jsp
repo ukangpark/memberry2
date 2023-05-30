@@ -39,8 +39,10 @@
 					<input type="text">
 				</div>
 				<div class="ui fluid labeled big input mt-5">
-					<div class="ui label">종류</div>
+					<div class="ui label">품종</div>
 					<input type="text">
+					몸무게
+					
 				</div>
 				<div class="ui fluid labeled big input mt-5">
 					<div class="ui label">생년월일</div>
@@ -90,6 +92,9 @@
 				<div class="ui fluid labeled big input mt-5">
 					<div class="ui label">반려동물 등록 번호</div>
 					<input type="text">
+					
+					몸무게
+					
 				</div>
 
 			</div>
