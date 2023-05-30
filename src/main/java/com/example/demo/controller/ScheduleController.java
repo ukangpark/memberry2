@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 public class ScheduleController {
 	@GetMapping("schedule")
 	public String get() {
-		return "schedule";
+		return "mem/schedule";
 	}
 	
 	@PostMapping("schedule/addSchedule")

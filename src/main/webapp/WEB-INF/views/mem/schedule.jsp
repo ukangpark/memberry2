@@ -42,13 +42,13 @@ body {
 	width: 80%;
 	float: center;
 	margin: auto;
-	margin-top: 30px;
+	margin-top: 50px;
 }
-.toDo {
-	margin: auto;
+ .toDoLink {
+	 margin: auto; 
 	float: right;
-	
-}
+	z-index: 2;
+} 
 
 /* --달력 코드 복붙------------------------------------------------------- */
 /* btn css */
@@ -72,17 +72,19 @@ header {
   padding: 10px;
   height: 7%;
   box-sizing: border-box;
+  
 }
 header > h1 {
   display: inline-block;
   height: 100%;
   flex-grow: 1;
+  width: 50%;
 }
 .fa-calendar-check {color: grey; margin-right: 2%; vertical-align: middle;}
 
 header > h1 > span {color: #a7a7a7; font-size: 24px; font-weight: 400; vertical-align: bottom;}
 
-.calendar_title { margin: 0 auto; flex-grow: 1;}
+.calendar_title { margin: 0 auto; flex-grow: 1; display: inline-block; float: center;}
 .calendar_title .prev , .next{
   width: 30px;
   height: 100%;
@@ -91,6 +93,7 @@ header > h1 > span {color: #a7a7a7; font-size: 24px; font-weight: 400; vertical-
   font-size: 20px;
   font-weight: 700;
   outline: none;
+  text-align: center;
 
   color: #5c5c5c;
   border-radius: 10%;
@@ -106,6 +109,7 @@ header > h1 > span {color: #a7a7a7; font-size: 24px; font-weight: 400; vertical-
   margin: 0 20px;
   font-weight: 600;
 }
+
 
 /* content left */
 .content-left {
@@ -163,7 +167,7 @@ header > h1 > span {color: #a7a7a7; font-size: 24px; font-weight: 400; vertical-
 }
 .content-right .day-of-week .dayHeader {
   display: inline-block;
-  width: calc(100% / 7.5);
+  width: calc(100% / 7.2);
   height: 100%;
   text-align: center;
   padding: 1%;
@@ -307,12 +311,10 @@ img { vertical-align: top;}
 
 </head>
 <body>
-	<div class="header">
-
-		<h1>Calendar</h1>
-	</div>
-	<!------------------------------------------------------------------------>
-
+		
+		
+		<my:navBar current="schedule"></my:navBar>
+		
 
 	<div class="calendarWrapper">
 		<header>
@@ -325,9 +327,8 @@ img { vertical-align: top;}
 
 				<button class="next">&#62;</button>				
 			</div>
-			<div>
-				<a href="toDoList"><h3>ToDoList</h3></a>
-
+			<div class="toDoLink">
+				<a href="toDoList"><h2>ToDoList</h2></a>
 			</div>
 		</header>
 		<section class="content-left">
@@ -344,7 +345,7 @@ img { vertical-align: top;}
 
 						<button type="submit" class="input-btn clickBtn">추가</button>
 					</form>
-					<ul class="todoList"></ul>
+					<ul class="todoList" id="todoList"></ul>
 					<div class="showList">
 						<span class="listText"></span> <span class="createDate"></span>
 
@@ -374,7 +375,7 @@ img { vertical-align: top;}
 	
 
 
-	
+	<script src="/js/schedule.js"></script>
 
 
 	<script
@@ -387,6 +388,6 @@ img { vertical-align: top;}
 		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
-	<script src="/js/schedule.js"></script>
+	
 </body>
 </html>
