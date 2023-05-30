@@ -34,6 +34,10 @@ body {
 	height: 100vh;
 	width: 100%;
 }
+.head {
+	text-align: center;
+	margin-top: 50px;
+}
 
 .header {
 	text-align: center;
@@ -68,7 +72,7 @@ body {
 /* header */
 header {
   border-bottom: 1px solid grey; 
-  display: flex;
+  display: inline;
   padding: 10px;
   height: 7%;
   box-sizing: border-box;
@@ -77,12 +81,16 @@ header > h1 {
   display: inline-block;
   height: 100%;
   flex-grow: 1;
+  width: 30%;
+  border-top: 10px;
 }
 .fa-calendar-check {color: grey; margin-right: 2%; vertical-align: middle;}
+
 
 header > h1 > span {color: #a7a7a7; font-size: 24px; font-weight: 400; vertical-align: bottom;}
 
 .calendar_title { margin: 0 auto; flex-grow: 1;}
+
 .calendar_title .prev , .next{
   width: 30px;
   height: 100%;
@@ -134,6 +142,7 @@ header > h1 > span {color: #a7a7a7; font-size: 24px; font-weight: 400; vertical-
 .left-main .todo-wrap .todo-title {
   font-size: 40px;
   font-weight: 600;
+  margin-top: 10%;
   margin-bottom: 10%;
   color: grey;
 }
@@ -154,7 +163,7 @@ header > h1 > span {color: #a7a7a7; font-size: 24px; font-weight: 400; vertical-
   float: right;
   box-sizing: border-box;
   width: 80%;
-  border: solid;
+  border: solid 2px;;
 }
 .content-right .day-of-week {
   background: #e2e2e2;
@@ -163,7 +172,7 @@ header > h1 > span {color: #a7a7a7; font-size: 24px; font-weight: 400; vertical-
 }
 .content-right .day-of-week .dayHeader {
   display: inline-block;
-  width: calc(100% / 7.5);
+  width: calc(100% / 7.4);
   height: 100%;
   text-align: center;
   padding: 1%;
@@ -171,14 +180,14 @@ header > h1 > span {color: #a7a7a7; font-size: 24px; font-weight: 400; vertical-
   font-weight: 600;
   font-size: 18px;
 }
-.content-right .day-of-week .dayHeader.sun {color: #f02f2f;}
+.content-right .day-of-week .dayHeader.sun {color: #f02f2f; margin-left: 3px;}
 .content-right .day-of-week .dayHeader.sat {color: #2208e7;}
 
 /* calendar body  */
 #weekly > div {
   box-sizing: border-box;
   text-align: center;
-  width: calc(100% / 7);
+  width: calc(100% / 7.2);
   height: 130px;
   display: inline-block;
   border-bottom: 1px solid #e4e4e4;
@@ -229,7 +238,9 @@ header > h1 > span {color: #a7a7a7; font-size: 24px; font-weight: 400; vertical-
   width: 4px;
   height: 18px;
 
+
   background: grey;
+
 
 }
 .todoList > li > .del-data::after, .closed::after {transform: rotate(45deg);}
@@ -241,7 +252,9 @@ header > h1 > span {color: #a7a7a7; font-size: 24px; font-weight: 400; vertical-
   left: 50%;
   transform: translate(-50%, -50%);
 
+
   background: #e2e2e2;
+
 
   width: 400px;
   height: 300px;
@@ -294,22 +307,28 @@ header > h1 > span {color: #a7a7a7; font-size: 24px; font-weight: 400; vertical-
 
 /* ---reset--- */
 
+
 a {text-decoration:none;}
 
 table {border-collapse: collapse}
 h1, h2, h3, h4, h5, h6, div, p, dl, dt, dd, ul, ol, li, form, fieldset, blockquote, address, table, thead, tbody, tfoot, tr, td, caption {
+
 	margin:0;
 	padding:0;
+	font-family: 'Roboto', sans-serif;
 }
+
 img { vertical-align: top;}
 
 </style>
 
 </head>
 <body>
+
 	<div class="header">
 
 		<h1>Calendar</h1>
+
 	</div>
 	<!------------------------------------------------------------------------>
 
@@ -340,7 +359,9 @@ img { vertical-align: top;}
 
 					<div class="todo-title">일정</div>
 					<form class="input-form">
+
 						<input type="text" placeholder="일정을 작성하세요!!" class="input-box" />
+
 
 						<button type="submit" class="input-btn clickBtn">추가</button>
 					</form>
@@ -371,7 +392,9 @@ img { vertical-align: top;}
 	</div>
 
 
+
 	
+
 
 
 	
