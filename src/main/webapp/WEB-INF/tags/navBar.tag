@@ -17,9 +17,7 @@
 	border-radius: 50%;
 	height: 70px;
 	width: 70px;
-
 }
-
 </style>
 
 <div class="ui fluid right aligned container" id="container">
@@ -37,24 +35,26 @@
 					</div>
 				</div>
 
-				<a class="${current eq 'home' ? 'active' : '' } item" href="/home" data-tab="tab-home"> 홈피드 </a>
+				<a class="${current eq 'home' ? 'active' : '' } item" href="/home"> 홈피드 </a>
 				<a class="${current eq 'myFeed' ? 'active' : '' } item" href="/myFeed"> 마이피드 </a>
-				<a class="${current eq 'schedule' ? 'active' : '' } item" href="/schedule" data-tab="tab-schedule"> 스케줄달력 </a>
-				<!-- 함께가기 주소 업데이트 해야함 -->
-				<a class="${current eq '' ? 'active' : '' } item" href="/"> 함께가기 </a>
-				<div class="item">
-					펫시터
-					<div class="menu">
-						<!-- 펫시터 주소bery랑 확인 필요 -->
-						<a class="${current eq 'petsitterMain' ? 'active' : '' } item" href="/petsitterMain">펫시터홈</a>
-						<a class="${current eq 'petsitter' ? 'active' : '' } item" href="/petsitter">펫시터지원</a>
+				<a class="${current eq 'schedule' ? 'active' : '' } item" href="/schedule"> 스케줄달력 </a>
+				<a class="${current eq 'mapMain' ? 'active' : '' } item" href="/map/mapMain"> 함께가기 </a>
+				<div>
+					<div onclick="location.href='/petsitter/main'" class="${current eq 'petsitterMain' ? 'active' : '' } link item">
+						펫시터
+						<div class="menu">
+							<a class="${current eq 'main' ? 'active' : '' } item" href="/petsitter/main">펫시터홈</a>
+							<a class="${current eq 'apply' ? 'active' : '' } item" href="/petsitter/apply">펫시터지원</a>
+							<a class="${current eq 'hostMyPage' ? 'active' : '' } item" href="/petsitter/hostMyPage">호스트 마이페이지</a>
+							<a class="${current eq 'hostList' ? 'active' : '' } item" href="/petsitter/hostList">호스트 리스트</a>
+						</div>
 					</div>
 				</div>
-				<a class="${current eq 'registration' ? 'active' : '' } item" href="/registration" data-tab="tab-registration"> 반려동물등록 </a>
-				<a class="${current eq 'myPage' ? 'active' : '' } item" href="/myPage"> 마이페이지 </a>
-				<a class="${current eq 'login' ? 'active' : '' } item" href="/login"> 로그인 </a>
-				<a class="${current eq 'signup' ? 'active' : '' } item" href="/signup"> 회원가입 </a>
-				<a class="${current eq 'logout' ? 'active' : '' } item" href="/logout"> 로그아웃 </a>
+				<a class="${current eq 'registration' ? 'active' : '' } item" href="/registration"> 반려동물등록 </a>
+				<a class="${current eq 'myPage' ? 'active' : '' } item" href="/member/myPage"> 마이페이지 </a>
+				<a class="${current eq 'login' ? 'active' : '' } item" href="/member/login"> 로그인 </a>
+				<a class="${current eq 'signup' ? 'active' : '' } item" href="/member/signup"> 회원가입 </a>
+				<a class="${current eq 'logout' ? 'active' : '' } item" href="/member/logout"> 로그아웃 </a>
 
 			</div>
 		</div>
@@ -111,7 +111,7 @@
  -->
 <script>
 	$('.ui.sticky').sticky({
-		offset: 10
+		offset : 10
 	});
 	$('.ui.dropdown').dropdown({
 		direction : 'auto'
