@@ -19,7 +19,7 @@
 </head>
 <body>
 
-	<my:navBar />
+	<my:navBar current="home" />
 
 	<div class="ui center aligned container" id="container">
 		<div class="ui link cards">
