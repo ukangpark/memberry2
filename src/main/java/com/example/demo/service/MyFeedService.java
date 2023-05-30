@@ -67,7 +67,7 @@ public class MyFeedService {
 	}
 
 	public boolean remove(Integer id) {
-		//파일명 조회
+		//파일명 조회(데이터 지울 때 필요하여 미리 조회)
 		List<String> fileNames = mapper.selectFileNamesByFeedId(id);
 		
 		// File 테이블의 데이터 지우기(외래키 제약 사항 위배 안 되게 하려고)
@@ -85,7 +85,7 @@ public class MyFeedService {
 		
 		// 마이피드 테이블의 데이터 지우기
 		int cnt = mapper.deleteById(id);
-		return false;
+		return cnt == 1;
 	}
 
 	

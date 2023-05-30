@@ -1,8 +1,9 @@
 USE membery;
 SELECT * FROM Feed ORDER BY id DESC;
 SELECT * FROM File ORDER BY id DESC;
+SELECT * FROM File WHERE feedId = 44;
 
-DELETE FROM Feed WHERE id = 36;
+DELETE FROM Feed WHERE id = 45;
 
 DESC Feed;
 DESC File;
