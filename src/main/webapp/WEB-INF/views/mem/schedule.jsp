@@ -1,6 +1,10 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,6 +34,7 @@ body {
 	height: 100vh;
 	width: 100%;
 }
+
 .header {
 	text-align: center;
 }
@@ -52,15 +57,17 @@ body {
   height: 35px;
   border-radius: 10%;
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 700;
   border: none;
+
   background: #e2e2e2;
+
   margin-right: 30px;
 }
 
 /* header */
 header {
-  border-bottom: 1px solid #e4e4e4; 
+  border-bottom: 1px solid grey; 
   display: flex;
   padding: 10px;
   height: 7%;
@@ -72,7 +79,9 @@ header > h1 {
   flex-grow: 1;
 }
 .fa-calendar-check {color: grey; margin-right: 2%; vertical-align: middle;}
+
 header > h1 > span {color: #a7a7a7; font-size: 24px; font-weight: 400; vertical-align: bottom;}
+
 .calendar_title { margin: 0 auto; flex-grow: 1;}
 .calendar_title .prev , .next{
   width: 30px;
@@ -80,13 +89,17 @@ header > h1 > span {color: #a7a7a7; font-size: 24px; font-weight: 400; vertical-
   cursor: pointer;
   border: none;
   font-size: 20px;
+  font-weight: 700;
   outline: none;
+
   color: #5c5c5c;
   border-radius: 10%;
   font-weight: 600;
+
 }
 .calendar_title .current-year-month {
   font-size: 24px;
+  font-weight: 500;
   vertical-align: middle;
   color: black;
   display: inline-block;
@@ -99,6 +112,7 @@ header > h1 > span {color: #a7a7a7; font-size: 24px; font-weight: 400; vertical-
   float: left;
   box-sizing: border-box;
   width: 20%;
+  
 }
 .left-main {margin-top: 20%;}
 .left-main .main-wrap {
@@ -108,11 +122,12 @@ header > h1 > span {color: #a7a7a7; font-size: 24px; font-weight: 400; vertical-
 .left-main .main-wrap .main-day {
   padding: 10% 0;
   font-size: 30px;
-  color: grey;
+  color: black;
 }
 .left-main .main-wrap .main-date {
   margin: 10% 0;
   font-size: 80px;
+
   color: #585858;
 }
 .left-main .todo-wrap {padding: 20% 0 10% 10%;}
@@ -122,12 +137,15 @@ header > h1 > span {color: #a7a7a7; font-size: 24px; font-weight: 400; vertical-
   margin-bottom: 10%;
   color: grey;
 }
+
 .left-main .todo-wrap .input-form .input-box {
   width: 90%;
   height: 50px;
   font-size: 20px;
   border: 0;
+
   border-bottom: 2px dashed black;
+
   margin-bottom: 30px;
   outline-style: none;
 }
@@ -136,6 +154,7 @@ header > h1 > span {color: #a7a7a7; font-size: 24px; font-weight: 400; vertical-
   float: right;
   box-sizing: border-box;
   width: 80%;
+  border: solid;
 }
 .content-right .day-of-week {
   background: #e2e2e2;
@@ -209,7 +228,9 @@ header > h1 > span {color: #a7a7a7; font-size: 24px; font-weight: 400; vertical-
   display: block;
   width: 4px;
   height: 18px;
+
   background: grey;
+
 }
 .todoList > li > .del-data::after, .closed::after {transform: rotate(45deg);}
 .todoList > li > .del-data::before, .closed::before{transform: rotate(-45deg);}
@@ -219,7 +240,9 @@ header > h1 > span {color: #a7a7a7; font-size: 24px; font-weight: 400; vertical-
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+
   background: #e2e2e2;
+
   width: 400px;
   height: 300px;
   z-index: 1;
@@ -268,23 +291,28 @@ header > h1 > span {color: #a7a7a7; font-size: 24px; font-weight: 400; vertical-
   position: absolute;
   left: 0; right: 0; top: 0; bottom: 0;
 }
+
 /* ---reset--- */
 
 a {text-decoration:none;}
+
 table {border-collapse: collapse}
 h1, h2, h3, h4, h5, h6, div, p, dl, dt, dd, ul, ol, li, form, fieldset, blockquote, address, table, thead, tbody, tfoot, tr, td, caption {
 	margin:0;
 	padding:0;
 }
 img { vertical-align: top;}
+
 </style>
 
 </head>
 <body>
 	<div class="header">
+
 		<h1>Calendar</h1>
 	</div>
 	<!------------------------------------------------------------------------>
+
 
 	<div class="calendarWrapper">
 		<header>
@@ -294,10 +322,12 @@ img { vertical-align: top;}
 			<div class="calendar_title">
 				<button class="prev">&#60;</button>
 				<span class="current-year-month"></span>
+
 				<button class="next">&#62;</button>				
 			</div>
 			<div>
 				<a href="toDoList"><h3>ToDoList</h3></a>
+
 			</div>
 		</header>
 		<section class="content-left">
@@ -307,15 +337,19 @@ img { vertical-align: top;}
 					<div class="main-date"></div>
 				</div>
 				<div class="todo-wrap">
+
 					<div class="todo-title">일정</div>
 					<form class="input-form">
 						<input type="text" placeholder="일정을 작성하세요!!" class="input-box" />
+
 						<button type="submit" class="input-btn clickBtn">추가</button>
 					</form>
 					<ul class="todoList"></ul>
 					<div class="showList">
 						<span class="listText"></span> <span class="createDate"></span>
+
 						<button class="closed">닫기</button>
+
 					</div>
 					<div class="bgblack"></div>
 				</div>
@@ -333,6 +367,7 @@ img { vertical-align: top;}
 			</div>
 			<div class="calendar-body"></div>
 		</section>
+
 	</div>
 
 
@@ -351,6 +386,7 @@ img { vertical-align: top;}
 		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"
 		integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ=="
 		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 
 	<script src="/js/schedule.js"></script>
 </body>
