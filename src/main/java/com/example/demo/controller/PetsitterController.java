@@ -57,7 +57,7 @@ public class PetsitterController {
 		//host 정보 받아서 추가
 		int count = petsitterService.insertHost(host);
 		rttr.addFlashAttribute("host", host);
-		return "redirect:/petsitter/main";
+		return "redirect:/petsitter/main2";
 	}
 	
 	@GetMapping("hostMyPage")

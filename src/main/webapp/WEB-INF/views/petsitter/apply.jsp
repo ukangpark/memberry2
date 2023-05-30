@@ -20,7 +20,7 @@
 				<form id="applyForm" class="ui big form" method="post" action="/petsitter/apply">
 					<h1>호스트 등록</h1>
 					<div class="field">
-						<label for="photo">사진 등록</label>
+						<label for="photo">프로필 사진 등록</label>
 						<input id="photo" type="file" name="photo">
 					</div>
 					<div class="field">
