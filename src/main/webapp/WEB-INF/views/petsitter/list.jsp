@@ -25,7 +25,7 @@
 		<h1>펫시터 목록</h1>
 <hr />
 
-<div style= "height:200px" >
+<%-- <div style= "height:200px" >
 		<div class="ui selection dropdown">
 			<input type="hidden" name="city"> <i class="dropdown icon"></i>
 			<div class="default text">시</div>
@@ -77,11 +77,11 @@
 				<div class="item" data-value="0">2동</div>
 			</div>
 		</div>
-	</div>
+	</div> --%>
 
 <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">search</button>
+        <input class="form-control me-2" type="search" placeholder="맡기고 싶은 지역을 검색하세요 (예. 서울시 서초구 반포동)" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit" style="width:80px">검색</button>
       </form>
 
 	<script>
@@ -91,7 +91,7 @@
 <hr />
 
 
-	<div class="ui link cards">
+	<div class="ui link cards" onclick="/petsitter/detail?${host.id }">
     <c:forEach items="${petsitterList }" var="host">
   <div class="card">
     <div class="image">
@@ -108,11 +108,11 @@
     </div>
     <div class="extra content">
       <span class="right floated">
-        1박 0000원
+      
         하루 000원
       </span>
       <span>
-        <i class="user icon"></i>
+        <i class="comments icon"></i>
         후기 몇개
       </span>
     </div>

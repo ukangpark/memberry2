@@ -6,7 +6,7 @@
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Bx slider</title>
+<title>main</title>
 <!-- bxslider -->
 <link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -15,6 +15,7 @@
 <!-- 기본 -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" type="text/css" href="/js/semantic/semantic.min.css">
 
 <style>
 /* 서치 바 */
@@ -150,7 +151,10 @@ button {
 			<img src="/img/MemberyLogo.png" alt="Membery logo">
 
 			<div class="input-box">
-				<i class="fa-solid i1 fa-magnifying-glass"></i> <input type="text"> <i class="fa-solid fa-keyboard"></i> <i class="fa-solid fa-microphone"></i>
+				<i class="fa-solid i1 fa-magnifying-glass"></i>
+				<input type="text">
+				<i class="fa-solid fa-keyboard"></i>
+				<i class="fa-solid fa-microphone"></i>
 			</div>
 
 			<div class="btn-box">
@@ -163,20 +167,58 @@ button {
 
 	<div class="slider">
 		<ul class="slide_gallery">
-			<li><img src="img/petplanet1.png" alt="사진1"></li>
-			<li><img src="img/petplanet2.png" alt="사진2"></li>
-			<li><img src="img/petplanet3.png" alt="사진3"></li>
-			<li><img src="img/petplanet4.png" alt="사진4"></li>
-			<li><img src="img/petplanet5.png" alt="사진5"></li>
-			<li><img src="img/petplanet6.png" alt="사진6"></li>
-			<li><img src="img/petplanet7.png" alt="사진7"></li>
-			<li><img src="img/petplanet8.png" alt="사진8"></li>
+			<li class="ui card">
+				<img class="image" src="https://image.dongascience.com/Photo/2020/03/5bddba7b6574b95d37b6079c199d7101.jpg" alt="사진2">
+				<div class="content">
+					<a class="header">Elliot Fu</a>
+					<a class="header">Elliot Fu</a>
+					<a class="header">Elliot Fu</a>
+				</div>
+			</li>
+			<li class="ui card">
+				<img class="image" src="https://image.dongascience.com/Photo/2020/03/5bddba7b6574b95d37b6079c199d7101.jpg" alt="사진2">
+				<div class="content">
+					<a class="header">Elliot Fu</a>
+					<a class="header">Elliot Fu</a>
+					<a class="header">Elliot Fu</a>
+				</div>
+			</li>
+			<li class="ui card">
+				<img class="image" src="https://image.dongascience.com/Photo/2020/03/5bddba7b6574b95d37b6079c199d7101.jpg" alt="사진2">
+				<div class="content">
+					<a class="header">Elliot Fu</a>
+					<a class="header">Elliot Fu</a>
+					<a class="header">Elliot Fu</a>
+				</div>
+			</li>
+			<li class="ui card">
+				<img class="image" src="https://image.dongascience.com/Photo/2020/03/5bddba7b6574b95d37b6079c199d7101.jpg" alt="사진2">
+				<div class="content">
+					<a class="header">Elliot Fu</a>
+					<a class="header">Elliot Fu</a>
+					<a class="header">Elliot Fu</a>
+				</div>
+			</li>
+			<li class="ui card">
+				<img class="image" src="https://image.dongascience.com/Photo/2020/03/5bddba7b6574b95d37b6079c199d7101.jpg" alt="사진2">
+				<div class="content">
+					<a class="header">Elliot Fu</a>
+					<a class="header">Elliot Fu</a>
+					<a class="header">Elliot Fu</a>
+				</div>
+			</li>
+			
 		</ul>
 	</div>
 
-	<script src="/js/main.js"></script>
 
+
+
+	<script src="/js/main.js"></script>
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+	<script src="semantic/dist/semantic.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 </body>
 </html>

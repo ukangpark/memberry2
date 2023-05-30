@@ -27,6 +27,7 @@ public class customConfig {
 	@Autowired
 	private ServletContext application;
 	
+	
 	@PostConstruct
 	public void init( ) {
 		application.setAttribute("bucketUrl","https://lilysbucket0503.s3.ap-northeast-2.amazonaws.com/membery");
