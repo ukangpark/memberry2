@@ -1,11 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Insert title here</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
@@ -17,36 +17,36 @@
 	<my:navBar></my:navBar>
 	
 	<div class="container-lg">
-		<h1>${feed.id  }¹ø °Ô½Ã¹° ¼öÁ¤ÇÏ±â</h1>
+		<h1>${feed.id  }ë²ˆ ê²Œì‹œë¬¼ ìˆ˜ì •í•˜ê¸°</h1>
 		<form method="post">
 			<input type="hidden" name="id" value="${feed.id }" />
 			<div>
-				»çÁøÀ» µî·ÏÇØº¸¼¼¿ä! <br />
+				ì‚¬ì§„ì„ ë“±ë¡í•´ë³´ì„¸ìš”! <br />
 				 <input type="file" multiple name="files" accept="image/*" />
 			</div>
 			<br />
 			<div>
-				Á¦¸ñÀ» ¼öÁ¤ÇÏ¼¼¿ä  <input type="text" name="title" value="${feed.title }" />
+				ì œëª©ì„ ìˆ˜ì •í•˜ì„¸ìš”  <input type="text" name="title" value="${feed.title }" />
 				</div>
 			<br />	
 			<div>
-				³»¿ëÀ» ¼öÁ¤ÇÏ¼¼¿ä  <textarea name="content">${feed.content }</textarea>
+				ë‚´ìš©ì„ ìˆ˜ì •í•˜ì„¸ìš”  <textarea name="content">${feed.content }</textarea>
 			</div>
 			<br />
 			<div>
-				ÀÛ¼ºÀÚ  <input type="text" name="writer" value="${feed.writer }"/>
+				ìž‘ì„±ìž  <input type="text" name="writer" value="${feed.writer }"/>
 			</div>
 			<br />
 			<div>
-				ÀÛ¼ºÀÏ½Ã <input type="text" value="${feed.inserted }" readonly/>
+				ìž‘ì„±ì¼ì‹œ <input type="text" value="${feed.inserted }" readonly/>
 			</div>
 			<br />
 			<div>
-				Àå¼Ò¸¦ ÅÂ±×ÇÏ¼¼¿ä  <input type="text" name="location" value="${feed.location }"/>
+				ìž¥ì†Œë¥¼ íƒœê·¸í•˜ì„¸ìš”  <input type="text" name="location" value="${feed.location }"/>
 			</div>
 			<br />
 			<div>
-				<input type="submit" value="¼öÁ¤ÇÏ±â" />
+				<input type="submit" value="ìˆ˜ì •í•˜ê¸°" />
 		</form>
 	</div>
 
@@ -56,7 +56,7 @@
 	
  	<c:if test="${not empty param.fail }">
 		<script>
-			alert("°Ô½Ã¹°ÀÌ ¼öÁ¤µÇÁö ¾Ê¾Ò½À´Ï´Ù.");
+			alert("ê²Œì‹œë¬¼ì´ ìˆ˜ì •ë˜ì§€ ì•Šì•˜ìŠµë‹ˆë‹¤.");
 		</script>
 	</c:if> 
 </body>
