@@ -23,6 +23,8 @@ import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 @RequestMapping("petsitter")
 public class PetsitterController {
 	
+	
+	
 	@Autowired
 	private PetsitterService petsitterService;
 	
@@ -82,6 +84,20 @@ public class PetsitterController {
 		
 		return "redirect:/petsitter/hostMyPage?id=" + host.getId();
 	}
+	@GetMapping("list")
+	public String petsitterList(Model model) {
+		List<Host> list = petsitterService.listHost();
+		model.addAttribute("petsitterList", list);
+		
+		return "petsitter/list";
+	}
+	
+	
+	@GetMapping("regiForm")
+	public String regiForm() {
+		return "petsitter/regiForm";
+	}
+	
 	
 	@GetMapping("hostList")
 	public void hostList(Model model) {

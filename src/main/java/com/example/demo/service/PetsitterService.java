@@ -15,7 +15,7 @@ import com.example.demo.mapper.PetsitterMapper;
 public class PetsitterService {
 	
 	@Autowired
-	PetsitterMapper petsitterMapper;
+	private PetsitterMapper petsitterMapper;
 	
 	public List<Host> selectAll() {
 		
@@ -62,5 +62,10 @@ public class PetsitterService {
 		return count == 1;
 	}
 
+	public List<Host> listHost(){
+		List<Host> list = petsitterMapper.selectAll();
+		return list;
+	}
+	
 
 }

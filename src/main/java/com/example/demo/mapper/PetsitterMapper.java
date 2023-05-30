@@ -72,4 +72,18 @@ public interface PetsitterMapper {
 			""")
 	Integer insertDetail(Detail detail);
 
+	// 외래키 설정하면 쿼리 변경해야함 
+	@Select("""
+			SELECT 
+				si,
+				gu,
+				dong,
+				Detail.title,
+				photo
+				
+			FROM Host, Detail
+			ORDER BY Detail.inserted DESC
+			""")
+	List<Host> selectAll();
+
 }
