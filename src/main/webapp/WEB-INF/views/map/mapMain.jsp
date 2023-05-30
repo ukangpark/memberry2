@@ -295,7 +295,7 @@ function displayInfowindow(marker, title) {
     infowindow.open(map, marker);
 }
 
- // 검색결과 목록의 자식 Element를 제거하는 함수입니다
+ // 검색결과 목록의 자식 Element를 제거하는 함수
 function removeAllChildNods(el) {   
     while (el.hasChildNodes()) {
         el.removeChild (el.lastChild);
@@ -306,7 +306,7 @@ function removeAllChildNods(el) {
 // 사이드바 버튼 누를때 리스트 뜨게 함수 설정 
 function searchRest(param){
 	
-	// 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
+	// 장소검색 객체를 통해 키워드로 장소검색을 요청
     ps.keywordSearch( param, placesSearchCB); 
     document.getElementById('keyword').value = param;
     
