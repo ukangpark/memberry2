@@ -29,7 +29,7 @@
 </head>
 <body>
 
-	<my:navBar></my:navBar>
+	<my:navBar current="myFeed"></my:navBar>
 	
 	<h1>My Feed</h1>
 	</br>
