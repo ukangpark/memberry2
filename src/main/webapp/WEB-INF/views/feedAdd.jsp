@@ -20,6 +20,12 @@
 		<div class="col-12 col-md-8 col-lg-6">
 		<h1>새로운 스토리를 추가해보세요!</h1>
 		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		
 		<form method="post" enctype="multipart/form-data" id="addForm">
 			<!-- 이미지 파일 업로드 -->
 			<div>
