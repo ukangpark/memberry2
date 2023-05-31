@@ -88,7 +88,6 @@ public class MyFeedController {
 	public String remove(Integer id, RedirectAttributes rttr) {
 		boolean ok = service.remove(id);
 		if (ok) {
-			rttr.addFlashAttribute("message", "게시물이 삭제되었습니다!");
 			return "redirect:/myFeed";
 		} else {
 			return "redirect:/id/" + id;

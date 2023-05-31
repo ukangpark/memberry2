@@ -168,14 +168,29 @@ calendarBody.addEventListener('click', function (e) {
   resetInsert();
 });
 
-inputBtn.addEventListener('click', function (e) {
-  e.preventDefault();
-  let inputValue = inputBox.value;
-  insertTodo(inputValue);
+//inputBtn.addEventListener('click', function (e) {
+  //e.preventDefault();
+  //let inputValue = inputBox.value;
+  //insertTodo(inputValue);
   
-  
-});
+//});
 
+$("#inputBtn").click(function() {
+	const data = inputBox.text().trim();
+	const inputDate = currentDate;
+	
+	$.ajax("schedule/addSchedile", {
+		method: "post",
+		contentType:"application/json",
+		date : JSON.stringify(data, inputDate)
+		
+		//success: function(data) {
+			//if 
+		//}
+	})
+})
+
+  const liEl = document.createElement('li');
 function insertTodo(text) {
   let todoObj = {
     todo: text,
@@ -186,7 +201,6 @@ function insertTodo(text) {
   } else {
     DATA[currentDate].push(todoObj);
   }
-  const liEl = document.createElement('li');
   const spanEl = document.createElement('span');
   const delBtn = document.createElement('button');
   delBtn.innerText = "DEL";
@@ -297,5 +311,6 @@ function save() {
   localStorage.setItem(currentDate, JSON.stringify(DATA[currentDate]));
 	}
 }
+
 
 

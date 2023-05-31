@@ -206,24 +206,6 @@ body {
 </head>
 <body>
 
-	<!-- <div class="wrapper">
-		<h1>ToDoList</h1>
-		<div class="inputField">
-			<input type="text" name="toDo" id="addList" placeholder="할 일 추가" />
-			<button type="button" id="addBtn" onclick="addTodo()">
-				<i class="fa-solid fa-plus"></i>
-			</button>
-		</div>
-		<div>
-			<ul id="addTodo" class="toDoList">
-				<li><div id="result"></div></li>
-			</ul>
-		</div>
-		<div class="footer">
-			<button class="btn btn-danger" type="button" id="allClear"
-				onclick="allClearList()">모두 삭제</button>
-		</div>
-	</div> -->
 
 <div class="todo-wrapper">
         <div class="todo-title">To do</div>

@@ -51,16 +51,5 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>
 
-	<script type="text/javascript">
-		$("addButton").click(function(e) {
-			e.preventDefault();
-			
-			const res = confirm("게시물을 추가 하시겠습니까?");
-			if (res) {
-				//서브밋 실행
-				$("addForm").submit();
-			}
-		});
-	</script>
 </body>
 </html>
