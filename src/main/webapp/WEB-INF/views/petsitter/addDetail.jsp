@@ -41,6 +41,7 @@
 			<div class="extra content">
 				<div class="ui two buttons">
 					<button class="ui basic red button">뒤로 돌아가기</button>
+					<c:if test=""></c:if>
 					<button class="ui basic green button" data-bs-toggle="modal" data-bs-target="#addDetailModal">등록하기</button>
 				</div>
 			</div>

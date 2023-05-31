@@ -18,14 +18,14 @@ public class PetsitterService {
 	private PetsitterMapper petsitterMapper;
 	
 	public List<Host> selectAll() {
-		
+		// 전체 호스트 정보 탐색 
 		List<Host> host = petsitterMapper.selectHostAll();
-		
-		
+				
 		return host;
 	}
 	
 	public Map<String, Object> selectById(Integer hostId) {
+		// 호스트 아이디로 상세페이지와 호스트 정보탐색
 		Map<String, Object> info = new HashMap<>();
 		
 		// 상세페이지 정보 불러옴 
@@ -41,24 +41,37 @@ public class PetsitterService {
 	}
 	
 	public Integer insertHost(Host host) {
+		// 호스트 정보 등록 
 		Integer count = petsitterMapper.insertHost(host);
 		
 		return count;
 	}
 
-	public boolean modifyById(Host host) {
-		Integer count = petsitterMapper.modifyById(host);
+	public boolean modifyHostById(Host host) {
+		// 호스트 정보 수정 
+		Integer count = petsitterMapper.modifyHostById(host);
 		return count == 1;
 	}
 
 	public boolean deleteHostById(Integer hostId) {
+		//호스트 정보 삭제 
 		Integer count = petsitterMapper.deleteHostById(hostId);
 		
 		return count == 1;
 	}
 
 	public boolean insertDetail(Detail detail) {
-		Integer count = petsitterMapper.insertDetail(detail);
+		// 상세페이지 등록 
+		Integer count;
+		
+		// 호스트 아이디로 상세페이지가 있는지 탐색 
+		if (selectById(detail.getHostId()) == null) {
+			count = petsitterMapper.insertDetail(detail);
+			// 없으면 추가 
+		} else {
+			count = 0;
+			// 있으면 추가 안됨 
+		}
 		return count == 1;
 	}
 

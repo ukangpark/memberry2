@@ -21,4 +21,5 @@ public class Host {
 	private LocalDate inserted;
 	private String photo;
 	private String title;
+	private boolean detail;
 }

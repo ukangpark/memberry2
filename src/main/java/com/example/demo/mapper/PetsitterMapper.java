@@ -13,38 +13,54 @@ import com.example.demo.domain.Host;
 
 @Mapper
 public interface PetsitterMapper {
-	
+
 	@Select("""
 			SELECT * FROM Host WHERE id = #{hostId}
 			""")
 	Host selectHostById(Integer hostId);
-	
+
 	@Select("""
 			SELECT * FROM Detail WHERE hostId = #{hostId}
 			""")
 	Detail selectDetailById(Integer hostId);
-	
+
 	@Insert("""
-			INSERT INTO Host 
+			INSERT INTO Host
 			(hostName, phone, idNumber, si, gu, dong, address, houseType, pet, species, experience, photo)
 			VALUES
 			(#{hostName}, #{phone}, #{idNumber}, #{si}, #{gu}, #{dong}, #{address}, #{houseType}, #{pet}, #{species}, #{experience}, #{photo})
 			""")
 	Integer insertHost(Host host);
-	
+
 	@Select("""
 			SELECT * FROM Detail
 			""")
 	List<Detail> selectDetailAll();
 
 	@Select("""
-			SELECT * FROM Host
+			SELECT 
+				Host.id, 
+				hostName, 
+				address, 
+				phone, 
+				Host.inserted, 
+				idNumber, 
+				houseType, 
+				pet, 
+				species, 
+				experience, 
+				si, 
+				gu, 
+				dong, 
+				Host.title, 
+				Detail.id detail 
+			FROM Host LEFT JOIN Detail ON Host.id = Detail.hostId;
 			""")
 	List<Host> selectHostAll();
 
 	@Update("""
 			UPDATE Host
-			SET 
+			SET
 				hostName = #{hostName},
 				phone = #{phone},
 				si = #{si},
@@ -57,13 +73,13 @@ public interface PetsitterMapper {
 				experience = #{experience}
 			WHERE id = #{id}
 			""")
-	Integer modifyById(Host host);
-	
+	Integer modifyHostById(Host host);
+
 	@Delete("""
 			DELETE FROM Host WHERE id = #{hostId}
 			""")
 	Integer deleteHostById(Integer hostId);
-	
+
 	@Insert("""
 			INSERT INTO Detail
 			(title, body, hostId)
@@ -72,15 +88,15 @@ public interface PetsitterMapper {
 			""")
 	Integer insertDetail(Detail detail);
 
-	// 외래키 설정하면 쿼리 변경해야함 
+	// 외래키 설정하면 쿼리 변경해야함
 	@Select("""
-			SELECT 
+			SELECT
 				si,
 				gu,
 				dong,
 				Detail.title,
 				photo
-				
+
 			FROM Host, Detail
 			ORDER BY Detail.inserted DESC
 			""")

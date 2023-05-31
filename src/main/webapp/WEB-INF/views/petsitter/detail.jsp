@@ -64,6 +64,7 @@
 	<div class="container" style="width: 800px; margin-top: 25px;">
 		<div class="ui text container">
 			<p>본문 : ${detail.body }</p>
+			<p>등록 여부 : ${message }</p>
 		</div>
 		<div>
 			<button class="ui right floated inverted red button">예약</button>

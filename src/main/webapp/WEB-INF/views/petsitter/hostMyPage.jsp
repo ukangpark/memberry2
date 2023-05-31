@@ -67,6 +67,10 @@
 									<label>펫시터 경험</label>
 									<input type="text" name="experience" value="${host.experience }" disabled>
 								</div>
+								<div class="field">
+									<label>등록된 상세페이지</label>
+									<input type="text" name="experience" value="${detail.id eq null ? '등록된 상세페이지가 없습니다.' : '등록된 상세페이지가 있습니다.' }" disabled>
+								</div>
 							</div>
 						</form>
 					</div>

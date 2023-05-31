@@ -74,13 +74,14 @@ public class PetsitterController {
 		//호스트 정보 수정폼 포워드
 		Map<String, Object> info = petsitterService.selectById(hostId);
 		model.addAllAttributes(info);
+
 		
 	}
 	
 	@PostMapping("hostModify")
 	public String hostModifyProcess(Host host) {
 		//호스트 정보 수정 과정
-		boolean ok = petsitterService.modifyById(host);
+		boolean ok = petsitterService.modifyHostById(host);
 		
 		return "redirect:/petsitter/hostMyPage?id=" + host.getId();
 	}
@@ -103,8 +104,8 @@ public class PetsitterController {
 	@GetMapping("hostList")
 	public void hostList(Model model) {
 		//호스트 리스트 포워드
-		List<Host> list = petsitterService.selectAll();
-		model.addAttribute("host", list);
+		List<Host> host = petsitterService.selectAll();
+		model.addAttribute("host", host);
 	}
 	
 	@PostMapping("hostDelete")
@@ -120,8 +121,19 @@ public class PetsitterController {
 	}
 	
 	@PostMapping("addDetail")
-	public String addDetailProcess(Detail detail) {
+	public String addDetailProcess(
+			Detail detail, 
+			RedirectAttributes rttr) {
+		// 상세페이지 등록 과정 
 		boolean ok = petsitterService.insertDetail(detail);
+		
+		if(ok) {
+			// 상세페이지 최초 등록
+			rttr.addFlashAttribute("message", "게시물이 성공적으로 등록되었습니다.");
+		} else {
+			// 상세페이지 재등록
+			rttr.addFlashAttribute("message", "게시물이 등록되지 않았습니다.");
+		}
 		
 		return "redirect:/petsitter/detail?id=" + detail.getHostId();
 	}

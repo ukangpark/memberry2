@@ -21,6 +21,7 @@
 					<th>Name</th>
 					<th>Id</th>
 					<th>phone</th>
+					<th>detail</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -31,6 +32,7 @@
 						</td>
 						<td>${host.id }</td>
 						<td>${host.phone }</td>
+						<td>${host.detail }</td>
 					</tr>
 				</c:forEach>
 			</tbody>
