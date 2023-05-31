@@ -79,7 +79,7 @@
 			</div>
 			<div class="extra content">
 				<div class="ui two buttons">
-					<button class="ui red basic button">취소하기</button>
+					<a href="/petsitter/hostMyPage?id=${host.id }" class="ui red basic button">취소하기</a>
 					<button form="checkForm" class="ui green basic button">수정하기</button>
 				</div>
 			</div>

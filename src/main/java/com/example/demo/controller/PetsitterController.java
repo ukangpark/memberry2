@@ -152,4 +152,10 @@ public class PetsitterController {
 		boolean ok = petsitterService.modifyDetail(detail);
 		return "redirect:/petsitter/detail?id=" + detail.getHostId();
 	}
+	
+	@GetMapping("deleteDetail")
+	public String deleteDetail(@RequestParam("hostId") Integer hostId) {
+		boolean ok = petsitterService.deleteDetailByHostId(hostId);
+		return "redirect:/petsitter/hostMyPage?id=" + hostId;
+	}
 }

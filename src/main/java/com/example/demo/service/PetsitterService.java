@@ -84,6 +84,12 @@ public class PetsitterService {
 		Integer count = petsitterMapper.modifyDetail(detail);
 		return count == 1;
 	}
+
+	public boolean deleteDetailByHostId(Integer hostId) {
+		Integer count = petsitterMapper.deleteDetailByHostId(hostId);
+		
+		return count == 1;
+	}
 	
 
 }

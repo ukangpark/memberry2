@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="d" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,6 +13,7 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 </head>
 <body>
+	<my:navBar></my:navBar>
 	<br>
 	<div class="ui centered equal width grid">
 		<div class="eight wide column">
@@ -68,8 +69,12 @@
 									<input type="text" name="experience" value="${host.experience }" disabled>
 								</div>
 								<div class="field">
-									<label>등록된 상세페이지</label>
-									<input type="text" name="experience" value="${detail.id eq null ? '등록된 상세페이지가 없습니다.' : '등록된 상세페이지가 있습니다.' }" disabled>
+									<div class="ui mini transparent input">
+									<c:if test="${detail.id ne null }">
+										<a class="ui basic huge label" href="/petsitter/detail?id=${host.id }">상세페이지 보기</a>
+									</c:if>
+										<input type="text" value="${detail.id eq null ? '등록된 상세페이지가 없습니다.' : '등록된 상세페이지가 있습니다.' }" disabled>
+									</div>
 								</div>
 							</div>
 						</form>
@@ -79,20 +84,20 @@
 			<div class="extra content">
 				<div class="ui three buttons">
 					<button data-bs-toggle="modal" data-bs-target="#deleteModal" class="ui red basic button">삭제하기</button>
-					<button data-bs-toggle="modal" data-bs-target="#checkModal" class="ui blue basic button">상세페이지 ${detail.id eq null ? '등록하기' : '수정하기' }</button>
+					<button data-bs-toggle="modal" data-bs-target="#checkModal" class="ui blue basic button">상세페이지 ${detail.id eq null ? '등록하기' : '수정 및 삭제하기' }</button>
 					<a href="/petsitter/hostModify?id=${host.id }" class="ui green basic button">나의 정보 수정하기</a>
 				</div>
 			</div>
 		</div>
 	</div>
-	
+
 	<!-- 상세페이지 등록 정보 -->
 	<div class="d-none">
 		<form action="/petsitter/${detail.id eq null ? 'addDetail' : 'modifyDetail' }" id="detailForm">
 			<input type="text" name="hostId" value="${host.id }">
 		</form>
 	</div>
-	
+
 	<!-- 상세페이지 등록/수정 모달 -->
 	<div class="modal fade" id="checkModal" tabindex="-1" aria-labelledby="checkModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
@@ -101,17 +106,15 @@
 					<h1 class="modal-title fs-5" id="checkModalLabel">상세페이지</h1>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
-				<div class="modal-body">${detail.id eq null ? '상세페이지를 등록하시겠습니까?' : '상세페이지를 수정하시겠습니까?' } </div>
+				<div class="modal-body">${detail.id eq null ? '상세페이지를 등록하시겠습니까?' : '상세페이지를 수정 및 삭제하시겠습니까?' }</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소하기</button>
-					<button type="submit" class="btn btn-primary" form="detailForm">
-						${detail.id eq null ? '등록하기' : '수정하기' } 
-					</button>
+					<button type="submit" class="btn btn-primary" form="detailForm">${detail.id eq null ? '등록하기' : '수정 및 삭제하기' }</button>
 				</div>
 			</div>
 		</div>
 	</div>
-	
+
 	<!-- 삭제하기 정보 -->
 	<div class="d-none">
 		<form action="/petsitter/hostDelete" method="post" id="deleteForm">
@@ -140,6 +143,6 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 	<script src="semantic/dist/semantic.min.js"></script>
-	
+
 </body>
 </html>

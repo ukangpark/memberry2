@@ -110,5 +110,10 @@ public interface PetsitterMapper {
 			WHERE hostId = #{hostId}
 			""")
 	Integer modifyDetail(Detail detail);
+	
+	@Delete("""
+			DELETE FROM Detail WHERE hostId = #{hostId}
+			""")
+	Integer deleteDetailByHostId(Integer hostId);
 
 }
