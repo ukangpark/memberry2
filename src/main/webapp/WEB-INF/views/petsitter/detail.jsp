@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="d" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
 
 <!DOCTYPE html>
 <html>
@@ -14,6 +14,8 @@
 <script src="/js/semantic.min.js"></script>
 </head>
 <body>
+	<my:navBar></my:navBar>
+
 	<!-- 호스트의 집사진 -->
 	<div class="container">
 		<h1>펫시터 상세페이지</h1>
