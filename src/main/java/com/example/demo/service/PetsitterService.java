@@ -79,6 +79,11 @@ public class PetsitterService {
 		List<Host> list = petsitterMapper.selectAll();
 		return list;
 	}
+
+	public boolean modifyDetail(Detail detail) {
+		Integer count = petsitterMapper.modifyDetail(detail);
+		return count == 1;
+	}
 	
 
 }

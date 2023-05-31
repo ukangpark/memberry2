@@ -139,7 +139,17 @@ public class PetsitterController {
 	}
 	
 	@GetMapping("modifyDetail")
-	public void modifyDetailForm(Integer hostId) {
+	public void modifyDetailForm(@RequestParam("hostId") Integer hostId, Model model) {
 		// 상세페이지 수정폼 view 포워드
+		
+		// 기존 상세페이지 정보 탐색
+		Map<String, Object> info = petsitterService.selectById(hostId);
+		model.addAllAttributes(info);
+	}
+	
+	@PostMapping("modifyDetail")
+	public String modifyProcess(Detail detail) {
+		boolean ok = petsitterService.modifyDetail(detail);
+		return "redirect:/petsitter/detail?id=" + detail.getHostId();
 	}
 }

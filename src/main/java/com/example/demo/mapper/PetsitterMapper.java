@@ -101,5 +101,14 @@ public interface PetsitterMapper {
 			ORDER BY Detail.inserted DESC
 			""")
 	List<Host> selectAll();
+	
+	@Update("""
+			UPDATE Detail
+			SET
+				title = #{title},
+				body = #{body}
+			WHERE hostId = #{hostId}
+			""")
+	Integer modifyDetail(Detail detail);
 
 }
