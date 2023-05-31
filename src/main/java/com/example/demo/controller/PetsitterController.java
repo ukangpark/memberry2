@@ -149,6 +149,7 @@ public class PetsitterController {
 	
 	@PostMapping("modifyDetail")
 	public String modifyProcess(Detail detail) {
+		// 상세페이지 수정 process 
 		boolean ok = petsitterService.modifyDetail(detail);
 		return "redirect:/petsitter/detail?id=" + detail.getHostId();
 	}
