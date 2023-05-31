@@ -9,6 +9,7 @@ public class Registration {
 	private Integer id;
 	private String petName;
 	private String type;
+	private Double weight;
 	private Date birth;
 	private Date togeter;
 	private String gender;
