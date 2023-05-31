@@ -38,7 +38,7 @@
 					
 					<!-- 새 이미지 파일 추가 input -->
 					<div>
-						사진을 새로 등록해보세요! <br />
+						사진을 추가해보세요! <br />
 						<input type="file" multiple name="files" accept="image/*" />
 						 
 					</div>
