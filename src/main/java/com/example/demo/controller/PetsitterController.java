@@ -134,7 +134,6 @@ public class PetsitterController {
 			// 상세페이지 재등록
 			rttr.addFlashAttribute("message", "게시물이 등록되지 않았습니다.");
 		}
-		
 		return "redirect:/petsitter/detail?id=" + detail.getHostId();
 	}
 	

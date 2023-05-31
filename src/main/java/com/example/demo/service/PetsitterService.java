@@ -65,7 +65,7 @@ public class PetsitterService {
 		Integer count;
 		
 		// 호스트 아이디로 상세페이지가 있는지 탐색 
-		if (selectById(detail.getHostId()) == null) {
+		if (selectById(detail.getHostId()).get("detail") == null) {
 			count = petsitterMapper.insertDetail(detail);
 			// 없으면 추가 
 		} else {
