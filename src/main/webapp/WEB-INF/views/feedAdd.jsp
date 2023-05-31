@@ -30,8 +30,8 @@
 		
 		.back {
 			min-height: 75vh;
-			margin-right: 10%;
-			margin-left: 10%;
+			margin-right: 15%;
+			margin-left: 15%;
 			border-radius: 1.5rem;
 		}
 		
@@ -47,11 +47,13 @@
 		}
 		
 		#add {
-			flex-grow: 1;
+			flex-grow: 2;
 		} 
 		
 		#content {
-			flex-grow: 2;
+			flex-grow: 3;
+			margin-right: 10rem;
+			margin-left: 10rem;
 		}
 		
 		
@@ -111,10 +113,6 @@
 				</div>
 				<br />
 				
-				<%-- <div>
-					장소를 태그하세요 <input type="text" name="location" value="${feed.location }" />
-				</div>
-				<br /> --%>
 		</form>
 		
 		<div align="right">
