@@ -35,7 +35,7 @@ const bgblack = document.querySelector('.bgblack');
 const closedBtn = document.querySelector('.closed');
 let currentDate;
 
-// 달력 만들기
+
 buildCalendar();
 function buildCalendar() {
   let firstDate = new Date(today.getFullYear(), today.getMonth(), 1);
@@ -50,11 +50,10 @@ function buildCalendar() {
     pageYear = notLeapYear;
   }
   headerYear.innerHTML = `${monthList[firstDate.getMonth()]}&nbsp;&nbsp;&nbsp;&nbsp;${today.getFullYear()}`;
-  makeElement(firstDate);  //1일~30(31)일 요소 만들기
-  showMain();   //왼쪽 - 오늘 날짜랑 요일 
-  currentDateget();  
-  resetInsert();  //
-  
+  makeElement(firstDate);
+  showMain();
+  currentDateget();
+  resetInsert();
 }
 
 function showMain() {
@@ -65,21 +64,9 @@ function showMain() {
   mainDate.innerHTML = today.getDate();
 }
 
-
-
 function makeElement(firstDate) {
   let weekly = 100;
   let dateSet = 1;
-  let dateShowList = '스케쥴';
-  					//localStorage.getItem(currentDate);
-  if (dateShowList !== null) {
-    let liEl = document.querySelectorAll('LI');
-    for (let i = 0; i < liEl.length; i++) {
-      dateShowList.textContent(liEl[i]);
-    }
-  }
- 
-  
   for (let i = 0; i < 6; i++) {
     let weeklyEl = document.createElement('div');
     weeklyEl.setAttribute('class', weekly);
@@ -94,28 +81,29 @@ function makeElement(firstDate) {
       } else {
         // 해당 칸에 날짜가 있으면 div엘리먼트 생성 후 해당 날짜 넣어주기
         let dateEl = document.createElement('div');
-        let dateLi = document.createElement('p');
         dateEl.textContent = dateSet;
-        dateLi.textContent =  dateShowList;
-        dateEl.appendChild(dateLi);
         dateEl.setAttribute('class', dateSet);
         dateEl.setAttribute('id', `${today.format2()}-${dateSet}`);
-        weeklyEl.appendChild(dateEl);
         
+        let aaa = document.createElement('div');
+      aaa.innerHTML = "000";
+      
+        
+	  	dateEl.appendChild(aaa);
+        
+        weeklyEl.appendChild(dateEl);
         dateSet++;
       }
-      
     }
     weekly++;
     calendarBody.appendChild(weeklyEl);
-
-   
   }
+        
+	  	
   // 현재 내가 선택한 날짜가 있으면 이전 달, 다음 달로 넘어가도 화면에 보여주기 위해 써줌
   let clickedDate = document.getElementsByClassName(today.getDate());
   clickedDate[0].classList.add('active');
 }
-
 
 function removeCalendar() {
   let divEls = document.querySelectorAll('.calendar-body > #weekly > div');
@@ -168,29 +156,13 @@ calendarBody.addEventListener('click', function (e) {
   resetInsert();
 });
 
-//inputBtn.addEventListener('click', function (e) {
-  //e.preventDefault();
-  //let inputValue = inputBox.value;
-  //insertTodo(inputValue);
-  
-//});
+inputBtn.addEventListener('click', function (e) {
+  e.preventDefault();
+  let inputValue = inputBox.value;
+  insertTodo(inputValue);
+});
 
-$("#inputBtn").click(function() {
-	const data = inputBox.text().trim();
-	const inputDate = currentDate;
-	
-	$.ajax("schedule/addSchedile", {
-		method: "post",
-		contentType:"application/json",
-		date : JSON.stringify(data, inputDate)
-		
-		//success: function(data) {
-			//if 
-		//}
-	})
-})
 
-  const liEl = document.createElement('li');
 function insertTodo(text) {
   let todoObj = {
     todo: text,
@@ -201,6 +173,7 @@ function insertTodo(text) {
   } else {
     DATA[currentDate].push(todoObj);
   }
+  const liEl = document.createElement('li');
   const spanEl = document.createElement('span');
   const delBtn = document.createElement('button');
   delBtn.innerText = "DEL";
@@ -216,7 +189,6 @@ function insertTodo(text) {
   todoObj.id = DATA[currentDate].length;
   save();
   inputBox.value = '';
-
 }
 
 function redrawLi() {
@@ -241,13 +213,10 @@ function redrawLi() {
         delBtn2.addEventListener('click', delWork);
         liEl2.addEventListener('dblclick', showTodo);
         
-
       }
     }
   }
 }
-
-
 
 // 다음달,이전달 다른날, 첫 로드 될 때 마다 todo 목록이 있으면(if로 조건문 처리) 다 지우고 다시 그려주는 함수 
 function resetInsert() {
@@ -274,6 +243,7 @@ function resetInsert() {
         inputList.appendChild(lili);
         deldel.addEventListener('click', delWork);
         lili.addEventListener('dblclick', showTodo);
+        document.getElementById(tdId).innerHTML = inputList;
       }
     });
   }
@@ -292,7 +262,6 @@ function delWork(e) {
   });
   DATA[currentDate] = cleanToDos;
   save();
-
 }
 
 function showTodo(e){
@@ -309,8 +278,9 @@ closedBtn.addEventListener('click', function(e){
 
 function save() {
   localStorage.setItem(currentDate, JSON.stringify(DATA[currentDate]));
-	}
 }
 
+
+}
 
 

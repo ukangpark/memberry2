@@ -82,24 +82,18 @@ header > h1 {
   display: inline-block;
   height: 100%;
   flex-grow: 1;
-<<<<<<< HEAD:src/main/webapp/WEB-INF/views/mem/schedule.jsp
+
   width: 50%;
-=======
-  width: 30%;
-  border-top: 10px;
->>>>>>> 313047f53e0a45e6ffa343df1b213d29607375dd:src/main/webapp/WEB-INF/views/schedule.jsp
+
 }
 .fa-calendar-check {color: grey; margin-right: 2%; vertical-align: middle;}
 
 
 header > h1 > span {color: #a7a7a7; font-size: 24px; font-weight: 400; vertical-align: bottom;}
 
-<<<<<<< HEAD:src/main/webapp/WEB-INF/views/mem/schedule.jsp
-.calendar_title { margin: 0 auto; flex-grow: 1; display: inline-block; float: center;}
-=======
-.calendar_title { margin: 0 auto; flex-grow: 1;}
 
->>>>>>> 313047f53e0a45e6ffa343df1b213d29607375dd:src/main/webapp/WEB-INF/views/schedule.jsp
+.calendar_title { margin: 0 auto; flex-grow: 1; display: inline-block; float: center;}
+
 .calendar_title .prev , .next{
   width: 30px;
   height: 100%;

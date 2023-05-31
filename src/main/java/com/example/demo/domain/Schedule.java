@@ -1,13 +1,17 @@
 package com.example.demo.domain;
 
-import java.time.*;
+import java.util.*;
 
 import lombok.*;
 
+//일정 자바빈
 @Data
 public class Schedule {
-
 	private Integer id;
-	private LocalDate date;
-	private String content;
+	private String memberId;
+	private String title;
+	private Date start;
+	private Date end;
+	
+	
 }
