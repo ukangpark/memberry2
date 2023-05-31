@@ -116,8 +116,8 @@ public class PetsitterController {
 	}
 	
 	@GetMapping("addDetail")
-	public void detailForm(Integer hostId) {
-		// 상세페이지 view 포워드
+	public void adddetailForm(Integer hostId) {
+		// 상세페이지 등록폼 view 포워드
 	}
 	
 	@PostMapping("addDetail")
@@ -136,5 +136,10 @@ public class PetsitterController {
 		}
 		
 		return "redirect:/petsitter/detail?id=" + detail.getHostId();
+	}
+	
+	@GetMapping("modifyDetail")
+	public void modifyDetailForm(Integer hostId) {
+		// 상세페이지 수정폼 view 포워드
 	}
 }

@@ -79,8 +79,8 @@
 			<div class="extra content">
 				<div class="ui three buttons">
 					<button data-bs-toggle="modal" data-bs-target="#deleteModal" class="ui red basic button">삭제하기</button>
-					<button form="detailFormButton" class="ui blue basic button">상세페이지 등록하기</button>
-					<a href="/petsitter/hostModify?id=${host.id }" class="ui green basic button">수정하기</a>
+					<button data-bs-toggle="modal" data-bs-target="#checkModal" class="ui blue basic button">상세페이지 ${detail.id eq null ? '등록하기' : '수정하기' }</button>
+					<a href="/petsitter/hostModify?id=${host.id }" class="ui green basic button">나의 정보 수정하기</a>
 				</div>
 			</div>
 		</div>
@@ -88,14 +88,33 @@
 	
 	<!-- 상세페이지 등록 정보 -->
 	<div class="d-none">
-		<form action="/petsitter/addDetail" id="detailFormButton">
+		<form action="/petsitter/${detail.id eq null ? 'addDetail' : 'modifyDetail' }" id="detailForm">
 			<input type="text" name="hostId" value="${host.id }">
 		</form>
 	</div>
 	
+	<!-- 상세페이지 등록/수정 모달 -->
+	<div class="modal fade" id="checkModal" tabindex="-1" aria-labelledby="checkModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="checkModalLabel">상세페이지</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">${detail.id eq null ? '상세페이지를 등록하시겠습니까?' : '상세페이지를 수정하시겠습니까?' } </div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소하기</button>
+					<button type="submit" class="btn btn-primary" form="detailForm">
+						${detail.id eq null ? '등록하기' : '수정하기' } 
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
 	<!-- 삭제하기 정보 -->
 	<div class="d-none">
-		<form action="/petsitter/hostDelete" method="post" id="deleteButton">
+		<form action="/petsitter/hostDelete" method="post" id="deleteForm">
 			<input type="text" name="hostId" value="${host.id }">
 		</form>
 	</div>
@@ -111,7 +130,7 @@
 				<div class="modal-body">호스트 등록 정보를 정말 삭제하시겠습니까?</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소하기</button>
-					<button type="submit" class="btn btn-danger" form="deleteButton">삭제하기</button>
+					<button type="submit" class="btn btn-danger" form="deleteForm">삭제하기</button>
 				</div>
 			</div>
 		</div>
