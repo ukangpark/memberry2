@@ -13,7 +13,7 @@
 </head>
 
 	<style>
-		.title {
+		.pageName {
 			height: 120px;
 			display: flex;
 			justify-content: center;
@@ -22,11 +22,16 @@
 		
 		.wrapper {
 			display: flex;
-			justify-content: space-between;
+			justify-content: center;
 			align-items: center;
 			min-height: 75vh;
-			margin-right: 5%;
-			margin-left: 5%;
+
+		}
+		
+		.back {
+			min-height: 75vh;
+			margin-right: 10%;
+			margin-left: 10%;
 			border-radius: 1.5rem;
 		}
 		
@@ -41,57 +46,81 @@
 			
 		}
 		
-		.add {
-			display: flex;
-			align-items: center;
-			margin-right: 5rem;
+		#add {
+			flex-grow: 1;
 		} 
 		
-		.content {
-			
+		#content {
+			flex-grow: 2;
 		}
+		
+		
 	</style>
 <body>
 
 	<my:navBar />
 
 
-	<div class="title">
+	<div class="pageName">
 	<h1>새로운 스토리를 추가해 보세요!</h1>
 	</div>
 
-	<div class="wrapper" style="background-color: #EEEEEE">
-		<form method="post" enctype="multipart/form-data" id="addForm">
+	<div class="back" style="background-color: #EEEEEE">
+		<form class="wrapper" method="post" enctype="multipart/form-data" id="addForm">
 			
 			<!-- 이미지 파일 업로드 -->
-			<div id="add" align="left">
-				<div class="ui aligned container" id="imgContainer">
+			<div id="add">
+				<div class="" id="imgContainer">
 					<img class="ui centered medium bordered circular image" src="images/투명발바닥.png"> <label for="fileInput" class="big circular ui icon button" id="addBtn"><i class="large plus icon"></i></label>
 					<input style="display: none" class="form-control" type="file" id="fileInput" name="files" accept="image/*" />
 					<h3 style="text-align: center">사진을 등록해 보세요!</h3>
 				</div>
 			</div>
 			<br />
-			<div id="content" align="right">
-				<div>
-					제목을 입력하세요 <input type="text" name="title" value="${feed.title }" />
+			
+			<div id="content" >
+			
+				<div class="ui form">
+				    <div class="title">
+				      <label align="left" style="color: red; font-weight: bolder;">필수</label>
+				      	<input placeholder="제목을 입력하세요" type="text" name="title" value="${feed.title }" >
+				    </div>
 				</div>
 				<br />
-				<div>
-					내용을 입력하세요
-					<textarea name="content">${feed.content }</textarea>
+				
+				<div class="ui form">
+					  <div class="content">
+					   	<label align="left" style="color: red; font-weight: bolder;">필수</label>
+					   	<textarea placeholder="내용을 입력하세요" name="content">${feed.content }</textarea>
+				 </div>
+				 <br />
+				
+				<div class="ui form">
+				    <div class="writer">
+				      <label></label>
+				      <input placeholder="글쓴이" type="text" name="writer" value="${feed.writer }" />
+				    </div>
 				</div>
 				<br />
-				<div>
-					작성자 <input type="text" name="writer" value="${feed.writer }" />
+				
+				<div class="ui form">
+				    <div class="location">
+				      <label></label>
+				      <input placeholder="장소를 태그하세요" type="text" name="location" value="${feed.location }" />
+				    </div>
 				</div>
 				<br />
-				<div>
+				
+				<%-- <div>
 					장소를 태그하세요 <input type="text" name="location" value="${feed.location }" />
 				</div>
-				<br />
+				<br /> --%>
 		</form>
-		<button  class="btn btn-secondary" type="submit" form="addForm" id="addButton">추가하기</button>
+		
+		<div align="right">
+			<button class="btn btn-secondary" type="submit" form="addForm" id="addButton">추가하기</button>
+		</div>
+		
 		</div>
 	</div>
 	
