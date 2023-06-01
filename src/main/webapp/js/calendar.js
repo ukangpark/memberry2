@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
           console.log(obj);
         },
         select: function(arg) { // 캘린더에서 드래그로 이벤트를 생성할 수 있다.
-          var title = prompt('Event Title:');
+          var title = prompt('일정추가:');
           if (title) {
             calendar.addEvent({
               title: title,
@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
 				custom_param2: 'somethingelse'
 			},
 			failure: function() {
-				alert('뭔가 잘못됐음');
+				alert(' fail');
 			},
 			
 		}

@@ -9,18 +9,16 @@ import com.example.demo.domain.*;
 import com.example.demo.mapper.*;
 
 @Service
-public class ScheduleService {
+public class HomeService {
 
-	@Autowired 
-	private ScheduleMapper mapper;
 
-	public void addSchedule(Schedule schedule) {
-		mapper.insertScheduleByDate(schedule);
-		
-		
+	@Autowired
+	private HomeMapper mapper;
+
+	public List<Feed> listFeed() {
+		List<Feed> list = mapper.selectAll();
+		return list;
 	}
-	
-	
 
-
+	
 }

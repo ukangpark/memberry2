@@ -5,18 +5,20 @@ import org.apache.ibatis.annotations.*;
 import com.example.demo.domain.*;
 
 @Mapper
-public interface ScheduleMapper {
+public interface CalendarMapper {
 
 	@Insert("""
 			INSERT INTO Schedule (start, content) 
 			VALUES (#{start}, #{content})
 			""")
-	Integer insertScheduleByDate(Schedule schedule);
+	Integer insertScheduleByDate(Calendar schedule);
 
 	@Delete("""
 			DELETE FROM Schedule
 			WHERE id = ${id}
 			""")
-	Integer deleteScheduleById(Schedule schedule);
+	Integer deleteScheduleById(Calendar schedule);
+
+	
 	
 }
