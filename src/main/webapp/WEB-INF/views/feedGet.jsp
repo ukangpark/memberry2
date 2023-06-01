@@ -95,9 +95,9 @@
 			</div>
 		</div>
 		
-				<!-- Default dropend button -->
+		<!-- Default dropend button -->
 		<div class="drop">
-			 <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+			 <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
 			 	<i class="fa-solid fa-ellipsis-vertical"></i>
 			 </button>
 
@@ -118,6 +118,17 @@
 					<input type="text" name="id" value="${feed.id }"/>
 				</form>
 			</div> 
+			
+			
+			<div class="ui multiple dropdown">
+				<i class="fa-solid fa-ellipsis-vertical"></i>
+			  <div class="menu">
+			     <div style="text-align:center">
+			    	<a href="/modify/${feed.id }">수정하기</a>
+			    </div>
+			  </div>
+		    </div>
+			
 		
 	</div>
 	

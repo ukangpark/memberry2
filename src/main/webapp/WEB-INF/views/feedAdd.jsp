@@ -100,9 +100,9 @@
 
 					<div class="inline field">
 						<input placeholder="username" type="text" name="writer" value="${feed.writer }" />
-					</div>
-					<div class="ui pointing label">
-						이름을 입력해 주세요!
+						<div class="ui left pointing label">
+							이름을 입력해 주세요!
+						</div>
 					</div>
 
 			 <div class="ui divider"></div>
