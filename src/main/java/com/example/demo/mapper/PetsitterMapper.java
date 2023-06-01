@@ -8,8 +8,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
-import com.example.demo.domain.Detail;
-import com.example.demo.domain.Host;
+import com.example.demo.domain.*;
+import com.example.demo.service.*;
 
 @Mapper
 public interface PetsitterMapper {
@@ -72,18 +72,20 @@ public interface PetsitterMapper {
 			""")
 	Integer insertDetail(Detail detail);
 
-	// 외래키 설정하면 쿼리 변경해야함 
+	// 외래키 설정하면 쿼리 변경해야함 (펫시터 전체보기)
 	@Select("""
 			SELECT 
 				si,
 				gu,
 				dong,
 				Detail.title,
-				photo
+				photo,
+				Host.id
 				
 			FROM Host, Detail
 			ORDER BY Detail.inserted DESC
 			""")
 	List<Host> selectAll();
-
+	
+	
 }

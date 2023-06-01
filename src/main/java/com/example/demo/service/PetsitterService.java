@@ -1,15 +1,13 @@
 package com.example.demo.service;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.stereotype.*;
 
-import com.example.demo.domain.Detail;
-import com.example.demo.domain.Host;
-import com.example.demo.mapper.PetsitterMapper;
+import com.example.demo.controller.*;
+import com.example.demo.domain.*;
+import com.example.demo.mapper.*;
 
 @Service
 public class PetsitterService {
@@ -62,10 +60,16 @@ public class PetsitterService {
 		return count == 1;
 	}
 
+	// 펫시터 전체목록
 	public List<Host> listHost(){
 		List<Host> list = petsitterMapper.selectAll();
 		return list;
 	}
+
+	
+	
+	
+	
 	
 
 }

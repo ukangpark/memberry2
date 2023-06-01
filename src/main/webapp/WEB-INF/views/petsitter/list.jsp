@@ -25,82 +25,29 @@
 		<h1>펫시터 목록</h1>
 <hr />
 
-<%-- <div style= "height:200px" >
-		<div class="ui selection dropdown">
-			<input type="hidden" name="city"> <i class="dropdown icon"></i>
-			<div class="default text">시</div>
-			<div class="menu">
-				<div class="item" data-value="1">서울시</div>
-				<div class="item" data-value="0">경기도</div>
-			</div>
-		</div>
 
-		<div class="ui selection dropdown">
-			<input type="hidden" name="city2"> <i class="dropdown icon"></i>
-			<div class="default text">구</div>
-			<div class="menu">
-				<div class="item" data-value="1">강남구</div>
-				<div class="item" data-value="0">강동구</div>
-				<div class="item" data-value="0">강북구</div>
-				<div class="item" data-value="0">강서구</div>
-				<div class="item" data-value="0">관악구</div>
-				<div class="item" data-value="0">광진구</div>
-				<div class="item" data-value="0">구로구</div>
-				<div class="item" data-value="0">금천구</div>
-				<div class="item" data-value="0">노원구</div>
-				<div class="item" data-value="0">도봉구</div>
-				<div class="item" data-value="0">동대문구</div>
-				<div class="item" data-value="0">동작구</div>
-				<div class="item" data-value="0">마포구</div>
-				<div class="item" data-value="0">서대문구</div>
-				<div class="item" data-value="0">서초구</div>
-				<div class="item" data-value="0">성동구</div>
-				<div class="item" data-value="0">성북구</div>
-				<div class="item" data-value="0">송파구</div>
-				<div class="item" data-value="0">양천구</div>
-				<div class="item" data-value="0">영등포구</div>
-				<div class="item" data-value="0">용산구</div>
-				<div class="item" data-value="0">은평구</div>
-				<div class="item" data-value="0">종로구</div>
-				<div class="item" data-value="0">중구</div>
-				<div class="item" data-value="0">중랑구</div>
-
-			</div>
-		</div>
-
-
-		<div class="ui selection dropdown">
-			<input type="hidden" name="city"> <i class="dropdown icon"></i>
-			<div class="default text">동</div>
-			<div class="menu">
-				<div class="item" data-value="1">1동</div>
-				<div class="item" data-value="0">2동</div>
-			</div>
-		</div>
-	</div> --%>
-
-<form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="맡기고 싶은 지역을 검색하세요 (예. 서울시 서초구 반포동)" aria-label="Search">
+<form action="list" class="d-flex" role="search">
+        <input name="search" class="form-control me-2" type="search" placeholder="맡기고 싶은 지역을 검색하세요 (예. 서울시 서초구 반포동)" aria-label="Search">
         <button class="btn btn-outline-success" type="submit" style="width:80px">검색</button>
       </form>
 
-	<script>
+	<!-- <script>
 		$('.ui.dropdown').dropdown();
-	</script>
+	</script> -->
 
 <hr />
 
 
-	<div class="ui link cards" onclick="/petsitter/detail?${host.id }">
+	<div class="ui link cards" >
     <c:forEach items="${petsitterList }" var="host">
   <div class="card">
     <div class="image">
-      <img src="/images/avatar2/large/matthew.png">
+    	<img src="/home1.jpg" alt="" height="70" />
     </div>
     <div class="content">
       <div class="header">${host.title }</div>
-      <div class="meta">
-        <a>${host.si } ${host.gu } ${host.dong }</a>
+      <div class="meta" >
+        <a href="/petsitter/detail?id=${host.id }">${host.si } ${host.gu } ${host.dong }</a>
       </div>
       <div class="description">
         펫시터 상세 설명

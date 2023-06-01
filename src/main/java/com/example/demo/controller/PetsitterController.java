@@ -14,8 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.example.demo.domain.Detail;
-import com.example.demo.domain.Host;
+import com.example.demo.domain.*;
 import com.example.demo.service.PetsitterService;
 import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 
@@ -84,9 +83,12 @@ public class PetsitterController {
 		
 		return "redirect:/petsitter/hostMyPage?id=" + host.getId();
 	}
+	
 	// 펫시터 전체목록보기
 	@GetMapping("list")
-	public String petsitterList(Model model) {
+	public String petsitterList(Model model,
+			@RequestParam(value="search", defaultValue="")String search) {
+		// Map<String, Object> result = service.listPetsitter(search);
 		List<Host> list = petsitterService.listHost();
 		model.addAttribute("petsitterList", list);
 		
@@ -96,7 +98,7 @@ public class PetsitterController {
 	
 	@GetMapping("regiForm")
 	public String regiForm() {
-		return "petsitter/regiForm";
+		return "book/regiForm";
 	}
 	
 	
@@ -125,4 +127,7 @@ public class PetsitterController {
 		
 		return "redirect:/petsitter/detail?id=" + detail.getHostId();
 	}
+	
+	
+	
 }
