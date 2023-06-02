@@ -69,9 +69,13 @@ public class MyFeedController {
 	
 	// 게시물 수정한 값 업로드
 	@PostMapping("/modify/{feedId}")
-	public String modifyProcess(Feed feed, File file, RedirectAttributes rttr) {
+	public String modifyProcess(Feed feed, 
+			File file, 
+			@RequestParam(value="removeFiles", required = false) List<String> removeFileNames,
+			@RequestParam(value="files", required = false) MultipartFile[] addFiles,
+			RedirectAttributes rttr) throws Exception {
 		
-		boolean ok = service.modify(feed);
+		boolean ok = service.modify(feed, removeFileNames, addFiles);
 		
 		if (ok) { 
 			// 수정이 잘 되면 작성한 게시물로 리디렉션
