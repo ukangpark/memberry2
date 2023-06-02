@@ -36,8 +36,6 @@
 			margin-left: 15%;
 			border-radius: 1.5rem;
 		}
-			
-		}
 		
 		#add {
 			flex-grow: 2;
@@ -89,7 +87,8 @@
 				<c:forEach items="${feed.fileName }" var="fileName" varStatus="status">
 					<li id="imageList${status.index }">
 						<%-- <input type="checkbox" name="removeFiles" value="${fileName }" id="" /><i class="fa-regular fa-circle-trash"></i> --%>
-						<button data-target-list="#imageList${status.index }" type="button" class=" removeFilesBtn btn btn-outline-dark" name="removeFiles" value="${fileName }"><i class="fa-solid fa-trash"></i></button>
+						<%-- <button data-target-list="#imageList${status.index }" type="button" class=" removeFilesBtn btn btn-outline-dark" name="removeFiles" value="${fileName }"><i class="fa-solid fa-trash"></i></button> --%>
+						<button type="button" class="removeFilesBtn btn btn-outline-dark" name="removeFiles" value="${fileName }"><i class="trash alternate icon"></i></button>
 						<img class="ui medium rounded imager" src="${bucketUrl }/${feed.id }/${fileName }" alt="" />
 					</li>
 				</c:forEach>
@@ -162,12 +161,12 @@
 			  slideWidth: 400
 		  });
 		  
-		  $(".removeFilesBtn").click(function() {
+		  /* $(".removeFilesBtn").click(function() {
 			 const target = $(this).attr("data-target-list");
 			 $(target).remove();
 			 slider.reloadSlider();
-		  });
-		});
+		  }); */
+		}); 
 	</script>
 </body>
 </html>

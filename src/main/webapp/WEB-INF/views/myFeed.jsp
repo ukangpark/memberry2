@@ -5,19 +5,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<style>
-		.container {
-			display: grid;
-			grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-			grid-template-rows: masonry; /* this will do the magic */
-			grid-gap: 10px;
-			margin-left:5%;
-			margin-right:5%;
+<style>
+	.container {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+		grid-template-rows: masonry; /* this will do the magic */
+		grid-gap: 10px;
+		margin-left:5%;			
+		margin-right:5%;
 		}
 		
-		img {
-			width: 100%;
-			border-radius: 10%;
+	img {
+		width: 100%;
+		border-radius: 10%;
 	}
 	
 	#profilImage {
@@ -30,8 +30,11 @@
 	
 	#upper {
 		display: flex;
+		justify-content: center;
 		align-items: baseline;
+		width: 100%;
 	}
+	
 	</style>
 
 <meta charset="UTF-8">
@@ -50,17 +53,29 @@
 	
 		<!-- 프로필 이미지 -->
 		<div id="upper" class="ui aligned container" id="imgContainer">
-			<button class="massive ui basic button">
-				  <i class="icon user"></i>
-				  follower
+			<button class="massive ui basic button" style="border: 2px solid #E2E2E2; border-radius: 0.5rem; margin-right:70px;">
+				  <i class="fa-solid fa-user"></i>
+				  팔로워
 			</button>
 			
-			<button class="massive ui basic button">
-				  <i class="icon user"></i>
-				  following
+			<button class="massive ui basic button" style="border: 2px solid #E2E2E2; border-radius: 0.5rem; margin-right:50px;">
+				  <i class="fa-solid fa-user-check"></i>
+				  팔로잉
 			</button>
 			
 			<img id="profilImage" class="ui circular image" src="images/또복이 (1).jpg">
+			
+				<button class="massive ui basic button" style="border: 2px solid #E2E2E2; border-radius: 0.5rem; margin-left:50px; margin-right:70px;">
+				  <!-- <i class="fa-solid fa-envelope"></i> -->
+				  <i class="fa-solid fa-paper-plane"></i>
+				  메세지
+			</button>
+			
+			<button class="massive ui basic button" style="border: 2px solid #E2E2E2; border-radius: 0.5rem;">
+				  <i class="fa-solid fa-bolt"></i>
+				  산책번개
+			</button>
+			
 		</div>
 
 	<div class="container">
