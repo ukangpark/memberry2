@@ -48,11 +48,6 @@ body {
 	margin: auto;
 	margin-top: 30px;
 }
-.toDo {
-	margin: auto;
-	float: right;
-	
-}
 
 /* --달력 코드 복붙------------------------------------------------------- */
 /* btn css */
@@ -83,13 +78,14 @@ header > h1 {
   flex-grow: 1;
   width: 30%;
   border-top: 10px;
+  width: 50%;
 }
 .fa-calendar-check {color: grey; margin-right: 2%; vertical-align: middle;}
 
 
 header > h1 > span {color: #a7a7a7; font-size: 24px; font-weight: 400; vertical-align: bottom;}
 
-.calendar_title { margin: 0 auto; flex-grow: 1;}
+.calendar_title { margin: 0 auto; flex-grow: 1; width: 40%;}
 
 .calendar_title .prev , .next{
   width: 30px;
@@ -113,6 +109,12 @@ header > h1 > span {color: #a7a7a7; font-size: 24px; font-weight: 400; vertical-
   display: inline-block;
   margin: 0 20px;
   font-weight: 600;
+}
+.todoLink {
+	margin: auto;
+	float: right;
+	width: 30%;
+	
 }
 
 /* content left */
@@ -328,6 +330,7 @@ img { vertical-align: top;}
 	<div class="header">
 
 		<h1>Calendar</h1>
+	<my:navBar current="schedule"></my:navBar>
 
 	</div>
 	<!------------------------------------------------------------------------>
@@ -341,12 +344,10 @@ img { vertical-align: top;}
 			<div class="calendar_title">
 				<button class="prev">&#60;</button>
 				<span class="current-year-month"></span>
-
 				<button class="next">&#62;</button>				
 			</div>
-			<div>
-				<a href="toDoList"><h3>ToDoList</h3></a>
-
+			<div class="todoLink">
+				<a href="toDoList"><h2>ToDoList</h2></a>
 			</div>
 		</header>
 		<section class="content-left">
