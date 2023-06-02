@@ -19,8 +19,8 @@
 		<div class="eight wide column">
 			<div class="ui segment">
 				<div class="content">
-					<img class="left floated ui image" style="width: 50px;" src="https://kr.seaicons.com/wp-content/uploads/2015/06/person-icon.png">
-					<h1>${host.hostName }님정보입니다.(${host.id })</h1>
+					<img class="ui small centered circular image "  src="/images/발바닥.png">
+					<h1 class="ui center aligned header">${host.hostName }님 정보입니다.(${host.id })</h1>
 					<div>
 						<form class="ui big form" id="checkForm">
 							<div class="field">

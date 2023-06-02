@@ -43,7 +43,7 @@ public class PetsitterService {
 	public Integer insertHost(Host host) {
 		// 호스트 정보 등록 
 		Integer count = petsitterMapper.insertHost(host);
-		
+		System.out.println("apply service working");
 		return count;
 	}
 

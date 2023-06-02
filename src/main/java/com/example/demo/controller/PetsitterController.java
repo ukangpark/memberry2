@@ -59,6 +59,7 @@ public class PetsitterController {
 		//host 정보 받아서 추가
 		int count = petsitterService.insertHost(host);
 		rttr.addFlashAttribute("host", host);
+		System.out.println("apply controller working");
 		return "redirect:/petsitter/main2";
 	}
 	
