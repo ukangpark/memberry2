@@ -6,7 +6,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Insert title here</title>
+<title>memberModify</title>
+
+<style>
+.container{
+	display: flex;
+	height: 15vh;
+	justify-content: center;
+	align-items: center;
+}
+</style>
+
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
@@ -17,9 +27,10 @@
 
 	<my:alert></my:alert>
 
-	<div class="container-lg">
+	<div class="ui center aligned container" id="container">
+	
 		<div class="row justify-content-center">
-			<div class="col-12 col-md-8 col-lg-6">
+			<div class="col-12 col-md-8 ">
 				<h1>회원정보수정</h1>
 				<form id="modifyForm" action="/member/modify" method="post">
 					<div class="mb-3">
@@ -29,7 +40,8 @@
 						<label for="inputName" class="form-label">이름</label> <input id="inputName" class="form-control" type="text" name="name" value="${member.name }" readonly />
 					</div>
 					<div class="mb-3">
-						<label for="inputPassword" class="form-label">비밀번호</label> <input id="inputPassword" class="form-control" type="password" name="password" value="${member.password }" />
+						<label for="inputPassword" class="form-label">비밀번호</label> 
+						<input id="inputPassword" class="form-control" type="password" name="password" value="" />
 					</div>
 					<div class="mb-3">
 						<label for="nickName" class="form-label">별명</label> <input id="nickName" class="form-control" type="text" name="nickName" value="${member.nickName }" />
@@ -55,7 +67,7 @@
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
-					<label for="inputOldPassword" class="form-label">기존 암호</label>
+					<label for="inputOldPassword" class="form-label">암호 입력</label>
 					<input form="modifyForm" id="inputOldPassword" class="form-control" type="text" name="oldPassword" />
 				</div>
 				<div class="modal-footer">
