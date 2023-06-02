@@ -35,20 +35,28 @@
 		}
 
 		.bx-wrapper {
-			flex-grow: 3;
+			/* flex-grow: 3; */
 			margin-left: 1rem;
 		} 
 		
-		#content {
-			flex-grow: 2; 
+		.bxslider {
+			position : absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+		}
+		
+		#textContentt {
+			/* flex-grow: 2;  */
 			margin-right: 10rem;
 			margin-left: 10rem;
 		}
 		
 		#drop {
-			flex-grow: 0.5; 
-			position: absolute; 
-			float: right;
+			/* flex-grow: 0.5;  */
+			/* position: absolute;  */
+			
 		}
 	
 		
@@ -60,10 +68,22 @@
 	<div class="pageName">
 		<h1>${feed.id }번 게시물</h1>
 	</div>
-		
+	
 	<div class="wrapper">
 	
-		<!-- 이미지 파일 출력 -->
+	<!-- card -->
+	<div class="ui card">
+		<div class="content">
+			<div class="right floated meta">${feed.inserted }</div>
+			<img class="ui avatar image" src="/images/또복이 (1).jpg"> 또복언니
+		</div>
+		<div class="content">
+			<div class="right floated meta"><img class="ui avatar image" src="/images/scrap.png"></div>
+		</div>
+
+		<div class="content">
+			<!-- 이미지 파일 출력 -->
+			<br />
 			<ul class="bxslider">
 				<c:forEach items="${feed.fileName }" var="fileName" >
 					<li>
@@ -71,31 +91,46 @@
 					</li>
 				</c:forEach>
 			</ul>
+		</div>
 
-	<div class="d-flex" style="height: 200px;">
-  		<div class="vr"></div>
+		<div class="content">
+			<span class="right floated"> <i class="fa-solid fa-bone"></i> 17 likes
+			</span> <i class="comment icon"></i> 3 comments
+		</div>
+		<div class="extra content">
+			<div class="ui large transparent right icon input">
+				<input type="text" placeholder="Add Comment..."><img class="" src="/images/comment.png">
+			</div>
+		</div>
 	</div>
+	
+		
+		
+		<!-- 중간 라인 -->
+		<div class="d-flex" style="height: 200px;">
+	  		<div class="vr"></div>
+		</div>
 			
 		<!-- text content -->
-		<div class="content">
-			<div class="ui segment">
+		<div class="textContent">
+			<div class="ui segment" style="font-weight:700;">
 				제목 : ${feed.title }
 			</div>
-			<div class="ui segment" style="font-weight:600;">
+			<div class="ui segment" style="font-weight:700;">
 				본문 : ${feed.content }
 			</div>
-			<div class="ui segment">
+			<div class="ui segment" style="font-weight:700;">
 				작성자 : ${feed.writer }
 			</div>
-			<div class="ui segment">
+			<div class="ui segment" style="font-weight:700;">
 				작성일시 : ${feed.inserted }
 			</div>
-			<div class="ui segment">
+			<div class="ui segment" style="font-weight:700;">
 				장소 태그 : ${feed.location }
 			</div>
 		</div>
 		
-		<!-- Default dropend button -->
+		<!-- 수정/삭제 버튼 드랍다운 -->
 		<div class="drop">
 			 <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
 			 	<i class="fa-solid fa-ellipsis-vertical"></i>
@@ -110,27 +145,15 @@
 			    	<a href="#" onclick="javascript:document.removeForm.submit();">삭제하기</a>
 			    </div> 
 			 </ul>
-		</div>
-			
+	
 			<!-- 삭제하기 기능 -->
 			<div class="d-none">
 				<form action="/remove" method="post" name="removeForm">
 					<input type="text" name="id" value="${feed.id }"/>
 				</form>
-			</div> 
-			
-			
-			<div class="ui multiple dropdown">
-				<i class="fa-solid fa-ellipsis-vertical"></i>
-			  <div class="menu">
-			     <div style="text-align:center">
-			    	<a href="/modify/${feed.id }">수정하기</a>
-			    </div>
-			  </div>
-		    </div>
-			
-		
-	</div>
+			</div> 	
+		</div>
+	</div><!-- wrapper div -->
 	
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
