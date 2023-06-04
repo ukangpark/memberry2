@@ -11,14 +11,37 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css">
 
 <style>
-#imgContainer {
+#imagePreview {
 	position: relative;
+	width: 300px;
+	height: 300px;
+	border-radius: 50%;
+	border: 2px;
+	border-style: solid;
+	border-color: #cccccc;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0px;
+}
+
+.defaultImage > img {
+	width: 100%;
+	height: 100%;
+}
+
+#imagePreview > img {
+	display: none;
+	width: 100%;
+	height: 100%;
+	
 }
 
 #addBtn {
 	position: absolute;
-	top: 75%;
-	left: 58%;
+	top: 30%;
+	left: 56%;
 }
 </style>
 
@@ -29,15 +52,17 @@
 
 	<!-- 상단 공백 -->
 	<div style="margin-bottom: 15px"></div>
-
+	
 	<!-- form -->
 	<form class="ui form" method="post" enctype="multipart/form-data">
 
 		<!-- 상단 컨테이너 (프로필사진, addBtn) -->
-		<div class="ui aligned container" id="imgContainer">
-			<img class="ui centered medium bordered circular image" src="images/발바닥.png"> <label for="fileInput" class="big circular ui icon button" id="addBtn"><i class="large plus icon"></i></label>
-			<input style="display: none" class="form-control" type="file" id="fileInput" name="photo" accept="image/*" />
-		</div>
+			<div class="ui aligned container" id="imagePreview">
+				<img class="preview" src=""> 
+				<span class="defaultImage"><img alt="" src="images/발바닥.png"></span>
+			</div>
+			<label for="fileInput" class="big circular ui icon button" id="addBtn"><i class="large plus icon"></i></label>
+			<input style="display: none" class="form-control" type="file" id="fileInput" name="file" accept="image/*" />
 
 		<!-- 하단 컨테이너 -->
 		<div class="ui grid container">
@@ -152,6 +177,48 @@
 		$('#select1').dropdown();
 		$('#select2').dropdown();
 		$('#select3').dropdown();
+	</script>
+	<script>
+	const fileInput = document.getElementById("fileInput");
+	const previewContainer = document.getElementById("imagePreview");
+	const previewImage = previewContainer.querySelector(".preview");
+	const previewDefaultImage = previewContainer.querySelector(".defaultImage");
+	
+	fileInput.addEventListener("change", function() {
+		const file = this.files[0];
+		//console.log(file);
+		
+		if (file) {
+			const reader = new FileReader();
+			
+			previewDefaultImage.style.display = "none";
+			previewImage.style.display = "block";
+			
+			reader.addEventListener("load", function() {
+				previewImage.setAttribute("src", this.result);
+			});
+			
+			reader.readAsDataURL(file);
+		}		
+		
+		
+	})
+	
+	
+	
+	/* const fileInput = document.querySelector("#fileInput")
+	fileInput.addEventListener("change", (e) => {
+		//console.log(e);
+		const reader = new FileReader()
+		reader.readAsDataURL(e.target.files[0])
+		
+		reader.onload = function(event) {
+			//console.log(event);
+			const img = document.createElement("img")
+			img.setAttribute("src", event.target.result)
+			document.querySelector("#imgContainer").appendChild(img)
+		}
+	}) */
 	</script>
 </body>
 </html>

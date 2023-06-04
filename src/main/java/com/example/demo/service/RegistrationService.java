@@ -28,7 +28,7 @@ public class RegistrationService {
 	public void insert(Registration registration, MultipartFile file) throws Exception {
 		
 		//테이블에 정보 insert
-		int cnt = mapper.insertAll(registration);
+		int cnt = mapper.insertAll(registration, file.getOriginalFilename());
 		
 		// s3에 파일 업데이트 
 		String objectKey = "membery/" + registration.getId() + "/" + file.getOriginalFilename();
