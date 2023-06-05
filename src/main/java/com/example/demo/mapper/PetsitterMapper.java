@@ -26,11 +26,11 @@ public interface PetsitterMapper {
 
 	@Insert("""
 			INSERT INTO Host
-			(hostName, phone, idNumber, si, gu, dong, address, houseType, pet, species, experience, photo)
+			(hostName, phone, idNumber, si, gu, dong, address, houseType, pet, species, experience, profile)
 			VALUES
-			(#{hostName}, #{phone}, #{idNumber}, #{si}, #{gu}, #{dong}, #{address}, #{houseType}, #{pet}, #{species}, #{experience}, #{photo})
+			(#{host.hostName}, #{host.phone}, #{host.idNumber}, #{host.si}, #{host.gu}, #{host.dong}, #{host.address}, #{host.houseType}, #{host.pet}, #{host.species}, #{host.experience}, #{profile})
 			""")
-	Integer insertHost(Host host);
+	Integer insertHost(Host host, String profile);
 
 	@Select("""
 			SELECT * FROM Detail
@@ -53,7 +53,8 @@ public interface PetsitterMapper {
 				gu, 
 				dong, 
 				Host.title, 
-				Detail.id detail 
+				Detail.id detail ,
+				profile
 			FROM Host LEFT JOIN Detail ON Host.id = Detail.hostId;
 			""")
 	List<Host> selectHostAll();

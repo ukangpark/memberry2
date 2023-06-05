@@ -19,7 +19,7 @@ public class Host {
 	private String species; 
 	private String experience; 
 	private LocalDate inserted;
-	private String photo;
+	private String profile;
 	private String title;
 	private boolean detail;
 }

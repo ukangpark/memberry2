@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
 <!DOCTYPE html>
@@ -15,19 +14,32 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 <script src="/js/semantic/semantic.min.js"></script>
+<style type="text/css">
+#imgContainer {
+	position: relative;
+}
 
+#addBtn {
+	position: absolute;
+	top: 75%;
+	left: 58%;
+}
+</style>
 </head>
 <body>
-	<my:navBar></my:navBar>
+	<my:navBar current="apply"></my:navBar>
 	<br>
 	<div class="ui centered equal width grid">
 		<div class="eight wide column">
 			<div class="ui segment">
-				<form id="applyForm" class="ui big form" method="post" action="/petsitter/apply">
+				<form id="applyForm" class="ui big form" method="post" action="/petsitter/apply" enctype="multipart/form-data">
 					<h1>호스트 등록</h1>
-					<div class="field">
-						<label for="photo">프로필 사진 등록</label>
-						<input id="photo" type="file" name="photo">
+					<div class="ui aligned container" id="imgContainer">
+						<img class="ui centered medium bordered circular image" src="/images/발바닥.png">
+						<label for="file" class="big circular ui icon button" id="addBtn">
+							<i class="large plus icon"></i>
+						</label>
+						<input style="display: none;" class="form-control" type="file" id="file" name="file" accept="image/*" />
 					</div>
 					<div class="field">
 						<label for="hostName">이름</label>

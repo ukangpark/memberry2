@@ -5,17 +5,28 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.domain.Detail;
 import com.example.demo.domain.Host;
 import com.example.demo.mapper.PetsitterMapper;
 
+import software.amazon.awssdk.core.sync.RequestBody;
+import software.amazon.awssdk.services.s3.S3Client;
+import software.amazon.awssdk.services.s3.model.ObjectCannedACL;
+import software.amazon.awssdk.services.s3.model.PutObjectRequest;
+
 @Service
 public class PetsitterService {
 	
 	@Autowired
+	private S3Client s3;
+	@Autowired
 	private PetsitterMapper petsitterMapper;
+	@Value("${aws.s3.bucketName}")
+	private String bucketName;
 	
 	public List<Host> selectAll() {
 		// 전체 호스트 정보 탐색 
@@ -40,10 +51,23 @@ public class PetsitterService {
 		return info;
 	}
 	
-	public Integer insertHost(Host host) {
+	public Integer insertHost(Host host, MultipartFile file) throws Exception {
+		
 		// 호스트 정보 등록 
-		Integer count = petsitterMapper.insertHost(host);
-		System.out.println("apply service working");
+		Integer count = petsitterMapper.insertHost(host, file.getOriginalFilename());
+		
+		//호스트 프로필 사진 업로드 
+		String key = "hostProfile/" + file.getOriginalFilename();
+		
+		PutObjectRequest objectRequest = PutObjectRequest.builder()
+                .bucket(bucketName)
+                .key(key)
+                .acl(ObjectCannedACL.PUBLIC_READ)
+                .build();
+		
+        s3.putObject(objectRequest, RequestBody.fromInputStream(file.getInputStream(), file.getSize()));
+
+		
 		return count;
 	}
 

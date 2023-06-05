@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.domain.Detail;
@@ -19,11 +21,14 @@ import com.example.demo.domain.Host;
 import com.example.demo.service.PetsitterService;
 import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 
+import software.amazon.awssdk.awscore.exception.AwsServiceException;
+import software.amazon.awssdk.core.exception.SdkClientException;
+import software.amazon.awssdk.services.s3.S3Client;
+import software.amazon.awssdk.services.s3.model.S3Exception;
+
 @Controller
 @RequestMapping("petsitter")
 public class PetsitterController {
-	
-	
 	
 	@Autowired
 	private PetsitterService petsitterService;
@@ -55,11 +60,13 @@ public class PetsitterController {
 	}
 	
 	@PostMapping("apply")
-	public String applyProcess(Host host, RedirectAttributes rttr) {
-		//host 정보 받아서 추가
-		int count = petsitterService.insertHost(host);
+	public String applyProcess(
+			Host host, 
+			RedirectAttributes rttr,
+			@RequestParam("file") MultipartFile file) throws Exception {
+		//host 정보 받아서 추가S3Exception
+		int count = petsitterService.insertHost(host, file);
 		rttr.addFlashAttribute("host", host);
-		System.out.println("apply controller working");
 		return "redirect:/petsitter/main2";
 	}
 	

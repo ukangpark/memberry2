@@ -34,7 +34,8 @@
 		<div class="ui items">
 			<div class="item">
 				<div class="image">
-					<img src="https://www.walkerhillstory.com/wp-content/uploads/2020/09/2-1.jpg">
+					<!-- <img src="https://memberyfortest.s3.ap-northeast-2.amazonaws.com/hostProfile/IMG_2042.jpg"> -->
+					<img src="${bucketUrl }/hostProfile/${host.profile }">
 				</div>
 				<div class="content">
 					<a class="header">${host.hostName } (${host.id })</a>

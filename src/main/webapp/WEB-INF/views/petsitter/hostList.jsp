@@ -23,6 +23,7 @@
 					<th>Id</th>
 					<th>phone</th>
 					<th>detail</th>
+					<th>profile</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -34,6 +35,7 @@
 						<td>${host.id }</td>
 						<td>${host.phone }</td>
 						<td>${host.detail eq 'true' ? '등록' : '미등록' }</td>
+						<td>${host.profile } </td>
 					</tr>
 				</c:forEach>
 			</tbody>
