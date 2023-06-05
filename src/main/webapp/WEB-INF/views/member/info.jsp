@@ -65,8 +65,8 @@
 		</div>
 
 		<div id="buttons">
-			<a class="btn btn-warning" href="/member/modify?id=${member.id }" style="margin: 20px; font-size: 18px;">수정</a>
-			<button type="button" data-bs-toggle="modal" class="btn btn-danger" data-bs-target="#confirmModal" style="margin: 20px; font-size: 18px;">탈퇴</button>
+			<a class="ui secondary button" href="/member/modify?id=${member.id }" style="margin: 20px; font-size: 18px;">수정</a>
+			<button type="button" data-bs-toggle="modal" class="ui red button" data-bs-target="#confirmModal" style="margin: 20px; font-size: 18px;">탈퇴</button>
 		</div>
 	</div>
 	
@@ -84,8 +84,8 @@
 					</form>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-					<button type="submit" form="removeForm" class="btn btn-danger">탈퇴</button>
+					<button type="button" class="ui button" data-bs-dismiss="modal">취소</button>
+					<button type="submit" form="removeForm" class="ui red button">탈퇴</button>
 				</div>
 			</div>
 		</div>
