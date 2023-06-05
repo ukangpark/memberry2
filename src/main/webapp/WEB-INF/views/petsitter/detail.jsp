@@ -35,9 +35,9 @@
 			<div class="item">
 				<div class="image">
 					<c:choose>
-						<c:when test="${host.profile eq null }">
+						<c:when test="${host.profile eq null or host.profile eq '' }">
 							<!-- 프로필 사진 없음 -->
-							<img alt="기본 사진" src="images/발바닥.png">
+							<img alt="기본 사진" src="/images/paw.png">
 						</c:when>
 						<c:otherwise>
 							<!-- 프로필 사진 있음  -->

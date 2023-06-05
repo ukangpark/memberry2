@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,10 +14,13 @@ import com.example.demo.domain.Detail;
 import com.example.demo.domain.Host;
 import com.example.demo.mapper.PetsitterMapper;
 
+import software.amazon.awssdk.awscore.exception.AwsServiceException;
+import software.amazon.awssdk.core.exception.SdkClientException;
 import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.ObjectCannedACL;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
+import software.amazon.awssdk.services.s3.model.S3Exception;
 
 @Service
 public class PetsitterService {
@@ -71,13 +75,27 @@ public class PetsitterService {
 		return count;
 	}
 
-	public boolean modifyHostById(Host host) {
+	public boolean modifyHostById(Host host, MultipartFile file) throws Exception {
+		// 호스트 수정페이지 프로필 사진 업로드
+		String key = "hostProfile/" + file.getOriginalFilename();
+		
+		PutObjectRequest objectRequest = PutObjectRequest.builder()
+                .bucket(bucketName)
+                .acl(ObjectCannedACL.PUBLIC_READ)
+                .key(key)
+                .build();
+		
+		s3.putObject(objectRequest, RequestBody.fromInputStream(file.getInputStream(), file.getSize()));
+
 		// 호스트 정보 수정 
-		Integer count = petsitterMapper.modifyHostById(host);
+		Integer count = petsitterMapper.modifyHostById(host, file.getOriginalFilename());
 		return count == 1;
 	}
 
 	public boolean deleteHostById(Integer hostId) {
+		//해당 호스트 상세페이지 삭제
+		petsitterMapper.deleteDetailByHostId(hostId);
+		
 		//호스트 정보 삭제 
 		Integer count = petsitterMapper.deleteHostById(hostId);
 		

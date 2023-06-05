@@ -62,19 +62,20 @@ public interface PetsitterMapper {
 	@Update("""
 			UPDATE Host
 			SET
-				hostName = #{hostName},
-				phone = #{phone},
-				si = #{si},
-				gu = #{gu},
-				dong = #{dong},
-				address = #{address},
-				houseType = #{houseType},
-				pet = #{pet},
-				species = #{species},
-				experience = #{experience}
-			WHERE id = #{id}
+				hostName = #{host.hostName},
+				phone = #{host.phone},
+				si = #{host.si},
+				gu = #{host.gu},
+				dong = #{host.dong},
+				address = #{host.address},
+				houseType = #{host.houseType},
+				pet = #{host.pet},
+				species = #{host.species},
+				experience = #{host.experience},
+				profile = #{profile}
+			WHERE id = #{host.id}
 			""")
-	Integer modifyHostById(Host host);
+	Integer modifyHostById(Host host, String profile);
 
 	@Delete("""
 			DELETE FROM Host WHERE id = #{hostId}

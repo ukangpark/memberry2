@@ -20,11 +20,11 @@
 			<div class="ui segment">
 				<div class="content">
 					<c:choose>
-						<c:when test="${host.profile eq null }">
-							<img class="ui small centered circular image " src="/images/paw.png">
+						<c:when test="${host.profile eq null or host.profile eq '' }">
+							<img class="ui medium bordered centered circular image " src="/images/paw.png">
 						</c:when>
 						<c:otherwise>
-							<img class="ui small centered circular image " src="${bucketUrl }/hostProfile/${host.profile }">
+							<img class="ui medium bordered centered circular image " src="${bucketUrl }/hostProfile/${host.profile }">
 						</c:otherwise>
 					</c:choose>
 					<h1 class="ui center aligned header">${host.hostName }님 정보입니다.(${host.id })</h1>

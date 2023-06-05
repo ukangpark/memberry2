@@ -82,14 +82,14 @@ public class PetsitterController {
 		//호스트 정보 수정폼 포워드
 		Map<String, Object> info = petsitterService.selectById(hostId);
 		model.addAllAttributes(info);
-
-		
 	}
 	
 	@PostMapping("hostModify")
-	public String hostModifyProcess(Host host) {
+	public String hostModifyProcess(
+			Host host, 
+			@RequestParam("file") MultipartFile file) throws Exception {
 		//호스트 정보 수정 과정
-		boolean ok = petsitterService.modifyHostById(host);
+		boolean ok = petsitterService.modifyHostById(host, file);
 		
 		return "redirect:/petsitter/hostMyPage?id=" + host.getId();
 	}

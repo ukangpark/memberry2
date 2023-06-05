@@ -11,6 +11,17 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="/js/semantic/semantic.min.css">
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+<style type="text/css">
+#imgContainer {
+	position: relative;
+}
+
+#addBtn {
+	position: absolute;
+	top: 75%;
+	left: 58%;
+}
+</style>
 </head>
 <body>
 	<my:navBar></my:navBar>
@@ -20,11 +31,24 @@
 		<div class="eight wide column">
 			<div class="ui segment">
 				<div class="content">
-					<img class="left floated ui image" style="width: 50px;" src="https://kr.seaicons.com/wp-content/uploads/2015/06/person-icon.png">
-					<h1>${host.hostName }님정보입니다.</h1>
+					<h4 class="ui grey center aligned header">수정정보를 입력해주세요.</h4>
+					<h1 class="ui center aligned header">${host.hostName }님정보입니다.</h1>
 					<div>
-						<form action="/petsitter/hostModify?id=${host.id }" class="ui big form" id="checkForm" method="post">
-							<h4 class="ui grey header">수정정보를 입력해주세요.</h4>
+						<form action="/petsitter/hostModify?id=${host.id }" class="ui big form" id="checkForm" method="post" enctype="multipart/form-data">
+							<div class="ui aligned container" id="imgContainer">
+								<c:choose>
+									<c:when test="${host.profile eq null or host.profile eq '' }">
+										<img class="ui medium bordered centered circular image " src="/images/paw.png">
+									</c:when>
+									<c:otherwise>
+										<img class="ui medium bordered centered circular image " src="${bucketUrl }/hostProfile/${host.profile }">
+									</c:otherwise>
+								</c:choose>
+								<label for="file" class="big circular ui icon button" id="addBtn">
+									<i class="large plus icon"></i>
+								</label>
+								<input style="display: none;" class="form-control" type="file" id="file" name="file" accept="image/*" />
+							</div>
 							<div class="field">
 								<label>이름</label>
 								<input type="text" name="hostName" value="${host.hostName }">
