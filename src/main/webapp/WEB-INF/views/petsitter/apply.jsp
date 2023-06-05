@@ -35,7 +35,7 @@
 				<form id="applyForm" class="ui big form" method="post" action="/petsitter/apply" enctype="multipart/form-data">
 					<h1>호스트 등록</h1>
 					<div class="ui aligned container" id="imgContainer">
-						<img class="ui centered medium bordered circular image" src="/images/발바닥.png">
+						<img class="ui centered medium bordered circular image" src="/images/paw.png">
 						<label for="file" class="big circular ui icon button" id="addBtn">
 							<i class="large plus icon"></i>
 						</label>

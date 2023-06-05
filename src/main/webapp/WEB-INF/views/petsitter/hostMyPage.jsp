@@ -19,7 +19,14 @@
 		<div class="eight wide column">
 			<div class="ui segment">
 				<div class="content">
-					<img class="ui small centered circular image "  src="/images/발바닥.png">
+					<c:choose>
+						<c:when test="${host.profile eq null }">
+							<img class="ui small centered circular image " src="/images/paw.png">
+						</c:when>
+						<c:otherwise>
+							<img class="ui small centered circular image " src="${bucketUrl }/hostProfile/${host.profile }">
+						</c:otherwise>
+					</c:choose>
 					<h1 class="ui center aligned header">${host.hostName }님 정보입니다.(${host.id })</h1>
 					<div>
 						<form class="ui big form" id="checkForm">

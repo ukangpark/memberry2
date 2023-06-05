@@ -34,8 +34,16 @@
 		<div class="ui items">
 			<div class="item">
 				<div class="image">
-					<!-- <img src="https://memberyfortest.s3.ap-northeast-2.amazonaws.com/hostProfile/IMG_2042.jpg"> -->
-					<img src="${bucketUrl }/hostProfile/${host.profile }">
+					<c:choose>
+						<c:when test="${host.profile eq null }">
+							<!-- 프로필 사진 없음 -->
+							<img alt="기본 사진" src="images/발바닥.png">
+						</c:when>
+						<c:otherwise>
+							<!-- 프로필 사진 있음  -->
+							<img src="${bucketUrl }/hostProfile/${host.profile }">
+						</c:otherwise>
+					</c:choose>
 				</div>
 				<div class="content">
 					<a class="header">${host.hostName } (${host.id })</a>
@@ -44,7 +52,7 @@
 						<br>
 						<span>번호 : ${host.phone }</span>
 						<br>
-						<span>날짜 : ${host.inserted }</span>
+						<span>프로필 : ${host.profile }</span>
 					</div>
 					<div class="description">
 						<p>한 줄 소개 : ${detail.title }</p>
