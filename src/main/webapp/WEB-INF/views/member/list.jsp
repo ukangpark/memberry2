@@ -13,6 +13,7 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	font-size:17px;
 }
 </style>
 
@@ -27,7 +28,6 @@
 	<div class="ui center aligned container" id="container">
 	
 		<div class="row justify-content-center">
-			<div class="col-12">
 				<div style="margin:50px;">
 				<h1>회원 목록</h1>
 				</div>

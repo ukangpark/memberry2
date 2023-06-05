@@ -65,8 +65,8 @@
 		</div>
 
 		<div id="buttons">
-			<a class="ui secondary button" href="/member/modify?id=${member.id }" style="margin: 20px; font-size: 18px;">수정</a>
-			<button type="button" data-bs-toggle="modal" class="ui red button" data-bs-target="#confirmModal" style="margin: 20px; font-size: 18px;">탈퇴</button>
+			<a class="ui secondary button" href="/member/modify?id=${member.id }" style="margin: 20px; font-size: 16px;">수정</a>
+			<button type="button" data-bs-toggle="modal" class="ui red button" data-bs-target="#confirmModal" style="margin: 20px; font-size: 16px;">탈퇴</button>
 		</div>
 	</div>
 	
