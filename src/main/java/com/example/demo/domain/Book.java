@@ -13,7 +13,10 @@ public class Book {
 	private Integer hostId;
 	private String message;
 	private String hospital;
-	private Integer num;
+	private int num;
+	private String type;
+	private int detailId;
+	
 	
 	
 	

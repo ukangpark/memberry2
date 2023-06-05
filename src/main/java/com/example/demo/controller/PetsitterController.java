@@ -1,22 +1,15 @@
 package com.example.demo.controller;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PostAuthorize;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.stereotype.*;
+import org.springframework.ui.*;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.*;
 
 import com.example.demo.domain.*;
-import com.example.demo.service.PetsitterService;
-import com.fasterxml.jackson.annotation.JsonCreator.Mode;
+import com.example.demo.service.*;
 
 @Controller
 @RequestMapping("petsitter")
@@ -84,13 +77,13 @@ public class PetsitterController {
 		return "redirect:/petsitter/hostMyPage?id=" + host.getId();
 	}
 	
-	// 펫시터 전체목록보기
+	// 펫시터 전체목록보기, 페이지네이션, 검색
 	@GetMapping("list")
 	public String petsitterList(Model model,
-			@RequestParam(value="search", defaultValue="")String search) {
-		// Map<String, Object> result = service.listPetsitter(search);
-		List<Host> list = petsitterService.listHost();
-		model.addAttribute("petsitterList", list);
+			@RequestParam(value="page", defaultValue="1")Integer page,
+			@RequestParam(value="search", defaultValue="") String search) {
+		Map<String, Object> result = petsitterService.listHost(page, search);
+		model.addAllAttributes(result);
 		
 		return "petsitter/list";
 	}

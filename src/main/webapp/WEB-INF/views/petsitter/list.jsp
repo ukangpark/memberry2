@@ -27,7 +27,7 @@
 
 
 <form action="list" class="d-flex" role="search">
-        <input name="search" class="form-control me-2" type="search" placeholder="맡기고 싶은 지역을 검색하세요 (예. 서울시 서초구 반포동)" aria-label="Search">
+        <input name="search" class="form-control me-2" type="search" placeholder="맡기고 싶은 지역을 검색하세요" aria-label="Search">
         <button class="btn btn-outline-success" type="submit" style="width:80px">검색</button>
       </form>
 
@@ -56,11 +56,11 @@
     <div class="extra content">
       <span class="right floated">
       
-        하루 000원
+        하루 40,000원~
       </span>
       <span>
         <i class="comments icon"></i>
-        후기 몇개
+        후기  ${host.commentCount }개
       </span>
     </div>
   </div>
@@ -68,6 +68,41 @@
   </c:forEach>
 </div>
 	
+	
+	
+	<div class="container-lg">
+		<div class="row">
+			<nav aria-label="Page navigation example">
+				<ul class="pagination justify-content-center">
+
+					<!-- 이전 버튼 -->
+					<c:if test="${pageInfo.currentPageNum ne 1 }">
+						<c:url value="list" var="pageLink">
+							<c:param name="page" value="${pageInfo.currentPageNum - 1}" />
+						</c:url>
+						<li class="page-item"><a class="page-link" href="${pageLink }">이전</a></li>
+					</c:if>
+
+					<c:forEach begin="${pageInfo.leftPageNum }" end="${pageInfo.rightPageNum }" var="pageNum">
+						<c:url value="list" var="pageLink">
+							<c:param name="page" value="${pageNum}" />
+						</c:url>
+						<li class="page-item"><a class="page-link ${pageNum eq pageInfo.currentPageNum ? 'active' : '' }" href="${pageLink }">${pageNum}</a></li>
+					</c:forEach>
+
+					<!-- 다음 버튼 -->
+					<c:if test="${pageInfo.currentPageNum lt pageInfo.lastPageNum }">
+						<c:url value="list" var="pageLink">
+							<c:param name="page" value="${pageInfo.currentPageNum + 1}" />
+						</c:url>
+						<li class="page-item"><a class="page-link" href="${pageLink }">다음</a>
+						</li>
+						</c:if>
+						
+				</ul>
+			</nav>
+		</div>
+	</div>
 	
 
 	

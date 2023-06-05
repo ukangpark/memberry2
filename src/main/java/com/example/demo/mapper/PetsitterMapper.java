@@ -1,15 +1,10 @@
 package com.example.demo.mapper;
 
-import java.util.List;
+import java.util.*;
 
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import com.example.demo.domain.*;
-import com.example.demo.service.*;
 
 @Mapper
 public interface PetsitterMapper {
@@ -26,9 +21,9 @@ public interface PetsitterMapper {
 	
 	@Insert("""
 			INSERT INTO Host 
-			(hostName, phone, idNumber, si, gu, dong, address, houseType, pet, species, experience, photo)
+			(hostName, phone, idNumber, si, gu, dong, address, houseType, pet, species, experience, profile)
 			VALUES
-			(#{hostName}, #{phone}, #{idNumber}, #{si}, #{gu}, #{dong}, #{address}, #{houseType}, #{pet}, #{species}, #{experience}, #{photo})
+			(#{hostName}, #{phone}, #{idNumber}, #{si}, #{gu}, #{dong}, #{address}, #{houseType}, #{pet}, #{species}, #{experience}, #{profile})
 			""")
 	Integer insertHost(Host host);
 	
@@ -79,13 +74,45 @@ public interface PetsitterMapper {
 				gu,
 				dong,
 				Detail.title,
-				photo,
+				profile,
 				Host.id
 				
 			FROM Host, Detail
 			ORDER BY Detail.inserted DESC
 			""")
 	List<Host> selectAll();
+
+	@Select("""
+			<script>
+			<bind name="pattern" value="'%' + search + '%'" />
+			SELECT
+			si,
+			gu,
+			dong,
+			Detail.title,
+			profile,
+			Host.id,
+			 (select count(*) from PetsitterComment where detailId = Detail.id) commentCount 
+		FROM Host, Detail
+		WHERE
+			Host.id = Detail.hostId
+		AND
+			(si LIKE #{pattern}
+		OR  gu LIKE #{pattern}
+		OR  dong LIKE #{pattern})
+		ORDER BY Detail.inserted DESC
+		LIMIT #{startIndex}, #{rowPerPage}
+		</script>
+			""")
+	List<Host> selectAllPaging(Integer startIndex, Integer rowPerPage, String search);
+	
+	@Select("""
+			SELECT COUNT(*)
+			FROM Host
+			""")
+	Integer countAll();
+
+	
 	
 	
 }

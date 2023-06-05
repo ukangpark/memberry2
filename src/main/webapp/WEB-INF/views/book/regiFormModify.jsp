@@ -20,13 +20,15 @@
 
 <div style="margin:100px 300px 300px 300px; border: 8px double lightblue;">
 	<form class="ui form" style="margin:100px 100px 100px 100px">
-		<h2 class="ui dividing header" style = "text-align:center">예약 신청서 변경</h2>
+		<h2 class="ui dividing header" style = "text-align:center">${book.petName }예약 변경 신청</h2>
 		<br>
+		<form method="post">
+		<input type="hidden" name="num" value="${book.num }"/>
 		<div class="field">
 		<h4 class="ui header">이름</h4>
 			<div class="field">
 
-				<input type="text" name="booking[이름]">
+				<input type="text" name="petName" value="${book.petName }" />
 
 			</div>
 		</div>
@@ -170,10 +172,14 @@
 
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  예약 신청 변경하기
+  예약 변경 신청하기
 </button>
 </div>
+		</form>
 
+	<script>
+		$('.ui.radio.checkbox').checkbox();
+	</script>
 	
 </body>
 </html>

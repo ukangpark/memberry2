@@ -5,7 +5,6 @@ import java.util.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 
-import com.example.demo.controller.*;
 import com.example.demo.domain.*;
 import com.example.demo.mapper.*;
 
@@ -65,6 +64,39 @@ public class PetsitterService {
 		List<Host> list = petsitterMapper.selectAll();
 		return list;
 	}
+
+	//페이지네이션
+		public Map<String, Object> listHost(Integer page, String search) {
+			Integer rowPerPage = 4;
+			
+			Integer startIndex = (page-1) * rowPerPage;
+			
+			Integer numOfRecords =petsitterMapper.countAll();
+			
+			Integer lastPageNumber = (numOfRecords-1) / rowPerPage +1;
+			
+			
+			Integer leftPageNum = page - 5;
+			
+			leftPageNum = Math.max(leftPageNum, 1);
+			
+			
+			Integer rightPageNum = leftPageNum +9;  
+			
+			rightPageNum = Math.min(rightPageNum, lastPageNumber);
+			
+			Map<String, Object> pageInfo = new HashMap<>();
+			pageInfo.put("rightPageNum", rightPageNum);
+			pageInfo.put("leftPageNum", leftPageNum);
+			pageInfo.put("currentPageNum", page);
+			pageInfo.put("lastPageNum", lastPageNumber);
+			
+			// 게시물 목록 넘겨주고
+			List<Host> list = petsitterMapper.selectAllPaging(startIndex, rowPerPage, search);
+					return Map.of("pageInfo", pageInfo,
+								  "petsitterList", list);
+			
+		}
 
 	
 	

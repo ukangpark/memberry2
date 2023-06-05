@@ -41,7 +41,7 @@
 				<a class="${current eq 'myFeed' ? 'active' : '' } item" href="/myFeed"> 마이피드 </a>
 				<a class="${current eq 'schedule' ? 'active' : '' } item" href="/schedule" data-tab="tab-schedule"> 스케줄달력 </a>
 				<!-- 함께가기 주소 업데이트 해야함 -->
-				<a class="${current eq '' ? 'active' : '' } item" href="/"> 함께가기 </a>
+				<a class="${current eq 'mapMain' ? 'active' : '' } item" href="/map/mapMain"> 함께가기 </a>
 				<div class="item">
 					펫시터
 					<div class="menu">
