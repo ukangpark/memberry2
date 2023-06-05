@@ -43,12 +43,12 @@ img {
 											<i class="lock icon"></i> <input type="password" name="password" placeholder="비밀번호" />
 										</div>
 									</div>
-									<button type="submit" class="ui blue submit button"> 로그인 </button>
+									<button type="submit" class="ui secondary submit button"> 로그인 </button>
 								</div>
 							</div>
 							<div class="middle aligned column">
 								<div class="ui big button">
-									<i class="handshake outline icon"></i> <a href="/member/signup">회원가입</a>
+									<i class="handshake outline icon"></i> <a href="/member/signup" style="color:black;">회원가입</a>
 								</div>
 							</div>
 						</div>

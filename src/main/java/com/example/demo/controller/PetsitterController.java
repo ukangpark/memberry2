@@ -20,13 +20,13 @@ import com.example.demo.service.PetsitterService;
 import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 
 @Controller
-@RequestMapping({ "/", "petsitter" })
+@RequestMapping("petsitter")
 public class PetsitterController {
 	
 	@Autowired
 	private PetsitterService petsitterService;
 	
-	@GetMapping({ "/", "main" })
+	@GetMapping("main")
 	public void main(Model model) {
 		//main 페이지 포워드
 		//모든 정보를 읽음
