@@ -21,8 +21,8 @@
 
 #addBtn {
 	position: absolute;
-	top: 75%;
-	left: 58%;
+	top: 230px;
+	left: 440px;
 }
 </style>
 </head>
@@ -35,11 +35,11 @@
 				<form id="applyForm" class="ui big form" method="post" action="/petsitter/apply" enctype="multipart/form-data">
 					<h1>호스트 등록</h1>
 					<div class="ui aligned container" id="imgContainer">
-						<img class="ui centered medium bordered circular image" src="/images/paw.png">
+						<img class="ui centered medium bordered circular image" src="/images/paw.png" id="preview">
 						<label for="file" class="big circular ui icon button" id="addBtn">
 							<i class="large plus icon"></i>
 						</label>
-						<input style="display: none;" class="form-control" type="file" id="file" name="file" accept="image/*" />
+						<input style="display: none;" onchange="readURL(this);" class="form-control" type="file" id="file" name="file" accept="image/*" />
 					</div>
 					<div class="field">
 						<label for="hostName">이름</label>
@@ -149,8 +149,21 @@
 			</div>
 		</div>
 	</div>
+
 	<script>
 		$('.ui.dropdown').dropdown();
+
+		function readURL(input) {
+			if (input.files && input.files[0]) {
+				var reader = new FileReader();
+				reader.onload = function(e) {
+					document.getElementById('preview').src = e.target.result;
+				};
+				reader.readAsDataURL(input.files[0]);
+			} else {
+				document.getElementById('preview').src = "";
+			}
+		}
 	</script>
 </body>
 </html>

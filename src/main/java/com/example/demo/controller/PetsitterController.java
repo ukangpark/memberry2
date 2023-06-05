@@ -131,9 +131,10 @@ public class PetsitterController {
 	@PostMapping("addDetail")
 	public String addDetailProcess(
 			Detail detail, 
-			RedirectAttributes rttr) {
+			@RequestParam("housePhotoes") MultipartFile[] housePhotoes,
+			RedirectAttributes rttr) throws Exception {
 		// 상세페이지 등록 과정 
-		boolean ok = petsitterService.insertDetail(detail);
+		boolean ok = petsitterService.insertDetail(detail, housePhotoes);
 		
 		if(ok) {
 			// 상세페이지 최초 등록

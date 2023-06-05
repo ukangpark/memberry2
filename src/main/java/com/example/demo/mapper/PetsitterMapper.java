@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Update;
 
 import com.example.demo.domain.Detail;
 import com.example.demo.domain.Host;
+import com.example.demo.domain.HostHousePhoto;
 
 @Mapper
 public interface PetsitterMapper {
@@ -117,5 +118,19 @@ public interface PetsitterMapper {
 			DELETE FROM Detail WHERE hostId = #{hostId}
 			""")
 	Integer deleteDetailByHostId(Integer hostId);
+
+	@Select("""
+			SELECT * FROM HostHousePhoto WHERE hostId = #{hostId}
+			""")
+	List<HostHousePhoto> selectHostHousePhotoByHostId(Integer hostId);
+	
+	@Insert("""
+			INSERT INTO HostHousePhoto
+			(housePhoto, hostId)
+			VALUES
+			(#{housePhoto}, #{hostId})
+			""")
+	Integer insertHostHousePhoto(String housePhoto, Integer hostId);
+	
 
 }

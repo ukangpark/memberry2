@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.domain.Detail;
 import com.example.demo.domain.Host;
+import com.example.demo.domain.HostHousePhoto;
 import com.example.demo.mapper.PetsitterMapper;
 
 import software.amazon.awssdk.awscore.exception.AwsServiceException;
@@ -43,15 +44,19 @@ public class PetsitterService {
 		// 호스트 아이디로 상세페이지와 호스트 정보탐색
 		Map<String, Object> info = new HashMap<>();
 		
+		// 호스트의 정보를 불러옴 
+		Host host = petsitterMapper.selectHostById(hostId);
+		
 		// 상세페이지 정보 불러옴 
 		Detail detail = petsitterMapper.selectDetailById(hostId);
 		
-		// 호스트의 정보를 불러옴 
-		Host host = petsitterMapper.selectHostById(hostId);
+		//호스트 집사진 정보를 불러옴
+		List<HostHousePhoto> hostHousePhoto = petsitterMapper.selectHostHousePhotoByHostId(hostId);
 		
 		// map타입 변수 info에 넣음 
 		info.put("host", host);
 		info.put("detail", detail);
+		info.put("hostHousePhoto", hostHousePhoto);
 		return info;
 	}
 	
@@ -102,17 +107,31 @@ public class PetsitterService {
 		return count == 1;
 	}
 
-	public boolean insertDetail(Detail detail) {
+	public boolean insertDetail(Detail detail, MultipartFile[] housePhotoes) throws Exception {
 		// 상세페이지 등록 
 		Integer count;
-		
 		// 호스트 아이디로 상세페이지가 있는지 탐색 
 		if (selectById(detail.getHostId()).get("detail") == null) {
+			// 없으면 상세페이지 추가 
 			count = petsitterMapper.insertDetail(detail);
-			// 없으면 추가 
+			
+			// 상세페이지 집사진 추가
+			for(MultipartFile housePhoto : housePhotoes ) {
+				String key ="hostHousePhoto/" + detail.getHostId() + "/" + housePhoto.getOriginalFilename();
+				PutObjectRequest objectRequest = PutObjectRequest.builder()
+		                .bucket(bucketName)
+		                .key(key)
+		                .acl(ObjectCannedACL.PUBLIC_READ)
+		                .build();
+				s3.putObject(objectRequest, RequestBody.fromInputStream(housePhoto.getInputStream(), housePhoto.getSize()));
+
+				// 상세페이지 집사진 이름 추가 
+				petsitterMapper.insertHostHousePhoto(housePhoto.getOriginalFilename(), detail.getHostId());
+				System.out.println("aws upload success");
+			}
 		} else {
-			count = 0;
 			// 있으면 추가 안됨 
+			count = 0;
 		}
 		return count == 1;
 	}

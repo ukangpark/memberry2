@@ -21,7 +21,9 @@
 		<h1>펫시터 상세페이지</h1>
 		<div class="ui grid" style="height: 300px; margin-bottom: 25px;">
 			<div class="ten wide column teal">
-				<h1>집사진</h1>
+				<c:forEach items="${hostHousePhoto }" var="hostHousePhoto">
+					<img style="width: 50px;" src="${bucketUrl }/hostHousePhoto/${host.id }/${hostHousePhoto.housePhoto }">
+				</c:forEach>
 			</div>
 			<div class="six wide column blue">
 				<h1>집사진</h1>
