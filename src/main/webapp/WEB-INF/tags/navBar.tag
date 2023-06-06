@@ -97,10 +97,11 @@
 		</div>
 	</div>
 </div>
-
+<!-- 
 <div>
 	<sec:authentication property="principal"/>
 </div>
+ -->
 
 <!-- 
 <div class="d-flex flex-row-reverse mt-3"  >

@@ -48,6 +48,7 @@ public class customConfig {
 		return http.build();
 	}
 	
+
 	@Bean
 	public S3Client s3client() {
 		
