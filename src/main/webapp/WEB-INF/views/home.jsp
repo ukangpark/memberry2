@@ -124,7 +124,7 @@ overflow-y: auto;
 
 	<my:navBar current="home" />
 	<div id="header">
-		<h2>header</h2>
+		<h2>Membery</h2>
 	</div>
 	<div style="position: fixed; bottom: 5px; right: 5px; color: #a5a5a5">
 		<a href="#header"><i class="fa-solid fa-circle-arrow-up fa-3x"></i></a>
@@ -301,8 +301,6 @@ overflow-y: auto;
 						</a>
 						<!-- </div> -->
 
-
-
 					</div>
 					<div class="content">
 						<div class="header">${feed.title}</div>
@@ -314,12 +312,13 @@ overflow-y: auto;
 					</div>
 					<div class="extra content">
 						<span class="left floated"> <i
-							class="heart outline like icon"></i>17 likes &nbsp; <i
-							class="paw icon"></i>&nbsp;&nbsp; <!-- Button trigger modal -->
-							<button type="button" class="btn btn-primary"
+							class="heart outline like icon"></i>17 likes
+							<!-- Button trigger modal -->
+							<button type="button" class="btn btn-outline-secondary"
 								data-bs-toggle="modal" data-bs-target="#commentModal">
 								<i class="comment icon"></i>
 							</button>
+							<i class="paw icon"></i> 
 
 						</span> <span class="right floated">${feed.inserted}</span>
 					</div>
@@ -340,16 +339,16 @@ overflow-y: auto;
 						aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
-					<h1>
+					<h3>
 						<i class="fa-solid fa-comments"></i>
-					</h1>
+					</h3>
 					<div class="input-group">
 						<div class="form-floating">
 							<textarea id="commentTextArea" class="form-control"
-								style="height: 97px" placeholder="댓글을 남겨주세요"></textarea>
+								style="height: 50px; margin-bottom: 20px;" placeholder="댓글을 남겨주세요"></textarea>
 							<label for="floatingTextArea">댓글을 남겨주세요</label>
 						</div>
-						<button id="sendCommentBtn" class="btn btn-outline-primary">
+						<button id="sendCommentBtn" class="btn btn-outline-primary" style="height: 50px;">
 							<i class="fa-regular fa-paper-plane"></i>
 						</button>
 					</div>
@@ -359,7 +358,11 @@ overflow-y: auto;
 						<tr>
 							<td>작성자</td>
 							<td>댓글</td>
-							<td>수정/삭제/신고 버튼</td>
+							<td>
+								<button class="btn btn-outline-primary">수정</button>
+								<button class="btn btn-outline-secondary">삭제</button>
+								<button class="btn btn-danger">신고</button>
+							</td>
 						</tr>
 					</c:forEach>
 					</table>

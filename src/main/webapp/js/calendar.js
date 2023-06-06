@@ -10,7 +10,6 @@ document.addEventListener('DOMContentLoaded', function() {
 		},
 
 		 initialView: 'dayGridMonth', // 초기 로드 될때 보이는 캘린더 화면(기본 설정: 달)
-        initialDate: '2023-06-01', // 초기 날짜 설정 (설정하지 않으면 오늘 날짜가 보인다.)
         navLinks: true, // 날짜를 선택하면 Day 캘린더나 Week 캘린더로 링크
         editable: true, // 수정 가능?
         selectable: true, // 달력 일자 드래그 설정가능
@@ -44,10 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			extraParams: {
 				custom_param1: 'something',
 				custom_param2: 'somethingelse'
-			},
-			failure: function() {
-				alert(' fail');
-			},
+			}
 			
 		}
 	});
