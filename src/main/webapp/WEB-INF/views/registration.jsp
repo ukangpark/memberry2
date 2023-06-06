@@ -204,21 +204,6 @@
 		
 	})
 	
-	
-	
-	/* const fileInput = document.querySelector("#fileInput")
-	fileInput.addEventListener("change", (e) => {
-		//console.log(e);
-		const reader = new FileReader()
-		reader.readAsDataURL(e.target.files[0])
-		
-		reader.onload = function(event) {
-			//console.log(event);
-			const img = document.createElement("img")
-			img.setAttribute("src", event.target.result)
-			document.querySelector("#imgContainer").appendChild(img)
-		}
-	}) */
 	</script>
 </body>
 </html>
