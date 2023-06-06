@@ -38,7 +38,7 @@ img {
 </head>
 <body>
 
-	<my:navBar current="registration"></my:navBar>
+	<my:navBar current="myPetList"></my:navBar>
 
 	<!-- 상단 공백 -->
 	<div style="margin-bottom: 15px"></div>

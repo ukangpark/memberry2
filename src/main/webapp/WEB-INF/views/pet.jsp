@@ -26,7 +26,7 @@
 	padding: 0px;
 }
 
-.profile>img {
+img {
 	width: 100%;
 	height: 100%;
 }
@@ -51,8 +51,7 @@ label {
 
 	<!-- 상단 프로필 컨테이너 -->
 	<div class="ui container" id="profileContainer">
-		<span class="profile"> <img src="${bucketUrl }/${pet.id }/${pet.photo}">
-		</span>
+		<img src="${bucketUrl }/${pet.id }/${pet.photo}">
 	</div>
 
 	<!-- 상단 헤더 컨테이너 -->
@@ -76,7 +75,7 @@ label {
 					</div>
 					<div class="field mt-5">
 						<label>몸무게</label>
-						<input type="text" name="weight" value="${pet.weight eq 'small' ? '소형견 ( 7kg 미만 )' : pet.weight eq 'medium' ? '중형견 ( 7 ~ 14.9kg)' : '대형견 ( 15kg 이상 )' }" readonly>
+						<input type="text" name="weight" value="${pet.weight eq 'small' ? '작은친구 ( 7kg 미만 )' : pet.weight eq 'medium' ? '중간친구 ( 7 ~ 14.9kg)' : '큰친구 ( 15kg 이상 )' }" readonly>
 					</div>
 					<div class="field mt-5">
 						<label>생년월일</label>
@@ -106,9 +105,9 @@ label {
 					</div>
 				</div>
 				<div style="margin-top: 65px">
-					<div class="ui toggle right floated large button" style="background-color:#cc6666" onclick="location.href='petDelete'">삭제하기</div>
-					<div class="ui toggle right floated large button" style="background-color:#6699cc" onclick="location.href='petModify'">수정하기</div>
-					<div class="ui right floated large button" style="background-color:#cccccc" onclick="location.href='/myPetList'">목록보기</div>
+					<div class="ui toggle right floated large button" style="background-color:#cc6666" onclick="location.href='/petDelete'">삭제하기</div>
+					<div class="ui toggle right floated large button" style="background-color:#6699cc" onclick="location.href='/petModify/${pet.id}'">수정하기</div>
+					<div class="ui right floated large button" style="background-color:#cccccc" onclick="location.href='/petList'">목록보기</div>
 				</div>
 			</div>
 

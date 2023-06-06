@@ -15,5 +15,6 @@ public class Registration {
 	private String neutered;
 	private Integer registrationNum;
 	private String photo;
+	private String memberId;
 
 }

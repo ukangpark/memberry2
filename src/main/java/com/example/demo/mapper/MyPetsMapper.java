@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.example.demo.domain.Registration;
 
@@ -20,5 +21,31 @@ public interface MyPetsMapper {
 			WHERE id = #{id}
 			""")
 	Registration selectById(Integer id);
+
+	@Update("""
+			UPDATE Pet SET photo = null
+			WHERE Id = #{id}
+			""")
+	Integer updatePhotoNull(Integer id);
+
+	@Update("""
+			UPDATE Pet SET
+				id = #{registration.id},
+				petName = #{registration.petName},
+				type = #{registration.type},
+				birth = #{registration.birth},
+				together = #{registration.together},
+				gender = #{registration.gender},
+				neutered = #{registration.neutered},
+				registrationNum = #{registration.registrationNum},
+				photo = #{originalFilename},
+				weight = #{registration.weight},
+				memberId = #{registration.memberId}
+			WHERE Id = #{registration.id}
+			""")
+	Integer update(Registration registration, String originalFilename);
+
+
+
 
 }

@@ -31,7 +31,7 @@ public class RegistrationController {
 		
 		rttr.addAttribute("registration", "registration");
 		
-		return "redirect:/myPetList";
+		return "redirect:/petList";
 		
 	}
 
