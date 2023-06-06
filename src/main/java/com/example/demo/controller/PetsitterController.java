@@ -147,7 +147,9 @@ public class PetsitterController {
 	}
 	
 	@GetMapping("modifyDetail")
-	public void modifyDetailForm(@RequestParam("hostId") Integer hostId, Model model) {
+	public void modifyDetailForm(
+			@RequestParam("hostId") Integer hostId, 
+			Model model) {
 		// 상세페이지 수정폼 view 포워드
 		
 		// 기존 상세페이지 정보 탐색
@@ -156,9 +158,11 @@ public class PetsitterController {
 	}
 	
 	@PostMapping("modifyDetail")
-	public String modifyProcess(Detail detail) {
+	public String modifyProcess(
+			Detail detail, 
+			@RequestParam("housePhotoes") MultipartFile[] housePhotoes) throws Exception {
 		// 상세페이지 수정 process 
-		boolean ok = petsitterService.modifyDetail(detail);
+		boolean ok = petsitterService.modifyDetail(detail, housePhotoes);
 		return "redirect:/petsitter/detail?id=" + detail.getHostId();
 	}
 	

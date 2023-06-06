@@ -132,5 +132,10 @@ public interface PetsitterMapper {
 			""")
 	Integer insertHostHousePhoto(String housePhoto, Integer hostId);
 	
+	@Select("""
+			SELECT count(*) FROM HostHousePhoto WHERE hostId = #{hostId};
+			""")
+	Integer housePhotoCount(Integer hostId);
+	
 
 }

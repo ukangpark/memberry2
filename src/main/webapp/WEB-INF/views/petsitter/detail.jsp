@@ -17,21 +17,18 @@
 	<my:navBar></my:navBar>
 
 	<!-- 호스트의 집사진 -->
-	<div class="container">
+	<div class="container" style="width: 900px">
 		<h1>펫시터 상세페이지</h1>
-		<div class="ui grid" style="height: 300px; margin-bottom: 25px;">
 			<div class="ten wide column teal">
-				<c:forEach items="${hostHousePhoto }" var="hostHousePhoto">
-					<img style="width: 50px;" src="${bucketUrl }/hostHousePhoto/${host.id }/${hostHousePhoto.housePhoto }">
-				</c:forEach>
-			</div>
-			<div class="six wide column blue">
-				<h1>집사진</h1>
+				<div class="ui images">
+					<c:forEach items="${hostHousePhoto }" var="hostHousePhoto">
+						<img class="ui medium rounded image" src="${bucketUrl }/hostHousePhoto/${host.id }/${hostHousePhoto.housePhoto }">
+					</c:forEach>
+				</div>
 			</div>
 		</div>
-	</div>
 	<!-- 호스트 간략 정보 -->
-	<div class="container" style="width: 800px">
+	<div class="container" style="width: 900px">
 		<h3 class="ui dividing header">Detail</h3>
 		<div class="ui items">
 			<div class="item">
@@ -74,7 +71,7 @@
 	</div>
 
 	<!-- 본문 -->
-	<div class="container" style="width: 800px; margin-top: 25px;">
+	<div class="container" style="width: 900px; margin-top: 25px;">
 		<div class="ui text container">
 			<p>본문 : ${detail.body }</p>
 		</div>
@@ -84,7 +81,7 @@
 	</div>
 
 	<!-- 후기 -->
-	<div class="container" style="width: 800px; margin: 25px auto 50px;">
+	<div class="container" style="width: 900px; margin: 25px auto 50px;">
 		<div class="ui minimal comments">
 			<h3 class="ui dividing header">Comments</h3>
 			<div class="comment">

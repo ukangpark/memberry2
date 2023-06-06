@@ -21,8 +21,8 @@
 				<form id="modifyDetailForm" class="ui big form" method="post" action="/petsitter/modifyDetail" enctype="multipart/form-data">
 					<h1 class="ui dividing header">상세페이지 수정하기</h1>
 					<div class="field">
-						<label for="photo">집사진 등록</label>
-						<input id="photo" type="file" name="photo" multiple>
+						<label for="housePhotoes">집사진 등록</label>
+						<input id="housePhotoes" type="file" name="housePhotoes" multiple>
 					</div>
 					<div class="field">
 						<label for="title">제목</label>
