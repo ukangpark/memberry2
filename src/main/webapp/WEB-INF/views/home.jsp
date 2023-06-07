@@ -26,7 +26,7 @@
 	margin: 40px 0;
 }
 
-.slider {
+/* .slider {
 	text-align: center;
 }
 
@@ -92,7 +92,7 @@
 
 .bx-pager div a.active {
 	background-color: #000;
-}
+} */
 
 /* 댓글 모달 css */
 .modal-title {
@@ -110,12 +110,13 @@ height: 250px;
 overflow-y: auto;
 }
 </style>
-<link rel="stylesheet"
+<!-- bxslider -->
+<!-- <link rel="stylesheet"
 	href="http://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script
-	src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+	src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script> -->
 
 
 
@@ -135,7 +136,7 @@ overflow-y: auto;
 		<div class="ui link cards">
 			<div class="card">
 				<div class="image">
-					<img src="/images/loki.jpeg">
+					   <img src="/images/loki.jpeg" />
 				</div>
 				<div class="content">
 					<div class="header">로키</div>
@@ -289,17 +290,16 @@ overflow-y: auto;
 			<c:forEach items="${feedList}" var="feed">
 				<div class="card" style="margin: 40px;">
 					<div class="image">
-						<a href="/feedId/${feed.id }"> <!-- <div class="slider"> -->
+						<a href="/feedId/${feed.id }"> 
+						
 							<c:forEach items="${feed.fileName }" var="fileName">
-								<div>
+							
 									<img src="${bucketUrl }/${feed.id }/${fileName }" alt=""
 										width="100%" ; height="auto" ;/>
-								</div>
-								<!-- <i class="xi-angle-left-thin"></i>
-							<i class="xi-angle-right-thin"></i> -->
+								
 							</c:forEach>
+						</div> 
 						</a>
-						<!-- </div> -->
 
 					</div>
 					<div class="content">
