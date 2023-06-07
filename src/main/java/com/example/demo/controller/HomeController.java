@@ -12,4 +12,8 @@ public class HomeController {
 		return "home";
 	}
 	
+	@GetMapping("regiList")
+	public String regiList() {
+		return "regiList";
+	}
 }

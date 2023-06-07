@@ -21,10 +21,11 @@ public class RegistrationController {
 		
 	}
 	
-	@PostMapping("registration")
-	public void addRegistration(Registration registration) {
-		Integer cnt = service.insert(registration);
-		
-	}
+	/*
+	 * @PostMapping("registration") public void addRegistration(Registration
+	 * registration) { Integer cnt = service.insert(registration);
+	 * 
+	 * }
+	 */
 
 }

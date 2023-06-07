@@ -8,10 +8,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>예약 신청 페이지</title>
+<title>예약 변경</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="/js/semantic/semantic.min.css">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 	<script src="/js/semantic/semantic.min.js"></script>
@@ -20,13 +20,15 @@
 
 <div style="margin:100px 300px 300px 300px; border: 8px double lightblue;">
 	<form class="ui form" style="margin:100px 100px 100px 100px">
-		<h4 class="ui dividing header" style = "text-align:center">예약 신청서</h4>
+		<h2 class="ui dividing header" style = "text-align:center">${book.petName }예약 변경 신청</h2>
 		<br>
+		<form method="post">
+		<input type="hidden" name="num" value="${book.num }"/>
 		<div class="field">
 		<h4 class="ui header">이름</h4>
 			<div class="field">
 
-				<input type="text" name="booking[이름]">
+				<input type="text" name="petName" value="${book.petName }" />
 
 			</div>
 		</div>
@@ -120,30 +122,36 @@
 			<div class="btn-group" role="group" aria-label="Basic radio toggle button group" style="width:1090px">
   		<input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
   		<label class="btn btn-outline-secondary" for="btnradio1">여자</label>
-
   		<input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
   		<label class="btn btn-outline-secondary" for="btnradio2">남자</label>
+		</div>
 
-</div>
 
-
-			<%-- <div class="ui two item menu">
-
-				<a class="item">여자</a> <a class="item">남자</a>
-			</div>--%>
-
+	
 			<h4 class="ui header">중성화</h4>
-			<div class="ui two item menu">
+			<div class="btn-group" role="group" aria-label="Basic radio toggle button group" style="width:1090px">
+  		<input type="radio" class="btn-check" name="btnradio1" id="btnradio3" autocomplete="off" checked>
+  		<label class="btn btn-outline-secondary" for="btnradio3">네</label>
 
-				<a class="item">네</a> <a class="item">아니오</a>
-			</div> 
+  		<input type="radio" class="btn-check" name="btnradio1" id="btnradio4" autocomplete="off">
+  		<label class="btn btn-outline-secondary" for="btnradio4">아니오</label>
+  		</div>
+			
+			
+			
 
 
 			<h4 class="ui header">배변훈련(배변패드)</h4>
-			<div class="ui three item menu">
-
-				<a class="item">잘해요</a> <a class="item">미숙해요</a> <a class="item">실외배변</a>
-			</div>
+			<div class="btn-group" role="group" aria-label="Basic radio toggle button group" style="width:1090px">
+  		<input type="radio" class="btn-check" name="btnradio2" id="btnradio5" autocomplete="off" checked>
+  		<label class="btn btn-outline-secondary" for="btnradio5">잘해요</label>
+  		<input type="radio" class="btn-check" name="btnradio2" id="btnradio6" autocomplete="off">
+  		<label class="btn btn-outline-secondary" for="btnradio6">미숙해요</label>
+  		<input type="radio" class="btn-check" name="btnradio2" id="btnradio7" autocomplete="off">
+  		<label class="btn btn-outline-secondary" for="btnradio7">실외배변</label>
+		</div>
+			
+	
 
 
 			<h4 class="ui header">자주 다니는 동물병원 이름과 위치(동)</h4>
@@ -154,72 +162,24 @@
 			</div>
 
 
-
-
-
-
-
-
 			<h4 class="ui header">전하고 싶은 말</h4>
 			<div class="field">
 
 				<textarea rows="2" placeholder="특이사항, 주의사항 등등 자유롭게 적어주세요"></textarea>
 			</div>
 
-	<!-- <div class="ui button" tabindex="0">예약 신청하기</div>  -->		
 
 
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  예약 신청하기
+  예약 변경 신청하기
 </button>
 </div>
-
-<!-- 결제 금액 Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">결제 금액</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-      <!-- 달력 칸수 곱해서 금액산출 -->
-        총 결제 금액은 000원입니다. 
-        
-        예약하시겠습니까?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#bookModal">예약하기</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-
-<!-- 최종 예약 Modal -->
-<div class="modal fade" id="bookModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-     
-      <div class="modal-body">
-       예약 신청이 완료되었습니다.
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">확인</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-	</form>
+		</form>
 
 	<script>
 		$('.ui.radio.checkbox').checkbox();
 	</script>
-
 	
 </body>
 </html>
