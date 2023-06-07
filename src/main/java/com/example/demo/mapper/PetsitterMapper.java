@@ -83,6 +83,7 @@ public interface PetsitterMapper {
 			VALUES
 			(#{title}, #{body}, #{hostId})
 			""")
+	@Options(useGeneratedKeys = true, keyProperty = "id")
 	Integer insertDetail(Detail detail);
 
 	// 외래키 설정하면 쿼리 변경해야함 (펫시터 전체보기)
@@ -119,15 +120,15 @@ public interface PetsitterMapper {
 	@Select("""
 			SELECT * FROM HostHousePhoto WHERE detailId = #{detailId}
 			""")
-	List<HostHousePhoto> selectHostHousePhotoByHostId(Integer hostId);
+	List<HostHousePhoto> selectHostHousePhotoByHostId(Integer detailId);
 	
 	@Insert("""
 			INSERT INTO HostHousePhoto
-			(housePhoto, hostId)
+			(housePhoto, detailId)
 			VALUES
-			(#{housePhoto}, #{hostId})
+			(#{housePhoto}, #{detailId})
 			""")
-	Integer insertHostHousePhoto(String housePhoto, Integer hostId);
+	Integer insertHostHousePhoto(String housePhoto, Integer detailId);
 	
 	@Select("""
 			SELECT count(*) FROM HostHousePhoto WHERE hostId = #{hostId};

@@ -42,7 +42,7 @@ public class PetsitterService {
 		Detail detail = petsitterMapper.selectDetailById(hostId);
 
 		// 호스트 집사진 정보를 불러옴
-		List<HostHousePhoto> hostHousePhoto = petsitterMapper.selectHostHousePhotoByHostId(hostId);
+		List<HostHousePhoto> hostHousePhoto = petsitterMapper.selectHostHousePhotoByHostId(detail.getId());
 
 		// map타입 변수 info에 넣음
 		info.put("host", host);
@@ -101,14 +101,15 @@ public class PetsitterService {
 
 			// 상세페이지 집사진 추가
 			for (MultipartFile housePhoto : housePhotoes) {
-				String key = "hostHousePhoto/" + detail.getHostId() + "/" + housePhoto.getOriginalFilename();
+				String key = "hostHousePhoto/" + detail.getId() + "/" + housePhoto.getOriginalFilename();
+				System.out.println("상세페이지 아이디 mybatis : " + detail.getId());
 				PutObjectRequest objectRequest = PutObjectRequest.builder().bucket(bucketName).key(key)
 						.acl(ObjectCannedACL.PUBLIC_READ).build();
 				s3.putObject(objectRequest,
 						RequestBody.fromInputStream(housePhoto.getInputStream(), housePhoto.getSize()));
 
 				// 상세페이지 집사진 이름 추가
-				petsitterMapper.insertHostHousePhoto(housePhoto.getOriginalFilename(), detail.getHostId());
+				petsitterMapper.insertHostHousePhoto(housePhoto.getOriginalFilename(), detail.getId());
 			}
 		} else {
 			// 있으면 추가 안됨
@@ -135,13 +136,13 @@ public class PetsitterService {
 			// 집사진이 없는 상세페이지이면
 			// 상세페이지 집사진 추가
 			for (MultipartFile housePhoto : housePhotoes) {
-				String key = "hostHousePhoto/" + detail.getHostId() + "/" + housePhoto.getOriginalFilename();
+				String key = "hostHousePhoto/" + detail.getId() + "/" + housePhoto.getOriginalFilename();
 				PutObjectRequest objectRequest = PutObjectRequest.builder().bucket(bucketName).key(key)
 						.acl(ObjectCannedACL.PUBLIC_READ).build();
 				s3.putObject(objectRequest, RequestBody.fromInputStream(housePhoto.getInputStream(), housePhoto.getSize()));
 
 				// 상세페이지 집사진 이름 추가
-				petsitterMapper.insertHostHousePhoto(housePhoto.getOriginalFilename(), detail.getHostId());
+				petsitterMapper.insertHostHousePhoto(housePhoto.getOriginalFilename(), detail.getId());
 			}
 
 		} else {
