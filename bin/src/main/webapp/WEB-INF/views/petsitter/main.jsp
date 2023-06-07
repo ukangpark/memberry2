@@ -1,188 +1,80 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
+
 <!DOCTYPE html>
 <html>
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Bx slider</title>
-<!-- bxslider -->
-<link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
-
-<!-- 기본 -->
+<title>mainPage</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css">
 
 <style>
-/* 서치 바 */
-* {
-	box-sizing: border-box;
-	margin: 0;
-	padding: 0;
+#img {
+	margin: 0px 0px 0px 0px;
 }
 
-img {
-	width: 300px;
+#cards {
+	margin: 0px 0px 0px 90px;
 }
 
-.searchBar {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	height: 23vh;
-	text-align: center;
-}
-
-.container {
-	padding: 100px 50px;
-}
-
-.input-box {
-	display: flex;
-	margin: auto;
-	width: 400px;
-	padding: 6px;
-	border-radius: 15px;
-	border: 1px solid #e2e2e2;
-}
-
-.input-box i {
-	flex: 1;
-}
-
-.input-box input {
-	flex: 7;
-	border: none;
-	outline: none;
-}
-
-button {
-	margin-bottom: 15px;
-	padding: 10px;
-	border: none;
-	border-radius: 5px;
-	cursor: pointer;
-}
-
-/* 슬라이더 */
-.slider {
-	position: relative;
-	top: 30px;
-}
-
-.slider img {
-	display: block;
-	width: 350px;
-	margin: auto
-}
-
-.bx-wrapper {
-	position: relative;
-}
-
-.bx-controls-direction {
-	font-size: 100px;
-}
-
-.bx-controls-direction a {
-	position: absolute;
-	display: block;
-	width: 100px;
-	height: 110px;
-	overflow: hidden;
-	transform: translateY(-280%);
-	color: #5a5a5a;
-	font-weight: normal;
-}
-
-.bx-controls-direction .bx-prev {
-	left: 0;
-}
-
-.bx-controls-direction .bx-next {
-	right: 0;
-}
-
-.bx-controls-direction .bx-prev:before {
-	content: "\e93d";
-	font-family: 'xeicon';
-}
-
-.bx-controls-direction .bx-next:before {
-	content: "\e940";
-	font-family: 'xeicon';
-}
-
-.bx-pager {
-	position: absolute;
-	left: 0;
-	bottom: -37px;
-	width: 100%;
-	text-align: center;
-}
-
-.bx-pager div {
-	display: inline-block;
-	padding: 0 5px;
-}
-
-.bx-pager div a {
-	display: block;
-	color: transparent;
-	width: 24px;
-	height: 3px;
-	background: #999;
-	font-size: 0;
-}
-
-.bx-pager div a.active {
-	background: #000;
+#button{
+	position:relative;
+	text-align: right;
+	margin: 0px 130px 20px 0px;
 }
 </style>
+
 </head>
 <body>
 
 	<my:navBar current="main" />
-
 	<my:alert></my:alert>
-	
-	<div class="searchBar">
-		<div class="container">
 
-			<img src="/img/MemberyLogo.png" alt="Membery logo">
+	<div class="ui center aligned container" id="container">
 
-			<div class="input-box">
-				<i class="fa-solid i1 fa-magnifying-glass"></i> <input type="text"> <i class="fa-solid fa-keyboard"></i> <i class="fa-solid fa-microphone"></i>
+		<img src="/img/MemberyLogo.png" alt="" id="img" />
+		
+		<div id="button">
+		<button class="ui right labeled icon button" onclick="location.href='/petsitter/list'">
+			<i class="right arrow icon"></i> 전체보기
+		</button>
+		</div>
+
+		<div class="ui link cards" id="cards">
+			<div class="ui cards" items="${host }" var="host">
+				<c:forEach items="${host }" var="host" end="2">
+					<div class="ui card inblock">
+						<div class="ui slide masked reveal image">
+							<a href="/petsitter/detail"><img src="/img/petplanet1.png" class="visible content"> </a>
+						</div>
+						<div class="content">
+							<a class="header">${host.hostName }</a>
+							<div class="meta">
+								<span class="date">${host.si }시 ${host.gu }구 ${host.dong }동</span>
+							</div>
+							<div class="description">경력 : ${host.experience }</div>
+							<div class="description">반려견 : ${host.pet }</div>
+
+						</div>
+						<div class="extra content">
+							<a class="inblock"> <i class="comment icon"></i> 댓글 개수 표시
+							</a>
+							<form class="right floated inblock" action="/petsitter/detail" id="idForm">
+								<input class="d-none" type="text" name="id" value="${host.id }"> <input class="ui secondary button" type="submit" value="상세보기">
+							</form>
+						</div>
+					</div>
+				</c:forEach>
 			</div>
-
-			<div class="btn-box">
-				<button>어디에 사시나요?</button>
-				<button>언제 맡기시나요?</button>
-			</div>
-
 		</div>
 	</div>
 
-	<div class="slider">
-		<ul class="slide_gallery">
-			<li><img src="img/petplanet1.png" alt="사진1"></li>
-			<li><img src="img/petplanet2.png" alt="사진2"></li>
-			<li><img src="img/petplanet3.png" alt="사진3"></li>
-			<li><img src="img/petplanet4.png" alt="사진4"></li>
-			<li><img src="img/petplanet5.png" alt="사진5"></li>
-			<li><img src="img/petplanet6.png" alt="사진6"></li>
-			<li><img src="img/petplanet7.png" alt="사진7"></li>
-			<li><img src="img/petplanet8.png" alt="사진8"></li>
-		</ul>
-	</div>
-
-	<script src="/js/main.js"></script>
-
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>
 </body>
 </html>
