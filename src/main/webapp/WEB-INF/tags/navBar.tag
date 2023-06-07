@@ -21,10 +21,12 @@
 }
 </style>
 
+
+
 <div class="ui fluid right aligned container" id="container">
 	<div class="ui fixed top sticky">
-		<div class="ui dropdown" id="profile">
-			<h4>
+		<div class="ui dropdown">
+			<h4 id="profile">
 
 				<img class="ui tiny image" src="/images/genieLoki.jpeg">로키맘
 
@@ -37,15 +39,17 @@
 				</div>
 
 				<a class="${current eq 'home' ? 'active' : '' } item" href="/home"> 홈피드 </a>
+
 				
 				<sec:authorize access="isAuthenticated()">
 					<a class="${current eq 'myFeed' ? 'active' : '' } item" href="/myFeed"> 마이피드 </a>
 				</sec:authorize>
 				
 				<sec:authorize access="isAuthenticated()">
-					<a class="${current eq 'schedule' ? 'active' : '' } item" href="/schedule"> 스케줄달력 </a>
+					<a class="${current eq 'fullCalendar' ? 'active' : '' } item" href="/fullCalendar"> 스케줄달력 </a>
 				</sec:authorize>
 				
+
 				<a class="${current eq 'mapMain' ? 'active' : '' } item" href="/map/mapMain"> 함께가기 </a>
 				<div>
 					<div onclick="location.href='/petsitter/main'" class="${current eq 'petsitterMain' ? 'active' : '' } link item">
@@ -68,6 +72,7 @@
 						</div>
 					</div>
 				</div>
+
 				
 				<sec:authorize access="isAuthenticated()">
 					<a class="${current eq 'registration' ? 'active' : '' } item" href="/registration"> 반려동물등록 </a>
@@ -94,10 +99,12 @@
 					<a class="${current eq 'logout' ? 'active' : '' } item" href="/member/logout"> 로그아웃 </a>
 				</sec:authorize>
 				
+
 			</div>
 		</div>
 	</div>
 </div>
+
 <!-- 
 <div>
 	<sec:authentication property="principal"/>
@@ -153,11 +160,22 @@
 	</div>
 </div>
  -->
+ 
+ <div class="up" style="position: fixed; bottom: 10px; right: 10px; ">
+		<i class="fa-solid fa-circle-chevron-up fa-2x"  ></i>
+	</div>
+
 <script>
 	$('.ui.sticky').sticky({
 		offset : 10
 	});
 	$('.ui.dropdown').dropdown({
 		direction : 'auto'
+	});
+	$(function(){
+		$('.up').on('click',function(e){
+			e.preventDefault();
+			$('html,body').animate({scrollTop:0},1000);
+		});
 	});
 </script>
