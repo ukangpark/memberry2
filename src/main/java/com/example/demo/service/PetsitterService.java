@@ -146,13 +146,16 @@ public class PetsitterService {
 				String key = "hostHousePhoto/" + detail.getHostId() + "/" + housePhoto.getOriginalFilename();
 				PutObjectRequest objectRequest = PutObjectRequest.builder().bucket(bucketName).key(key)
 						.acl(ObjectCannedACL.PUBLIC_READ).build();
-				s3.putObject(objectRequest,
-						RequestBody.fromInputStream(housePhoto.getInputStream(), housePhoto.getSize()));
+				s3.putObject(objectRequest, RequestBody.fromInputStream(housePhoto.getInputStream(), housePhoto.getSize()));
 
 				// 상세페이지 집사진 이름 추가
 				petsitterMapper.insertHostHousePhoto(housePhoto.getOriginalFilename(), detail.getHostId());
 			}
 
+		} else {
+			// 집사진이 있는 상세페이지라면 
+			//원래 있던 집사진 삭제 후 추가
+			
 		}
 
 		return count == 1;

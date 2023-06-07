@@ -36,11 +36,11 @@
 					<c:choose>
 						<c:when test="${host.profile eq null or host.profile eq '' }">
 							<!-- 프로필 사진 없음 -->
-							<img alt="기본 사진" src="/images/paw.png">
+							<img style="width: 150px; height: 150px;" alt="기본 사진" src="/images/paw.png">
 						</c:when>
 						<c:otherwise>
 							<!-- 프로필 사진 있음  -->
-							<img src="${bucketUrl }/hostProfile/${host.profile }">
+							<img style="width: 150px; height: 150px;" src="${bucketUrl }/hostProfile/${host.profile }">
 						</c:otherwise>
 					</c:choose>
 				</div>
