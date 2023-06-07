@@ -74,5 +74,22 @@ public class MyPetsController {
 		
 	}
 	
+	@PostMapping("petRemove")
+	public String delete(Integer id, RedirectAttributes rttr) {
+		boolean ok = service.remove(id);
+		if (ok) {
+			
+			//모델에 추가
+			rttr.addFlashAttribute("message", "등록된 반려동물이 삭제되었습니다.");
+			return "redirect:/petList";
+		} else {
+			// 남아있게 할래
+			rttr.addFlashAttribute("message","등록된 반려동물 삭제를 실패하였습니다.");
+			return "redirect:/id/" + id;
+		}
+		
+		
+	}
+	
 
 }

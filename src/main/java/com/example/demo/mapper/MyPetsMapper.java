@@ -2,6 +2,7 @@ package com.example.demo.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -44,6 +45,18 @@ public interface MyPetsMapper {
 			WHERE Id = #{registration.id}
 			""")
 	Integer update(Registration registration, String originalFilename);
+
+	@Delete("""
+			DELETE FROM Pet
+			WHERE id = #{id};
+			""")
+	Integer deleteById(Integer id);
+
+	@Select("""
+			SELECT Photo FROM Pet
+			WHERE id = #{id}
+			""")
+	List<String> selectPhotoById(Integer id);
 
 
 

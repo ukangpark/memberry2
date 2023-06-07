@@ -33,9 +33,9 @@ public class MyPetsService {
 
 	public Map<String, Object> petsList() {
 		List<Registration> list = mapper.selectAll();
-		
+
 		var now = LocalDate.now();
-		for(Registration r : list) {
+		for (Registration r : list) {
 			r.setDiff(Period.between(r.getTogether().toLocalDate(), now));
 		}
 
@@ -72,6 +72,25 @@ public class MyPetsService {
 
 		// 테이블에 새로운 파일 추가, 수정
 		int cnt = mapper.update(registration, addFile.getOriginalFilename());
+		return cnt == 1;
+	}
+
+	public boolean remove(Integer id) {
+
+		// 파일명 조회
+		List<String> fileName = mapper.selectPhotoById(id);
+		
+		//s3에서 삭제
+		String objectKey = "membery/" + id + "/" + fileName;
+		DeleteObjectRequest dor = DeleteObjectRequest
+					.builder()
+					.bucket(bucketName)
+					.key(objectKey)
+					.build();
+		s3.deleteObject(dor);
+
+		int cnt = mapper.deleteById(id);
+
 		return cnt == 1;
 	}
 }
