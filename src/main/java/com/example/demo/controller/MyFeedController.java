@@ -22,32 +22,32 @@ public class MyFeedController {
 	private MyFeedService service;
 
 	// 게시물 목록
-	@GetMapping("myFeed")
+	@GetMapping("feed/myFeed")
 	public String myFeed(Model model) {
 		List<File> list = service.listMyFeed();
 		model.addAttribute("fileList", list);
 		
-		return "myFeed";
+		return "feed/myFeed";
 		
 	}
 	
-	@GetMapping("feedAdd")
+	@GetMapping("feed/feedAdd")
 	public void addForm() {
 		// 게시물 작성 form(view)로 포워드
 	}
 	
 	// 게시물 추가하기
-	@PostMapping("feedAdd")
+	@PostMapping("feed/feedAdd")
 	public String addProcess(@RequestParam("files") MultipartFile[] files,
 			Feed feed, RedirectAttributes rttr) throws Exception {
 		// 새 게시물 DB에 추가
 		boolean ok = service.addFeed(feed, files);
 		if (ok) {
 			// 추가가 잘 되었으면 게시판으로 이동
-			return "redirect:/myFeed";
+			return "redirect:/feed/myFeed";
 		} else {
 			rttr.addFlashAttribute("feed", feed);
-			return "redirect:/feedAdd";
+			return "redirect:/feed/feedAdd";
 		}
 	}
 	
@@ -57,14 +57,14 @@ public class MyFeedController {
 		Feed feed = service.getPost(feedId);
 		model.addAttribute("feed", feed);
 		
-		return "feedGet";
+		return "feed/feedGet";
 	}
 	
 	// 게시물 수정하는 폼 보여주기
 	@GetMapping("/modify/{feedId}")
 	public String modifyForm(@PathVariable("feedId") Integer feedId, Model model) {
 		model.addAttribute("feed", service.getPost(feedId));
-		return "feedModify";
+		return "feed/feedModify";
 	}
 	
 	// 게시물 수정한 값 업로드
@@ -84,7 +84,7 @@ public class MyFeedController {
 		} else {
 			// 수정이 안 되면 수정하기 양식으로 리디렉션
 			rttr.addAttribute("fail", "fail"); 
-			return "redirect:/modify/" + file.getFeedId();
+			return "redirect:/feed/modify/" + file.getFeedId();
 		}
 	}
 	
@@ -92,7 +92,7 @@ public class MyFeedController {
 	public String remove(Integer id, RedirectAttributes rttr) {
 		boolean ok = service.remove(id);
 		if (ok) {
-			return "redirect:/myFeed";
+			return "redirect:/feed/myFeed";
 		} else {
 			return "redirect:/id/" + id;
 		}

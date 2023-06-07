@@ -73,7 +73,7 @@
 			<!-- 이미지 파일 업로드 -->
 			<div id="add">
 				<div class="" id="imgContainer">
-					<img class="ui centered medium bordered circular image" src="images/투명발바닥.png"> <label for="fileInput" class="big circular ui icon button" id="addBtn"><i class="large plus icon"></i></label> <input style="display: none" class="form-control" type="file" id="fileInput" name="files" accept="image/*" />
+					<img class="ui centered medium bordered circular image" src="/images/투명발바닥.png"> <label for="fileInput" class="big circular ui icon button" id="addBtn"><i class="large plus icon"></i></label> <input style="display: none" class="form-control" type="file" id="fileInput" name="files" accept="image/*" />
 					<h3 style="text-align: center">사진을 등록해 보세요!</h3>
 				</div>
 			</div>
