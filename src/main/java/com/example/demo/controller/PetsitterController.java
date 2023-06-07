@@ -49,7 +49,7 @@ public class PetsitterController {
 		//host 정보 받아서 추가S3Exception
 		int count = petsitterService.insertHost(host, file);
 		rttr.addFlashAttribute("host", host);
-		return "redirect:/petsitter/main2";
+		return "redirect:/petsitter/main";
 	}
 	
 	@GetMapping("hostMyPage")

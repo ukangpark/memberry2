@@ -25,6 +25,7 @@ public interface PetsitterMapper {
 			VALUES
 			(#{host.hostName}, #{host.phone}, #{host.idNumber}, #{host.si}, #{host.gu}, #{host.dong}, #{host.address}, #{host.houseType}, #{host.pet}, #{host.species}, #{host.experience}, #{profile})
 			""")
+	@Options(useGeneratedKeys = true, keyProperty = "host.id")
 	Integer insertHost(Host host, String profile);
 
 	@Select("""

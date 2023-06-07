@@ -1,6 +1,5 @@
 package com.example.demo.service;
 
-
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.*;
@@ -57,8 +56,7 @@ public class PetsitterService {
 		Integer count = petsitterMapper.insertHost(host, file.getOriginalFilename());
 
 		// 호스트 프로필 사진 업로드
-		String key = "hostProfile/" + file.getOriginalFilename();
-
+		String key = "hostProfile/" + host.getId() + "/" + file.getOriginalFilename();
 		PutObjectRequest objectRequest = PutObjectRequest.builder().bucket(bucketName).key(key)
 				.acl(ObjectCannedACL.PUBLIC_READ).build();
 
@@ -119,7 +117,7 @@ public class PetsitterService {
 	}
 
 	// 펫시터 전체목록
-	public List<Host> listHost(){
+	public List<Host> listHost() {
 		List<Host> list = petsitterMapper.selectAll();
 		return list;
 	}
@@ -139,16 +137,17 @@ public class PetsitterService {
 				String key = "hostHousePhoto/" + detail.getId() + "/" + housePhoto.getOriginalFilename();
 				PutObjectRequest objectRequest = PutObjectRequest.builder().bucket(bucketName).key(key)
 						.acl(ObjectCannedACL.PUBLIC_READ).build();
-				s3.putObject(objectRequest, RequestBody.fromInputStream(housePhoto.getInputStream(), housePhoto.getSize()));
+				s3.putObject(objectRequest,
+						RequestBody.fromInputStream(housePhoto.getInputStream(), housePhoto.getSize()));
 
 				// 상세페이지 집사진 이름 추가
 				petsitterMapper.insertHostHousePhoto(housePhoto.getOriginalFilename(), detail.getId());
 			}
 
 		} else {
-			// 집사진이 있는 상세페이지라면 
-			//원래 있던 집사진 삭제 후 추가
-			
+			// 집사진이 있는 상세페이지라면
+			// 원래 있던 집사진 삭제 후 추가
+
 		}
 
 		return count == 1;
@@ -159,44 +158,35 @@ public class PetsitterService {
 
 		return count == 1;
 	}
-  
-	//페이지네이션
-		public Map<String, Object> listHost(Integer page, String search) {
-			Integer rowPerPage = 8;
-			
-			Integer startIndex = (page-1) * rowPerPage;
-			
-			Integer numOfRecords =petsitterMapper.countAll(search);
-			
-			Integer lastPageNumber = (numOfRecords-1) / rowPerPage +1;
-			
-			
-			Integer leftPageNum = page - 5;
-			
-			leftPageNum = Math.max(leftPageNum, 1);
-			
-			
-			Integer rightPageNum = leftPageNum +9;  
-			
-			rightPageNum = Math.min(rightPageNum, lastPageNumber);
-			
-			Map<String, Object> pageInfo = new HashMap<>();
-			pageInfo.put("rightPageNum", rightPageNum);
-			pageInfo.put("leftPageNum", leftPageNum);
-			pageInfo.put("currentPageNum", page);
-			pageInfo.put("lastPageNum", lastPageNumber);
-			
-			// 게시물 목록 넘겨주고
-			List<Host> list = petsitterMapper.selectAllPaging(startIndex, rowPerPage, search);
-					return Map.of("pageInfo", pageInfo,
-								  "petsitterList", list);
-			
-		}
 
-	
-	
-	
-	
-	
+	// 페이지네이션
+	public Map<String, Object> listHost(Integer page, String search) {
+		Integer rowPerPage = 8;
+
+		Integer startIndex = (page - 1) * rowPerPage;
+
+		Integer numOfRecords = petsitterMapper.countAll(search);
+
+		Integer lastPageNumber = (numOfRecords - 1) / rowPerPage + 1;
+
+		Integer leftPageNum = page - 5;
+
+		leftPageNum = Math.max(leftPageNum, 1);
+
+		Integer rightPageNum = leftPageNum + 9;
+
+		rightPageNum = Math.min(rightPageNum, lastPageNumber);
+
+		Map<String, Object> pageInfo = new HashMap<>();
+		pageInfo.put("rightPageNum", rightPageNum);
+		pageInfo.put("leftPageNum", leftPageNum);
+		pageInfo.put("currentPageNum", page);
+		pageInfo.put("lastPageNum", lastPageNumber);
+
+		// 게시물 목록 넘겨주고
+		List<Host> list = petsitterMapper.selectAllPaging(startIndex, rowPerPage, search);
+		return Map.of("pageInfo", pageInfo, "petsitterList", list);
+
+	}
 
 }
