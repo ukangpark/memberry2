@@ -25,13 +25,17 @@ public class customConfig {
 	private String accessKeyId;
 	@Value("${aws.secretAccessKeyId}")
 	private String secretAccessKey;
+	@Value("${aws.bucketUrl}")
+	private String bucketUrl;
+	
 	
 	@Autowired
 	private ServletContext application;
 	
+	
 	@PostConstruct
 	public void init( ) {
-		application.setAttribute("bucketUrl","https://lilysbucket0503.s3.ap-northeast-2.amazonaws.com/membery");
+		application.setAttribute("bucketUrl",bucketUrl);
 	}
 	
 	@Bean
@@ -48,6 +52,7 @@ public class customConfig {
 		return http.build();
 	}
 	
+
 	@Bean
 	public S3Client s3client() {
 		

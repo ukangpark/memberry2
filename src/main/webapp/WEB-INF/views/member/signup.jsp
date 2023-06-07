@@ -11,7 +11,6 @@
 <style>
 .container {
 	display: flex;
-	height: 15vh;
 	justify-content: center;
 	align-items: center;
 }
@@ -30,29 +29,38 @@
 
 		<div class="row justify-content-center">
 			<div class="col-12 col-md-8 ">
-
+				
+				<div style="margin:30px 0px 50px 0px;">
 				<h1>회원 가입</h1>
+				</div>
+				
 				<form method="post">
-					<div class="mb-3">
-						<label for="inputId" class="form-label">아이디</label> <input id="inputId" type="text" class="form-control" name="id" value="${member.id }" />
+					<div class="ui fluid labeled big input mt-5">
+					<div class="ui label">아이디</div> 
+						<input id="inputId" type="text" class="form-control" name="id" value="${member.id }" style="font-size: 18px; text-align: center;" />
+					</div>
+					<div class="ui fluid labeled big input mt-5">
+					<div class="ui label">이름</div> 
+						<input id="inputName" type="text" class="form-control" name="name" value="${member.name }" style="font-size: 18px; text-align: center;"/>
+					</div>
+					<div class="ui fluid labeled big input mt-5">
+					<div class="ui label">비밀번호</div>
+						<input id="inputPassword" type="password" class="form-control" name="password" style="font-size: 18px; text-align: center;"/>
+					</div>
+					<div class="ui fluid labeled big input mt-5">
+					<div class="ui label">닉네임</div>
+						<input id="inputNickName" type="text" class="form-control" name="nickName" value="${member.nickName }" style="font-size: 18px; text-align: center;"/>
+					</div>
+					<div class="ui fluid labeled big input mt-5">
+					<div class="ui label">이메일</div>
+						<input id="inputEmail" type="email" class="form-control" name="email" value="${member.email }" style="font-size: 18px; text-align: center;"/>
+					</div>
+					<div class="ui fluid labeled big input mt-5">
+					<div class="ui label">연락처</div>
+						<input id="inputPhoneNumber" type="text" class="form-control" name="phoneNumber" value="${member.phoneNumber }" style="font-size: 18px; text-align: center;"/>
 					</div>
 					<div class="mb-3">
-						<label for="inputName" class="form-label">이름</label> <input id="inputName" type="text" class="form-control" name="name" value="${member.name }" />
-					</div>
-					<div class="mb-3">
-						<label for="inputPassword" class="form-label">패스워드</label> <input id="inputPassword" type="password" class="form-control" name="password" />
-					</div>
-					<div class="mb-3">
-						<label for="inputNickName" class="form-label">닉네임</label> <input id="inputNickName" type="text" class="form-control" name="nickName" value="${member.nickName }" />
-					</div>
-					<div class="mb-3">
-						<label for="inputEmail" class="form-label">이메일</label> <input id="inputEmail" type="email" class="form-control" name="email" value="${member.email }" />
-					</div>
-					<div class="mb-3">
-						<label for="inputPhoneNumber" class="form-label">연락처</label> <input id="inputPhoneNumber" type="text" class="form-control" name="phoneNumber" value="${member.phoneNumber }" />
-					</div>
-					<div class="mb-3">
-						<input type="submit" class="btn btn-primary" value="가입" />
+						<input type="submit" class="ui secondary button" value="가입" style="font-size : 16px; margin: 20px;"/>
 					</div>
 				</form>
 			</div>

@@ -4,7 +4,7 @@ import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("home")
+@RequestMapping({"/", "home"})
 public class HomeController {
 
 	@GetMapping("")
@@ -12,4 +12,8 @@ public class HomeController {
 		return "home";
 	}
 	
+	@GetMapping("regiList")
+	public String regiList() {
+		return "regiList";
+	}
 }

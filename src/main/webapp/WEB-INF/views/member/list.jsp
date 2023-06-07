@@ -11,9 +11,9 @@
 <style>
 .container{
 	display: flex;
-	height: 15vh;
 	justify-content: center;
 	align-items: center;
+	font-size:17px;
 }
 </style>
 
@@ -28,19 +28,19 @@
 	<div class="ui center aligned container" id="container">
 	
 		<div class="row justify-content-center">
-			<div class="col-12">
-			
+				<div style="margin:50px;">
 				<h1>회원 목록</h1>
+				</div>
 				<table class="table">
 					<thead>
 						<tr>
-							<th>ID</th>
-							<th>NAME</th>
-							<th>PASSWORD</th>
-							<th>NICKNAME</th>
-							<th>EMAIL</th>
-							<th>PHONENUMBER</th>
-							<th>INSERTED</th>
+							<th>아이디</th>
+							<th>이름</th>
+							<th>비밀번호</th>
+							<th>별명</th>
+							<th>이메일</th>
+							<th>연락처</th>
+							<th>가입일시</th>
 						</tr>
 					</thead>
 					<tbody>

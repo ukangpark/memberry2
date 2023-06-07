@@ -17,7 +17,9 @@
 	border-radius: 50%;
 	height: 70px;
 	width: 70px;
+
 }
+
 </style>
 
 <div class="ui fluid right aligned container" id="container">

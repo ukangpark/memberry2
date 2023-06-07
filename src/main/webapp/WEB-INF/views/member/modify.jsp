@@ -11,7 +11,6 @@
 <style>
 .container{
 	display: flex;
-	height: 15vh;
 	justify-content: center;
 	align-items: center;
 }
@@ -31,28 +30,37 @@
 	
 		<div class="row justify-content-center">
 			<div class="col-12 col-md-8 ">
-				<h1>회원정보수정</h1>
+			
+				<div style="margin:30px 0px 50px 0px;">
+					<h1>회원정보수정</h1>
+				</div>
+				
 				<form id="modifyForm" action="/member/modify" method="post">
-					<div class="mb-3">
-						<label for="inputId" class="form-label">아이디</label> <input id="inputId" class="form-control" type="text" name="id" value="${member.id }" readonly />
+					<div class="ui fluid labeled big input mt-5">
+					<div class="ui label">아이디</div>  
+						<input id="inputId" class="form-control" type="text" name="id" value="${member.id }" style="font-size: 18px; text-align: center;" readonly />
 					</div>
-					<div class="mb-3">
-						<label for="inputName" class="form-label">이름</label> <input id="inputName" class="form-control" type="text" name="name" value="${member.name }" readonly />
+					<div class="ui fluid labeled big input mt-5">
+					<div class="ui label">이름</div>  
+						<input id="inputName" class="form-control" type="text" name="name" value="${member.name }" style="font-size: 18px; text-align: center;" readonly />
 					</div>
-					<div class="mb-3">
-						<label for="inputPassword" class="form-label">비밀번호</label> 
-						<input id="inputPassword" class="form-control" type="password" name="password" value="" />
+					<div class="ui fluid labeled big input mt-5">
+					<div class="ui label">비밀번호</div>
+						<input id="inputPassword" class="form-control" type="password" name="password" style="font-size: 18px; text-align: center;" value="" />
 					</div>
-					<div class="mb-3">
-						<label for="nickName" class="form-label">별명</label> <input id="nickName" class="form-control" type="text" name="nickName" value="${member.nickName }" />
+					<div class="ui fluid labeled big input mt-5">
+					<div class="ui label">닉네임</div>
+						<input id="nickName" class="form-control" type="text" name="nickName" value="${member.nickName }" style="font-size: 18px; text-align: center;"/>
 					</div>
-					<div class="mb-3">
-						<label for="inputName" class="form-label">이메일</label> <input class="form-control" type="email" name="email" value="${member.email }" />
+					<div class="ui fluid labeled big input mt-5">
+					<div class="ui label">이메일</div>
+						<input class="form-control" type="email" name="email" value="${member.email }" style="font-size: 18px; text-align: center;"/>
 					</div>
-					<div class="mb-3">
-						<label for="inputPhoneNumber" class="form-label">연락처</label> <input id="inputPhoneNumber" class="form-control" type="text" name="phoneNumber" value="${member.phoneNumber }" />
+					<div class="ui fluid labeled big input mt-5">
+					<div class="ui label">연락처</div>
+						<input id="inputPhoneNumber" class="form-control" type="text" name="phoneNumber" value="${member.phoneNumber }" style="font-size: 18px; text-align: center;"/>
 					</div>
-					<button type="button" data-bs-toggle="modal" data-bs-target="#confirmModal" class="btn btn-success">수정완료</button>
+					<button type="button" data-bs-toggle="modal" data-bs-target="#confirmModal" class="ui secondary submit button" style="font-size:16px; margin:20px;">저장</button>
 				</form>
 			</div>
 		</div>
@@ -71,8 +79,8 @@
 					<input form="modifyForm" id="inputOldPassword" class="form-control" type="text" name="oldPassword" />
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-					<button type="submit" form="modifyForm" class="btn btn-success">저장</button>
+					<button type="button" class="ui button" data-bs-dismiss="modal">취소</button>
+					<button type="submit" form="modifyForm" class="ui secondary button">저장</button>
 				</div>
 			</div>
 		</div>
