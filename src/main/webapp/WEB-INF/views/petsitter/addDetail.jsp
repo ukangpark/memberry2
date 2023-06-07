@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="d" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,6 +13,8 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 </head>
 <body>
+	<my:navBar></my:navBar>
+
 	<br>
 	<div class="ui centered equal width grid">
 		<div class="eight wide column">
@@ -20,8 +22,8 @@
 				<form id="addDetailForm" class="ui big form" method="post" action="/petsitter/addDetail" enctype="multipart/form-data">
 					<h1 class="ui dividing header">상세페이지 등록하기</h1>
 					<div class="field">
-						<label for="photo">집사진 등록</label>
-						<input id="photo" type="file" name="photo" multiple>
+						<label for="housePhoto">집사진 등록</label>
+						<input id="housePhoto" type="file" name="housePhotoes" multiple>
 					</div>
 					<div class="field">
 						<label for="title">제목</label>
@@ -52,12 +54,12 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h1 class="modal-title fs-5" id="addDetailModalLabel">상세페이지 등록하기</h1>
+					<h1 class="modal-title fs-5" id="addDetailModalLabel">상세페이지</h1>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">상세페이지를 등록하시겠습니까?</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-danger" data-bs-dismiss="modal">취소하기</button>
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소하기</button>
 					<button type="submit" form="addDetailForm" class="btn btn-primary">등록하기</button>
 				</div>
 			</div>
