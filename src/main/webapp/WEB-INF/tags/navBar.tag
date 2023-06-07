@@ -37,30 +37,73 @@
 				</div>
 
 				<a class="${current eq 'home' ? 'active' : '' } item" href="/home"> 홈피드 </a>
-				<a class="${current eq 'myFeed' ? 'active' : '' } item" href="/myFeed"> 마이피드 </a>
-				<a class="${current eq 'schedule' ? 'active' : '' } item" href="/schedule"> 스케줄달력 </a>
+				
+				<sec:authorize access="isAuthenticated()">
+					<a class="${current eq 'myFeed' ? 'active' : '' } item" href="/myFeed"> 마이피드 </a>
+				</sec:authorize>
+				
+				<sec:authorize access="isAuthenticated()">
+					<a class="${current eq 'schedule' ? 'active' : '' } item" href="/schedule"> 스케줄달력 </a>
+				</sec:authorize>
+				
 				<a class="${current eq 'mapMain' ? 'active' : '' } item" href="/map/mapMain"> 함께가기 </a>
 				<div>
 					<div onclick="location.href='/petsitter/main'" class="${current eq 'petsitterMain' ? 'active' : '' } link item">
 						펫시터
 						<div class="menu">
 							<a class="${current eq 'main' ? 'active' : '' } item" href="/petsitter/main">펫시터홈</a>
-							<a class="${current eq 'apply' ? 'active' : '' } item" href="/petsitter/apply">펫시터지원</a>
-							<a class="${current eq 'hostMyPage' ? 'active' : '' } item" href="/petsitter/hostMyPage">호스트 마이페이지</a>
-							<a class="${current eq 'hostList' ? 'active' : '' } item" href="/petsitter/hostList">호스트 리스트</a>
+							
+							<sec:authorize access="isAuthenticated()">
+								<a class="${current eq 'apply' ? 'active' : '' } item" href="/petsitter/apply">펫시터지원</a>
+							</sec:authorize>
+							
+							<sec:authorize access="isAuthenticated()">
+								<a class="${current eq 'hostMyPage' ? 'active' : '' } item" href="/petsitter/hostMyPage">호스트 마이페이지</a>
+							</sec:authorize>
+							
+							<!-- 관리자 권한으로 변경해야함 -->
+							<sec:authorize access="isAuthenticated()">
+								<a class="${current eq 'hostList' ? 'active' : '' } item" href="/petsitter/hostList">호스트 리스트</a>
+							</sec:authorize>
 						</div>
 					</div>
 				</div>
-				<a class="${current eq 'registration' ? 'active' : '' } item" href="/registration"> 반려동물등록 </a>
-				<a class="${current eq 'myPage' ? 'active' : '' } item" href="/member/myPage"> 마이페이지 </a>
-				<a class="${current eq 'login' ? 'active' : '' } item" href="/member/login"> 로그인 </a>
-				<a class="${current eq 'signup' ? 'active' : '' } item" href="/member/signup"> 회원가입 </a>
-				<a class="${current eq 'logout' ? 'active' : '' } item" href="/member/logout"> 로그아웃 </a>
-
+				
+				<sec:authorize access="isAuthenticated()">
+					<a class="${current eq 'registration' ? 'active' : '' } item" href="/registration"> 반려동물등록 </a>
+				</sec:authorize>
+				
+				<sec:authorize access="isAuthenticated()">
+					<a class="${current eq 'myPage' ? 'active' : '' } item" href="/member/myPage"> 마이페이지 </a>
+				</sec:authorize>
+				
+				<sec:authorize access="isAnonymous()">
+					<a class="${current eq 'login' ? 'active' : '' } item" href="/member/login"> 로그인 </a>
+				</sec:authorize>
+				
+				<sec:authorize access="isAnonymous()">
+					<a class="${current eq 'signup' ? 'active' : '' } item" href="/member/signup"> 회원가입 </a>
+				</sec:authorize>
+				
+				<!-- 관리자 권한으로 변경해야함 -->
+				<sec:authorize access="isAuthenticated()">
+					<a class="${current eq 'list' ? 'active' : '' } item" href="/member/list"> 회원목록 </a>
+				</sec:authorize>
+				
+				<sec:authorize access="isAuthenticated()">
+					<a class="${current eq 'logout' ? 'active' : '' } item" href="/member/logout"> 로그아웃 </a>
+				</sec:authorize>
+				
 			</div>
 		</div>
 	</div>
 </div>
+<!-- 
+<div>
+	<sec:authentication property="principal"/>
+</div>
+ -->
+
 <!-- 
 <div class="d-flex flex-row-reverse mt-3"  >
 	<div class="ui inline dropdown">
@@ -112,7 +155,7 @@
  -->
 <script>
 	$('.ui.sticky').sticky({
-		offset: 10
+		offset : 10
 	});
 	$('.ui.dropdown').dropdown({
 		direction : 'auto'

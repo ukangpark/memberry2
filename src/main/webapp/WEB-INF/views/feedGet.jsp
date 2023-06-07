@@ -17,8 +17,9 @@
 	<my:navBar />
 
 	<div class="container-lg">
+		<div class="my-5">
 		<h1>${feed.id }번 게시물</h1>
-		
+		</div>
 		
 		<!-- 이미지 파일 출력 -->
 		<div class="mb-3">
