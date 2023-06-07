@@ -172,7 +172,7 @@ public class PetsitterService {
 		List<HostHousePhoto> hostHousePhotoes = petsitterMapper.selectHostHousePhotoByDetailId(detailId);
 		
 		for(HostHousePhoto hostHousePhoto : hostHousePhotoes) {
-			//aws파일 삭제
+			//aws에서 집사진 삭제
 			String key = "hostHousePhoto/" + detailId + "/" + hostHousePhoto.getHousePhoto();
 			DeleteObjectRequest deleteObjectRequest = DeleteObjectRequest.builder()
 					.bucket(bucketName)
@@ -183,8 +183,8 @@ public class PetsitterService {
 			
 		}
 		
+		//집사진 테이블에서 정보 삭
 		Integer photoDeleteCount = petsitterMapper.deleteHostHousePhotoByDetailId(detailId);
-		System.out.println("상세페이지 아이디 : " + detailId + ", " + "삭제된 집사진 : " + photoDeleteCount);
 		
 		
 		//상세페이지 삭제 
