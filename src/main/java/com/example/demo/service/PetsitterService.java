@@ -51,6 +51,7 @@ public class PetsitterService {
 
 		// 호스트 집사진 정보를 불러옴
 		if (detail != null) {
+			//등록된 상세페이지가 있다면 정보 조회
 			List<HostHousePhoto> hostHousePhoto = petsitterMapper.selectHostHousePhotoByDetailId(detail.getId());
 			info.put("hostHousePhoto", hostHousePhoto);
 		}

@@ -21,6 +21,12 @@
 				<form id="modifyDetailForm" class="ui big form" method="post" action="/petsitter/modifyDetail" enctype="multipart/form-data">
 					<h1 class="ui dividing header">상세페이지 수정하기</h1>
 					<div class="field">
+						<c:forEach items="${hostHousePhoto }" var="hostHousePhoto">
+							<label for="housePhoto${hostHousePhoto.housePhoto }">
+								<img style="width: 100px;" src="${bucketUrl }/hostHousePhoto/${detail.id }/${hostHousePhoto.housePhoto }">
+							</label>
+							<input type="checkbox" name="removePhoto" value="${hostHousePhoto.housePhoto }" id="housePhoto${hostHousePhoto.housePhoto }">
+						</c:forEach>
 						<label for="housePhotoes">집사진 등록</label>
 						<input id="housePhotoes" type="file" name="housePhotoes" multiple>
 					</div>
