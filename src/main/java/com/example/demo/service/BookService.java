@@ -67,6 +67,12 @@ public class BookService {
 		
 	}
 
+	// 예약승인
+	public void bookAccept(int num) {
+		mapper.bookAcceptUpdate(num);
+		
+	}
+
 
 		
 

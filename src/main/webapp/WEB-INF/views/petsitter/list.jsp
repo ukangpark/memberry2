@@ -22,12 +22,14 @@
 
 
 	<div class="container-lg">
+		<a href = "list" style = "color:black">
 		<h1>펫시터 목록</h1>
+		</a>
 <hr />
 
 
 <form action="list" class="d-flex" role="search">
-        <input name="search" class="form-control me-2" type="search" placeholder="맡기고 싶은 지역을 검색하세요" aria-label="Search">
+        <input value="${param.search }" name="search" class="form-control me-2" type="search" placeholder="맡기고 싶은 지역을 검색해보세요" aria-label="Search">
         <button class="btn btn-outline-success" type="submit" style="width:80px">검색</button>
       </form>
 
@@ -50,7 +52,7 @@
         <a href="/petsitter/detail?id=${host.id }">${host.si } ${host.gu } ${host.dong }</a>
       </div>
       <div class="description">
-        펫시터 상세 설명
+        ${host.houseType }, ${host.pet }, ${host.species }
       </div>
     </div>
     <div class="extra content">
@@ -68,7 +70,8 @@
   </c:forEach>
 </div>
 	
-	
+	<br />
+	<br />
 	
 	<div class="container-lg">
 		<div class="row">
@@ -78,6 +81,10 @@
 					<!-- 이전 버튼 -->
 					<c:if test="${pageInfo.currentPageNum ne 1 }">
 						<c:url value="list" var="pageLink">
+						<c:param name="page" value="${pageNum}" />
+							<c:if test ="${not empty param.search }">
+							<c:param name="search" value="${param.search }" />
+							</c:if>
 							<c:param name="page" value="${pageInfo.currentPageNum - 1}" />
 						</c:url>
 						<li class="page-item"><a class="page-link" href="${pageLink }">이전</a></li>
@@ -86,6 +93,9 @@
 					<c:forEach begin="${pageInfo.leftPageNum }" end="${pageInfo.rightPageNum }" var="pageNum">
 						<c:url value="list" var="pageLink">
 							<c:param name="page" value="${pageNum}" />
+							<c:if test ="${not empty param.search }">
+							<c:param name="search" value="${param.search }" />
+							</c:if>
 						</c:url>
 						<li class="page-item"><a class="page-link ${pageNum eq pageInfo.currentPageNum ? 'active' : '' }" href="${pageLink }">${pageNum}</a></li>
 					</c:forEach>
@@ -93,6 +103,10 @@
 					<!-- 다음 버튼 -->
 					<c:if test="${pageInfo.currentPageNum lt pageInfo.lastPageNum }">
 						<c:url value="list" var="pageLink">
+						<c:param name="page" value="${pageNum}" />
+							<c:if test ="${not empty param.search }">
+							<c:param name="search" value="${param.search }" />
+							</c:if>
 							<c:param name="page" value="${pageInfo.currentPageNum + 1}" />
 						</c:url>
 						<li class="page-item"><a class="page-link" href="${pageLink }">다음</a>

@@ -22,4 +22,5 @@ public class Host {
 	private String profile;
 	private String title;
 	private int commentCount;
+	
 }

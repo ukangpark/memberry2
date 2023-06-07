@@ -11,24 +11,25 @@ import org.springframework.web.servlet.mvc.support.*;
 import com.example.demo.domain.*;
 import com.example.demo.service.*;
 
-
 @Controller
 @RequestMapping("book")
 public class BookController {
-	
+
 	@Autowired
 	private BookService service;
-	
 
-	//예약목록(마이페이지완성되면 이동예정), 페이지네이션
+	// 사용자가 보는 예약목록(마이페이지완성되면 이동예정), 페이지네이션
 	@GetMapping("list")
-	public String bookList(Model model,
-			@RequestParam(value="page", defaultValue="1") Integer page) {
+	public String bookList(Model model, // Authentication authentication,
+			@RequestParam(value = "page", defaultValue = "1") Integer page) {
+		// String userId = authentication.getName(); //인증서에 저장된 아이디 값 가져오기
+
 		Map<String, Object> result = service.bookList(page);
+
 		model.addAllAttributes(result);
 		return "book/myPageTest";
 	}
-	
+
 	// 예약페이지 뜨게
 	@GetMapping("/num/{num}")
 	public String bookList(@PathVariable("num") Integer id, Model model) {
@@ -36,31 +37,46 @@ public class BookController {
 		model.addAttribute("book", book);
 		return "book/getBook";
 	}
-	
-	
+
 	// 예약수정
 	@GetMapping("/modify/{num}")
 	public String modifyForm(@PathVariable("num") Integer id, Model model) {
 		model.addAttribute("book", service.getBook(id));
 		return "book/regiFormModify";
 	}
-	
+
 	// 수정되게
 	@PostMapping("/modifiy/{num}")
 	public String modifyProcess(Book book, RedirectAttributes rttr) {
 		boolean ok = service.modify(book);
-		
-		if(ok) {
-			
+
+		if (ok) {
+
 			rttr.addAttribute("success", "success");
 			return "redirect:/num/" + book.getNum();
-			
+
 		} else {
-			
+
 			rttr.addAttribute("fail", "fail");
 			return "redirect:/regiFormModify/" + book.getNum();
-			
+
 		}
 	}
+
+	// 호스트가 보는 예약목록, 페이지네이션
+	@GetMapping("list/host")
+	public String bookListHost(Model model, @RequestParam(value = "page", defaultValue = "1") Integer page) {
+
+		Map<String, Object> result = service.bookList(page);
+
+		model.addAllAttributes(result);
+		return "book/regiListHost";
+	}
 	
+	@PostMapping("accept")
+	@ResponseBody
+	public void bookAccept(@RequestBody int num) {
+		service.bookAccept(num);
+	}
+
 }

@@ -54,7 +54,8 @@ public interface BookMapper {
 				hostName,
 				accepted,
 				detailId,
-				num
+				num,
+				Book.memberId
 			FROM Book,Pet,Host,Detail
 			WHERE Book.memberId = Pet.memberId
 			AND Detail.id = Book.detailId
@@ -75,6 +76,15 @@ public interface BookMapper {
 			-- AND Pet.memberId = '시큐리티에 있는 아이디값'
 			""")
 	Integer countAll();
+
+	@Update("""
+			UPDATE Book 
+			SET
+			accepted =1
+			WHERE 
+			num = #{num}
+			""")
+	void bookAcceptUpdate(int num);
 
 
 	

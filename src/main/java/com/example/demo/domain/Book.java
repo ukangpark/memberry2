@@ -16,6 +16,7 @@ public class Book {
 	private int num;
 	private String type;
 	private int detailId;
+	private String memberId;
 	
 	
 	

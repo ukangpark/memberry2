@@ -75,7 +75,10 @@ public interface PetsitterMapper {
 				dong,
 				Detail.title,
 				profile,
-				Host.id
+				Host.id,
+				pet,
+				houseType,
+				species
 				
 			FROM Host, Detail
 			ORDER BY Detail.inserted DESC
@@ -92,6 +95,9 @@ public interface PetsitterMapper {
 			Detail.title,
 			profile,
 			Host.id,
+			pet,
+			houseType,
+			species,
 			 (select count(*) from PetsitterComment where detailId = Detail.id) commentCount 
 		FROM Host, Detail
 		WHERE
@@ -107,10 +113,17 @@ public interface PetsitterMapper {
 	List<Host> selectAllPaging(Integer startIndex, Integer rowPerPage, String search);
 	
 	@Select("""
+			<script>
+			<bind name="pattern" value="'%' + search + '%'" />
 			SELECT COUNT(*)
 			FROM Host
+			WHERE
+			si LIKE #{pattern}
+		OR  gu LIKE #{pattern}
+		OR  dong LIKE #{pattern}
+		</script>
 			""")
-	Integer countAll();
+	Integer countAll(String search);
 
 	
 	

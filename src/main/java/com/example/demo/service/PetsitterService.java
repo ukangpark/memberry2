@@ -67,11 +67,11 @@ public class PetsitterService {
 
 	//페이지네이션
 		public Map<String, Object> listHost(Integer page, String search) {
-			Integer rowPerPage = 4;
+			Integer rowPerPage = 8;
 			
 			Integer startIndex = (page-1) * rowPerPage;
 			
-			Integer numOfRecords =petsitterMapper.countAll();
+			Integer numOfRecords =petsitterMapper.countAll(search);
 			
 			Integer lastPageNumber = (numOfRecords-1) / rowPerPage +1;
 			
