@@ -148,18 +148,22 @@ overflow-y: auto;
 
 
 			<c:forEach items="${feedList}" var="feed">
-				<div class="ui card">
-					<div class=" content" id="imgContainer">
-	
-						<div class="bxslider">
-							<c:forEach items="${feed.fileName }" var="fileName">
-								<div><img id="img" class="ui medium rounded imager" src="${bucketUrl }/${feed.id }/${fileName }" alt="" /></div>
-							</c:forEach>
-						</div>
-						
+				<div class="ui card" id="my-card">
+				<div class="content"">
+					<div id="inserted" class="right floated meta">${feed.inserted }</div>
+					<img id="profilImage" class="ui avatar image" src="/images/또복이 (1).jpg"> ${feed.writer}
+				</div>
+		
 
-					
-					</div>
+				<div class="content" id="imgContainer">
+					<!-- 이미지 파일 출력 -->
+					<br />
+					<ul class="bxslider">
+						<c:forEach items="${feed.fileName }" var="fileName">
+							<li><img id="img" class="ui medium rounded imager" src="${bucketUrl }/${feed.id }/${fileName }" alt="" /></li>
+						</c:forEach>
+					</ul>
+				</div>
 					<div class="content">
 						<div class="header">${feed.title}</div>
 						<div class="meta">
@@ -237,14 +241,14 @@ overflow-y: auto;
 
 
 
-	 <script src="/js/home.js"></script> 
-<!-- 	<script type="text/javascript">
+	 <!-- <script src="/js/home.js"></script>  -->
+ 	<script type="text/javascript">
 		$(document).ready(function() {
 			let slider = $('.bxslider').bxSlider({
 				
 			});
 		});
-	</script> -->
+	</script>
 	
 
 	<script
