@@ -21,6 +21,7 @@ public class Host {
 	private LocalDate inserted;
 	private String profile;
 	private String title;
+	private boolean detail;
 	private int commentCount;
-	
+
 }

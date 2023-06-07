@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="d" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +12,8 @@
 <link rel="stylesheet" type="text/css" href="/js/semantic/semantic.min.css">
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 </head>
-<body>
+<body>	
+	<my:navBar current="hostList"></my:navBar>
 	<div class="container">
 		<h1>호스트 리스트</h1>
 		<table class="ui fixed single line celled table">
@@ -21,6 +22,8 @@
 					<th>Name</th>
 					<th>Id</th>
 					<th>phone</th>
+					<th>detail</th>
+					<th>profile</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -31,6 +34,8 @@
 						</td>
 						<td>${host.id }</td>
 						<td>${host.phone }</td>
+						<td>${host.detail eq 'true' ? '등록' : '미등록' }</td>
+						<td>${host.profile } </td>
 					</tr>
 				</c:forEach>
 			</tbody>
