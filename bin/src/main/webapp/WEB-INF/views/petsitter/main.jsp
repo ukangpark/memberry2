@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
+<%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,7 +33,7 @@ img {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	height: 35vh;
+	height: 23vh;
 	text-align: center;
 }
 
@@ -144,6 +145,11 @@ button {
 </style>
 </head>
 <body>
+
+	<my:navBar current="main" />
+
+	<my:alert></my:alert>
+	
 	<div class="searchBar">
 		<div class="container">
 

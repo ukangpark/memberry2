@@ -24,6 +24,7 @@ public class RegistrationController {
 		
 	}
 	
+
 	@PostMapping("/registration")
 	public String addRegistration(@RequestParam("file") MultipartFile file, 
 								Registration registration, RedirectAttributes rttr) throws Exception {
@@ -34,5 +35,6 @@ public class RegistrationController {
 		return "redirect:/petList";
 		
 	}
+
 
 }

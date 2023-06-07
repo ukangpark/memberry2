@@ -11,7 +11,7 @@ import com.example.demo.domain.*;
 import com.example.demo.service.*;
 
 @Controller
-@RequestMapping("home")
+@RequestMapping({"/", "home"})
 public class HomeController {
 
 	@Autowired
@@ -24,7 +24,5 @@ public class HomeController {
 		return "home";
 	}
 	
-	
-	
-	
+
 }
