@@ -83,7 +83,7 @@
 	<my:navBar />
 
 	<div class="pageName">
-		<h1>${feed.id }번게시물</h1>
+		<h1>${feed.id }번 게시물</h1>
 	</div>
 
 	<div class="wrapper">
