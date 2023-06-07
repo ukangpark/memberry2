@@ -1,5 +1,5 @@
 home();
 
 function home() {
-	$('.slider').bxSlider();
+	$('.bxslider').bxSlider();
 };

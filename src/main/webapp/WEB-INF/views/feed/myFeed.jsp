@@ -63,7 +63,7 @@
 				  팔로잉
 			</button>
 			
-			<img id="profilImage" class="ui circular image" src="images/또복이 (1).jpg">
+			<img id="profilImage" class="ui circular image" src="/images/또복이 (1).jpg">
 			
 				<button class="massive ui basic button" style="border: 2px solid #E2E2E2; border-radius: 0.5rem; margin-left:50px; margin-right:70px;">
 				  <!-- <i class="fa-solid fa-envelope"></i> -->
@@ -80,7 +80,7 @@
 
 	<div class="container">
 
-		<a href="/feedAdd">
+		<a href="/feed/feedAdd">
 		<img src="/images/feedAddIcon.PNG" alt="" />
 
 		<c:forEach items="${fileList }" var="file">

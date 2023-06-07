@@ -30,14 +30,11 @@
 	height: 300px;
 }
 
- #image1 {
+ #img {
 	width: 100%;
 	height: 100%;
 }
- #image2 {
-	width: 100%;
-	height: 100%;
-}
+
 
 
 
@@ -147,170 +144,26 @@ overflow-y: auto;
 	<div class="ui center aligned container" id="container"
 		style="background-color: #e2e2e2;">
 		<div class="ui link cards">
-			<div class="card">
-				<div class="image">
-					   <img src="/images/loki.jpeg" />
-				</div>
-				<div class="content">
-					<div class="header">로키</div>
-					<div class="meta">
-						<a>멋째이 로키</a>
-					</div>
-					<div class="description">오늘 로키는 멋째이 선구리를 썼다.</div>
-				</div>
-				<div class="extra content">
-					<span class="left floated"> <i
-						class="heart outline like icon"></i>17 likes &nbsp; <i
-						class="paw icon"></i>&nbsp;&nbsp; <i class="comment icon"></i>
-					</span> <span class="right floated">2023.06.01 </span>
-				</div>
-			</div>
-			<div class="card">
-				<div class="image">
-					<img src="/images/cat.jpeg">
-				</div>
-				<div class="content">
-					<div class="header">Molly</div>
-					<div class="meta">
-						<span class="date">Coworker</span>
-					</div>
-					<div class="description">Molly is a personal assistant living
-						in Paris.</div>
-				</div>
-				<div class="extra content">
-					<span class="left floated"> <i
-						class="heart outline like icon"></i>17 likes &nbsp; <i
-						class="paw icon"></i>&nbsp;&nbsp; <i class="comment icon"></i>
-					</span> <span class="right floated">2023.06.01 </span>
-				</div>
-			</div>
-			<div class="card">
-				<div class="image">
-					<img src="/images/yj.JPG">
-				</div>
-				<div class="content">
-					<div class="header">Elyse</div>
-					<div class="meta">
-						<a>Coworker</a>
-					</div>
-					<div class="description">Elyse is a copywriter working in New
-						York.</div>
-				</div>
-				<div class="extra content">
-					<span class="left floated"> <i
-						class="heart outline like icon"></i>17 likes &nbsp; <i
-						class="paw icon"></i>&nbsp;&nbsp; <i class="comment icon"></i>
-					</span> <span class="right floated">2023.06.01 </span>
-				</div>
-			</div>
-			<div class="card">
-				<div class="image">
-					<img src="/images/cat2.jpeg">
-				</div>
-				<div class="content">
-					<div class="header">Elyse</div>
-					<div class="meta">
-						<a>Coworker</a>
-					</div>
-					<div class="description">Elyse is a copywriter working in New
-						York.</div>
-				</div>
-				<div class="extra content">
-					<span class="left floated"> <i
-						class="heart outline like icon"></i>17 likes &nbsp; <i
-						class="paw icon"></i>&nbsp;&nbsp; <i class="comment icon"></i>
-					</span> <span class="right floated">2023.06.01 </span>
-				</div>
-			</div>
-			<div class="card">
-				<div class="image">
-					<img src="/images/js.JPG">
-				</div>
-				<div class="content">
-					<div class="header">Elyse</div>
-					<div class="meta">
-						<a>Coworker</a>
-					</div>
-					<div class="description">Elyse is a copywriter working in New
-						York.</div>
-				</div>
-				<div class="extra content">
-					<span class="left floated"> <i
-						class="heart outline like icon"></i>17 likes &nbsp; <i
-						class="paw icon"></i>&nbsp;&nbsp; <i class="comment icon"></i>
-					</span> <span class="right floated">2023.06.01 </span>
-				</div>
-			</div>
-			<div class="card">
-				<div class="image">
-					<img src="/images/yj2.JPG">
-				</div>
-				<div class="content">
-					<div class="header">Elyse</div>
-					<div class="meta">
-						<a>Coworker</a>
-					</div>
-					<div class="description">Elyse is a copywriter working in New
-						York.</div>
-				</div>
-				<div class="extra content">
-					<span class="left floated"> <i
-						class="heart outline like icon"></i>17 likes &nbsp; <i
-						class="paw icon"></i>&nbsp;&nbsp; <i class="comment icon"></i>
-					</span> <span class="right floated">2023.06.01 </span>
-				</div>
-			</div>
-			<div class="card">
-				<div class="image">
-					<img src="/images/js2.JPG">
-				</div>
-				<div class="content">
-					<div class="header">Elyse</div>
-					<div class="meta">
-						<a>Coworker</a>
-					</div>
-					<div class="description">Elyse is a copywriter working in New
-						York.</div>
-				</div>
-				<div class="extra content">
-					<span class="left floated"> <i
-						class="heart outline like icon"></i>17 likes &nbsp; <i
-						class="paw icon"></i>&nbsp;&nbsp; <i class="comment icon"></i>
-					</span> <span class="right floated">2023.06.01 </span>
-				</div>
-			</div>
-			<div class="card">
-				<div class="image">
-					<img src="/images/dog5.jpeg">
-				</div>
-				<div class="content">
-					<div class="header">Elyse</div>
-					<div class="meta">
-						<a>Coworker</a>
-					</div>
-					<div class="description">Elyse is a copywriter working in New
-						York.</div>
-				</div>
-				<div class="extra content">
-					<span class="left floated"> <i
-						class="heart outline like icon"></i>17 likes &nbsp; <i
-						class="paw icon"></i>&nbsp;&nbsp; <i class="comment icon"></i>
-					</span> <span class="right floated">2023.06.01 </span>
-				</div>
-			</div>
+			
 
 
 			<c:forEach items="${feedList}" var="feed">
-				<div class="ui card">
-					<div class="ui slide masked reveal image" id="imgContainer">
-	
-							<img id="image1" src="${bucketUrl }/${feed.id }/${feed.fileName[0] }" alt=""class="visible content" />
-					 	 	<img id="image2" src="${bucketUrl }/${feed.id }/${feed.fileName[1] }" alt="" class="hidden content" />
-					 	 	<img id="image2" src="${bucketUrl }/${feed.id }/${feed.fileName[2] }" alt="" class="hidden content" />
-						
+				<div class="ui card" id="my-card">
+				<div class="content"">
+					<div id="inserted" class="right floated meta">${feed.inserted }</div>
+					<img id="profilImage" class="ui avatar image" src="/images/또복이 (1).jpg"> ${feed.writer}
+				</div>
+		
 
-					
-					</div>
+				<div class="content" id="imgContainer">
+					<!-- 이미지 파일 출력 -->
+					<br />
+					<ul class="bxslider">
+						<c:forEach items="${feed.fileName }" var="fileName">
+							<li><img id="img" class="ui medium rounded imager" src="${bucketUrl }/${feed.id }/${fileName }" alt="" /></li>
+						</c:forEach>
+					</ul>
+				</div>
 					<div class="content">
 						<div class="header">${feed.title}</div>
 						<div class="meta">
@@ -335,6 +188,7 @@ overflow-y: auto;
 
 		</div>
 	</div>
+
 
 
 	<!-- 댓글 modal -->
@@ -387,7 +241,14 @@ overflow-y: auto;
 
 
 
-	<!-- <script src="/js/home.js"></script> -->
+	 <!-- <script src="/js/home.js"></script>  -->
+ 	<script type="text/javascript">
+		$(document).ready(function() {
+			let slider = $('.bxslider').bxSlider({
+				
+			});
+		});
+	</script>
 	
 
 	<script
