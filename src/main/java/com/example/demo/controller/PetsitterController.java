@@ -12,11 +12,6 @@ import org.springframework.web.servlet.mvc.support.*;
 import com.example.demo.domain.*;
 import com.example.demo.service.*;
 
-import software.amazon.awssdk.awscore.exception.AwsServiceException;
-import software.amazon.awssdk.core.exception.SdkClientException;
-import software.amazon.awssdk.services.s3.S3Client;
-import software.amazon.awssdk.services.s3.model.S3Exception;
-
 @Controller
 @RequestMapping("petsitter")
 public class PetsitterController {
