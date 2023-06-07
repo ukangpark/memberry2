@@ -7,6 +7,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>memberList</title>
+
+<style>
+.container{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size:17px;
+}
+</style>
+
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
@@ -15,20 +25,22 @@
 	
 	<my:navBar></my:navBar>
 	
-	<div class="container-lg">
+	<div class="ui center aligned container" id="container">
+	
 		<div class="row justify-content-center">
-			<div class="col-12">
+				<div style="margin:50px;">
 				<h1>회원 목록</h1>
+				</div>
 				<table class="table">
 					<thead>
 						<tr>
-							<th>ID</th>
-							<th>NAME</th>
-							<th>PASSWORD</th>
-							<th>NICKNAME</th>
-							<th>EMAIL</th>
-							<th>PHONENUMBER</th>
-							<th>INSERTED</th>
+							<th>아이디</th>
+							<th>이름</th>
+							<th>비밀번호</th>
+							<th>별명</th>
+							<th>이메일</th>
+							<th>연락처</th>
+							<th>가입일시</th>
 						</tr>
 					</thead>
 					<tbody>

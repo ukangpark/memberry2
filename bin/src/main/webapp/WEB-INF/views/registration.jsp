@@ -11,10 +11,38 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css">
 
 <style>
+#imagePreview {
+	position: relative;
+	width: 300px;
+	height: 300px;
+	border-radius: 50%;
+	border: 2px;
+	border-style: solid;
+	border-color: #cccccc;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0px;
+}
+
+.defaultImage>img {
+	width: 100%;
+	height: 100%;
+}
+
+#imagePreview>img {
+	display: none;
+	width: 100%;
+	height: 100%;
+}
 
 #addBtn {
 	position: absolute;
+	top: 30%;
+	left: 56%;
 }
+
 </style>
 
 </head>
@@ -22,93 +50,162 @@
 
 	<my:navBar current="registration"></my:navBar>
 
+	<!-- 상단 공백 -->
 	<div style="margin-bottom: 15px"></div>
-	<div class="ui aligned container" id="imgContainer">
-		<img class="ui centered medium bordered circular image" src="images/발바닥.png">
-	</div>
-		<button class="circular ui icon button" id="addBtn">
-			<i class="big corner plus icon"></i>
-		</button>
-	<div class="ui grid container">
 
-		<div class="eight wide column">
-			<div class="ui left aligned container" id="leftContainer">
+	<!-- form -->
+	<form class="ui form" method="post" enctype="multipart/form-data">
 
-				<div class="ui fluid labeled big input mt-5">
-					<div class="ui label">이름</div>
-					<input type="text">
-				</div>
-				<div class="ui fluid labeled big input mt-5">
-					<div class="ui label">품종</div>
-					<input type="text">
-					몸무게
-					
-				</div>
-				<div class="ui fluid labeled big input mt-5">
-					<div class="ui label">생년월일</div>
-					<input type="date">
-				</div>
-				<div class="ui fluid labeled big input mt-5">
-					<div class="ui label">함께한날</div>
-					<input type="date">
+		<!-- 상단 컨테이너 (프로필사진, addBtn) -->
+		<div class="ui container" id="imagePreview">
+			<img class="preview" src="">
+			<span class="defaultImage"><img alt="" src="images/발바닥.png"></span>
+		</div>
+		<label for="fileInput" class="big circular ui icon button" id="addBtn"><i class="large plus icon"></i></label>
+		<input style="display: none" type="file" id="fileInput" name="file" accept="image/*" />
+
+		<!-- 하단 컨테이너 -->
+		<div class="ui grid container">
+
+			<!-- 왼쪽 컨테이너 항목들 -->
+			<div class="eight wide column">
+				<div class="ui left aligned container" id="leftContainer">
+
+					<div class="field">
+						<input type="text" name="id" style="display: none">
+					</div>
+
+					<div class="field">
+						<div class="ui fluid labeled big input mt-5">
+							<div class="ui label">이름</div>
+							<input type="text" name="petName">
+						</div>
+					</div>
+
+					<div class="field">
+						<div class="ui fluid labeled big input mt-5">
+							<div class="ui label">품종</div>
+							<input type="text" name="type">
+						</div>
+					</div>
+
+					<div class="field">
+						<div class="ui fluid labeled big input mt-5">
+							<div class="ui label">몸무게</div>
+							<div class="ui fluid selection dropdown" id="select1">
+								<input type="hidden" name="weight">
+								<div class="default text">몸무게를 선택 해 주세요.</div>
+								<i class="dropdown icon"></i>
+								<div class="menu">
+									<div class="item" data-value="small">작은친구 ( 7kg 미만 )</div>
+									<div class="item" data-value="medium">중간친구 ( 7 ~ 14.9kg)</div>
+									<div class="item" data-value="large">큰친구 ( 15kg 이상 )</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="field">
+						<div class="ui fluid labeled big input mt-5">
+							<div class="ui label">생년월일</div>
+							<input type="date" name="birth">
+						</div>
+					</div>
 				</div>
 			</div>
-		</div>
 
-		<div class="eight wide column">
-			<div class="ui right aligned container" id="rightContainer">
-				<div class="ui form">
+			<!-- 오른쪽 컨테이너 항목들 -->
+			<div class="eight wide column">
+				<div class="ui right aligned container" id="rightContainer">
+					<div class="ui fluid labeled big input mt-5">
+						<div class="ui label">함께한날</div>
+						<input type="date" name="together">
+					</div>
+
 					<div class="field">
 						<div class="ui fluid labeled big input mt-5">
 							<div class="ui label">성별</div>
-							<div class="ui fluid selection dropdown">
+							<div class="ui fluid selection dropdown" id="select2">
 								<input type="hidden" name="gender">
 								<div class="default text">성별을 선택 해 주세요.</div>
 								<i class="dropdown icon"></i>
 								<div class="menu">
-									<div class="item" data-value="1">남아</div>
-									<div class="item" data-value="0">여아</div>
+									<div class="item" data-value="male">남아</div>
+									<div class="item" data-value="female">여아</div>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-				<div class="ui form">
+
 					<div class="field">
 						<div class="ui fluid labeled big input mt-5">
 							<div class="ui label">중성화 유무</div>
-							<div class="ui fluid selection dropdown">
-								<input type="hidden" name="gender">
+							<div class="ui fluid selection dropdown" id="select3">
+								<input type="hidden" name="neutered">
 								<div class="default text">중성화 유무를 선택 해 주세요.</div>
 								<i class="dropdown icon"></i>
 								<div class="menu">
-									<div class="item" data-value="1">했어요</div>
-									<div class="item" data-value="0">안했어요</div>
+									<div class="item" data-value="yes">했어요</div>
+									<div class="item" data-value="no">안했어요</div>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-				<div class="ui fluid labeled big input mt-5">
-					<div class="ui label">반려동물 등록 번호</div>
-					<input type="text">
-					
-					몸무게
-					
-				</div>
 
+					<div class="field">
+						<div class="ui fluid labeled big input mt-5">
+							<div class="ui label">반려동물 등록 번호</div>
+							<input type="text" name="registrationNum">
+						</div>
+					</div>
+
+					<div class="mt-4">
+						<button class="ui large button" type="submit">등록하기</button>
+					</div>
+				</div>
 			</div>
 		</div>
-	</div>
+
+	</form>
+
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>
 
 	<script>
-		$('.ui.dropdown').dropdown({
-			direction : 'auto'
-		});
+	
+		/* 항목들 드롭다운 */
+		$('#select1').dropdown();
+		$('#select2').dropdown();
+		$('#select3').dropdown();
+
+		/* 첨부파일 이미지 변경 */
+		const fileInput = document.getElementById("fileInput");
+		const previewContainer = document.getElementById("imagePreview");
+		const previewImage = previewContainer.querySelector(".preview");
+		const previewDefaultImage = previewContainer
+				.querySelector(".defaultImage");
+
+		fileInput.addEventListener("change", function() {
+			const file = this.files[0];
+			//console.log(file);
+
+			if (file) {
+				const reader = new FileReader();
+
+				previewDefaultImage.style.display = "none";
+				previewImage.style.display = "block";
+
+				reader.addEventListener("load", function() {
+					previewImage.setAttribute("src", this.result);
+				});
+
+				reader.readAsDataURL(file);
+			}
+
+		})
+		
 	</script>
 </body>
 </html>
