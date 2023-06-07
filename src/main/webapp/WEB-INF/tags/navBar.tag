@@ -109,11 +109,21 @@
 	</div>
 </div>
  -->
+ 
+ <div class="up" style="position: fixed; bottom: 10px; right: 10px; ">
+		<i class="fa-solid fa-circle-chevron-up fa-2x"  ></i>
+	</div>
 <script>
 	$('.ui.sticky').sticky({
 		offset : 10
 	});
 	$('.ui.dropdown').dropdown({
 		direction : 'auto'
+	});
+	$(function(){
+		$('.up').on('click',function(e){
+			e.preventDefault();
+			$('html,body').animate({scrollTop:0},1000);
+		});
 	});
 </script>

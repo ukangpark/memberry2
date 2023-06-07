@@ -25,6 +25,21 @@
 	text-align: center;
 	margin: 40px 0;
 }
+#imgContainer {
+	width: 300px;
+	height: 300px;
+}
+
+ #image1 {
+	width: 100%;
+	height: 100%;
+}
+ #image2 {
+	width: 100%;
+	height: 100%;
+}
+
+
 
 /* .slider {
 	text-align: center;
@@ -127,9 +142,7 @@ overflow-y: auto;
 	<div id="header">
 		<h2>Membery</h2>
 	</div>
-	<div style="position: fixed; bottom: 5px; right: 5px; color: #a5a5a5">
-		<a href="#header"><i class="fa-solid fa-circle-arrow-up fa-3x"></i></a>
-	</div>
+	
 
 	<div class="ui center aligned container" id="container"
 		style="background-color: #e2e2e2;">
@@ -288,25 +301,20 @@ overflow-y: auto;
 
 
 			<c:forEach items="${feedList}" var="feed">
-				<div class="card" style="margin: 40px;">
-					<div class="image">
-						<a href="/feedId/${feed.id }"> 
+				<div class="ui card">
+					<div class="ui slide masked reveal image" id="imgContainer">
+	
+							<img id="image1" src="${bucketUrl }/${feed.id }/${feed.fileName[0] }" alt=""class="visible content" />
+					 	 	<img id="image2" src="${bucketUrl }/${feed.id }/${feed.fileName[1] }" alt="" class="hidden content" />
+					 	 	<img id="image2" src="${bucketUrl }/${feed.id }/${feed.fileName[2] }" alt="" class="hidden content" />
 						
-							<c:forEach items="${feed.fileName }" var="fileName">
-							
-									<img src="${bucketUrl }/${feed.id }/${fileName }" alt=""
-										width="100%" ; height="auto" ;/>
-								
-							</c:forEach>
-						</div> 
-						</a>
 
+					
 					</div>
 					<div class="content">
 						<div class="header">${feed.title}</div>
 						<div class="meta">
-							<!--이름누르면 해당 멤버의 마이피드로 이동 -->
-							<a href="/myFeed">${feed.writer}</a>
+							<a>${feed.writer}</a>
 						</div>
 						<div class="description">${feed.content}</div>
 					</div>
