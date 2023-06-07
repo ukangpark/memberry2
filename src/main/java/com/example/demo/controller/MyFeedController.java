@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.*;
+import org.springframework.security.core.*;
 import org.springframework.stereotype.*;
 import org.springframework.ui.*;
 import org.springframework.web.bind.annotation.*;
@@ -84,7 +85,7 @@ public class MyFeedController {
 		} else {
 			// 수정이 안 되면 수정하기 양식으로 리디렉션
 			rttr.addAttribute("fail", "fail"); 
-			return "redirect:/feed/modify/" + file.getFeedId();
+			return "redirect:/modify/" + file.getFeedId();
 		}
 	}
 	
@@ -96,5 +97,14 @@ public class MyFeedController {
 		} else {
 			return "redirect:/id/" + id;
 		}
+	}
+	
+	@PostMapping("/like")
+	@ResponseBody
+	public Map<String, Object> like(
+			@RequestBody Like like,
+			Authentication authentication) {
+		
+		return service.like(like, authentication);
 	}
 }

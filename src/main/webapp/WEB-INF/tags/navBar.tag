@@ -42,7 +42,7 @@
 
 				
 				<sec:authorize access="isAuthenticated()">
-					<a class="${current eq 'myFeed' ? 'active' : '' } item" href="/myFeed"> 마이피드 </a>
+					<a class="${current eq 'myFeed' ? 'active' : '' } item" href="/feed/myFeed"> 마이피드 </a>
 				</sec:authorize>
 				
 				<sec:authorize access="isAuthenticated()">
