@@ -66,7 +66,7 @@
 			<p>본문 : ${detail.body }</p>
 		</div>
 		<div>
-			<button class="ui right floated inverted red button">예약</button>
+			<button class="ui right floated inverted red button" onclick="location.href='/petsitter/regiForm'" >예약</button>
 		</div>
 	</div>
 
