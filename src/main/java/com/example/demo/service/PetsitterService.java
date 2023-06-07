@@ -1,19 +1,13 @@
 package com.example.demo.service;
 
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
+import java.util.*;
 
-import com.example.demo.domain.Detail;
-import com.example.demo.domain.Host;
-import com.example.demo.domain.HostHousePhoto;
-import com.example.demo.mapper.PetsitterMapper;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.stereotype.*;
+
+import com.example.demo.domain.*;
+import com.example.demo.mapper.*;
 
 import software.amazon.awssdk.awscore.exception.AwsServiceException;
 import software.amazon.awssdk.core.exception.SdkClientException;
@@ -126,7 +120,8 @@ public class PetsitterService {
 		return count == 1;
 	}
 
-	public List<Host> listHost() {
+	// 펫시터 전체목록
+	public List<Host> listHost(){
 		List<Host> list = petsitterMapper.selectAll();
 		return list;
 	}
@@ -166,5 +161,44 @@ public class PetsitterService {
 
 		return count == 1;
 	}
+  
+	//페이지네이션
+		public Map<String, Object> listHost(Integer page, String search) {
+			Integer rowPerPage = 8;
+			
+			Integer startIndex = (page-1) * rowPerPage;
+			
+			Integer numOfRecords =petsitterMapper.countAll(search);
+			
+			Integer lastPageNumber = (numOfRecords-1) / rowPerPage +1;
+			
+			
+			Integer leftPageNum = page - 5;
+			
+			leftPageNum = Math.max(leftPageNum, 1);
+			
+			
+			Integer rightPageNum = leftPageNum +9;  
+			
+			rightPageNum = Math.min(rightPageNum, lastPageNumber);
+			
+			Map<String, Object> pageInfo = new HashMap<>();
+			pageInfo.put("rightPageNum", rightPageNum);
+			pageInfo.put("leftPageNum", leftPageNum);
+			pageInfo.put("currentPageNum", page);
+			pageInfo.put("lastPageNum", lastPageNumber);
+			
+			// 게시물 목록 넘겨주고
+			List<Host> list = petsitterMapper.selectAllPaging(startIndex, rowPerPage, search);
+					return Map.of("pageInfo", pageInfo,
+								  "petsitterList", list);
+			
+		}
+
+	
+	
+	
+	
+	
 
 }

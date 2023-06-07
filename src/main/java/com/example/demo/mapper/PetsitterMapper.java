@@ -1,16 +1,10 @@
 package com.example.demo.mapper;
 
-import java.util.List;
+import java.util.*;
 
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
-import com.example.demo.domain.Detail;
-import com.example.demo.domain.Host;
-import com.example.demo.domain.HostHousePhoto;
+import com.example.demo.domain.*;
 
 @Mapper
 public interface PetsitterMapper {
@@ -91,15 +85,18 @@ public interface PetsitterMapper {
 			""")
 	Integer insertDetail(Detail detail);
 
-	// 외래키 설정하면 쿼리 변경해야함
+	// 외래키 설정하면 쿼리 변경해야함 (펫시터 전체보기)
 	@Select("""
 			SELECT
 				si,
 				gu,
 				dong,
 				Detail.title,
-				photo
-
+				profile,
+				Host.id,
+				pet,
+				houseType,
+				species
 			FROM Host, Detail
 			ORDER BY Detail.inserted DESC
 			""")
@@ -138,4 +135,47 @@ public interface PetsitterMapper {
 	Integer housePhotoCount(Integer hostId);
 	
 
+	@Select("""
+			<script>
+			<bind name="pattern" value="'%' + search + '%'" />
+			SELECT
+			si,
+			gu,
+			dong,
+			Detail.title,
+			profile,
+			Host.id,
+			pet,
+			houseType,
+			species,
+			 (select count(*) from PetsitterComment where detailId = Detail.id) commentCount 
+		FROM Host, Detail
+		WHERE
+			Host.id = Detail.hostId
+		AND
+			(si LIKE #{pattern}
+		OR  gu LIKE #{pattern}
+		OR  dong LIKE #{pattern})
+		ORDER BY Detail.inserted DESC
+		LIMIT #{startIndex}, #{rowPerPage}
+		</script>
+			""")
+	List<Host> selectAllPaging(Integer startIndex, Integer rowPerPage, String search);
+	
+	@Select("""
+			<script>
+			<bind name="pattern" value="'%' + search + '%'" />
+			SELECT COUNT(*)
+			FROM Host
+			WHERE
+			si LIKE #{pattern}
+		OR  gu LIKE #{pattern}
+		OR  dong LIKE #{pattern}
+		</script>
+			""")
+	Integer countAll(String search);
+
+	
+	
+	
 }

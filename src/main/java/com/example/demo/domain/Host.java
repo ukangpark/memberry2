@@ -1,8 +1,8 @@
 package com.example.demo.domain;
 
-import java.time.LocalDate;
+import java.time.*;
 
-import lombok.Data;
+import lombok.*;
 
 @Data
 public class Host {
@@ -22,4 +22,6 @@ public class Host {
 	private String profile;
 	private String title;
 	private boolean detail;
+	private int commentCount;
+
 }
