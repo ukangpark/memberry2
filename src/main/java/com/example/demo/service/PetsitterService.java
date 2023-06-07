@@ -172,6 +172,7 @@ public class PetsitterService {
 		List<HostHousePhoto> hostHousePhotoes = petsitterMapper.selectHostHousePhotoByDetailId(detailId);
 		
 		for(HostHousePhoto hostHousePhoto : hostHousePhotoes) {
+			//aws파일 삭제
 			String key = "hostHousePhoto/" + detailId + "/" + hostHousePhoto.getHousePhoto();
 			DeleteObjectRequest deleteObjectRequest = DeleteObjectRequest.builder()
 					.bucket(bucketName)
