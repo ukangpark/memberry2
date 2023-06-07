@@ -186,6 +186,12 @@ public interface PetsitterMapper {
 			DELETE FROM HostHousePhoto WHERE detailId = #{detailId}
 			""")
 	Integer deleteHostHousePhotoByDetailId(Integer detailId);
+	
+	@Delete("""
+			DELETE FROM HostHousePhoto
+				WHERE detailId = #{detailId} AND housePhoto = #{removePhoto}
+			""")
+	Integer deleteHousePhotoByDetailIdAndPhotoName(Integer detailId, String removePhoto);
 
 	
 	

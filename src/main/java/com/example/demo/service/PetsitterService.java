@@ -51,7 +51,7 @@ public class PetsitterService {
 
 		// 호스트 집사진 정보를 불러옴
 		if (detail != null) {
-			//등록된 상세페이지가 있다면 정보 조회
+			// 등록된 상세페이지가 있다면 정보 조회
 			List<HostHousePhoto> hostHousePhoto = petsitterMapper.selectHostHousePhotoByDetailId(detail.getId());
 			info.put("hostHousePhoto", hostHousePhoto);
 		}
@@ -152,33 +152,40 @@ public class PetsitterService {
 		return list;
 	}
 
-	public boolean modifyDetail(Detail detail, MultipartFile[] housePhotoes) throws Exception {
-		// 상세페이지 수정
-		Integer count = petsitterMapper.modifyDetail(detail);
-
+	public boolean modifyDetail(
+			Detail detail, 
+			MultipartFile[] addPhotos, 
+			List<String> removePhotos) throws Exception {
 		// 집사진 수정
-		// hostId로 집사진이 있는지 탐색
-		Integer housePhotoCount = petsitterMapper.housePhotoCount(detail.getHostId());
-
-		if (housePhotoCount == 0) {
-			// 집사진이 없는 상세페이지이면
-			// 상세페이지 집사진 추가
-			for (MultipartFile housePhoto : housePhotoes) {
-				String key = "hostHousePhoto/" + detail.getId() + "/" + housePhoto.getOriginalFilename();
+		// 삭제할 사진은 삭제하기
+		if(removePhotos != null && !removePhotos.isEmpty()) {
+			for (String removePhoto : removePhotos) {
+				// aws에서 집사진 파일 삭제
+				String key = "hostHousePhoto/" + detail.getId() + "/" + removePhoto;
+				DeleteObjectRequest deleteObjectRequest = DeleteObjectRequest.builder().bucket(bucketName).key(key).build();
+				
+				s3.deleteObject(deleteObjectRequest);
+				
+				// 집사진 테이블 삭제
+				Integer deletePhotocount = petsitterMapper.deleteHousePhotoByDetailIdAndPhotoName(detail.getId(), removePhoto);	
+			}
+		}
+		// 추가할 사진은 추가하기
+		for (MultipartFile addPhoto : addPhotos) {
+			if(addPhoto.getSize() > 0) {
+				//aws에 집사진 추가
+				String key = "hostHousePhoto/" + detail.getId() + "/" + addPhoto.getOriginalFilename();
 				PutObjectRequest objectRequest = PutObjectRequest.builder().bucket(bucketName).key(key)
 						.acl(ObjectCannedACL.PUBLIC_READ).build();
-				s3.putObject(objectRequest,
-						RequestBody.fromInputStream(housePhoto.getInputStream(), housePhoto.getSize()));
-
-				// 상세페이지 집사진 이름 추가
-				petsitterMapper.insertHostHousePhoto(housePhoto.getOriginalFilename(), detail.getId());
+				s3.putObject(objectRequest, RequestBody.fromInputStream(addPhoto.getInputStream(), addPhoto.getSize()));
+				
+				// 집사진 테이블 추가
+				petsitterMapper.insertHostHousePhoto(addPhoto.getOriginalFilename(), detail.getId());
 			}
-
-		} else {
-			// 집사진이 있는 상세페이지라면
-			// 원래 있던 집사진 삭제 후 추가
-
 		}
+
+		// 내용 수정
+		Integer count = petsitterMapper.modifyDetail(detail);
 
 		return count == 1;
 	}

@@ -144,10 +144,11 @@ public class PetsitterController {
 	
 	@PostMapping("modifyDetail")
 	public String modifyProcess(
-			Detail detail, 
-			@RequestParam("housePhotoes") MultipartFile[] housePhotoes) throws Exception {
+			Detail detail,
+			@RequestParam(value =  "removePhotos", required = false) List<String> removePhotos,
+			@RequestParam(value =  "addPhotos", required = false) MultipartFile[] addPhotos) throws Exception {
 		// 상세페이지 수정 process 
-		boolean ok = petsitterService.modifyDetail(detail, housePhotoes);
+		boolean ok = petsitterService.modifyDetail(detail, addPhotos, removePhotos);
 		return "redirect:/petsitter/detail?id=" + detail.getHostId();
 	}
 	
