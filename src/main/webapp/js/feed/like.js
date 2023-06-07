@@ -1,3 +1,5 @@
+const toast = new bootstrap.Toast(document.querySelector("#liveToast"));
+
 $("#likeIcon").click(function() {
 	// 게시물 번호 request body에 추가
 	const feedId = $("#feedIdText").text().trim();
@@ -14,6 +16,10 @@ $("#likeIcon").click(function() {
 			} else {
 				$("#likeIcon").html(`<img src="/images/olbone.png">`);
 			}
-		}
+		},
+		error: function(jqXHR) {
+			$(".toast-body").text(jqXHR.responseJSON.message);
+			toast.show();
+		},
 	});
 });
