@@ -111,9 +111,18 @@
 					</ul>
 				</div>
 
-				<div class="content">
-					<span class="right floated"> <i class="fa-solid fa-bone"></i> 17 likes
-					</span> <i class="comment icon"></i> 3 comments
+				<div id="iconContainer" class="content" >
+					
+						<span id="likeIcon" style="font-weight: normal">
+							<h3><i class="fa-solid fa-bone"></i>
+						</span>
+						<span id="likeNummber">
+							17
+						</span> likes
+						
+					<span class="left floated" style="margin-right: 200px text">
+						<i class="comment icon"></i> 3 comments</h3>
+					</span> 
 				</div>
 				<div class="extra content">
 					<div class="ui large transparent right icon input">
