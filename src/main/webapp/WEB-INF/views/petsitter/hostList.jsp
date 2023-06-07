@@ -27,7 +27,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${host }" var="host">
+ 				<c:forEach items="${host }" var="host">
 					<tr>
 						<td>
 							<a href="/petsitter/hostMyPage?id=${host.id }">${host.hostName }</a>
@@ -38,6 +38,7 @@
 						<td>${host.profile }</td>
 					</tr>
 				</c:forEach>
+				
 			</tbody>
 		</table>
 	</div>

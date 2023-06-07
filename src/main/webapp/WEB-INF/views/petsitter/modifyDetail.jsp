@@ -35,6 +35,9 @@
 					<div class="field">
 						<input type="text" name="hostId" value="${param.hostId }">
 					</div>
+					<div class="field">
+						<input type="text" name="detailId" value="${detail.id }">
+					</div>
 				</form>
 			</div>
 

@@ -23,11 +23,20 @@ public class PetsitterService {
 	@Value("${aws.s3.bucketName}")
 	private String bucketName;
 
-	public List<Host> selectAll() {
+	public Map<String, Object> selectAll() {
 		// 전체 호스트 정보 탐색
 		List<Host> host = petsitterMapper.selectHostAll();
-
-		return host;
+		// 전체 상세페이지 정보 탐색
+		List<Detail> detail = petsitterMapper.selectDetailAll();
+		// 전체 집사진 정보 탐색
+		List<HostHousePhoto> hostHousePhoto = petsitterMapper.selectHostHousePhotoAll();
+		
+		Map<String, Object> info = new HashMap<>();
+		info.put("host", host);
+		info.put("detail", detail);
+		info.put("hostHousePhoto", hostHousePhoto);
+		
+		return info;
 	}
 
 	public Map<String, Object> selectById(Integer hostId) {
@@ -41,12 +50,14 @@ public class PetsitterService {
 		Detail detail = petsitterMapper.selectDetailById(hostId);
 
 		// 호스트 집사진 정보를 불러옴
-		List<HostHousePhoto> hostHousePhoto = petsitterMapper.selectHostHousePhotoByHostId(detail.getId());
+		if(detail != null) {
+			List<HostHousePhoto> hostHousePhoto = petsitterMapper.selectHostHousePhotoByDetailId(detail.getId());
+			info.put("hostHousePhoto", hostHousePhoto);			
+		}
 
 		// map타입 변수 info에 넣음
 		info.put("host", host);
 		info.put("detail", detail);
-		info.put("hostHousePhoto", hostHousePhoto);
 		return info;
 	}
 
@@ -100,7 +111,6 @@ public class PetsitterService {
 			// 상세페이지 집사진 추가
 			for (MultipartFile housePhoto : housePhotoes) {
 				String key = "hostHousePhoto/" + detail.getId() + "/" + housePhoto.getOriginalFilename();
-				System.out.println("상세페이지 아이디 mybatis : " + detail.getId());
 				PutObjectRequest objectRequest = PutObjectRequest.builder().bucket(bucketName).key(key)
 						.acl(ObjectCannedACL.PUBLIC_READ).build();
 				s3.putObject(objectRequest,
@@ -154,6 +164,29 @@ public class PetsitterService {
 	}
 
 	public boolean deleteDetailByHostId(Integer hostId) {
+		//상세페이지 집사진 먼저 삭제 
+		// detailId 값을 가져옴 
+		Integer detailId = petsitterMapper.selectDetailById(hostId).getId();
+		
+		// 사진 이름 조회 
+		List<HostHousePhoto> hostHousePhotoes = petsitterMapper.selectHostHousePhotoByDetailId(detailId);
+		
+		for(HostHousePhoto hostHousePhoto : hostHousePhotoes) {
+			String key = "hostHousePhoto/" + detailId + "/" + hostHousePhoto.getHousePhoto();
+			DeleteObjectRequest deleteObjectRequest = DeleteObjectRequest.builder()
+					.bucket(bucketName)
+					.key(key)
+					.build();
+			
+			s3.deleteObject(deleteObjectRequest);
+			
+		}
+		
+		Integer photoDeleteCount = petsitterMapper.deleteHostHousePhotoByDetailId(detailId);
+		System.out.println("상세페이지 아이디 : " + detailId + ", " + "삭제된 집사진 : " + photoDeleteCount);
+		
+		
+		//상세페이지 삭제 
 		Integer count = petsitterMapper.deleteDetailByHostId(hostId);
 
 		return count == 1;

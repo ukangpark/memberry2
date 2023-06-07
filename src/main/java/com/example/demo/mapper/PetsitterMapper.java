@@ -121,7 +121,7 @@ public interface PetsitterMapper {
 	@Select("""
 			SELECT * FROM HostHousePhoto WHERE detailId = #{detailId}
 			""")
-	List<HostHousePhoto> selectHostHousePhotoByHostId(Integer detailId);
+	List<HostHousePhoto> selectHostHousePhotoByDetailId(Integer detailId);
 	
 	@Insert("""
 			INSERT INTO HostHousePhoto
@@ -176,6 +176,16 @@ public interface PetsitterMapper {
 		</script>
 			""")
 	Integer countAll(String search);
+	
+	@Select("""
+			SELECT * FROM HostHousePhoto
+			""")
+	List<HostHousePhoto> selectHostHousePhotoAll();
+	
+	@Delete("""
+			DELETE FROM HostHousePhoto WHERE detailId = #{detailId}
+			""")
+	Integer deleteHostHousePhotoByDetailId(Integer detailId);
 
 	
 	

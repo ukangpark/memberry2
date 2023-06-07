@@ -23,8 +23,8 @@ public class PetsitterController {
 	public void main(Model model) {
 		//main 페이지 포워드
 		//모든 정보를 읽음
-		List<Host> list = petsitterService.selectAll();
-		model.addAttribute("host", list);
+		Map<String, Object> list = petsitterService.selectAll();
+		model.addAllAttributes(list);
 	}
 	
 	@GetMapping("detail")
@@ -97,8 +97,8 @@ public class PetsitterController {
 	@GetMapping("hostList")
 	public void hostList(Model model) {
 		//호스트 리스트 포워드
-		List<Host> host = petsitterService.selectAll();
-		model.addAttribute("host", host);
+		Map<String, Object> info = petsitterService.selectAll();
+		model.addAllAttributes(info);
 	}
 	
 	@PostMapping("hostDelete")
