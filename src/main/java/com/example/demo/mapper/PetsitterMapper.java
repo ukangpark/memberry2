@@ -117,7 +117,7 @@ public interface PetsitterMapper {
 	Integer deleteDetailByHostId(Integer hostId);
 
 	@Select("""
-			SELECT * FROM HostHousePhoto WHERE hostId = #{hostId}
+			SELECT * FROM HostHousePhoto WHERE detailId = #{detailId}
 			""")
 	List<HostHousePhoto> selectHostHousePhotoByHostId(Integer hostId);
 	
