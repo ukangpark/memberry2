@@ -30,12 +30,12 @@ public class PetsitterService {
 		List<Detail> detail = petsitterMapper.selectDetailAll();
 		// 전체 집사진 정보 탐색
 		List<HostHousePhoto> hostHousePhoto = petsitterMapper.selectHostHousePhotoAll();
-		
+
 		Map<String, Object> info = new HashMap<>();
 		info.put("host", host);
 		info.put("detail", detail);
 		info.put("hostHousePhoto", hostHousePhoto);
-		
+
 		return info;
 	}
 
@@ -50,9 +50,9 @@ public class PetsitterService {
 		Detail detail = petsitterMapper.selectDetailById(hostId);
 
 		// 호스트 집사진 정보를 불러옴
-		if(detail != null) {
+		if (detail != null) {
 			List<HostHousePhoto> hostHousePhoto = petsitterMapper.selectHostHousePhotoByDetailId(detail.getId());
-			info.put("hostHousePhoto", hostHousePhoto);			
+			info.put("hostHousePhoto", hostHousePhoto);
 		}
 
 		// map타입 변수 info에 넣음
@@ -91,8 +91,27 @@ public class PetsitterService {
 	}
 
 	public boolean deleteHostById(Integer hostId) {
+		// 상세페이지 집사진 삭제
+		// detailId 값을 가져옴
+		Integer detailId = petsitterMapper.selectDetailById(hostId).getId();
+
+		// 사진 이름 조회
+		List<HostHousePhoto> hostHousePhotoes = petsitterMapper.selectHostHousePhotoByDetailId(detailId);
+
+		for (HostHousePhoto hostHousePhoto : hostHousePhotoes) {
+			// aws에서 집사진 삭제
+			String key = "hostHousePhoto/" + detailId + "/" + hostHousePhoto.getHousePhoto();
+			DeleteObjectRequest deleteObjectRequest = DeleteObjectRequest.builder().bucket(bucketName).key(key).build();
+
+			s3.deleteObject(deleteObjectRequest);
+
+		}
+
+		// 집사진 테이블에서 정보 삭제
+		Integer photoDeleteCount = petsitterMapper.deleteHostHousePhotoByDetailId(detailId);
+
 		// 해당 호스트 상세페이지 삭제
-		petsitterMapper.deleteDetailByHostId(hostId);
+		Integer detailCount = petsitterMapper.deleteDetailByHostId(hostId);
 
 		// 호스트 정보 삭제
 		Integer count = petsitterMapper.deleteHostById(hostId);
@@ -164,30 +183,26 @@ public class PetsitterService {
 	}
 
 	public boolean deleteDetailByHostId(Integer hostId) {
-		//상세페이지 집사진 먼저 삭제 
-		// detailId 값을 가져옴 
+		// 상세페이지 집사진 삭제
+		// detailId 값을 가져옴
 		Integer detailId = petsitterMapper.selectDetailById(hostId).getId();
-		
-		// 사진 이름 조회 
+
+		// 사진 이름 조회
 		List<HostHousePhoto> hostHousePhotoes = petsitterMapper.selectHostHousePhotoByDetailId(detailId);
-		
-		for(HostHousePhoto hostHousePhoto : hostHousePhotoes) {
-			//aws에서 집사진 삭제
+
+		for (HostHousePhoto hostHousePhoto : hostHousePhotoes) {
+			// aws에서 집사진 삭제
 			String key = "hostHousePhoto/" + detailId + "/" + hostHousePhoto.getHousePhoto();
-			DeleteObjectRequest deleteObjectRequest = DeleteObjectRequest.builder()
-					.bucket(bucketName)
-					.key(key)
-					.build();
-			
+			DeleteObjectRequest deleteObjectRequest = DeleteObjectRequest.builder().bucket(bucketName).key(key).build();
+
 			s3.deleteObject(deleteObjectRequest);
-			
+
 		}
-		
-		//집사진 테이블에서 정보 삭
+
+		// 집사진 테이블에서 정보 삭제
 		Integer photoDeleteCount = petsitterMapper.deleteHostHousePhotoByDetailId(detailId);
-		
-		
-		//상세페이지 삭제 
+
+		// 상세페이지 삭제
 		Integer count = petsitterMapper.deleteDetailByHostId(hostId);
 
 		return count == 1;
