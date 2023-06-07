@@ -33,18 +33,13 @@ public class MyPetsService {
 
 	public Map<String, Object> petsList() {
 		List<Registration> list = mapper.selectAll();
-
+		
 		var now = LocalDate.now();
-		var together = LocalDate.of(2017, 7, 20);
+		for(Registration r : list) {
+			r.setDiff(Period.between(r.getTogether().toLocalDate(), now));
+		}
 
-		Period diff = Period.between(together, now);
-
-		var yearDiff = diff.getYears();
-		var monthDiff = diff.getMonths();
-
-		System.out.printf("%d년 %d개월째", diff.getYears(), diff.getMonths());
-
-		return Map.of("petsList", list, "yearDiff", yearDiff, "monthDiff", monthDiff);
+		return Map.of("petsList", list);
 	}
 
 	public Registration getPet(Integer id) {

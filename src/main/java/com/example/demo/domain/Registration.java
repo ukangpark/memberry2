@@ -1,6 +1,8 @@
 package com.example.demo.domain;
 
 import java.sql.Date;
+import java.time.Period;
+
 import lombok.Data;
 
 @Data
@@ -16,5 +18,6 @@ public class Registration {
 	private Integer registrationNum;
 	private String photo;
 	private String memberId;
+	private Period diff;
 
 }

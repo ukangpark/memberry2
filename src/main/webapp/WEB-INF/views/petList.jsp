@@ -63,7 +63,7 @@ img {
 							<p>${petsList.birth }</p>
 
 							<p>
-								<i class="heart icon"></i>${yearDiff}년 ${monthDiff}개월째 함께 하는 중 입니다<i class="heart icon"></i>
+								<i class="heart icon"></i>${petsList.diff.years}년 ${petsList.diff.months}개월째 함께 하는 중 입니다<i class="heart icon"></i>
 							</p>
 						</div>
 					</div>
