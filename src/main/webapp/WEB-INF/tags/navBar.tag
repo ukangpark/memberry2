@@ -39,7 +39,7 @@
 
 				<a class="${current eq 'home' ? 'active' : '' } item" href="/home"> 홈피드 </a>
 				<a class="${current eq 'myFeed' ? 'active' : '' } item" href="/myFeed"> 마이피드 </a>
-				<a class="${current eq 'schedule' ? 'active' : '' } item" href="/schedule"> 스케줄달력 </a>
+				<a class="${current eq 'calendar' ? 'active' : '' } item" href="/fullCalendar"> 스케줄달력 </a>
 				<a class="${current eq 'mapMain' ? 'active' : '' } item" href="/map/mapMain"> 함께가기 </a>
 				<div>
 					<div onclick="location.href='/petsitter/main'" class="${current eq 'petsitterMain' ? 'active' : '' } link item">
