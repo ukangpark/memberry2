@@ -144,6 +144,10 @@ public class MyFeedService {
 			result.put("like", true);
 		}
 		
+		// 게시물 번호 기준으로 좋아요 개수 읽어내기
+		Integer count = likeMapper.countByFeedId(like.getFeedId());
+		result.put("count", count);
+		
 		/* Integer count = likeMapper.countByFeedId(like.getFeedId()); */
 		
 		

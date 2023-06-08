@@ -18,7 +18,10 @@ public interface HomeMapper {
 				fe.content,
 				fe.writer,
 				fe.inserted,
-				fi.fileName
+				fi.fileName,
+				(SELECT COUNT(*) 
+				 FROM FeedLike 
+				 WHERE feedId = fe.id) likeCount
 			FROM Feed fe LEFT JOIN File fi ON fe.id = fi.feedId
 			ORDER BY fe.id DESC
 			""")
