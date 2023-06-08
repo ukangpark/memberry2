@@ -13,6 +13,9 @@ public class CustomSecurityChecker {
 	@Autowired
 	private MyFeedMapper mapper;
 	
+	@Autowired
+	private CommentMapper commentMapper;
+	
 	public boolean checkFeedWriter(Authentication authentication, Integer feedId) {
 		Feed feed = mapper.selectById(feedId);
 		
@@ -21,4 +24,10 @@ public class CustomSecurityChecker {
 		
 		return username.equals(writer);
 	}
+	
+	public boolean checkCommentWriter(Authentication authentication, Integer commentId) {
+		Comment comment = commentMapper.selectById(commentId);
+		return comment.getMemberId().equals(authentication.getName());
+	}
+	
 }

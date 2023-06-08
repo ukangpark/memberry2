@@ -255,15 +255,20 @@
 					<h3>
 						<i class="fa-solid fa-comments"></i>
 					</h3>
-					<div class="input-group">
-						<div class="form-floating">
-							<textarea id="commentTextArea" class="form-control" style="height: 50px; margin-bottom: 20px;" placeholder="댓글을 남겨주세요"></textarea>
-							<label for="floatingTextArea">댓글을 남겨주세요</label>
+					<sec:authorize access="isAuthenticated()">
+						<div class="mb-3" id="addCommentContainer">
+						
+							<div class="input-group">
+								<div class="form-floating">
+									<textarea id="commentTextArea" class="form-control" style="height: 97px" placeholder="댓글을 남겨주세요"></textarea>
+									<label for="floatingTextArea">댓글을 남겨주세요</label>
+								</div>
+								<button id="sendCommentBtn" class="btn btn-outline-primary">
+									<i class="fa-regular fa-paper-plane"></i>
+								</button>
+							</div>
 						</div>
-						<button id="sendCommentBtn" class="btn btn-outline-primary" style="height: 50px;">
-							<i class="fa-regular fa-paper-plane"></i>
-						</button>
-					</div>
+					</sec:authorize>
 					<div id="updateCommentContainer">
 						<h6>수정</h6>
 						<input type="hidden" id="commentUpdateInput"/>
@@ -284,6 +289,46 @@
 		</div>
 	</div>
 
+<!-- 댓글 삭제 모달 -->
+<div class="modal fade" id="deleteCommentConfirmModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">댓글 삭제 확인</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+       삭제하시겠습니까?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+        <button id="deleteCommentModalButton" type="submit" class="btn btn-danger">삭제</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 댓글 수정 모달 -->
+<div class="modal fade" id="commentUpdateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" >댓글 수정</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      	<div id="updateCommentContaier">
+      		<input type="hidden" id="commentUpdateIdInput" />
+      		<textarea id="commentUpdateTextArea" class="form-control"></textarea>
+      	</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+        <button type="button" class="btn btn-primary">수정</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 

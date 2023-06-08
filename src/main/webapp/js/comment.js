@@ -7,26 +7,39 @@ function listComment() {
 		success: function(comments) {
 			$("commentListContainer").empty();
 			for(const comment of comments) {
-				$("commentListContainer").append(
-					<div>
+				const editButtons = `
 						<button
 						id="commentDeleteBtn${comment.id}"
-						class="commentDeleteButton"
-						data-comment-id="${comment.id}">삭제
+						class="commentDeleteButton btn btn-danger"
+						data-bs-toggle="modal"
+						data-bs-target="#deleteCommentConfirmModal"
+						data-comment-id="${comment.id}">
+							<i class="fa-regular fa-trash-can"></i>
 						</button>
-						: ${comment.content}
-						: ${comment.memberId}
-						: ${comment.inserted}
 						<button
 						id="commentUpdateBtn${comment.id}"
+						class="commentUpdateButton btn btn-secondary"
+						data-bs-toggle="modal"
+						data-bs-target="#commentUpdateModal"
 						class="commentUpdateButton"
-						data-comment-id="${comment.id}">수정
+						data-comment-id="${comment.id}">
+							<i class="fa-regular fa-pen-to-square"></i>
 						</button>
-						: ${comment.content}
-						: ${comment.memberId}
-						: ${comment.inserted}
+				`;		
+				$("commentListContainer").append(`
+				<li class="list-group item d-flex justify-content-between align-items-start">
+					<div class="ms-2 me-auto">
+						<div class="fw-bold"><i class="fa-solid fa-user></i>${comment.memberId}</div>
+						<div style="white-space: pre-wrap;">${comment.content}</div>
 					</div>
-				);
+					<div>
+						<span class="badge bg-secondary rounded-pill>${comment.inserted}</span>
+						<div class="text-end mt-2">
+							${comment.editable ? editButtons : ''}
+						</div>
+					</div>
+				</li>
+				`);
 			};
 			
 			$(".commentDeleteButton").click(function() {
@@ -64,7 +77,9 @@ $("#sendCommentBtn").click(function() {
 		data: JSON.stringify(data),
 		complete: function() {
 			listComment();
-		}
+			$("#commentTextArea").val("");
+		},
+		
 	})
 })
 $("#commentUpdateBtn").click(function() {

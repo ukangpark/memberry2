@@ -13,6 +13,7 @@ public interface CommentMapper {
 			SELECT *
 			FROM Comment
 			WHERE feedId = #{feedId}
+			ORDER BY id DESC
 			""")
 	List<Comment> selectAllByFeedId(Integer feedId);
 
@@ -35,5 +36,13 @@ public interface CommentMapper {
 			WHERE id = {id}
 			""")
 	Integer update(Comment comment);
+	
+	@Select("""
+			SELECT *
+			FROM Comment
+			WHERE id = #{id}
+			""")
+	Comment selectById(Integer id);
+	
 
 }
