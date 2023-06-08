@@ -131,23 +131,21 @@ public class MyFeedService {
 	}
 
 
-	public Map<String, Object> like(Like like, Authentication authentication) {
-		Map<String, Object> result = new HashMap<>();
-		
-		result.put("like", false);
-		
-		like.setMemberId(authentication.getName());
-		Integer deleteCnt = likeMapper.delete(like);
-		
-		if (deleteCnt != 1) {
-			Integer insertCnt = likeMapper.insert(like);
-			result.put("like", true);
-		}
-		
-		// 게시물 번호 기준으로 좋아요 개수 읽어내기
-		Integer count = likeMapper.countByFeedId(like.getFeedId());
-		result.put("count", count);
-		
-		return result;
-	}
+	/*
+	 * public Map<String, Object> like(Like like, Authentication authentication) {
+	 * Map<String, Object> result = new HashMap<>();
+	 * 
+	 * result.put("like", false);
+	 * 
+	 * like.setMemberId(authentication.getName()); Integer deleteCnt =
+	 * likeMapper.delete(like);
+	 * 
+	 * if (deleteCnt != 1) { Integer insertCnt = likeMapper.insert(like);
+	 * result.put("like", true); }
+	 * 
+	 * // 게시물 번호 기준으로 좋아요 개수 읽어내기 Integer count =
+	 * likeMapper.countByFeedId(like.getFeedId()); result.put("count", count);
+	 * 
+	 * return result; }
+	 */
 }

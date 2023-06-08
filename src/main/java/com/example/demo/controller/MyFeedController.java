@@ -107,22 +107,18 @@ public class MyFeedController {
 		}
 	}
 	
-	@PostMapping("/like")
-	@ResponseBody
-	public ResponseEntity<Map<String, Object>> like(
-			@RequestBody Like like,
-			Authentication authentication) {
-		
-		if (authentication == null) {
-			return ResponseEntity
-					.status(403)
-					.body(Map.of("message", "로그인 후 좋아요 클릭 가능합니다."));
-		} else {
-			
-			return ResponseEntity
-					.ok()
-					.body(service.like(like, authentication));
-		}
-		
-	}
+	/*
+	 * @PostMapping("/like")
+	 * 
+	 * @ResponseBody public ResponseEntity<Map<String, Object>> like(
+	 * 
+	 * @RequestBody Like like, Authentication authentication) {
+	 * 
+	 * if (authentication == null) { return ResponseEntity .status(403)
+	 * .body(Map.of("message", "로그인 후 좋아요 클릭 가능합니다.")); } else {
+	 * 
+	 * return ResponseEntity .ok() .body(service.like(like, authentication)); }
+	 * 
+	 * }
+	 */
 }

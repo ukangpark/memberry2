@@ -134,7 +134,7 @@
 </head>
 <body>
 
-		<%--  <my:navBar current="home" /> --%>
+		<my:navBar current="home" />
 
 <div class="toast-container position-fixed  top-0 start-50 translate-middle-x p-3">
 	  <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
@@ -149,9 +149,6 @@
 		<h2>Membery</h2>
 	</div> 
 	
-	<my:navBar current="home" />
-	
-	<input type="hidden" >
 
 	<div class="wrapper">
 
@@ -159,6 +156,12 @@
 			<div class="ui link cards">
 				<c:forEach items="${feedList}" var="feed">
 
+					
+				<!-- 좋아요 기능을 위한 id 값 불러오기 -->
+				<span id="feedIdText" class="d-none">
+					${feed.id }
+				</span>
+							
 					<div class="ui card" style="margin: 30px;">
 						<div class="content">
 							<!-- 이미지 파일 출력 -->
@@ -181,6 +184,7 @@
 						</div>
 						<div class="extra content">
 							<span class="left floated"> 
+							
 							<span id="likeIcon" >
 								<img src="/images/olhomebone.png">
 							</span>
