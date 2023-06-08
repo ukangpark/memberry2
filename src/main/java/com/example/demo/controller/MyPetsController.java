@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -27,9 +29,11 @@ public class MyPetsController {
 	
 	//나의반려동물 리스트 보기
 	@GetMapping("petList")
-	public void list (Model model) {
+	@PreAuthorize("isAuthenticated()")
+	public void list (Model model, Authentication auth) {
 		
-		Map<String, Object> list = service.petsList();
+		System.out.println(auth.getName());
+		Map<String, Object> list = service.petsList(auth);
 				
 		model.addAllAttributes(list);
 		
@@ -46,7 +50,6 @@ public class MyPetsController {
 	
 	//펫 정보 수정 전 조회
 	@GetMapping("/petModify/{id}")
-	@PreAuthorize("isAuthenticated() and @customSecurityChecker.checkBoardWriter(authentication, #id)")
 	public String modify(@PathVariable("id") Integer id, Model model) {
 		model.addAttribute("pet", service.getPet(id));
 		return "petModify";
@@ -55,7 +58,7 @@ public class MyPetsController {
 	
 	//펫 정보 수정
 	@PostMapping("/petModify/{id}")
-	@PreAuthorize("isAuthenticated() and @customSecurityChecker.checkBoardWriter(authentication, #id)")
+	//@PreAuthorize("isAuthenticated() and @customSecurityChecker.checkBoardWriter(authentication, #id)")
 	public String modifyProcess(Registration registration, 
 			@RequestParam(value="file", required = false) MultipartFile addFile,
 			@RequestParam(value="removeFile", required = false) String removeFile,
