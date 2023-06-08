@@ -2,14 +2,10 @@ package com.example.demo.controller;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.domain.Comment;
 import com.example.demo.service.CommentService;
@@ -40,5 +36,10 @@ public class CommentController {
 		
 		return "ok";
 	}
-
+	
+	@DeleteMapping("id/{id}")
+	public String remove(@PathVariable("id") Integer id) {
+		service.remove(id);
+		return "ok";
+	}
 }

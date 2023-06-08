@@ -149,7 +149,10 @@
 
 </head>
 <body>
-	   <%-- <my:navBar current="home" />  --%>
+	  <div>
+		  <my:navBar current="home" />  
+	  
+	  </div>
 	   
 	<div id="header">
 		<h2>Membery</h2>
@@ -185,12 +188,15 @@
 					<div class="description">${feed.content}</div>
 				</div>
 				<div class="extra content">
-					<span class="left floated"> <i
-						class="heart outline like icon"></i>17 likes <!-- Button trigger modal -->
+					<span class="left floated"> 
+					
+					<i class="heart outline like icon"></i>17 likes 
+					<!-- Button trigger modal -->
 						<button type="button" class="btn btn-secondary-link"
 							data-bs-toggle="modal" data-bs-target="#commentModal">
 							<i class="fa-solid fa-comment"></i>
-						</button> <i class="paw icon"></i>
+						</button>
+						 <i class="paw icon"></i>
 
 					</span> <span class="right floated">${feed.inserted}</span>
 				</div>
@@ -271,21 +277,12 @@
 							<i class="fa-regular fa-paper-plane"></i>
 						</button>
 					</div>
-					<div class="showComment">
-						<table class="modal_table">
-							<c:forEach begin="1" end="10">
-								<tr>
-									<td>작성자</td>
-									<td>댓글</td>
-									<td>
-										<button class="btn btn-outline-primary">수정</button>
-										<button class="btn btn-outline-secondary">삭제</button>
-										<button class="btn btn-danger">신고</button>
-									</td>
-								</tr>
-							</c:forEach>
-						</table>
-					</div>
+					
+					<ul class="list-group" id="commentListContainer">
+						
+						
+					</ul>
+				
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary"
