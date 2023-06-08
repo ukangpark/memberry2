@@ -45,6 +45,7 @@ label {
 <body>
 
 	<my:navBar></my:navBar>
+	<my:alert></my:alert>
 
 	<!-- 상단 공백 -->
 	<div style="margin-bottom: 15px"></div>
@@ -105,15 +106,39 @@ label {
 					</div>
 				</div>
 				<div style="margin-top: 65px">
-					<div class="ui toggle right floated large button" style="background-color:#cc6666" onclick="location.href='/petDelete'">삭제하기</div>
-					<div class="ui toggle right floated large button" style="background-color:#6699cc" onclick="location.href='/petModify/${pet.id}'">수정하기</div>
-					<div class="ui right floated large button" style="background-color:#cccccc" onclick="location.href='/petList'">목록보기</div>
+					<div class="ui toggle right floated large button" style="background-color: #cc6666" data-bs-toggle="modal" data-bs-target="#deleteConfirmModal">삭제하기</div>
+					<div class="ui toggle right floated large button" style="background-color: #6699cc" onclick="location.href='/petModify/${pet.id}'">수정하기</div>
+					<div class="ui right floated large button" style="background-color: #cccccc" onclick="location.href='/petList'">목록보기</div>
 				</div>
 			</div>
 
-
 		</div>
 	</form>
+
+	<!-- 삭제하기위해 해당 registration id 가져오기 -->
+	<div class="d-none">
+		<form action="/petRemove" method="post" id="removeForm">
+			<input type="text" name="id" value="${pet.id }" />
+		</form>
+	</div>
+
+	<!-- 해당펫정보 삭제 모달 -->
+	<div class="modal fade" id="deleteConfirmModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="exampleModalLabel">삭제 확인</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">삭제 하시겠습니까?</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+					<button type="submit" class="btn btn-danger" form="removeForm">삭제</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
