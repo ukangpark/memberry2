@@ -23,7 +23,14 @@
 					<h1 class="ui dividing header">상세페이지 등록하기</h1>
 					<div class="field">
 						<label for="housePhoto">집사진 등록</label>
-						<input id="housePhoto" type="file" name="housePhotoes" multiple>
+						<div class="ui placeholder segment">
+							<div class="ui icon header">
+								<i class="camera retro icon"></i>
+								집사진을 등록해 주세요!
+							</div>
+							<a id="inputPhotoBtn" class="ui primary button" data-bs-toggle="modal" data-bs-target="#inputPhoto" data-bs-whatever="@mdo">사진 등록하기</a>
+						</div>
+						<input class="d-none" id="housePhoto" type="file" name="housePhotoes" multiple>
 					</div>
 					<div class="field">
 						<label for="title">제목</label>
@@ -49,6 +56,48 @@
 		</div>
 	</div>
 
+	<!-- 사진 등록 모달 -->
+	<div class="modal fade" id="inputPhoto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="exampleModalLabel">집사진 등록하기</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<!-- <form>
+						<div id="imgContainer" class="ui images">
+							<label for="inputHouse" >
+								<img class="ui medium rounded image" style="margin-right: 30px;" src="/images/dog3.jpeg" id="preview1">
+								<img class="ui medium rounded image" style="margin-right: 30px;" src="/images/dog3.jpeg" id="preview2">
+							</label>
+							<label class="big circular ui icon button" id="addBtn">
+								<i class="large plus icon"></i>
+							</label>
+							<input class="d-none" type="file" accept="image/*" name="housePhotoes" id="inputHouse">
+						</div>
+						<div class="mb-3">
+							<label for="recipient-name" class="col-form-label">Recipient:</label>
+							<input type="text" class="form-control" id="recipient-name">
+						</div>
+						<div class="mb-3">
+							<label for="message-text" class="col-form-label">Message:</label>
+							<textarea class="form-control" id="message-text"></textarea>
+						</div>
+					</form> -->
+					<form action="" id="test">
+						<input type="text" name="test">
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary" form="test">Send message</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
 	<!-- 등록 모달 -->
 	<div class="modal fade" id="addDetailModal" tabindex="-1" aria-labelledby="addDetailModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
@@ -69,6 +118,17 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-	<script src="semantic/dist/semantic.min.js"></script>
+	<script src="/js/semantic/semantic.min.js"></script>
+	<style type="text/css">
+#imgContainer {
+	position: relative;
+}
+
+#addBtn {
+	position: absolute;
+	top: 270px;
+	left: 270px;
+}
+</style>
 </body>
 </html>
