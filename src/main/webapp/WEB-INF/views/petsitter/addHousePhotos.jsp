@@ -25,7 +25,7 @@
 			<div class="ui segment">
 				<form id="addDetailForm" action="/petsitter/addHousePhotos" class="ui big form" method="post" enctype="multipart/form-data">
 					<h1 class="ui dividing header">집사진 등록하기</h1>
-
+					<input type="text" name="hostId" value="${param.hostId }" class="d-none">
 					<div class="field">
 						<h2 class="ui center aligned icon header">
 							<i class="circular camera retro icon"></i>
@@ -33,28 +33,28 @@
 							<br>
 							<button style="margin-top: 20px;" id="addPhotoBtn" class="ui  primary button" type="button">사진 추가하기</button>
 						</h2>
+					</div>
 
-						<!-- 사진1 -->
+					<!-- 사진1 -->
+					<div class="field">
 						<div class="ui aligned container" style="position: relative;" id="imgContainer">
 							<img class="ui centered large bordered rounded image" src="/images/defaultHome.jpeg" id="preview1">
-							<label class="small circular ui icon button inverted" style="position: absolute; top: 0.5lh; left: 41.1lh;">
-								<i class="large paw icon"></i>
-							</label>
-							<input style="display: none;" onchange="readURL(this);" class="form-control" id="housePhoto1" type="file" name="housePhotos" accept="image/*" />
+							<div class="ui left pointing dropdown icon circular button inverted" id="right" style="position: absolute; top: 0.5lh; left: 38lh;">
+								<i class="paw icon large "></i>
+								<div class="menu">
+									<div class="item">
+										<div class="ui blue empty circular label"></div>
+										<label for="housePhoto1"> 등록하기 </label>
+									</div>
+									<div class="item">
+										<div class="ui red empty circular label"></div>
+										삭제하기
+									</div>
+								</div>
+							</div>
+							<input style="display: none;" onchange="readURL(this);" class="form-control" id="housePhoto1" type="file" name="housePhotos" accept="image/*" multiple />
 							<br>
 						</div>
-						<!-- 사진2 -->
-						<%-- 						<div class="ui aligned container" style="position: relative;">
-							<img class="ui centered large bordered rounded image" src="/images/defaultHome.jpeg" id="preview2">
-							<label for="housePhoto2" class="small circular ui icon button inverted" style="position: absolute; top: 0.5lh; left: 41.1lh;">
-								<i class="large paw icon"></i>
-							</label>
-							<input style="display: none;" onchange="getImagePreview(event)" class="form-control" id="housePhoto2" type="file" name="housePhotos" accept="image/*" />
-						</div>
-
-						<div class="field">
-							<input type="number" name="hostId" value="${param.hostId }" class="d-none">
-						</div> --%>
 					</div>
 				</form>
 			</div>
@@ -98,10 +98,14 @@
 				document.getElementById('preview1').src = "";
 			}
 		}
-		
+
 		$('#addPhotoBtn').click(function() {
-			
+
 		})
+
+		$('#right').dropdown({
+			direction : 'right'
+		});
 	</script>
 </body>
 </html>
