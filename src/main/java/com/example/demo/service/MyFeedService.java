@@ -148,9 +148,6 @@ public class MyFeedService {
 		Integer count = likeMapper.countByFeedId(like.getFeedId());
 		result.put("count", count);
 		
-		/* Integer count = likeMapper.countByFeedId(like.getFeedId()); */
-		
-		
 		return result;
 	}
 }

@@ -16,6 +16,8 @@ $("#likeIcon").click(function() {
 			} else {
 				$("#likeIcon").html(`<img src="/images/olbone.png">`);
 			}
+			// 좋아요 수 업데이트
+			$("#likeNumber").text(data.count);
 		},
 		error: function(jqXHR) {
 			$(".toast-body").text(jqXHR.responseJSON.message);

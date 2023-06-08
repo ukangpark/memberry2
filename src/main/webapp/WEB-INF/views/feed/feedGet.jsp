@@ -38,17 +38,10 @@
 }
 
 .bx-wrapper {
-	/* flex-grow: 3; */
-	margin-left: 1rem;
+	
+	margin-left: 1.2rem;
 }
 
-/* .bxslider {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-} */
 
 #textContentt {
 	/* flex-grow: 2;  */
@@ -130,7 +123,7 @@
 						<span id="likeIcon" >
 							<!-- <i class="fa-solid fa-bone"></i> --><img src="/images/olbone.png">
 						</span>
-						<span id="likeNummber" style="font-weight: 300; font-size: large;">
+						<span id="likeNumber" style="font-weight: 300; font-size: large;">
 							${feed.likeCount }
 						</span> 
 						<span style="font-weight: 300; font-size: large;">likes</span>
