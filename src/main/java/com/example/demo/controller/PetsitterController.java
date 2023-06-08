@@ -109,14 +109,14 @@ public class PetsitterController {
 	}
 	
 	@GetMapping("addDetail")
-	public void adddetailForm(Integer hostId) {
+	public void addDetailForm(Integer hostId) {
 		// 상세페이지 등록폼 view 포워드
 	}
 	
 	@PostMapping("addDetail")
 	public String addDetailProcess(
 			Detail detail, 
-			@RequestParam("housePhotoes") MultipartFile[] housePhotoes,
+			@RequestParam(value =  "housePhotoes", required = false) MultipartFile[] housePhotoes,
 			RedirectAttributes rttr) throws Exception {
 		// 상세페이지 등록 과정 
 		boolean ok = petsitterService.insertDetail(detail, housePhotoes);
@@ -128,7 +128,14 @@ public class PetsitterController {
 			// 상세페이지 재등록
 			rttr.addFlashAttribute("message", "게시물이 등록되지 않았습니다.");
 		}
-		return "redirect:/petsitter/detail?id=" + detail.getHostId();
+		
+		System.out.println(detail.getId());
+		return "redirect:/petsitter/addHousePhotos?detailId=" + detail.getId();
+	}
+	
+	@GetMapping("addHousePhotos")
+	public void addHousePhotosForm(@RequestParam("detailId") Integer detailId) {
+		
 	}
 	
 	@GetMapping("modifyDetail")
