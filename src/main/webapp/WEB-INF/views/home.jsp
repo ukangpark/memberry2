@@ -172,8 +172,14 @@ overflow-y: auto;
 						<div class="description">${feed.content}</div>
 					</div>
 					<div class="extra content">
-						<span class="left floated"> <i
-							class="heart outline like icon"></i>17 likes
+						<span class="left floated"> 
+							<span id="likeIcon" >
+								<img src="/images/olhomebone.png">
+							</span>
+							<span id="likeNummber">
+								${feed.likeCount }
+							</span>
+							likes
 							<!-- Button trigger modal -->
 							<button type="button" class="btn btn-outline-secondary"
 								data-bs-toggle="modal" data-bs-target="#commentModal">

@@ -33,7 +33,7 @@ public interface MyFeedMapper {
 				fl.fileName,
 				(SELECT COUNT(*) 
 				 FROM FeedLike 
-				 WHERE feedId = fd.id) countLike
+				 WHERE feedId = fd.id) likeCount
 			FROM Feed fd LEFT JOIN File fl ON fd.id = fl.feedId
 			WHERE fd.id = #{id}
 			""")

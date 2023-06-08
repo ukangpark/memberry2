@@ -131,7 +131,7 @@
 							<!-- <i class="fa-solid fa-bone"></i> --><img src="/images/olbone.png">
 						</span>
 						<span id="likeNummber" style="font-weight: 300; font-size: large;">
-							17
+							${feed.likeCount }
 						</span> 
 						<span style="font-weight: 300; font-size: large;">likes</span>
 						
