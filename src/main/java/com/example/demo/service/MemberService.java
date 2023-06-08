@@ -71,6 +71,18 @@ public class MemberService {
 		
 		return cnt == 1;
 	}
+
+	public List<Member> listMember(Integer page) {
+		
+		// 한 페이지에 10개씩 보여주기
+		Integer startIndex = (page -1) * 10;
+		
+		// 회원 목록 가져와서 보여주기
+		return mapper.selectAllPage(startIndex);
+		
+		// 페이지네이션이 필요한 정보 가져와서 보여주기
+		
+	}
 	
 }
 

@@ -57,5 +57,20 @@ public interface MemberMapper {
 			</script>
 			""")
 	Integer update(Member member);
+
+
+	@Select("""
+			SELECT id,
+				   name,
+				   password,
+				   nickName,
+				   email,
+				   phoneNumber,
+				   inserted
+			FROM Member
+			ORDER BY inserted DESC
+			LIMIT #{startIndex}, 10
+			""")
+	List<Member> selectAllPage(Integer startIndex);
 	
 }
