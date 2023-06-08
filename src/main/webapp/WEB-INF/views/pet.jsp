@@ -85,7 +85,7 @@ label {
 
 			<!-- 왼쪽 컨테이너 항목들 -->
 			<div class="eight wide column">
-				<div class="ui left aligned container mt-5" id="leftContainer">
+				<div class="ui left aligned container mt-3" id="leftContainer">
 					<div class="field">
 						<label>품종</label>
 						<input type="text" name="type" value="${pet.type }" readonly>
@@ -107,7 +107,7 @@ label {
 
 			<!-- 오른쪽 컨테이너 항목들 -->
 			<div class="eight wide column">
-				<div class="ui right aligned container mt-5" id="rightContainer">
+				<div class="ui right aligned container mt-3" id="rightContainer">
 					<div class="field">
 						<label>성별</label>
 						<input type="text" name="gender" value="${pet.gender eq 'male' ? '남아' : '여아'}" readonly>
