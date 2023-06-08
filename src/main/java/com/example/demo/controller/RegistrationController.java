@@ -31,7 +31,6 @@ public class RegistrationController {
 	@PostMapping("/registration")
 	public String addRegistration(@RequestParam("file") MultipartFile file, 
 								Registration registration, RedirectAttributes rttr) throws Exception {
-		System.out.println(registration);
 		boolean ok = service.insert(registration, file);
 		if (ok) {
 			rttr.addFlashAttribute("message", registration.getPetName() + " 친구가 등록되었습니다.");

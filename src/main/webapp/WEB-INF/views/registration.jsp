@@ -16,7 +16,7 @@
 	width: 300px;
 	height: 300px;
 	border-radius: 50%;
-	border: 2px;
+	border: 1px;
 	border-style: solid;
 	border-color: #cccccc;
 	overflow: hidden;
@@ -43,6 +43,15 @@
 	left: 56%;
 }
 
+#mustInput {
+	position: relative;
+}
+
+#tag {
+	width: 2px;
+	height: 2px;
+	position: absolute;
+}
 </style>
 
 </head>
@@ -75,14 +84,15 @@
 					<div class="field">
 						<input type="text" name="id" style="display: none">
 					</div>
-					
+
 					<div class="field">
 						<input type="text" name="memberId" value="${auth.getName() }" style="display: none">
 					</div>
 
 					<div class="field">
 						<div class="ui fluid labeled big input mt-5">
-							<div class="ui label">이름</div>
+							<div class="ui label" id="mustInput">이름</div>
+							<i class="mini red circle icon" id="tag"></i>
 							<input type="text" name="petName" value="${registration.petName }">
 						</div>
 					</div>
@@ -96,7 +106,8 @@
 
 					<div class="field">
 						<div class="ui fluid labeled big input mt-5">
-							<div class="ui label">몸무게</div>
+							<div class="ui label" id="mustInput">몸무게</div>
+							<i class="mini red circle icon" id="tag"></i>
 							<div class="ui fluid selection dropdown" id="select1">
 								<input type="hidden" name="weight" value="${registration.weight }">
 								<div class="default text">몸무게를 선택 해 주세요.</div>
@@ -123,13 +134,15 @@
 			<div class="eight wide column">
 				<div class="ui right aligned container" id="rightContainer">
 					<div class="ui fluid labeled big input mt-5">
-						<div class="ui label">함께한날</div>
+						<div class="ui label" id="mustInput">함께한날</div>
+						<i class="mini red circle icon" id="tag"></i>
 						<input type="date" name="together" value="${registration.together }">
 					</div>
 
 					<div class="field">
 						<div class="ui fluid labeled big input mt-5">
-							<div class="ui label">성별</div>
+							<div class="ui label" id="mustInput">성별</div>
+							<i class="mini red circle icon" id="tag"></i>
 							<div class="ui fluid selection dropdown" id="select2">
 								<input type="hidden" name="gender" value="${registration.gender }">
 								<div class="default text">성별을 선택 해 주세요.</div>
@@ -144,7 +157,8 @@
 
 					<div class="field">
 						<div class="ui fluid labeled big input mt-5">
-							<div class="ui label">중성화 유무</div>
+							<div class="ui label" id="mustInput">중성화 유무</div>
+							<i class="mini red circle icon" id="tag"></i>
 							<div class="ui fluid selection dropdown" id="select3">
 								<input type="hidden" name="neutered" value="${registration.neutered }">
 								<div class="default text">중성화 유무를 선택 해 주세요.</div>
@@ -179,7 +193,6 @@
 	<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>
 
 	<script>
-	
 		/* 항목들 드롭다운 */
 		$('#select1').dropdown();
 		$('#select2').dropdown();
@@ -210,7 +223,15 @@
 			}
 
 		})
-		
+
+		/* 엔터키 치면 전송되는 것 방지 */
+		$('input[type="text"]').keydown(function() {
+			if (event.keyCode == 13) {
+				event.preventDefault();
+			}
+			;
+
+		})
 	</script>
 </body>
 </html>

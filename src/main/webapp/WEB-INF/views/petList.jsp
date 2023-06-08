@@ -15,6 +15,7 @@
 
 <style>
 .profile {
+	position: relative;
 	width: 300px;
 	height: 300px;
 	border-radius: 50%;
@@ -30,6 +31,18 @@ img {
 	height: 100%;
 }
 
+.border {
+	position: absolute;
+	width: 300px;
+	height: 300px;
+	border-radius: 50%;
+	border-style: solid;
+	border: 1px;
+	align-items: center;
+	justify-content: center;
+	padding: 0px;
+}
+
 .item {
 	align-items: center;
 	justify-content: center;
@@ -41,9 +54,9 @@ img {
 
 	<my:navBar current="myPetList"></my:navBar>
 	<my:alert></my:alert>
-	
+
 	<!-- security test -->
-	<sec:authentication property="principal"/>
+	<sec:authentication property="principal" />
 
 	<!-- 상단 공백 -->
 	<div style="margin-bottom: 15px"></div>
@@ -60,6 +73,7 @@ img {
 				<div class="item" onclick="location.href='/id/${petsList.id }'">
 					<div class="profile">
 						<img src="${bucketUrl }/${petsList.id }/${petsList.photo}">
+						<div class="border"></div>
 					</div>
 					<div class="content">
 						<div class="ui huge header">${petsList.petName }</div>

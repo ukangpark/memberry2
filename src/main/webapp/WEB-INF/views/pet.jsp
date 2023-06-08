@@ -16,9 +16,6 @@
 	width: 300px;
 	height: 300px;
 	border-radius: 50%;
-	border: 2px;
-	border-style: solid;
-	border-color: #cccccc;
 	overflow: hidden;
 	display: flex;
 	align-items: center;
@@ -29,6 +26,18 @@
 img {
 	width: 100%;
 	height: 100%;
+}
+
+.border {
+	position: absolute;
+	width: 300px;
+	height: 300px;
+	border-radius: 50%;
+	border-style: solid;
+	border: 1px;
+	align-items: center;
+	justify-content: center;
+	padding: 0px;
 }
 
 .item {
@@ -53,11 +62,18 @@ label {
 	<!-- 상단 프로필 컨테이너 -->
 	<div class="ui container" id="profileContainer">
 		<img src="${bucketUrl }/${pet.id }/${pet.photo}">
+		<div class="border"></div>
 	</div>
 
 	<!-- 상단 헤더 컨테이너 -->
 	<div class="ui center aligned container mt-2">
 		<div class="ui huge header">${pet.petName }</div>
+		<div class="inline field">
+			<div class="ui toggle checkbox">
+				<input type="checkbox" tabindex="0" class="hidden" id="checkbox">
+				<label>내프로필로 등록</label>
+			</div>
+		</div>
 	</div>
 
 	<!-- form -->
