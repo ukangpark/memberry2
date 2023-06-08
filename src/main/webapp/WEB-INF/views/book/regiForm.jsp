@@ -18,69 +18,25 @@
 </head>
 <body>
 
+<d:navBar current="regiForm" />
+
 <div style="margin:100px 300px 300px 300px; border: 8px double lightblue;">
-	<form class="ui form" style="margin:100px 100px 100px 100px">
+	<form class="ui form" style="margin:100px 100px 100px 100px" method="post" id="bookForm" action="/book/bookAdd">
+	<input type="hidden" name="num" value"${pet.id }" />
 		<h4 class="ui dividing header" style = "text-align:center">예약 신청서</h4>
 		<br>
+		
 		<div class="field">
 		<h4 class="ui header">이름</h4>
 			<div class="field">
 
-				<input type="text" name="booking[이름]">
+				<input type="text" name="petName" value="${pet.petName }">
 
 			</div>
 		</div>
 		<div class="field">
 			<h4 class="ui header">생년월일</h4>
-			<div class="two fields">
-				<div class="field">
-					<select class="ui fluid dropdown">
-						<option value="">년도</option>
-						<option value="00">2000</option>
-						<option value="01">2001</option>
-						<option value="02">2002</option>
-						<option value="03">2003</option>
-						<option value="04">2004</option>
-						<option value="05">2005</option>
-						<option value="06">2006</option>
-						<option value="07">2007</option>
-						<option value="08">2008</option>
-						<option value="09">2009</option>
-						<option value="10">2010</option>
-						<option value="11">2011</option>
-						<option value="12">2012</option>
-						<option value="13">2013</option>
-						<option value="14">2014</option>
-						<option value="15">2015</option>
-						<option value="16">2016</option>
-						<option value="17">2017</option>
-						<option value="18">2018</option>
-						<option value="19">2019</option>
-						<option value="20">2020</option>
-						<option value="21">2021</option>
-						<option value="22">2022</option>
-						<option value="23">2023</option>
-
-					</select>
-				</div>
-				<div class="field">
-					<select class="ui fluid dropdown">
-						<option value="">월</option>
-						<option value="1">1월</option>
-						<option value="2">2월</option>
-						<option value="3">3월</option>
-						<option value="4">4월</option>
-						<option value="5">5월</option>
-						<option value="6">6월</option>
-						<option value="7">7월</option>
-						<option value="8">8월</option>
-						<option value="9">9월</option>
-						<option value="10">10월</option>
-						<option value="11">11월</option>
-						<option value="12">12월</option>
-					</select>
-				</div>
-			</div>
+			<input type="text" name="birth" value="${pet.birth }">
 		</div>
 
 
@@ -111,7 +67,7 @@
 			<h4 class="ui header">품종</h4>
 			<div class="field">
 
-				<input type="text" name="booking[품종]">
+				<input type="text" name="type" value="${pet.type }">
 
 			</div>
 			
@@ -155,7 +111,7 @@
 			<h4 class="ui header">자주 다니는 동물병원 이름과 위치(동)</h4>
 			<div class="field">
 
-				<input type="text" name="booking[동물병원]">
+				<input type="text" name="hospital" value="${book.hospital }">
 
 			</div>
 
@@ -163,19 +119,31 @@
 			<h4 class="ui header">전하고 싶은 말</h4>
 			<div class="field">
 
-				<textarea rows="2" placeholder="특이사항, 주의사항 등등 자유롭게 적어주세요"></textarea>
+				<textarea name="message" value="${book.message }" rows="2" placeholder="특이사항, 주의사항 등등 자유롭게 적어주세요"></textarea>
 			</div>
-
-
-
+			
+			<div class="field">
+			<h4 class="ui header">체크인 날짜</h4>
+			<input type="date" name="checkIn">
+			</div>
+			
+			<div class="field">
+			<h4 class="ui header">체크아웃 날짜</h4>
+			<input type="date" name="checkOut">
+			</div>
+			
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+<button type="submit"  class="btn btn-primary" ><!-- data-bs-toggle="modal" data-bs-target="#exampleModal"> -->
   예약 신청하기
 </button>
+			
+</form>
+
+
 </div>
 
 <!-- 결제 금액 Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<%-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -190,7 +158,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#bookModal">예약하기</button>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#bookForm" onclick="location.href='/book/bookAdd'">예약하기</button>
       </div>
     </div>
   </div>
@@ -207,11 +175,11 @@
        예약 신청이 완료되었습니다.
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">확인</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="location.href='/book/list'">확인</button>
       </div>
     </div>
   </div>
-</div>
+</div> --%>
 
 	</form>
 

@@ -13,6 +13,7 @@
 <link rel="stylesheet" type="text/css" href="/js/semantic/semantic.min.css">
 </head>
 <body>
+<d:navBar current="mapMypage" />
 
 <h1> 즐겨찾기 </h1>
 

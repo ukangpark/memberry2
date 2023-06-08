@@ -88,12 +88,6 @@ public class PetsitterController {
 	}
 	
 	
-	@GetMapping("regiForm")
-	public String regiForm() {
-		return "book/regiForm";
-	}
-	
-	
 	@GetMapping("hostList")
 	public void hostList(Model model) {
 		//호스트 리스트 포워드

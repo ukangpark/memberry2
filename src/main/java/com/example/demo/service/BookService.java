@@ -20,6 +20,13 @@ public class BookService {
 		List<Book> list = mapper.selectAll();
 		return list;
 		}
+	
+	
+	//예약신청서
+	public boolean addRegi(Book book) {
+		int cnt = mapper.insert(book);
+		return cnt==1;
+	}
 
 	
 	// 눌렀을때 페이지 뜨게
@@ -35,7 +42,7 @@ public class BookService {
 	}
 
 	//페이지네이션
-	public Map<String, Object> bookList(Integer page) {
+	public Map<String, Object> bookList(Integer page,String userId) {
 		Integer rowPerPage = 4;
 		
 		Integer startIndex = (page-1) * rowPerPage;
@@ -61,7 +68,7 @@ public class BookService {
 		pageInfo.put("lastPageNum", lastPageNumber);
 		
 		// 게시물 목록 넘겨주고
-		List<Book> list = mapper.selectAllPaging(startIndex, rowPerPage);
+		List<Book> list = mapper.selectAllPaging(startIndex, rowPerPage, userId);
 				return Map.of("pageInfo", pageInfo,
 							  "bookList", list);
 		
@@ -71,6 +78,12 @@ public class BookService {
 	public void bookAccept(int num) {
 		mapper.bookAcceptUpdate(num);
 		
+	}
+
+
+	// 펫 정보 가져오기
+	public Registration getPet(String userId) {
+		return mapper.getPet(userId);
 	}
 
 
