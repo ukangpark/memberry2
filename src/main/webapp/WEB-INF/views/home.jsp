@@ -157,10 +157,6 @@
 				<c:forEach items="${feedList}" var="feed">
 
 					
-				<!-- 좋아요 기능을 위한 id 값 불러오기 -->
-				<span id="feedIdText" class="d-none">
-					${feed.id }
-				</span>
 							
 					<div class="ui card" style="margin: 30px;">
 						<div class="content">
@@ -185,12 +181,14 @@
 						<div class="extra content">
 							<span class="left floated"> 
 							
-							<span id="likeIcon" >
+							<!-- 좋아요 기능 구현 -->
+							<span class="likeIcon" data-feed-id="${feed.id }">
 								<img src="/images/olhomebone.png">
 							</span>
-							<span id="likeNumber">
+							<span class="likeNumber">
 								${feed.likeCount } 
 							</span> likes 
+							
 								<!-- Button trigger modal -->
 								<button type="button" class="btn btn-secondary-link" data-bs-toggle="modal" data-bs-target="#commentModal">
 									<i class="fa-solid fa-comment"></i>

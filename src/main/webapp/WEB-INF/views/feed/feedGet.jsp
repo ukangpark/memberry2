@@ -86,11 +86,7 @@
 	</div>
 
 	<div class="pageName">
-		<h1>
-			<span id="feedIdText">
-			${feed.id }
-			</span>
-			번 게시물</h1>
+		<h1>${feed.id }번 게시물</h1>
 	</div>
 
 	<div class="wrapper">
@@ -120,10 +116,10 @@
 
 				<div class="content" >
 					
-						<span id="likeIcon" >
+						<span class="likeIcon" data-feed-id="${feed.id }">
 							<!-- <i class="fa-solid fa-bone"></i> --><img src="/images/olbone.png">
 						</span>
-						<span id="likeNumber" style="font-weight: 300; font-size: large;">
+						<span class="likeNumber" style="font-weight: 300; font-size: large;">
 							${feed.likeCount }
 						</span> 
 						<span style="font-weight: 300; font-size: large;">likes</span>
