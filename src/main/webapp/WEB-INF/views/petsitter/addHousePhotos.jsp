@@ -16,6 +16,7 @@
 <script src="/js/semantic/semantic.min.js"></script>
 </head>
 <body>
+	<my:navBar></my:navBar>
 	<h1>집사진 등록</h1>
 	<form action="/petsitter/addHousePhotos" method="post" enctype="multipart/form-data">
 		<div class="field">
@@ -33,29 +34,6 @@
 			<input class="d-none" id="housePhoto" type="file" name="housePhotoes" multiple>
 		</div>
 	</form>
-	
-		<!-- 사진 등록 모달 -->
-<%-- 	<div class="modal fade" id="inputPhoto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-lg">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h1 class="modal-title fs-5" id="exampleModalLabel">집사진 등록하기</h1>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				</div>
-				<div class="modal-body">
-					<form action="" id="test" method="post" enctype="multipart/form-data">
-						<div class="field">
-							<input type="text" name="hostId" value="${param.hostId }">
-							<input type="file" name="housePhotoes" multiple>
-						</div>
-					</form>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소하기</button>
-					<button type="submit" class="btn btn-primary" form="test">등록하기</button>
-				</div>
-			</div>
-		</div>
-	</div> --%>
+
 </body>
 </html>
