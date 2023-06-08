@@ -1,6 +1,6 @@
 package com.example.demo.mapper;
 
-import java.util.List;
+import java.util.*;
 
 import org.apache.ibatis.annotations.*;
 
@@ -26,6 +26,14 @@ public interface CommentMapper {
 			DELETE FROM Comment
 			WHERE id = #{id}
 			""")
-	Integer deleteById();
+	Integer deleteById(Integer id);
+
+	@Update("""
+			UPDATE Comment
+			SET 
+				content = #{content}
+			WHERE id = {id}
+			""")
+	Integer update(Comment comment);
 
 }
