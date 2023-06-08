@@ -21,6 +21,8 @@
 </head>
 <body>
 	
+	<d:navBar current="mapMain" />
+	
 	<h1>너와 함께</h1>
 <%-- 이거는 왜 안뜨는걸까.. <i class="fa-duotone fa-paw" style="--fa-primary-color: #f9a9a9; --fa-secondary-color: #1f1f1f;"></i> --%>	
 	

@@ -60,11 +60,11 @@ public interface BookMapper {
 			WHERE Book.memberId = Pet.memberId
 			AND Detail.id = Book.detailId
 			AND Host.id = Detail.hostId
-			-- AND Pet.memberId = '시큐리티에 있는 아이디값'
+			AND Pet.memberId = #{userId}
 			ORDER BY Book.num DESC
 			LIMIT #{startIndex}, #{rowPerPage}
 			""")
-	List<Book> selectAllPaging(Integer startIndex, Integer rowPerPage);
+	List<Book> selectAllPaging(Integer startIndex, Integer rowPerPage, String userId);
 
 	// 시큐리티 적용후 쿼리 변경 예정
 	@Select("""
@@ -86,8 +86,27 @@ public interface BookMapper {
 			""")
 	void bookAcceptUpdate(int num);
 
-
 	
+	@Insert("""
+			INSERT INTO Book (hospital, message)
+			VALUES (#{hospital}, #{message})
+			""")
+	@Options(useGeneratedKeys = true, keyProperty="id")
+	int insert(Book book);
+
+	@Select("""
+			SELECT 
+				petName,
+				type,
+				birth,
+				gender,
+				neutered,
+				weight
+			FROM Pet
+			WHERE Pet.memberId = #{userId}
+			""")
+	Registration getPet(String userId);
+
 	
 }
 

@@ -16,6 +16,8 @@
 
 </head>
 <body>
+	<d:navBar current="myPageTest" />
+
 	<div class="container-lg">
 	
 	   <i class="fa-duotone fa-paw" style="--fa-primary-color: #ffd6e2; --fa-secondary-color: #a6969b;"></i>

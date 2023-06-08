@@ -16,17 +16,28 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 <script src="/js/semantic/semantic.min.js"></script>
+
+<style>
+h1{ text-align : center;
+}
+
+</style>
+
 </head>
 <body>
-
+<d:navBar current="list" />
 
 
 	<div class="container-lg">
 		<a href = "list" style = "color:black">
+		<br />
 		<h1>펫시터 목록</h1>
 		</a>
-<hr />
+<br />
+<br />
 
+<br />
+<br />
 
 <form action="list" class="d-flex" role="search">
         <input value="${param.search }" name="search" class="form-control me-2" type="search" placeholder="맡기고 싶은 지역을 검색해보세요" aria-label="Search">
