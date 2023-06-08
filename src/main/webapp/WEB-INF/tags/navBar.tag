@@ -42,7 +42,7 @@
 
 				
 				<sec:authorize access="isAuthenticated()">
-					<a class="${current eq 'myFeed' ? 'active' : '' } item" href="/myFeed"> 마이피드 </a>
+					<a class="${current eq 'myFeed' ? 'active' : '' } item" href="/feed/myFeed"> 마이피드 </a>
 				</sec:authorize>
 				
 				<sec:authorize access="isAuthenticated()">
@@ -76,6 +76,10 @@
 				
 				<sec:authorize access="isAuthenticated()">
 					<a class="${current eq 'registration' ? 'active' : '' } item" href="/registration"> 반려동물등록 </a>
+				</sec:authorize>
+				
+				<sec:authorize access="isAuthenticated()">
+					<a class="${current eq 'petList' ? 'active' : '' } item" href="/petList"> 나의반려동물 </a>
 				</sec:authorize>
 				
 				<sec:authorize access="isAuthenticated()">

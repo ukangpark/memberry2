@@ -59,7 +59,7 @@
 		<!-- 상단 컨테이너 (프로필사진, addBtn) -->
 		<div class="ui container" id="imagePreview">
 			<img class="preview" src="">
-			<span class="defaultImage"><img alt="" src="images/발바닥.png"></span>
+			<span class="defaultImage"><img alt="" src="images/paw.png"></span>
 		</div>
 		<label for="fileInput" class="big circular ui icon button" id="addBtn"><i class="large plus icon"></i></label>
 		<input style="display: none" type="file" id="fileInput" name="file" accept="image/*" />

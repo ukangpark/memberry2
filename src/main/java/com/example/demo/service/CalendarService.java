@@ -22,10 +22,6 @@ public class CalendarService {
 		return calendardao.getCalendar();
 	}
 
-	public void add(Calendar calendar) {
-		mapper.insertScheduleByDate(calendar);
-		
-	}
 	
 	
 

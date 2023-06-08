@@ -1,18 +1,27 @@
 package com.example.demo.controller;
 
-import java.io.*;
-import java.util.*;
+import java.util.List;
+import java.util.Map;
 
-import org.springframework.beans.factory.annotation.*;
-import org.springframework.stereotype.*;
-import org.springframework.ui.*;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.*;
-import org.springframework.web.servlet.mvc.support.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.example.demo.domain.*;
+import com.example.demo.domain.Feed;
 import com.example.demo.domain.File;
-import com.example.demo.service.*;
+import com.example.demo.domain.Like;
+import com.example.demo.service.MyFeedService;
 
 @Controller
 @RequestMapping("/")
@@ -84,7 +93,7 @@ public class MyFeedController {
 		} else {
 			// 수정이 안 되면 수정하기 양식으로 리디렉션
 			rttr.addAttribute("fail", "fail"); 
-			return "redirect:/feed/modify/" + file.getFeedId();
+			return "redirect:/modify/" + file.getFeedId();
 		}
 	}
 	
@@ -96,5 +105,24 @@ public class MyFeedController {
 		} else {
 			return "redirect:/id/" + id;
 		}
+	}
+	
+	@PostMapping("/like")
+	@ResponseBody
+	public ResponseEntity<Map<String, Object>> like(
+			@RequestBody Like like,
+			Authentication authentication) {
+		
+		if (authentication == null) {
+			return ResponseEntity
+					.status(403)
+					.body(Map.of("message", "로그인 후 좋아요 클릭 가능합니다."));
+		} else {
+			
+			return ResponseEntity
+					.ok()
+					.body(service.like(like, authentication));
+		}
+		
 	}
 }

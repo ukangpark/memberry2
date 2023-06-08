@@ -38,13 +38,7 @@ public class CalendarController {
 		return "toDoList";
 	}
 	
-	@PostMapping(value = "/schedule/add")
-	public String addSchedule() {
-		Map<String, Calendar> map = new HashMap<>();
-		
-		map.put("event1", ("db이벤트1", "2023-12-11", "2023-12-12"));
-		map.put("event2", new Calendar());
-	}
+
 	
 
 	
