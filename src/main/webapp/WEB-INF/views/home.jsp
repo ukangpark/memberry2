@@ -20,27 +20,41 @@
 	crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css">
+
 <style>
+
 #header {
 	text-align: center;
 	margin: 40px 0;
-}
-#imgContainer {
-	width: 300px;
-	height: 300px;
+	display: flex;
+	justify-content: center;
 }
 
- #img {
+#imgContainer {
+	width: 300px;
+	height: 350px;
+}
+#imgContainer > #img {
 	width: 100%;
 	height: 100%;
 }
 
+.wrapper {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	min-height: 100vh;
+	margin-right: 10%;
+	margin-left: 10%;
+	border-radius: 1.5rem;
+	position: relative;
+}
 
-
-
-/* .slider {
+.slider {
 	text-align: center;
 }
+
+
 
 .bx-wrapper {
 	position: relative;
@@ -89,13 +103,13 @@
 
 .bx-pager div {
 	display: inline-block;
-	padding: 0 5px;
+	padding: 0 3px;
 }
 
 .bx-pager div a {
 	display: block;
-	width: 5px;
-	height: 5px;
+	width: 3px;
+	height: 3px;
 	background-color: #999;
 	font-size: 0;
 	border-radius: 50px;;
@@ -104,66 +118,114 @@
 
 .bx-pager div a.active {
 	background-color: #000;
-} */
+}
 
 /* 댓글 모달 css */
 .modal-title {
 	font-weight: bold;
 }
+
 .modal_table {
 	width: 100%;
 	text-align: center;
 }
-.modal-content{
-overflow-y: initial !important
+
+.modal-content {
+	overflow-y: initial !important
 }
-.modal-body{
-height: 250px;
-overflow-y: auto;
+
+.modal-body {
+	height: 250px;
+	overflow-y: auto;
 }
 </style>
 <!-- bxslider -->
-<!-- <link rel="stylesheet"
-	href="http://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script
-	src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script> -->
-
-
+	src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
 
 </head>
 <body>
-
-	<my:navBar current="home" />
+	  <div>
+		  <my:navBar current="home" />  
+	  
+	  </div>
+	   
 	<div id="header">
 		<h2>Membery</h2>
 	</div>
-	
 
-	<div class="ui center aligned container" id="container"
+	<div class="wrapper">
+	
+<div class="ui center aligned container" id="container">
+		<div class="ui link cards">
+		<c:forEach items="${feedList}" var="feed">
+		
+			<div class="ui card"  style="margin: 30px;">
+				<div class="content">
+					<!-- 이미지 파일 출력 -->
+					<br />
+					<ul class="slider" id="imgContainer">
+						<c:forEach items="${feed.fileName }" var="fileName">
+					
+							<li>
+							<a href="/feedId/${feed.id}">
+								<img id="img" class="ui medium rounded imager"	src="${bucketUrl }/${feed.id }/${fileName }" alt="" />
+							</a> 
+							</li>
+					
+						</c:forEach>
+					</ul>
+				</div>
+				<div class="content">
+					<div class="header">${feed.title}</div>
+					<div class="meta">
+						<a>${feed.writer}</a>
+					</div>
+					<div class="description">${feed.content}</div>
+				</div>
+				<div class="extra content">
+					<span class="left floated"> 
+					
+					<i class="heart outline like icon"></i>17 likes 
+					<!-- Button trigger modal -->
+						<button type="button" class="btn btn-secondary-link"
+							data-bs-toggle="modal" data-bs-target="#commentModal">
+							<i class="fa-solid fa-comment"></i>
+						</button>
+						 <i class="paw icon"></i>
+
+					</span> <span class="right floated">${feed.inserted}</span>
+				</div>
+			</div>
+	
+	</c:forEach>
+
+</div>
+</div>
+	</div>
+	<!-- <i class="xi-angle-left-thin"></i>
+	<i class="xi-angle-right-thin"></i> -->
+
+
+	<%-- <div class="ui center aligned container" id="container"
 		style="background-color: #e2e2e2;">
 		<div class="ui link cards">
 			
 
 
 			<c:forEach items="${feedList}" var="feed">
-				<div class="ui card" id="my-card">
-				<div class="content"">
-					<div id="inserted" class="right floated meta">${feed.inserted }</div>
-					<img id="profilImage" class="ui avatar image" src="/images/또복이 (1).jpg"> ${feed.writer}
-				</div>
-		
+				<div class="ui card" style="margin: 15px 40px;">
+					<div class="ui slide masked reveal image" id="imgContainer">
+						<a href="/feedId/${feed.id}">	
+							<img id="image1" src="${bucketUrl }/${feed.id }/${feed.fileName[0] }" alt=""class="visible content" />
+					 	 	<img id="image2" src="${bucketUrl }/${feed.id }/${feed.fileName[1] }" alt="" class="hidden content" />					
+						</a>
 
-				<div class="content" id="imgContainer">
-					<!-- 이미지 파일 출력 -->
-					<br />
-					<ul class="bxslider">
-						<c:forEach items="${feed.fileName }" var="fileName">
-							<li><img id="img" class="ui medium rounded imager" src="${bucketUrl }/${feed.id }/${fileName }" alt="" /></li>
-						</c:forEach>
-					</ul>
-				</div>
+					</div>
 					<div class="content">
 						<div class="header">${feed.title}</div>
 						<div class="meta">
@@ -175,9 +237,9 @@ overflow-y: auto;
 						<span class="left floated"> <i
 							class="heart outline like icon"></i>17 likes
 							<!-- Button trigger modal -->
-							<button type="button" class="btn btn-outline-secondary"
+							<button type="button"  class="btn btn-secondary-link"
 								data-bs-toggle="modal" data-bs-target="#commentModal">
-								<i class="comment icon"></i>
+								<i class="fa-solid fa-comment"></i>
 							</button>
 							<i class="paw icon"></i> 
 
@@ -187,8 +249,7 @@ overflow-y: auto;
 			</c:forEach>
 
 		</div>
-	</div>
-
+	</div> --%>
 
 
 	<!-- 댓글 modal -->
@@ -207,28 +268,21 @@ overflow-y: auto;
 					<div class="input-group">
 						<div class="form-floating">
 							<textarea id="commentTextArea" class="form-control"
-								style="height: 50px; margin-bottom: 20px;" placeholder="댓글을 남겨주세요"></textarea>
+								style="height: 50px; margin-bottom: 20px;"
+								placeholder="댓글을 남겨주세요"></textarea>
 							<label for="floatingTextArea">댓글을 남겨주세요</label>
 						</div>
-						<button id="sendCommentBtn" class="btn btn-outline-primary" style="height: 50px;">
+						<button id="sendCommentBtn" class="btn btn-outline-primary"
+							style="height: 50px;">
 							<i class="fa-regular fa-paper-plane"></i>
 						</button>
 					</div>
-					<div class="showComment">
-					<table class="modal_table">
-					<c:forEach begin="1" end="10">
-						<tr>
-							<td>작성자</td>
-							<td>댓글</td>
-							<td>
-								<button class="btn btn-outline-primary">수정</button>
-								<button class="btn btn-outline-secondary">삭제</button>
-								<button class="btn btn-danger">신고</button>
-							</td>
-						</tr>
-					</c:forEach>
-					</table>
-				</div>
+					
+					<ul class="list-group" id="commentListContainer">
+						
+						
+					</ul>
+				
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary"
@@ -241,15 +295,8 @@ overflow-y: auto;
 
 
 
-	 <!-- <script src="/js/home.js"></script>  -->
- 	<script type="text/javascript">
-		$(document).ready(function() {
-			let slider = $('.bxslider').bxSlider({
-				
-			});
-		});
-	</script>
-	
+	<script src="/js/home.js"></script>
+
 
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
@@ -260,5 +307,6 @@ overflow-y: auto;
 		crossorigin="anonymous"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>
+
 </body>
 </html>
