@@ -15,8 +15,12 @@ public class HomeService {
 	@Autowired
 	private HomeMapper mapper;
 	
+	@Autowired
+	private FeedLikeMapper likeMapper;
+	
 	public List<Feed> listFeed() {
 		List<Feed> list = mapper.selectAll();
+				
 		return list;
 	}
 	
