@@ -1,9 +1,9 @@
 package com.example.demo.domain;
 
-import java.sql.Date;
-import java.time.Period;
+import java.sql.*;
+import java.time.*;
 
-import lombok.Data;
+import lombok.*;
 
 @Data
 public class Registration {
@@ -19,5 +19,6 @@ public class Registration {
 	private String photo;
 	private String memberId;
 	private Period diff;
+	
 
 }

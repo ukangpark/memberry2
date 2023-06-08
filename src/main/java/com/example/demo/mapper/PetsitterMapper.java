@@ -25,6 +25,7 @@ public interface PetsitterMapper {
 			VALUES
 			(#{host.hostName}, #{host.phone}, #{host.idNumber}, #{host.si}, #{host.gu}, #{host.dong}, #{host.address}, #{host.houseType}, #{host.pet}, #{host.species}, #{host.experience}, #{profile})
 			""")
+	@Options(useGeneratedKeys = true, keyProperty = "host.id")
 	Integer insertHost(Host host, String profile);
 
 	@Select("""
@@ -83,6 +84,7 @@ public interface PetsitterMapper {
 			VALUES
 			(#{title}, #{body}, #{hostId})
 			""")
+	@Options(useGeneratedKeys = true, keyProperty = "id")
 	Integer insertDetail(Detail detail);
 
 	// 외래키 설정하면 쿼리 변경해야함 (펫시터 전체보기)
@@ -119,15 +121,15 @@ public interface PetsitterMapper {
 	@Select("""
 			SELECT * FROM HostHousePhoto WHERE detailId = #{detailId}
 			""")
-	List<HostHousePhoto> selectHostHousePhotoByHostId(Integer hostId);
+	List<HostHousePhoto> selectHostHousePhotoByDetailId(Integer detailId);
 	
 	@Insert("""
 			INSERT INTO HostHousePhoto
-			(housePhoto, hostId)
+			(housePhoto, detailId)
 			VALUES
-			(#{housePhoto}, #{hostId})
+			(#{housePhoto}, #{detailId})
 			""")
-	Integer insertHostHousePhoto(String housePhoto, Integer hostId);
+	Integer insertHostHousePhoto(String housePhoto, Integer detailId);
 	
 	@Select("""
 			SELECT count(*) FROM HostHousePhoto WHERE hostId = #{hostId};
@@ -174,6 +176,22 @@ public interface PetsitterMapper {
 		</script>
 			""")
 	Integer countAll(String search);
+	
+	@Select("""
+			SELECT * FROM HostHousePhoto
+			""")
+	List<HostHousePhoto> selectHostHousePhotoAll();
+	
+	@Delete("""
+			DELETE FROM HostHousePhoto WHERE detailId = #{detailId}
+			""")
+	Integer deleteHostHousePhotoByDetailId(Integer detailId);
+	
+	@Delete("""
+			DELETE FROM HostHousePhoto
+				WHERE detailId = #{detailId} AND housePhoto = #{removePhoto}
+			""")
+	Integer deleteHousePhotoByDetailIdAndPhotoName(Integer detailId, String removePhoto);
 
 	
 	

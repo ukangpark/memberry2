@@ -22,7 +22,7 @@
 			<div class="ten wide column teal">
 				<div class="ui images">
 					<c:forEach items="${hostHousePhoto }" var="hostHousePhoto">
-						<img class="ui medium rounded image" src="${bucketUrl }/hostHousePhoto/${host.id }/${hostHousePhoto.housePhoto }">
+						<img class="ui medium rounded image" src="${bucketUrl }/hostHousePhoto/${detail.id }/${hostHousePhoto.housePhoto }">
 					</c:forEach>
 				</div>
 			</div>
@@ -76,7 +76,7 @@
 			<p>본문 : ${detail.body }</p>
 		</div>
 		<div>
-			<button class="ui right floated inverted red button" onclick="location.href='/petsitter/regiForm'" >예약</button>
+			<button class="ui right floated inverted red button" onclick="location.href='/book/regiForm/${host.id}'" >예약</button>
 		</div>
 	</div>
 
