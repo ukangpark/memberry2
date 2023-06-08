@@ -18,4 +18,11 @@ public interface FeedLikeMapper {
 			  AND memberId = #{memberId}
 			""")
 	Integer delete(Like like);
+
+	@Select("""
+			SELECT COUNT(*) 
+			FROM FeedLike
+			WHERE feedId = #{feedId}
+			""")
+	Integer countByFeedId(Integer feedId);
 }
