@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.*;
+import org.springframework.security.core.*;
 import org.springframework.stereotype.*;
 import org.springframework.transaction.annotation.*;
 import org.springframework.web.multipart.*;
@@ -27,6 +28,9 @@ public class MyFeedService {
 	
 	@Autowired
 	private MyFeedMapper mapper;
+	
+	@Autowired
+	private FeedLikeMapper likeMapper;
 	
 	public List<File> listMyFeed() {
 		List<File> file = mapper.selectAll();
@@ -126,5 +130,23 @@ public class MyFeedService {
 		return cnt == 1;
 	}
 
-	
+
+	public Map<String, Object> like(Like like, Authentication authentication) {
+		Map<String, Object> result = new HashMap<>();
+		
+		result.put("like", false);
+		
+		like.setMemberId(authentication.getName());
+		Integer deleteCnt = likeMapper.delete(like);
+		
+		if (deleteCnt != 1) {
+			Integer insertCnt = likeMapper.insert(like);
+			result.put("like", true);
+		}
+		
+		/* Integer count = likeMapper.countByFeedId(like.getFeedId()); */
+		
+		
+		return result;
+	}
 }

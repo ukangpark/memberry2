@@ -81,9 +81,23 @@
 <body id="body" style="background-color: #FFF2F2">
 
 	<my:navBar />
+	
+	<!-- toast 알람 -->
+	<div class="toast-container top-0 start-50 translate-middle-x p-3">
+		<div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+			<div class="toast-header">
+				<button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+			</div>
+			<div class="toast-body"></div>
+		</div>
+	</div>
 
 	<div class="pageName">
-		<h1>${feed.id }번 게시물</h1>
+		<h1>
+			<span id="feedIdText">
+			${feed.id }
+			</span>
+			번 게시물</h1>
 	</div>
 
 	<div class="wrapper">
@@ -111,22 +125,23 @@
 					</ul>
 				</div>
 
-				<div id="iconContainer" class="content" >
+				<div class="content" >
 					
-						<span id="likeIcon" style="font-weight: normal">
-							<h3><i class="fa-solid fa-bone"></i>
+						<span id="likeIcon" >
+							<!-- <i class="fa-solid fa-bone"></i> --><img src="/images/olbone.png">
 						</span>
-						<span id="likeNummber">
-							17
-						</span> likes
+						<span id="likeNummber" style="font-weight: 300; font-size: large;">
+							${feed.likeCount }
+						</span> 
+						<span style="font-weight: 300; font-size: large;">likes</span>
 						
-					<span class="left floated" style="margin-right: 200px text">
-						<i class="comment icon"></i> 3 comments</h3>
+					<span class="left floated" style="margin-right: 200px; font-weight: 300; font-size: large;">
+						<!-- <i class="comment icon"></i> --><img src="/images/chat.png"> 3 comments
 					</span> 
 				</div>
 				<div class="extra content">
 					<div class="ui large transparent right icon input">
-						<input size=42 type="text" placeholder="Add Comment..."><img class="" src="/images/comment.png">
+						<input size=42 type="text" placeholder="Add Comment..."><img src="/images/comment.png">
 					</div>
 				</div>
 			</div>
@@ -185,6 +200,10 @@
 				slideWidth : 400
 			});
 		});
+	</script>
+	
+	<script src="/js/feed/like.js">
+	
 	</script>
 </body>
 </html>
