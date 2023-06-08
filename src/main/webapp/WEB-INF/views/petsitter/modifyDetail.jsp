@@ -21,8 +21,14 @@
 				<form id="modifyDetailForm" class="ui big form" method="post" action="/petsitter/modifyDetail" enctype="multipart/form-data">
 					<h1 class="ui dividing header">상세페이지 수정하기</h1>
 					<div class="field">
-						<label for="housePhotoes">집사진 등록</label>
-						<input id="housePhotoes" type="file" name="housePhotoes" multiple>
+						<c:forEach items="${hostHousePhoto }" var="hostHousePhoto" varStatus="status">
+							<label for="housePhoto${status.index }">
+								<img style="width: 100px;" src="${bucketUrl }/hostHousePhoto/${detail.id }/${hostHousePhoto.housePhoto }">
+							</label>
+							<input type="checkbox" name="removePhotos" value="${hostHousePhoto.housePhoto }" id="housePhoto${status.index }">
+						</c:forEach>
+						<label for="housePhotos">집사진 등록</label>
+						<input id="housePhotos" type="file" name="addPhotos" multiple>
 					</div>
 					<div class="field">
 						<label for="title">제목</label>
@@ -34,6 +40,9 @@
 					</div>
 					<div class="field">
 						<input type="text" name="hostId" value="${param.hostId }">
+					</div>
+					<div class="field">
+						<input type="text" name="id" value="${detail.id }">
 					</div>
 				</form>
 			</div>

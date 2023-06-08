@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.io.*;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.*;
@@ -12,6 +13,10 @@ import org.springframework.web.servlet.mvc.support.*;
 import com.example.demo.domain.*;
 import com.example.demo.service.*;
 
+import software.amazon.awssdk.awscore.exception.*;
+import software.amazon.awssdk.core.exception.*;
+import software.amazon.awssdk.services.s3.model.*;
+
 @Controller
 @RequestMapping("petsitter")
 public class PetsitterController {
@@ -23,8 +28,8 @@ public class PetsitterController {
 	public void main(Model model) {
 		//main 페이지 포워드
 		//모든 정보를 읽음
-		List<Host> list = petsitterService.selectAll();
-		model.addAttribute("host", list);
+		Map<String, Object> list = petsitterService.selectAll();
+		model.addAllAttributes(list);
 	}
 	
 	@GetMapping("detail")
@@ -49,7 +54,7 @@ public class PetsitterController {
 		//host 정보 받아서 추가S3Exception
 		int count = petsitterService.insertHost(host, file);
 		rttr.addFlashAttribute("host", host);
-		return "redirect:/petsitter/main2";
+		return "redirect:/petsitter/main";
 	}
 	
 	@GetMapping("hostMyPage")
@@ -97,8 +102,8 @@ public class PetsitterController {
 	@GetMapping("hostList")
 	public void hostList(Model model) {
 		//호스트 리스트 포워드
-		List<Host> host = petsitterService.selectAll();
-		model.addAttribute("host", host);
+		Map<String, Object> info = petsitterService.selectAll();
+		model.addAllAttributes(info);
 	}
 	
 	@PostMapping("hostDelete")
@@ -109,17 +114,16 @@ public class PetsitterController {
 	}
 	
 	@GetMapping("addDetail")
-	public void adddetailForm(Integer hostId) {
+	public void addDetailForm(Integer hostId) {
 		// 상세페이지 등록폼 view 포워드
 	}
 	
 	@PostMapping("addDetail")
 	public String addDetailProcess(
 			Detail detail, 
-			@RequestParam("housePhotoes") MultipartFile[] housePhotoes,
 			RedirectAttributes rttr) throws Exception {
 		// 상세페이지 등록 과정 
-		boolean ok = petsitterService.insertDetail(detail, housePhotoes);
+		boolean ok = petsitterService.insertDetail(detail);
 		
 		if(ok) {
 			// 상세페이지 최초 등록
@@ -128,7 +132,22 @@ public class PetsitterController {
 			// 상세페이지 재등록
 			rttr.addFlashAttribute("message", "게시물이 등록되지 않았습니다.");
 		}
-		return "redirect:/petsitter/detail?id=" + detail.getHostId();
+		
+		return "redirect:/petsitter/addHousePhotos?hostId=" + detail.getHostId();
+	}
+	
+	@GetMapping("addHousePhotos")
+	public void addHousePhotosForm(@RequestParam("hostId") Integer hostId) {
+		
+	}
+	
+	@PostMapping("addHousePhotos")
+	public String addHousePhotosProgress(
+			@RequestParam(value =  "housePhotoes", required = false) MultipartFile[] housePhotoes,
+			@RequestParam("hostId") Integer hostId) throws Exception {
+		Integer count = petsitterService.insertHousePhotos(housePhotoes, hostId);
+		
+		return "redirect:/petsitter/detail?id=" + hostId;
 	}
 	
 	@GetMapping("modifyDetail")
@@ -144,10 +163,11 @@ public class PetsitterController {
 	
 	@PostMapping("modifyDetail")
 	public String modifyProcess(
-			Detail detail, 
-			@RequestParam("housePhotoes") MultipartFile[] housePhotoes) throws Exception {
+			Detail detail,
+			@RequestParam(value =  "removePhotos", required = false) List<String> removePhotos,
+			@RequestParam(value =  "addPhotos", required = false) MultipartFile[] addPhotos) throws Exception {
 		// 상세페이지 수정 process 
-		boolean ok = petsitterService.modifyDetail(detail, housePhotoes);
+		boolean ok = petsitterService.modifyDetail(detail, addPhotos, removePhotos);
 		return "redirect:/petsitter/detail?id=" + detail.getHostId();
 	}
 	

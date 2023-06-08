@@ -22,7 +22,7 @@
 			<div class="ten wide column teal">
 				<div class="ui images">
 					<c:forEach items="${hostHousePhoto }" var="hostHousePhoto">
-						<img class="ui medium rounded image" src="${bucketUrl }/hostHousePhoto/${host.id }/${hostHousePhoto.housePhoto }">
+						<img class="ui medium rounded image" src="${bucketUrl }/hostHousePhoto/${detail.id }/${hostHousePhoto.housePhoto }">
 					</c:forEach>
 				</div>
 			</div>

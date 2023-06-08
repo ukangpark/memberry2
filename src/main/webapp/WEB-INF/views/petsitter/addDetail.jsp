@@ -19,12 +19,8 @@
 	<div class="ui centered equal width grid">
 		<div class="eight wide column">
 			<div class="ui segment">
-				<form id="addDetailForm" class="ui big form" method="post" action="/petsitter/addDetail" enctype="multipart/form-data">
+				<form id="addDetailForm" class="ui big form" method="post" action="/petsitter/addDetail">
 					<h1 class="ui dividing header">상세페이지 등록하기</h1>
-					<div class="field">
-						<label for="housePhoto">집사진 등록</label>
-						<input id="housePhoto" type="file" name="housePhotoes" multiple>
-					</div>
 					<div class="field">
 						<label for="title">제목</label>
 						<input id="title" type="text" name="title" placeholder="제목을 입력해주세요.">
@@ -49,6 +45,9 @@
 		</div>
 	</div>
 
+
+
+
 	<!-- 등록 모달 -->
 	<div class="modal fade" id="addDetailModal" tabindex="-1" aria-labelledby="addDetailModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
@@ -69,6 +68,18 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-	<script src="semantic/dist/semantic.min.js"></script>
+	<script src="/js/semantic/semantic.min.js"></script>
+	<style type="text/css">
+#imgContainer {
+	position: relative;
+}
+
+#addBtn {
+	position: absolute;
+	top: 270px;
+	left: 270px;
+}
+
+</style>
 </body>
 </html>

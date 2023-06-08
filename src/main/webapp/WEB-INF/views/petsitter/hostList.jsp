@@ -12,7 +12,7 @@
 <link rel="stylesheet" type="text/css" href="/js/semantic/semantic.min.css">
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 </head>
-<body>	
+<body>
 	<my:navBar current="hostList"></my:navBar>
 	<div class="container">
 		<h1>호스트 리스트</h1>
@@ -27,7 +27,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${host }" var="host">
+ 				<c:forEach items="${host }" var="host">
 					<tr>
 						<td>
 							<a href="/petsitter/hostMyPage?id=${host.id }">${host.hostName }</a>
@@ -35,9 +35,10 @@
 						<td>${host.id }</td>
 						<td>${host.phone }</td>
 						<td>${host.detail eq 'true' ? '등록' : '미등록' }</td>
-						<td>${host.profile } </td>
+						<td>${host.profile }</td>
 					</tr>
 				</c:forEach>
+				
 			</tbody>
 		</table>
 	</div>
