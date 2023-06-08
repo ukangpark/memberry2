@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -31,7 +32,10 @@ public class MyPetsService {
 	@Value("${aws.s3.bucketName}")
 	private String bucketName;
 
-	public Map<String, Object> petsList() {
+	public Map<String, Object> petsList(Authentication auth) {
+		
+		Registration reg = new Registration();
+		//reg.setMemberId(auth);
 		List<Registration> list = mapper.selectAll();
 
 		var now = LocalDate.now();
