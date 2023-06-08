@@ -17,6 +17,8 @@ public class Feed {
 	private String location;
 	private List<String> fileName;
 	private Integer likeCount;
+	private Integer commentCount;
+	
 	
 	public void setInserted(Date date) {
 		this.inserted = FeedTime.calculateTime(date); // 기존의 getter, setter에서 변경된 부분

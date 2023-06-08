@@ -60,6 +60,10 @@ function listComment() {
 					}
 				});
 			})
+			$(".commentDeleteButton").click(function() {
+				const commentId = $(this).attr("data-comment-id");
+				$("#deleteCommentModalButton").attr("data-comment-id", commentId);
+			});
 		}
 	})
 }
@@ -82,6 +86,7 @@ $("#sendCommentBtn").click(function() {
 		
 	})
 })
+
 $("#commentUpdateBtn").click(function() {
 	const commentId = $("#commentUpdateInput").val();
 	const content = $("#commentUpdateTextArea").val();
@@ -101,3 +106,25 @@ $("#commentUpdateBtn").click(function() {
 		}
 	})
 })
+$("#deleteCommentModalButton").click(function() {
+	const commentId = $(this).attr("data-comment-id");
+	$.ajax("/comment/id/" + commentId, {
+		method: "delete",
+		complete: function(jqXHR) {
+			listComment();
+			$(".toast-body").text(jqXHR.responseJSON.message);
+			toast.show();
+		}
+	});
+});
+$("#deleteCommentModalButton").click(function() {
+	const commentId = $(this).attr("data-comment-id");
+	$.ajax("/comment/id/" + commentId, {
+		method: "delete",
+		complete: function(jqXHR) {
+			listComment();
+			$(".toast-body").text(jqXHR.responseJSON.message);
+			toast.show();
+		}
+	});
+});
