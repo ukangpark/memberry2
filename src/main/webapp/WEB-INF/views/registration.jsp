@@ -49,6 +49,7 @@
 <body>
 
 	<my:navBar current="registration"></my:navBar>
+	<my:alert></my:alert>
 
 	<!-- 상단 공백 -->
 	<div style="margin-bottom: 15px"></div>
@@ -74,18 +75,22 @@
 					<div class="field">
 						<input type="text" name="id" style="display: none">
 					</div>
+					
+					<div class="field">
+						<input type="text" name="memberId" value="${auth.getName() }" style="display: none">
+					</div>
 
 					<div class="field">
 						<div class="ui fluid labeled big input mt-5">
 							<div class="ui label">이름</div>
-							<input type="text" name="petName">
+							<input type="text" name="petName" value="${registration.petName }">
 						</div>
 					</div>
 
 					<div class="field">
 						<div class="ui fluid labeled big input mt-5">
 							<div class="ui label">품종</div>
-							<input type="text" name="type">
+							<input type="text" name="type" value="${registration.type }">
 						</div>
 					</div>
 
@@ -93,7 +98,7 @@
 						<div class="ui fluid labeled big input mt-5">
 							<div class="ui label">몸무게</div>
 							<div class="ui fluid selection dropdown" id="select1">
-								<input type="hidden" name="weight">
+								<input type="hidden" name="weight" value="${registration.weight }">
 								<div class="default text">몸무게를 선택 해 주세요.</div>
 								<i class="dropdown icon"></i>
 								<div class="menu">
@@ -108,7 +113,7 @@
 					<div class="field">
 						<div class="ui fluid labeled big input mt-5">
 							<div class="ui label">생년월일</div>
-							<input type="date" name="birth">
+							<input type="date" name="birth" value="${registration.birth }">
 						</div>
 					</div>
 				</div>
@@ -119,14 +124,14 @@
 				<div class="ui right aligned container" id="rightContainer">
 					<div class="ui fluid labeled big input mt-5">
 						<div class="ui label">함께한날</div>
-						<input type="date" name="together">
+						<input type="date" name="together" value="${registration.together }">
 					</div>
 
 					<div class="field">
 						<div class="ui fluid labeled big input mt-5">
 							<div class="ui label">성별</div>
 							<div class="ui fluid selection dropdown" id="select2">
-								<input type="hidden" name="gender">
+								<input type="hidden" name="gender" value="${registration.gender }">
 								<div class="default text">성별을 선택 해 주세요.</div>
 								<i class="dropdown icon"></i>
 								<div class="menu">
@@ -141,7 +146,7 @@
 						<div class="ui fluid labeled big input mt-5">
 							<div class="ui label">중성화 유무</div>
 							<div class="ui fluid selection dropdown" id="select3">
-								<input type="hidden" name="neutered">
+								<input type="hidden" name="neutered" value="${registration.neutered }">
 								<div class="default text">중성화 유무를 선택 해 주세요.</div>
 								<i class="dropdown icon"></i>
 								<div class="menu">
@@ -155,7 +160,7 @@
 					<div class="field">
 						<div class="ui fluid labeled big input mt-5">
 							<div class="ui label">반려동물 등록 번호</div>
-							<input type="text" name="registrationNum">
+							<input type="text" name="registrationNum" value="${registration.registrationNum }">
 						</div>
 					</div>
 

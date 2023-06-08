@@ -13,9 +13,10 @@ import com.example.demo.domain.Registration;
 public interface MyPetsMapper {
 
 	@Select("""
-			SELECT * FROM Pet
+			SELECT * FROM Pet 
+			WHERE memberId = #{memberId};
 			""")
-	List<Registration> selectAll();
+	List<Registration> selectAll(String memberId);
 
 	@Select("""
 			SELECT * FROM Pet

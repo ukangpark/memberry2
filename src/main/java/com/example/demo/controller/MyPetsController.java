@@ -32,7 +32,6 @@ public class MyPetsController {
 	@PreAuthorize("isAuthenticated()")
 	public void list (Model model, Authentication auth) {
 		
-		System.out.println(auth.getName());
 		Map<String, Object> list = service.petsList(auth);
 				
 		model.addAllAttributes(list);
@@ -63,7 +62,6 @@ public class MyPetsController {
 			@RequestParam(value="file", required = false) MultipartFile addFile,
 			@RequestParam(value="removeFile", required = false) String removeFile,
 			RedirectAttributes rttr) throws Exception {
-		System.out.println(removeFile); //컨트롤러가 잘 받는지 확인용 
 		boolean ok = service.modify(registration, removeFile, addFile);//서비스에게 넘김
 		
 		//DB가 수정되고 만약 잘 수정되었다면(true)이면 다음 실행흐름을 이어가라

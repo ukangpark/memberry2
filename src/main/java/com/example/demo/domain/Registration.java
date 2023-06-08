@@ -11,8 +11,8 @@ public class Registration {
 	private String petName;
 	private String type;
 	private String weight;
-	private Date birth;
-	private Date together;
+	private LocalDate birth;
+	private LocalDate together;
 	private String gender;
 	private String neutered;
 	private Integer registrationNum;

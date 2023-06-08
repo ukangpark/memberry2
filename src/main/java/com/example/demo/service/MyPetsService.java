@@ -33,14 +33,13 @@ public class MyPetsService {
 	private String bucketName;
 
 	public Map<String, Object> petsList(Authentication auth) {
-		
-		Registration reg = new Registration();
-		//reg.setMemberId(auth);
-		List<Registration> list = mapper.selectAll();
 
+		List<Registration> list = mapper.selectAll(auth.getName());
+
+		// 날짜계산
 		var now = LocalDate.now();
 		for (Registration r : list) {
-			r.setDiff(Period.between(r.getTogether().toLocalDate(), now));
+			r.setDiff(Period.between(r.getTogether(), now));
 		}
 
 		return Map.of("petsList", list);
@@ -83,14 +82,10 @@ public class MyPetsService {
 
 		// 파일명 조회
 		List<String> fileName = mapper.selectPhotoById(id);
-		
-		//s3에서 삭제
+
+		// s3에서 삭제
 		String objectKey = "membery/" + id + "/" + fileName;
-		DeleteObjectRequest dor = DeleteObjectRequest
-					.builder()
-					.bucket(bucketName)
-					.key(objectKey)
-					.build();
+		DeleteObjectRequest dor = DeleteObjectRequest.builder().bucket(bucketName).key(objectKey).build();
 		s3.deleteObject(dor);
 
 		int cnt = mapper.deleteById(id);

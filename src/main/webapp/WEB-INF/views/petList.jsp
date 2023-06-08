@@ -66,6 +66,7 @@ img {
 						<div class="description">
 							<p>${petsList.type }</p>
 							<p>${petsList.birth }</p>
+							<p style="display: none">${petsList.memberId}</p>
 
 							<p>
 								<i class="heart icon"></i>${petsList.diff.years}년 ${petsList.diff.months}개월째 함께 하는 중 입니다<i class="heart icon"></i>
