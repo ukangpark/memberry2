@@ -39,6 +39,7 @@ img {
 <body>
 
 	<my:navBar current="myPetList"></my:navBar>
+	<my:alert></my:alert>
 
 	<!-- 상단 공백 -->
 	<div style="margin-bottom: 15px"></div>

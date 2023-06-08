@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,6 +46,7 @@ public class MyPetsController {
 	
 	//펫 정보 수정 전 조회
 	@GetMapping("/petModify/{id}")
+	@PreAuthorize("isAuthenticated() and @customSecurityChecker.checkBoardWriter(authentication, #id)")
 	public String modify(@PathVariable("id") Integer id, Model model) {
 		model.addAttribute("pet", service.getPet(id));
 		return "petModify";
@@ -53,6 +55,7 @@ public class MyPetsController {
 	
 	//펫 정보 수정
 	@PostMapping("/petModify/{id}")
+	@PreAuthorize("isAuthenticated() and @customSecurityChecker.checkBoardWriter(authentication, #id)")
 	public String modifyProcess(Registration registration, 
 			@RequestParam(value="file", required = false) MultipartFile addFile,
 			@RequestParam(value="removeFile", required = false) String removeFile,
@@ -71,6 +74,23 @@ public class MyPetsController {
 			//rttr.addAttribute("fail", "fail");
 			return "redirect:/modify/" + registration.getId();
 		}
+		
+	}
+	
+	@PostMapping("petRemove")
+	public String delete(Integer id, RedirectAttributes rttr) {
+		boolean ok = service.remove(id);
+		if (ok) {
+			
+			//모델에 추가
+			rttr.addFlashAttribute("message", "등록된 반려동물이 삭제되었습니다.");
+			return "redirect:/petList";
+		} else {
+			// 남아있게 할래
+			rttr.addFlashAttribute("message","등록된 반려동물 삭제를 실패하였습니다.");
+			return "redirect:/id/" + id;
+		}
+		
 		
 	}
 	
