@@ -117,7 +117,12 @@
 				<div class="content" >
 					
 						<span class="likeIcon" data-feed-id="${feed.id }">
-							<!-- <i class="fa-solid fa-bone"></i> --><img src="/images/olbone.png">
+							<c:if test="${feed.liked }">
+								<img src="/images/bone.png">
+							</c:if>
+							<c:if test="${not feed.liked }">
+								<img src="/images/olbone.png">						
+							</c:if>
 						</span>
 						<span class="likeNumber" style="font-weight: 300; font-size: large;">
 							${feed.likeCount }

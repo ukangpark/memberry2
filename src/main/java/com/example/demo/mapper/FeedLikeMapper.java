@@ -25,4 +25,12 @@ public interface FeedLikeMapper {
 			WHERE feedId = #{feedId}
 			""")
 	Integer countByFeedId(Integer feedId);
+
+	@Select("""
+			SELECT *
+			FROM FeedLike
+			WHERE feedId = #{feedId}
+			  AND memberId = #{memberId}
+			""")
+	Like select(Integer feedId, String memberId);
 }

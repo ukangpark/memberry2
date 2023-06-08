@@ -62,8 +62,11 @@ public class MyFeedController {
 	
 	// 클릭한 게시물 보기
 	@GetMapping("/feedId/{feedId}")
-	public String post(@PathVariable("feedId") Integer feedId, Model model) {
-		Feed feed = service.getPost(feedId);
+	public String post(
+			@PathVariable("feedId") Integer feedId, 
+			Model model,
+			Authentication authentication) {
+		Feed feed = service.getPost(feedId, authentication);
 		model.addAttribute("feed", feed);
 		
 		return "feed/feedGet";
