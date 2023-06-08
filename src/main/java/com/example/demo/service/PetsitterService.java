@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import java.io.*;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.*;
@@ -9,6 +10,8 @@ import org.springframework.web.multipart.*;
 import com.example.demo.domain.*;
 import com.example.demo.mapper.*;
 
+import software.amazon.awssdk.awscore.exception.*;
+import software.amazon.awssdk.core.exception.*;
 import software.amazon.awssdk.core.sync.*;
 import software.amazon.awssdk.services.s3.*;
 import software.amazon.awssdk.services.s3.model.*;
@@ -120,16 +123,24 @@ public class PetsitterService {
 		return count == 1;
 	}
 
-	public boolean insertDetail(Detail detail, MultipartFile[] housePhotoes) throws Exception {
+	public boolean insertDetail(Detail detail) throws Exception {
 		// 상세페이지 등록
-		Integer count;
+		Integer count = 0;
 		// 호스트 아이디로 상세페이지가 있는지 탐색
 		if (selectById(detail.getHostId()).get("detail") == null) {
 			// 없으면 상세페이지 추가
 			count = petsitterMapper.insertDetail(detail);
+			
+		}
+		return count == 1;
+	}
 
-			// 상세페이지 집사진 추가
-			for (MultipartFile housePhoto : housePhotoes) {
+	public Integer insertHousePhotos(MultipartFile[] housePhotoes, Integer hostId) throws Exception {
+		int count = 0;
+		Detail detail = petsitterMapper.selectDetailById(hostId);
+		// 상세페이지 집사진 추가
+		for (MultipartFile housePhoto : housePhotoes) {
+			if (housePhoto.getSize() > 0) {
 				String key = "hostHousePhoto/" + detail.getId() + "/" + housePhoto.getOriginalFilename();
 				PutObjectRequest objectRequest = PutObjectRequest.builder().bucket(bucketName).key(key)
 						.acl(ObjectCannedACL.PUBLIC_READ).build();
@@ -138,12 +149,12 @@ public class PetsitterService {
 
 				// 상세페이지 집사진 이름 추가
 				petsitterMapper.insertHostHousePhoto(housePhoto.getOriginalFilename(), detail.getId());
+				
+				count++;
 			}
-		} else {
-			// 있으면 추가 안됨
-			count = 0;
 		}
-		return count == 1;
+
+		return count;
 	}
 
 	// 펫시터 전체목록
@@ -152,33 +163,32 @@ public class PetsitterService {
 		return list;
 	}
 
-	public boolean modifyDetail(
-			Detail detail, 
-			MultipartFile[] addPhotos, 
-			List<String> removePhotos) throws Exception {
+	public boolean modifyDetail(Detail detail, MultipartFile[] addPhotos, List<String> removePhotos) throws Exception {
 		// 집사진 수정
 		// 삭제할 사진은 삭제하기
-		if(removePhotos != null && !removePhotos.isEmpty()) {
+		if (removePhotos != null && !removePhotos.isEmpty()) {
 			for (String removePhoto : removePhotos) {
 				// aws에서 집사진 파일 삭제
 				String key = "hostHousePhoto/" + detail.getId() + "/" + removePhoto;
-				DeleteObjectRequest deleteObjectRequest = DeleteObjectRequest.builder().bucket(bucketName).key(key).build();
-				
+				DeleteObjectRequest deleteObjectRequest = DeleteObjectRequest.builder().bucket(bucketName).key(key)
+						.build();
+
 				s3.deleteObject(deleteObjectRequest);
-				
+
 				// 집사진 테이블 삭제
-				Integer deletePhotocount = petsitterMapper.deleteHousePhotoByDetailIdAndPhotoName(detail.getId(), removePhoto);	
+				Integer deletePhotocount = petsitterMapper.deleteHousePhotoByDetailIdAndPhotoName(detail.getId(),
+						removePhoto);
 			}
 		}
 		// 추가할 사진은 추가하기
 		for (MultipartFile addPhoto : addPhotos) {
-			if(addPhoto.getSize() > 0) {
-				//aws에 집사진 추가
+			if (addPhoto.getSize() > 0) {
+				// aws에 집사진 추가
 				String key = "hostHousePhoto/" + detail.getId() + "/" + addPhoto.getOriginalFilename();
 				PutObjectRequest objectRequest = PutObjectRequest.builder().bucket(bucketName).key(key)
 						.acl(ObjectCannedACL.PUBLIC_READ).build();
 				s3.putObject(objectRequest, RequestBody.fromInputStream(addPhoto.getInputStream(), addPhoto.getSize()));
-				
+
 				// 집사진 테이블 추가
 				petsitterMapper.insertHostHousePhoto(addPhoto.getOriginalFilename(), detail.getId());
 			}

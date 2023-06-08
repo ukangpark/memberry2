@@ -19,8 +19,7 @@
 	<div class="ui centered equal width grid">
 		<div class="eight wide column">
 			<div class="ui segment">
-
-				<form id="addDetailForm" class="ui big form" method="post" action="/petsitter/addDetail" enctype="multipart/form-data">
+				<form id="addDetailForm" class="ui big form" method="post" action="/petsitter/addDetail">
 					<h1 class="ui dividing header">상세페이지 등록하기</h1>
 					<div class="field">
 						<label for="title">제목</label>

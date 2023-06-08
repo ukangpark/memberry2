@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.io.*;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.*;
@@ -11,6 +12,10 @@ import org.springframework.web.servlet.mvc.support.*;
 
 import com.example.demo.domain.*;
 import com.example.demo.service.*;
+
+import software.amazon.awssdk.awscore.exception.*;
+import software.amazon.awssdk.core.exception.*;
+import software.amazon.awssdk.services.s3.model.*;
 
 @Controller
 @RequestMapping("petsitter")
@@ -116,10 +121,9 @@ public class PetsitterController {
 	@PostMapping("addDetail")
 	public String addDetailProcess(
 			Detail detail, 
-			@RequestParam(value =  "housePhotoes", required = false) MultipartFile[] housePhotoes,
 			RedirectAttributes rttr) throws Exception {
 		// 상세페이지 등록 과정 
-		boolean ok = petsitterService.insertDetail(detail, housePhotoes);
+		boolean ok = petsitterService.insertDetail(detail);
 		
 		if(ok) {
 			// 상세페이지 최초 등록
@@ -129,13 +133,21 @@ public class PetsitterController {
 			rttr.addFlashAttribute("message", "게시물이 등록되지 않았습니다.");
 		}
 		
-		System.out.println(detail.getId());
-		return "redirect:/petsitter/addHousePhotos?detailId=" + detail.getId();
+		return "redirect:/petsitter/addHousePhotos?hostId=" + detail.getHostId();
 	}
 	
 	@GetMapping("addHousePhotos")
-	public void addHousePhotosForm(@RequestParam("detailId") Integer detailId) {
+	public void addHousePhotosForm(@RequestParam("hostId") Integer hostId) {
 		
+	}
+	
+	@PostMapping("addHousePhotos")
+	public String addHousePhotosProgress(
+			@RequestParam(value =  "housePhotoes", required = false) MultipartFile[] housePhotoes,
+			@RequestParam("hostId") Integer hostId) throws Exception {
+		Integer count = petsitterService.insertHousePhotos(housePhotoes, hostId);
+		
+		return "redirect:/petsitter/detail?id=" + hostId;
 	}
 	
 	@GetMapping("modifyDetail")
