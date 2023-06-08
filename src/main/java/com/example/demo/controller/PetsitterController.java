@@ -129,9 +129,9 @@ public class PetsitterController {
 
 	@PostMapping("addHousePhotos")
 	public String addHousePhotosProgress(
-			@RequestParam(value = "housePhotoes", required = false) MultipartFile[] housePhotoes,
+			@RequestParam(value = "housePhotos", required = false) MultipartFile[] housePhotos,
 			@RequestParam("hostId") Integer hostId) throws Exception {
-		Integer count = petsitterService.insertHousePhotos(housePhotoes, hostId);
+		Integer count = petsitterService.insertHousePhotos(housePhotos, hostId);
 
 		return "redirect:/petsitter/detail?id=" + hostId;
 	}
@@ -167,7 +167,7 @@ public class PetsitterController {
 			Detail detail,
 			@RequestParam(value = "removePhotos", required = false) List<String> removePhotos,
 			@RequestParam(value = "addPhotos", required = false) MultipartFile[] addPhotos) throws Exception {
-		
+		// 집사진 수정 process
 		petsitterService.modifyDetailHousePhotos(addPhotos, removePhotos, detail);
 		return "redirect:/petsitter/detail?id=" + detail.getHostId();
 	}

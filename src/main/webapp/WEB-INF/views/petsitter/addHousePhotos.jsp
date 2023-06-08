@@ -14,26 +14,94 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 <script src="/js/semantic/semantic.min.js"></script>
+
 </head>
 <body>
-	<my:navBar></my:navBar>
-	<h1>집사진 등록</h1>
-	<form action="/petsitter/addHousePhotos" method="post" enctype="multipart/form-data">
-		<div class="field">
-			<h2 class="ui center aligned icon header">
-				<i class="circular camera retro icon"></i>
-				집사진을 등록해 주세요!
-				<div>
-					<a id="inputPhotoBtn" class="ui  primary button" data-bs-toggle="modal" data-bs-target="#inputPhoto" data-bs-whatever="@mdo">사진 등록하기</a>
-				</div>
-				
-				<input type="file" name="housePhotoes" multiple>
-				<input type="number" name="hostId" value="${param.hostId }">
-				<input type="submit" value="전송">
-			</h2>
-			<input class="d-none" id="housePhoto" type="file" name="housePhotoes" multiple>
-		</div>
-	</form>
 
+	<my:navBar></my:navBar>
+	<br>
+	<div class="ui centered equal width grid">
+		<div class="eight wide column">
+			<div class="ui segment">
+				<form id="addDetailForm" action="/petsitter/addHousePhotos" class="ui big form" method="post" enctype="multipart/form-data">
+					<h1 class="ui dividing header">집사진 등록하기</h1>
+
+					<div class="field">
+						<h2 class="ui center aligned icon header">
+							<i class="circular camera retro icon"></i>
+							집사진을 등록해주세요!
+							<br>
+							<button style="margin-top: 20px;" id="addPhotoBtn" class="ui  primary button" type="button">사진 추가하기</button>
+						</h2>
+
+						<!-- 사진1 -->
+						<div class="ui aligned container" style="position: relative;" id="imgContainer">
+							<img class="ui centered large bordered rounded image" src="/images/defaultHome.jpeg" id="preview1">
+							<label class="small circular ui icon button inverted" style="position: absolute; top: 0.5lh; left: 41.1lh;">
+								<i class="large paw icon"></i>
+							</label>
+							<input style="display: none;" onchange="readURL(this);" class="form-control" id="housePhoto1" type="file" name="housePhotos" accept="image/*" />
+							<br>
+						</div>
+						<!-- 사진2 -->
+						<%-- 						<div class="ui aligned container" style="position: relative;">
+							<img class="ui centered large bordered rounded image" src="/images/defaultHome.jpeg" id="preview2">
+							<label for="housePhoto2" class="small circular ui icon button inverted" style="position: absolute; top: 0.5lh; left: 41.1lh;">
+								<i class="large paw icon"></i>
+							</label>
+							<input style="display: none;" onchange="getImagePreview(event)" class="form-control" id="housePhoto2" type="file" name="housePhotos" accept="image/*" />
+						</div>
+
+						<div class="field">
+							<input type="number" name="hostId" value="${param.hostId }" class="d-none">
+						</div> --%>
+					</div>
+				</form>
+			</div>
+			<!-- 버튼 -->
+			<div class="extra content">
+				<div class="ui two buttons">
+					<a href="/petsitter/addDetail?hostId=${param.hostId }" class="ui basic red button">뒤로 돌아가기</a>
+					<button form="addDetailForm" class="ui basic green button" data-bs-toggle="modal" data-bs-target="#addDetailModal">등록하기</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<!-- 등록 모달 -->
+	<div class="modal fade" id="addDetailModal" tabindex="-1" aria-labelledby="addDetailModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="addDetailModalLabel">상세페이지</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">상세페이지를 등록하시겠습니까?</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소하기</button>
+					<button type="submit" form="addDetailForm" class="btn btn-primary">등록하기</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		function readURL(input) {
+			if (input.files && input.files[0]) {
+				var reader = new FileReader();
+				reader.onload = function(e) {
+					document.getElementById('preview1').src = e.target.result;
+				};
+				reader.readAsDataURL(input.files[0]);
+			} else {
+				document.getElementById('preview1').src = "";
+			}
+		}
+		
+		$('#addPhotoBtn').click(function() {
+			
+		})
+	</script>
 </body>
 </html>

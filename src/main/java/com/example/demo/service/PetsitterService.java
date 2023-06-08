@@ -135,11 +135,11 @@ public class PetsitterService {
 		return count == 1;
 	}
 
-	public Integer insertHousePhotos(MultipartFile[] housePhotoes, Integer hostId) throws Exception {
+	public Integer insertHousePhotos(MultipartFile[] housePhotos, Integer hostId) throws Exception {
 		int count = 0;
 		Detail detail = petsitterMapper.selectDetailById(hostId);
 		// 상세페이지 집사진 추가
-		for (MultipartFile housePhoto : housePhotoes) {
+		for (MultipartFile housePhoto : housePhotos) {
 			if (housePhoto.getSize() > 0) {
 				String key = "hostHousePhoto/" + detail.getId() + "/" + housePhoto.getOriginalFilename();
 				PutObjectRequest objectRequest = PutObjectRequest.builder().bucket(bucketName).key(key)
