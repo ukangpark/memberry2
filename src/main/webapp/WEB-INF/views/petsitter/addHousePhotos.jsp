@@ -14,13 +14,23 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 <script src="/js/semantic/semantic.min.js"></script>
+<style>
+#imgContainer {
+	height: 300px;
+}
 
+#imgContainer:empty:before {
+	content: attr(data-placeholder);
+	color: #999;
+	font-size: .9em;
+}
+</style>
 </head>
 <body>
 
-	<my:navBar></my:navBar>
+	<%-- <my:navBar></my:navBar> --%>
 	<br>
-	<div class="ui centered equal width grid">
+	<div class="ui centered equal width grid" id="fullDiv">
 		<div class="eight wide column">
 			<div class="ui segment">
 				<form id="addDetailForm" action="/petsitter/addHousePhotos" class="ui big form" method="post" enctype="multipart/form-data">
@@ -31,31 +41,31 @@
 							<i class="circular camera retro icon"></i>
 							집사진을 등록해주세요!
 							<br>
-							<button style="margin-top: 20px;" id="addPhotoBtn" class="ui  primary button" type="button">사진 추가하기</button>
+							<!-- 	<label for="housePhoto1">
+								<button style="margin-top: 20px;" id="addPhotoBtn" class="ui  primary button" type="button">사진 추가하기</button>
+							</label> -->
 						</h2>
 					</div>
+					<div class="field">
+						<input class="form-control" id="housePhoto1" type="file" name="housePhotos" accept="image/*" multiple placeholder="대표 사진을 선택해주세요."/>
+					</div>
+					<!-- 이미지 미리보기  -->
+					<div id="imagePreview" class="field">
+						<input class="form-control" type="file" id="housePhoto" multiple="multiple" />
+						<br>
+						<div id="imgContainer" class="field ui aligned container segment" data-placeholder='파일을 첨부 하려면 파일 선택 버튼을 클릭하거나 파일을 드래그앤드롭 하세요'></div>
+					</div>
+
 
 					<!-- 사진1 -->
-					<div class="field">
+					<!-- <div class="field" id="imgContainer">
 						<div class="ui aligned container" style="position: relative;" id="imgContainer">
 							<img class="ui centered large bordered rounded image" src="/images/defaultHome.jpeg" id="preview1">
-							<div class="ui left pointing dropdown icon circular button inverted" id="right" style="position: absolute; top: 0.5lh; left: 38lh;">
-								<i class="paw icon large "></i>
-								<div class="menu">
-									<div class="item">
-										<div class="ui blue empty circular label"></div>
-										<label for="housePhoto1"> 등록하기 </label>
-									</div>
-									<div class="item">
-										<div class="ui red empty circular label"></div>
-										삭제하기
-									</div>
-								</div>
-							</div>
-							<input style="display: none;" onchange="readURL(this);" class="form-control" id="housePhoto1" type="file" name="housePhotos" accept="image/*" multiple />
-							<br>
+							<label for="housePhoto1">
+								<i class="bars icon large button" style="position: absolute; top: 0.5lh; left: 20.1lh;"></i>
+							</label>
 						</div>
-					</div>
+					</div> -->
 				</form>
 			</div>
 			<!-- 버튼 -->
@@ -85,27 +95,6 @@
 			</div>
 		</div>
 	</div>
-
-	<script>
-		function readURL(input) {
-			if (input.files && input.files[0]) {
-				var reader = new FileReader();
-				reader.onload = function(e) {
-					document.getElementById('preview1').src = e.target.result;
-				};
-				reader.readAsDataURL(input.files[0]);
-			} else {
-				document.getElementById('preview1').src = "";
-			}
-		}
-
-		$('#addPhotoBtn').click(function() {
-
-		})
-
-		$('#right').dropdown({
-			direction : 'right'
-		});
-	</script>
+	<script src="/js/petsitter/addHousePhoto.js"></script>
 </body>
 </html>
