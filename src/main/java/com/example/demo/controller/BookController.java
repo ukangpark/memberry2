@@ -28,7 +28,7 @@ public class BookController {
 		Map<String, Object> result = service.bookList(page,userId);
 
 		model.addAllAttributes(result);
-		return "book/myPageTest";
+		return "book/regiList";
 	}
 
 	// 예약페이지 뜨게

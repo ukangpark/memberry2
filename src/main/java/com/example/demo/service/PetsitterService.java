@@ -1,6 +1,5 @@
 package com.example.demo.service;
 
-import java.io.*;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.*;
@@ -10,8 +9,6 @@ import org.springframework.web.multipart.*;
 import com.example.demo.domain.*;
 import com.example.demo.mapper.*;
 
-import software.amazon.awssdk.awscore.exception.*;
-import software.amazon.awssdk.core.exception.*;
 import software.amazon.awssdk.core.sync.*;
 import software.amazon.awssdk.services.s3.*;
 import software.amazon.awssdk.services.s3.model.*;

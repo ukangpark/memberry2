@@ -1,5 +1,7 @@
 package com.example.demo.domain;
 
+import java.util.*;
+
 import lombok.*;
 
 @Data
@@ -17,6 +19,14 @@ public class Book {
 	private String type;
 	private int detailId;
 	private String memberId;
+	private String gender;
+	private String neutered;
+	private Date birth;
+	private String weight;
+	private int pottyTraining;
+	
+	
+	
 	
 	
 	

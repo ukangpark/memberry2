@@ -61,6 +61,14 @@
 								<a class="${current eq 'apply' ? 'active' : '' } item" href="/petsitter/apply">펫시터지원</a>
 							</sec:authorize>
 							
+							<!-- 사용자 예약내역 -->
+							<sec:authorize access="isAuthenticated()">
+								<a class="${current eq 'regiList' ? 'active' : '' } item" href="/book/list">예약내역</a>
+							</sec:authorize>
+							<!-- 호스트가 보는 예약내역-->
+							<sec:authorize access="isAuthenticated()">
+								<a class="${current eq 'regiListHost' ? 'active' : '' } item" href="/book/list/host">예약내역</a>
+							</sec:authorize>
 							<sec:authorize access="isAuthenticated()">
 								<a class="${current eq 'hostMyPage' ? 'active' : '' } item" href="/petsitter/hostMyPage">호스트 마이페이지</a>
 							</sec:authorize>
