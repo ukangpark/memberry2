@@ -1,7 +1,9 @@
 package com.example.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +22,8 @@ public class RegistrationController {
 	private RegistrationService service;
 	
 	@GetMapping("/registration")
-	public void registrationForm() {
+	public void registrationForm(Authentication auth, Model model) {
+		model.addAttribute("auth", auth);
 		
 	}
 	
@@ -28,11 +31,18 @@ public class RegistrationController {
 	@PostMapping("/registration")
 	public String addRegistration(@RequestParam("file") MultipartFile file, 
 								Registration registration, RedirectAttributes rttr) throws Exception {
-		service.insert(registration, file);
+		boolean ok = service.insert(registration, file);
+		if (ok) {
+			rttr.addFlashAttribute("message", registration.getPetName() + " 친구가 등록되었습니다.");
+			rttr.addFlashAttribute("registration", registration);
+			return "redirect:/myPets/petList";
+		} else {
+			rttr.addFlashAttribute("registration", registration);
+			rttr.addFlashAttribute("message", "반려동물 등록에 실패하였습니다.");
+			return "redirect:/registration";
+		}
 		
-		rttr.addAttribute("registration", "registration");
 		
-		return "redirect:/petList";
 		
 	}
 

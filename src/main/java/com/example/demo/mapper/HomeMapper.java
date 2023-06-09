@@ -28,6 +28,13 @@ public interface HomeMapper {
 	@ResultMap("homeFeedResultMap")
 	List<Feed> selectAll();
 
+	@Select("""
+			SELECT *
+			FROM FeedLike
+			WHERE memberId = #{memberId}
+			""")
+	List<Like> select(String memberId);
+
 	
 
 	

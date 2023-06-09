@@ -50,6 +50,11 @@
 	height: 250px;
 	overflow-y: auto;
 }
+
+.likeIcon img {
+	width: 16px;
+}
+
 </style>
 
 <!-- bxslider -->
@@ -61,7 +66,9 @@
 </head>
 <body>
 
+
 	      <my:navBar current="home" />  
+
 
 <div class="toast-container position-fixed  top-0 start-50 translate-middle-x p-3">
 	  <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
@@ -75,6 +82,7 @@
 	<div id="header">
 		<h2>Membery</h2>
 	</div> 
+	
 
 	<div class="wrapper" style="margin-top: 50px;">
 
@@ -82,8 +90,10 @@
 			<div class="ui link cards">
 				<c:forEach items="${feedList}" var="feed">
 
+
 					<div class="ui card" style="margin: 30px;" >
 						<div class="content" >
+
 							<!-- 이미지 파일 출력 -->
 							<br />
 							<ul class="slider" id="imgContainer">
@@ -106,13 +116,28 @@
 							<div class="description">${feed.content}</div>
 						</div>
 						<div class="extra content">
-							<span class="left floated"> 
-							${feed.likeCount }
-							<!-- Button trigger modal -->
-							<button id="commentBtn" type="button" class="btn btn-secondary-link" data-bs-toggle="modal" data-bs-target="#commentModal" data-id="${feed.id }">
-								<i class="fa-solid fa-comment"></i>
-								${feed.commentCount }
-							</button> <i class="paw icon"></i>
+							<span class="left floated">
+               
+
+							
+							<!-- 좋아요 기능 구현 -->
+							<span class="likeIcon" data-feed-id="${feed.id }" >
+								<c:if test="${feed.liked }">
+									<img src="/images/bone.png">
+								</c:if>
+								<c:if test="${not feed.liked }">
+									<img src="/images/olbone.png">								
+								</c:if>
+							</span>
+							<span class="likeNumber">
+								${feed.likeCount } 
+							</span> likes 
+							
+								<!-- Button trigger modal -->
+								<button type="button" class="btn btn-secondary-link" data-bs-toggle="modal" data-bs-target="#commentModal">
+									<i class="fa-solid fa-comment"></i>${feed.commentCount }
+								</button> <i class="paw icon"></i>
+
 
 							</span> <span class="right floated">${feed.inserted}</span>
 						</div>
@@ -219,8 +244,11 @@
 	 <script src="/js/comment.js"></script>
 	 
 
+
 	<my:bottom></my:bottom>
 
 
+
+	<script src="/js/feed/like.js"></script>
 </body>
 </html>

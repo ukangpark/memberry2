@@ -16,11 +16,20 @@
 	width: 300px;
 	height: 300px;
 	border-radius: 50%;
-	border: 2px;
-	border-style: solid;
-	border-color: #cccccc;
 	overflow: hidden;
 	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0px;
+}
+
+.border {
+	position: absolute;
+	width: 300px;
+	height: 300px;
+	border-radius: 50%;
+	border-style: solid;
+	border: 1px;
 	align-items: center;
 	justify-content: center;
 	padding: 0px;
@@ -38,13 +47,12 @@
 	padding: 0px;
 }
 
-
-.oldImage > img {
-	max-width: 100%;
+.oldImage>img {
+	width: 100%;
 	height: 100%;
 }
 
-#imagePreview > img {
+.preview {
 	display: none;
 	width: 100%;
 	height: 100%;
@@ -56,6 +64,9 @@
 	left: 56%;
 }
 
+#tag {
+	position: absolute;
+}
 </style>
 
 </head>
@@ -64,19 +75,21 @@
 	<my:navBar></my:navBar>
 
 	<!-- 상단 공백 -->
-	<div style="margin-bottom: 15px"></div>
+	<div style="margin-bottom: 5px"></div>
 
 	<!-- form -->
 	<form class="ui form" method="post" enctype="multipart/form-data">
 
 		<!-- 상단 컨테이너 (프로필사진, addBtn) -->
 		<div class="ui container" id="imagePreview">
-			<img class="preview" src="">
-			<div class="oldImage"><img alt="" src="${bucketUrl }/${pet.id }/${pet.photo}"></div>
+			<img class="preview" src= "">
+			<div class="oldImage">
+				<img alt="" src="${bucketUrl }/${pet.id }/${pet.photo}">
+				<div class="border"></div>
+			</div>
 		</div>
 		<label for="fileInput" class="big circular ui icon button" id="addBtn"><i class="large plus icon"></i></label>
 		<input style="display: none" type="file" id="fileInput" name="file" accept="image/*" />
-		<input style="display: none" type="text" name="removeFile" value="${pet.photo }"> 
 
 		<!-- 하단 컨테이너 -->
 		<div class="ui grid container">
@@ -90,8 +103,17 @@
 					</div>
 
 					<div class="field">
+						<input type="text" name="memberId" value="${pet.memberId }" style="display: none">
+					</div>
+
+					<div class="field">
+						<input type="text" name="id" value="${pet.id }" style="display: none">
+					</div>
+
+					<div class="field">
 						<div class="ui fluid labeled big input mt-5">
 							<div class="ui label">이름</div>
+							<i class="mini red circle icon" id="tag"></i>
 							<input type="text" name="petName" value="${pet.petName }">
 						</div>
 					</div>
@@ -106,6 +128,7 @@
 					<div class="field">
 						<div class="ui fluid labeled big input mt-5">
 							<div class="ui label">몸무게</div>
+							<i class="mini red circle icon" id="tag"></i>
 							<div class="ui fluid selection dropdown" id="select1">
 								<input type="hidden" name="weight" value="${pet.weight eq 'small' ? '작은친구 ( 7kg 미만 )' : pet.weight eq 'medium' ? '중간친구 ( 7 ~ 14.9kg)' : '큰친구 ( 15kg 이상 )' }">
 								<div class="default text">몸무게를 선택 해 주세요.</div>
@@ -133,12 +156,14 @@
 				<div class="ui right aligned container" id="rightContainer">
 					<div class="ui fluid labeled big input mt-5">
 						<div class="ui label">함께한날</div>
+						<i class="mini red circle icon" id="tag"></i>
 						<input type="date" name="together" value="${pet.together }">
 					</div>
 
 					<div class="field">
 						<div class="ui fluid labeled big input mt-5">
 							<div class="ui label">성별</div>
+							<i class="mini red circle icon" id="tag"></i>
 							<div class="ui fluid selection dropdown" id="select2">
 								<input type="hidden" name="gender" value="${pet.gender eq 'male' ? '남아' : '여아'}">
 								<div class="default text">성별을 선택 해 주세요.</div>
@@ -154,6 +179,7 @@
 					<div class="field">
 						<div class="ui fluid labeled big input mt-5">
 							<div class="ui label">중성화 유무</div>
+							<i class="mini red circle icon" id="tag"></i>
 							<div class="ui fluid selection dropdown" id="select3">
 								<input type="hidden" name="neutered" value="${pet.neutered eq 'yes' ? '했어요' : '안했어요'}">
 								<div class="default text">중성화 유무를 선택 해 주세요.</div>
@@ -218,7 +244,6 @@
 			}
 
 		})
-
 	</script>
 </body>
 </html>

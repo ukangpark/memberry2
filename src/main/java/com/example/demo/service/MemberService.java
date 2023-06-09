@@ -19,6 +19,9 @@ public class MemberService {
 	private MemberMapper mapper;
 	
 	@Autowired
+	private FeedLikeMapper likeMapper;
+	
+	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
 	@Autowired
@@ -53,6 +56,8 @@ public class MemberService {
 			
 			cnt = mapper.deleteById(member.getId());			
 		
+			// 이 회원이 좋아요한 레코드 삭제
+			likeMapper.deleteByMemberId(member.getId());
 		} 
 		
 		return cnt == 1;
