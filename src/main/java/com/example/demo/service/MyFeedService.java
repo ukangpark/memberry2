@@ -1,20 +1,28 @@
 package com.example.demo.service;
 
-import java.io.IOException;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import org.springframework.beans.factory.annotation.*;
-import org.springframework.security.core.*;
-import org.springframework.stereotype.*;
-import org.springframework.transaction.annotation.*;
-import org.springframework.web.multipart.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
-import com.example.demo.domain.*;
-import com.example.demo.mapper.*;
+import com.example.demo.domain.Feed;
+import com.example.demo.domain.File;
+import com.example.demo.domain.Like;
+import com.example.demo.mapper.CommentMapper;
+import com.example.demo.mapper.FeedLikeMapper;
+import com.example.demo.mapper.MyFeedMapper;
 
-import software.amazon.awssdk.core.sync.*;
-import software.amazon.awssdk.services.s3.*;
-import software.amazon.awssdk.services.s3.model.*;
+import software.amazon.awssdk.core.sync.RequestBody;
+import software.amazon.awssdk.services.s3.S3Client;
+import software.amazon.awssdk.services.s3.model.DeleteObjectRequest;
+import software.amazon.awssdk.services.s3.model.ObjectCannedACL;
+import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 
 @Service
 @Transactional(rollbackFor = Exception.class)
@@ -31,6 +39,10 @@ public class MyFeedService {
 	
 	@Autowired
 	private FeedLikeMapper likeMapper;
+	
+	@Autowired
+	private CommentMapper commentMapper;
+
 	
 	public List<File> listMyFeed() {
 		List<File> file = mapper.selectAll();
@@ -109,6 +121,8 @@ public class MyFeedService {
 	}
 
 	public boolean remove(Integer id) {
+		commentMapper.deleteByFeedId(id);
+		
 		//파일명 조회(데이터 지울 때 필요하여 미리 조회)
 		List<String> fileNames = mapper.selectFileNamesByFeedId(id);
 		

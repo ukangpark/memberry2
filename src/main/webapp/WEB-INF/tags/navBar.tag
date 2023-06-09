@@ -4,9 +4,6 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ attribute name="current"%>
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css">
-<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>
 
 
 <style>
@@ -24,7 +21,7 @@
 
 
 <div class="ui fluid right aligned container" id="container">
-	<div class="ui fixed top sticky">
+	<div class="ui position-fixed top-0 end-0">
 		<div class="ui dropdown">
 			<h4 id="profile">
 
@@ -170,12 +167,7 @@
 	</div>
 
 <script>
-	$('.ui.sticky').sticky({
-		offset : 10
-	});
-	$('.ui.dropdown').dropdown({
-		direction : 'auto'
-	});
+	
 	$(function(){
 		$('.up').on('click',function(e){
 			e.preventDefault();
