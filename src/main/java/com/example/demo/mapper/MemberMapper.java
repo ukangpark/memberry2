@@ -57,5 +57,27 @@ public interface MemberMapper {
 			</script>
 			""")
 	Integer update(Member member);
+
+
+	@Select("""
+			SELECT id,
+				   name,
+				   password,
+				   nickName,
+				   email,
+				   phoneNumber,
+				   inserted
+			FROM Member
+			ORDER BY inserted DESC
+			LIMIT #{startIndex}, #{recordsInPage}
+			""")
+	List<Member> selectAllPage(Integer startIndex, Integer recordsInPage);
+
+	
+	@Select("""
+			SELECT COUNT(*)
+			FROM Member
+			""")
+	Integer countAll();
 	
 }
