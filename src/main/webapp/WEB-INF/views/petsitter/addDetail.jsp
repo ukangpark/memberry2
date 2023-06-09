@@ -38,28 +38,8 @@
 			<!-- 버튼 -->
 			<div class="extra content">
 				<div class="ui two buttons">
-					<button class="ui basic red button">뒤로 돌아가기</button>
-					<button class="ui basic green button" data-bs-toggle="modal" data-bs-target="#addDetailModal">등록하기</button>
-				</div>
-			</div>
-		</div>
-	</div>
-
-
-
-
-	<!-- 등록 모달 -->
-	<div class="modal fade" id="addDetailModal" tabindex="-1" aria-labelledby="addDetailModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h1 class="modal-title fs-5" id="addDetailModalLabel">상세페이지</h1>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				</div>
-				<div class="modal-body">상세페이지를 등록하시겠습니까?</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소하기</button>
-					<button type="submit" form="addDetailForm" class="btn btn-primary">등록하기</button>
+					<a href="/petsitter/hostMyPage?id=${param.hostId }" class="ui basic red button">뒤로 돌아가기</a>
+					<button form="addDetailForm" type="submit" class="ui basic green button">집사진 등록하기</button>
 				</div>
 			</div>
 		</div>
@@ -69,16 +49,6 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 	<script src="/js/semantic/semantic.min.js"></script>
-	<style type="text/css">
-#imgContainer {
-	position: relative;
-}
-
-#addBtn {
-	position: absolute;
-	top: 270px;
-	left: 270px;
-}
 
 </style>
 </body>
