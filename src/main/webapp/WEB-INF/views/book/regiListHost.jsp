@@ -8,25 +8,30 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>예약요청 목록</title>
+<title>예약요청 목록(펫시터)</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="/js/semantic/semantic.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-
 </head>
 <body>
+
+<d:navBar current="regiListHost" />
+
 	<div class="container-lg">
 	
-	   <i class="fa-duotone fa-paw" style="--fa-primary-color: #ffd6e2; --fa-secondary-color: #a6969b;"></i>
-		<h3>
-		예약요청 목록
-		</h3>
-		<i class="fa-duotone fa-paw" style="--fa-primary-color: #ffd6e2; --fa-secondary-color: #a6969b;"></i>
-		<table class="table">
+	   
+	   
+		<h2 style="margin-top: 60px; margin-bottom: 0px; text-align:center;">
+		<i class="fa fa-solid fa-paw"></i>
+		예약요청 목록 
+		<i class="fa fa-solid fa-paw"></i>
+		</h2>
+		
+		<table class="table" style="margin-top:75px;">
 			<thead>
 				<tr>
-					<th>pet 이름</th>
+					<th>pet 이름 </th>
 					<th>체크인 날짜</th>
 					<th>체크아웃 날짜</th>
 					<th>보호자 이름</th>

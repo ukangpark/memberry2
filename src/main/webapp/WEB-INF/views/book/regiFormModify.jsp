@@ -18,9 +18,11 @@
 </head>
 <body>
 
+<div class="container-lg">
+
 <div style="margin:100px 300px 300px 300px; border: 8px double lightblue;">
 	<form class="ui form" style="margin:100px 100px 100px 100px">
-		<h2 class="ui dividing header" style = "text-align:center">${book.petName }예약 변경 신청</h2>
+		<h2 class="ui dividing header" style = "text-align:center">${book.petName }(이)의 예약 변경 신청</h2>
 		<br>
 		<form method="post">
 		<input type="hidden" name="num" value="${book.num }"/>
@@ -34,55 +36,7 @@
 		</div>
 		<div class="field">
 			<h4 class="ui header">생년월일</h4>
-			<div class="two fields">
-				<div class="field">
-					<select class="ui fluid dropdown">
-						<option value="">년도</option>
-						<option value="00">2000</option>
-						<option value="01">2001</option>
-						<option value="02">2002</option>
-						<option value="03">2003</option>
-						<option value="04">2004</option>
-						<option value="05">2005</option>
-						<option value="06">2006</option>
-						<option value="07">2007</option>
-						<option value="08">2008</option>
-						<option value="09">2009</option>
-						<option value="10">2010</option>
-						<option value="11">2011</option>
-						<option value="12">2012</option>
-						<option value="13">2013</option>
-						<option value="14">2014</option>
-						<option value="15">2015</option>
-						<option value="16">2016</option>
-						<option value="17">2017</option>
-						<option value="18">2018</option>
-						<option value="19">2019</option>
-						<option value="20">2020</option>
-						<option value="21">2021</option>
-						<option value="22">2022</option>
-						<option value="23">2023</option>
-
-					</select>
-				</div>
-				<div class="field">
-					<select class="ui fluid dropdown">
-						<option value="">월</option>
-						<option value="1">1월</option>
-						<option value="2">2월</option>
-						<option value="3">3월</option>
-						<option value="4">4월</option>
-						<option value="5">5월</option>
-						<option value="6">6월</option>
-						<option value="7">7월</option>
-						<option value="8">8월</option>
-						<option value="9">9월</option>
-						<option value="10">10월</option>
-						<option value="11">11월</option>
-						<option value="12">12월</option>
-					</select>
-				</div>
-			</div>
+				<input type="text" name="birth" value="${pet.birth }">
 		</div>
 
 
@@ -176,6 +130,7 @@
 </button>
 </div>
 		</form>
+		</div>
 
 	<script>
 		$('.ui.radio.checkbox').checkbox();
