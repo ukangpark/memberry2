@@ -1,6 +1,6 @@
 package com.example.demo.mapper;
 
-import java.util.List;
+import java.util.*;
 
 import org.apache.ibatis.annotations.*;
 

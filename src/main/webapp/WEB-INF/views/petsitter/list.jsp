@@ -9,8 +9,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>전체보기</title>
+
 <d:top></d:top>
 <link rel="stylesheet" type="text/css" href="/js/semantic/semantic.min.css">
+
+
+
+
 
 <style>
 h1 {
@@ -68,6 +73,7 @@ h1 {
 			</c:forEach>
 		</div>
 
+
 		<br /> <br />
 
 		<div class="container-lg">
@@ -113,6 +119,7 @@ h1 {
 				</nav>
 			</div>
 		</div>
+
 
 
 		<d:bottom></d:bottom>

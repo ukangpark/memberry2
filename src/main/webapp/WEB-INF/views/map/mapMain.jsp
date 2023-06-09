@@ -9,10 +9,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title> 너와 함께</title>
+
+
+<d:top></d:top>
+
+<link rel="stylesheet" type="text/css" href="/js/semantic/semantic.min.css">
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=${apiKey }&libraries=services"></script>
 <link rel = "stylesheet" href="/css/mapMain.css" />
 
-<d:top></d:top>
+
+
+
 
 </head>
 <body>
@@ -313,6 +320,8 @@ function searchRest(param){
 	</script>
 	
 
-	<d:bottom></d:bottom>
+<d:bottom />
+	<script src="js/semantic/semantic.min.js"></script>
+
 </body>
 </html>
