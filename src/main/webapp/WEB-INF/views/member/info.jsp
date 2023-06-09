@@ -20,6 +20,7 @@
 <body>
 
 	<my:navBar current="memberInfo"></my:navBar>
+	<my:alert></my:alert>
 
 	<div style="margin-top: 50px; margin-bottom: 15px;"></div>
 	<div class="ui aligned container" id="imgContainer">
