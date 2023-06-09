@@ -192,6 +192,11 @@ public interface PetsitterMapper {
 				WHERE detailId = #{detailId} AND housePhoto = #{removePhoto}
 			""")
 	Integer deleteHousePhotoByDetailIdAndPhotoName(Integer detailId, String removePhoto);
+	
+	@Insert("""
+			
+			""")
+	Integer insertCover(Integer id, String originalFilename);
 
 	
 	

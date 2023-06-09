@@ -10,7 +10,6 @@
 <my:top></my:top>
 <link rel="stylesheet" type="text/css" href="/js/semantic/semantic.min.css">
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-<my:bottom></my:bottom>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="/js/semantic/semantic.min.js"></script>
 <style type="text/css">
@@ -148,7 +147,7 @@
 			</div>
 		</div>
 	</div>
-
+	<my:bottom></my:bottom>
 	<script>
 		$('.ui.dropdown').dropdown();
 

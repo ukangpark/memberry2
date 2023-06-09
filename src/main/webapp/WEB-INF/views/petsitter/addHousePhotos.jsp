@@ -10,8 +10,7 @@
 
 <my:top></my:top>
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-<my:bottom></my:bottom>
-<script src="/js/semantic/semantic.min.js"></script>
+
 <style>
 #imgContainer {
 	height: 300%;
@@ -25,7 +24,7 @@
 </style>
 </head>
 <body>
-
+	<my:navBar></my:navBar>
 	<br>
 	<div class="ui centered equal width grid" id="fullDiv">
 		<div class="eight wide column">
@@ -45,20 +44,20 @@
 					</div>
 					<!-- 대표 사진 / 미리보기 -->
 					<div class="field" style="position: relative;">
-						<div class="ui aligned container"  >
+						<div class="ui aligned container">
 							<img class="ui centered large bordered rounded image" id="preview" src="/images/defaultHome.jpeg" id="preview1">
 							<label for="cover">
 								<i class="bars icon large button" style="position: absolute; top: 0.5lh; left: 20.1lh;"></i>
 							</label>
 						</div>
-						<div class="ui teal ribbon label" style="position: absolute; top:10px; left:118px;">대표 사진</div>
+						<div class="ui teal ribbon label" style="position: absolute; top: 10px; left: 118px;">대표 사진</div>
 					</div>
 
 					<!-- 이미지 미리보기  -->
-					<div  style="position: relative;" id="imagePreview" class="field">
+					<div style="position: relative;" id="imagePreview" class="field">
 						<div id="imgContainer" class="field ui aligned container segment" data-placeholder='파일을 첨부 하려면 파일 선택 버튼을 클릭하거나 파일을 드래그앤드롭 하세요. 대표 사진은 위 삼단바 버튼을 눌러주세요.'></div>
 						<br>
-						<input class="form-control" type="file" id="housePhoto" name="housePhotos" multiple="multiple" accept="image/*" /> 
+						<input class="form-control" type="file" id="housePhoto" name="housePhotos" multiple="multiple" accept="image/*" />
 						<div class="ui teal right ribbon label" style="bottom: 125px;">상세 사진</div>
 					</div>
 				</form>
@@ -90,6 +89,8 @@
 			</div>
 		</div>
 	</div>
+	<my:bottom></my:bottom>
+	<script src="/js/semantic/semantic.min.js"></script>
 	<script src="/js/petsitter/addHousePhoto.js"></script>
 	<script>
 		function readURL(input) {
