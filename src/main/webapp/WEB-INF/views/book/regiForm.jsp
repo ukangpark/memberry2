@@ -11,6 +11,7 @@
 <title>예약 신청 페이지</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="/js/semantic/semantic.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
@@ -20,10 +21,15 @@
 
 <d:navBar current="regiForm" />
 
+<div class="container-lg">
+
 <div style="margin:100px 300px 300px 300px; border: 8px double lightblue;">
 	<form class="ui form" style="margin:100px 100px 100px 100px" method="post" id="bookForm" action="/book/bookAdd">
 	<input type="hidden" name="num" value"${pet.id }" />
-		<h4 class="ui dividing header" style = "text-align:center">예약 신청서</h4>
+		<h2 class="ui dividing header" style = "text-align:center">
+		<i class="fa fa-solid fa-paw"></i>예약 신청서
+		<i class="fa fa-solid fa-paw"></i>
+		</h2>
 		<br>
 		
 		<div class="field">
@@ -47,17 +53,18 @@
 				<label for="weight">몸무게</label>
 				<div class="field">
 					<div class="ui radio checkbox">
-						<input type="radio" name="price" tabindex="0" class="hidden" value="30,000"> <label>소형견 ( 7kg 미만 )</label>
+						<input type="radio" name="weight" tabindex="0" class="hidden" value="small"> <label>소형견 ( 7kg 미만 )</label>
+					</div>
+				</div>
+				<div class="field">
+				
+					<div class="ui radio checkbox">
+						<input type="radio" name="weight" tabindex="0" class="hidden" value="medium"> <label>중형견 ( 7 ~ 14.9kg)</label>
 					</div>
 				</div>
 				<div class="field">
 					<div class="ui radio checkbox">
-						<input type="radio" name="price" tabindex="0" class="hidden"> <label>중형견 ( 7 ~ 14.9kg)</label>
-					</div>
-				</div>
-				<div class="field">
-					<div class="ui radio checkbox">
-						<input type="radio" name="price" tabindex="0" class="hidden"> <label>대형견 ( 15kg 이상 )</label>
+						<input type="radio" name="weight" tabindex="0" class="hidden" value="big"> <label>대형견 ( 15kg 이상 )</label>
 					</div>
 				</div>
 			</div>
@@ -73,17 +80,18 @@
 			
 			
 			<h4 class="ui header">성별</h4>
-			<div class="btn-group" role="group" aria-label="Basic radio toggle button group" style="width:1090px">
-  		<input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
+			<div class="btn-group" role="group" aria-label="Basic radio toggle button group" >
+  		<input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" <c:if test="${pet.gender eq female }"> checked</c:if> />
   		<label class="btn btn-outline-secondary" for="btnradio1">여자</label>
-  		<input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+  		
+  		<input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" <c:if test="${pet.gender eq female }"> checked</c:if> />
   		<label class="btn btn-outline-secondary" for="btnradio2">남자</label>
 		</div>
 
 
 	
 			<h4 class="ui header">중성화</h4>
-			<div class="btn-group" role="group" aria-label="Basic radio toggle button group" style="width:1090px">
+			<div class="btn-group" role="group" aria-label="Basic radio toggle button group" >
   		<input type="radio" class="btn-check" name="btnradio1" id="btnradio3" autocomplete="off" checked>
   		<label class="btn btn-outline-secondary" for="btnradio3">네</label>
 
@@ -96,7 +104,7 @@
 
 
 			<h4 class="ui header">배변훈련(배변패드)</h4>
-			<div class="btn-group" role="group" aria-label="Basic radio toggle button group" style="width:1090px">
+			<div class="btn-group" role="group" aria-label="Basic radio toggle button group" >
   		<input type="radio" class="btn-check" name="btnradio2" id="btnradio5" autocomplete="off" checked>
   		<label class="btn btn-outline-secondary" for="btnradio5">잘해요</label>
   		<input type="radio" class="btn-check" name="btnradio2" id="btnradio6" autocomplete="off">
@@ -122,6 +130,7 @@
 				<textarea name="message" value="${book.message }" rows="2" placeholder="특이사항, 주의사항 등등 자유롭게 적어주세요"></textarea>
 			</div>
 			
+			<div style="display:flex; justify-content : flex-start;">
 			<div class="field">
 			<h4 class="ui header">체크인 날짜</h4>
 			<input type="date" name="checkIn">
@@ -131,15 +140,18 @@
 			<h4 class="ui header">체크아웃 날짜</h4>
 			<input type="date" name="checkOut">
 			</div>
+			</div>
+			
 			
 <!-- Button trigger modal -->
-<button type="submit"  class="btn btn-primary" ><!-- data-bs-toggle="modal" data-bs-target="#exampleModal"> -->
+<button type="submit"  class="btn btn-primary" style="margin-top:50px;" ><!-- data-bs-toggle="modal" data-bs-target="#exampleModal"> -->
   예약 신청하기
 </button>
 			
 </form>
 
 
+</div>
 </div>
 
 <!-- 결제 금액 Modal -->

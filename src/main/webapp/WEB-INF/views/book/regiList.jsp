@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>마이페이지 테스트용</title>
+<title>예약내역 (사용자)</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="/js/semantic/semantic.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -16,17 +16,18 @@
 
 </head>
 <body>
-	<d:navBar current="myPageTest" />
+	 <d:navBar current="regiList" />  
 
+	  
 	<div class="container-lg">
 	
-	   <i class="fa-duotone fa-paw" style="--fa-primary-color: #ffd6e2; --fa-secondary-color: #a6969b;"></i>
-		<h3>
+		<h2 style="margin-top: 60px; margin-bottom: 0px; text-align:center;">
+		<i class="fa fa-solid fa-paw"></i>
 		예약내역
-		</h3>
-		<i class="fa-duotone fa-paw" style="--fa-primary-color: #ffd6e2; --fa-secondary-color: #a6969b;"></i>
+		<i class="fa fa-solid fa-paw"></i>
+		</h2>
 		
-		<table class="table">
+		<table class="table" style="margin-top:75px;">
 			<thead>
 				<tr>
 					<th>pet 이름</th>
@@ -61,7 +62,7 @@
 						<td>
 						<c:if test = "${book.accepted == 0 }">
 						<button type="button" class="btn btn-secondary" onclick="location.href='/book/modify/${book.num}'">변경</button>
-						<button type="button" class="btn btn-danger" >삭제</button>
+						<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">삭제</button>
 						</c:if>
 						</td>
 					</tr>
@@ -69,6 +70,25 @@
 			</tbody>
 		</table>
 	</div>
+	
+	
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      
+      <div class="modal-body">
+      <br />
+        확인을 누르시면 예약신청이 취소됩니다.
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger">확인</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 
