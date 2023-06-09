@@ -20,12 +20,6 @@ public class CommentController {
 	@Autowired
 	private CommentService service;
 	
-	
-	@GetMapping("")
-	public String comment () {
-		return "comment";
-	}
-	
 		
 	@GetMapping("list")
 	@ResponseBody

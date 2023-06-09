@@ -1,15 +1,15 @@
 package com.example.demo.service;
 
-import java.util.*;
+import java.util.List;
 
-import org.springframework.beans.factory.annotation.*;
-import org.springframework.security.crypto.password.*;
-import org.springframework.stereotype.*;
-import org.springframework.transaction.annotation.*;
-import org.springframework.web.servlet.mvc.support.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.example.demo.domain.*;
-import com.example.demo.mapper.*;
+import com.example.demo.domain.Member;
+import com.example.demo.mapper.CommentMapper;
+import com.example.demo.mapper.MemberMapper;
 
 @Service
 @Transactional(rollbackFor = Exception.class)
@@ -23,6 +23,9 @@ public class MemberService {
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+	
+	@Autowired
+	private CommentMapper commentMapper;
 	
 	public boolean signup(Member member) {
 		
@@ -47,6 +50,10 @@ public class MemberService {
 		int cnt = 0;
 		if(passwordEncoder.matches(member.getPassword(), eachMemberId.getPassword())) {
 			// 암호가 같으면?
+			
+			//회원이 작성한 댓글 삭제
+			commentMapper.deleteByMemberId(member.getId());
+			
 			cnt = mapper.deleteById(member.getId());			
 		
 			// 이 회원이 좋아요한 레코드 삭제

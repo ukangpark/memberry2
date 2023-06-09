@@ -34,6 +34,7 @@ public interface MyFeedMapper {
 				(SELECT COUNT(*) 
 				 FROM FeedLike 
 				 WHERE feedId = fd.id) likeCount
+				 (SELECT COUNT(*) FROM Comment WHERE feedId = fd.id) commentCount
 			FROM Feed fd LEFT JOIN File fl ON fd.id = fl.feedId
 			WHERE fd.id = #{id}
 			""")
@@ -82,6 +83,8 @@ public interface MyFeedMapper {
 				AND fileName = #{fileName}
 			""")
 	void deleteFileNameByFeedIdAndFileName(Integer feedId, String fileName);
+	
+	
 
 
 }

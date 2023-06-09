@@ -18,6 +18,8 @@ public class Feed {
 	
 	private List<String> fileName;
 	private Integer likeCount;
+
+	private Integer commentCount;
 	private Boolean liked;
 
 	
