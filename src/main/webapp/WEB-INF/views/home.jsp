@@ -103,7 +103,7 @@
 									<li>
 										<a href="/feedId/${feed.id}"> 
 										<img class="ui medium rounded imager" src="${bucketUrl }/${feed.id }/${fileName }" alt="" />
-									</a>
+										</a>
 									</li>
 									
 
@@ -243,7 +243,7 @@
 
 
 	 <script src="/js/home.js"></script>  
-	 <script src="/js/comment.js"></script>
+	<!--  <script src="/js/comment.js"></script> -->
 	 
 
 

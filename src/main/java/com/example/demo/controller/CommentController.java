@@ -23,7 +23,7 @@ public class CommentController {
 		
 	@GetMapping("list")
 	@ResponseBody
-	public List<Comment> list(@RequestParam("feed") Integer feedId, Authentication authentication) {
+	public List<Comment> list(@RequestParam("myFeed") Integer feedId, Authentication authentication) {
 		return service.list(feedId, authentication);
 	}
 	
