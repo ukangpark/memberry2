@@ -1,14 +1,32 @@
 package com.example.demo.service;
 
+
 import java.util.*;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+
 
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.security.crypto.password.*;
 import org.springframework.stereotype.*;
 import org.springframework.transaction.annotation.*;
 
-import com.example.demo.domain.*;
+
+import com.example.demo.domain.Member;
+
 import com.example.demo.mapper.*;
+
+import com.example.demo.mapper.CommentMapper;
+import com.example.demo.mapper.FeedLikeMapper;
+import com.example.demo.mapper.MemberMapper;
+
+import com.example.demo.domain.*;
+
+
+
 
 @Service
 @Transactional(rollbackFor = Exception.class)

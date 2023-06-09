@@ -8,8 +8,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Insert title here</title>
+
 <my:top></my:top>
+
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js'></script>
+
 <style>
  html, body {
   margin: 0;
@@ -51,6 +54,7 @@
 
 
 <script src="/js/calendar.js"></script>
+
 <my:bottom></my:bottom>
 
 	 
