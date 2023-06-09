@@ -32,7 +32,7 @@ public interface MyFeedMapper {
 				fd.location,
 				fl.fileName,
 				(SELECT COUNT(*) 
-				 FROM FeedLike
+				 FROM FeedLike 
 				 WHERE feedId = fd.id) likeCount,
 				 (SELECT COUNT(*) FROM Comment WHERE feedId = fd.id) commentCount
 			FROM Feed fd LEFT JOIN File fl ON fd.id = fl.feedId

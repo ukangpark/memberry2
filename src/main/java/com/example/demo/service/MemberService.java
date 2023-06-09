@@ -1,6 +1,12 @@
 package com.example.demo.service;
 
+
 import java.util.*;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -8,7 +14,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.domain.Member;
+
 import com.example.demo.mapper.*;
+
+import com.example.demo.mapper.CommentMapper;
+import com.example.demo.mapper.FeedLikeMapper;
+import com.example.demo.mapper.MemberMapper;
+
 
 @Service
 @Transactional(rollbackFor = Exception.class)
