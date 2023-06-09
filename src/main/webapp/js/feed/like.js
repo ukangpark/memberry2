@@ -15,10 +15,8 @@ $(".likeIcon").click(function() {
 		success: function(data) {
 			if (data.like) {
 				likeIcon.html(`<img src="/images/bone.png">`);
-				//$(".homeLikeIcon").html(`<img src="/images/homebone.png">`);
 			} else {
 				likeIcon.html(`<img src="/images/olbone.png">`);
-				//$(".homelikeIcon").html(`<img src="/images/olhomebone.png">`);
 			}
 			// 좋아요 수 업데이트
 			likeNumber.text(data.count);

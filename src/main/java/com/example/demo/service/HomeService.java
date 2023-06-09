@@ -18,9 +18,21 @@ public class HomeService {
 	@Autowired
 	private FeedLikeMapper likeMapper;
 	
-	public List<Feed> listFeed() {
+	public List<Feed> listFeed(Authentication authentication) {
 		List<Feed> list = mapper.selectAll();
-				
+			
+		// 현재 로그인 한 사람이 이 게시물에 좋아요 했는지 여부 쿼리로 가져오기
+		if (authentication != null) {
+			List<Like> like = mapper.select(authentication.getName());
+			
+			for (Feed feed : list) {
+				for (Like l : like) {
+					if (feed.getId().equals(l.getFeedId())) {
+						feed.setLiked(true);
+					}
+				}
+			}
+		}
 		return list;
 	}
 	

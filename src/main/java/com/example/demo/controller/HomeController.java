@@ -3,7 +3,6 @@ package com.example.demo.controller;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.*;
-import org.springframework.http.*;
 import org.springframework.security.core.*;
 import org.springframework.stereotype.*;
 import org.springframework.ui.*;
@@ -20,8 +19,9 @@ public class HomeController {
 	private HomeService service;
 	
 	@GetMapping("")
-	public String feed(Model model) {
-		List<Feed> result = service.listFeed();
+	public String feed(Model model,
+			Authentication authentication) {
+		List<Feed> result = service.listFeed(authentication);
 		model.addAttribute("feedList", result);
 		return "home";
 	}

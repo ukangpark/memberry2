@@ -78,10 +78,10 @@
 	<!-- toast 알람 -->
 	<div class="toast-container top-0 start-50 translate-middle-x p-3">
 		<div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-			<div class="toast-header">
-				<button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+			<div class="d-flex">
+				<div class="toast-body"></div>
+				<button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
 			</div>
-			<div class="toast-body"></div>
 		</div>
 	</div>
 
@@ -150,8 +150,6 @@
 			<div class="textContent">
 				<div class="ui segment" style="font-weight: 700;">제목 : ${feed.title }</div>
 				<div class="ui segment" style="font-weight: 700;">본문 : ${feed.content }</div>
-				<div class="ui segment" style="font-weight: 700;">작성자 : ${feed.writer }</div>
-				<div class="ui segment" style="font-weight: 700;">작성일시 : ${feed.inserted }</div>
 				<div class="ui segment" style="font-weight: 700;">장소 태그 : ${feed.location }</div>
 			</div>
 

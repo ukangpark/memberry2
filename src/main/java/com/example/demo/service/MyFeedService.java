@@ -72,7 +72,6 @@ public class MyFeedService {
 				feed.setLiked(true);
 			}
 		}
-		
 		return feed;
 	}
 
@@ -119,6 +118,9 @@ public class MyFeedService {
 	}
 
 	public boolean remove(Integer id) {
+		//좋아요 테이블 지우기
+		likeMapper.deleteByFeedId(id);
+		
 		//파일명 조회(데이터 지울 때 필요하여 미리 조회)
 		List<String> fileNames = mapper.selectFileNamesByFeedId(id);
 		

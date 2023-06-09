@@ -125,6 +125,11 @@
 	height: 250px;
 	overflow-y: auto;
 }
+
+.likeIcon img {
+	width: 16px;
+}
+
 </style>
 <!-- bxslider -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
@@ -134,7 +139,7 @@
 </head>
 <body>
 
-		<my:navBar current="home" />
+		<%-- <my:navBar current="home" /> --%>
 
 <div class="toast-container position-fixed  top-0 start-50 translate-middle-x p-3">
 	  <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
@@ -182,8 +187,13 @@
 							<span class="left floated"> 
 							
 							<!-- 좋아요 기능 구현 -->
-							<span class="likeIcon" data-feed-id="${feed.id }">
-								<img src="/images/olhomebone.png">
+							<span class="likeIcon" data-feed-id="${feed.id }" >
+								<c:if test="${feed.liked }">
+									<img src="/images/bone.png">
+								</c:if>
+								<c:if test="${not feed.liked }">
+									<img src="/images/olbone.png">								
+								</c:if>
 							</span>
 							<span class="likeNumber">
 								${feed.likeCount } 

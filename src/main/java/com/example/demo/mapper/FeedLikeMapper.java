@@ -33,4 +33,17 @@ public interface FeedLikeMapper {
 			  AND memberId = #{memberId}
 			""")
 	Like select(Integer feedId, String memberId);
+
+	@Delete("""
+			DELETE FROM FeedLike
+			WHERE feedId = #{feedId}
+			""")
+	void deleteByFeedId(Integer feedId);
+
+	@Delete("""
+			DELETE FROM FeedLike
+			WHERE memberId = #{memberId}
+			""")
+	void deleteByMemberId(String memberId);
+
 }
