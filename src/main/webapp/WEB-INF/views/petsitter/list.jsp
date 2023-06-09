@@ -19,6 +19,8 @@
 
 <style>
 h1{ text-align : center;
+	/* 왜안댕.. */font-family:fantasy;
+	
 }
 
 </style>
@@ -31,7 +33,11 @@ h1{ text-align : center;
 	<div class="container-lg">
 		<a href = "list" style = "color:black">
 		<br />
-		<h1>펫시터 목록</h1>
+		<h1>
+		<i class="fa fa-solid fa-paw"></i>
+		펫시터 목록
+		<i class="fa fa-solid fa-paw"></i>
+		</h1>
 		</a>
 <br />
 <br />
