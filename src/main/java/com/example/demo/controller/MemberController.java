@@ -49,13 +49,16 @@ public class MemberController {
 	// 경로: http://localhost:8080/member/list?page=3
 	@GetMapping("list")
 	@PreAuthorize("isAuthenticated()")
-	public void list(Model model, 
+	public String list(Model model, 
 					 @RequestParam(value="page", defaultValue="1") Integer page) {
 //		List<Member> list = service.listMember(); // 페이지 처리 전
 		
-		List<Member> list = service.listMember(page); // 페이지 처리 이후
+		Map<String, Object> result = service.listMember(page); // 페이지 처리 이후
 		
-		model.addAttribute("memberList", list);
+		model.addAttribute("pageInfo", result.get("pageInfo"));
+		model.addAttribute("memberList", result.get("memberList"));
+	
+		return "member/list";
 	}
 
 	@GetMapping("info")

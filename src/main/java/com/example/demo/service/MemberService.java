@@ -72,17 +72,43 @@ public class MemberService {
 		return cnt == 1;
 	}
 
-	public List<Member> listMember(Integer page) {
+	public Map<String, Object> listMember(Integer page) {
 		
-		// 한 페이지에 10개씩 보여주기
-		Integer startIndex = (page -1) * 10;
+		// 한 페이지에 보여줄 레코드 개수
+		Integer recordsInPage = 10;
 		
-		// 회원 목록 가져와서 보여주기
-		return mapper.selectAllPage(startIndex);
+		// query LIMIT절에 사용할 시작 인덱스
+		Integer startIndex = (page -1) * recordsInPage;
 		
 		// 페이지네이션이 필요한 정보 가져와서 보여주기
+		// 전체 레코드 수
+		Integer countAllRecords = mapper.countAll();
 		
+		// 마지막 페이지 번호
+		Integer lastPageNum = (countAllRecords - 1) / recordsInPage + 1;
+		
+		// 페이지네이션 왼쪽 번호
+		Integer leftPageNum = page - 5;
+		// 1보다 작을 수 없음
+		leftPageNum = Math.max(leftPageNum, 1);
+		
+		// 페이지네이션 오른쪽 번호
+		Integer rightPageNum = page + 4;
+		// 마지막페이지보다 클 수 없음
+		rightPageNum = Math.min(rightPageNum, lastPageNum);
+		
+		Map<String, Object> pageInfo = new HashMap<>();
+		pageInfo.put("leftPageNum", leftPageNum);
+		pageInfo.put("rightPageNum", rightPageNum);
+		pageInfo.put("currentPageNum", page);
+		
+		// 회원 목록 가져와서 보여주기
+		List<Member> list = mapper.selectAllPage(startIndex, recordsInPage);
+		
+		return Map.of("pageInfo", pageInfo, 
+					  "memberList", list);
 	}
-	
+	 
 }
-
+ 
+ 

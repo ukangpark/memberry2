@@ -69,8 +69,15 @@ public interface MemberMapper {
 				   inserted
 			FROM Member
 			ORDER BY inserted DESC
-			LIMIT #{startIndex}, 10
+			LIMIT #{startIndex}, #{recordsInPage}
 			""")
-	List<Member> selectAllPage(Integer startIndex);
+	List<Member> selectAllPage(Integer startIndex, Integer recordsInPage);
+
+	
+	@Select("""
+			SELECT COUNT(*)
+			FROM Member
+			""")
+	Integer countAll();
 	
 }

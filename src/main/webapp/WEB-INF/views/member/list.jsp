@@ -17,13 +17,13 @@
 }
 
 .size {
-	width:250px;
-	min-width:150px;
-	max-width:150px;
+	width: 250px;
+	min-width: 150px;
+	max-width: 150px;
 }
 
 #pagination {
-	display:flex;
+	display: flex;
 	justify-content: center;
 	align-items: center;
 }
@@ -77,13 +77,14 @@
 
 	<!-- pagination -->
 	<div class="container-lg" id="pagination">
+		<c:forEach begin="${pageInfo.leftPageNum }" end="${pageInfo.rightPageNum }" var="pageNum">
+			<c:url value="/member/list" var="pageLink">
+				<c:param name="page" value="${pageNum }" />
+			</c:url>
 			<div class="ui pagination menu">
-				<a class="active item"> 1 </a>
-				<div class="disabled item">...</div>
-				<a class="item"> 10 </a> 
-				<a class="item"> 11 </a> 
-				<a class="item"> 12 </a>
+				<a class="item ${pageNum eq pageInfo.currentPageNum ? 'active' : '' }" href="${pageLink }"> ${pageNum } </a>
 			</div>
+		</c:forEach>
 	</div>
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
