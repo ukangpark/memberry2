@@ -10,8 +10,17 @@ import com.example.demo.domain.Registration;
 public interface RegistrationMapper {
 
 	@Insert("""
-			INSERT INTO Pet (petName, type, weight, birth, together, gender, neutered, registrationNum, photo)
-			VALUES (#{registration.petName}, #{registration.type}, #{registration.weight}, #{registration.birth}, #{registration.together}, #{registration.gender}, #{registration.neutered}, #{registration.registrationNum}, #{originalFilename})
+			INSERT INTO Pet (petName, type, weight, birth, together, gender, neutered, registrationNum, photo, memberId)
+			VALUES (#{registration.petName}, 
+					#{registration.type}, 
+					#{registration.weight}, 
+					#{registration.birth}, 
+					#{registration.together}, 
+					#{registration.gender}, 
+					#{registration.neutered}, 
+					#{registration.registrationNum}, 
+					#{originalFilename}, 
+					#{registration.memberId})
 			""")
 	@Options(useGeneratedKeys = true, keyProperty = "registration.id")
 	Integer insertAll(Registration registration, String originalFilename);

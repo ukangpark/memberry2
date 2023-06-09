@@ -3,6 +3,7 @@ package com.example.demo.service;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.*;
+import org.springframework.security.core.*;
 import org.springframework.stereotype.*;
 import org.springframework.transaction.annotation.*;
 
@@ -16,14 +17,22 @@ public class CommentService {
 	@Autowired
 	private CommentMapper mapper;
 
-	public List<Comment> list(Integer feedId) {
-		return mapper.selectAllByFeedId(feedId);
+	public List<Comment> list(Integer feedId, Authentication authentication) {
+		List<Comment> comments = mapper.selectAllByFeedId(feedId);
+		if (authentication != null) {
+			for(Comment comment : comments) {
+				comment.setEditable(comment.getMemberId().equals(authentication.getName()));
+			}
+		}
+		return comments;
 	}
 	
-	
+	public Comment get(Integer id) {
+		return mapper.selectById(id);
+	}
 
-	public Map<String, Object> add(Comment comment) {
-		comment.setMemberId("123");
+	public Map<String, Object> add(Comment comment, Authentication authentication) {
+		comment.setMemberId(authentication.getName());
 		var res = new HashMap<String, Object>();
 		int cnt = mapper.insert(comment);
 		

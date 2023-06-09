@@ -62,8 +62,11 @@ public class MyFeedController {
 	
 	// 클릭한 게시물 보기
 	@GetMapping("/feedId/{feedId}")
-	public String post(@PathVariable("feedId") Integer feedId, Model model) {
-		Feed feed = service.getPost(feedId);
+	public String post(
+			@PathVariable("feedId") Integer feedId, 
+			Model model,
+			Authentication authentication) {
+		Feed feed = service.getPost(feedId, authentication);
 		model.addAttribute("feed", feed);
 		
 		return "feed/feedGet";
@@ -106,23 +109,5 @@ public class MyFeedController {
 			return "redirect:/id/" + id;
 		}
 	}
-	
-	@PostMapping("/like")
-	@ResponseBody
-	public ResponseEntity<Map<String, Object>> like(
-			@RequestBody Like like,
-			Authentication authentication) {
-		
-		if (authentication == null) {
-			return ResponseEntity
-					.status(403)
-					.body(Map.of("message", "로그인 후 좋아요 클릭 가능합니다."));
-		} else {
-			
-			return ResponseEntity
-					.ok()
-					.body(service.like(like, authentication));
-		}
-		
-	}
+
 }

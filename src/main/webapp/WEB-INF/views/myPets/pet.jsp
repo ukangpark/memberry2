@@ -11,14 +11,17 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css">
 
 <style>
-#profileContainer {
+.profileContainer {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.profile {
 	position: relative;
 	width: 300px;
 	height: 300px;
 	border-radius: 50%;
-	border: 2px;
-	border-style: solid;
-	border-color: #cccccc;
 	overflow: hidden;
 	display: flex;
 	align-items: center;
@@ -29,6 +32,18 @@
 img {
 	width: 100%;
 	height: 100%;
+}
+
+.border {
+	position: absolute;
+	width: 300px;
+	height: 300px;
+	border-radius: 50%;
+	border-style: solid;
+	border: 1px;
+	align-items: center;
+	justify-content: center;
+	padding: 0px;
 }
 
 .item {
@@ -48,16 +63,23 @@ label {
 	<my:alert></my:alert>
 
 	<!-- 상단 공백 -->
-	<div style="margin-bottom: 15px"></div>
+	<div style="margin-bottom: 5px"></div>
 
 	<!-- 상단 프로필 컨테이너 -->
-	<div class="ui container" id="profileContainer">
-		<img src="${bucketUrl }/${pet.id }/${pet.photo}">
+	<div class="profileContainer">
+		<div class="profile">
+			<img src="${bucketUrl }/${pet.id }/${pet.photo}">
+			<div class="border"></div>
+		</div>
 	</div>
 
 	<!-- 상단 헤더 컨테이너 -->
 	<div class="ui center aligned container mt-2">
 		<div class="ui huge header">${pet.petName }</div>
+		<div class="ui toggle checkbox">
+			<input id="checkbox" type="checkbox" name="profileSubmit">
+			<label>내 프로필로 등록</label>
+		</div>
 	</div>
 
 	<!-- form -->
@@ -69,7 +91,7 @@ label {
 
 			<!-- 왼쪽 컨테이너 항목들 -->
 			<div class="eight wide column">
-				<div class="ui left aligned container mt-5" id="leftContainer">
+				<div class="ui left aligned container mt-3" id="leftContainer">
 					<div class="field">
 						<label>품종</label>
 						<input type="text" name="type" value="${pet.type }" readonly>
@@ -91,7 +113,7 @@ label {
 
 			<!-- 오른쪽 컨테이너 항목들 -->
 			<div class="eight wide column">
-				<div class="ui right aligned container mt-5" id="rightContainer">
+				<div class="ui right aligned container mt-3" id="rightContainer">
 					<div class="field">
 						<label>성별</label>
 						<input type="text" name="gender" value="${pet.gender eq 'male' ? '남아' : '여아'}" readonly>
@@ -108,7 +130,7 @@ label {
 				<div style="margin-top: 65px">
 					<div class="ui toggle right floated large button" style="background-color: #cc6666" data-bs-toggle="modal" data-bs-target="#deleteConfirmModal">삭제하기</div>
 					<div class="ui toggle right floated large button" style="background-color: #6699cc" onclick="location.href='/petModify/${pet.id}'">수정하기</div>
-					<div class="ui right floated large button" style="background-color: #cccccc" onclick="location.href='/petList'">목록보기</div>
+					<div class="ui right floated large button" style="background-color: #cccccc" onclick="location.href='/myPets/petList'">목록보기</div>
 				</div>
 			</div>
 
