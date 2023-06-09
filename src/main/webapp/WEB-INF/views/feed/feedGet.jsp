@@ -9,6 +9,8 @@
 <title>Insert title here</title>
 <my:top></my:top>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.min.css" rel="stylesheet" />
+<my:top></my:top>
+
 </head>
 
 <style>
@@ -178,7 +180,9 @@
 	</div>
 	<!-- wrapper div -->
 
+
 <my:bottom></my:bottom>
+
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.min.js"></script>
 

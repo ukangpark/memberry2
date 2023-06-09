@@ -98,17 +98,17 @@
 
 							<!-- 이미지 파일 출력 -->
 							<br />
-							<ul class="slider" id="imgContainer">
-								<c:forEach items="${feed.fileName }" var="fileName">
-									<li>
-										<a href="/feedId/${feed.id}"> 
-										<img class="ui medium rounded imager" src="${bucketUrl }/${feed.id }/${fileName }" alt="" />
-									</a>
-									</li>
-									
-
-								</c:forEach>
-							</ul>
+							<a href="/feedId/${feed.id}" > 
+								<ul class="slider" id="imgContainer">
+									<c:forEach items="${feed.fileName }" var="fileName">
+										<li>
+											<img class="ui medium rounded imager" src="${bucketUrl }/${feed.id }/${fileName }" alt="" />
+										</li>
+										
+	
+									</c:forEach>
+								</ul>
+							</a>
 						</div>
 						<div class="content">
 							<div class="header">${feed.title}</div>
@@ -243,7 +243,7 @@
 
 
 	 <script src="/js/home.js"></script>  
-	 <script src="/js/comment.js"></script>
+	<!--  <script src="/js/comment.js"></script> -->
 	 
 
 
