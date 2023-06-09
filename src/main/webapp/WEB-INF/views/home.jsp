@@ -125,6 +125,11 @@
 	height: 250px;
 	overflow-y: auto;
 }
+
+.likeIcon img {
+	width: 16px;
+}
+
 </style>
 <!-- bxslider -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
@@ -134,7 +139,7 @@
 </head>
 <body>
 
-		<%--  <my:navBar current="home" /> --%>
+		<%-- <my:navBar current="home" /> --%>
 
 <div class="toast-container position-fixed  top-0 start-50 translate-middle-x p-3">
 	  <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
@@ -148,6 +153,7 @@
 	<div id="header">
 		<h2>Membery</h2>
 	</div> 
+	
 
 	<div class="wrapper">
 
@@ -155,6 +161,8 @@
 			<div class="ui link cards">
 				<c:forEach items="${feedList}" var="feed">
 
+					
+							
 					<div class="ui card" style="margin: 30px;">
 						<div class="content">
 							<!-- 이미지 파일 출력 -->
@@ -176,7 +184,22 @@
 							<div class="description">${feed.content}</div>
 						</div>
 						<div class="extra content">
-							<span class="left floated"> <i class="heart outline like icon"></i>17 likes <!-- Button trigger modal -->
+							<span class="left floated"> 
+							
+							<!-- 좋아요 기능 구현 -->
+							<span class="likeIcon" data-feed-id="${feed.id }" >
+								<c:if test="${feed.liked }">
+									<img src="/images/bone.png">
+								</c:if>
+								<c:if test="${not feed.liked }">
+									<img src="/images/olbone.png">								
+								</c:if>
+							</span>
+							<span class="likeNumber">
+								${feed.likeCount } 
+							</span> likes 
+							
+								<!-- Button trigger modal -->
 								<button type="button" class="btn btn-secondary-link" data-bs-toggle="modal" data-bs-target="#commentModal">
 									<i class="fa-solid fa-comment"></i>
 								</button> <i class="paw icon"></i>
@@ -334,10 +357,10 @@
 
 	<script src="/js/home.js"></script>
 
-
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>
 
+	<script src="/js/feed/like.js"></script>
 </body>
 </html>

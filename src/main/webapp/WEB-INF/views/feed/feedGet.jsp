@@ -38,17 +38,10 @@
 }
 
 .bx-wrapper {
-	/* flex-grow: 3; */
-	margin-left: 1rem;
+	
+	margin-left: 1.2rem;
 }
 
-/* .bxslider {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-} */
 
 #textContentt {
 	/* flex-grow: 2;  */
@@ -85,19 +78,15 @@
 	<!-- toast 알람 -->
 	<div class="toast-container top-0 start-50 translate-middle-x p-3">
 		<div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-			<div class="toast-header">
-				<button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+			<div class="d-flex">
+				<div class="toast-body"></div>
+				<button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
 			</div>
-			<div class="toast-body"></div>
 		</div>
 	</div>
 
 	<div class="pageName">
-		<h1>
-			<span id="feedIdText">
-			${feed.id }
-			</span>
-			번 게시물</h1>
+		<h1>${feed.id }번 게시물</h1>
 	</div>
 
 	<div class="wrapper">
@@ -127,10 +116,15 @@
 
 				<div class="content" >
 					
-						<span id="likeIcon" >
-							<!-- <i class="fa-solid fa-bone"></i> --><img src="/images/olbone.png">
+						<span class="likeIcon" data-feed-id="${feed.id }">
+							<c:if test="${feed.liked }">
+								<img src="/images/bone.png">
+							</c:if>
+							<c:if test="${not feed.liked }">
+								<img src="/images/olbone.png">						
+							</c:if>
 						</span>
-						<span id="likeNummber" style="font-weight: 300; font-size: large;">
+						<span class="likeNumber" style="font-weight: 300; font-size: large;">
 							${feed.likeCount }
 						</span> 
 						<span style="font-weight: 300; font-size: large;">likes</span>
@@ -156,8 +150,6 @@
 			<div class="textContent">
 				<div class="ui segment" style="font-weight: 700;">제목 : ${feed.title }</div>
 				<div class="ui segment" style="font-weight: 700;">본문 : ${feed.content }</div>
-				<div class="ui segment" style="font-weight: 700;">작성자 : ${feed.writer }</div>
-				<div class="ui segment" style="font-weight: 700;">작성일시 : ${feed.inserted }</div>
 				<div class="ui segment" style="font-weight: 700;">장소 태그 : ${feed.location }</div>
 			</div>
 

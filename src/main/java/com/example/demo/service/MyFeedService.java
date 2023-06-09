@@ -62,8 +62,17 @@ public class MyFeedService {
 		return cnt == 1;
 	}
 
-	public Feed getPost(Integer id) {
-		return mapper.selectById(id);
+	public Feed getPost(Integer id, Authentication authentication) {
+		Feed feed = mapper.selectById(id);
+		
+		// 현재 로그인 한 사람이 이 게시물에 좋아요 했는지 여부 쿼리로 가져오기
+		if (authentication != null) {
+			Like like = likeMapper.select(id, authentication.getName());
+			if (like != null) {
+				feed.setLiked(true);
+			}
+		}
+		return feed;
 	}
 
 	public boolean modify(Feed feed, List<String> removeFileNames, MultipartFile[] addFiles) throws Exception {
@@ -109,6 +118,9 @@ public class MyFeedService {
 	}
 
 	public boolean remove(Integer id) {
+		//좋아요 테이블 지우기
+		likeMapper.deleteByFeedId(id);
+		
 		//파일명 조회(데이터 지울 때 필요하여 미리 조회)
 		List<String> fileNames = mapper.selectFileNamesByFeedId(id);
 		
@@ -130,27 +142,10 @@ public class MyFeedService {
 		return cnt == 1;
 	}
 
+	public Feed getPost(Integer feedId) {
 
-	public Map<String, Object> like(Like like, Authentication authentication) {
-		Map<String, Object> result = new HashMap<>();
-		
-		result.put("like", false);
-		
-		like.setMemberId(authentication.getName());
-		Integer deleteCnt = likeMapper.delete(like);
-		
-		if (deleteCnt != 1) {
-			Integer insertCnt = likeMapper.insert(like);
-			result.put("like", true);
-		}
-		
-		// 게시물 번호 기준으로 좋아요 개수 읽어내기
-		Integer count = likeMapper.countByFeedId(like.getFeedId());
-		result.put("count", count);
-		
-		/* Integer count = likeMapper.countByFeedId(like.getFeedId()); */
-		
-		
-		return result;
+		return getPost(feedId, null);
 	}
+
+
 }
