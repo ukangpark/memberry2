@@ -25,12 +25,7 @@ public interface MyPetsMapper {
 	Registration selectById(Integer id);
 
 	@Update("""
-			UPDATE Pet SET photo = null
-			WHERE Id = #{id}
-			""")
-	Integer updatePhotoNull(Integer id);
-
-	@Update("""
+			<script>
 			UPDATE Pet SET
 				id = #{registration.id},
 				petName = #{registration.petName},
@@ -40,10 +35,15 @@ public interface MyPetsMapper {
 				gender = #{registration.gender},
 				neutered = #{registration.neutered},
 				registrationNum = #{registration.registrationNum},
+				
+				<if test="originalFilename neq ''">
 				photo = #{originalFilename},
+				</if>
+				
 				weight = #{registration.weight},
 				memberId = #{registration.memberId}
 			WHERE Id = #{registration.id}
+			</script>
 			""")
 	Integer update(Registration registration, String originalFilename);
 

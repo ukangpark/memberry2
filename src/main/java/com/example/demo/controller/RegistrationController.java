@@ -35,7 +35,7 @@ public class RegistrationController {
 		if (ok) {
 			rttr.addFlashAttribute("message", registration.getPetName() + " 친구가 등록되었습니다.");
 			rttr.addFlashAttribute("registration", registration);
-			return "redirect:/petList";
+			return "redirect:/myPets/petList";
 		} else {
 			rttr.addFlashAttribute("registration", registration);
 			rttr.addFlashAttribute("message", "반려동물 등록에 실패하였습니다.");

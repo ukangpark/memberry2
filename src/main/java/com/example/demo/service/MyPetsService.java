@@ -49,29 +49,18 @@ public class MyPetsService {
 		return mapper.selectById(id);
 	}
 
-	public boolean modify(Registration registration, String removeFile, MultipartFile addFile) throws Exception {
-
-		// 기존사진이 있다면,
-		if (removeFile != null && !removeFile.isEmpty()) {
-
-			// aws s3에서 삭제
-			String objectKey = "membery/" + registration.getId() + "/" + removeFile;
-			DeleteObjectRequest dor = DeleteObjectRequest.builder().bucket(bucketName).key(objectKey).build();
-			s3.deleteObject(dor);
-
-			// 테이블에 기존사진 삭제
-			mapper.updatePhotoNull(registration.getId());
-
-		}
+	public boolean modify(Registration registration, MultipartFile addFile) throws Exception {
 
 		// 새 파일 추가
-
 		// aws s3에 업로드
-		String objectKey = "membery/" + registration.getId() + "/" + addFile.getOriginalFilename();
-		PutObjectRequest por = PutObjectRequest.builder().bucket(bucketName).key(objectKey)
-				.acl(ObjectCannedACL.PUBLIC_READ).build();
-		RequestBody rb = RequestBody.fromInputStream(addFile.getInputStream(), addFile.getSize());
-		s3.putObject(por, rb);
+		if (addFile.getSize() > 0) {
+			String objectKey = "membery/" + registration.getId() + "/" + addFile.getOriginalFilename();
+			PutObjectRequest por = PutObjectRequest.builder().bucket(bucketName).key(objectKey)
+					.acl(ObjectCannedACL.PUBLIC_READ).build();
+			RequestBody rb = RequestBody.fromInputStream(addFile.getInputStream(), addFile.getSize());
+			s3.putObject(por, rb);
+			
+		}
 
 		// 테이블에 새로운 파일 추가, 수정
 		int cnt = mapper.update(registration, addFile.getOriginalFilename());

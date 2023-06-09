@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +27,7 @@ public class MyPetsController {
 	private MyPetsService service;
 	
 	//나의반려동물 리스트 보기
-	@GetMapping("petList")
+	@GetMapping("myPets/petList")
 	@PreAuthorize("isAuthenticated()")
 	public void list (Model model, Authentication auth) {
 		
@@ -43,7 +42,7 @@ public class MyPetsController {
 	public String myPet (@PathVariable("id") Integer id, Model model) {
 		Registration registration = service.getPet(id);
 		model.addAttribute("pet",registration);
-		return "pet";
+		return "myPets/pet";
 		
 	}
 	
@@ -51,7 +50,7 @@ public class MyPetsController {
 	@GetMapping("/petModify/{id}")
 	public String modify(@PathVariable("id") Integer id, Model model) {
 		model.addAttribute("pet", service.getPet(id));
-		return "petModify";
+		return "myPets/petModify";
 		
 	}
 	
@@ -60,18 +59,17 @@ public class MyPetsController {
 	//@PreAuthorize("isAuthenticated() and @customSecurityChecker.checkBoardWriter(authentication, #id)")
 	public String modifyProcess(Registration registration, 
 			@RequestParam(value="file", required = false) MultipartFile addFile,
-			@RequestParam(value="removeFile", required = false) String removeFile,
 			RedirectAttributes rttr) throws Exception {
-		boolean ok = service.modify(registration, removeFile, addFile);//서비스에게 넘김
+		boolean ok = service.modify(registration, addFile);//서비스에게 넘김
 		
 		//DB가 수정되고 만약 잘 수정되었다면(true)이면 다음 실행흐름을 이어가라
 		if (ok) {
 			//해당 펫정보보기로 돌아가게 만들래 (리다이렉션)
-			rttr.addFlashAttribute("message", registration.getId() + "번 게시물이 수정되었습니다.");
+			rttr.addFlashAttribute("message", registration.getPetName() + " 정보가 수정되었습니다.");
 			return "redirect:/id/" + registration.getId();
 		} else {
 			//잘못수정이 되었을 때는 수정페이지로 돌아가게 만들래
-			rttr.addFlashAttribute("message", registration.getId() + "번 게시물이 수정되지 않았습니다.");
+			rttr.addFlashAttribute("message", registration.getPetName() + " 정보가 수정되지 못했습니다.");
 			//rttr.addAttribute("fail", "fail");
 			return "redirect:/modify/" + registration.getId();
 		}
@@ -85,7 +83,7 @@ public class MyPetsController {
 			
 			//모델에 추가
 			rttr.addFlashAttribute("message", "등록된 반려동물이 삭제되었습니다.");
-			return "redirect:/petList";
+			return "redirect:/myPets/petList";
 		} else {
 			// 남아있게 할래
 			rttr.addFlashAttribute("message","등록된 반려동물 삭제를 실패하였습니다.");

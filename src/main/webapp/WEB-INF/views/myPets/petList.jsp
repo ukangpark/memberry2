@@ -56,10 +56,10 @@ img {
 	<my:alert></my:alert>
 
 	<!-- security test -->
-	<sec:authentication property="principal" />
+	<%-- <sec:authentication property="principal" /> --%>
 
 	<!-- 상단 공백 -->
-	<div style="margin-bottom: 15px"></div>
+	<div style="margin-bottom: 5px"></div>
 
 	<!-- 제목 -->
 	<div class="ui center aligned container mb-5" id="title">
@@ -91,7 +91,7 @@ img {
 			</c:forEach>
 		</div>
 		<div class="ui center aligned container">
-			<button class="ui large button" onclick="location.href='registration'">추가하기</button>
+			<button class="ui large button" onclick="location.href='/registration'">추가하기</button>
 		</div>
 	</div>
 

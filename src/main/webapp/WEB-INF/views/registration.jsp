@@ -16,9 +16,30 @@
 	width: 300px;
 	height: 300px;
 	border-radius: 50%;
-	border: 1px;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0px;
+}
+
+.border {
+	position: absolute;
+	width: 300px;
+	height: 300px;
+	border-radius: 50%;
 	border-style: solid;
-	border-color: #cccccc;
+	border: 1px;
+	align-items: center;
+	justify-content: center;
+	padding: 0px;
+}
+
+.defaultImage {
+	position: relative;
+	width: 300px;
+	height: 300px;
+	border-radius: 50%;
 	overflow: hidden;
 	display: flex;
 	align-items: center;
@@ -31,7 +52,7 @@
 	height: 100%;
 }
 
-#imagePreview>img {
+.preview {
 	display: none;
 	width: 100%;
 	height: 100%;
@@ -43,13 +64,7 @@
 	left: 56%;
 }
 
-#mustInput {
-	position: relative;
-}
-
 #tag {
-	width: 2px;
-	height: 2px;
 	position: absolute;
 }
 </style>
@@ -69,7 +84,10 @@
 		<!-- 상단 컨테이너 (프로필사진, addBtn) -->
 		<div class="ui container" id="imagePreview">
 			<img class="preview" src="">
-			<span class="defaultImage"><img alt="" src="images/paw.png"></span>
+			<div class="defaultImage">
+				<img alt="" src="images/paw.png">
+				<div class="border"></div>
+			</div>
 		</div>
 		<label for="fileInput" class="big circular ui icon button" id="addBtn"><i class="large plus icon"></i></label>
 		<input style="display: none" type="file" id="fileInput" name="file" accept="image/*" />
