@@ -73,6 +73,5 @@
 	</div>
 
 <my:bottom></my:bottom>	
-
 </body>
 </html>

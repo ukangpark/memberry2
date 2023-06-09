@@ -132,9 +132,22 @@ public class PetsitterService {
 		return count == 1;
 	}
 
-	public Integer insertHousePhotos(MultipartFile[] housePhotos, Integer hostId) throws Exception {
+	public Integer insertHousePhotos(MultipartFile[] housePhotos, Integer hostId, MultipartFile cover) throws Exception {
 		int count = 0;
+		
+		//상세페이지 아이디를 얻기 위한 메소드 
 		Detail detail = petsitterMapper.selectDetailById(hostId);
+		
+		// 대표 사진 추가
+		String coverKey = "cover/" +	detail.getId() + cover.getOriginalFilename();
+		PutObjectRequest objectRequestCover = PutObjectRequest.builder().bucket(bucketName).key(coverKey)
+				.acl(ObjectCannedACL.PUBLIC_READ).build();
+		s3.putObject(objectRequestCover,
+				RequestBody.fromInputStream(cover.getInputStream(), cover.getSize()));
+		// 대표 사진 테이블 추가
+		petsitterMapper.insertCover(detail.getId(), cover.getOriginalFilename());
+
+		
 		// 상세페이지 집사진 추가
 		for (MultipartFile housePhoto : housePhotos) {
 			if (housePhoto.getSize() > 0) {

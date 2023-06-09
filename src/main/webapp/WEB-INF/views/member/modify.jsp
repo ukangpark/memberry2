@@ -85,7 +85,7 @@
 		</div>
 	</div>
 
-<my:bottom></my:bottom>
+<my:bottom></my:bottom>	
 
 </body>
 </html>

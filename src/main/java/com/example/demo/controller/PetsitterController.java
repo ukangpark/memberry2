@@ -129,9 +129,10 @@ public class PetsitterController {
 
 	@PostMapping("addHousePhotos")
 	public String addHousePhotosProgress(
+			@RequestParam("cover") MultipartFile cover,
 			@RequestParam(value = "housePhotos", required = false) MultipartFile[] housePhotos,
 			@RequestParam("hostId") Integer hostId) throws Exception {
-		Integer count = petsitterService.insertHousePhotos(housePhotos, hostId);
+		Integer count = petsitterService.insertHousePhotos(housePhotos, hostId, cover);
 
 		return "redirect:/petsitter/detail?id=" + hostId;
 	}

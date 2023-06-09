@@ -30,6 +30,8 @@
 }
 </style>
 
+<my:top></my:top>
+
 </head>
 <body>
 
@@ -85,7 +87,7 @@
 		</c:forEach>
 	</div>
 
-<my:bottom></my:bottom>	
+<my:bottom></my:bottom>
 	
 </body>
 </html>

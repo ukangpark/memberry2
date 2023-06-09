@@ -11,5 +11,6 @@ public class Detail {
 	private String body;
 	private LocalDate inserted;
 	private Integer hostId;
+	private String cover;
 	
 }
