@@ -58,9 +58,11 @@ public class MemberController {
 		
 		Map<String, Object> result = service.listMember(page); // 페이지 처리 이후
 		
-		model.addAttribute("pageInfo", result.get("pageInfo"));
-		model.addAttribute("memberList", result.get("memberList"));
-	
+//		model.addAttribute("pageInfo", result.get("pageInfo"));
+//		model.addAttribute("memberList", result.get("memberList"));
+		model.addAllAttributes(result);
+		
+		
 		return "member/list";
 	}
 
