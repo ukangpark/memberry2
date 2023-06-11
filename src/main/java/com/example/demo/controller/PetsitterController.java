@@ -94,9 +94,9 @@ public class PetsitterController {
 	}
 
 	@PostMapping("hostDelete")
-	public String hostDelete(Integer hostId) {
+	public String hostDelete(Integer hostId, Member member) {
 		// 호스트 정보 삭제 과정
-		boolean ok = petsitterService.deleteHostById(hostId);
+		boolean ok = petsitterService.deleteHostById(hostId, member);
 		return "redirect:/petsitter/hostList";
 	}
 

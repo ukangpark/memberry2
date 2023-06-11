@@ -27,7 +27,7 @@
 							<img class="ui medium bordered centered circular image " src="${bucketUrl }/hostProfile/${host.id }/${host.profile }">
 						</c:otherwise>
 					</c:choose>
-					<h1 class="ui center aligned header">${host.hostName }님 정보입니다.(${host.id })</h1>
+					<h1 class="ui center aligned header">${host.hostName }님정보입니다.(${host.id })</h1>
 					<div>
 						<form class="ui big form" id="checkForm">
 							<div class="field">
@@ -77,9 +77,9 @@
 								</div>
 								<div class="field">
 									<div class="ui mini transparent input">
-									<c:if test="${detail.id ne null }">
-										<a class="ui basic huge label" href="/petsitter/detail?id=${host.id }">상세페이지 보기</a>
-									</c:if>
+										<c:if test="${detail.id ne null }">
+											<a class="ui basic huge label" href="/petsitter/detail?id=${host.id }">상세페이지 보기</a>
+										</c:if>
 										<input type="text" value="${detail.id eq null ? '등록된 상세페이지가 없습니다.' : '등록된 상세페이지가 있습니다.' }" disabled>
 									</div>
 								</div>
@@ -122,12 +122,6 @@
 		</div>
 	</div>
 
-	<!-- 삭제하기 정보 -->
-	<div class="d-none">
-		<form action="/petsitter/hostDelete" method="post" id="deleteForm">
-			<input type="text" name="hostId" value="${host.id }">
-		</form>
-	</div>
 
 	<!-- 삭제하기 모달 -->
 	<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
@@ -137,7 +131,18 @@
 					<h1 class="modal-title fs-5" id="deleteModalLabel">삭제 확인</h1>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
-				<div class="modal-body">호스트 등록 정보를 정말 삭제하시겠습니까?</div>
+				<div class="modal-body">
+					<div class="mb-3">
+					호스트 등록 정보를 정말 삭제하시겠습니까?
+					<br>
+					삭제를 확인하려면 비밀번호를 입력해주세요.
+					</div>
+					<!-- 삭제하기 정보 -->
+					<form action="/petsitter/hostDelete" method="post" id="deleteForm">
+						<input type="hidden" name="hostId" value="${host.id }">
+						<input class="form-control" type="text" name="password" id="passwordInput" placeholder="비밀번호를 입력해주세요.">
+					</form>
+				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소하기</button>
 					<button type="submit" class="btn btn-danger" form="deleteForm">삭제하기</button>
