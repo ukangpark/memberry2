@@ -54,6 +54,8 @@ public class PetsitterService {
 			// 등록된 상세페이지가 있다면 정보 조회
 			List<HostHousePhoto> hostHousePhoto = petsitterMapper.selectHostHousePhotoByDetailId(detail.getId());
 			info.put("hostHousePhoto", hostHousePhoto);
+			
+			
 		}
 
 		// map타입 변수 info에 넣음
@@ -77,17 +79,23 @@ public class PetsitterService {
 		return count;
 	}
 
-	public boolean modifyHostById(Host host, MultipartFile file) throws Exception {
+	public boolean modifyHostById(Host host, MultipartFile profile) throws Exception {
+		Integer count = 0;
+		
 		// 호스트 수정페이지 프로필 사진 업로드
-		String key = "hostProfile/" + file.getOriginalFilename();
-
-		PutObjectRequest objectRequest = PutObjectRequest.builder().bucket(bucketName).acl(ObjectCannedACL.PUBLIC_READ)
-				.key(key).build();
-
-		s3.putObject(objectRequest, RequestBody.fromInputStream(file.getInputStream(), file.getSize()));
-
-		// 호스트 정보 수정
-		Integer count = petsitterMapper.modifyHostById(host, file.getOriginalFilename());
+		if(profile.getSize() > 0) {
+			String key = "hostProfile/" + host.getId() + "/" + profile.getOriginalFilename();
+			
+			PutObjectRequest objectRequest = PutObjectRequest.builder().bucket(bucketName).acl(ObjectCannedACL.PUBLIC_READ)
+					.key(key).build();
+			
+			s3.putObject(objectRequest, RequestBody.fromInputStream(profile.getInputStream(), profile.getSize()));
+			
+			// 호스트 정보 수정
+			count = petsitterMapper.modifyHostById(host, profile.getOriginalFilename());
+			
+		}
+		System.out.println("service working");
 		return count == 1;
 	}
 
@@ -139,7 +147,7 @@ public class PetsitterService {
 		Detail detail = petsitterMapper.selectDetailById(hostId);
 		
 		// 대표 사진 추가
-		String coverKey = "cover/" +	detail.getId() + cover.getOriginalFilename();
+		String coverKey = "cover/" + detail.getId() + "/" + cover.getOriginalFilename();
 		PutObjectRequest objectRequestCover = PutObjectRequest.builder().bucket(bucketName).key(coverKey)
 				.acl(ObjectCannedACL.PUBLIC_READ).build();
 		s3.putObject(objectRequestCover,
@@ -180,18 +188,30 @@ public class PetsitterService {
 		return count == 1;
 	}
 
-	public Integer modifyDetailHousePhotos(MultipartFile[] addPhotos, List<String> removePhotos, Detail detail)
+	public Integer modifyDetailHousePhotos(MultipartFile addCover, MultipartFile[] addPhotos, List<String> removePhotos, Detail detail)
 			throws Exception {
 		Integer count = 0;
+		//커버사진 수정 		
+		if(addCover.getSize() > 0) {
+			//새로운 커버 사진 aws 업로드
+			String keyCover = "cover/" + detail.getId() + "/" + addCover.getOriginalFilename();
+			PutObjectRequest objectRequestCover = PutObjectRequest.builder().bucket(bucketName).key(keyCover)
+					.acl(ObjectCannedACL.PUBLIC_READ).build();
+			s3.putObject(objectRequestCover, RequestBody.fromInputStream(addCover.getInputStream(), addCover.getSize()));
+			
+			//커버사진 테이블 추가
+			petsitterMapper.insertCover(detail.getId(), addCover.getOriginalFilename());
+		}
+		
 		// 집사진 수정
 		// 추가할 사진은 추가하기
 		for (MultipartFile addPhoto : addPhotos) {
 			if (addPhoto.getSize() > 0) {
 				// aws에 집사진 추가
-				String key = "hostHousePhoto/" + detail.getId() + "/" + addPhoto.getOriginalFilename();
-				PutObjectRequest objectRequest = PutObjectRequest.builder().bucket(bucketName).key(key)
+				String keyDetail = "hostHousePhoto/" + detail.getId() + "/" + addPhoto.getOriginalFilename();
+				PutObjectRequest objectRequestDetail = PutObjectRequest.builder().bucket(bucketName).key(keyDetail)
 						.acl(ObjectCannedACL.PUBLIC_READ).build();
-				s3.putObject(objectRequest, RequestBody.fromInputStream(addPhoto.getInputStream(), addPhoto.getSize()));
+				s3.putObject(objectRequestDetail, RequestBody.fromInputStream(addPhoto.getInputStream(), addPhoto.getSize()));
 
 				// 집사진 테이블 추가
 				petsitterMapper.insertHostHousePhoto(addPhoto.getOriginalFilename(), detail.getId());
@@ -204,8 +224,8 @@ public class PetsitterService {
 		if (removePhotos != null && !removePhotos.isEmpty()) {
 			for (String removePhoto : removePhotos) {
 				// aws에서 집사진 파일 삭제
-				String key = "hostHousePhoto/" + detail.getId() + "/" + removePhoto;
-				DeleteObjectRequest deleteObjectRequest = DeleteObjectRequest.builder().bucket(bucketName).key(key)
+				String keyDetail = "hostHousePhoto/" + detail.getId() + "/" + removePhoto;
+				DeleteObjectRequest deleteObjectRequest = DeleteObjectRequest.builder().bucket(bucketName).key(keyDetail)
 						.build();
 
 				s3.deleteObject(deleteObjectRequest);
@@ -222,14 +242,14 @@ public class PetsitterService {
 	public boolean deleteDetailByHostId(Integer hostId) {
 		// 상세페이지 집사진 삭제
 		// detailId 값을 가져옴
-		Integer detailId = petsitterMapper.selectDetailById(hostId).getId();
-
-		// 사진 이름 조회
-		List<HostHousePhoto> hostHousePhotoes = petsitterMapper.selectHostHousePhotoByDetailId(detailId);
+		Detail detail = petsitterMapper.selectDetailById(hostId);
+		
+		// 집사진 이름 조회
+		List<HostHousePhoto> hostHousePhotoes = petsitterMapper.selectHostHousePhotoByDetailId(detail.getId());
 
 		for (HostHousePhoto hostHousePhoto : hostHousePhotoes) {
 			// aws에서 집사진 삭제
-			String key = "hostHousePhoto/" + detailId + "/" + hostHousePhoto.getHousePhoto();
+			String key = "hostHousePhoto/" + detail.getId() + "/" + hostHousePhoto.getHousePhoto();
 			DeleteObjectRequest deleteObjectRequest = DeleteObjectRequest.builder().bucket(bucketName).key(key).build();
 
 			s3.deleteObject(deleteObjectRequest);
@@ -237,7 +257,7 @@ public class PetsitterService {
 		}
 
 		// 집사진 테이블에서 정보 삭제
-		Integer photoDeleteCount = petsitterMapper.deleteHostHousePhotoByDetailId(detailId);
+		Integer photoDeleteCount = petsitterMapper.deleteHostHousePhotoByDetailId(detail.getId());
 
 		// 상세페이지 삭제
 		Integer count = petsitterMapper.deleteDetailByHostId(hostId);

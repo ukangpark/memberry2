@@ -45,7 +45,7 @@
 					<!-- 대표 사진 / 미리보기 -->
 					<div class="field" style="position: relative;">
 						<div class="ui aligned container">
-							<img class="ui centered large bordered rounded image" id="preview" src="/images/defaultHome.jpeg" id="preview1">
+							<img class="ui centered large bordered rounded image" id="preview" src="/images/defaultHome.jpeg" >
 							<label for="cover">
 								<i class="bars icon large button" style="position: absolute; top: 0.5lh; left: 20.1lh;"></i>
 							</label>
@@ -55,9 +55,9 @@
 
 					<!-- 이미지 미리보기  -->
 					<div style="position: relative;" id="imagePreview" class="field">
-						<div id="imgContainer" class="field ui aligned container segment" data-placeholder='파일을 첨부 하려면 파일 선택 버튼을 클릭하거나 파일을 드래그앤드롭 하세요. 대표 사진은 위 삼단바 버튼을 눌러주세요.'></div>
+						<div id="imgContainer" class="field ui aligned container segment" data-placeholder='파일을 첨부 하려면 파일 선택 버튼을 클릭하세요. 대표 사진은 위 삼단바 버튼을 눌러주세요.'></div>
 						<br>
-						<input class="form-control" type="file" id="housePhoto" name="housePhotos" multiple="multiple" accept="image/*" />
+						<input class="form-control" type="file" id="housePhotos" name="housePhotos" multiple="multiple" accept="image/*" />
 						<div class="ui teal right ribbon label" style="bottom: 125px;">상세 사진</div>
 					</div>
 				</form>
@@ -92,18 +92,6 @@
 	<my:bottom></my:bottom>
 	<script src="/js/semantic/semantic.min.js"></script>
 	<script src="/js/petsitter/addHousePhoto.js"></script>
-	<script>
-		function readURL(input) {
-			if (input.files && input.files[0]) {
-				var reader = new FileReader();
-				reader.onload = function(e) {
-					document.getElementById('preview').src = e.target.result;
-				};
-				reader.readAsDataURL(input.files[0]);
-			} else {
-				document.getElementById('preview').src = "";
-			}
-		}
-	</script>
+	
 </body>
 </html>

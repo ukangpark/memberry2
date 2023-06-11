@@ -24,7 +24,7 @@
 							<img class="ui medium bordered centered circular image " src="/images/paw.png">
 						</c:when>
 						<c:otherwise>
-							<img class="ui medium bordered centered circular image " src="${bucketUrl }/hostProfile/${host.profile }">
+							<img class="ui medium bordered centered circular image " src="${bucketUrl }/hostProfile/${host.id }/${host.profile }">
 						</c:otherwise>
 					</c:choose>
 					<h1 class="ui center aligned header">${host.hostName }님 정보입니다.(${host.id })</h1>

@@ -70,10 +70,10 @@ public class PetsitterController {
 	}
 
 	@PostMapping("hostModify")
-	public String hostModifyProcess(Host host, @RequestParam("file") MultipartFile file) throws Exception {
+	public String hostModifyProcess(Host host, @RequestParam(value =  "file", required = false) MultipartFile file) throws Exception {
 		// 호스트 정보 수정 과정
 		boolean ok = petsitterService.modifyHostById(host, file);
-
+		System.out.println("controller working");
 		return "redirect:/petsitter/hostMyPage?id=" + host.getId();
 	}
 
@@ -83,7 +83,6 @@ public class PetsitterController {
 			@RequestParam(value = "search", defaultValue = "") String search) {
 		Map<String, Object> result = petsitterService.listHost(page, search);
 		model.addAllAttributes(result);
-
 		return "petsitter/list";
 	}
 
@@ -124,7 +123,7 @@ public class PetsitterController {
 
 	@GetMapping("addHousePhotos")
 	public void addHousePhotosForm(@RequestParam("hostId") Integer hostId) {
-
+		// 상세페이지에 집사진 등록하는 폼 포워드 
 	}
 
 	@PostMapping("addHousePhotos")
@@ -132,6 +131,7 @@ public class PetsitterController {
 			@RequestParam("cover") MultipartFile cover,
 			@RequestParam(value = "housePhotos", required = false) MultipartFile[] housePhotos,
 			@RequestParam("hostId") Integer hostId) throws Exception {
+		// 상세페이지에 집사진 등록하는 과
 		Integer count = petsitterService.insertHousePhotos(housePhotos, hostId, cover);
 
 		return "redirect:/petsitter/detail?id=" + hostId;
@@ -166,10 +166,11 @@ public class PetsitterController {
 	@PostMapping("modifyHousePhotos")
 	public String modifyHousePhotosProcess(
 			Detail detail,
+			@RequestParam(value = "addCover", required = false) MultipartFile addCover,
 			@RequestParam(value = "removePhotos", required = false) List<String> removePhotos,
 			@RequestParam(value = "addPhotos", required = false) MultipartFile[] addPhotos) throws Exception {
 		// 집사진 수정 process
-		petsitterService.modifyDetailHousePhotos(addPhotos, removePhotos, detail);
+		petsitterService.modifyDetailHousePhotos(addCover, addPhotos, removePhotos, detail);
 		return "redirect:/petsitter/detail?id=" + detail.getHostId();
 	}
 
