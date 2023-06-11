@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+import org.springframework.security.core.Authentication;
 
 import com.example.demo.domain.Registration;
 
@@ -54,10 +55,18 @@ public interface MyPetsMapper {
 	Integer deleteById(Integer id);
 
 	@Select("""
-			SELECT Photo FROM Pet
+			SELECT photo FROM Pet
 			WHERE id = #{id}
 			""")
 	List<String> selectPhotoById(Integer id);
+
+	@Select("""
+			SELECT * FROM Pet
+			WHERE id = #{id}
+			""")
+	Registration thumbnailByMemberId(Integer id);
+
+	
 
 
 

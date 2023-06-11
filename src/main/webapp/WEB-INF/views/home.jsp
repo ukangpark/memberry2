@@ -13,14 +13,15 @@
 
 <style>
 
-
-
  #header {
-	text-align: center;
-	margin: 40px 0;
 	display: flex;
 	justify-content: center;
+	
 } 
+
+#memberyLogo {
+	width: 350px;
+}
 
 
 .wrapper {
@@ -82,11 +83,11 @@
 	</div>
 
 	<div id="header">
-		<h2>Membery</h2>
+		<img id="memberyLogo" src="/images/memberyLogo.png" alt="Membery logo">
 	</div> 
 	
 
-	<div class="wrapper" style="margin-top: 50px;">
+	<div class="wrapper">
 
 		<div class="ui center aligned container" id="container" style="z-index: 1">
 			<div class="ui link cards">

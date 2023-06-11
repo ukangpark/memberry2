@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -80,5 +81,13 @@ public class MyPetsService {
 		int cnt = mapper.deleteById(id);
 
 		return cnt == 1;
+	}
+
+	public Registration thumbnail(Integer id) {
+		
+		Registration reg  = mapper.thumbnailByMemberId(id);
+		
+		return reg;
+		
 	}
 }

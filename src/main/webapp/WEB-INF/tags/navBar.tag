@@ -16,7 +16,13 @@
 	height: 70px;
 	width: 70px;
 }
+
 #nav-container {
+	position: relative;
+	z-index: 100;
+}
+
+.up {
 	position: relative;
 	z-index: 100;
 }
@@ -28,9 +34,7 @@
 	<div class="ui position-fixed top-0 end-0">
 		<div class="ui dropdown" id="navBar">
 			<h4 id="profile">
-
-				<img class="ui tiny image" src="/images/genieLoki.jpeg">로키맘
-
+					<img class="ui tiny image" id="nav-image" src="">로키맘
 			</h4>
 			<div class="ui vertical menu">
 				<div class="item">
@@ -39,7 +43,7 @@
 					</div>
 				</div>
 
-				<a class="${current eq 'home' ? 'active' : '' } item" href="/home"> 홈피드 </a>
+				<a class="${current eq 'home' ? 'active' : '' } item" href="/home"> 홈피드</a>
 
 
 				<sec:authorize access="isAuthenticated()">
