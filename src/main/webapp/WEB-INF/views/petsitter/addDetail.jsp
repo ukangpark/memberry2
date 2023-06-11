@@ -28,7 +28,7 @@
 						<label for="body">소개글</label>
 						<textarea id="body" type="text" name="body" rows="20" placeholder="소개글을 입력해주세요."></textarea>
 					</div>
-					<div class="field">
+					<div class="field d-none">
 						<input type="text" name="hostId" value="${param.hostId }">
 					</div>
 				</form>
@@ -46,7 +46,5 @@
 
 	<my:bottom></my:bottom>
 	<script src="/js/semantic/semantic.min.js"></script>
-
-</style>
 </body>
 </html>

@@ -102,22 +102,28 @@ public class PetsitterService {
 	public boolean deleteHostById(Integer hostId) {
 		// 상세페이지 집사진 삭제
 		// detailId 값을 가져옴
-		Integer detailId = petsitterMapper.selectDetailById(hostId).getId();
+		Detail detail = petsitterMapper.selectDetailById(hostId);
 
 		// 사진 이름 조회
-		List<HostHousePhoto> hostHousePhotoes = petsitterMapper.selectHostHousePhotoByDetailId(detailId);
+		List<HostHousePhoto> hostHousePhotoes = petsitterMapper.selectHostHousePhotoByDetailId(detail.getId());
 
 		for (HostHousePhoto hostHousePhoto : hostHousePhotoes) {
 			// aws에서 집사진 삭제
-			String key = "hostHousePhoto/" + detailId + "/" + hostHousePhoto.getHousePhoto();
+			String key = "hostHousePhoto/" + detail.getId() + "/" + hostHousePhoto.getHousePhoto();
 			DeleteObjectRequest deleteObjectRequest = DeleteObjectRequest.builder().bucket(bucketName).key(key).build();
 
 			s3.deleteObject(deleteObjectRequest);
 
 		}
+		
+		//aws에서 커버 사진 삭제
+		String keyCover = "cover/" + detail.getId() + "/" + detail.getCover();
+		DeleteObjectRequest deleteObjectRequestCover = DeleteObjectRequest.builder().bucket(bucketName).key(keyCover).build();
+
+		s3.deleteObject(deleteObjectRequestCover);
 
 		// 집사진 테이블에서 정보 삭제
-		Integer photoDeleteCount = petsitterMapper.deleteHostHousePhotoByDetailId(detailId);
+		Integer photoDeleteCount = petsitterMapper.deleteHostHousePhotoByDetailId(detail.getId());
 
 		// 해당 호스트 상세페이지 삭제
 		Integer detailCount = petsitterMapper.deleteDetailByHostId(hostId);
@@ -255,6 +261,12 @@ public class PetsitterService {
 			s3.deleteObject(deleteObjectRequest);
 
 		}
+		
+		//aws에 커버사진 삭제 
+		String keyCover = "cover/" + detail.getId() + "/" + detail.getCover();
+		DeleteObjectRequest deleteObjectRequestCover = DeleteObjectRequest.builder().bucket(bucketName).key(keyCover).build();
+
+		s3.deleteObject(deleteObjectRequestCover);
 
 		// 집사진 테이블에서 정보 삭제
 		Integer photoDeleteCount = petsitterMapper.deleteHostHousePhotoByDetailId(detail.getId());

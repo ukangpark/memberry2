@@ -66,7 +66,7 @@
 			<div class="extra content">
 				<div class="ui two buttons">
 					<a href="/petsitter/addDetail?hostId=${param.hostId }" class="ui basic red button">뒤로 돌아가기</a>
-					<button form="addDetailForm" class="ui basic green button" data-bs-toggle="modal" data-bs-target="#addDetailModal">등록하기</button>
+					<button class="ui basic green button" data-bs-toggle="modal" data-bs-target="#addDetailModal">등록하기</button>
 				</div>
 			</div>
 

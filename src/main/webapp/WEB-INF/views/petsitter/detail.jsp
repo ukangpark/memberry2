@@ -49,13 +49,11 @@
 					</c:choose>
 				</div>
 				<div class="content">
-					<a class="header">${host.hostName } (${host.id }) (${detail.id })</a>
+					<a class="header">${host.hostName }</a>
 					<div class="meta">
 						<span>주소 : ${host.si }시 ${host.gu }구 ${host.dong }동</span>
 						<br>
 						<span>번호 : ${host.phone }</span>
-						<br>
-						<span>프로필 : ${host.profile }</span>
 					</div>
 					<div class="description">
 						<p>한 줄 소개 : ${detail.title }</p>
@@ -77,7 +75,7 @@
 	<!-- 본문 -->
 	<div class="container" style="width: 900px; margin-top: 25px;">
 		<div class="ui text container">
-			<p>본문 : ${detail.body }</p>
+			<p>${detail.body }</p>
 		</div>
 		<div>
 			<button class="ui right floated inverted red button" onclick="location.href='/book/regiForm/${host.id}'" >예약</button>

@@ -30,10 +30,10 @@
 						<label for="body">소개글</label>
 						<textarea id="body" type="text" name="body" rows="20">${detail.body }</textarea>
 					</div>
-					<div class="field">
+					<div class="field d-none">
 						<input type="text" name="hostId" value="${param.hostId }">
 					</div>
-					<div class="field">
+					<div class="field d-none">
 						<input type="text" name="detailId" value="${detail.id }">
 					</div>
 				</form>

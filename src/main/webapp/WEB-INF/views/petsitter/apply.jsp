@@ -20,7 +20,7 @@
 #addBtn {
 	position: absolute;
 	top: 230px;
-	left: 540px;
+	left: 440px;
 }
 </style>
 </head>
