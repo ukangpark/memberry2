@@ -44,12 +44,12 @@ public class MyFeedService {
 	private CommentMapper commentMapper;
 
 	
-	public List<File> listMyFeed() {
-		List<File> file = mapper.selectAll();
+	public List<File> listMyFeed(Authentication authentication) {
+		List<File> file = mapper.selectAll(authentication.getName());
 		return file;
 	}
 
-	public boolean addFeed(Feed feed, MultipartFile[] files) throws Exception {
+	public boolean addFeed(Feed feed, MultipartFile[] files, Authentication authentication) throws Exception {
 		// 게시물 insert
 		int cnt = mapper.insert(feed);
 		
@@ -67,7 +67,7 @@ public class MyFeedService {
 				s3.putObject(por, rb);
 				
 				// DB에 관련 정보 저장(insert)
-				mapper.insertFileName(feed.getId(), file.getOriginalFilename());
+				mapper.insertFileName(feed.getId(), file.getOriginalFilename(), authentication.getName());
 			}
 		}
 		
@@ -109,7 +109,7 @@ public class MyFeedService {
 		for (MultipartFile newFile : addFiles) {
 			if (newFile.getSize() > 0) {
 				// 테이블에 파일명 추가
-				mapper.insertFileName(feed.getId(), newFile.getOriginalFilename());
+				mapper.insertFileName(feed.getId(), newFile.getOriginalFilename(), newFile.getName());
 				
 				// s3에 파일(객체) 업로드
 				String objectKey = "membery/" + feed.getId() + "/" + newFile.getOriginalFilename();

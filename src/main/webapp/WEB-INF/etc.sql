@@ -30,7 +30,7 @@ CREATE TABLE FeedLike (
 
 DESC Member;
 
-show full columns from Feed;
+show full columns from File;
 
 alter table Feed convert to character set utf8mb4 collate utf8mb4_unicode_ci;
 alter database membery character set utf8mb4 collate utf8mb4_unicode_ci;
@@ -57,4 +57,23 @@ DELETE FROM Feed WHERE id = 8;
 
 SELECT * FROM FeedLike;
 
-SELECT * FROM Member;
+SELECT * FROM File;
+
+SELECT * FROM Pet ORDER BY id DESC;
+
+SELECT feedId, fileName FROM File
+WHERE memberId = "playKim"
+GROUP BY FeedId ORDER BY id DESC;
+            
+DESC Pet;
+DESC Member;
+DESC File;
+DESC FeedLike;
+
+ALTER TABLE File DROP memberId;
+ALTER TABLE File ADD memberId varchar(12);
+ALTER TABLE File ADD foreign key(memberId) references Member(id);
+ALTER TABLE File DROP foreign key File_ibfk_2;
+select* from information_schema.table_constraints WHERE table_name = 'File';
+
+show full columns from Member;

@@ -68,6 +68,12 @@
 	<div class="back" style="background-color: #EEEEEE">
 		<form class="wrapper" method="post" enctype="multipart/form-data" id="addForm">
 
+		<!--  로그인 id 불러오기 -->
+		<div>
+			<input type="text" name="memberId" value="${authentication.getName() }" style="display: none">
+		</div>
+
+
 			<!-- 이미지 파일 업로드 -->
 			<div id="add">
 				<div class="" id="imgContainer">
