@@ -36,8 +36,14 @@
 				<form method="post">
 					<div class="ui fluid labeled big input mt-5">
 						<div class="ui label">아이디</div>
-						<input id="inputId" type="text" class="form-control" name="id" value="${member.id }" style="font-size: 18px; text-align: center;" />
+						<input id="inputId" type="text" class="form-control" name="id" value="${member.id }" 
+						style="font-size: 18px; text-align: center;" />
+						
+						<div id="availableIdMessage" class="d-none">사용 가능한 아이디입니다.</div>
+						<div id="notAvailableIdMessage" class="d-none">사용 불가능한 아이디입니다.</div>
+						<button type="button" id="checkIdBtn">중복확인</button>
 					</div>
+					
 					<div class="ui fluid labeled big input mt-5">
 						<div class="ui label">이름</div>
 						<input id="inputName" type="text" class="form-control" name="name" value="${member.name }" style="font-size: 18px; text-align: center;" />
@@ -62,16 +68,32 @@
 					
 					<div class="ui fluid labeled big input mt-5">
 						<div class="ui label">닉네임</div>
-						<input id="inputNickName" type="text" class="form-control" name="nickName" value="${member.nickName }" style="font-size: 18px; text-align: center;" />
+						<input id="inputNickName" type="text" class="form-control" name="nickName" value="${member.nickName }" 
+						style="font-size: 18px; text-align: center;" />
+						
+						<div id="availableNickNameMessage" class="d-none">사용 가능한 닉네임입니다.</div>
+						<div id="notAvailableNickNameMessage" class="d-none">사용 불가능한 닉네임입니다.</div>
+						<button type="button" id="checkNickNameBtn">중복확인</button>
 					</div>
+					
 					<div class="ui fluid labeled big input mt-5">
 						<div class="ui label">이메일</div>
 						<input id="inputEmail" type="email" class="form-control" name="email" value="${member.email }" style="font-size: 18px; text-align: center;" />
+					
+						<div id="availableEmailMessage" class="d-none">사용 가능한 이메일입니다.</div>
+						<div id="notAvailableEmailMessage" class="d-none">사용 불가능한 이메일입니다.</div>
+						<button type="button" id=checkEmailBtn>중복확인</button>
 					</div>
+					
 					<div class="ui fluid labeled big input mt-5">
 						<div class="ui label">연락처</div>
 						<input id="inputPhoneNumber" type="text" class="form-control" name="phoneNumber" value="${member.phoneNumber }" style="font-size: 18px; text-align: center;" />
+						
+						<div id="availablePhoneNumberMessage" class="d-none">사용 가능한 전화번호입니다.</div>
+						<div id="notAvailablePhoneNumberMessage" class="d-none">사용 불가능한 전화번호입니다.</div>
+						<button type="button" id="checkPhoneNumberBtn">중복확인</button>
 					</div>
+					
 					<div class="mb-3">
 						<input type="submit" id="signupSubmit" class="ui disabled secondary button" value="가입" 
 						style="font-size: 16px; margin: 20px;" />

@@ -14,7 +14,7 @@
 <style>
 img {
 	width: 400px;
-	margin: 50px 0px 20px 0px;
+	margin: 100px 0px 30px 0px;
 }
 </style>
 </head>

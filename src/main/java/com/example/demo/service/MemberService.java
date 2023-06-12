@@ -138,7 +138,56 @@ public class MemberService {
 		return Map.of("pageInfo", pageInfo, 
 					  "memberList", list);
 	}
+
+	public Map<String, Object> checkId(String id) {
+		Member member = mapper.selectById(id);
+		
+		// null이면 available
+		return Map.of("available", member == null);
+	}
+
+	public Map<String, Object> checkNickName(String nickName) {
+		Member member = mapper.selectByNickName(nickName);
+		
+		// null이면 available
+		return Map.of("available", member == null);
+	}
+
+	public Map<String, Object> checkEmail(String email) {
+		Member member = mapper.selectByEmail(email);
+		
+		// null이면 available
+		return Map.of("available", member == null);
+	}
+
+	public Map<String, Object> checkPhoneNumber(String phoneNumber) {
+		Member member = mapper.selectByPhoneNumber(phoneNumber);
+		
+		// null이면 available
+		return Map.of("available", member == null);
+	}
 	 
 }
  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
  
