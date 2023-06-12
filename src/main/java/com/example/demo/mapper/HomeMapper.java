@@ -13,17 +13,18 @@ public interface HomeMapper {
 
 	@Select("""
 			SELECT 
-				fe.id,
-				fe.title,
-				fe.content,
-				fe.writer,
-				fe.inserted,
+				fd.id,
+				fd.title,
+				fd.content,
+				fd.writer,
+				fd.inserted,
 				fi.fileName,
 				(SELECT COUNT(*) 
 				 FROM FeedLike 
-				 WHERE feedId = fe.id) likeCount
-			FROM Feed fe LEFT JOIN File fi ON fe.id = fi.feedId
-			ORDER BY fe.id DESC
+				 WHERE feedId = fd.id) likeCount,
+				 (SELECT COUNT(*) FROM Comment WHERE feedId = fd.id) commentCount
+			FROM Feed fd LEFT JOIN File fi ON fd.id = fi.feedId
+			ORDER BY fd.id DESC
 			""")
 	@ResultMap("homeFeedResultMap")
 	List<Feed> selectAll();

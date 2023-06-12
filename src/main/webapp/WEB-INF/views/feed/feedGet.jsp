@@ -130,7 +130,10 @@
 						<span style="font-weight: 300; font-size: large;">likes</span>
 						
 					<span class="left floated" style="margin-right: 200px; font-weight: 300; font-size: large;">
-						<!-- <i class="comment icon"></i> --><img src="/images/chat.png"> 3 comments
+						<button type="button" class="btn btn-secondary-link btnTriggerModal position-relative" id="commentIcon" data-bs-toggle="modal" data-bs-target="#commentModal" data-id="${feed.id }">
+						<i class="fa-solid fa-comment fa-2x" ></i>
+						<span id="commentCnt" class="badge text-bg-light" >${feed.commentCount }</span>
+						</button>
 					</span> 
 				</div>
 				<div class="extra content">
