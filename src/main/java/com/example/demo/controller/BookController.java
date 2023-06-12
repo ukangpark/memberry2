@@ -89,6 +89,7 @@ public class BookController {
 		String userId = authentication.getName();
 		Registration pet = service.getPet(userId);
 		model.addAttribute("pet", pet);
+		model.addAttribute("detailId", id);
 		return "book/regiForm";
 	
 	}
@@ -101,7 +102,7 @@ public class BookController {
 
 		
 		// db에 추가
-//		boolean ok = service.addRegi(book);
+		boolean ok = service.addRegi(book);
 //		if(ok) {
 //			return "redirect:/list";
 //		} else {

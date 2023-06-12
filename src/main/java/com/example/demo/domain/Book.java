@@ -1,6 +1,6 @@
 package com.example.demo.domain;
 
-import java.util.*;
+import java.time.*;
 
 import lombok.*;
 
@@ -21,7 +21,7 @@ public class Book {
 	private String memberId;
 	private String gender;
 	private String neutered;
-	private Date birth;
+	private LocalDate birth;
 	private String weight;
 	private int pottyTraining;
 	

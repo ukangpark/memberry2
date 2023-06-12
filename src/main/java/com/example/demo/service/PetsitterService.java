@@ -145,7 +145,7 @@ public class PetsitterService {
 		s3.putObject(objectRequestCover,
 				RequestBody.fromInputStream(cover.getInputStream(), cover.getSize()));
 		// 대표 사진 테이블 추가
-		petsitterMapper.insertCover(detail.getId(), cover.getOriginalFilename());
+//		petsitterMapper.insertCover(detail.getId(), cover.getOriginalFilename());
 
 		
 		// 상세페이지 집사진 추가

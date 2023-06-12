@@ -23,7 +23,7 @@
 
 <div style="margin:100px 300px 300px 300px; border: 8px double lightblue;">
 	<form class="ui form" style="margin:100px 100px 100px 100px" method="post" id="bookForm" action="/book/bookAdd">
-	<input type="hidden" name="num" value"${pet.id }" />
+	<input type="hidden" name="num" value="${detailId}" />
 		<h2 class="ui dividing header" style = "text-align:center">
 		<i class="fa fa-solid fa-paw"></i>예약 신청서
 		<i class="fa fa-solid fa-paw"></i>
@@ -34,13 +34,13 @@
 		<h4 class="ui header">이름</h4>
 			<div class="field">
 
-				<input type="text" name="petName" value="${pet.petName }">
+				<input type="text" name="petName" value="${pet.petName }" disabled>
 
 			</div>
 		</div>
 		<div class="field">
 			<h4 class="ui header">생년월일</h4>
-			<input type="text" name="birth" value="${pet.birth }">
+			<input type="date" name="birth" value="${pet.birth }">
 		</div>
 
 
@@ -79,10 +79,10 @@
 			
 			<h4 class="ui header">성별</h4>
 			<div class="btn-group" role="group" aria-label="Basic radio toggle button group" >
-  		<input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" <c:if test="${pet.gender eq female }"> checked</c:if> />
+  		<input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" <c:if test="${pet.gender eq 'female' }"> checked</c:if> />
   		<label class="btn btn-outline-secondary" for="btnradio1">여자</label>
   		
-  		<input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" <c:if test="${pet.gender eq female }"> checked</c:if> />
+  		<input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" <c:if test="${pet.gender eq 'male' }"> checked</c:if> />
   		<label class="btn btn-outline-secondary" for="btnradio2">남자</label>
 		</div>
 
