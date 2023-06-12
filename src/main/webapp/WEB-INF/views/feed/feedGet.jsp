@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -150,10 +151,12 @@
 			<div class="textContent">
 				<div class="ui segment" style="font-weight: 700;">제목 : ${feed.title }</div>
 				<div class="ui segment" style="font-weight: 700;">본문 : ${feed.content }</div>
+				<div class="ui segment" style="font-weight: 700;">작성자 : ${feed.writer }</div>
 				<div class="ui segment" style="font-weight: 700;">장소 태그 : ${feed.location }</div>
 			</div>
 
 			<!-- 수정/삭제 버튼 드랍다운 -->
+			<sec:authorize access="isAuthenticated()">
 			<div class="drop">
 				<button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
 					<i class="fa-solid fa-ellipsis-vertical"></i>
@@ -176,6 +179,7 @@
 					</form>
 				</div>
 			</div>
+			</sec:authorize>
 		</div>
 	</div>
 	<!-- wrapper div -->
