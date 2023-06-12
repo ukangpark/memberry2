@@ -22,7 +22,7 @@ $("#inputId").keyup(function(){
 	
 	// submit 버튼 비활성화
 	enableSubmit();
-})
+});
 
 // id 중복확인 버튼이 클릭되면
 $("#checkIdBtn").click(function() {
@@ -45,7 +45,7 @@ $("#checkIdBtn").click(function() {
 		},
 		complete: enableSubmit
 	})
-})
+});
 
 // input 닉네임에 keyup 이벤트 발생시
 $("#inputNickName").keyup(function(){
@@ -152,7 +152,7 @@ $("#inputPassword, #inputPasswordCheck").keyup(function() {
 	// 비밀번호에 입력한 값과 비밀번호 확인에 입력한 값이 같으면
 	if (pw1 === pw2) {
 		// submit 버튼 활성화 
-		$("#signupSubmit").removeClass("disabled");
+		$("#signupSubmit").removeAttr("disabled");
 
 		// 비밀번호가 일치한다는 메세지 출력
 		$("#passwordCheckSuccess").removeClass("d-none");
@@ -160,7 +160,7 @@ $("#inputPassword, #inputPasswordCheck").keyup(function() {
 		checkPassword = true;
 	} else {
 		// 그렇지 않으면 submit 버튼 비활성화 
-		$("#signupSubmit").addClass("disabled");
+		$("#signupSubmit").attr("disabled", "");
 
 		//비밀번호가 일치하지 않는다는 메세지 출력
 		$("#passwordCheckFail").removeClass("d-none");
