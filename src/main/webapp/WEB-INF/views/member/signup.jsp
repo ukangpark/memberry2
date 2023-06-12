@@ -36,11 +36,11 @@
 				<form method="post">
 					<div class="ui fluid labeled big input mt-5">
 						<div class="ui label">아이디</div>
-						<input id="inputId" type="text" class="form-control" name="id" value="${member.id }" 
+						<input id="inputId" type="text" class="form-control" name="id" value="${member.id}" 
 						style="font-size: 18px; text-align: center;" />
 						
-						<div id="availableIdMessage" class="d-none">사용 가능한 아이디입니다.</div>
-						<div id="notAvailableIdMessage" class="d-none">사용 불가능한 아이디입니다.</div>
+						<div id="availableIdMessage" class="d-none">사용 가능한 닉네임입니다.</div>
+						<div id="notAvailableIdMessage" class="d-none">사용 불가능한 닉네임입니다.</div>
 						<button type="button" id="checkIdBtn">중복확인</button>
 					</div>
 					
@@ -95,7 +95,7 @@
 					</div>
 					
 					<div class="mb-3">
-						<input type="submit" id="signupSubmit" class="ui disabled secondary button" value="가입" 
+						<input type="submit" id="signupSubmit" class="ui secondary button" disabled value="가입" 
 						style="font-size: 16px; margin: 20px;" />
 					</div>
 				</form>
