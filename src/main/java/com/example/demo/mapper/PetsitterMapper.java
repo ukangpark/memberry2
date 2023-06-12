@@ -21,9 +21,9 @@ public interface PetsitterMapper {
 
 	@Insert("""
 			INSERT INTO Host
-			(hostName, phone, idNumber, si, gu, dong, address, houseType, pet, species, experience, profile)
+			(hostName, phone, idNumber, si, gu, dong, address, houseType, pet, species, experience, profile, memberId)
 			VALUES
-			(#{host.hostName}, #{host.phone}, #{host.idNumber}, #{host.si}, #{host.gu}, #{host.dong}, #{host.address}, #{host.houseType}, #{host.pet}, #{host.species}, #{host.experience}, #{profile})
+			(#{host.hostName}, #{host.phone}, #{host.idNumber}, #{host.si}, #{host.gu}, #{host.dong}, #{host.address}, #{host.houseType}, #{host.pet}, #{host.species}, #{host.experience}, #{profile}, #{host.memberId})
 			""")
 	@Options(useGeneratedKeys = true, keyProperty = "host.id")
 	Integer insertHost(Host host, String profile);

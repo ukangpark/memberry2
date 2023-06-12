@@ -54,6 +54,7 @@ public class PetsitterController {
 			throws Exception {
 		// host 정보 받아서 추가S3Exception
 		int count = petsitterService.insertHost(host, file);
+		System.out.println(host);
 		rttr.addFlashAttribute("host", host);
 		return "redirect:/petsitter/main";
 	}

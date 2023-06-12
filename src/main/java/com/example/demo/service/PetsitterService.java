@@ -72,11 +72,13 @@ public class PetsitterService {
 		Integer count = petsitterMapper.insertHost(host, file.getOriginalFilename());
 
 		// 호스트 프로필 사진 업로드
-		String key = "hostProfile/" + host.getId() + "/" + file.getOriginalFilename();
-		PutObjectRequest objectRequest = PutObjectRequest.builder().bucket(bucketName).key(key)
-				.acl(ObjectCannedACL.PUBLIC_READ).build();
-
-		s3.putObject(objectRequest, RequestBody.fromInputStream(file.getInputStream(), file.getSize()));
+		if(file.getSize() > 0) {
+			String key = "hostProfile/" + host.getId() + "/" + file.getOriginalFilename();
+			PutObjectRequest objectRequest = PutObjectRequest.builder().bucket(bucketName).key(key)
+					.acl(ObjectCannedACL.PUBLIC_READ).build();
+			
+			s3.putObject(objectRequest, RequestBody.fromInputStream(file.getInputStream(), file.getSize()));			
+		}
 
 		return count;
 	}
