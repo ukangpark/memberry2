@@ -32,23 +32,23 @@
 						<form class="ui big form" id="checkForm">
 							<div class="field">
 								<label>전화번호</label>
-								<input type="text" name="phone" value="${host.phone }" disabled>
+								<input type="text" name="phone" value="${host.phone }" readonly>
 							</div>
 							<div class="field">
 								<label>주민번호</label>
-								<input type="text" name="idNumber" value="${host.idNumber }" disabled>
+								<input type="text" name="idNumber" value="${host.idNumber }" readonly>
 							</div>
 							<div class="field">
 								<label>주소</label>
 								<div class="equal width fields">
 									<div class="field">
-										<input type="text" name="si" value="${host.si }시" disabled>
+										<input type="text" name="si" value="${host.si }시" readonly>
 									</div>
 									<div class="field">
-										<input type="text" name="gu" value="${host.gu }구" disabled>
+										<input type="text" name="gu" value="${host.gu }구" readonly>
 									</div>
 									<div class="field">
-										<input type="text" name="dong" value="${host.dong }동" disabled>
+										<input type="text" name="dong" value="${host.dong }동" readonly>
 									</div>
 								</div>
 							</div>
@@ -133,9 +133,9 @@
 				</div>
 				<div class="modal-body">
 					<div class="mb-3">
-					호스트 등록 정보를 정말 삭제하시겠습니까?
-					<br>
-					삭제를 확인하려면 비밀번호를 입력해주세요.
+						호스트 등록 정보를 정말 삭제하시겠습니까?
+						<br>
+						삭제를 확인하려면 비밀번호를 입력해주세요.
 					</div>
 					<!-- 삭제하기 정보 -->
 					<form action="/petsitter/hostDelete" method="post" id="deleteForm">
@@ -150,7 +150,6 @@
 			</div>
 		</div>
 	</div>
-
 	<my:bottom></my:bottom>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="semantic/dist/semantic.min.js"></script>

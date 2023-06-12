@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.*;
+import org.springframework.security.access.prepost.*;
 import org.springframework.stereotype.*;
 import org.springframework.ui.*;
 import org.springframework.web.bind.annotation.*;
@@ -33,6 +34,7 @@ public class PetsitterController {
 	}
 
 	@GetMapping("detail")
+	@PreAuthorize("isAuthenticated()")
 	public void detail(@RequestParam("id") Integer hostId, Model model) {
 		// detail로 포워드
 		// 쿼리스트링으로 받은 id값을 받아서 해당 상세페이지를 읽음
@@ -42,6 +44,7 @@ public class PetsitterController {
 	}
 
 	@GetMapping("apply")
+	@PreAuthorize("isAuthenticated()")
 	public void applyForm() {
 		// 호스트 등록 폼으로 포워드
 	}
@@ -56,6 +59,7 @@ public class PetsitterController {
 	}
 
 	@GetMapping("hostMyPage")
+	@PreAuthorize("isAuthenticated()")
 	public void hostMyPage(@RequestParam("id") Integer hostId, Model model) {
 		// 호스트 마이페이지 포워드
 		Map<String, Object> info = petsitterService.selectById(hostId);
@@ -63,6 +67,7 @@ public class PetsitterController {
 	}
 
 	@GetMapping("hostModify")
+	@PreAuthorize("isAuthenticated()")
 	public void hostModifyForm(@RequestParam("id") Integer hostId, Model model) {
 		// 호스트 정보 수정폼 포워드
 		Map<String, Object> info = petsitterService.selectById(hostId);
@@ -87,6 +92,7 @@ public class PetsitterController {
 	}
 
 	@GetMapping("hostList")
+	@PreAuthorize("isAuthenticated()")
 	public void hostList(Model model) {
 		// 호스트 리스트 포워드
 		Map<String, Object> info = petsitterService.selectAll();
@@ -101,6 +107,7 @@ public class PetsitterController {
 	}
 
 	@GetMapping("addDetail")
+	@PreAuthorize("isAuthenticated()")
 	public void addDetailForm(Integer hostId) {
 		// 상세페이지 등록폼 view 포워드
 	}
@@ -122,6 +129,7 @@ public class PetsitterController {
 	}
 
 	@GetMapping("addHousePhotos")
+	@PreAuthorize("isAuthenticated()")
 	public void addHousePhotosForm(@RequestParam("hostId") Integer hostId) {
 		// 상세페이지에 집사진 등록하는 폼 포워드 
 	}
@@ -138,6 +146,7 @@ public class PetsitterController {
 	}
 
 	@GetMapping("modifyDetail")
+	@PreAuthorize("isAuthenticated()")
 	public void modifyDetailForm(@RequestParam("hostId") Integer hostId, Model model) {
 		// 상세페이지 수정폼 view 포워드
 
@@ -155,6 +164,7 @@ public class PetsitterController {
 	}
 
 	@GetMapping("modifyHousePhotos")
+	@PreAuthorize("isAuthenticated()")
 	public void modifuHousePhtosForm(@RequestParam("hostId") Integer hostId, Model model) {
 		// 상세페이지 집사진 수정폼 view 포워드
 
@@ -175,6 +185,7 @@ public class PetsitterController {
 	}
 
 	@GetMapping("deleteDetail")
+	@PreAuthorize("isAuthenticated()")
 	public String deleteDetail(@RequestParam("hostId") Integer hostId) {
 		boolean ok = petsitterService.deleteDetailByHostId(hostId);
 		return "redirect:/petsitter/hostMyPage?id=" + hostId;
