@@ -22,9 +22,10 @@
 	<my:navBar current="memberInfo"></my:navBar>
 	<my:alert></my:alert>
 
-	<div style="margin-top: 50px; margin-bottom: 15px;"></div>
-	<div class="ui aligned container" id="imgContainer">
-		<img class="ui centered medium circular image" src="/img/MemberyLogo.png">
+	<div style="margin-top: 100px; margin-bottom: 50px;">
+		<div class="ui aligned container" id="imgContainer">
+			<img class="ui centered medium circular image" src="/img/MemberyLogo.png">
+		</div>
 	</div>
 
 	<div class="ui grid container" id="container">

@@ -40,7 +40,7 @@
 	<div class="ui center aligned container" id="container">
 
 		<div class="row justify-content-center">
-			<div style="margin: 30px;">
+			<div style="margin: 70px;">
 				<h1>회원 목록</h1>
 			</div>
 			<table class="table">

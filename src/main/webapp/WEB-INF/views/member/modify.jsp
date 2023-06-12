@@ -30,7 +30,7 @@
 		<div class="row justify-content-center">
 			<div class="col-12 col-md-8 ">
 
-				<div style="margin: 30px 0px 50px 0px;">
+				<div style="margin: 90px 0px 70px 0px;">
 					<h1>회원정보수정</h1>
 				</div>
 
@@ -39,19 +39,19 @@
 						<div class="ui label">아이디</div>
 						<input id="inputId" class="form-control" type="text" name="id" value="${member.id }" style="font-size: 18px; text-align: center;" readonly />
 					</div>
-					<div class="ui fluid labeled big input mt-4">
+					<div class="ui fluid labeled big input mt-5">
 						<div class="ui label">이름</div>
 						<input id="inputName" class="form-control" type="text" name="name" value="${member.name }" style="font-size: 18px; text-align: center;" readonly />
 					</div>
 
-					<div class="ui fluid labeled big input mt-4">
+					<div class="ui fluid labeled big input mt-5">
 						<div class="ui label">비밀번호</div>
 						<input id="inputPassword" class="form-control" type="password" name="password" 
 						placeholder="비밀번호를 입력하지 않으면 기존 비밀번호를 유지합니다."
 						style="font-size: 18px; text-align: center;" value="" />
 					</div>
 
-					<div class="ui fluid labeled big input mt-4">
+					<div class="ui fluid labeled big input mt-5">
 						<div class="ui label">비밀번호 확인</div>
 						<input id="inputPasswordCheck" class="form-control" type="password" 
 						placeholder="비밀번호를 입력하지 않으면 기존 비밀번호를 유지합니다."
@@ -66,15 +66,15 @@
 						</div>
 					</div>
 
-					<div class="ui fluid labeled big input mt-4">
+					<div class="ui fluid labeled big input mt-5">
 						<div class="ui label">닉네임</div>
 						<input id="nickName" class="form-control" type="text" name="nickName" value="${member.nickName }" style="font-size: 18px; text-align: center;" />
 					</div>
-					<div class="ui fluid labeled big input mt-4">
+					<div class="ui fluid labeled big input mt-5">
 						<div class="ui label">이메일</div>
 						<input class="form-control" type="email" name="email" value="${member.email }" style="font-size: 18px; text-align: center;" />
 					</div>
-					<div class="ui fluid labeled big input mt-4">
+					<div class="ui fluid labeled big input mt-5">
 						<div class="ui label">연락처</div>
 						<input id="inputPhoneNumber" class="form-control" type="text" name="phoneNumber" value="${member.phoneNumber }" style="font-size: 18px; text-align: center;" />
 					</div>
