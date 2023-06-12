@@ -83,11 +83,12 @@ public class MyPetsService {
 		return cnt == 1;
 	}
 
-	public Registration thumbnail(Integer id) {
+	public boolean profileImage(String profileImageName, Authentication auth) {
 		
-		Registration reg  = mapper.thumbnailByMemberId(id);
+		int cnt = mapper.updateProfileByMemberId(profileImageName,auth.getName());
 		
-		return reg;
-		
+		return cnt == 1;
+				
 	}
+
 }

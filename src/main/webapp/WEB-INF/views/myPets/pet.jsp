@@ -75,9 +75,13 @@ label {
 	<div class="ui center aligned container mt-2">
 		<div class="ui huge header">${pet.petName }</div>
 		<!-- 프로필등록 버튼 -->
-		<div class="ui toggle checkbox">
-			<input id="petCheckbox" type="checkbox" name="profileSubmit">
-			<label>내 프로필로 등록</label>
+		<div class="inline field">
+			<div class="ui toggle checkbox" id="petCheckbox">
+				<input type="checkbox" tabindex="0" class="hidden">
+				<input id="petId" type="text" name="id" value="${pet.id }" readonly style="display: none;">
+				<input id="petPhoto" type="text" name="photo" value="${pet.photo }" readonly style="display: none;">
+				<label>프로필로 등록</label>
+			</div>
 		</div>
 	</div>
 
@@ -91,9 +95,6 @@ label {
 			<!-- 왼쪽 컨테이너 항목들 -->
 			<div class="eight wide column">
 				<div class="ui left aligned container mt-3" id="leftContainer">
-					<div class="field">
-						<input id="petId" type="text" name="id" value="${pet.id }" readonly style="display: none;">
-					</div>
 					<div class="field">
 						<label>품종</label>
 						<input type="text" name="type" value="${pet.type }" readonly>
@@ -165,6 +166,9 @@ label {
 
 
 	<my:bottom></my:bottom>
+	<script>
+		$('.ui.checkbox').checkbox();
+	</script>
 	<script src="/js/pet.js"></script>
 </body>
 </html>

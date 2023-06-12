@@ -34,7 +34,14 @@
 	<div class="ui position-fixed top-0 end-0">
 		<div class="ui dropdown" id="navBar">
 			<h4 id="profile">
-					<img class="ui tiny image" id="nav-image" src="">로키맘
+			
+				<sec:authorize access="isAuthenticated()">
+					<img class="ui tiny image" id="nav-image" src="${bucketUrl }${logedInMember.profileImage }">${logedInMember.nickName } 
+				</sec:authorize>
+				<sec:authorize access="not isAuthenticated()">
+					<img class="ui tiny image" id="nav-image" src="/images/paw.png">default 별명 
+				</sec:authorize>					
+					
 			</h4>
 			<div class="ui vertical menu">
 				<div class="item">

@@ -66,6 +66,13 @@ public interface MyPetsMapper {
 			""")
 	Registration thumbnailByMemberId(Integer id);
 
+	@Update("""
+			UPDATE Member SET
+				profileImage = #{profileImageName}
+			WHERE id = #{userId};
+			""")
+	Integer updateProfileByMemberId(String profileImageName,String userId);
+
 	
 
 

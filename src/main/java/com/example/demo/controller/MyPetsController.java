@@ -96,16 +96,39 @@ public class MyPetsController {
 		}
 	}
 
-	// 펫사진 썸네일로 등록
-	@PostMapping("/thumbnail")
+	// 펫사진 member테이블에 등록
+	@PostMapping("/thumbnail/{id}/{photo}")
 	@ResponseBody
-	public void thumbnail(RedirectAttributes rttr) {
+	public void profileImage(@PathVariable("id") Integer id,
+						@PathVariable("photo") String photo,
+						Authentication auth,
+						RedirectAttributes rttr) {
 		
+		String profileImageName = "/"+id+"/"+photo;
+		//System.out.println(profileImageName);
+		boolean result = service.profileImage(profileImageName, auth);
+		
+//		System.out.println(id);
+//		System.out.println(photo);
+//		System.out.println(result.getPhoto());
+
 //		ResponseEntity<Map<String, Object>> thumbnailResult  = ResponseEntity
 //					.ok()
 //					.body(service.thumbnail());
 //			
-		
-		}
+	}
+	
+	
+	
+//	
+//	//네브바 닉네임 가져오기
+//	@GetMapping("/")
+//	public void navBarNickName(Authentication auth, Model model) {
+//		System.out.println(auth);
+//		String userNickName = service.navBarNickName(auth);
+//		model.addAttribute("userNickName", userNickName);
+//		System.out.println(userNickName);
+//		
+//	}
 
 }
