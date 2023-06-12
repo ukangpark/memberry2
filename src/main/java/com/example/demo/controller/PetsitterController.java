@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-import java.io.*;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.*;
@@ -12,10 +11,6 @@ import org.springframework.web.servlet.mvc.support.*;
 
 import com.example.demo.domain.*;
 import com.example.demo.service.*;
-
-import software.amazon.awssdk.awscore.exception.*;
-import software.amazon.awssdk.core.exception.*;
-import software.amazon.awssdk.services.s3.model.*;
 
 @Controller
 @RequestMapping("petsitter")

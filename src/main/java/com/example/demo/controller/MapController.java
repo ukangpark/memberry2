@@ -32,7 +32,7 @@ public class MapController {
 		String apiKey = mapService.getKakao_javaScript_key();
 		model.addAttribute("apiKey", apiKey);
 		String userId = authentication.getName();
-		Map<String, Object> result = mapService.likePlace(userId);
+		Map<String, Object> result = mapService.likePlace(page,userId);
 		model.addAllAttributes(result);
 		
 	}

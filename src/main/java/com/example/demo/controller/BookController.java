@@ -100,14 +100,9 @@ public class BookController {
 	@PostMapping("bookAdd")
 	public String addRegi(Book book, RedirectAttributes rttr) {
 
-		
-		// db에 추가
-		boolean ok = service.addRegi(book);
-//		if(ok) {
-//			return "redirect:/list";
-//		} else {
-			return "redirect:/book/regiForm";
-//		}
+		service.addRegi(book);
+		return "book/list";
+
 	}
 
 }

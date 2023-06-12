@@ -55,7 +55,7 @@ h1 {
 			<c:forEach items="${petsitterList }" var="host">
 				<div class="card">
 					<div class="image">
-						<img src="/home1.jpg" alt="" height="70" />
+						<img src="${bucketUrl }/cover/${detail.id }/${detail.cover }" alt="" height="70" />
 					</div>
 					<div class="content">
 						<div class="header">${host.title }</div>
@@ -84,7 +84,7 @@ h1 {
 						<!-- 이전 버튼 -->
 						<c:if test="${pageInfo.currentPageNum ne 1 }">
 							<c:url value="list" var="pageLink">
-								<c:param name="page" value="${pageNum}" />
+								<c:param name="page" value="${pageInfo.currentPageNum - 1}" />
 								<c:if test="${not empty param.search }">
 									<c:param name="search" value="${param.search }" />
 								</c:if>
@@ -106,7 +106,7 @@ h1 {
 						<!-- 다음 버튼 -->
 						<c:if test="${pageInfo.currentPageNum lt pageInfo.lastPageNum }">
 							<c:url value="list" var="pageLink">
-								<c:param name="page" value="${pageNum}" />
+								<c:param name="page" value="${pageInfo.currentPageNum + 1}" />
 								<c:if test="${not empty param.search }">
 									<c:param name="search" value="${param.search }" />
 								</c:if>

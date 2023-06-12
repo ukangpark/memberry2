@@ -11,7 +11,7 @@ public interface MapMapper {
 
 	// 찜 장소 중복확인
 	@Select("""
-			SELECT COUNT (*) FROM Maplist
+			SELECT COUNT (*) FROM MapList
 			WHERE memberId = #{userId}
 			AND address = #{address}
 			""")
@@ -19,17 +19,26 @@ public interface MapMapper {
 
 	// 찜 장소 추가
 	@Insert("""
-			INSERT INTO Maplist (name, address, phone, url, memberId)
+			INSERT INTO MapList (name, address, phone, url, memberId)
 			VALUES(#{name}, #{address}, #{phone}, #{url}, #{memberId})
 			""")
 	void insertMapList(Place place);
 
 	//찜 목록 가져오기
 	@Select("""
-			SELECT * FROM Maplist
+			SELECT * FROM MapList
+			WHERE memberId = #{userId}
+			ORDER BY id DESC
+			LIMIT #{startIndex}, #{rowPerPage}
+			""")
+	List<Place> selectLikePlace(Integer startIndex, Integer rowPerPage, String userId);
+
+	@Select("""
+			SELECT COUNT(*)
+			FROM MapList
 			WHERE memberId = #{userId}
 			""")
-	List<Place> selectLikePlace(String userId);
+	Integer countAll(String userId);
 
 
 	

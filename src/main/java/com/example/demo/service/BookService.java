@@ -23,9 +23,8 @@ public class BookService {
 	
 	
 	//예약신청서
-	public boolean addRegi(Book book) {
-		int cnt = mapper.insert(book);
-		return cnt==1;
+	public void addRegi(Book book) {
+		 mapper.insert(book);
 	}
 
 	

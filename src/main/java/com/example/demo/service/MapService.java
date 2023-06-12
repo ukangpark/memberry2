@@ -35,10 +35,36 @@ public class MapService {
 		mapper.insertMapList(place);
 	}
 
-	// 찜 목록 가져오기
-	public Map<String, Object> likePlace(String userId) {
-		List<Place> list = mapper.selectLikePlace(userId);
-		return Map.of("mapList", list);
+	// 찜 목록 가져오기, 페이지네이션
+	public Map<String, Object> likePlace(Integer page, String userId) {
+			
+			Integer rowPerPage = 5;
+			
+			Integer startIndex = (page-1) * rowPerPage;
+			
+			Integer numOfRecords =mapper.countAll(userId);
+			// 마지막 페이지 번호
+			Integer lastPageNumber = (numOfRecords-1) / rowPerPage +1;
+			
+			// 페이지네이션 왼쪽 번호
+			Integer leftPageNum = page - 5;
+			// 1보다 작을 수 없음
+			leftPageNum = Math.max(leftPageNum, 1);
+			
+			// 페이지네이션 오른쪽 번호
+			Integer rightPageNum = leftPageNum +9;  
+			// 마지막 페이지보다 클 수 없음
+			rightPageNum = Math.min(rightPageNum, lastPageNumber);
+			
+			Map<String, Object> pageInfo = new HashMap<>();
+			pageInfo.put("rightPageNum", rightPageNum);
+			pageInfo.put("leftPageNum", leftPageNum);
+			pageInfo.put("currentPageNum", page);
+			pageInfo.put("lastPageNum", lastPageNumber);
+			
+		List<Place> list = mapper.selectLikePlace(startIndex, rowPerPage, userId);
+		return Map.of("mapList", list,
+					   "pageInfo", pageInfo);
 	}
 	
 
