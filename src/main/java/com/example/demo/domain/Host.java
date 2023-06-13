@@ -24,5 +24,6 @@ public class Host {
 	private boolean detail;
 	private int commentCount;
 	private String cover;
+	private String memberId;
 
 }
