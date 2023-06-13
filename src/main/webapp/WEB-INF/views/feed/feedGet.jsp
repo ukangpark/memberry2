@@ -105,11 +105,9 @@
 	</div>
 
 	<div class="pageName">
-
 		<h1>
 			<span id="feedIdText">${feed.id }</span>번 게시물
 		</h1>
-
 	</div>
 
 	<div class="wrapper">
@@ -171,19 +169,9 @@
 				</div>
 			</div>
 
-		</div>
 
-		<div class="d-flex">
-
-
-
-			<!-- text content 댓글-->
-			<div class="textContent">
-
-
-
-
-				<div id="commentcontainer">
+		
+			<div id="commentcontainer">
 					<div id="commentTitle"><h3><i class="fa-solid fa-comments"></i> 댓글</h3></div>
 					<br />
 					<c:if test="${feed.commentCount > 0 }">
@@ -212,100 +200,89 @@
 
 
 				</div>
-			</div>
-
-
-		</div>
-	</div>
-	<!-- wrapper div -->
-
-	<!-- 댓글 삭제 모달 -->
-	<div class="modal fade" id="deleteCommentConfirmModal" tabindex="-1"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h1 class="modal-title fs-5">댓글 삭제 확인</h1>
-					<button type="button" class="btn-close" data-bs-dismiss="modal"
-						aria-label="Close"></button>
-				</div>
-				<div class="modal-body">삭제 하시겠습니까?</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary"
-						data-bs-dismiss="modal">닫기</button>
-					<button id="deleteCommentModalButton" data-bs-dismiss="modal"
-						type="submit" class="btn btn-danger">삭제</button>
-
+			
+			<!-- text content-->
+			<div class="textContent">			
 				<div class="ui segment" style="font-weight: 700;">제목 : ${feed.title }</div>
 				<div class="ui segment" style="font-weight: 700;">본문 : ${feed.content }</div>
 				<div class="ui segment" style="font-weight: 700;">작성자 : ${feed.writer }</div>
 				<div class="ui segment" style="font-weight: 700;">장소 태그 : ${feed.location }</div>
 			</div>
-        
-        <%-- 댓글 수정 모달 --%>
-	<div class="modal fade" id="commentUpdateModal" tabindex="-1"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h1 class="modal-title fs-5">댓글 수정</h1>
-					<button type="button" class="btn-close" data-bs-dismiss="modal"
-						aria-label="Close"></button>
-				</div>
-				<div class="modal-body">
-					<div id="updateCommentContainer">
-						<input type="hidden" id="commentUpdateIdInput" />
-						<textarea class="form-control" id="commentUpdateTextArea"></textarea>
-					</div>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary"
-						data-bs-dismiss="modal">취소</button>
-					<button type="button" class="btn btn-primary" id="updateCommentBtn"
-						data-bs-dismiss="modal">수정</button>
-				</div>
-			</div>
-		</div>
-	</div>
 
-			<!-- 수정/삭제 버튼 드랍다운 -->
-			<sec:authorize access="isAuthenticated()">
-				<sec:authentication property="name" var="uerId" />
-				<c:if test="${userId eq feed.writer }">
+
+			<!-- 댓글 삭제 모달 -->
+			<div class="modal fade" id="deleteCommentConfirmModal" tabindex="-1"
+				aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h1 class="modal-title fs-5">댓글 삭제 확인</h1>
+							<button type="button" class="btn-close" data-bs-dismiss="modal"
+								aria-label="Close"></button>
+						</div>
+						<div class="modal-body">삭제 하시겠습니까?</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary"
+								data-bs-dismiss="modal">닫기</button>
+							<button id="deleteCommentModalButton" data-bs-dismiss="modal"
+								type="submit" class="btn btn-danger">삭제</button>
+						</div>
+
+					<%-- 댓글 수정 모달 --%>
+					<div class="modal fade" id="commentUpdateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h1 class="modal-title fs-5">댓글 수정</h1>
+									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+								</div>
+								<div class="modal-body">
+									<div id="updateCommentContainer">
+										<input type="hidden" id="commentUpdateIdInput" />
+										<textarea class="form-control" id="commentUpdateTextArea"></textarea>
+									</div>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+									<button type="button" class="btn btn-primary" id="updateCommentBtn" data-bs-dismiss="modal">수정</button>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				<!-- 수정/삭제 버튼 드랍다운 -->
+				<sec:authorize access="isAuthenticated()">
+					<sec:authentication property="name" var="uerId" />
+						<c:if test="${userId eq feed.writer }">
+						
+							<div class="drop">
+								<button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+									<i class="fa-solid fa-ellipsis-vertical"></i>
+								</button>
 				
-				<div class="drop">
-					<button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-						<i class="fa-solid fa-ellipsis-vertical"></i>
-					</button>
-	
-					<ul class="dropdown-menu">
-						<!-- Dropdown menu links -->
-						<div style="text-align: center">
-							<a href="/modify/${feed.id }">수정하기</a>
-						</div>
-						<div style="text-align: center">
-							<a href="#" onclick="javascript:document.removeForm.submit();">삭제하기</a>
-						</div>
-					</ul>
-	
-					<!-- 삭제하기 기능 -->
-					<div class="d-none">
-						<form action="/remove" method="post" name="removeForm">
-							<input type="text" name="id" value="${feed.id }" />
-						</form>
-					</div>
-
-				</div>
-				</c:if>
-			</sec:authorize>
+								<ul class="dropdown-menu">
+									<!-- Dropdown menu links -->
+									<div style="text-align: center">
+										<a href="/modify/${feed.id }">수정하기</a>
+									</div>
+									<div style="text-align: center">
+										<a href="#" onclick="javascript:document.removeForm.submit();">삭제하기</a>
+									</div>
+								</ul>
+				
+								<!-- 삭제하기 기능 -->
+								<div class="d-none">
+									<form action="/remove" method="post" name="removeForm">
+										<input type="text" name="id" value="${feed.id }" />
+									</form>
+								</div>
+			
+							</div>
+						</c:if>
+				</sec:authorize>
 			
 		</div>
 	</div>
-
-
-
-
-
 
 
 	<my:bottom></my:bottom>
