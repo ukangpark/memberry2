@@ -14,13 +14,31 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 </head>
 <body>
-<my:navBar></my:navBar>
+	<my:navBar></my:navBar>
 	<br>
 	<div class="ui centered equal width grid">
 		<div class="eight wide column">
 			<div class="ui segment">
 				<form id="modifyDetailForm" class="ui big form" method="post" action="/petsitter/modifyHousePhotos" enctype="multipart/form-data">
 					<h1 class="ui dividing header">집사진 수정하기</h1>
+					<div>대표 사진</div>
+					<c:choose>
+						<c:when test="${detail.cover eq null or detail.cover eq '' }">
+							<img style="position: relative;" class="ui centered large bordered rounded image" id="preview" src="/images/defaultHome.jpeg">
+							<div class="ui teal ribbon label" style="position: absolute; top: 90px; left: 118px;">대표 사진</div>
+						</c:when>
+						<c:otherwise>
+							<img style="position: relative;" class="ui centered large bordered rounded image " src="${bucketUrl }/cover/${detail.id }/${detail.cover }" id="preview">
+							<div class="ui teal ribbon label" style="position: absolute; top: 90px; left: 118px;">대표 사진</div>
+						</c:otherwise>
+					</c:choose>
+					<label for="addCover">
+						<i class="bars icon large button" style="position: absolute; top: 3.1lh; left: 20.1lh;"></i>
+					</label>
+					<div class="field">
+						<input id="addCover" type="file" name="addCover" onchange="readURL(this);">
+					</div>
+					<hr>
 					<div class="field">
 						<c:forEach items="${hostHousePhoto }" var="hostHousePhoto" varStatus="status">
 							<label for="housePhoto${status.index }">
@@ -70,5 +88,18 @@
 	<my:bottom></my:bottom>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="/js/semantic/semantic.min.js"></script>
+	<script type="text/javascript">
+	function readURL(input) {
+		if (input.files && input.files[0]) {
+			var reader = new FileReader();
+			reader.onload = function(e) {
+				document.getElementById('preview').src = e.target.result;
+			};
+			reader.readAsDataURL(input.files[0]);
+		} else {
+			document.getElementById('preview').src = "";
+		}
+	}
+	</script>
 </body>
 </html>
