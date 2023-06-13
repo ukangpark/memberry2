@@ -67,10 +67,10 @@
 			
 			<!-- 프로필 이미지 -->
 			<c:if test="${logedInMember.profileImage ne null}">
-				<img class="ui circular image" id="profilImage" src="${bucketUrl }/pet${logedInMember.profileImage }">${logedInMember.nickName } 
+				<img class="ui circular image" id="profilImage" src="${bucketUrl }/pet${logedInMember.profileImage }"> 
 			</c:if>
 			<c:if test="${logedInMember.profileImage eq null}">
-				<img class="ui circular image" id="profilImage" src="/images/paw.png">${logedInMember.nickName } 
+				<img class="ui circular image" id="profilImage" src="/images/paw.png">
 			</c:if>
 			
 				<button class="massive ui basic button" style="border: 2px solid #E2E2E2; border-radius: 0.5rem; margin-left:50px; margin-right:70px;">
@@ -95,9 +95,9 @@
 		
 	    	<div class=item>
 	    		<a href="/feedId/${file.feedId }">
-
+	    		
 	    		<img src="${bucketUrl }/feed/${file.feedId }/${file.fileName }" alt="" />
-
+	    		
 	    		</a>
 	    	</div> 
     
