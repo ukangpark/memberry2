@@ -111,6 +111,7 @@
 								</ul>
 							</a>
 						</div>
+						
 						<div class="content">
 							<div class="header">${feed.title}</div>
 							<div class="meta">
@@ -139,7 +140,7 @@
 								<!-- Button trigger modal -->
 								<button type="button" class="btn btn-secondary-link btnTriggerModal position-relative" id="commentIcon" data-bs-toggle="modal" data-bs-target="#commentModal" data-id="${feed.id }">
 									<i class="fa-solid fa-comment"></i>
-									<span id="commentCnt" class="badge text-bg-light" >
+									<span id="commentCnt" class="position-absolute top-35 start-70 translate-middle badge rounded-pill bg-secondary" >
 									${feed.commentCount }</span>
 								</button>
 								
@@ -215,6 +216,6 @@
 	<my:bottom></my:bottom>
 
 	<script src="/js/feed/like.js"></script>
-	<script src="/js/comment.js"></script>
+	
 </body>
 </html>
