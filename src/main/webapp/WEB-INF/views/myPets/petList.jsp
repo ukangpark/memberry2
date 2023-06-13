@@ -70,7 +70,7 @@ img {
 			<c:forEach items="${petsList }" var="petsList">
 				<div class="item" onclick="location.href='/id/${petsList.id }'">
 					<div class="profile">
-						<img src="${bucketUrl }/${petsList.id }/${petsList.photo}">
+						<img src="${bucketUrl }/pet/${petsList.id }/${petsList.photo}">
 						<div class="border"></div>
 					</div>
 					<div class="content">

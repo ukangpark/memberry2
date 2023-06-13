@@ -55,7 +55,7 @@ public class MyPetsService {
 		// 새 파일 추가
 		// aws s3에 업로드
 		if (addFile.getSize() > 0) {
-			String objectKey = "membery/" + registration.getId() + "/" + addFile.getOriginalFilename();
+			String objectKey = "membery/pet/" + registration.getId() + "/" + addFile.getOriginalFilename();
 			PutObjectRequest por = PutObjectRequest.builder().bucket(bucketName).key(objectKey)
 					.acl(ObjectCannedACL.PUBLIC_READ).build();
 			RequestBody rb = RequestBody.fromInputStream(addFile.getInputStream(), addFile.getSize());
@@ -74,7 +74,7 @@ public class MyPetsService {
 		List<String> fileName = mapper.selectPhotoById(id);
 
 		// s3에서 삭제
-		String objectKey = "membery/" + id + "/" + fileName;
+		String objectKey = "membery/pet/" + id + "/" + fileName;
 		DeleteObjectRequest dor = DeleteObjectRequest.builder().bucket(bucketName).key(objectKey).build();
 		s3.deleteObject(dor);
 

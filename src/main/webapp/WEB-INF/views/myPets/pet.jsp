@@ -66,7 +66,7 @@ label {
 	<!-- 상단 프로필 컨테이너 -->
 	<div class="profileContainer">
 		<div class="profile">
-			<img id="imageByPet" src="${bucketUrl }/${pet.id }/${pet.photo}">
+			<img id="imageByPet" src="${bucketUrl }/pet/${pet.id }/${pet.photo}">
 			<div class="border"></div>
 		</div>
 	</div>

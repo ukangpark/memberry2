@@ -28,18 +28,18 @@ public class RegistrationService {
 	public boolean insert(Registration registration, MultipartFile file) throws Exception {
 
 		// 테이블에 정보 insert
-
+		int cnt = 0;
+		if (registration.getPetName() != null && registration.getTogether() != null && registration.getGender() !=null && registration.getNeutered() != null && registration.getWeight() != null && registration.getMemberId() != null) {
+			cnt = mapper.insertAll(registration, file.getOriginalFilename());
+		}
+		
 		// s3에 파일 업데이트
-		String objectKey = "membery/" + registration.getId() + "/" + file.getOriginalFilename();
+		String objectKey = "membery/pet/" + registration.getId() + "/" + file.getOriginalFilename();
 		PutObjectRequest por = PutObjectRequest.builder().bucket(bucketName).key(objectKey)
 				.acl(ObjectCannedACL.PUBLIC_READ).build();
 		RequestBody rb = RequestBody.fromInputStream(file.getInputStream(), file.getSize());
 		s3.putObject(por, rb);
 
-		int cnt = 0;
-		if (registration.getPetName() != null && registration.getTogether() != null && registration.getGender() !=null && registration.getNeutered() != null && registration.getWeight() != null && registration.getMemberId() != null) {
-			cnt = mapper.insertAll(registration, file.getOriginalFilename());
-		}
 		return cnt == 1;
 
 	}
