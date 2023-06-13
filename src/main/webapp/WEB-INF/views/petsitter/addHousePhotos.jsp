@@ -31,7 +31,7 @@
 			<div class="ui segment">
 				<form id="addDetailForm" action="/petsitter/addHousePhotos" class="ui big form" method="post" enctype="multipart/form-data">
 					<h1 class="ui dividing header">집사진 등록하기</h1>
-					<input type="text" name="hostId" value="${param.hostId }" class="d-none">
+					<input type="text" name="hostId" value="${host.id }">
 					<div class="field">
 						<h2 class="ui center aligned icon header">
 							<i class="circular camera retro icon"></i>
@@ -65,7 +65,7 @@
 			<!-- 버튼 -->
 			<div class="extra content">
 				<div class="ui two buttons">
-					<a href="/petsitter/addDetail?hostId=${param.hostId }" class="ui basic red button">뒤로 돌아가기</a>
+					<a href="/petsitter/addDetail" class="ui basic red button">뒤로 돌아가기</a>
 					<button class="ui basic green button" data-bs-toggle="modal" data-bs-target="#addDetailModal">등록하기</button>
 				</div>
 			</div>

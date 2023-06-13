@@ -23,6 +23,6 @@ public class Host {
 	private String title;
 	private boolean detail;
 	private int commentCount;
-	private Integer memberId;
+	private String memberId;
 
 }

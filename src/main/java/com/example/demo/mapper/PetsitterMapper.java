@@ -12,7 +12,7 @@ public interface PetsitterMapper {
 	@Select("""
 			SELECT * FROM Host WHERE id = #{hostId}
 			""")
-	Host selectHostById(Integer hostId);
+	Host selectHostByHostId(Integer hostId);
 
 	@Select("""
 			SELECT * FROM Detail WHERE hostId = #{hostId}
@@ -199,6 +199,11 @@ public interface PetsitterMapper {
 			WHERE id = #{detailId}
 			""")
 	Integer insertCover(Integer detailId, String cover);
+
+	@Select("""
+			SELECT * FROM Host WHERE memberId = #{memberId}
+			""")
+	Host selectHostByMemberId(String memberId);
 
 
 	

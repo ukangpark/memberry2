@@ -14,6 +14,7 @@
 </head>
 <body>
 	<my:navBar></my:navBar>
+	<my:alert></my:alert>
 	<br>
 	<div class="ui centered equal width grid">
 		<div class="eight wide column">
@@ -98,13 +99,6 @@
 		</div>
 	</div>
 
-	<!-- 상세페이지 등록 정보 -->
-	<div class="d-none">
-		<form action="/petsitter/${detail.id eq null ? 'addDetail' : 'modifyDetail' }" id="detailForm">
-			<input type="text" name="hostId" value="${host.id }">
-		</form>
-	</div>
-
 	<!-- 상세페이지 등록/수정 모달 -->
 	<div class="modal fade" id="checkModal" tabindex="-1" aria-labelledby="checkModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
@@ -116,7 +110,7 @@
 				<div class="modal-body">${detail.id eq null ? '상세페이지를 등록하시겠습니까?' : '상세페이지를 수정 및 삭제하시겠습니까?' }</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소하기</button>
-					<button type="submit" class="btn btn-primary" form="detailForm">${detail.id eq null ? '등록하기' : '수정 및 삭제하기' }</button>
+					<a href="/petsitter/${detail.id eq null ? 'addDetail' : 'modifyDetail' }" class="btn btn-primary">${detail.id eq null ? '등록하기' : '수정 및 삭제하기' }</a>
 				</div>
 			</div>
 		</div>
@@ -139,7 +133,7 @@
 					</div>
 					<!-- 삭제하기 정보 -->
 					<form action="/petsitter/hostDelete" method="post" id="deleteForm">
-						<input type="hidden" name="hostId" value="${host.id }">
+						<input type="hidden" name="hostId" value="${hosasdasdt.id }">
 						<input class="form-control" type="text" name="password" id="passwordInput" placeholder="비밀번호를 입력해주세요.">
 					</form>
 				</div>

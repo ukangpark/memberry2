@@ -55,7 +55,6 @@ public class MemberController {
 	public String list(Model model, 
 					 @RequestParam(value="page", defaultValue="1") Integer page) {
 //		List<Member> list = service.listMember(); // 페이지 처리 전
-		
 		Map<String, Object> result = service.listMember(page); // 페이지 처리 이후
 		
 		model.addAttribute("pageInfo", result.get("pageInfo"));
