@@ -69,7 +69,7 @@ public class MemberService {
 			// 암호가 같으면?
 			
 			//회원이 작성한 댓글 삭제
-			commentMapper.deleteByMemberId(member.getId());
+			commentMapper.deleteByMemberID(member.getId());
 			
 			cnt = mapper.deleteById(member.getId());			
 		

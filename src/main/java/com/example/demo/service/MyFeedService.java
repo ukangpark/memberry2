@@ -131,7 +131,8 @@ public class MyFeedService {
 
 	public boolean remove(Integer id) {
 
-		commentMapper.deleteByFeedId(id);
+		//댓글 테이블 지우기
+		commentMapper.deleteByFeedID(id);
 
 		//좋아요 테이블 지우기
 		likeMapper.deleteByFeedId(id);

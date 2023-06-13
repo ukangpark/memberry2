@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.time.LocalDate;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.*;
@@ -18,26 +19,30 @@ public class CalendarController {
 	
 	@Autowired
 	private CalendarService service;
-	
 
-	
-
-	//일정 관리 달력으로 이동
-	@GetMapping("schedule")
-	public String get() {
-		return "schedule";
-	}
-	//테스트 일정 관리 달력으로 이동
+	//달력으로 이동
 	@GetMapping("fullCalendar")
 	public String getTest() {
 		return "calendar";
 	}
-	// to do list로 이동
-	@GetMapping("toDoList")
-	public String toDoList() {
-		return "toDoList";
+	
+	@PostMapping("getAll")
+	public void getall() {
+		Map<String, Calendar> cal = new HashMap<>();
+		
+		LocalDate date1 = LocalDate.of(2023, 05, 01);
+		LocalDate date2 = LocalDate.of(2023, 05, 26);
+		
+		Calendar calender = new Calendar();
+		calender.setTitle("event1");
+		calender.setStart(date1);
+		calender.setEnd(date2);
+		cal.put("ev1", calender);
+		
+		
 	}
 	
+
 
 	
 
