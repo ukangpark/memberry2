@@ -118,25 +118,9 @@ public class MyPetsController {
 		
 		boolean result = service.profileImage(id, auth, reg.getChecked());
 		
-		//body에 있는 true / false를 꺼내서, true일 땐 아래 코드를, false일 땐 ''를 아래코드에 심어주기
-		System.out.println(reg.getChecked());
-		boolean checked = reg.getChecked();
-		
-//		if (checked) {
-//			
-//		} else {
-//			
-//		}
-			
-		
 		Member member = memberService.get(auth.getName());
 		
 		session.setAttribute("logedInMember", member);
-
-//		ResponseEntity<Map<String, Object>> thumbnailResult  = ResponseEntity
-//					.ok()
-//					.body(service.thumbnail());
-//			
 	}
 	
 	

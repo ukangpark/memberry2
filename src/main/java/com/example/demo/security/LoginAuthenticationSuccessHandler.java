@@ -29,16 +29,12 @@ public class LoginAuthenticationSuccessHandler implements AuthenticationSuccessH
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
-		// TODO Auto-generated method stub
 		
 		HttpSession session = request.getSession();
 		
 		Member member = mapper.selectById(authentication.getName());
 		
 		session.setAttribute("logedInMember", member);
-		
-		System.out.println(member);
-		System.out.println(authentication);
 		
 		response.sendRedirect("/");
 
