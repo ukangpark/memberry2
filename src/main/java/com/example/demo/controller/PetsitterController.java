@@ -36,6 +36,8 @@ public class PetsitterController {
 		// 쿼리스트링으로 받은 id값을 받아서 해당 상세페이지를 읽음
 		Map<String, Object> info = petsitterService.selectByHostId(hostId);
 		model.addAllAttributes(info);
+		System.out.println(info.get("detail"));
+		System.out.println(hostId);
 	}
 
 	@GetMapping("apply")

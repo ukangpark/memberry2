@@ -150,6 +150,3 @@
 				  }
 				)('imgContainer', 'housePhoto')
 
-				)('imgContainer', 'housePhoto')
-
-				)('imgContainer', 'housePhotos')

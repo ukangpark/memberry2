@@ -48,7 +48,7 @@
 					</c:choose>
 				</div>
 				<div class="content">
-					<a class="header">${host.hostName }</a>
+					<a class="header">${host.hostName } id : ${detail.id }</a>
 					<div class="meta">
 						<span>주소 : ${host.si }시 ${host.gu }구 ${host.dong }동</span>
 						<br>

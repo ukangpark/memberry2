@@ -207,16 +207,17 @@ public class PetsitterService {
 
 		// 상세페이지 아이디를 얻기 위한 메소드
 		Detail detail = petsitterMapper.selectDetailById(hostId);
-		System.out.println("insert service : "  + detail);
-		System.out.println("hostId service : " + hostId);
+		
 		// 대표 사진 추가
-		String coverKey = "membery/cover/" + detail.getId() + "/" + cover.getOriginalFilename();
-		PutObjectRequest objectRequestCover = PutObjectRequest.builder().bucket(bucketName).key(coverKey)
-				.acl(ObjectCannedACL.PUBLIC_READ).build();
-		s3.putObject(objectRequestCover, RequestBody.fromInputStream(cover.getInputStream(), cover.getSize()));
-		// 대표 사진 테이블 추가
-
-//		petsitterMapper.insertCover(detail.getId(), cover.getOriginalFilename());
+		if(cover.getSize() > 0) {
+			String coverKey = "membery/cover/" + detail.getId() + "/" + cover.getOriginalFilename();
+			PutObjectRequest objectRequestCover = PutObjectRequest.builder().bucket(bucketName).key(coverKey)
+					.acl(ObjectCannedACL.PUBLIC_READ).build();
+			s3.putObject(objectRequestCover, RequestBody.fromInputStream(cover.getInputStream(), cover.getSize()));
+			// 대표 사진 테이블 추가
+			
+			petsitterMapper.insertCover(detail.getId(), cover.getOriginalFilename());
+		}
 
 
 		// 상세페이지 집사진 추가
