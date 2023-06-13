@@ -46,19 +46,17 @@
 
 					<div class="ui fluid labeled big input mt-5">
 						<div class="ui label">비밀번호</div>
-						<input id="inputPassword" class="form-control" type="password" name="password" 
-						placeholder="비밀번호를 입력하지 않으면 기존 비밀번호를 유지합니다."
+						<input id="inputPassword" class="form-control" type="password" name="password" placeholder="비밀번호를 입력하지 않으면 기존 비밀번호를 유지합니다." 
 						style="font-size: 18px; text-align: center;" value="" />
 					</div>
 
 					<div class="ui fluid labeled big input mt-5">
 						<div class="ui label">비밀번호 확인</div>
-						<input id="inputPasswordCheck" class="form-control" type="password" 
-						placeholder="비밀번호를 입력하지 않으면 기존 비밀번호를 유지합니다."
+						<input id="inputPasswordCheck" class="form-control" type="password" placeholder="비밀번호를 입력하지 않으면 기존 비밀번호를 유지합니다." 
 						style="font-size: 18px; text-align: center;" value="" />
-						
+
 						<div id="passwordCheckSuccess" class="d-none inline field">
-							<div class="ui left pointing black basic label" style="font-size: 15px;">비밀번호가 일치합니다.</div>
+							<div class="ui left pointing olive basic label" style="font-size: 15px;">비밀번호가 일치합니다.</div>
 						</div>
 
 						<div id="passwordCheckFail" class="d-none inline field">
@@ -68,18 +66,42 @@
 
 					<div class="ui fluid labeled big input mt-5">
 						<div class="ui label">닉네임</div>
-						<input id="nickName" class="form-control" type="text" name="nickName" value="${member.nickName }" style="font-size: 18px; text-align: center;" />
+						<input id="inputNickName" class="form-control" type="text" name="nickName" value="${member.nickName }" 
+							style="font-size: 18px; text-align: center;" /> 
+						<input id="availableNickNameMessage" class="d-none form-control" type="text" value="사용 가능한 닉네임입니다." 
+							style="font-size: 18px; text-align: center; color: blue;" readonly /> 
+						<input id="notAvailableNickNameMessage" class="d-none form-control" type="text" value="사용 불가능한 닉네임입니다." 
+							style="font-size: 18px; text-align: center; color: red;" readonly />
+						<button id="checkNickNameBtn" class="ui olive button" type="button" style="font-size: 18px; padding: 11px;">중복확인</button>
 					</div>
+
 					<div class="ui fluid labeled big input mt-5">
 						<div class="ui label">이메일</div>
-						<input class="form-control" type="email" name="email" value="${member.email }" style="font-size: 18px; text-align: center;" />
+						<input id="inputEmail" class="form-control" type="email" name="email" value="${member.email }" 
+							style="font-size: 18px; text-align: center;" /> 
+						
+						<input id="availableEmailMessage" class="d-none form-control" type="text" value="사용 가능한 이메일입니다." 
+							style="font-size: 18px; text-align: center; color: blue;" readonly /> 
+						<input id="notAvailableEmailMessage" class="d-none form-control" type="text" value="사용 불가능한 이메일입니다." 
+							style="font-size: 18px; text-align: center; color: red;" readonly />
+							
+						<button id="checkEmailBtn" class="ui olive button" type="button" style="font-size: 18px; padding: 11px;">중복확인</button>
 					</div>
+					
 					<div class="ui fluid labeled big input mt-5">
 						<div class="ui label">연락처</div>
-						<input id="inputPhoneNumber" class="form-control" type="text" name="phoneNumber" value="${member.phoneNumber }" style="font-size: 18px; text-align: center;" />
+						<input id="inputPhoneNumber" class="form-control" type="text" name="phoneNumber" value="${member.phoneNumber }" 
+							style="font-size: 18px; text-align: center;" />
+						
+						<input id="availablePhoneNumberMessage" class="d-none form-control" type="text" value="사용 가능한 연락처입니다." 
+							style="font-size: 18px; text-align: center; color: blue;" readonly/> 
+						<input id="notAvailablePhoneNumberMessage" class="d-none form-control" type="text" value="사용 불가능한 연락처입니다." 
+							style="font-size: 18px; text-align: center; color: red;" readonly/>
+						
+						<button id="checkPhoneNumberBtn" class="ui olive button" type="button" style="font-size: 18px; padding: 11px;">중복확인</button>
 					</div>
-					<button id="modifySave" type="button" data-bs-toggle="modal" data-bs-target="#confirmModal" class="ui secondary submit button" 
-					style="font-size: 16px; margin: 20px;">저장</button>
+					
+					<button id="modifySave" type="button" data-bs-toggle="modal" data-bs-target="#confirmModal" class="ui secondary submit button" style="font-size: 16px; margin: 20px;">저장</button>
 				</form>
 			</div>
 		</div>
@@ -94,8 +116,7 @@
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
-					<label for="inputOldPassword" class="form-label">비밀번호 입력</label> 
-					<input form="modifyForm" id="inputOldPassword" class="form-control" type="password" name="oldPassword" />
+					<label for="inputOldPassword" class="form-label">비밀번호 입력</label> <input form="modifyForm" id="inputOldPassword" class="form-control" type="password" name="oldPassword" />
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="ui button" data-bs-dismiss="modal">취소</button>
