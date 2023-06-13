@@ -16,6 +16,7 @@ public class Book {
 	private String message;
 	private String hospital;
 	private int num;
+	private int petId;
 	private String type;
 	private int detailId;
 	private String memberId;

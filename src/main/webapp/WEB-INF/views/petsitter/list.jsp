@@ -44,18 +44,18 @@ h1 {
 			<button class="btn btn-outline-success" type="submit" style="width: 80px">검색</button>
 		</form>
 
-		<!-- <script>
-		$('.ui.dropdown').dropdown();
-	</script> -->
-
+		
 		<hr />
 
-
+		
 		<div class="ui link cards">
 			<c:forEach items="${petsitterList }" var="host">
 				<div class="card">
+				
 					<div class="image">
-						<img src="${bucketUrl }/cover/${detail.id }/${detail.cover }" alt="" height="70" />
+						
+						<img src="${bucketUrl }/cover/167/스크린샷 2023-05-30 오전 10.30.49.png" alt="" height="70" />
+						</a>
 					</div>
 					<div class="content">
 						<div class="header">${host.title }</div>

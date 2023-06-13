@@ -44,8 +44,21 @@
 			alert("체크인 날짜보다 크거나 같은 날짜를 선택해주세요.");
 		}
 	}
-	//함수만들고 똑같이 체크아웃 날짜 값 가져오기
-	// if 체크아웃 날짜 < 체크인날짜 이면 alert
+	
+	// 일수 계산
+	function fnDays(){
+		var startDate = moment($('#checkIn').val());
+		var endDate = moment($('#checkOut').val());
+		var durationInDays = endDate.diff(startDate, 'days');
+		
+		// 결제 금액 계산
+		
+		var totalPrice = 40000 * durationInDays; // 총 금액 계산
+		  $('#totalPrice').text(totalPrice + '원'); // 결제 금액을 보여주는 요소 업데이트
+		
+	}
+	
+
 </script>
 
 <d:navBar current="regiForm" />
@@ -54,7 +67,8 @@
 
 <div style="margin:100px 300px 300px 300px; border: 8px double lightblue;">
 	<form class="ui form" style="margin:100px 100px 100px 100px" method="post" id="bookForm" action="/book/bookAdd">
-	<input type="hidden" name="num" value="${detailId}" />
+	<input type="hidden" name="detailId" value="${detailId}" />
+	<input type="hidden" name="petId" value="${pet.id}" />
 		<h2 class="ui dividing header" style = "text-align:center">
 		<i class="fa fa-solid fa-paw"></i>예약 신청서
 		<i class="fa fa-solid fa-paw"></i>
@@ -103,7 +117,7 @@
 			<h4 class="ui header">품종</h4>
 			<div class="field">
 
-				<input type="text" name="type" value="${pet.type }" disabled>
+				<input type="text" name="type" value="${pet.type }" disabled />
 
 			</div>
 			
@@ -134,11 +148,11 @@
 
 			<h4 class="ui header">배변훈련(배변패드)</h4>
 			<div class="btn-group" role="group" aria-label="Basic radio toggle button group" >
-  		<input type="radio" value="1" class="btn-check" name="btnradio2" id="btnradio5" autocomplete="off" checked>
+  		<input type="radio" value="1" class="btn-check" name="pottyTraining" id="btnradio5" autocomplete="off" checked>
   		<label class="btn btn-outline-secondary" for="btnradio5">잘해요</label>
-  		<input type="radio" value="2" class="btn-check" name="btnradio2" id="btnradio6" autocomplete="off">
+  		<input type="radio" value="2" class="btn-check" name="pottyTraining" id="btnradio6" autocomplete="off">
   		<label class="btn btn-outline-secondary" for="btnradio6">미숙해요</label>
-  		<input type="radio" value="3" class="btn-check" name="btnradio2" id="btnradio7" autocomplete="off">
+  		<input type="radio" value="3" class="btn-check" name="pottyTraining" id="btnradio7" autocomplete="off">
   		<label class="btn btn-outline-secondary" for="btnradio7">실외배변</label>
 		</div>
 			
@@ -156,7 +170,7 @@
 			<h4 class="ui header">전하고 싶은 말</h4>
 			<div class="field">
 
-				<textarea name="message" value="${book.message }" rows="2" placeholder="특이사항, 주의사항 등등 자유롭게 적어주세요"></textarea>
+				<textarea name="message" value="${book.message }" rows="4" placeholder="특이사항, 주의사항 등등 자유롭게 적어주세요"></textarea>
 			</div>
 			
 			<div style="display:flex; justify-content : flex-start;">
@@ -173,33 +187,33 @@
 			
 			
 <!-- Button trigger modal -->
-<button type="submit"  class="btn btn-primary" style="margin-top:50px;" ><!-- data-bs-toggle="modal" data-bs-target="#exampleModal"> -->
+<button type="button"  class="btn btn-primary" style="margin-top:50px;" data-bs-toggle="modal" data-bs-target="#exampleModal"> 
   예약 신청하기
 </button>
 			
-</form>
+
 
 
 </div>
 </div>
 
-<!-- 결제 금액 Modal -->
-<%-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+ <!-- 결제 금액 Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="exampleModalLabel">결제 금액</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
+      
       <div class="modal-body">
       <!-- 달력 칸수 곱해서 금액산출 -->
-        총 결제 금액은 000원입니다. 
-        
+        총 결제 금액은 <span function="javascript:fnDays()" id="totalPrice">원</span>입니다.
         예약하시겠습니까?
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#bookForm" onclick="location.href='/book/bookAdd'">예약하기</button>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#bookModal">예약하기</button>
       </div>
     </div>
   </div>
@@ -208,7 +222,7 @@
 
 
 <!-- 최종 예약 Modal -->
-<div class="modal fade" id="bookModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="bookModal" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
      
@@ -216,13 +230,13 @@
        예약 신청이 완료되었습니다.
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="location.href='/book/list'">확인</button>
+        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" >확인</button>
       </div>
     </div>
   </div>
-</div> --%>
+</div> 
 
-	</form>
+</form>
 
 
 

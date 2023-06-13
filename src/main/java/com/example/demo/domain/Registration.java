@@ -1,6 +1,5 @@
 package com.example.demo.domain;
 
-import java.sql.*;
 import java.time.*;
 
 import lombok.*;
@@ -8,6 +7,7 @@ import lombok.*;
 @Data
 public class Registration {
 	private Integer id;
+	private Integer detailId;
 	private String petName;
 	private String type;
 	private String weight;

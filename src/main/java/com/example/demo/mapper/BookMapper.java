@@ -89,13 +89,14 @@ public interface BookMapper {
 	
 	@Insert("""
 			INSERT INTO Book (hospital, message, checkIn, checkOut, pottyTraining, detailId, petId, memberId)
-			VALUES (#{hospital}, #{message}, #{checkIn}, #{checkOut}, #{pootyTraining}, #{detailId}, #{petId}, #{memberId} )
+			VALUES (#{hospital}, #{message}, #{checkIn}, #{checkOut}, #{pottyTraining}, #{detailId}, #{petId}, #{memberId} )
 			""")
 	@Options(useGeneratedKeys = true, keyProperty="id")
 	int insert(Book book);
 
 	@Select("""
 			SELECT 
+				id,
 				petName,
 				type,
 				birth,
