@@ -5,8 +5,8 @@ let checkEmail = false;
 let checkPhoneNumber = false;
 let checkPassword = false;
 
-function enableSubmit(){
-	if(checkId && checkNickName && checkEmail && checkPhoneNumber && checkPassword){
+function enableSubmit() {
+	if (checkId && checkNickName && checkEmail && checkPhoneNumber && checkPassword) {
 		$("#signupSubmit").removeAttr("disabled");
 	} else {
 		$("#signupSubmit").attr("disabled", "");
@@ -14,12 +14,12 @@ function enableSubmit(){
 }
 
 // input 아이디에 keyup 이벤트 발생시
-$("#inputId").keyup(function(){
+$("#inputId").keyup(function() {
 	// 아이디 중복확인 다시
 	checkId = false;
 	$("#availableIdMessage").addClass("d-none");
 	$("#notAvailableIdMessage").addClass("d-none");
-	
+
 	// submit 버튼 비활성화
 	enableSubmit();
 });
@@ -45,31 +45,31 @@ $("#checkIdBtn").click(function() {
 		},
 		complete: enableSubmit
 	})
-});
+})
 
 // input 닉네임에 keyup 이벤트 발생시
-$("#inputNickName").keyup(function(){
+$("#inputNickName").keyup(function() {
 	// 닉네임 중복확인 다시
 	checkNickName = false;
 	$("#availableNickNameMessage").addClass("d-none");
 	$("#notAvailableNickNameMessage").addClass("d-none");
-	
+
 	// submit 버튼 비활성화
 	enableSubmit();
 })
 
 // nickName 중복확인 버튼이 클릭되면
-$("#checkNickNameBtn").click(function(){
+$("#checkNickNameBtn").click(function() {
 	const usernickname = $("#inputNickName").val();
 	//입력한 nickname과 ajax요청 보내서 결과에 따라 다른 메세지 보여주기
 	$.ajax("/member/checkNickName/" + usernickname, {
-		success: function(data){
+		success: function(data) {
 			//`{"available" : true}`
-			if(data.available){
+			if (data.available) {
 				$("#availableNickNameMessage").removeClass("d-none");
 				$("#notAvailableNickNameMessage").addClass("d-none");
 				checkNickName = true;
-			}else{
+			} else {
 				$("#notAvailableNickNameMessage").removeClass("d-none");
 				$("#availableNickNameMessage").addClass("d-none");
 				checkNickName = false;
@@ -80,24 +80,24 @@ $("#checkNickNameBtn").click(function(){
 })
 
 // input 이메일에 keyup 이벤트 발생시
-$("#inputEmail").keyup(function(){
+$("#inputEmail").keyup(function() {
 	// 이메일 중복확인 다시
 	checkEmail = false;
 	$("#availableEmailMessage").addClass("d-none");
 	$("#notAvailableEmailMessage").addClass("d-none");
-	
+
 	// submit 버튼 비활성화
 	enableSubmit();
 })
 
 // email 중복확인 버튼이 클릭되면
-$("#checkEmailBtn").click(function(){
+$("#checkEmailBtn").click(function() {
 	const useremail = $("#inputEmail").val();
 	//입력한 email과 ajax 요청 보내서 결과에 따라 다른 메세지 보여주기
 	$.ajax("/member/checkEmail/" + useremail, {
-		success: function(data){
+		success: function(data) {
 			//`{"available" : true}`
-			if(data.available){
+			if (data.available) {
 				$("#availableEmailMessage").removeClass("d-none");
 				$("#notAvailableEmailMessage").addClass("d-none");
 				checkEmail = true;
@@ -112,24 +112,24 @@ $("#checkEmailBtn").click(function(){
 })
 
 // input 연락처에 keyup 이벤트 발생시
-$("#inputPhoneNumber").keyup(function(){
+$("#inputPhoneNumber").keyup(function() {
 	// 연락처 중복확인 다시
-	checkId = false;
+	checkPhoneNumber = false;
 	$("#availablePhoneNumberMessage").addClass("d-none");
 	$("#notAvailablePhoneNumberMessage").addClass("d-none");
-	
+
 	// submit 버튼 비활성화
 	enableSubmit();
 })
 
 // 연락처 중복확인 버튼이 클릭되면
-$("#checkPhoneNumberBtn").click(function(){
+$("#checkPhoneNumberBtn").click(function() {
 	const userphonenumber = $("#inputPhoneNumber").val();
 	//입력한 연락처와 ajax 요청 보내서 결과에 따라 다른 메세지 보여주기
 	$.ajax("/member/checkPhoneNumber/" + userphonenumber, {
-		success: function(data){
+		success: function(data) {
 			//`{"available" : true}`
-			if(data.available){
+			if (data.available) {
 				$("#availablePhoneNumberMessage").removeClass("d-none");
 				$("#notAvailablePhoneNumberMessage").addClass("d-none");
 				checkPhoneNumber = true;
@@ -138,8 +138,16 @@ $("#checkPhoneNumberBtn").click(function(){
 				$("#availablePhoneNumberMessage").addClass("d-none");
 				checkPhoneNumber = false;
 			}
-		}, 
-		complete: enableSubmit
+		},
+		complete: function() {
+			console.log("complete start")
+			console.log("complete", checkId)
+			console.log("complete", checkNickName)
+			console.log("complete", checkEmail)
+			console.log("complete", checkPhoneNumber)
+			console.log("complete", checkPassword)
+			enableSubmit();
+		}
 	})
 })
 

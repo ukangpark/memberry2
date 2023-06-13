@@ -12,8 +12,8 @@
 <my:top></my:top>
 
 <style>
-img {
-	width: 400px;
+#img {
+	width: 450px;
 	margin: 100px 0px 30px 0px;
 }
 </style>
@@ -25,7 +25,7 @@ img {
 
 		<div class="row justify-content-center">
 			<div class="col-12 col-md-8 ">
-				<img src="/img/MemberyLogo.png" alt="Membery logo">
+				<img src="/img/MemberyLogo.png" alt="Membery logo" id="img" >
 				<h1 style="margin: 30px 0px 50px 0px;">로그인</h1>
 				<form method="post">
 					<div class="ui stacked segment">

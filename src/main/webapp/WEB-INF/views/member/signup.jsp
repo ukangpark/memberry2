@@ -39,10 +39,10 @@
 						<input id="inputId" type="text" class="form-control" name="id" value="${member.id}" style="font-size: 18px; text-align: center;" /> 
 						
 						<input id="availableIdMessage" class="d-none form-control" type="text" value="사용 가능한 아이디입니다." 
-						style="font-size: 18px; text-align: center; color: blue;" /> 
+						style="font-size: 18px; text-align: center; color: blue;" readonly/> 
 						
 						<input id="notAvailableIdMessage" class="d-none form-control" type="text" value="사용 불가능한 아이디입니다." 
-						style="font-size: 18px; text-align: center; color: red;" />
+						style="font-size: 18px; text-align: center; color: red;" readonly/>
 						
 						<button id="checkIdBtn" class="ui olive button" type="button" style="font-size: 18px; padding: 11px;">중복확인</button>
 					</div>
@@ -61,7 +61,7 @@
 						<input id="inputPasswordCheck" type="password" class="form-control" style="font-size: 18px; text-align: center;" />
 
 						<div id="passwordCheckSuccess" class="d-none inline field">
-							<div class="ui left pointing black basic label" style="font-size: 15px;">비밀번호가 일치합니다.</div>
+							<div class="ui left pointing olive basic label" style="font-size: 15px;">비밀번호가 일치합니다.</div>
 						</div>
 
 						<div id="passwordCheckFail" class="d-none inline field">
@@ -75,11 +75,10 @@
 						style="font-size: 18px; text-align: center;" /> 
 						
 						<input id="availableNickNameMessage" class="d-none form-control" type="text" value="사용 가능한 닉네임입니다." 
-						style="font-size: 18px; text-align: center; color: blue;" /> 
+						style="font-size: 18px; text-align: center; color: blue;" readonly/> 
 						
 						<input id="notAvailableNickNameMessage" class="d-none form-control" type="text" value="사용 불가능한 닉네임입니다." 
-						
-						style="font-size: 18px; text-align: center; color: red;" />
+						style="font-size: 18px; text-align: center; color: red;" readonly/>
 						<button id="checkNickNameBtn" class="ui olive button" type="button" style="font-size: 18px; padding: 11px;">중복확인</button>
 					</div>
 
@@ -89,10 +88,10 @@
 						style="font-size: 18px; text-align: center;" /> 
 						
 						<input id="availableEmailMessage" class="d-none form-control" type="text" value="사용 가능한 이메일입니다." 
-						style="font-size: 18px; text-align: center; color: blue;" /> 
+						style="font-size: 18px; text-align: center; color: blue;" readonly/> 
 						
 						<input id="notAvailableEmailMessage" class="d-none form-control" type="text" value="사용 불가능한 이메일입니다." 
-						style="font-size: 18px; text-align: center; color: red;" />
+						style="font-size: 18px; text-align: center; color: red;" readonly/>
 						
 						<button id="checkEmailBtn" class="ui olive button" type="button" style="font-size: 18px; padding: 11px;">중복확인</button>
 					</div>
@@ -103,16 +102,16 @@
 						style="font-size: 18px; text-align: center;" /> 
 						
 						<input id="availablePhoneNumberMessage" class="d-none form-control" type="text" value="사용 가능한 연락처입니다." 
-						style="font-size: 18px; text-align: center; color: blue;" /> 
+						style="font-size: 18px; text-align: center; color: blue;" readonly/> 
 						
 						<input id="notAvailablePhoneNumberMessage" class="d-none form-control" type="text" value="사용 불가능한 연락처입니다." 
-						style="font-size: 18px; text-align: center; color: red;" />
+						style="font-size: 18px; text-align: center; color: red;" readonly/>
 						
 						<button id="checkPhoneNumberBtn" class="ui olive button" type="button" style="font-size: 18px; padding: 11px;">중복확인</button>
 					</div>
 
 					<div class="mb-3">
-						<input type="submit" id="signupSubmit" class="ui secondary button" disabled value="가입" style="font-size: 16px; margin: 20px;" />
+						<input type="submit" id="signupSubmit" class="ui secondary button" disabled value="가입" style="font-size: 16.5px; margin: 20px;" />
 					</div>
 				</form>
 			</div>
