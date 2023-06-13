@@ -12,6 +12,7 @@
 		<result column="writer" property="writer" />
 		<result column="location" property="location" />
 		<result column="likeCount" property="likeCount" />
+		<result column="commentCount" property="commentCount" />
 		<collection property="fileName" ofType="string">
 			<result column="fileName"/>
 		</collection>
