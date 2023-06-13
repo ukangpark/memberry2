@@ -36,7 +36,13 @@
 			<h4 id="profile">
 			
 				<sec:authorize access="isAuthenticated()">
-					<img class="ui tiny image" id="nav-image" src="${bucketUrl }${logedInMember.profileImage }">${logedInMember.nickName } 
+					<c:if test="${logedInMember.profileImage ne null}">
+					<img class="ui tiny image" id="nav-image" src=${bucketUrl }${logedInMember.profileImage }>${logedInMember.nickName } 
+					</c:if>
+					<c:if test="${logedInMember.profileImage eq null}">
+					<img class="ui tiny image" id="nav-image" src="/images/paw.png">${logedInMember.nickName } 
+					</c:if>
+					
 				</sec:authorize>
 				<sec:authorize access="not isAuthenticated()">
 					<img class="ui tiny image" id="nav-image" src="/images/paw.png">default 별명 
