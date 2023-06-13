@@ -150,7 +150,9 @@ public interface PetsitterMapper {
 			pet,
 			houseType,
 			species,
-			 (select count(*) from PetsitterComment where detailId = Detail.id) commentCount 
+			 (select count(*) from PetsitterComment where detailId = Detail.id) commentCount,
+			 Detail.id detailId,
+			 cover 
 		FROM Host, Detail
 		WHERE
 			Host.id = Detail.hostId

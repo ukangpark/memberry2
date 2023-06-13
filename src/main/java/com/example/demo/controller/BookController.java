@@ -20,7 +20,7 @@ public class BookController {
 	private BookService service;
 
 	// 사용자가 보는 예약목록(마이페이지완성되면 이동예정), 페이지네이션
-	@PostMapping("list")
+	@GetMapping("list")
 	public String bookList(Model model,  Authentication authentication,
 			@RequestParam(value = "page", defaultValue = "1") Integer page) {
 		 String userId = authentication.getName(); //인증서에 저장된 아이디 값 가져오기
@@ -105,7 +105,7 @@ public class BookController {
 	public String addRegi(Book book, RedirectAttributes rttr) {
 
 		service.addRegi(book);
-		return "book/regiList";
+		return "redirect:/book/list";
 
 	}
 

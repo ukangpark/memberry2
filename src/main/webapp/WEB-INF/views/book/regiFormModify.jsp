@@ -106,11 +106,11 @@
 
 			<h4 class="ui header">배변훈련(배변패드)</h4>
 			<div class="btn-group" role="group" aria-label="Basic radio toggle button group" >
-  		<input type="radio" value="1" class="btn-check" name="pottyTraining"  autocomplete="off" <c:if test="${book.pottyTraining eq '1' }"> checked</c:if> />
+  		<input type="radio" value="1" class="btn-check" name="pottyTraining" id="btnradio5" autocomplete="off" <c:if test="${book.pottyTraining eq '1' }"> checked</c:if> />
   		<label class="btn btn-outline-secondary" for="btnradio5">잘해요</label>
-  		<input type="radio" value="2" class="btn-check" name="pottyTraining"  autocomplete="off" <c:if test="${book.pottyTraining eq '2' }"> checked</c:if> />
+  		<input type="radio" value="2" class="btn-check" name="pottyTraining" id="btnradio6" autocomplete="off" <c:if test="${book.pottyTraining eq '2' }"> checked</c:if> />
   		<label class="btn btn-outline-secondary" for="btnradio6">미숙해요</label>
-  		<input type="radio" value="3" class="btn-check" name="pottyTraining" autocomplete="off" <c:if test="${book.pottyTraining eq '3' }"> checked</c:if> />
+  		<input type="radio" value="3" class="btn-check" name="pottyTraining" id="btnradio7" autocomplete="off" <c:if test="${book.pottyTraining eq '3' }"> checked</c:if> />
   		<label class="btn btn-outline-secondary" for="btnradio7">실외배변</label>
 		</div>
 			
@@ -152,6 +152,27 @@
   예약 변경 신청하기
 </button>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">예약변경 신청</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        확인버튼을 누르면 예약변경이 신청됩니다.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+        <button type="submit" class="btn btn-primary">확인</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 		</form>
 		</div>
 

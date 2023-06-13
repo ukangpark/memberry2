@@ -30,7 +30,6 @@
 		var checkInDate = $('#checkIn').val();
 		var curDate = new Date();
 		var formattedDate = moment(curDate).format('YYYY-MM-DD');
-		console.log(formattedDate);
 		if(checkInDate < formattedDate){
 			alert("현재 날짜 이후의 날짜를 선택해주세요.");
 		}
@@ -50,10 +49,20 @@
 		var startDate = moment($('#checkIn').val());
 		var endDate = moment($('#checkOut').val());
 		var durationInDays = endDate.diff(startDate, 'days');
+		var price;
+		var weight = '${pet.weight}';
+		
+		if(weight == 'small'){
+			price = 40000;
+		}else if(weight == 'medium'){
+			price = 45000;			
+		}else{
+			price = 50000;						
+		}
 		
 		// 결제 금액 계산
 		
-		var totalPrice = 40000 * durationInDays; // 총 금액 계산
+		var totalPrice = price * durationInDays; // 총 금액 계산
 		  $('#totalPrice').text(totalPrice + '원'); // 결제 금액을 보여주는 요소 업데이트
 		
 	}
@@ -187,7 +196,7 @@
 			
 			
 <!-- Button trigger modal -->
-<button type="button"  class="btn btn-primary" style="margin-top:50px;" data-bs-toggle="modal" data-bs-target="#exampleModal"> 
+<button type="button"  class="btn btn-primary" style="margin-top:50px;" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="javascript:fnDays()"> 
   예약 신청하기
 </button>
 			
@@ -208,7 +217,7 @@
       
       <div class="modal-body">
       <!-- 달력 칸수 곱해서 금액산출 -->
-        총 결제 금액은 <span function="javascript:fnDays()" id="totalPrice">원</span>입니다.
+        총 결제 금액은 <span id="totalPrice"></span> 입니다.
         예약하시겠습니까?
       </div>
       <div class="modal-footer">
