@@ -157,29 +157,34 @@
 
 			<!-- 수정/삭제 버튼 드랍다운 -->
 			<sec:authorize access="isAuthenticated()">
-			<div class="drop">
-				<button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-					<i class="fa-solid fa-ellipsis-vertical"></i>
-				</button>
-
-				<ul class="dropdown-menu">
-					<!-- Dropdown menu links -->
-					<div style="text-align: center">
-						<a href="/modify/${feed.id }">수정하기</a>
+				<sec:authentication property="name" var="uerId" />
+				<c:if test="${userId eq feed.writer }">
+				
+				<div class="drop">
+					<button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+						<i class="fa-solid fa-ellipsis-vertical"></i>
+					</button>
+	
+					<ul class="dropdown-menu">
+						<!-- Dropdown menu links -->
+						<div style="text-align: center">
+							<a href="/modify/${feed.id }">수정하기</a>
+						</div>
+						<div style="text-align: center">
+							<a href="#" onclick="javascript:document.removeForm.submit();">삭제하기</a>
+						</div>
+					</ul>
+	
+					<!-- 삭제하기 기능 -->
+					<div class="d-none">
+						<form action="/remove" method="post" name="removeForm">
+							<input type="text" name="id" value="${feed.id }" />
+						</form>
 					</div>
-					<div style="text-align: center">
-						<a href="#" onclick="javascript:document.removeForm.submit();">삭제하기</a>
-					</div>
-				</ul>
-
-				<!-- 삭제하기 기능 -->
-				<div class="d-none">
-					<form action="/remove" method="post" name="removeForm">
-						<input type="text" name="id" value="${feed.id }" />
-					</form>
 				</div>
-			</div>
+				</c:if>
 			</sec:authorize>
+			
 		</div>
 	</div>
 	<!-- wrapper div -->

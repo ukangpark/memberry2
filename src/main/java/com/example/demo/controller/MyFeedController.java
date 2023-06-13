@@ -85,7 +85,7 @@ public class MyFeedController {
 	
 	// 게시물 수정하는 폼 보여주기
 	@GetMapping("/modify/{feedId}")
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("isAuthenticated() and @customSecurityChecker.checkFeedWriter(authentication, #id)")
 	public String modifyForm(@PathVariable("feedId") Integer feedId, Model model) {
 		model.addAttribute("feed", service.getPost(feedId));
 		return "feed/feedModify";
@@ -93,7 +93,8 @@ public class MyFeedController {
 	
 	// 게시물 수정한 값 업로드
 	@PostMapping("/modify/{feedId}")
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("isAuthenticated() and @customSecurityChecker.checkFeedWriter(authentication, #feed.id)")
+	// 수정하려는 게시물의 id : feed.id
 	public String modifyProcess(Feed feed, 
 			File file, 
 			@RequestParam(value="removeFiles", required = false) List<String> removeFileNames,
@@ -114,7 +115,7 @@ public class MyFeedController {
 	}
 	
 	@PostMapping("remove")
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("isAuthenticated() and @customSecurityChecker.checkFeedWriter(authentication, #id)")
 	public String remove(Integer id, RedirectAttributes rttr) {
 		boolean ok = service.remove(id);
 		if (ok) {
