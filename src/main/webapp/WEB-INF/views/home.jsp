@@ -104,7 +104,7 @@
 								<ul class="slider" id="imgContainer">
 									<c:forEach items="${feed.fileName }" var="fileName">
 										<li>
-											<img class="ui medium rounded imager" src="${bucketUrl }/${feed.id }/${fileName }" alt="" />
+											<img class="ui medium rounded imager" src="${bucketUrl }/feed/${feed.id }/${fileName }" alt="" />
 										</li>
 										
 	

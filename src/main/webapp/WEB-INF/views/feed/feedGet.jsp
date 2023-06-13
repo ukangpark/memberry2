@@ -134,7 +134,7 @@
 					<ul class="bxslider">
 						<c:forEach items="${feed.fileName }" var="fileName">
 							<li><img class="ui medium rounded imager"
-								src="${bucketUrl }/${feed.id }/${fileName }" alt="" /></li>
+								src="${bucketUrl }/feed/${feed.id }/${fileName }" alt="" /></li>
 						</c:forEach>
 					</ul>
 				</div>

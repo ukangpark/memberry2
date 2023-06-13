@@ -56,7 +56,7 @@ public class MyFeedService {
 		for (MultipartFile file : files) {
 			if (file.getSize() > 0) {
 				// S3 저장소 사용을 위한 키
-				String objectKey = "membery/" + feed.getId() + "/" + file.getOriginalFilename();
+				String objectKey = "membery/feed/" + feed.getId() + "/" + file.getOriginalFilename();
 				PutObjectRequest por = PutObjectRequest.builder()
 						.bucket(bucketName)
 						.key(objectKey)
@@ -93,7 +93,7 @@ public class MyFeedService {
 		if (removeFileNames != null && !removeFileNames.isEmpty()) {
 			for (String fileName : removeFileNames) {
 				// S3에서 파일(객체) 삭제
-				String objectKey = "feed/" + feed.getId() + "/" + fileName;
+				String objectKey = "membery/feed/" + feed.getId() + "/" + fileName;
 				DeleteObjectRequest dor = DeleteObjectRequest.builder()
 						.bucket(bucketName)
 						.key(objectKey)
@@ -112,7 +112,7 @@ public class MyFeedService {
 				mapper.insertFileName(feed.getId(), newFile.getOriginalFilename(), newFile.getName());
 				
 				// s3에 파일(객체) 업로드
-				String objectKey = "membery/" + feed.getId() + "/" + newFile.getOriginalFilename();
+				String objectKey = "membery/feed/" + feed.getId() + "/" + newFile.getOriginalFilename();
 				PutObjectRequest por = PutObjectRequest.builder()
 						.acl(ObjectCannedACL.PUBLIC_READ)
 						.bucket(bucketName)
@@ -148,7 +148,7 @@ public class MyFeedService {
 		
 		// S3 bucket의 파일(객체) 지우기
 		for(String fileName : fileNames) {
-			String objectKey = "membery/" + id + "/" + fileName;
+			String objectKey = "membery/feed/" + id + "/" + fileName;
 			DeleteObjectRequest dor = DeleteObjectRequest.builder()
 					.bucket(bucketName)
 					.key(objectKey)
