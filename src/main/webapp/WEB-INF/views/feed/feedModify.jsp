@@ -123,13 +123,13 @@
 					 </div>
 					 <br />
 					
-					<%-- <div class="ui form">
-					    <div class="writer">
+					<div class="ui form">
+					    <div class="writer d-none">
 					      <label></label>
-					      <input placeholder="글쓴이" type="text" name="writer" value="${feed.writer }" />
+					      <input placeholder="글쓴이" type="text" name="writer" value="${feed.writer }" readonly />
 					    </div>
 					</div>
-					<br /> --%>
+					<br />
 					
 					<div class="ui form">
 					    <div class="location">

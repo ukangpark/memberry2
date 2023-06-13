@@ -101,15 +101,6 @@
 					<textarea placeholder="content" name="content">${feed.content }</textarea>
 					<div class="ui pointing red basic label">내용을 입력해 주세요!</div>
 
-					<%--<div class="ui divider"></div>
-
-					 <!-- 로그인한 Id 정보 가져오기 -->
-					<div class="inline field">
-						<input placeholder="username" type="text" name="writer" value="<sec:authentication property="name"/>" readonly />
-						<div class="ui left pointing label">
-							<!-- 이름을 입력해 주세요! -->
-						</div>
-					</div> --%>
 
 			 <div class="ui divider"></div>
 

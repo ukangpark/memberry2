@@ -93,3 +93,5 @@ UPDATE Feed SET writer = 'ukang0711' WHERE id = 82;
 
 ALTER TABLE Feed
 ADD FOREIGN KEY (writer) REFERENCES Member(id);
+
+UPDATE Feed SET writer = 'sohee.G' WHERE id = 106;

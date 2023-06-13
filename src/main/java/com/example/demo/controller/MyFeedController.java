@@ -85,7 +85,7 @@ public class MyFeedController {
 	
 	// 게시물 수정하는 폼 보여주기
 	@GetMapping("/modify/{feedId}")
-	@PreAuthorize("isAuthenticated() and @customSecurityChecker.checkFeedWriter(authentication, #id)")
+	@PreAuthorize("isAuthenticated() and @customSecurityChecker.checkFeedWriter(authentication, #feedId)")
 	public String modifyForm(@PathVariable("feedId") Integer feedId, Model model) {
 		model.addAttribute("feed", service.getPost(feedId));
 		return "feed/feedModify";
