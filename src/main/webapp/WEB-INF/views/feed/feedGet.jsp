@@ -117,8 +117,13 @@
 			<div class="ui card" id="my-card">
 				<div class="content"">
 					<div id="inserted" class="right floated meta">${feed.inserted }</div>
-					<img id="profilImage" class="ui avatar image"
-						src="/images/또복이 (1).jpg"> 또복언니
+					<!-- 프로필 이미지 + 닉네임 -->
+					<c:if test="${logedInMember.profileImage ne null}">
+						<img class="ui avatar image" id="profilImage" src="${bucketUrl }/pet${logedInMember.profileImage }">${logedInMember.nickName } 
+					</c:if>
+					<c:if test="${logedInMember.profileImage eq null}">
+						<img class="ui avatar image" id="profilImage" src="/images/paw.png">${logedInMember.nickName } 
+					</c:if>
 				</div>
 				<div class="content">
 					<div class="right floated meta">
