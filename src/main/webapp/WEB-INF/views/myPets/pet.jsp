@@ -6,9 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.css">
+<my:top></my:top>
 
 <style>
 .profileContainer {
@@ -68,7 +66,7 @@ label {
 	<!-- 상단 프로필 컨테이너 -->
 	<div class="profileContainer">
 		<div class="profile">
-			<img src="${bucketUrl }/${pet.id }/${pet.photo}">
+			<img id="imageByPet" src="${bucketUrl }/${pet.id }/${pet.photo}">
 			<div class="border"></div>
 		</div>
 	</div>
@@ -76,9 +74,20 @@ label {
 	<!-- 상단 헤더 컨테이너 -->
 	<div class="ui center aligned container mt-2">
 		<div class="ui huge header">${pet.petName }</div>
-		<div class="ui toggle checkbox">
-			<input id="checkbox" type="checkbox" name="profileSubmit">
-			<label>내 프로필로 등록</label>
+		<!-- 프로필등록 버튼 -->
+		<div class="inline field">
+			<div class="ui toggle checkbox" id="petCheckbox">
+				<c:if test="${pet.defaultPetId eq '' || pet.defaultPetId ne pet.id}">
+					<input type="checkbox" name="thumbnail">
+				</c:if>
+				<c:if test="${pet.defaultPetId eq pet.id}">
+					<input type="checkbox" name="thumbnail" checked>
+				</c:if>
+				<!-- navBar연동을 위한 코드 -->
+				<input id="petId" type="text" name="id" value="${pet.id }" readonly style="display: none;">
+				<input id="petPhoto" type="text" name="photo" value="${pet.photo }" readonly style="display: none;">
+				<label>프로필로 등록</label>
+			</div>
 		</div>
 	</div>
 
@@ -162,9 +171,10 @@ label {
 	</div>
 
 
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.5.0/dist/semantic.min.js"></script>
+	<my:bottom></my:bottom>
+	<script>
+		$('.ui.checkbox').checkbox();
+	</script>
+	<script src="/js/pet.js"></script>
 </body>
 </html>

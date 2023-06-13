@@ -4,6 +4,7 @@ function home() {
 	$('.slider').bxSlider();
 };
 
+
 // 댓글 js
 $(".btnTriggerModal").click(function() {
 	const feedId = $(this).attr("data-id");

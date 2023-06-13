@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -104,9 +105,11 @@
 	</div>
 
 	<div class="pageName">
+
 		<h1>
 			<span id="feedIdText">${feed.id }</span>번 게시물
 		</h1>
+
 	</div>
 
 	<div class="wrapper">
@@ -179,6 +182,7 @@
 
 
 
+
 				<div id="commentcontainer">
 					<div id="commentTitle"><h3><i class="fa-solid fa-comments"></i> 댓글</h3></div>
 					<br />
@@ -210,7 +214,6 @@
 				</div>
 			</div>
 
-			<!-- 수정/삭제 버튼 드랍다운 -->
 
 		</div>
 	</div>
@@ -232,12 +235,14 @@
 						data-bs-dismiss="modal">닫기</button>
 					<button id="deleteCommentModalButton" data-bs-dismiss="modal"
 						type="submit" class="btn btn-danger">삭제</button>
-				</div>
-			</div>
-		</div>
-	</div>
 
-	<%-- 댓글 수정 모달 --%>
+				<div class="ui segment" style="font-weight: 700;">제목 : ${feed.title }</div>
+				<div class="ui segment" style="font-weight: 700;">본문 : ${feed.content }</div>
+				<div class="ui segment" style="font-weight: 700;">작성자 : ${feed.writer }</div>
+				<div class="ui segment" style="font-weight: 700;">장소 태그 : ${feed.location }</div>
+			</div>
+        
+        <%-- 댓글 수정 모달 --%>
 	<div class="modal fade" id="commentUpdateModal" tabindex="-1"
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
@@ -260,6 +265,40 @@
 						data-bs-dismiss="modal">수정</button>
 				</div>
 			</div>
+		</div>
+	</div>
+
+			<!-- 수정/삭제 버튼 드랍다운 -->
+			<sec:authorize access="isAuthenticated()">
+				<sec:authentication property="name" var="uerId" />
+				<c:if test="${userId eq feed.writer }">
+				
+				<div class="drop">
+					<button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+						<i class="fa-solid fa-ellipsis-vertical"></i>
+					</button>
+	
+					<ul class="dropdown-menu">
+						<!-- Dropdown menu links -->
+						<div style="text-align: center">
+							<a href="/modify/${feed.id }">수정하기</a>
+						</div>
+						<div style="text-align: center">
+							<a href="#" onclick="javascript:document.removeForm.submit();">삭제하기</a>
+						</div>
+					</ul>
+	
+					<!-- 삭제하기 기능 -->
+					<div class="d-none">
+						<form action="/remove" method="post" name="removeForm">
+							<input type="text" name="id" value="${feed.id }" />
+						</form>
+					</div>
+
+				</div>
+				</c:if>
+			</sec:authorize>
+			
 		</div>
 	</div>
 

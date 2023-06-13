@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -81,4 +82,13 @@ public class MyPetsService {
 
 		return cnt == 1;
 	}
+
+	public boolean profileImage(Integer petId, Authentication auth, Boolean checked) {
+		
+		int cnt = mapper.updateProfileByMemberId(petId,auth.getName(), checked);
+		
+		return cnt == 1;
+				
+	}
+
 }
