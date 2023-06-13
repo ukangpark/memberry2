@@ -15,6 +15,10 @@
 #buttons {
 	margin: auto;
 }
+
+#img{
+	width : 400px;
+}
 </style>
 </head>
 <body>
@@ -22,9 +26,10 @@
 	<my:navBar current="memberInfo"></my:navBar>
 	<my:alert></my:alert>
 
-	<div style="margin-top: 50px; margin-bottom: 15px;"></div>
-	<div class="ui aligned container" id="imgContainer">
-		<img class="ui centered medium circular image" src="/img/MemberyLogo.png">
+	<div style="margin-top: 100px; margin-bottom: 50px;">
+		<div class="ui aligned container" id="imgContainer">
+			<img class="ui centered medium circular image" src="/img/MemberyLogo.png" id="img">
+		</div>
 	</div>
 
 	<div class="ui grid container" id="container">
@@ -81,7 +86,8 @@
 				</div>
 				<div class="modal-body">
 					<form id="removeForm" action="/member/remove" method="post">
-						<input type="hidden" name="id" value="${member.id }" /> <label for="passwordInput1">암호</label> <input id="passwordInput1" type="password" name="password" class="form-control" />
+						<input type="hidden" name="id" value="${member.id }" /> <label for="passwordInput1">비밀번호 입력</label> 
+						<input id="passwordInput1" type="password" name="password" class="form-control" />
 					</form>
 				</div>
 				<div class="modal-footer">

@@ -13,7 +13,8 @@
 
 <style>
 #img {
-	margin: 0px 0px 0px 0px;
+	width: 450px;
+	margin: 50px 0px 60px 0px;
 }
 
 #cards {

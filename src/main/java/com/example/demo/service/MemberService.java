@@ -117,12 +117,12 @@ public class MemberService {
 		Integer lastPageNum = (countAllRecords - 1) / recordsInPage + 1;
 		
 		// 페이지네이션 왼쪽 번호
-		Integer leftPageNum = page - 5;
+		Integer leftPageNum = page - 3;
 		// 1보다 작을 수 없음
 		leftPageNum = Math.max(leftPageNum, 1);
 		
 		// 페이지네이션 오른쪽 번호
-		Integer rightPageNum = page + 4;
+		Integer rightPageNum = page + 2;
 		// 마지막페이지보다 클 수 없음
 		rightPageNum = Math.min(rightPageNum, lastPageNum);
 		
@@ -130,6 +130,7 @@ public class MemberService {
 		pageInfo.put("leftPageNum", leftPageNum);
 		pageInfo.put("rightPageNum", rightPageNum);
 		pageInfo.put("currentPageNum", page);
+		pageInfo.put("lastPageNum", lastPageNum);
 		
 		// 회원 목록 가져와서 보여주기
 		List<Member> list = mapper.selectAllPage(startIndex, recordsInPage);
@@ -137,7 +138,56 @@ public class MemberService {
 		return Map.of("pageInfo", pageInfo, 
 					  "memberList", list);
 	}
+
+	public Map<String, Object> checkId(String id) {
+		Member member = mapper.selectById(id);
+		
+		// null이면 available
+		return Map.of("available", member == null);
+	}
+
+	public Map<String, Object> checkNickName(String nickName) {
+		Member member = mapper.selectByNickName(nickName);
+		
+		// null이면 available
+		return Map.of("available", member == null);
+	}
+
+	public Map<String, Object> checkEmail(String email) {
+		Member member = mapper.selectByEmail(email);
+		
+		// null이면 available
+		return Map.of("available", member == null);
+	}
+
+	public Map<String, Object> checkPhoneNumber(String phoneNumber) {
+		Member member = mapper.selectByPhoneNumber(phoneNumber);
+		
+		// null이면 available
+		return Map.of("available", member == null);
+	}
 	 
 }
  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
  

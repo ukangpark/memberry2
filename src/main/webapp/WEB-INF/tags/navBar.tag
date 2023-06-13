@@ -64,11 +64,11 @@
 
 							<!-- 사용자 예약내역 -->
 							<sec:authorize access="isAuthenticated()">
-								<a class="${current eq 'regiList' ? 'active' : '' } item" href="/book/list">예약내역</a>
+								<a class="${current eq 'regiList' ? 'active' : '' } item" href="/book/list">예약신청내역</a>
 							</sec:authorize>
 							<!-- 호스트가 보는 예약내역-->
 							<sec:authorize access="isAuthenticated()">
-								<a class="${current eq 'regiListHost' ? 'active' : '' } item" href="/book/list/host">예약내역</a>
+								<a class="${current eq 'regiListHost' ? 'active' : '' } item" href="/book/list/host">예약요청내역</a>
 							</sec:authorize>
 							<sec:authorize access="isAuthenticated()">
 								<a class="${current eq 'hostMyPage' ? 'active' : '' } item" href="/petsitter/hostMyPage">호스트 마이페이지</a>
