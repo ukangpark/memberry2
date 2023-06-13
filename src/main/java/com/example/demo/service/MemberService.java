@@ -75,7 +75,7 @@ public class MemberService {
 			myFeedService.removeByWriter(member.getId());
 			
 			//회원이 작성한 댓글 삭제
-			commentMapper.deleteByMemberId(member.getId());
+			commentMapper.deleteByMemberID(member.getId());
 			
 			// Member 테이블 삭제
 			cnt = mapper.deleteById(member.getId());			
