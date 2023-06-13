@@ -249,8 +249,6 @@
 
 	<my:bottom></my:bottom>
 
-
-
 	<script src="/js/feed/like.js"></script>
 </body>
 </html>

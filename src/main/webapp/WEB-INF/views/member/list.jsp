@@ -40,7 +40,7 @@
 	<div class="ui center aligned container" id="container">
 
 		<div class="row justify-content-center">
-			<div style="margin: 30px;">
+			<div style="margin: 70px;">
 				<h1>회원 목록</h1>
 			</div>
 			<table class="table">
@@ -77,6 +77,17 @@
 
 	<!-- pagination -->
 	<div class="container-lg" id="pagination">
+
+		<!-- 이전 버튼 -->
+		<c:if test="${pageInfo.currentPageNum ne 1 }">
+			<c:url value="/member/list" var="pageLink">
+				<c:param name="page" value="${pageInfo.currentPageNum - 1 }" />
+			</c:url>
+			<div class="ui pagination menu">
+				<a class="item" href="${pageLink }"> prev </a>
+			</div>
+		</c:if>
+
 		<c:forEach begin="${pageInfo.leftPageNum }" end="${pageInfo.rightPageNum }" var="pageNum">
 			<c:url value="/member/list" var="pageLink">
 				<c:param name="page" value="${pageNum }" />
@@ -85,9 +96,19 @@
 				<a class="item ${pageNum eq pageInfo.currentPageNum ? 'active' : '' }" href="${pageLink }"> ${pageNum } </a>
 			</div>
 		</c:forEach>
+
+		<!-- 다음 버튼 -->
+		<c:if test="${pageInfo.currentPageNum ne pageInfo.lastPageNum }">
+			<c:url value="/member/list" var="pageLink">
+				<c:param name="page" value="${pageInfo.currentPageNum + 1 }" />
+			</c:url>
+			<div class="ui pagination menu">
+				<a class="item" href="${pageLink }"> next </a>
+			</div>
+		</c:if>
 	</div>
 
-<my:bottom></my:bottom>
-	
+	<my:bottom></my:bottom>
+
 </body>
 </html>

@@ -30,7 +30,27 @@ public interface MemberMapper {
 			WHERE id = #{id}
 			""")
 	Member selectById(String id);
+	
+	@Select("""
+			SELECT *
+			FROM Member
+			WHERE nickName = #{nickName}
+			""")
+	Member selectByNickName(String nickName);
 
+	@Select("""
+			SELECT *
+			FROM Member
+			WHERE email = #{email}
+			""")
+	Member selectByEmail(String email);
+	
+	@Select("""
+			SELECT *
+			FROM Member
+			WHERE phoneNumber = #{phoneNumber}
+			""")
+	Member selectByPhoneNumber(String phoneNumber);
 
 	@Delete("""
 			DELETE FROM Member
@@ -79,5 +99,9 @@ public interface MemberMapper {
 			FROM Member
 			""")
 	Integer countAll();
+
+
+	
+	
 	
 }

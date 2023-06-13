@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.domain.Member;
@@ -22,6 +19,34 @@ public class MemberController {
 	@Autowired
 	private MemberService service;
 
+	@GetMapping("checkId/{id}")
+	@ResponseBody
+	public Map<String, Object> checkId(@PathVariable("id") String id){
+		
+		return service.checkId(id);
+	}
+	
+	@GetMapping("checkNickName/{nickName}")
+	@ResponseBody
+	public Map<String, Object> checkNickName(@PathVariable("nickName") String nickName){
+		
+		return service.checkNickName(nickName);
+	}
+	
+	@GetMapping("checkEmail/{email}")
+	@ResponseBody
+	public Map<String, Object> checkEmail(@PathVariable("email") String email){
+		
+		return service.checkEmail(email);
+	}
+	
+	@GetMapping("checkPhoneNumber/{phoneNumber}")
+	@ResponseBody
+	public Map<String, Object> checkPhoneNumber(@PathVariable("phoneNumber") String phoneNumber){
+		
+		return service.checkPhoneNumber(phoneNumber);
+	}
+	
 	@GetMapping("login")
 	public void loginForm() {
 		
@@ -57,14 +82,16 @@ public class MemberController {
 //		List<Member> list = service.listMember(); // 페이지 처리 전
 		Map<String, Object> result = service.listMember(page); // 페이지 처리 이후
 		
-		model.addAttribute("pageInfo", result.get("pageInfo"));
-		model.addAttribute("memberList", result.get("memberList"));
-	
+//		model.addAttribute("pageInfo", result.get("pageInfo"));
+//		model.addAttribute("memberList", result.get("memberList"));
+		model.addAllAttributes(result);
+		
+		
 		return "member/list";
 	}
 
 	@GetMapping("info")
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("isAuthenticated() and (authentication.name eq #id)")
 	public void info(String id, Model model) {
 
 		Member member = service.get(id);
@@ -72,7 +99,7 @@ public class MemberController {
 	}
 
 	@PostMapping("remove")
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("isAuthenticated() and (authentication.name eq #member.id)")
 	public String remove(Member member, RedirectAttributes rttr) {
 
 		boolean ok = service.remove(member);
