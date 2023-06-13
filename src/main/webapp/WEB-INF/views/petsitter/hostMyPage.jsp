@@ -14,6 +14,7 @@
 </head>
 <body>
 	<my:navBar></my:navBar>
+	<my:alert></my:alert>
 	<br>
 	<div class="ui centered equal width grid">
 		<div class="eight wide column">
@@ -24,31 +25,31 @@
 							<img class="ui medium bordered centered circular image " src="/images/paw.png">
 						</c:when>
 						<c:otherwise>
-							<img class="ui medium bordered centered circular image " src="${bucketUrl }/hostProfile/${host.profile }">
+							<img class="ui medium bordered centered circular image " src="${bucketUrl }/hostProfile/${host.id }/${host.profile }">
 						</c:otherwise>
 					</c:choose>
-					<h1 class="ui center aligned header">${host.hostName }님 정보입니다.(${host.id })</h1>
+					<h1 class="ui center aligned header">${host.hostName }님정보입니다.(${host.id })</h1>
 					<div>
 						<form class="ui big form" id="checkForm">
 							<div class="field">
 								<label>전화번호</label>
-								<input type="text" name="phone" value="${host.phone }" disabled>
+								<input type="text" name="phone" value="${host.phone }" readonly>
 							</div>
 							<div class="field">
 								<label>주민번호</label>
-								<input type="text" name="idNumber" value="${host.idNumber }" disabled>
+								<input type="text" name="idNumber" value="${host.idNumber }" readonly>
 							</div>
 							<div class="field">
 								<label>주소</label>
 								<div class="equal width fields">
 									<div class="field">
-										<input type="text" name="si" value="${host.si }시" disabled>
+										<input type="text" name="si" value="${host.si }시" readonly>
 									</div>
 									<div class="field">
-										<input type="text" name="gu" value="${host.gu }구" disabled>
+										<input type="text" name="gu" value="${host.gu }구" readonly>
 									</div>
 									<div class="field">
-										<input type="text" name="dong" value="${host.dong }동" disabled>
+										<input type="text" name="dong" value="${host.dong }동" readonly>
 									</div>
 								</div>
 							</div>
@@ -77,9 +78,9 @@
 								</div>
 								<div class="field">
 									<div class="ui mini transparent input">
-									<c:if test="${detail.id ne null }">
-										<a class="ui basic huge label" href="/petsitter/detail?id=${host.id }">상세페이지 보기</a>
-									</c:if>
+										<c:if test="${detail.id ne null }">
+											<a class="ui basic huge label" href="/petsitter/detail?id=${host.id }">상세페이지 보기</a>
+										</c:if>
 										<input type="text" value="${detail.id eq null ? '등록된 상세페이지가 없습니다.' : '등록된 상세페이지가 있습니다.' }" disabled>
 									</div>
 								</div>
@@ -98,13 +99,6 @@
 		</div>
 	</div>
 
-	<!-- 상세페이지 등록 정보 -->
-	<div class="d-none">
-		<form action="/petsitter/${detail.id eq null ? 'addDetail' : 'modifyDetail' }" id="detailForm">
-			<input type="text" name="hostId" value="${host.id }">
-		</form>
-	</div>
-
 	<!-- 상세페이지 등록/수정 모달 -->
 	<div class="modal fade" id="checkModal" tabindex="-1" aria-labelledby="checkModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
@@ -116,18 +110,12 @@
 				<div class="modal-body">${detail.id eq null ? '상세페이지를 등록하시겠습니까?' : '상세페이지를 수정 및 삭제하시겠습니까?' }</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소하기</button>
-					<button type="submit" class="btn btn-primary" form="detailForm">${detail.id eq null ? '등록하기' : '수정 및 삭제하기' }</button>
+					<a href="/petsitter/${detail.id eq null ? 'addDetail' : 'modifyDetail' }" class="btn btn-primary">${detail.id eq null ? '등록하기' : '수정 및 삭제하기' }</a>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<!-- 삭제하기 정보 -->
-	<div class="d-none">
-		<form action="/petsitter/hostDelete" method="post" id="deleteForm">
-			<input type="text" name="hostId" value="${host.id }">
-		</form>
-	</div>
 
 	<!-- 삭제하기 모달 -->
 	<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
@@ -137,7 +125,18 @@
 					<h1 class="modal-title fs-5" id="deleteModalLabel">삭제 확인</h1>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
-				<div class="modal-body">호스트 등록 정보를 정말 삭제하시겠습니까?</div>
+				<div class="modal-body">
+					<div class="mb-3">
+						호스트 등록 정보를 정말 삭제하시겠습니까?
+						<br>
+						삭제를 확인하려면 비밀번호를 입력해주세요.
+					</div>
+					<!-- 삭제하기 정보 -->
+					<form action="/petsitter/hostDelete" method="post" id="deleteForm">
+						<input type="hidden" name="hostId" value="${hosasdasdt.id }">
+						<input class="form-control" type="text" name="password" id="passwordInput" placeholder="비밀번호를 입력해주세요.">
+					</form>
+				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소하기</button>
 					<button type="submit" class="btn btn-danger" form="deleteForm">삭제하기</button>
@@ -145,7 +144,6 @@
 			</div>
 		</div>
 	</div>
-
 	<my:bottom></my:bottom>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="semantic/dist/semantic.min.js"></script>

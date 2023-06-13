@@ -15,11 +15,14 @@
 </head>
 <body>
 	<my:navBar></my:navBar>
-
 	<!-- 호스트의 집사진 -->
 	<div class="container" style="width: 900px">
 		<h1>펫시터 상세페이지</h1>
 			<div class="ten wide column teal">
+				<div>
+					<h5>대표 사진</h5>
+					<img style="width: 200px;" src="${bucketUrl }/cover/${detail.id }/${detail.cover }">
+				</div>
 				<div class="ui images">
 					<c:forEach items="${hostHousePhoto }" var="hostHousePhoto">
 						<img class="ui medium rounded image" src="${bucketUrl }/hostHousePhoto/${detail.id }/${hostHousePhoto.housePhoto }">
@@ -40,18 +43,16 @@
 						</c:when>
 						<c:otherwise>
 							<!-- 프로필 사진 있음  -->
-							<img style="width: 150px; height: 150px;" src="${bucketUrl }/hostProfile/${host.profile }">
+							<img style="width: 150px; height: 150px;" src="${bucketUrl }/hostProfile/${host.id }/${host.profile }">
 						</c:otherwise>
 					</c:choose>
 				</div>
 				<div class="content">
-					<a class="header">${host.hostName } (${host.id })</a>
+					<a class="header">${host.hostName }</a>
 					<div class="meta">
 						<span>주소 : ${host.si }시 ${host.gu }구 ${host.dong }동</span>
 						<br>
 						<span>번호 : ${host.phone }</span>
-						<br>
-						<span>프로필 : ${host.profile }</span>
 					</div>
 					<div class="description">
 						<p>한 줄 소개 : ${detail.title }</p>
@@ -73,7 +74,7 @@
 	<!-- 본문 -->
 	<div class="container" style="width: 900px; margin-top: 25px;">
 		<div class="ui text container">
-			<p>본문 : ${detail.body }</p>
+			<p>${detail.body }</p>
 		</div>
 		<div>
 			<button class="ui right floated inverted red button" onclick="location.href='/book/regiForm/${host.id}'" >예약</button>
