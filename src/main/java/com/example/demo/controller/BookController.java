@@ -20,7 +20,7 @@ public class BookController {
 	private BookService service;
 
 	// 사용자가 보는 예약목록(마이페이지완성되면 이동예정), 페이지네이션
-	@GetMapping("list")
+	@PostMapping("list")
 	public String bookList(Model model,  Authentication authentication,
 			@RequestParam(value = "page", defaultValue = "1") Integer page) {
 		 String userId = authentication.getName(); //인증서에 저장된 아이디 값 가져오기
@@ -41,10 +41,14 @@ public class BookController {
 
 	// 예약수정
 	@GetMapping("/modify/{num}")
-	public String modifyForm(@PathVariable("num") Integer id, Model model) {
+	public String modifyForm(@PathVariable("num") Integer id, Model model, Authentication authentication) {
+		String userId = authentication.getName();
+		Registration pet = service.getPet(userId);
+		model.addAttribute("pet", pet);
 		model.addAttribute("book", service.getBook(id));
 		return "book/regiFormModify";
 	}
+	
 
 	// 수정되게
 	@PostMapping("/modifiy/{num}")
@@ -89,6 +93,7 @@ public class BookController {
 		String userId = authentication.getName();
 		Registration pet = service.getPet(userId);
 		model.addAttribute("pet", pet);
+		model.addAttribute("detailId", id);
 		return "book/regiForm";
 	
 	}
@@ -99,14 +104,9 @@ public class BookController {
 	@PostMapping("bookAdd")
 	public String addRegi(Book book, RedirectAttributes rttr) {
 
-		
-		// db에 추가
-//		boolean ok = service.addRegi(book);
-//		if(ok) {
-//			return "redirect:/list";
-//		} else {
-			return "redirect:/book/regiForm";
-//		}
+		service.addRegi(book);
+		return "book/regiList";
+
 	}
 
 }

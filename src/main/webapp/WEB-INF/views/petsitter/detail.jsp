@@ -77,7 +77,7 @@
 			<p>${detail.body }</p>
 		</div>
 		<div>
-			<button class="ui right floated inverted red button" onclick="location.href='/book/regiForm/${host.id}'" >예약</button>
+			<button class="ui right floated inverted red button" onclick="location.href='/book/regiForm/${detail.id}'" >예약</button>
 		</div>
 	</div>
 

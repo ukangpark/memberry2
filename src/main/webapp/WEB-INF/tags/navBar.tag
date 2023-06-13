@@ -51,7 +51,7 @@
 				</sec:authorize>
 
 
-				<a class="${current eq 'mapMain' ? 'active' : '' } item" href="/map/mapMain"> 함께가기 </a>
+				<a class="${current eq 'mapMain' ? 'active' : '' } item" href="/map/mapMain"> <i class="fa fa-solid fa-paw"></i>함께가개 <i class="fa fa-solid fa-paw"></i></a>
 				<div>
 					<div onclick="location.href='/petsitter/main'" class="${current eq 'petsitterMain' ? 'active' : '' } link item">
 						펫시터
@@ -68,6 +68,7 @@
 							</sec:authorize>
 							<!-- 호스트가 보는 예약내역-->
 							<sec:authorize access="isAuthenticated()">
+								<a class="${current eq 'regiListHost' ? 'active' : '' } item" href="/book/list/host">예약요청목록</a>
 								<a class="${current eq 'regiListHost' ? 'active' : '' } item" href="/book/list/host">예약요청내역</a>
 							</sec:authorize>
 							<sec:authorize access="isAuthenticated()">

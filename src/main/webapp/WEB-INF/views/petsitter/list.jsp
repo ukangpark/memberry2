@@ -44,18 +44,18 @@ h1 {
 			<button class="btn btn-outline-success" type="submit" style="width: 80px">검색</button>
 		</form>
 
-		<!-- <script>
-		$('.ui.dropdown').dropdown();
-	</script> -->
-
+		
 		<hr />
 
-
+		
 		<div class="ui link cards">
 			<c:forEach items="${petsitterList }" var="host">
 				<div class="card">
+				
 					<div class="image">
-						<img src="/home1.jpg" alt="" height="70" />
+						
+						<img src="${bucketUrl }/cover/167/스크린샷 2023-05-30 오전 10.30.49.png" alt="" height="70" />
+						</a>
 					</div>
 					<div class="content">
 						<div class="header">${host.title }</div>
@@ -84,7 +84,7 @@ h1 {
 						<!-- 이전 버튼 -->
 						<c:if test="${pageInfo.currentPageNum ne 1 }">
 							<c:url value="list" var="pageLink">
-								<c:param name="page" value="${pageNum}" />
+								<c:param name="page" value="${pageInfo.currentPageNum - 1}" />
 								<c:if test="${not empty param.search }">
 									<c:param name="search" value="${param.search }" />
 								</c:if>
@@ -106,7 +106,7 @@ h1 {
 						<!-- 다음 버튼 -->
 						<c:if test="${pageInfo.currentPageNum lt pageInfo.lastPageNum }">
 							<c:url value="list" var="pageLink">
-								<c:param name="page" value="${pageNum}" />
+								<c:param name="page" value="${pageInfo.currentPageNum + 1}" />
 								<c:if test="${not empty param.search }">
 									<c:param name="search" value="${param.search }" />
 								</c:if>

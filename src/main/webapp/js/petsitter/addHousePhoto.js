@@ -22,6 +22,7 @@
 				  imageView = function imageView(imgContainer, housePhoto){
 
 				    var attZone = document.getElementById(imgContainer);
+				    var btnAtt = document.getElementById(housePhoto)
 
 				    var btnAtt = document.getElementById(housePhoto)
 
@@ -39,6 +40,7 @@
 				                  + 'z-index:999; ';
 				    var chkClass = 'ui button icon red';
 				  
+				    btnAtt.onchange = function(e){
 
 				    btnAtt.onchange = function(e){
 
@@ -122,6 +124,7 @@
 				          var file = sel_files[f];
 				          dt.items.add(file);
 				        }
+				        btnAtt.files = dt.files;
 
 				        btnAtt.files = dt.files;
 
@@ -142,6 +145,7 @@
 				      return imgdiv
 				    }
 				  }
+				)('imgContainer', 'housePhoto')
 
 				)('imgContainer', 'housePhoto')
 
