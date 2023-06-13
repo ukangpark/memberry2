@@ -68,7 +68,7 @@
 				</sec:authorize>
 
 
-				<a class="${current eq 'mapMain' ? 'active' : '' } item" href="/map/mapMain"> <i class="fa fa-solid fa-paw"></i>함께가개 <i class="fa fa-solid fa-paw"></i></a>
+				<a class="${current eq 'mapMain' ? 'active' : '' } item" href="/map/mapMain"> 함께가개 </a>
 				<div>
 					<div onclick="location.href='/petsitter/main'" class="${current eq 'petsitterMain' ? 'active' : '' } link item">
 						펫시터

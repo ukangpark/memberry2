@@ -89,7 +89,7 @@
 		
 	    	<div class=item>
 	    		<a href="/feedId/${file.feedId }">
-	    		<img src="${bucketUrl }/${file.feedId }/${file.fileName }" alt="" />
+	    		<img src="${bucketUrl }/membery/${file.feedId }/${file.fileName }" alt="" />
 	    		</a>
 	    	</div> 
     
