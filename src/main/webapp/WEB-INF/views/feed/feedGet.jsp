@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -86,7 +87,7 @@
 	</div>
 
 	<div class="pageName">
-		<h1>${feed.id }번 게시물</h1>
+		<h1></h1>
 	</div>
 
 	<div class="wrapper">
@@ -150,32 +151,40 @@
 			<div class="textContent">
 				<div class="ui segment" style="font-weight: 700;">제목 : ${feed.title }</div>
 				<div class="ui segment" style="font-weight: 700;">본문 : ${feed.content }</div>
+				<div class="ui segment" style="font-weight: 700;">작성자 : ${feed.writer }</div>
 				<div class="ui segment" style="font-weight: 700;">장소 태그 : ${feed.location }</div>
 			</div>
 
 			<!-- 수정/삭제 버튼 드랍다운 -->
-			<div class="drop">
-				<button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-					<i class="fa-solid fa-ellipsis-vertical"></i>
-				</button>
-
-				<ul class="dropdown-menu">
-					<!-- Dropdown menu links -->
-					<div style="text-align: center">
-						<a href="/modify/${feed.id }">수정하기</a>
+			<sec:authorize access="isAuthenticated()">
+				<sec:authentication property="name" var="uerId" />
+				<c:if test="${userId eq feed.writer }">
+				
+				<div class="drop">
+					<button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+						<i class="fa-solid fa-ellipsis-vertical"></i>
+					</button>
+	
+					<ul class="dropdown-menu">
+						<!-- Dropdown menu links -->
+						<div style="text-align: center">
+							<a href="/modify/${feed.id }">수정하기</a>
+						</div>
+						<div style="text-align: center">
+							<a href="#" onclick="javascript:document.removeForm.submit();">삭제하기</a>
+						</div>
+					</ul>
+	
+					<!-- 삭제하기 기능 -->
+					<div class="d-none">
+						<form action="/remove" method="post" name="removeForm">
+							<input type="text" name="id" value="${feed.id }" />
+						</form>
 					</div>
-					<div style="text-align: center">
-						<a href="#" onclick="javascript:document.removeForm.submit();">삭제하기</a>
-					</div>
-				</ul>
-
-				<!-- 삭제하기 기능 -->
-				<div class="d-none">
-					<form action="/remove" method="post" name="removeForm">
-						<input type="text" name="id" value="${feed.id }" />
-					</form>
 				</div>
-			</div>
+				</c:if>
+			</sec:authorize>
+			
 		</div>
 	</div>
 	<!-- wrapper div -->

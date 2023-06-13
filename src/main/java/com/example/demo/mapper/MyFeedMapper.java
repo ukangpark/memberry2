@@ -11,9 +11,10 @@ public interface MyFeedMapper {
 	
 	@Select("""
 			SELECT feedId, fileName FROM File
+			WHERE memberId = #{memberId}
 			GROUP BY FeedId ORDER BY id DESC
 			""")
-	List<File> selectAll();
+	List<File> selectAll(String memberId);
 
 	@Insert("""
 			INSERT INTO Feed (title, content, writer, location)
@@ -42,17 +43,16 @@ public interface MyFeedMapper {
 	Feed selectById(Integer id);
 	
 	@Insert("""
-			INSERT INTO File (feedId, fileName)
-			VALUES (#{feedId}, #{fileName})
+			INSERT INTO File (feedId, fileName, memberId)
+			VALUES (#{feedId}, #{fileName}, #{memberId})
 			""")
-	Integer insertFileName(Integer feedId, String fileName);
+	Integer insertFileName(Integer feedId, String fileName, String memberId);
 
 	@Update(""" 
 			UPDATE Feed
 			SET
 				title = #{title},
 				content = #{content},
-				writer = #{writer},
 				location = #{location}
 			WHERE 
 				id = #{id}
