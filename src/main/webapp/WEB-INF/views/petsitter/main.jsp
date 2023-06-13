@@ -51,7 +51,7 @@
 				<c:forEach items="${host }" var="host" end="2">
 					<div class="ui card inblock">
 						<div class="ui slide masked reveal image">
-							<a href="/petsitter/detail"><img src="/img/petplanet1.png" class="visible content"> </a>
+							<a href="/petsitter/detail"><img src="/images/petplanet1.png" class="visible content"> </a>
 						</div>
 						<div class="content">
 							<a class="header">${host.hostName }</a>
