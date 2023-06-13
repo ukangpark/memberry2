@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
 <!DOCTYPE html>
@@ -18,8 +17,8 @@
 
 #addBtn {
 	position: absolute;
-	top: 75%;
-	left: 58%;
+	top: 80%;
+	left: 60%;
 }
 </style>
 </head>
@@ -38,16 +37,16 @@
 							<div class="ui aligned container" id="imgContainer">
 								<c:choose>
 									<c:when test="${host.profile eq null or host.profile eq '' }">
-										<img class="ui medium bordered centered circular image " src="/images/paw.png">
+										<img class="ui medium bordered centered circular image " src="/images/paw.png" id="preview">
 									</c:when>
 									<c:otherwise>
-										<img class="ui medium bordered centered circular image " src="${bucketUrl }/hostProfile/${host.profile }">
+										<img class="ui medium bordered centered circular image " id="preview" src="${bucketUrl }/hostProfile/${host.id }/${host.profile }">
 									</c:otherwise>
 								</c:choose>
 								<label for="file" class="big circular ui icon button" id="addBtn">
 									<i class="large plus icon"></i>
 								</label>
-								<input style="display: none;" class="form-control" type="file" id="file" name="file" accept="image/*" />
+								<input class="form-control d-none" onchange="readURL(this);" type="file" id="file" name="file" accept="image/*" />
 							</div>
 							<div class="field">
 								<label>이름</label>
@@ -115,7 +114,22 @@
 	
 	<my:bottom></my:bottom>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-	<script src="semantic/dist/semantic.min.js"></script>
+	<script src="/js/semantic/semantic.min.js"></script>
+	<script>
+		$('.ui.dropdown').dropdown();
+
+		function readURL(input) {
+			if (input.files && input.files[0]) {
+				var reader = new FileReader();
+				reader.onload = function(e) {
+					document.getElementById('preview').src = e.target.result;
+				};
+				reader.readAsDataURL(input.files[0]);
+			} else {
+				document.getElementById('preview').src = "";
+			}
+		}
+	</script>
 	
 </body>
 </html>

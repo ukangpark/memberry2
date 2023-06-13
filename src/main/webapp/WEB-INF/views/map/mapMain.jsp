@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title> 너와 함께</title>
+<title> 함께 가개</title>
 
 
 <d:top></d:top>
@@ -26,36 +26,44 @@
 	
 	<d:navBar current="mapMain" />
 	
-	<h1>너와 함께</h1>
-<%-- 이거는 왜 안뜨는걸까.. <i class="fa-duotone fa-paw" style="--fa-primary-color: #f9a9a9; --fa-secondary-color: #1f1f1f;"></i> --%>	
+	<h1 style="margin-bottom:30px;">
+	<i class="fa fa-solid fa-paw"></i>
+	함께 가개
+	<i class="fa fa-solid fa-paw"></i>
+	
+	</h1>
 	
 	
-	<button style= "float : right"  class="ui basic button" onclick="location.href='/map/mapMypage'">
+	<!-- <button style= "float : right"  class="ui basic button" onclick="location.href='/map/mapMypage'">
   <i class="icon star"></i>
 	  즐겨찾기
-	</button>
+	</button> -->
 
 	<div id="container">
 		<div id="navbar" class="ui compact vertical labeled icon menu">
-			<a class="item" onclick="searchRest('서울 애견동반식당')">
+			<a class="item" id="restaurant" onclick="searchRest('restaurant','서울 애견동반식당')">
 				<i class="utensils icon"></i>
 				식당 
 			</a>
-			<a class="item" onclick="searchRest('서울 애견카페')">
+			<a class="item" id="cafe" onclick="searchRest('cafe','서울 애견카페')">
 				<i class="coffee icon"></i>
 				카페 
 			</a>
-			<a class="item" onclick="searchRest('서울 동물병원')">
+			<a class="item" id="hospital" onclick="searchRest('hospital','서울 동물병원')">
 				<i class="hospital icon"></i>
 				병원 
 			</a>
-			<a class="item" onclick="searchRest('서울 애견동반호텔')">
+			<a class="item" id="hotel" onclick="searchRest('hotel','서울 애견동반호텔')">
 				<i class="building icon" ></i>
 				호텔
 			</a>
-			<a class="item" onclick="searchRest('애견캠핑장')">
+			<a class="item" id="camping" onclick="searchRest('camping','애견캠핑장')">
 				<i class="paw icon" ></i>
 				캠핑장
+			</a>
+			<a class="item" id="like" onclick="location.href='/map/mapMypage'">
+				<i class="heart icon"></i>
+				찜 목록
 			</a>
 		</div>
 		
@@ -69,7 +77,8 @@
             <div>
                 <form onsubmit="searchPlaces(); return false;">
                     키워드 : <input type="text" value="서울 애견동반식당" id="keyword" size="15"> 
-                    <button type="submit">검색하기</button> 
+                    <button type="button" class="btn btn-primary btn-sm">검색하기</button>
+                   <!--  <button type="submit">검색하기</button>  -->
                 </form>
             </div>
         </div>
@@ -90,8 +99,29 @@ var options = { //지도를 생성할 때 필요한 기본 옵션
 
 var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴 */
 
+//마커를 클릭했을 때 해당 장소의 상세정보를 보여줄 커스텀오버레이입니다
+var placeOverlay = new kakao.maps.CustomOverlay({zIndex:1}), 
+    contentNode = document.createElement('div'), // 커스텀 오버레이의 컨텐츠 엘리먼트 입니다 
+    markers = [], // 마커를 담을 배열입니다
+    currCategory = ''; // 현재 선택된 카테고리를 가지고 있을 변수입니다
+// 커스텀 오버레이의 컨텐츠 노드에 css class를 추가합니다 
+contentNode.className = 'placeinfo_wrap';
+//커스텀 오버레이의 컨텐츠 노드에 mousedown, touchstart 이벤트가 발생했을때
+//지도 객체에 이벤트가 전달되지 않도록 이벤트 핸들러로 kakao.maps.event.preventMap 메소드를 등록합니다 
+addEventHandle(contentNode, 'mousedown', kakao.maps.event.preventMap);
+addEventHandle(contentNode, 'touchstart', kakao.maps.event.preventMap);
+//엘리먼트에 이벤트 핸들러를 등록하는 함수입니다
+function addEventHandle(target, type, callback) {
+    if (target.addEventListener) {
+        target.addEventListener(type, callback);
+    } else {
+        target.attachEvent('on' + type, callback);
+    }
+}
+    // 커스텀 오버레이 컨텐츠를 설정합니다
+placeOverlay.setContent(contentNode); 
 
-//마커를 담을 배열입니다
+    //마커를 담을 배열입니다
 var markers = [];
 
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -120,6 +150,9 @@ function searchPlaces() {
         alert('키워드를 입력해주세요!');
         return false;
     }
+    
+ 	// 커스텀 오버레이를 숨깁니다 
+    placeOverlay.setMap(null);
 
     // 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
     ps.keywordSearch( keyword, placesSearchCB); 
@@ -178,7 +211,7 @@ function displayPlaces(places) {
         // 마커와 검색결과 항목에 mouseover 했을때
         // 해당 장소에 인포윈도우에 장소명을 표시합니다
         // mouseout 했을 때는 인포윈도우를 닫습니다
-        (function(marker, title) {
+        /* (function(marker, title) {
             kakao.maps.event.addListener(marker, 'mouseover', function() {
                 displayInfowindow(marker, title);
             });
@@ -194,7 +227,15 @@ function displayPlaces(places) {
             itemEl.onmouseout =  function () {
                 infowindow.close();
             };
-        })(marker, places[i].place_name);
+        })(marker, places[i].place_name); */
+        
+     	// 마커와 검색결과 항목을 클릭 했을 때
+        // 장소정보를 표출하도록 클릭 이벤트를 등록합니다
+        (function(marker, place) {
+            kakao.maps.event.addListener(marker, 'click', function() {
+                displayPlaceInfo(place);
+            });
+        })(marker, places[i]);
 
         fragment.appendChild(itemEl);
     }
@@ -207,22 +248,47 @@ function displayPlaces(places) {
     map.setBounds(bounds);
 }
 
+//클릭한 마커에 대한 장소 상세정보를 커스텀 오버레이로 표시하는 함수입니다
+function displayPlaceInfo (place) {
+    var content = '<div class="placeinfo">' +
+                    '   <a class="title" href="' + place.place_url + '" target="_blank" title="' + place.place_name + '">' + place.place_name + '</a>';   
+
+    if (place.road_address_name) {
+        content += '    <span title="' + place.road_address_name + '">' + place.road_address_name + '</span>' +
+                    '  <span class="jibun" title="' + place.address_name + '">(지번 : ' + place.address_name + ')</span>';
+    }  else {
+        content += '    <span title="' + place.address_name + '">' + place.address_name + '</span>';
+    }                
+   
+    content += '    <span class="tel">' + place.phone + '</span>' + 
+                '</div>' + 
+                '<div class="after"></div>';
+
+    contentNode.innerHTML = content;
+    placeOverlay.setPosition(new kakao.maps.LatLng(place.y, place.x));
+    placeOverlay.setMap(map);  
+}
+
 // 검색결과 항목을 Element로 반환하는 함수입니다
 function getListItem(index, places) {
 
     var el = document.createElement('li'),
     itemStr = '<span class="markerbg marker_' + (index+1) + '"></span>' +
                 '<div class="info">' +
-                '   <h5>' + places.place_name + '</h5>';
+                '   <h5 id="placeName_'+(index+1)+'">' + places.place_name + 
+                '</h5>' + 
+                '<input type="hidden" id="placeUrl" value="' + places.place_url + '" />';
 
     if (places.road_address_name) {
         itemStr += '    <span>' + places.road_address_name + '</span>' +
-                    '   <span class="jibun gray">' +  places.address_name  + '</span>';
+                    '   <span class="jibun gray" id="placeAddress_'+(index+1)+'">' +  places.address_name  + '</span>';
     } else {
-        itemStr += '    <span>' +  places.address_name  + '</span>'; 
+        itemStr += '    <span id="placeAddress_'+(index+1)+'">' +  places.address_name  + '</span>'; 
     }
                  
-      itemStr += '  <span class="tel">' + places.phone  + '</span>' +
+      itemStr += '  <span class="tel" id="placePhone_'+(index+1)+'">' + places.phone  + '</span>' +
+      '<input type="button"  class="btn btn-outline-danger"  value="찜하기♥" onclick="javascript:addPlace('+(index+1)+')"/>' + 
+      			
                 '</div>';           
 
     el.innerHTML = itemStr;
@@ -260,36 +326,7 @@ function removeMarker() {
     markers = [];
 }
 
-// 검색결과 목록 하단에 페이지번호를 표시는 함수입니다
-/* function displayPagination(pagination) {
-    var paginationEl = document.getElementById('pagination'),
-        fragment = document.createDocumentFragment(),
-        i; 
 
-    // 기존에 추가된 페이지번호를 삭제합니다
-    while (paginationEl.hasChildNodes()) {
-        paginationEl.removeChild (paginationEl.lastChild);
-    }
-
-    for (i=1; i<=pagination.last; i++) {
-        var el = document.createElement('a');
-        el.href = "#";
-        el.innerHTML = i;
-
-        if (i===pagination.current) {
-            el.className = 'on';
-        } else {
-            el.onclick = (function(i) {
-                return function() {
-                    pagination.gotoPage(i);
-                }
-            })(i);
-        }
-
-        fragment.appendChild(el);
-    }
-    paginationEl.appendChild(fragment);
-} */
 
 // 검색결과 목록 또는 마커를 클릭했을 때 호출되는 함수입니다
 // 인포윈도우에 장소명을 표시합니다
@@ -309,14 +346,43 @@ function removeAllChildNods(el) {
 
 
 // 사이드바 버튼 누를때 리스트 뜨게 함수 설정 
-function searchRest(param){
+function searchRest(menuId, param){
+	
+	placeOverlay.setMap(null);
 	
 	// 장소검색 객체를 통해 키워드로 장소검색을 요청
     ps.keywordSearch( param, placesSearchCB); 
     document.getElementById('keyword').value = param;
-    
+        
+    var divElement = document.getElementById("navbar");
+    var anchorTags = divElement.querySelectorAll("a");
+
+    for (var i = 0; i < anchorTags.length; i++) {
+      anchorTags[i].style.backgroundColor = "";
+    }
+    document.getElementById(menuId).style.backgroundColor = "lightgray";
 }
- 
+
+function addPlace(num){
+	var placeName = document.getElementById("placeName_"+num).innerHTML;
+	var placeAddress = document.getElementById("placeAddress_"+num).innerHTML;
+	var placePhone = document.getElementById("placePhone_"+num).innerHTML;
+	var placeUrl = $("#placeUrl").val();
+	
+	$.ajax("/map/addPlace", {
+		method:"post",
+		contentType: "application/json",
+		data: JSON.stringify({
+			"name" : placeName,
+			"address" : placeAddress,
+			"phone" : placePhone,
+			"url" : placeUrl
+		}),
+		success: function(data){
+			alert(data);
+		}
+	})
+}
 	</script>
 	
 

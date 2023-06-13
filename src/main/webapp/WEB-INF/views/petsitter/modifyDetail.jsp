@@ -31,7 +31,7 @@
 						<textarea id="body" type="text" name="body" rows="20">${detail.body }</textarea>
 					</div>
 					<div class="field">
-						<input type="text" name="hostId" value="${param.hostId }">
+						<input type="text" name="hostId" value="${host.id }">
 					</div>
 					<div class="field">
 						<input type="text" name="detailId" value="${detail.id }">
@@ -42,7 +42,7 @@
 			<!-- 삭제 정보 form -->
 			<div class="d-none">
 				<form action="/petsitter/deleteDetail" id="deleteDetailForm">
-					<input type="text" name="hostId" value="${param.hostId }">
+					<input type="text" name="hostId" value="${host.id }">
 				</form>
 			</div>
 

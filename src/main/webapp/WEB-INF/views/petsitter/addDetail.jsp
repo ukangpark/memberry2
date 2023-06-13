@@ -28,16 +28,13 @@
 						<label for="body">소개글</label>
 						<textarea id="body" type="text" name="body" rows="20" placeholder="소개글을 입력해주세요."></textarea>
 					</div>
-					<div class="field">
-						<input type="text" name="hostId" value="${param.hostId }">
-					</div>
 				</form>
 			</div>
 
 			<!-- 버튼 -->
 			<div class="extra content">
 				<div class="ui two buttons">
-					<a href="/petsitter/hostMyPage?id=${param.hostId }" class="ui basic red button">뒤로 돌아가기</a>
+					<a href="/petsitter/hostMyPage" class="ui basic red button">뒤로 돌아가기</a>
 					<button form="addDetailForm" type="submit" class="ui basic green button">집사진 등록하기</button>
 				</div>
 			</div>
@@ -46,7 +43,5 @@
 
 	<my:bottom></my:bottom>
 	<script src="/js/semantic/semantic.min.js"></script>
-
-</style>
 </body>
 </html>

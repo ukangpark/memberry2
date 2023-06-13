@@ -27,6 +27,7 @@
 			<div class="col-12 col-md-8 ">
 				<img id="memberyLogo" src="/images/memberyLogo.png" alt="Membery logo">
 				<h1 style="margin: 0px 0px 50px 0px;">로그인</h1>
+
 				<form method="post">
 					<div class="ui stacked segment">
 						<div class="ui two column very relaxed stackable grid">
