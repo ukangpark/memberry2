@@ -77,7 +77,13 @@ label {
 		<!-- 프로필등록 버튼 -->
 		<div class="inline field">
 			<div class="ui toggle checkbox" id="petCheckbox">
-				<input type="checkbox" tabindex="0" class="hidden">
+				<c:if test="${pet.defaultPetId eq '' || pet.defaultPetId ne pet.id}">
+					<input type="checkbox" name="thumbnail">
+				</c:if>
+				<c:if test="${pet.defaultPetId eq pet.id}">
+					<input type="checkbox" name="thumbnail" checked>
+				</c:if>
+				<!-- navBar연동을 위한 코드 -->
 				<input id="petId" type="text" name="id" value="${pet.id }" readonly style="display: none;">
 				<input id="petPhoto" type="text" name="photo" value="${pet.photo }" readonly style="display: none;">
 				<label>프로필로 등록</label>

@@ -8,7 +8,9 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import org.springframework.stereotype.Component;
 
 import com.example.demo.domain.Member;
+import com.example.demo.domain.Registration;
 import com.example.demo.mapper.MemberMapper;
+import com.example.demo.mapper.MyPetsMapper;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -20,6 +22,9 @@ public class LoginAuthenticationSuccessHandler implements AuthenticationSuccessH
 	
 	@Autowired
 	private MemberMapper mapper;
+	
+	@Autowired
+	private MyPetsMapper myPetsMapper;
 
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,

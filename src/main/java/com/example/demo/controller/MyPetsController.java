@@ -19,8 +19,12 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.domain.Like;
+import com.example.demo.domain.Member;
 import com.example.demo.domain.Registration;
+import com.example.demo.service.MemberService;
 import com.example.demo.service.MyPetsService;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/")
@@ -28,6 +32,9 @@ public class MyPetsController {
 
 	@Autowired
 	private MyPetsService service;
+	
+	@Autowired
+	private MemberService memberService;
 
 	// 나의반려동물 리스트 보기
 	@GetMapping("myPets/petList")
@@ -96,21 +103,21 @@ public class MyPetsController {
 		}
 	}
 
-	// 펫사진 member테이블에 등록
-	@PostMapping("/thumbnail/{id}/{photo}")
+	// 선택한 펫id를 member테이블에 등록
+	@PostMapping("/thumbnail/{id}")
 	@ResponseBody
 	public void profileImage(@PathVariable("id") Integer id,
-						@PathVariable("photo") String photo,
 						Authentication auth,
+						HttpSession session,
 						RedirectAttributes rttr) {
 		
-		String profileImageName = "/"+id+"/"+photo;
-		//System.out.println(profileImageName);
-		boolean result = service.profileImage(profileImageName, auth);
+		//body에 있는 true / false를 꺼내서, true일 땐 아래 코드를, false일 땐 ''를 아래코드에 심어주
+		Map<String, Object> map = R
+		boolean result = service.profileImage(id, auth);
 		
-//		System.out.println(id);
-//		System.out.println(photo);
-//		System.out.println(result.getPhoto());
+		Member member = memberService.get(auth.getName());
+		
+		session.setAttribute("logedInMember", member);
 
 //		ResponseEntity<Map<String, Object>> thumbnailResult  = ResponseEntity
 //					.ok()

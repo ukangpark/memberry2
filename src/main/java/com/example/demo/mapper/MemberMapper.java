@@ -25,9 +25,9 @@ public interface MemberMapper {
 
 
 	@Select("""
-			SELECT *
-			FROM Member
-			WHERE id = #{id}
+			SELECT m.*, CONCAT('/', p.id, '/', p.photo) profileImage
+			FROM Member m LEFT JOIN Pet p ON m.defaultPetId = p.id
+			WHERE m.id = #{id}
 			""")
 	Member selectById(String id);
 

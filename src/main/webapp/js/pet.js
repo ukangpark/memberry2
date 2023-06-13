@@ -1,16 +1,23 @@
 $("#petCheckbox").click(function() {
 	const petId = $("#petId").val();
-	const petPhoto = $("#petPhoto").val();
-	const data = { petId: petId };
-	//const thumbnailSrc = $("#imageByPet").attr("src");
+	const thumbnailSrc = $("#imageByPet").attr("src");
 	//console.log(thumbnailSrc);
-	$.ajax("/thumbnail" + "/" + petId + "/" + petPhoto, {
+
+	console.log($(this).find("input[type=checkbox]")[0].checked);
+	const checked = $(this).find("input[type=checkbox]")[0].checked;
+	const data = { checked : checked };
+
+	$.ajax("/thumbnail" + "/" + petId, {
 		type: "post",
 		contentType: "application/json",
-		data: JSON.stringify(data)
+		data: JSON.stringify(data),
 
-		//success: function(data) {
-			//document.getElementById('nav-image').setAttribute("src", thumbnailSrc);
-		//}
+		success: function(data) {
+			if (checked) {
+				document.getElementById('nav-image').setAttribute("src", thumbnailSrc);
+			} else {
+				document.getElementById('nav-image').setAttribute("src", "/images/paw.png");
+			}
+		}
 	})
 })

@@ -20,8 +20,9 @@ public interface MyPetsMapper {
 	List<Registration> selectAll(String memberId);
 
 	@Select("""
-			SELECT * FROM Pet
-			WHERE id = #{id}
+			SELECT * FROM Pet JOIN Member 
+			ON (Pet.memberId = Member.id)
+			WHERE Pet.id = #{id}
 			""")
 	Registration selectById(Integer id);
 
@@ -68,10 +69,10 @@ public interface MyPetsMapper {
 
 	@Update("""
 			UPDATE Member SET
-				profileImage = #{profileImageName}
+				defaultPetId = #{petId}
 			WHERE id = #{userId};
 			""")
-	Integer updateProfileByMemberId(String profileImageName,String userId);
+	Integer updateProfileByMemberId(Integer petId,String userId);
 
 	
 

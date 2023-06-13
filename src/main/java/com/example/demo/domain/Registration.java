@@ -20,5 +20,7 @@ public class Registration {
 	private String memberId;
 	private Period diff;
 	
+	private Integer defaultPetId;
+	
 
 }
