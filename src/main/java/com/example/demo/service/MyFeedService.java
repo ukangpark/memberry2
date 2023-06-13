@@ -131,7 +131,7 @@ public class MyFeedService {
 
 	public boolean remove(Integer id) {
 
-		commentMapper.deleteByFeedId(id);
+		commentMapper.deleteById(id);
 
 		//좋아요 테이블 지우기
 		likeMapper.deleteByFeedId(id);
@@ -161,6 +161,14 @@ public class MyFeedService {
 	public Feed getPost(Integer feedId) {
 
 		return getPost(feedId, null);
+	}
+
+	public void removeByWriter(String writer) {
+		List<Integer> idList = mapper.selectIdByWriter(writer);
+		
+		for (Integer id : idList) {
+			remove(id);
+		}
 	}
 
 
