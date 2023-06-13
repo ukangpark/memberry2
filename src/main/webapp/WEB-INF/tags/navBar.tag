@@ -37,7 +37,7 @@
 			
 				<sec:authorize access="isAuthenticated()">
 					<c:if test="${logedInMember.profileImage ne null}">
-					<img class="ui tiny image" id="nav-image" src=${bucketUrl }${logedInMember.profileImage }>${logedInMember.nickName } 
+					<img class="ui tiny image" id="nav-image" src="${bucketUrl }/pet${logedInMember.profileImage }">${logedInMember.nickName } 
 					</c:if>
 					<c:if test="${logedInMember.profileImage eq null}">
 					<img class="ui tiny image" id="nav-image" src="/images/paw.png">${logedInMember.nickName } 
