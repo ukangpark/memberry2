@@ -82,6 +82,7 @@ show full columns from Member;
 ALTER TABLE Feed MODIFY writer VARCHAR(12);
 
 SELECT * FROM Member ORDER BY id DESC;
+DELETE FROM Member WHERE name = '어드민';
 
 SET SQL_SAFE_UPDATES = 0;
 
