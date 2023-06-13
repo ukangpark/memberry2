@@ -22,5 +22,7 @@ public class Registration {
 	
 	private Integer defaultPetId;
 	
+	private Boolean checked;
+	
 
 }

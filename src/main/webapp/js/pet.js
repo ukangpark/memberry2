@@ -5,7 +5,7 @@ $("#petCheckbox").click(function() {
 
 	console.log($(this).find("input[type=checkbox]")[0].checked);
 	const checked = $(this).find("input[type=checkbox]")[0].checked;
-	const data = { checked : checked };
+	const data = { "checked" : checked };
 
 	$.ajax("/thumbnail" + "/" + petId, {
 		type: "post",

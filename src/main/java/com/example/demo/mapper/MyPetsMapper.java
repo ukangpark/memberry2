@@ -68,11 +68,20 @@ public interface MyPetsMapper {
 	Registration thumbnailByMemberId(Integer id);
 
 	@Update("""
+			<script>
 			UPDATE Member SET
-				defaultPetId = #{petId}
+			
+				<if test="checked">
+					defaultPetId = #{petId}
+				</if>
+				<if test="not checked">
+					defaultPetId = null
+				</if>
+				
 			WHERE id = #{userId};
+			</script>
 			""")
-	Integer updateProfileByMemberId(Integer petId,String userId);
+	Integer updateProfileByMemberId(Integer petId,String userId, Boolean checked);
 
 	
 

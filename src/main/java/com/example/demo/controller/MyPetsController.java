@@ -1,5 +1,9 @@
 package com.example.demo.controller;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -107,13 +111,23 @@ public class MyPetsController {
 	@PostMapping("/thumbnail/{id}")
 	@ResponseBody
 	public void profileImage(@PathVariable("id") Integer id,
-						Authentication auth,
-						HttpSession session,
-						RedirectAttributes rttr) {
+							@RequestBody Registration reg,
+							Authentication auth,
+							HttpSession session,
+							RedirectAttributes rttr) {
 		
-		//body에 있는 true / false를 꺼내서, true일 땐 아래 코드를, false일 땐 ''를 아래코드에 심어주
-		Map<String, Object> map = R
-		boolean result = service.profileImage(id, auth);
+		boolean result = service.profileImage(id, auth, reg.getChecked());
+		
+		//body에 있는 true / false를 꺼내서, true일 땐 아래 코드를, false일 땐 ''를 아래코드에 심어주기
+		System.out.println(reg.getChecked());
+		boolean checked = reg.getChecked();
+		
+//		if (checked) {
+//			
+//		} else {
+//			
+//		}
+			
 		
 		Member member = memberService.get(auth.getName());
 		

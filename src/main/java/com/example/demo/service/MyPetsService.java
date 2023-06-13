@@ -83,9 +83,9 @@ public class MyPetsService {
 		return cnt == 1;
 	}
 
-	public boolean profileImage(Integer petId, Authentication auth) {
+	public boolean profileImage(Integer petId, Authentication auth, Boolean checked) {
 		
-		int cnt = mapper.updateProfileByMemberId(petId,auth.getName());
+		int cnt = mapper.updateProfileByMemberId(petId,auth.getName(), checked);
 		
 		return cnt == 1;
 				

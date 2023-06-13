@@ -102,10 +102,6 @@
 					<a class="${current eq 'petList' ? 'active' : '' } item" href="/myPets/petList"> 나의반려동물 </a>
 				</sec:authorize>
 
-				<sec:authorize access="isAuthenticated()">
-					<a class="${current eq 'myPage' ? 'active' : '' } item" href="/member/myPage"> 마이페이지 </a>
-				</sec:authorize>
-
 				<sec:authorize access="isAnonymous()">
 					<a class="${current eq 'login' ? 'active' : '' } item" href="/member/login"> 로그인 </a>
 				</sec:authorize>
