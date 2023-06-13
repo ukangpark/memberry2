@@ -88,7 +88,7 @@ $("#checkEmailBtn").click(function(){
 })
 
 // input 연락처에 keyup 이벤트 발생시
-$("#inputPhoneNumberBtn").click(function(){
+$("#inputPhoneNumber").click(function(){
 	checkPhoneNumber = false;
 	$("#availablePhoneNumberMessage").addClass("d-none");
 	$("#notAvailablePhoneNumberMessage").addClass("d-none");
