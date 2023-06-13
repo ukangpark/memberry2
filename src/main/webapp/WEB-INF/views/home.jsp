@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <!DOCTYPE html>
 <html>
@@ -13,14 +14,15 @@
 
 <style>
 
-
-
  #header {
-	text-align: center;
-	margin: 40px 0;
 	display: flex;
 	justify-content: center;
+	
 } 
+
+#memberyLogo {
+	width: 350px;
+}
 
 
 .wrapper {
@@ -82,11 +84,11 @@
 	</div>
 
 	<div id="header">
-		<h2>Membery</h2>
+		<img id="memberyLogo" src="/images/memberyLogo.png" alt="Membery logo">
 	</div> 
 	
 
-	<div class="wrapper" style="margin-top: 50px;">
+	<div class="wrapper">
 
 		<div class="ui center aligned container" id="container" style="z-index: 1">
 			<div class="ui link cards">
@@ -110,6 +112,7 @@
 								</ul>
 							</a>
 						</div>
+						
 						<div class="content">
 							<div class="header">${feed.title}</div>
 							<div class="meta">
@@ -136,9 +139,13 @@
 							</span> likes 
 							
 								<!-- Button trigger modal -->
-								<button type="button" class="btn btn-secondary-link" data-bs-toggle="modal" data-bs-target="#commentModal">
-									<i class="fa-solid fa-comment"></i>${feed.commentCount }
-								</button> <i class="paw icon"></i>
+								<button type="button" class="btn btn-secondary-link btnTriggerModal position-relative" id="commentIcon" data-bs-toggle="modal" data-bs-target="#commentModal" data-id="${feed.id }">
+									<i class="fa-solid fa-comment"></i>
+									<span id="commentCnt" class="position-absolute top-35 start-70 translate-middle badge rounded-pill bg-secondary" >
+									${feed.commentCount }</span>
+								</button>
+								
+								 <i class="paw icon"></i>
 
 
 							</span> <span class="right floated">${feed.inserted}</span>
@@ -158,20 +165,17 @@
 		<div class="modal-dialog">
 			<div class="modal-content" style="position: relative; z-index: 10">
 				<div class="modal-header">
-					<h1 class="modal-title fs-5" id="exampleModalLabel">댓글</h1>
+					<h1 class="modal-title fs-5" id="exampleModalLabel"><i class="fa-solid fa-comments"></i> 댓글</h1>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
-					<h3>
-						<i class="fa-solid fa-comments"></i>
-						
-					</h3>
-					<sec:authorize access="isAuthenticated()">
+					
+					 <sec:authorize access="isAuthenticated()">
 						<div class="mb-3" id="addCommentContainer">
 						
 							<div class="input-group">
 								<div class="form-floating">
-									<textarea id="commentTextArea" class="form-control" style="height: 97px" placeholder="댓글을 남겨주세요"></textarea>
+									<textarea id="commentTextArea" class="form-control" style="height: 60px" placeholder="댓글을 남겨주세요"></textarea>
 									<label for="floatingTextArea">댓글을 남겨주세요</label>
 								</div>
 								<button id="sendCommentBtn" class="btn btn-outline-primary">
@@ -180,11 +184,17 @@
 							</div>
 						</div>
 					</sec:authorize>
-					<div id="updateCommentContainer">
-						<h6>수정</h6>
-						<input type="hidden" id="commentUpdateInput"/>
-						<textarea id="commentUpdateTextArea" ></textarea>
-						<button id="updateCommentBtn">수정</button>
+					<div id="updateCommentContainer" class=d-none>
+						<div class="input-group">
+							<div class="form-floating">
+							<input type="hidden" id="commentUpdateIdInput"/>
+							<textarea id="commentUpdateTextArea"  class="form-control" style="height: 50px"></textarea>		
+							<label for="floatingTextArea">댓글을 수정하세요</label>
+							</div>
+							<button id="updateCommentBtn" class="btn btn-outline-secondary">
+								<i class="fa-regular fa-pen-to-square"></i>
+							</button>
+						</div>
 					</div>
 
 					<ul class="list-group" id="commentListContainer">
@@ -200,57 +210,13 @@
 		</div>
 	</div>
 
-<!-- 댓글 삭제 모달 -->
-<div class="modal fade" id="deleteCommentConfirmModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">댓글 삭제 확인</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-       삭제하시겠습니까?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-        <button id="deleteCommentModalButton" type="submit" class="btn btn-danger">삭제</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- 댓글 수정 모달 -->
-<div class="modal fade" id="commentUpdateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" >댓글 수정</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-      	<div id="updateCommentContaier">
-      		<input type="hidden" id="commentUpdateIdInput" />
-      		<textarea id="commentUpdateTextArea" class="form-control"></textarea>
-      	</div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-        <button type="button" class="btn btn-primary">수정</button>
-      </div>
-    </div>
-  </div>
-</div>
 
 
 	 <script src="/js/home.js"></script>  
-	<!--  <script src="/js/comment.js"></script> -->
 	 
-
-
 	<my:bottom></my:bottom>
 
-
-
 	<script src="/js/feed/like.js"></script>
+	
 </body>
 </html>

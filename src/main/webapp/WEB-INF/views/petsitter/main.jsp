@@ -12,9 +12,12 @@
 <my:top></my:top>
 
 <style>
+
 #img {
-	margin: 0px 0px 0px 0px;
+	width: 600px;
+	margin: 50px 0px 0px 0px;
 }
+
 
 #cards {
 	margin: 0px 0px 0px 90px;
@@ -35,7 +38,7 @@
 
 	<div class="ui center aligned container" id="container">
 
-		<img src="/img/MemberyLogo.png" alt="" id="img" />
+		<img src="/images/memberyLogo.png" alt="" id="img" />
 		
 		<div id="button">
 		<button class="ui right labeled icon button" onclick="location.href='/petsitter/list'">

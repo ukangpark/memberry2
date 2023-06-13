@@ -1,5 +1,6 @@
 package com.example.demo.domain;
 
+import java.time.LocalDate;
 import java.util.*;
 
 import lombok.*;
@@ -7,6 +8,7 @@ import lombok.*;
 public class Calendar {
 	private Integer id;
 	private String title;
-	private Date start;
-	private Date end;
+	private LocalDate start;
+	private LocalDate end;
+	
 }

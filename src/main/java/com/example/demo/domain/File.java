@@ -7,4 +7,5 @@ public class File {
 	private Integer id;
 	private Integer feedId;
 	private String fileName;
+	private String memberId;
 }

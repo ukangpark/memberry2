@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.*;
 import org.springframework.security.crypto.password.*;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 import jakarta.annotation.*;
 import jakarta.servlet.*;
@@ -32,6 +33,8 @@ public class customConfig {
 	@Autowired
 	private ServletContext application;
 	
+	@Autowired
+	private AuthenticationSuccessHandler loginSuccessHandler;
 	
 	@PostConstruct
 	public void init( ) {
@@ -47,7 +50,7 @@ public class customConfig {
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http.csrf().disable(); 
 		http.authorizeHttpRequests().anyRequest().permitAll();
-		http.formLogin().loginPage("/member/login");
+		http.formLogin().loginPage("/member/login").successHandler(loginSuccessHandler);
 		http.logout().logoutUrl("/member/logout");
 		return http.build();
 	}

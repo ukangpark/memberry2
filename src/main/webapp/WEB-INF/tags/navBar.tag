@@ -16,7 +16,13 @@
 	height: 70px;
 	width: 70px;
 }
+
 #nav-container {
+	position: relative;
+	z-index: 100;
+}
+
+.up {
 	position: relative;
 	z-index: 100;
 }
@@ -28,9 +34,20 @@
 	<div class="ui position-fixed top-0 end-0">
 		<div class="ui dropdown" id="navBar">
 			<h4 id="profile">
-
-				<img class="ui tiny image" src="/images/genieLoki.jpeg">로키맘
-
+			
+				<sec:authorize access="isAuthenticated()">
+					<c:if test="${logedInMember.profileImage ne null}">
+					<img class="ui tiny image" id="nav-image" src=${bucketUrl }${logedInMember.profileImage }>${logedInMember.nickName } 
+					</c:if>
+					<c:if test="${logedInMember.profileImage eq null}">
+					<img class="ui tiny image" id="nav-image" src="/images/paw.png">${logedInMember.nickName } 
+					</c:if>
+					
+				</sec:authorize>
+				<sec:authorize access="not isAuthenticated()">
+					<img class="ui tiny image" id="nav-image" src="/images/paw.png">default 별명 
+				</sec:authorize>					
+					
 			</h4>
 			<div class="ui vertical menu">
 				<div class="item">
@@ -39,7 +56,7 @@
 					</div>
 				</div>
 
-				<a class="${current eq 'home' ? 'active' : '' } item" href="/home"> 홈피드 </a>
+				<a class="${current eq 'home' ? 'active' : '' } item" href="/home"> 홈피드</a>
 
 
 				<sec:authorize access="isAuthenticated()">
@@ -89,10 +106,6 @@
 
 				<sec:authorize access="isAuthenticated()">
 					<a class="${current eq 'petList' ? 'active' : '' } item" href="/myPets/petList"> 나의반려동물 </a>
-				</sec:authorize>
-
-				<sec:authorize access="isAuthenticated()">
-					<a class="${current eq 'myPage' ? 'active' : '' } item" href="/member/myPage"> 마이페이지 </a>
 				</sec:authorize>
 
 				<sec:authorize access="isAnonymous()">
