@@ -4,9 +4,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
 		// Tool Bar 목록 document : https://fullcalendar.io/docs/toolbar
 		headerToolbar: {
-			left: 'prevYear,prev,next,nextYear today',
+
+			left: 'prevYear,prev, today',
 			center: 'title',
-			right: 'dayGridMonth,dayGridWeek,dayGridDay'
+			right: 'next, nextYear'
+
 		},
 
 		 initialView: 'dayGridMonth', // 초기 로드 될때 보이는 캘린더 화면(기본 설정: 달)
@@ -16,6 +18,9 @@ document.addEventListener('DOMContentLoaded', function() {
         nowIndicator: true, // 현재 시간 마크
         dayMaxEvents: true, // 이벤트가 오버되면 높이 제한 (+ 몇 개식으로 표현)
         locale: 'ko', // 한국어 설정
+
+        fixedWeekCount: false,
+
         eventAdd: function(obj) { // 이벤트가 추가되면 발생하는 이벤트
            console.log(obj);
         },
@@ -32,7 +37,9 @@ document.addEventListener('DOMContentLoaded', function() {
               title: title,
               start: arg.start,
               end: arg.end,
+
               allDay: arg.allDay
+
             })
           }
           calendar.unselect()
@@ -48,6 +55,35 @@ document.addEventListener('DOMContentLoaded', function() {
 		}
 	});
 
+	var arr = getCalendar();
+	$.each(arr, function(index, item) {
+		calendar.addEvent(item);
+	});
 	calendar.render();
 });
+function getCalendar() {
+	var arr = [{title: 'eve1', start:'ssss'}, {title: 'eve2', start:'123123'}];
+	$.ajax({
+		contentType: "application/json",
+		dataType : "json",
+		url: "calendar/getAll",
+		type: "post",
+		async: false, 
+		success: function(resp) {
+			arr = resp;
+		},
+		error: function(){
+	 		alert("에러");
+ 		}	
+ 	});
+ return arr;
+}
+//$("#btnAddTest").click(function(){
+ //var arr = getCalendarDataInDB();
+ //$.each(arr, function(index, item){
+  //calendar.addEvent( item );
+ //});
+ //calendar.render();
+//});
+
 

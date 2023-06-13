@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+import org.springframework.security.core.Authentication;
 
 import com.example.demo.domain.Registration;
 
@@ -19,8 +20,9 @@ public interface MyPetsMapper {
 	List<Registration> selectAll(String memberId);
 
 	@Select("""
-			SELECT * FROM Pet
-			WHERE id = #{id}
+			SELECT * FROM Pet JOIN Member 
+			ON (Pet.memberId = Member.id)
+			WHERE Pet.id = #{id}
 			""")
 	Registration selectById(Integer id);
 
@@ -54,10 +56,34 @@ public interface MyPetsMapper {
 	Integer deleteById(Integer id);
 
 	@Select("""
-			SELECT Photo FROM Pet
+			SELECT photo FROM Pet
 			WHERE id = #{id}
 			""")
 	List<String> selectPhotoById(Integer id);
+
+	@Select("""
+			SELECT * FROM Pet
+			WHERE id = #{id}
+			""")
+	Registration thumbnailByMemberId(Integer id);
+
+	@Update("""
+			<script>
+			UPDATE Member SET
+			
+				<if test="checked">
+					defaultPetId = #{petId}
+				</if>
+				<if test="not checked">
+					defaultPetId = null
+				</if>
+				
+			WHERE id = #{userId};
+			</script>
+			""")
+	Integer updateProfileByMemberId(Integer petId,String userId, Boolean checked);
+
+	
 
 
 

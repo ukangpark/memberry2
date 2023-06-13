@@ -3,6 +3,7 @@ package com.example.demo.mapper;
 import java.util.*;
 
 import org.apache.ibatis.annotations.*;
+import org.springframework.security.core.*;
 
 import com.example.demo.domain.*;
 
@@ -11,9 +12,10 @@ public interface MyFeedMapper {
 	
 	@Select("""
 			SELECT feedId, fileName FROM File
+			WHERE memberId = #{memberId}
 			GROUP BY FeedId ORDER BY id DESC
 			""")
-	List<File> selectAll();
+	List<File> selectAll(String memberId);
 
 	@Insert("""
 			INSERT INTO Feed (title, content, writer, location)
@@ -42,10 +44,10 @@ public interface MyFeedMapper {
 	Feed selectById(Integer id);
 	
 	@Insert("""
-			INSERT INTO File (feedId, fileName)
-			VALUES (#{feedId}, #{fileName})
+			INSERT INTO File (feedId, fileName, memberId)
+			VALUES (#{feedId}, #{fileName}, #{memberId})
 			""")
-	Integer insertFileName(Integer feedId, String fileName);
+	Integer insertFileName(Integer feedId, String fileName, String memberId);
 
 	@Update(""" 
 			UPDATE Feed
@@ -83,6 +85,13 @@ public interface MyFeedMapper {
 				AND fileName = #{fileName}
 			""")
 	void deleteFileNameByFeedIdAndFileName(Integer feedId, String fileName);
+
+	@Select("""
+			SELECT id 
+			FROM Feed
+			WHERE writer = #{writer}
+			""")
+	List<Integer> selectIdByWriter(String writer);
 	
 	
 

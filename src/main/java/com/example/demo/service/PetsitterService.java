@@ -214,7 +214,9 @@ public class PetsitterService {
 				.acl(ObjectCannedACL.PUBLIC_READ).build();
 		s3.putObject(objectRequestCover, RequestBody.fromInputStream(cover.getInputStream(), cover.getSize()));
 		// 대표 사진 테이블 추가
+
 //		petsitterMapper.insertCover(detail.getId(), cover.getOriginalFilename());
+
 
 		// 상세페이지 집사진 추가
 		for (MultipartFile housePhoto : housePhotos) {

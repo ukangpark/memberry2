@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -68,6 +69,12 @@
 	<div class="back" style="background-color: #EEEEEE">
 		<form class="wrapper" method="post" enctype="multipart/form-data" id="addForm">
 
+		<!--  로그인 id 불러오기 -->
+		<div>
+			<input type="text" name="memberId" value="${authentication.getName() }" style="display: none">
+		</div>
+
+
 			<!-- 이미지 파일 업로드 -->
 			<div id="add">
 				<div class="" id="imgContainer">
@@ -94,14 +101,15 @@
 					<textarea placeholder="content" name="content">${feed.content }</textarea>
 					<div class="ui pointing red basic label">내용을 입력해 주세요!</div>
 
-					<div class="ui divider"></div>
+					<%--<div class="ui divider"></div>
 
+					 <!-- 로그인한 Id 정보 가져오기 -->
 					<div class="inline field">
-						<input placeholder="username" type="text" name="writer" value="${feed.writer }" />
+						<input placeholder="username" type="text" name="writer" value="<sec:authentication property="name"/>" readonly />
 						<div class="ui left pointing label">
-							이름을 입력해 주세요!
+							<!-- 이름을 입력해 주세요! -->
 						</div>
-					</div>
+					</div> --%>
 
 			 <div class="ui divider"></div>
 

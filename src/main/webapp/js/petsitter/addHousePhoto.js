@@ -5,7 +5,7 @@
 			console.log(node);
 			document.getElementById("addDetailForm").appendChild(clone);
 		};
-		
+
 		function readURL(input) {
 			if (input.files && input.files[0]) {
 				var reader = new FileReader();
@@ -24,6 +24,7 @@
 				    var attZone = document.getElementById(imgContainer);
 				    var btnAtt = document.getElementById(housePhoto)
 
+
 				    var btnAtt = document.getElementById(housePhoto)
 
 				    var housePhotos = document.getElementById(housePhoto)
@@ -41,6 +42,7 @@
 				    var chkClass = 'ui button icon red';
 				  
 				    btnAtt.onchange = function(e){
+
 
 				    btnAtt.onchange = function(e){
 
@@ -125,6 +127,7 @@
 				          dt.items.add(file);
 				        }
 				        btnAtt.files = dt.files;
+
 
 				        btnAtt.files = dt.files;
 
