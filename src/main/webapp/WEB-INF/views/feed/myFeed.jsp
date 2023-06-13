@@ -48,11 +48,13 @@
 <body>
 
 	<my:navBar current="myFeed"></my:navBar>
-	
-	<h1>My Feed</h1>
+	<div style="margin-botton: 5px"></div>
+	<div class="mb-5">
+	<h1 style="text-align: center;">My Feed</h1>
+	</div>
 	
 		<!-- 프로필 이미지 -->
-		<div id="upper" class="ui aligned container" id="imgContainer">
+		<div id="upper" class="ui aligned container mb-5" id="imgContainer">
 			<button class="massive ui basic button" style="border: 2px solid #E2E2E2; border-radius: 0.5rem; margin-right:70px;">
 				  <i class="fa-solid fa-user"></i>
 				  팔로워

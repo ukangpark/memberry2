@@ -3,6 +3,7 @@ package com.example.demo.mapper;
 import java.util.*;
 
 import org.apache.ibatis.annotations.*;
+import org.springframework.security.core.*;
 
 import com.example.demo.domain.*;
 
@@ -53,6 +54,7 @@ public interface MyFeedMapper {
 			SET
 				title = #{title},
 				content = #{content},
+				writer = #{writer},
 				location = #{location}
 			WHERE 
 				id = #{id}
@@ -83,6 +85,13 @@ public interface MyFeedMapper {
 				AND fileName = #{fileName}
 			""")
 	void deleteFileNameByFeedIdAndFileName(Integer feedId, String fileName);
+
+	@Select("""
+			SELECT id 
+			FROM Feed
+			WHERE writer = #{writer}
+			""")
+	List<Integer> selectIdByWriter(String writer);
 	
 	
 

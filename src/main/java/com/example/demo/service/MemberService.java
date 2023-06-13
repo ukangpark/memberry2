@@ -36,6 +36,9 @@ public class MemberService {
 	private MemberMapper mapper;
 	
 	@Autowired
+	private MyFeedService myFeedService;
+	
+	@Autowired
 	private FeedLikeMapper likeMapper;
 	
 	@Autowired
@@ -68,9 +71,13 @@ public class MemberService {
 		if(passwordEncoder.matches(member.getPassword(), eachMemberId.getPassword())) {
 			// 암호가 같으면?
 			
+			// 이 회원이 작성한 게시물 row 삭제
+			myFeedService.removeByWriter(member.getId());
+			
 			//회원이 작성한 댓글 삭제
 			commentMapper.deleteByMemberID(member.getId());
 			
+			// Member 테이블 삭제
 			cnt = mapper.deleteById(member.getId());			
 		
 			// 이 회원이 좋아요한 레코드 삭제
