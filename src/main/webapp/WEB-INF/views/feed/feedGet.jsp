@@ -173,46 +173,79 @@
 				</div> --%>
 				
 				<div id="rightContainer" class="d-flex">
-					<div id="content">
-						<!-- 댓글 기능 -->
-						<!-- <div id="commentcontainer"> -->
-								<div id="commentTitle"><h3><i class="fa-solid fa-comments"></i> 댓글</h3></div>
-								<br />
-								<c:if test="${feed.commentCount > 0 }">
-									<ul class="list-group" id="commentListContainer"></ul>
-								</c:if>
-								<c:if test="${feed.commentCount == 0 }">
-									<div><h6>댓글이 없습니다.</h6></div>
-								</c:if>
-									
-								
-								<sec:authorize access="isAuthenticated()">
-									<div class="mb-3" id="addCommentContainer">
-			
-										<div class="input-group">
-											<div class="form-floating">
-												<textarea id="commentTextArea" class="form-control"
-													style="height: 60px" placeholder="댓글을 남겨주세요"></textarea>
-												<label for="floatingTextArea">댓글을 남겨주세요</label>
-											</div>
-											<button id="sendCommentBtn" class="btn btn-outline-secondary">
-												<i class="fa-regular fa-paper-plane"></i>
-											</button>
-										</div>
-									</div>
-								</sec:authorize>
-							<!-- </div> -->
-					
-						<!-- text content-->
-						<!-- <div class="textContent">	 -->		
-							<div class="ui segment" style="font-weight: 700;">제목 : ${feed.title }</div>
-							<div class="ui segment" style="font-weight: 700;">본문 : ${feed.content }</div>
-							<div class="ui segment" style="font-weight: 700;">작성자 : ${feed.writer }</div>
-							<div class="ui segment" style="font-weight: 700;">장소 태그 : ${feed.location }</div>
-						<!-- </div> -->
+				<div class="ui card" id="my-card">
+					<!-- 프로필사진 + 닉네임 -->
+					<div class="content"">
+						<div id="inserted" class="right floated meta">${feed.inserted }</div>
+						<!-- 프로필 이미지 + 닉네임 -->
+						<c:if test="${logedInMember.profileImage ne null}">
+							<img class="ui avatar image" id="profilImage" src="${bucketUrl }/pet${logedInMember.profileImage }">${logedInMember.nickName } 
+						</c:if>
+						<c:if test="${logedInMember.profileImage eq null}">
+							<img class="ui avatar image" id="profilImage" src="/images/paw.png">${logedInMember.nickName } 
+						</c:if>
 					</div>
-					
-					<!-- 수정/삭제 버튼 드랍다운 -->
+
+				<!-- text content-->
+				<!-- <div class="textContent">	 -->
+				<div class="ui segment" style="font-weight: 700;">제목 : ${feed.title }</div>
+				<div class="ui segment" style="font-weight: 700;">본문 : ${feed.content }</div>
+				<div class="ui segment" style="font-weight: 700;">장소 태그 : ${feed.location }</div>
+				<!-- </div> -->
+				
+				<!-- 댓글 기능 -->
+				<!-- <div id="commentcontainer"> -->
+				<div id="commentTitle" class="content">
+					<h3>
+						<i class="fa-solid fa-comments"></i> 댓글
+					</h3>
+				</div>
+				<br />
+				<c:if test="${feed.commentCount > 0 }">
+					<ul class="list-group" id="commentListContainer"></ul>
+				</c:if>
+				<c:if test="${feed.commentCount == 0 }">
+					<div>
+						<h6>댓글이 없습니다.</h6>
+					</div>
+				</c:if>
+
+				
+				<div class="content">
+					<!-- 좋아요 기능 -->
+					<span class="likeIcon" data-feed-id="${feed.id }"> 
+						<c:if test="${feed.liked }">
+							<img src="/images/bone.png">
+						</c:if> <c:if test="${not feed.liked }">
+							<img src="/images/olbone.png">
+						</c:if>
+					</span> <br />
+					<!-- 좋아요 숫자 -->
+					<span class="likeNumber" style="font-weight: 300; font-size: medium;">
+						${feed.likeCount }명이 ${logedInMember.nickName }님의 글을 좋아합니다.
+					</span> 
+				</div>
+				
+
+				<sec:authorize access="isAuthenticated()">
+					<div class="mb-3" id="addCommentContainer">
+
+						<div class="input-group">
+							<div class="form-floating">
+								<textarea id="commentTextArea" class="form-control" style="height: 60px" placeholder="댓글을 남겨주세요"></textarea>
+								<label for="floatingTextArea">댓글을 남겨주세요</label>
+							</div>
+							<button id="sendCommentBtn" class="btn btn-outline-secondary">
+								<i class="fa-regular fa-paper-plane"></i>
+							</button>
+						</div>
+					</div>
+				</sec:authorize>
+				<!-- </div> -->
+				
+			</div>
+
+			<!-- 수정/삭제 버튼 드랍다운 -->
 						<sec:authorize access="isAuthenticated()">
 							<sec:authentication property="name" var="userId" /> 
 								<c:if test="${userId eq feed.writer }">

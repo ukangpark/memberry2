@@ -54,7 +54,6 @@ public interface MyFeedMapper {
 			SET
 				title = #{title},
 				content = #{content},
-				writer = #{writer},
 				location = #{location}
 			WHERE 
 				id = #{id}

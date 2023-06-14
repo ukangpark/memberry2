@@ -36,6 +36,7 @@
 		
 		#imgContainer {
 			position: relative;
+			
 		}
 		
 		#addBtn {
@@ -46,7 +47,7 @@
 		}
 		
 		#add {
-			flex-grow: 2;
+			
 		} 
 		
 		#content {
@@ -55,6 +56,9 @@
 			margin-left: 10rem;
 		}
 		
+		#previewCircle {
+			
+		}
 		
 	</style>
 <body>
@@ -74,16 +78,52 @@
 			<input type="text" name="memberId" value="${authentication.getName() }" style="display: none">
 		</div>
 
+<!-- 			<!-- 이미지 파일 업로드 -->
+			
+				<div class="" id="imgContainer">
+					<div id="imagePreview">
+						<div id="previewCircle" class="ui centered medium bordered circular image">
+						<img class="preview" >
+						</div>
+						<div class="defaultImage">	
+						<img class="ui centered medium bordered circular image" src="/images/투명발바닥.png">
+						</div> 
+					</div>
+					
+					<label for="fileInput" class="big circular ui icon button" id="addBtn">
+					<i class="large plus icon"></i></label> 
+					<input multiple class="form-control" type="file" id="fileInput" name="files" accept="image/*" />
+					<h3 style="text-align: center">사진을 등록해 보세요!</h3>
+				</div>
+			
+			<br /> -->
 
+
+		<%-- 
 			<!-- 이미지 파일 업로드 -->
 			<div id="add">
 				<div class="" id="imgContainer">
-					<img class="ui centered medium bordered circular image" src="/images/투명발바닥.png"> <label for="fileInput" class="big circular ui icon button" id="addBtn"><i class="large plus icon"></i></label> <input style="display: none" class="form-control" type="file" id="fileInput" name="files" accept="image/*" />
+					<div id="imagePreview">
+						<div id="previewCircle" class="ui centered medium bordered circular image">
+						<img class="preview" >
+						</div>
+						<div class="defaultImage">	
+						<img class="ui centered medium bordered circular image" src="/images/투명발바닥.png">
+						</div> 
+					</div>
+					
+					<label for="fileInput" class="big circular ui icon button" id="addBtn">
+					<i class="large plus icon"></i></label> 
+					<input multiple class="form-control" type="file" id="fileInput" name="files" accept="image/*" />
 					<h3 style="text-align: center">사진을 등록해 보세요!</h3>
 				</div>
 			</div>
 			<br />
-
+			
+			<!-- <div>
+			사진을 추가해보세요! <br /> <input type="file" multiple name="files" accept="image/*" />
+			</div> -->
+		--%>
 
 			<!-- text content -->
 			<div id="content">
@@ -122,5 +162,42 @@
 
 	<my:bottom></my:bottom>
 
+	<script>
+		/* 엔터키 치면 전송되는 것 방지 */
+		$('input[type="text"]').keydown(function() {
+			if (event.keyCode == 13) {
+				event.preventDefault();
+			}
+			;
+
+		})
+	
+		/* 첨부파일 이미지 변경 */
+		const fileInput = document.getElementById("fileInput");
+		const previewContainer = document.getElementById("imagePreview");
+		const previewImage = previewContainer.querySelector(".preview");
+		const previewDefaultImage = previewContainer
+				.querySelector(".defaultImage");
+
+		fileInput.addEventListener("change", function() {
+			const file = this.files[0];
+			//console.log(file);
+
+			if (file) {
+				const reader = new FileReader();
+
+				previewDefaultImage.style.display = "none";
+				previewImage.style.display = "block";
+
+				reader.addEventListener("load", function() {
+					previewImage.setAttribute("src", this.result);
+				});
+
+				reader.readAsDataURL(file);
+			}
+
+		})
+		
+	</script>
 </body>
 </html>
