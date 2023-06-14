@@ -137,6 +137,8 @@ public class PetsitterController {
 
 		return "redirect:/petsitter/main";
 	}
+	
+	
 
 	@GetMapping("addDetail")
 	@PreAuthorize("isAuthenticated()")
