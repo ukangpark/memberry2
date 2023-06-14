@@ -32,7 +32,7 @@
 
 .wrapper {
 	display: flex;
-	justify-content: space-evenly;
+	justify-content: space-around;
 	align-items: center;
 	min-height: 100vh;
 	background-color: #EEEEEE;
@@ -42,20 +42,21 @@
 	position: relative;
 }
 
-.leftContainer {
-	display: flex;
-}
-
 .bx-wrapper {
 	margin-left: 1.2rem;
 }
 
-#textContent {
+#textContentt {
 	/* flex-grow: 2;  */
 	margin-right: 10rem;
 	margin-left: 10rem;
 }
 
+#drop {
+	/* flex-grow: 0.5;  */
+	/* position: absolute;  */
+	
+}
 
 #my-card {
 	width: 100%;
@@ -91,7 +92,8 @@
 	<my:navBar />
 
 	<!-- toast 알람 -->
-	<div class="toast-container position-fixed  top-0 start-50 translate-middle-x p-3">
+	<div
+		class="toast-container position-fixed  top-0 start-50 translate-middle-x p-3">
 		<div id="liveToast" class="toast" role="alert" aria-live="assertive"
 			aria-atomic="true">
 			<div class="d-flex">
@@ -110,9 +112,9 @@
 
 	<div class="wrapper">
 
-		<!-- <div id="container" > -->
+		<div class="d-flex">
 		
-<%-- 			<!-- card -->
+			<!-- card -->
 			<div class="ui card" id="my-card">
 				<div class="content"">
 					<div id="inserted" class="right floated meta">${feed.inserted }</div>
@@ -128,10 +130,11 @@
 					<div class="right floated meta">
 						<img class="ui avatar image" src="/images/scrap.png">
 					</div>
-				</div> --%>
+				</div>
 
 				<!-- 이미지 파일 출력 -->
-				<div id="imageBox" > <!-- class="content" -->
+				<div class="content">
+					<br />
 					<ul class="bxslider">
 						<c:forEach items="${feed.fileName }" var="fileName">
 							<li><img class="ui medium rounded imager"
@@ -140,7 +143,7 @@
 					</ul>
 				</div>
 
-<%-- 				<!-- 좋아요, 댓글 콘텐츠 -->
+				<!-- 좋아요, 댓글 콘텐츠 -->
 				<div class="content">
 					<!-- 좋아요 기능 -->
 					<span class="likeIcon" data-feed-id="${feed.id }"> 
@@ -170,114 +173,48 @@
 							<input size=42 type="text" placeholder="Add Comment..."><imgsrc="/images/comment.png">
 						</div>
 					</div>
-				</div> --%>
-				
-				<div id="rightContainer" class="d-flex">
-				<div class="ui card" id="my-card">
-					<!-- 프로필사진 + 닉네임 -->
-					<div class="content"">
-						<div id="inserted" class="right floated meta">${feed.inserted }</div>
-						<!-- 프로필 이미지 + 닉네임 -->
-						<c:if test="${logedInMember.profileImage ne null}">
-							<img class="ui avatar image" id="profilImage" src="${bucketUrl }/pet${logedInMember.profileImage }">${logedInMember.nickName } 
-						</c:if>
-						<c:if test="${logedInMember.profileImage eq null}">
-							<img class="ui avatar image" id="profilImage" src="/images/paw.png">${logedInMember.nickName } 
-						</c:if>
-					</div>
+				</div>
 
-				<!-- text content-->
-				<!-- <div class="textContent">	 -->
+
+				<!-- 댓글 기능 -->
+				<div id="commentcontainer">
+						<div id="commentTitle"><h3><i class="fa-solid fa-comments"></i> 댓글</h3></div>
+						<br />
+						<c:if test="${feed.commentCount > 0 }">
+							<ul class="list-group" id="commentListContainer"></ul>
+						</c:if>
+						<c:if test="${feed.commentCount == 0 }">
+							<div><h6>댓글이 없습니다.</h6></div>
+						</c:if>
+							
+						
+						<sec:authorize access="isAuthenticated()">
+							<div class="mb-3" id="addCommentContainer">
+	
+								<div class="input-group">
+									<div class="form-floating">
+										<textarea id="commentTextArea" class="form-control"
+											style="height: 60px" placeholder="댓글을 남겨주세요"></textarea>
+										<label for="floatingTextArea">댓글을 남겨주세요</label>
+									</div>
+									<button id="sendCommentBtn" class="btn btn-outline-secondary">
+										<i class="fa-regular fa-paper-plane"></i>
+									</button>
+								</div>
+							</div>
+						</sec:authorize>
+				</div>
+			</div>
+			
+			<!-- text content-->
+			<div class="textContent">			
 				<div class="ui segment" style="font-weight: 700;">제목 : ${feed.title }</div>
 				<div class="ui segment" style="font-weight: 700;">본문 : ${feed.content }</div>
+				<div class="ui segment" style="font-weight: 700;">작성자 : ${feed.writer }</div>
 				<div class="ui segment" style="font-weight: 700;">장소 태그 : ${feed.location }</div>
-				<!-- </div> -->
-				
-				<!-- 댓글 기능 -->
-				<!-- <div id="commentcontainer"> -->
-				<div id="commentTitle" class="content">
-					<h3>
-						<i class="fa-solid fa-comments"></i> 댓글
-					</h3>
-				</div>
-				<br />
-				<c:if test="${feed.commentCount > 0 }">
-					<ul class="list-group" id="commentListContainer"></ul>
-				</c:if>
-				<c:if test="${feed.commentCount == 0 }">
-					<div>
-						<h6>댓글이 없습니다.</h6>
-					</div>
-				</c:if>
-
-				
-				<div class="content">
-					<!-- 좋아요 기능 -->
-					<span class="likeIcon" data-feed-id="${feed.id }"> 
-						<c:if test="${feed.liked }">
-							<img src="/images/bone.png">
-						</c:if> <c:if test="${not feed.liked }">
-							<img src="/images/olbone.png">
-						</c:if>
-					</span> <br />
-					<!-- 좋아요 숫자 -->
-					<span class="likeNumber" style="font-weight: 300; font-size: medium;">
-						${feed.likeCount }명이 ${logedInMember.nickName }님의 글을 좋아합니다.
-					</span> 
-				</div>
-				
-
-				<sec:authorize access="isAuthenticated()">
-					<div class="mb-3" id="addCommentContainer">
-
-						<div class="input-group">
-							<div class="form-floating">
-								<textarea id="commentTextArea" class="form-control" style="height: 60px" placeholder="댓글을 남겨주세요"></textarea>
-								<label for="floatingTextArea">댓글을 남겨주세요</label>
-							</div>
-							<button id="sendCommentBtn" class="btn btn-outline-secondary">
-								<i class="fa-regular fa-paper-plane"></i>
-							</button>
-						</div>
-					</div>
-				</sec:authorize>
-				<!-- </div> -->
-				
 			</div>
 
-			<!-- 수정/삭제 버튼 드랍다운 -->
-						<sec:authorize access="isAuthenticated()">
-							<sec:authentication property="name" var="userId" /> 
-								<c:if test="${userId eq feed.writer }">
-								
-									<div class="drop">
-										<button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-											<i class="fa-solid fa-ellipsis-vertical"></i>
-										</button>
-						
-										<ul class="dropdown-menu">
-											<!-- Dropdown menu links -->
-											<div style="text-align: center">
-												<a href="/modify/${feed.id }">수정하기</a>
-											</div>
-											<div style="text-align: center">
-												<a href="#" onclick="javascript:document.removeForm.submit();">삭제하기</a>
-											</div>
-										</ul>
-						
-										<!-- 삭제하기 기능 -->
-										<div class="d-none">
-											<form action="/remove" method="post" name="removeForm">
-												<input type="text" name="id" value="${feed.id }" />
-											</form>
-										</div>
-					
-									</div>
-								</c:if>
-						</sec:authorize>
-				
-				</div>
-				
+
 			<!-- 댓글 삭제 모달 -->
 			<div class="modal fade" id="deleteCommentConfirmModal" tabindex="-1"
 				aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -299,7 +236,7 @@
 					</div>
 				</div>
 
-					<!-- 댓글 수정 모달 -->
+					<%-- 댓글 수정 모달 --%>
 					<div class="modal fade" id="commentUpdateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 						<div class="modal-dialog">
 							<div class="modal-content">
@@ -321,9 +258,38 @@
 						</div>
 					</div>
 
+				<!-- 수정/삭제 버튼 드랍다운 -->
+				<sec:authorize access="isAuthenticated()">
+					<sec:authentication property="name" var="uerId" />
+						<c:if test="${userId eq feed.writer }">
+						
+							<div class="drop">
+								<button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+									<i class="fa-solid fa-ellipsis-vertical"></i>
+								</button>
+				
+								<ul class="dropdown-menu">
+									<!-- Dropdown menu links -->
+									<div style="text-align: center">
+										<a href="/modify/${feed.id }">수정하기</a>
+									</div>
+									<div style="text-align: center">
+										<a href="#" onclick="javascript:document.removeForm.submit();">삭제하기</a>
+									</div>
+								</ul>
+				
+								<!-- 삭제하기 기능 -->
+								<div class="d-none">
+									<form action="/remove" method="post" name="removeForm">
+										<input type="text" name="id" value="${feed.id }" />
+									</form>
+								</div>
 			
-		<!-- </div> -->
-		
+							</div>
+						</c:if>
+				</sec:authorize>
+			
+		</div>
 	</div>
 
 

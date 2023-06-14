@@ -73,6 +73,39 @@ img {
 		</button>
 
 	</div>
+	
+		<!-- 프로필 이미지 -->
+		<div id="upper" class="ui aligned container mb-5" id="imgContainer">
+			<button class="massive ui basic button" style="border: 2px solid #E2E2E2; border-radius: 0.5rem; margin-right:70px;">
+				  <i class="fa-solid fa-user"></i>
+				  팔로워
+			</button>
+			
+			<button class="massive ui basic button" style="border: 2px solid #E2E2E2; border-radius: 0.5rem; margin-right:50px;">
+				  <i class="fa-solid fa-user-check"></i>
+				  팔로잉
+			</button>
+			
+			<!-- 프로필 이미지 -->
+			<c:if test="${logedInMember.profileImage ne null}">
+				<img class="ui circular image" id="profilImage" src="${bucketUrl }/pet${logedInMember.profileImage }"> 
+			</c:if>
+			<c:if test="${logedInMember.profileImage eq null}">
+				<img class="ui circular image" id="profilImage" src="/images/paw.png">
+			</c:if>
+			
+				<button class="massive ui basic button" style="border: 2px solid #E2E2E2; border-radius: 0.5rem; margin-left:50px; margin-right:70px;">
+				  <!-- <i class="fa-solid fa-envelope"></i> -->
+				  <i class="fa-solid fa-paper-plane"></i>
+				  메세지
+			</button>
+			
+			<button class="massive ui basic button" style="border: 2px solid #E2E2E2; border-radius: 0.5rem;">
+				  <i class="fa-solid fa-bolt"></i>
+				  산책번개
+			</button>
+			
+		</div>
 
 	<div class="container">
 
@@ -84,12 +117,18 @@ img {
 				<div class=item>
 					<a href="/feedId/${file.feedId }">
 
-						<img src="${bucketUrl }/feed/${file.feedId }/${file.fileName }" alt="" />
-
-					</a>
-				</div>
-
-			</c:forEach>
+		<c:forEach items="${fileList }" var="file">
+		
+	    	<div class=item>
+	    		<a href="/feedId/${file.feedId }">
+	    		
+	    		<img src="${bucketUrl }/feed/${file.feedId }/${file.fileName }" alt="" />
+	    		
+	    		</a>
+	    	</div> 
+    
+    </c:forEach>
+   	
 	</div>
 
 

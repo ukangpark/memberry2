@@ -87,7 +87,7 @@
 						<%-- <input type="checkbox" name="removeFiles" value="${fileName }" id="" /><i class="fa-regular fa-circle-trash"></i> --%>
 						<%-- <button data-target-list="#imageList${status.index }" type="button" class=" removeFilesBtn btn btn-outline-dark" name="removeFiles" value="${fileName }"><i class="fa-solid fa-trash"></i></button> --%>
 						<button type="button" class="removeFilesBtn btn btn-outline-dark" name="removeFiles" value="${fileName }"><i class="trash alternate icon"></i></button>
-						<img class="ui medium rounded imager" src="${bucketUrl }/${feed.id }/${fileName }" alt="" />
+						<img class="ui medium rounded imager" src="${bucketUrl }/feed/${feed.id }/${fileName }" alt="" />
 					</li>
 				</c:forEach>
 			</ul>
@@ -101,7 +101,7 @@
 		</div>
 
 		
-	<!-- 	<div>
+	<!-- <div>
 			사진을 추가해보세요! <br /> <input type="file" multiple name="files" accept="image/*" />
 		</div> -->
 		
@@ -122,14 +122,6 @@
 						   	<textarea placeholder="내용을 입력하세요" name="content">${feed.content }</textarea>
 					 </div>
 					 <br />
-					
-					<%-- <div class="ui form">
-					    <div class="writer">
-					      <label></label>
-					      <input placeholder="글쓴이" type="text" name="writer" value="${feed.writer }" />
-					    </div>
-					</div>
-					<br /> --%>
 					
 					<div class="ui form">
 					    <div class="location">
@@ -162,6 +154,42 @@
 			 slider.reloadSlider();
 		  }); */
 		}); 
+		
+		/* 엔터키 치면 전송되는 것 방지 */
+		$('input[type="text"]').keydown(function() {
+			if (event.keyCode == 13) {
+				event.preventDefault();
+			}
+			;
+
+		})
+		
+		/* 첨부파일 이미지 변경 */
+		const fileInput = document.getElementById("fileInput");
+		const previewContainer = document.getElementById("imagePreview");
+		const previewImage = previewContainer.querySelector(".preview");
+		const previewDefaultImage = previewContainer
+				.querySelector(".defaultImage");
+
+		fileInput.addEventListener("change", function() {
+			const file = this.files[0];
+			//console.log(file);
+
+			if (file) {
+				const reader = new FileReader();
+
+				previewDefaultImage.style.display = "none";
+				previewImage.style.display = "block";
+
+				reader.addEventListener("load", function() {
+					previewImage.setAttribute("src", this.result);
+				});
+
+				reader.readAsDataURL(file);
+			}
+
+		})
+		
 	</script>
 </body>
 </html>
