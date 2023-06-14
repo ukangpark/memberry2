@@ -22,6 +22,9 @@
 	
 </head>
 <body>
+
+ <d:navBar current="regiForm" />  
+
 <script>
 	$('.ui.radio.checkbox').checkbox();
 	
@@ -78,6 +81,9 @@
 	<form class="ui form" style="margin:100px 100px 100px 100px" method="post" id="bookForm" action="/book/bookAdd">
 	<input type="hidden" name="detailId" value="${detailId}" />
 	<input type="hidden" name="petId" value="${pet.id}" />
+	<%-- <input type="hidden" name="memberId" value="${pet.memberId}" /> --%>
+	<input type="hidden" name="accepted" value=0 />
+	
 		<h2 class="ui dividing header" style = "text-align:center">
 		<i class="fa fa-solid fa-paw"></i>예약 신청서
 		<i class="fa fa-solid fa-paw"></i>

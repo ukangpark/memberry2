@@ -51,19 +51,19 @@ public class BookController {
 	
 
 	// 수정되게
-	@PostMapping("/modifiy/{num}")
+	@PostMapping("/modify/{num}")
 	public String modifyProcess(Book book, RedirectAttributes rttr) {
 		boolean ok = service.modify(book);
 
 		if (ok) {
 
-			rttr.addAttribute("success", "success");
-			return "redirect:/num/" + book.getNum();
+			//rttr.addAttribute("success", "success");
+			return "redirect:/book/list";
 
 		} else {
 
-			rttr.addAttribute("fail", "fail");
-			return "redirect:/regiFormModify/" + book.getNum();
+			//rttr.addAttribute("fail", "fail");
+			return "redirect:/book/regiFormModify/" + book.getNum();
 
 		}
 	}
@@ -107,6 +107,20 @@ public class BookController {
 		service.addRegi(book);
 		return "redirect:/book/list";
 
+	}
+	
+	
+	// 예약 취소
+	@PostMapping("remove")
+	public String remove(int num, RedirectAttributes rttr) {
+		boolean ok =service.remove(num);
+		if(ok) {
+			rttr.addFlashAttribute("message", "예약이 취소되었습니다.");
+			return "redirect:/book/list";
+		} else {
+			return "redirect:/book/list";
+		}
+		
 	}
 
 }

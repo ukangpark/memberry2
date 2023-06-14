@@ -54,7 +54,7 @@ h1 {
 				
 					<div class="image">
 						
-						<img src="${bucketUrl }/${membery }cover/${host.detailId}/${host.cover}" alt="" height="70" />
+						<img src="${bucketUrl }/${membery }cover/${host.detailId}/${host.cover}" alt=""  style="width:300; height:200;" />
 						</a>
 					</div>
 					<div class="content">

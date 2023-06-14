@@ -207,6 +207,12 @@ public interface PetsitterMapper {
 			""")
 	Host selectHostByMemberId(String memberId);
 
+	@Select("""
+			SELECT * FROM Pet
+			WHERE memberId = #{userId}
+			""")
+	List<Registration> selectUserPet(String userId);
+
 
 	
 	

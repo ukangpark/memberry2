@@ -16,6 +16,8 @@
 <body>
 	 <d:navBar current="regiList" />  
 
+
+	<div>${message }</div>
 	  
 	<div class="container-lg">
 	
@@ -64,6 +66,11 @@
 						</c:if>
 						</td>
 					</tr>
+					<div class="d-done">
+					<form action="/book/remove" method="post" id="removeForm">
+					<input type="hidden" name="num" value="${book.num }"/>
+					</form>
+					</div>	
 				</c:forEach>
 			</tbody>
 		</table>
@@ -73,8 +80,7 @@
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
-    <div class="modal-content">
-      
+  <div class="modal-content">
       <div class="modal-body">
       <br />
         확인을 누르시면 예약신청이 취소됩니다.
@@ -82,11 +88,14 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-danger">확인</button>
+        <button type="submit" class="btn btn-danger" form="removeForm">확인</button>
       </div>
-    </div>
+  </div>
   </div>
 </div>
+
+
+
 
 
 
