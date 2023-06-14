@@ -17,10 +17,10 @@
 <body>
 	<my:navBar></my:navBar>
 	<my:alert></my:alert>
-	<h1> 로고 자리</h1>
+	<h1>로고 자리</h1>
 	<!-- 호스트의 집사진 -->
 	<div id="imgBox" class="container">
-		<button class="ui icon button">
+		<button type="button" class="ui icon button inverted " id="entireBtn" data-bs-toggle="modal" data-bs-target="#housePhotosModal">
 			<i class="fa-solid fa-plus"></i>
 		</button>
 		<div class="ui billboard">
@@ -165,6 +165,49 @@
 		</div>
 	</div>
 
+	<!-- 집사진 모달  -->
+	<div class="modal fade" id="housePhotosModal" tabindex="-1" aria-labelledby="housePhotosModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-xl">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="housePhotosModalLabel">전체 보기</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<!-- 사진들 -->
+					<div id="carouselExampleIndicators" class="carousel slide">
+						<div class="carousel-indicators">
+							<c:forEach items="${hostHousePhoto }" var="hostHousePhoto" varStatus="status">
+								<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="${status }" class="active" aria-current="true" aria-label="Slide ${status }"></button>
+							</c:forEach>
+						</div>
+						<div class="carousel-inner modalPhoto">
+							<div class="carousel-item active">
+								<img src="${bucketUrl }/cover/${detail.id }/${detail.cover }" class="d-block w-100 housePhotos">
+							</div>
+							<c:forEach items="${hostHousePhoto }" var="hostHousePhoto">
+								<div class="carousel-item">
+									<img class="rounded housePhotos" src="${bucketUrl }/hostHousePhoto/${detail.id }/${hostHousePhoto.housePhoto }">
+								</div>
+							</c:forEach>
+						</div>
+						<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+							<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+							<span class="visually-hidden">Previous</span>
+						</button>
+						<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+							<span class="carousel-control-next-icon" aria-hidden="true"></span>
+							<span class="visually-hidden">Next</span>
+						</button>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<!-- 상세페이지 수정 모달 -->
 	<div class="modal fade" id="checkModal" tabindex="-1" aria-labelledby="checkModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
@@ -212,5 +255,10 @@
 
 	<my:bottom></my:bottom>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script type="text/javascript">
+		function openModal() {
+			document.getElementById("myModal").style.display = "block";
+		}
+	</script>
 </body>
 </html>

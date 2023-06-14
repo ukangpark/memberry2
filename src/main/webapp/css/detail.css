@@ -31,5 +31,12 @@
 #entireBtn {
 	z-index: 10;
 	position: absolute;
-	top: 50px;
+	top: 10px;
+	left: 20px;
 }
+
+.modalPhoto {
+	width: 1110px;
+	height: 625px;
+}
+
