@@ -21,6 +21,9 @@ public class Feed {
 
 	private Integer commentCount;
 	private Boolean liked;
+	
+	private String profileImage;
+	private String nickName;
 
 	
 	public void setInserted(Date date) {

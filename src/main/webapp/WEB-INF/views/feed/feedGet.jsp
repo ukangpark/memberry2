@@ -75,11 +75,13 @@
 #commentTitle {
 	text-align: center;
 	font-weight: bold;
+	padding-bottom: 0;
 }
 #commentListContainer{
 	height: 250px;
 	overflow-y: auto;
-	border: solid 0.5px grey;
+	border: solid 1px #cccccc;
+	padding-top: 0;
 }
 #addCommentContainer {
 	padding-top: 20px;
@@ -93,6 +95,7 @@
 	width: 100%;
 	height: 100%;
 }
+
 
 </style>
 <body id="body" style="background-color: #FFF2F2">
@@ -136,10 +139,10 @@
 						<%-- <div id="inserted" class="right floated meta">${feed.inserted }</div> --%>
 						<!-- 프로필 이미지 + 닉네임 -->
 						<c:if test="${logedInMember.profileImage ne null}">
-							<img class="ui avatar image" id="profilImage" src="${bucketUrl }/pet${logedInMember.profileImage }">${logedInMember.nickName } 
+							<img class="ui avatar image" id="profilImage" src="${bucketUrl }/pet${feed.profileImage }"><span style="font-weight: bold;">${feed.nickName }</span> 
 						</c:if>
 						<c:if test="${logedInMember.profileImage eq null}">
-							<img class="ui avatar image" id="profilImage" src="/images/paw.png">${logedInMember.nickName } 
+							<img class="ui avatar image" id="profilImage" src="/images/paw.png"><span style="font-weight: bold;">${feed.nickName }</span> 
 						</c:if>
 						
 						<!-- 수정/삭제 버튼 드랍다운 -->
@@ -189,7 +192,6 @@
 							<i class="fa-solid fa-comments"></i> 댓글
 						</h3>
 					</div>
-					<br />
 					<c:if test="${feed.commentCount > 0 }">
 						<ul class="list-group" id="commentListContainer"></ul>
 					</c:if>
