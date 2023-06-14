@@ -15,6 +15,7 @@
 </head>
 <body>
 	<my:navBar></my:navBar>
+	<my:alert></my:alert>
 	<!-- 호스트의 집사진 -->
 	<div class="container" style="width: 900px">
 		<h1>펫시터 상세페이지</h1>

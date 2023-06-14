@@ -84,10 +84,19 @@ public class PetsitterController {
 	}
 
 	@PostMapping("hostModify")
-	public String hostModifyProcess(Host host, @RequestParam(value =  "file", required = false) MultipartFile file) throws Exception {
+	@PreAuthorize("isAuthenticated()")
+	public String hostModifyProcess(
+			Host host, 
+			@RequestParam(value =  "file", required = false) MultipartFile file,
+			RedirectAttributes rttr) throws Exception {
 		// 호스트 정보 수정 과정
 		boolean ok = petsitterService.modifyHostById(host, file);
-		System.out.println(host.getProfile());
+		
+		if(ok) {
+			rttr.addFlashAttribute("message", "정보를 수정하였습니다.");
+		} else {
+			rttr.addFlashAttribute("message", "정보를 수정하지 못했습니다.");
+		}
 		return "redirect:/petsitter/hostMyPage";
 	}
 
@@ -112,12 +121,20 @@ public class PetsitterController {
 	@PreAuthorize("isAuthenticated()")
 	public String hostDelete(
 			Integer hostId, 
-			String password,
-			Authentication authentication) {
+			Member member,
+			Authentication authentication,
+			RedirectAttributes rttr) {
 		// 호스트 정보 삭제 과정
-		boolean ok = petsitterService.deleteHostById(hostId, password, authentication.getName());
-		System.out.println("delete work : " + ok);
-		System.out.println("contriller : " + hostId + ", " + password + ", " + authentication.getName());
+		member.setId(authentication.getName());
+		
+		boolean ok = petsitterService.deleteHostById(hostId, member);
+		
+		if(ok) {
+			rttr.addFlashAttribute("message", "호스트 정보를 삭제하였습니다.");
+		} else {
+			rttr.addFlashAttribute("message", "호스트 정보를 삭제하지 못했습니다.");
+		}
+
 		return "redirect:/petsitter/main";
 	}
 
@@ -130,21 +147,13 @@ public class PetsitterController {
 	}
 
 	@PostMapping("addDetail")
+	@PreAuthorize("isAuthenticated()")
 	public String addDetailProcess(
 			Detail detail, 
-			RedirectAttributes rttr,
 			Authentication authentication) throws Exception {
 		// 상세페이지 등록 과정
 		boolean ok = petsitterService.insertDetail(detail, authentication.getName());
-
-		if (ok) {
-			// 상세페이지 최초 등록
-			rttr.addFlashAttribute("message", "게시물이 성공적으로 등록되었습니다.");
-		} else {
-			// 상세페이지 재등록
-			rttr.addFlashAttribute("message", "게시물이 등록되지 않았습니다.");
-		}
-
+	
 		return "redirect:/petsitter/addHousePhotos";
 	}
 
@@ -157,12 +166,23 @@ public class PetsitterController {
 	}
 
 	@PostMapping("addHousePhotos")
+	@PreAuthorize("isAuthenticated()")
 	public String addHousePhotosProgress(
 			@RequestParam("cover") MultipartFile cover,
 			@RequestParam(value = "housePhotos", required = false) MultipartFile[] housePhotos,
-			Integer hostId) throws Exception {
-		// 상세페이지에 집사진 등록하는 과
+			Integer hostId,
+			RedirectAttributes rttr) throws Exception {
+		// 상세페이지에 집사진 등록하는 과정 
 		Integer count = petsitterService.insertHousePhotos(housePhotos, hostId, cover);
+		
+		if(count != null) {
+			// 상세페이지 최초 등록
+			rttr.addFlashAttribute("message", "게시물이 성공적으로 등록되었습니다.");
+		} else {
+			// 상세페이지 재등록
+			rttr.addFlashAttribute("message", "게시물이 등록되지 않았습니다.");
+		}
+		
 		return "redirect:/petsitter/detail?id=" + hostId;
 	}
 
@@ -178,9 +198,12 @@ public class PetsitterController {
 	}
 
 	@PostMapping("modifyDetail")
+	@PreAuthorize("isAuthenticated()")
 	public String modifyProcess(Detail detail) throws Exception {
 		// 상세페이지 수정 process
 		boolean ok = petsitterService.modifyDetailDescription(detail);
+		
+		
 		return "redirect:/petsitter/modifyHousePhotos";
 	}
 
@@ -196,15 +219,23 @@ public class PetsitterController {
 	}
 
 	@PostMapping("modifyHousePhotos")
+	@PreAuthorize("isAuthenticated()")
 	public String modifyHousePhotosProcess(
 			Detail detail,
 			@RequestParam(value = "addCover", required = false) MultipartFile addCover,
 			@RequestParam(value = "removePhotos", required = false) List<String> removePhotos,
-			@RequestParam(value = "addPhotos", required = false) MultipartFile[] addPhotos) throws Exception {
+			@RequestParam(value = "addPhotos", required = false) MultipartFile[] addPhotos,
+			RedirectAttributes rttr) throws Exception {
 		//detailId 필요 
 		
 		// 집사진 수정 process
-		petsitterService.modifyDetailHousePhotos(addCover, addPhotos, removePhotos, detail);
+		Integer count = petsitterService.modifyDetailHousePhotos(addCover, addPhotos, removePhotos, detail);
+		if(count != null) {
+			rttr.addFlashAttribute("message", "상세페이지를 수정하였습니다.");
+		} else {
+			rttr.addFlashAttribute("message", "상세페이지를 수정하지 못했습니다.");
+		}
+		
 		return "redirect:/petsitter/detail?id=" + detail.getHostId();
 	}
 
