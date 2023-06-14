@@ -212,8 +212,7 @@
 					</div>
 
 					<ul class="list-group" id="commentListContainer">
-
-
+					
 					</ul>
 				
 				</div>
