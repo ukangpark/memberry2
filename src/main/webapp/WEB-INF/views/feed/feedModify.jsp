@@ -123,13 +123,13 @@
 					 </div>
 					 <br />
 					
-					<div class="ui form">
+					<%-- div class="ui form">
 					    <div class="location">
 					      <label></label>
 					      <input placeholder="장소를 태그하세요" type="text" name="location" value="${feed.location }" />
 					    </div>
 					</div>
-					<br />
+					<br /> --%>
 					
 			</form>
 			

@@ -89,17 +89,18 @@ img {
 		<a href="/feed/feedAdd">
 			<img src="/images/feedAddIcon.PNG" alt="" />
 
-			<c:forEach items="${fileList }" var="file">
 
-				<div class=item>
-					<a href="/feedId/${file.feedId }">
-	    		
-	    		<img src="${bucketUrl }/feed/${file.feedId }/${file.fileName }" alt="" />
-	    		
-	    		</a>
-	    	</div> 
-    
-    </c:forEach>
+		<c:forEach items="${fileList }" var="file">
+			
+		    <div class=item>
+		    	<a href="/feedId/${file.feedId }">
+		    		
+		    	<img src="${bucketUrl }/feed/${file.feedId }/${file.fileName }" alt="" />
+		    	
+		    	</a>
+		    </div> 
+	    
+	    </c:forEach>
    	
 	</div>
 
