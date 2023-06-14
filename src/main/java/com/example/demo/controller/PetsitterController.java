@@ -57,9 +57,9 @@ public class PetsitterController {
 		// host 정보 받아서 추가 
 		int count = petsitterService.insertHost(host, file);
 		if(count == 1) {
-			rttr.addAttribute("message", "호스트 등록이 완료되었습니다.");
+			rttr.addFlashAttribute("message", "호스트 등록이 완료되었습니다.");
 		} else {
-			rttr.addAttribute("message", "이미 호스트 등록이 되어있습니다.");
+			rttr.addFlashAttribute("message", "이미 호스트 등록이 되어있습니다.");
 		}
 		rttr.addFlashAttribute("host", host);
 		
@@ -210,9 +210,20 @@ public class PetsitterController {
 
 	@PostMapping("deleteDetail")
 	@PreAuthorize("isAuthenticated()")
-	public String deleteDetail(Integer hostId, Member member, Authentication authentication) {
+	public String deleteDetail(
+			Integer hostId, 
+			Member member,
+			Authentication authentication,
+			RedirectAttributes rttr) {
 		member.setId(authentication.getName());
 		boolean ok = petsitterService.deleteDetailByHostId(hostId, member);
+		
+		if(ok) {
+			rttr.addFlashAttribute("message", "상세페이지가 삭제되었습니다.");
+		} else {
+			rttr.addFlashAttribute("message", "상세페이지가 삭제되지 않았습니다.");
+		}
+		
 		return "redirect:/petsitter/hostMyPage";
 	}
 
