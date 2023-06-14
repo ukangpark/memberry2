@@ -38,15 +38,16 @@
 								<c:choose>
 									<c:when test="${host.profile eq null or host.profile eq '' }">
 										<img class="ui medium bordered centered circular image " src="/images/paw.png" id="preview">
+										<input class="form-control d-none" onchange="readURL(this);" type="file" id="file" name="file" accept="image/*" />
 									</c:when>
 									<c:otherwise>
 										<img class="ui medium bordered centered circular image " id="preview" src="${bucketUrl }/hostProfile/${host.id }/${host.profile }">
+										<input class="form-control d-none" onchange="readURL(this);" type="file" id="file" name="file" accept="image/*"  />
 									</c:otherwise>
 								</c:choose>
 								<label for="file" class="big circular ui icon button" id="addBtn">
 									<i class="large plus icon"></i>
 								</label>
-								<input class="form-control d-none" onchange="readURL(this);" type="file" id="file" name="file" accept="image/*" />
 							</div>
 							<div class="field">
 								<label>이름</label>
@@ -104,7 +105,7 @@
 			</div>
 			<div class="extra content">
 				<div class="ui two buttons">
-					<a href="/petsitter/hostMyPage?id=${host.id }" class="ui red basic button">취소하기</a>
+					<a href="/petsitter/hostMyPage" class="ui red basic button">취소하기</a>
 					<button form="checkForm" class="ui green basic button">수정하기</button>
 				</div>
 			</div>

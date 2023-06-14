@@ -14,7 +14,7 @@
 </head>
 <body>
 
-<my:navBar></my:navBar>
+	<my:navBar></my:navBar>
 	<br>
 	<!-- 수정 정보 form -->
 	<div class="ui centered equal width grid">
@@ -39,13 +39,6 @@
 				</form>
 			</div>
 
-			<!-- 삭제 정보 form -->
-			<div class="d-none">
-				<form action="/petsitter/deleteDetail" id="deleteDetailForm">
-					<input type="text" name="hostId" value="${host.id }">
-				</form>
-			</div>
-
 			<!-- 버튼 -->
 			<div class="extra content">
 				<div class="ui three buttons">
@@ -56,23 +49,6 @@
 			</div>
 		</div>
 	</div>
-	
-	<!-- 수정 모달 -->
-	<!-- <div class="modal fade" id="modifyDetailModal" tabindex="-1" aria-labelledby="modifyDetailModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h1 class="modal-title fs-5" id="modifyDetailModalLabel">상세페이지</h1>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				</div>
-				<div class="modal-body">상세페이지를 수정하시겠습니까?</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소하기</button>
-					<button type="submit" form="modifyDetailForm" class="btn btn-primary">수정하기</button>
-				</div>
-			</div>
-		</div>
-	</div>  -->
 
 	<!-- 삭제하기 모달 -->
 	<div class="modal fade" id="deleteDetailModal" tabindex="-1" aria-labelledby="deleteDetailModalLabel" aria-hidden="true">
@@ -82,7 +58,17 @@
 					<h1 class="modal-title fs-5" id="deleteDetailModalLabel">상세페이지</h1>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
-				<div class="modal-body">상세페이지 정보를 정말 삭제하시겠습니까?</div>
+				<div class="modal-body">
+					상세페이지 정보를 정말 삭제하시겠습니까?
+					<br>
+					삭제를 하시려면 비밀번호를 입력해주세요.
+					<form class="ui form" action="/petsitter/deleteDetail" id="deleteDetailForm" method="post">
+						<input type="hidden" name="hostId" value="${host.id }">
+						<div class="field">
+						<input type="text" name="password" placeholder="비밀번호 입력">						
+						</div>
+					</form>
+				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소하기</button>
 					<button type="submit" class="btn btn-danger" form="deleteDetailForm">삭제하기</button>
@@ -90,7 +76,7 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<my:bottom></my:bottom>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="semantic/dist/semantic.min.js"></script>

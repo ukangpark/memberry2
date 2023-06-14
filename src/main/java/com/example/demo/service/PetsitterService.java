@@ -124,21 +124,21 @@ public class PetsitterService {
 					.acl(ObjectCannedACL.PUBLIC_READ).key(key).build();
 
 			s3.putObject(objectRequest, RequestBody.fromInputStream(profile.getInputStream(), profile.getSize()));
-
-			// 호스트 정보 수정
-			count = petsitterMapper.modifyHostById(host, profile.getOriginalFilename());
-
 		}
+		
+		// 호스트 정보 수정
+		count = petsitterMapper.modifyHostById(host, profile.getOriginalFilename());
+		
 		return count == 1;
 	}
 
-	public boolean deleteHostById(Integer hostId, Member member) {
+	public boolean deleteHostById(Integer hostId, String password, String memberId) {
 		Integer count = 0;
 
-		Member memberInfo = memberMapper.selectById(member.getId());
-		System.out.println(member);
-		System.out.println(memberInfo);
-		if (memberInfo.getPassword().equals(member.getPassword())) {
+		Member memberInfo = memberMapper.selectById(memberId);
+		System.out.println("service work : " + memberInfo);
+		
+		if (memberInfo.getPassword().equals(password)) {
 			// 암호가 같으면 삭제 진행
 
 			// detailId 값을 가져옴
@@ -178,10 +178,8 @@ public class PetsitterService {
 			// 호스트 정보 삭제
 			count = petsitterMapper.deleteHostById(hostId);
 
-		} else {
-			// 암호가 다르면 삭제 안됨
-
 		}
+		// 암호가 다르면 삭제 안됨
 
 		return count == 1;
 	}
@@ -310,11 +308,15 @@ public class PetsitterService {
 		return count;
 	}
 
-	public boolean deleteDetailByHostId(Integer hostId) {
-		// 상세페이지 집사진 삭제
+	public boolean deleteDetailByHostId(Integer hostId, Member member) {
+		//비밀번호 일치/불일치 확인
+		//기존의 정보 조회 
+		Member oldMember = memberMapper.selectById(member.getId());
+		
 		// detailId 값을 가져옴
 		Detail detail = petsitterMapper.selectDetailById(hostId);
 
+		// 상세페이지 집사진 삭제
 		// 집사진 이름 조회
 		List<HostHousePhoto> hostHousePhotoes = petsitterMapper.selectHostHousePhotoByDetailId(detail.getId());
 
@@ -326,6 +328,9 @@ public class PetsitterService {
 			s3.deleteObject(deleteObjectRequest);
 
 		}
+		
+		// 집사진 테이블에서 정보 삭제
+		Integer photoDeleteCount = petsitterMapper.deleteHostHousePhotoByDetailId(detail.getId());
 
 		// aws에 커버사진 삭제
 		String keyCover = "membery/cover/" + detail.getId() + "/" + detail.getCover();
@@ -333,9 +338,12 @@ public class PetsitterService {
 				.build();
 
 		s3.deleteObject(deleteObjectRequestCover);
-
-		// 집사진 테이블에서 정보 삭제
-		Integer photoDeleteCount = petsitterMapper.deleteHostHousePhotoByDetailId(detail.getId());
+		
+		//petsitterComment 레코드 삭제 
+		petsitterMapper.deleteCommentByDetailId(detail.getId());
+		
+		//book 레코드 삭제 
+		petsitterMapper.deleteBookByDetailId(detail.getId());
 
 		// 상세페이지 삭제
 		Integer count = petsitterMapper.deleteDetailByHostId(hostId);

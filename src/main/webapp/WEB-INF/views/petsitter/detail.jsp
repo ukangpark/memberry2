@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
-
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,18 +18,18 @@
 	<!-- 호스트의 집사진 -->
 	<div class="container" style="width: 900px">
 		<h1>펫시터 상세페이지</h1>
-			<div class="ten wide column teal">
-				<div>
-					<h5>대표 사진</h5>
-					<img style="width: 200px;" src="${bucketUrl }/cover/${detail.id }/${detail.cover }">
-				</div>
-				<div class="ui images">
-					<c:forEach items="${hostHousePhoto }" var="hostHousePhoto">
-						<img class="ui medium rounded image" src="${bucketUrl }/hostHousePhoto/${detail.id }/${hostHousePhoto.housePhoto }">
-					</c:forEach>
-				</div>
+		<div class="ten wide column teal">
+			<div>
+				<h5>대표 사진</h5>
+				<img style="width: 200px;" src="${bucketUrl }/cover/${detail.id }/${detail.cover }">
+			</div>
+			<div class="ui images">
+				<c:forEach items="${hostHousePhoto }" var="hostHousePhoto">
+					<img class="ui medium rounded image" src="${bucketUrl }/hostHousePhoto/${detail.id }/${hostHousePhoto.housePhoto }">
+				</c:forEach>
 			</div>
 		</div>
+	</div>
 	<!-- 호스트 간략 정보 -->
 	<div class="container" style="width: 900px">
 		<h3 class="ui dividing header">Detail</h3>
@@ -48,7 +48,17 @@
 					</c:choose>
 				</div>
 				<div class="content">
-					<a class="header">${host.hostName } id : ${detail.id }</a>
+					<sec:authentication property="name" var="userId" />
+					<c:choose>
+						<c:when test="${userId eq host.memberId }">
+							<a data-bs-toggle="modal" data-bs-target="#deleteModal" class="ui right floated inverted red button">삭제</a>
+							<a data-bs-toggle="modal" data-bs-target="#checkModal" class="ui right floated inverted green button">수정</a>
+						</c:when>
+						<c:when test="${userId ne host.memberId }">
+							<button class="ui right floated inverted green button" onclick="location.href='/book/regiForm/${detail.id}'">예약</button>
+						</c:when>
+					</c:choose>
+					<a class="header">${host.hostName }</a>
 					<div class="meta">
 						<span>주소 : ${host.si }시 ${host.gu }구 ${host.dong }동</span>
 						<br>
@@ -58,14 +68,7 @@
 						<p>한 줄 소개 : ${detail.title }</p>
 					</div>
 					<div class="extra">#매일 산책 가능 #샤워 가능 #간식 있음</div>
-				</div>
 
-				<!-- 달력 -->
-				<div class="content ui input">
-					<label for="calendarIcon">
-						<i class="calendar alternate outline icon"></i>
-					</label>
-					<input id="calendarIcon" style="width: 200px;" type="text" name="daterange" value="01/01/2023 - 01/15/2023" />
 				</div>
 			</div>
 		</div>
@@ -75,9 +78,6 @@
 	<div class="container" style="width: 900px; margin-top: 25px;">
 		<div class="ui text container">
 			<p>${detail.body }</p>
-		</div>
-		<div>
-			<button class="ui right floated inverted red button" onclick="location.href='/book/regiForm/${detail.id}'" >예약</button>
 		</div>
 	</div>
 
@@ -160,24 +160,53 @@
 			</form>
 		</div>
 	</div>
+
+	<!-- 상세페이지 수정 모달 -->
+	<div class="modal fade" id="checkModal" tabindex="-1" aria-labelledby="checkModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="checkModalLabel">상세페이지</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">상세페이지를 수정하시겠습니까?</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소하기</button>
+					<a href="/petsitter/modifyDetail" class="btn btn-primary">수정하기</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 삭제하기 모달 -->
+	<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="deleteModalLabel">삭제 확인</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div class="mb-3">
+						호스트 등록 정보를 정말 삭제하시겠습니까?
+						<br>
+						삭제를 확인하려면 비밀번호를 입력해주세요.
+					</div>
+					<!-- 삭제하기 정보 -->
+					<form action="/petsitter/hostDelete" method="post" id="deleteForm">
+						<input type="hidden" name="hostId" value="${host.id }">
+						<input class="form-control" type="text" name="password" id="passwordInput" placeholder="비밀번호를 입력해주세요.">
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소하기</button>
+					<button type="submit" class="btn btn-danger" form="deleteForm">삭제하기</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<my:bottom></my:bottom>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-	<!-- 달력 -->
-	<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-	<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-	<script>
-		$(function() {
-			$('input[name="daterange"]').daterangepicker(
-					{
-						opens : 'left'
-					},
-					function(start, end, label) {
-						console.log("A new date selection was made: "
-								+ start.format('YYYY-MM-DD') + ' to '
-								+ end.format('YYYY-MM-DD'));
-					});
-		});
-	</script>
 </body>
 </html>

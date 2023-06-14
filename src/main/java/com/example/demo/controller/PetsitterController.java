@@ -87,7 +87,8 @@ public class PetsitterController {
 	public String hostModifyProcess(Host host, @RequestParam(value =  "file", required = false) MultipartFile file) throws Exception {
 		// 호스트 정보 수정 과정
 		boolean ok = petsitterService.modifyHostById(host, file);
-		return "redirect:/petsitter/hostMyPage?id=" + host.getId();
+		System.out.println(host.getProfile());
+		return "redirect:/petsitter/hostMyPage";
 	}
 
 	// 펫시터 전체목록보기, 페이지네이션, 검색
@@ -108,10 +109,16 @@ public class PetsitterController {
 	}
 
 	@PostMapping("hostDelete")
-	public String hostDelete(Integer hostId, Member member) {
+	@PreAuthorize("isAuthenticated()")
+	public String hostDelete(
+			Integer hostId, 
+			String password,
+			Authentication authentication) {
 		// 호스트 정보 삭제 과정
-		boolean ok = petsitterService.deleteHostById(hostId, member);
-		return "redirect:/petsitter/hostList";
+		boolean ok = petsitterService.deleteHostById(hostId, password, authentication.getName());
+		System.out.println("delete work : " + ok);
+		System.out.println("contriller : " + hostId + ", " + password + ", " + authentication.getName());
+		return "redirect:/petsitter/main";
 	}
 
 	@GetMapping("addDetail")
@@ -201,11 +208,12 @@ public class PetsitterController {
 		return "redirect:/petsitter/detail?id=" + detail.getHostId();
 	}
 
-	@GetMapping("deleteDetail")
+	@PostMapping("deleteDetail")
 	@PreAuthorize("isAuthenticated()")
-	public String deleteDetail(@RequestParam("hostId") Integer hostId) {
-		boolean ok = petsitterService.deleteDetailByHostId(hostId);
-		return "redirect:/petsitter/hostMyPage?id=" + hostId;
+	public String deleteDetail(Integer hostId, Member member, Authentication authentication) {
+		member.setId(authentication.getName());
+		boolean ok = petsitterService.deleteDetailByHostId(hostId, member);
+		return "redirect:/petsitter/hostMyPage";
 	}
 
 }
