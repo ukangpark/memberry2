@@ -11,24 +11,27 @@
 <my:top></my:top>
 <link rel="stylesheet" type="text/css" href="/js/semantic/semantic.min.css">
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-<script src="/js/semantic.min.js"></script>
+<script src="/js/semantic/semantic.min.js"></script>
+<link rel="stylesheet" href="/css/detail.css" />
 </head>
 <body>
 	<my:navBar></my:navBar>
 	<my:alert></my:alert>
+	<h1> 로고 자리</h1>
 	<!-- 호스트의 집사진 -->
-	<div class="container" style="width: 900px">
-		<h1>펫시터 상세페이지</h1>
-		<div class="ten wide column teal">
-			<div>
-				<h5>대표 사진</h5>
-				<img style="width: 200px;" src="${bucketUrl }/cover/${detail.id }/${detail.cover }">
+	<div id="imgBox" class="container">
+		<button class="ui icon button">
+			<i class="fa-solid fa-plus"></i>
+		</button>
+		<div class="ui billboard">
+			<div id="coverImgBox" class="ui images left floated">
+				<img id="coverImg" class="rounded" src="${bucketUrl }/cover/${detail.id }/${detail.cover }">
 			</div>
-			<div class="ui images">
-				<c:forEach items="${hostHousePhoto }" var="hostHousePhoto">
-					<img class="ui medium rounded image" src="${bucketUrl }/hostHousePhoto/${detail.id }/${hostHousePhoto.housePhoto }">
-				</c:forEach>
-			</div>
+			<c:forEach items="${hostHousePhoto }" var="hostHousePhoto" begin="1" end="2">
+				<div class="ui image right floated housePhotosBox">
+					<img class="rounded housePhotos" src="${bucketUrl }/hostHousePhoto/${detail.id }/${hostHousePhoto.housePhoto }">
+				</div>
+			</c:forEach>
 		</div>
 	</div>
 	<!-- 호스트 간략 정보 -->
