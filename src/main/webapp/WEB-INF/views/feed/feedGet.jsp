@@ -32,7 +32,7 @@
 
 .wrapper {
 	display: flex;
-	justify-content: space-evenly;
+	justify-content: center;
 	align-items: center;
 	min-height: 100vh;
 	background-color: #EEEEEE;
@@ -46,8 +46,8 @@
 	display: flex;
 }
 
-.bx-wrapper {
-	margin-left: 1.2rem;
+#imageBox {
+	/* margin-left: 100px; */
 }
 
 #textContent {
@@ -58,8 +58,9 @@
 
 
 #my-card {
-	width: 100%;
-	/* height: 80vh; */
+	 width: 600px; 
+	 height: 800px;
+	 margin-bottom: 25px;
 }
 
 #profilImage {
@@ -84,6 +85,14 @@
 	padding-top: 20px;
 }
 
+#li-imager {
+	height: 800px;
+}
+
+#imager {
+	width: 100%;
+	height: 100%;
+}
 
 </style>
 <body id="body" style="background-color: #FFF2F2">
@@ -110,73 +119,21 @@
 
 	<div class="wrapper">
 
-		<!-- <div id="container" > -->
-		
-<%-- 			<!-- card -->
-			<div class="ui card" id="my-card">
-				<div class="content"">
-					<div id="inserted" class="right floated meta">${feed.inserted }</div>
-					<!-- 프로필 이미지 + 닉네임 -->
-					<c:if test="${logedInMember.profileImage ne null}">
-						<img class="ui avatar image" id="profilImage" src="${bucketUrl }/pet${logedInMember.profileImage }">${logedInMember.nickName } 
-					</c:if>
-					<c:if test="${logedInMember.profileImage eq null}">
-						<img class="ui avatar image" id="profilImage" src="/images/paw.png">${logedInMember.nickName } 
-					</c:if>
-				</div>
-				<div class="content">
-					<div class="right floated meta">
-						<img class="ui avatar image" src="/images/scrap.png">
-					</div>
-				</div> --%>
-
 				<!-- 이미지 파일 출력 -->
-				<div id="imageBox" > <!-- class="content" -->
+				<div id="imageBox" style="margin-top: 40px"> <!-- class="content" -->
 					<ul class="bxslider">
 						<c:forEach items="${feed.fileName }" var="fileName">
-							<li><img class="ui medium rounded imager"
-								src="${bucketUrl }/feed/${feed.id }/${fileName }" alt="" /></li>
+							<li id="li-imager">
+								<img id="imager" class="ui medium rounded imager"
+									src="${bucketUrl }/feed/${feed.id }/${fileName }" alt="" />
+							</li>
 						</c:forEach>
 					</ul>
 				</div>
-
-<%-- 				<!-- 좋아요, 댓글 콘텐츠 -->
-				<div class="content">
-					<!-- 좋아요 기능 -->
-					<span class="likeIcon" data-feed-id="${feed.id }"> 
-						<c:if test="${feed.liked }">
-							<img src="/images/bone.png">
-						</c:if> <c:if test="${not feed.liked }">
-							<img src="/images/olbone.png">
-						</c:if>
-					</span> 
-					<!-- 좋아요 숫자 -->
-					<span class="likeNumber" style="font-weight: 300; font-size: large;">
-						${feed.likeCount } 
-					</span> 
-					<span style="font-weight: 300; font-size: large;">likes</span> 
-					<!-- 댓글 숫자 -->
-					<span class="left floated" style="margin-right: 200px; font-weight: 300; font-size: large;">
-						<button type="button" class="btn btn-secondary-link btnTriggerModal position-relative"
-							id="commentIcon" data-bs-toggle="modal" data-bs-target="#commentModal" data-id="${feed.id }">
-							<i class="fa-solid fa-comment fa-2x"></i> <span id="commentCnt"
-								class="position-absolute top-35 start-70 translate-middle badge rounded-pill bg-warning"">
-								${feed.commentCount }</span>
-						</button>
-					</span>
-					<!-- 댓글 입력 창 -->
-					<div class="extra content">
-						<div class="ui large transparent right icon input">
-							<input size=42 type="text" placeholder="Add Comment..."><imgsrc="/images/comment.png">
-						</div>
-					</div>
-				</div> --%>
 				
-				<div id="rightContainer" class="d-flex">
-				<div class="ui card" id="my-card">
-					<!-- 프로필사진 + 닉네임 -->
-					<div class="content"">
-						<div id="inserted" class="right floated meta">${feed.inserted }</div>
+				<div class="ui card d-flex" id="my-card">
+					<div class="content">
+						<%-- <div id="inserted" class="right floated meta">${feed.inserted }</div> --%>
 						<!-- 프로필 이미지 + 닉네임 -->
 						<c:if test="${logedInMember.profileImage ne null}">
 							<img class="ui avatar image" id="profilImage" src="${bucketUrl }/pet${logedInMember.profileImage }">${logedInMember.nickName } 
@@ -184,31 +141,63 @@
 						<c:if test="${logedInMember.profileImage eq null}">
 							<img class="ui avatar image" id="profilImage" src="/images/paw.png">${logedInMember.nickName } 
 						</c:if>
+						
+						<!-- 수정/삭제 버튼 드랍다운 -->
+						<sec:authorize access="isAuthenticated()">
+							<sec:authentication property="name" var="userId" /> 
+								<c:if test="${userId eq feed.writer }">
+								
+										<button type="button" class="btn btn-light dropdown-toggle right floated meta" data-bs-toggle="dropdown" aria-expanded="false">
+											<i class="fa-solid fa-ellipsis-vertical"></i>
+										</button>
+						
+										<ul class="dropdown-menu">
+											<!-- Dropdown menu links -->
+											<div style="text-align: center">
+												<a href="/modify/${feed.id }">수정하기</a>
+											</div>
+											<div style="text-align: center">
+												<a href="#" onclick="javascript:document.removeForm.submit();">삭제하기</a>
+											</div>
+										</ul>
+						
+										<!-- 삭제하기 기능 -->
+										<div class="d-none">
+											<form action="/remove" method="post" name="removeForm">
+												<input type="text" name="id" value="${feed.id }" />
+											</form>
+										</div>
+					
+								</c:if>
+						</sec:authorize>
+				
 					</div>
 
-				<!-- text content-->
-				<!-- <div class="textContent">	 -->
-				<div class="ui segment" style="font-weight: 700;">제목 : ${feed.title }</div>
-				<div class="ui segment" style="font-weight: 700;">본문 : ${feed.content }</div>
-				<div class="ui segment" style="font-weight: 700;">장소 태그 : ${feed.location }</div>
-				<!-- </div> -->
-				
-				<!-- 댓글 기능 -->
-				<!-- <div id="commentcontainer"> -->
-				<div id="commentTitle" class="content">
-					<h3>
-						<i class="fa-solid fa-comments"></i> 댓글
-					</h3>
-				</div>
-				<br />
-				<c:if test="${feed.commentCount > 0 }">
-					<ul class="list-group" id="commentListContainer"></ul>
-				</c:if>
-				<c:if test="${feed.commentCount == 0 }">
-					<div>
-						<h6>댓글이 없습니다.</h6>
+
+					<!-- text content-->
+					<div class="content"">
+						<div style="font-weight: 700; font-size: large;">${feed.title }</div> <br /><br />
+						<div style="font-weight: 500;">${feed.content }</div>
+						<%-- <div class="ui segment" style="font-weight: 700;">장소 태그 : ${feed.location }</div> --%>
 					</div>
-				</c:if>
+					<!-- </div> -->
+				
+					<!-- 댓글 기능 -->
+					<!-- <div id="commentcontainer"> -->
+					<div id="commentTitle" class="content">
+						<h3>
+							<i class="fa-solid fa-comments"></i> 댓글
+						</h3>
+					</div>
+					<br />
+					<c:if test="${feed.commentCount > 0 }">
+						<ul class="list-group" id="commentListContainer"></ul>
+					</c:if>
+					<c:if test="${feed.commentCount == 0 }">
+						<div>
+							<h6>댓글이 없습니다.</h6>
+						</div>
+					</c:if>
 
 				
 				<div class="content">
@@ -241,11 +230,11 @@
 						</div>
 					</div>
 				</sec:authorize>
-				<!-- </div> -->
 				
 			</div>
+		</div>
 
-			<!-- 수정/삭제 버튼 드랍다운 -->
+			<%-- <!-- 수정/삭제 버튼 드랍다운 -->
 						<sec:authorize access="isAuthenticated()">
 							<sec:authentication property="name" var="userId" /> 
 								<c:if test="${userId eq feed.writer }">
@@ -274,9 +263,8 @@
 					
 									</div>
 								</c:if>
-						</sec:authorize>
+						</sec:authorize> --%>
 				
-				</div>
 				
 			<!-- 댓글 삭제 모달 -->
 			<div class="modal fade" id="deleteCommentConfirmModal" tabindex="-1"
@@ -322,7 +310,7 @@
 					</div>
 
 			
-		<!-- </div> -->
+		<!— </div> —>
 		
 	</div>
 
@@ -337,7 +325,7 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 			let slider = $('.bxslider').bxSlider({
-				slideWidth : 400
+				slideWidth : 600
 			});
 		});
 	</script>

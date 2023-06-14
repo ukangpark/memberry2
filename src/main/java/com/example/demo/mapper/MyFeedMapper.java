@@ -53,8 +53,7 @@ public interface MyFeedMapper {
 			UPDATE Feed
 			SET
 				title = #{title},
-				content = #{content},
-				location = #{location}
+				content = #{content}
 			WHERE 
 				id = #{id}
 			""")
