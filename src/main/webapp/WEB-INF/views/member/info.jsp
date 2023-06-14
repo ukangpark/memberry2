@@ -70,33 +70,37 @@
 			</div>
 		</div>
 
+		<sec:authorize access="authentication.name eq #member.id">
 		<div id="buttons">
 			<a class="ui secondary button" href="/member/modify?id=${member.id }" style="margin: 20px; font-size: 16px;">수정</a>
 			<button type="button" data-bs-toggle="modal" class="ui red button" data-bs-target="#confirmModal" style="margin: 20px; font-size: 16px;">탈퇴</button>
 		</div>
+		</sec:authorize>
 	</div>
 	
 	<!-- 탈퇴 확인 Modal -->
-	<div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h1 class="modal-title fs-5" id="exampleModalLabel">탈퇴 확인</h1>
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				</div>
-				<div class="modal-body">
-					<form id="removeForm" action="/member/remove" method="post">
-						<input type="hidden" name="id" value="${member.id }" /> <label for="passwordInput1">비밀번호 입력</label> 
-						<input id="passwordInput1" type="password" name="password" class="form-control" />
-					</form>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="ui button" data-bs-dismiss="modal">취소</button>
-					<button type="submit" form="removeForm" class="ui red button">탈퇴</button>
+	<sec:authorize access="authentication.name eq #member.id">
+		<div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title fs-5" id="exampleModalLabel">탈퇴 확인</h1>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<form id="removeForm" action="/member/remove" method="post">
+							<input type="hidden" name="id" value="${member.id }" /> <label for="passwordInput1">비밀번호 입력</label> 
+							<input id="passwordInput1" type="password" name="password" class="form-control" />
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="ui button" data-bs-dismiss="modal">취소</button>
+						<button type="submit" form="removeForm" class="ui red button">탈퇴</button>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
+	</sec:authorize>
 
 	<my:bottom></my:bottom>
 	

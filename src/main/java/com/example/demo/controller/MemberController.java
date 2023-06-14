@@ -67,7 +67,7 @@ public class MemberController {
 		try {
 			service.signup(member);
 			rttr.addFlashAttribute("message", "회원 가입되었습니다.");
-			return "redirect:/petsitter/main";
+			return "redirect:/member/login";
 		} catch (Exception e) {
 			e.printStackTrace();
 			rttr.addFlashAttribute("member", member);
@@ -101,7 +101,7 @@ public class MemberController {
 	}
 
 	@PostMapping("remove")
-	@PreAuthorize("(isAuthenticated() and (authentication.name eq #member.id)) or hasAuthority('admin')")
+	@PreAuthorize("isAuthenticated() and (authentication.name eq #member.id)")
 	public String remove(Member member, 
 						 RedirectAttributes rttr,
 						 HttpServletRequest request) throws Exception {
@@ -114,7 +114,7 @@ public class MemberController {
 			// 탈퇴되었으면 로그아웃되도록
 			request.logout();
 			
-			return "redirect:/petsitter/main";
+			return "redirect:/home";
 		} else {
 			rttr.addFlashAttribute("message", "회원 탈퇴시 문제가 발생했습니다.");
 			return "redirect:/member/info?id=" + member.getId();
@@ -122,14 +122,14 @@ public class MemberController {
 	}
 
 	@GetMapping("modify")
-	@PreAuthorize("(isAuthenticated() and (authentication.name eq #id)) or hasAuthority('admin')")
+	@PreAuthorize("isAuthenticated() and (authentication.name eq #id)")
 	public void modifyForm(String id, Model model) {
 		Member member = service.get(id);
 		model.addAttribute("member", member);
 	}
  
 	@PostMapping("modify")
-	@PreAuthorize("(isAuthenticated() and (authentication.name eq #member.id)) or hasAuthority('admin')")
+	@PreAuthorize("isAuthenticated() and (authentication.name eq #member.id)")
 	public String modifyProcess(Member member, String oldPassword, RedirectAttributes rttr) {
 		boolean ok = service.modify(member, oldPassword);
 		if (ok) {
