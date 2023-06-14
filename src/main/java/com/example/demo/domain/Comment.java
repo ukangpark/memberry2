@@ -16,6 +16,11 @@ public class Comment {
 	private String content;
 	private String inserted;
 	private Boolean editable; 
+
+	private String nickName;
+	private String defaultPetId;
+	private String profileImage;
+	
 	
 	
 	public void setInserted(Date date) {
