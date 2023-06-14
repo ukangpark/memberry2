@@ -23,9 +23,9 @@ public class CalendarService {
 		return calendardao.getCalendar();
 	}
 
-	public Map<String, Calendar> getAllSchedule(Authentication authentication) {
-		Map<String, Calendar> cals = mapper.selectAllByMemberId(authentication.getName());
-		return cals;
+	public Arrays getAllSchedule(Authentication authentication) {
+		return mapper.selectAllByMemberId(authentication.getName());
+		
 	}
 	
 
