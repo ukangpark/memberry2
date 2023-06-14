@@ -86,7 +86,7 @@
 					<div class="ui fluid labeled big input mt-5">
 						<div class="ui label">이메일</div>
 						<input id="inputEmail" type="email" class="form-control" name="email" value="${member.email }" 
-						style="font-size: 18px; text-align: center;" /> 
+						style="font-size: 18px; text-align: center;" placeholder="영문으로만 입력해주세요"/> 
 						
 						<input id="availableEmailMessage" class="d-none form-control" type="text" value="사용 가능한 이메일입니다." 
 						style="font-size: 18px; text-align: center; color: blue;" readonly/> 

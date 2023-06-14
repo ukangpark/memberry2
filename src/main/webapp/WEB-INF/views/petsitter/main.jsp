@@ -29,10 +29,12 @@
 #input-box {
 	display: flex;
 	width: 600px;
-	padding: 6px;
+	padding: 6px 0px 6px 6px;
 	border-radius: 5px;
 	border: 2px solid #e2e2e2;
 	height: 50px;
+	text-align: center;
+	font-size: 15px;
 }
 
 .input-box i {
@@ -45,12 +47,13 @@
 	outline: none;
 }
 
-#button {
-	position: relative;
-	text-align: right;
-	margin: 0px 0px 20px 0px;
+#searchBtn{
+	margin: 0px 6px;
 }
 
+#allButton{
+	padding: 0px 6px;
+}
 /* 
 button {
 	margin-bottom: 15px;
@@ -155,18 +158,18 @@ button {
 
 	<div class="ui center aligned container" id="container">
 
-		<img id="memberyLogo" src="/images/petsitterRealLogo.png" alt="Membery logo">
+		<img id="memberyLogo" src="/images/petsitterLogo.png" alt="Membery logo">
 
 		<div class="searchBar">
 			<form action="list" class="d-flex" role="search">
 				<input value="${param.search }" name="search" class="form-control me-2" type="search" 
 				placeholder="맡기고 싶은 지역을 검색해보세요" aria-label="Search" id="input-box">
-				<button class="ui black button" type="submit" style="width: 80px">
+				<button id="searchBtn" class="ui black button" type="submit" style="width: 50px; text-align: center;">
 					<i class="fa-solid i1 fa-magnifying-glass"></i>
 				</button>
 				<!-- 전체보기 버튼 -->
-				<button class="ui right labeled icon button" onclick="location.href='/petsitter/list'"
-						style="width: 200px;">
+				<button id="allButton" class="ui right labeled icon button" onclick="location.href='/petsitter/list'"
+						style="width: 140px;">
 					<i class="right arrow icon"></i> 전체보기
 				</button>
 		</div>
