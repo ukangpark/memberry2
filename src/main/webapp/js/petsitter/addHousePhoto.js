@@ -5,7 +5,7 @@
 			console.log(node);
 			document.getElementById("addDetailForm").appendChild(clone);
 		};
-
+		
 		function readURL(input) {
 			if (input.files && input.files[0]) {
 				var reader = new FileReader();
@@ -17,18 +17,12 @@
 				document.getElementById('preview').src = "";
 			}
 		}
-
+		
 		( /* att_zone : 이미지들이 들어갈 위치 id, btn : file tag id */
 				  imageView = function imageView(imgContainer, housePhoto){
 
 				    var attZone = document.getElementById(imgContainer);
-				    var btnAtt = document.getElementById(housePhoto)
-
-
-				    var btnAtt = document.getElementById(housePhoto)
-
 				    var housePhotos = document.getElementById(housePhoto)
-
 				    var sel_files = [];
 				    
 				    // 이미지와 체크 박스를 감싸고 있는 div 속성
@@ -41,13 +35,7 @@
 				                  + 'z-index:999; ';
 				    var chkClass = 'ui button icon red';
 				  
-				    btnAtt.onchange = function(e){
-
-
-				    btnAtt.onchange = function(e){
-
 				    housePhotos.onchange = function(e){
-
 				      var files = e.target.files;
 				      var fileArr = Array.prototype.slice.call(files)
 				      for(f of fileArr){
@@ -126,13 +114,7 @@
 				          var file = sel_files[f];
 				          dt.items.add(file);
 				        }
-				        btnAtt.files = dt.files;
-
-
-				        btnAtt.files = dt.files;
-
 				        housePhotos.files = dt.files;
-
 				        var p = ele.parentNode;
 				        attZone.removeChild(p)
 				      });
@@ -148,5 +130,4 @@
 				      return imgdiv
 				    }
 				  }
-				)('imgContainer', 'housePhoto')
-
+				)('imgContainer', 'housePhotos')
