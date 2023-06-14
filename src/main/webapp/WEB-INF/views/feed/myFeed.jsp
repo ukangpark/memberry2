@@ -50,29 +50,6 @@ img {
 	<div class="mb-5">
 		<h1 style="text-align: center;">My Feed</h1>
 	</div>
-
-	<!-- 프로필 이미지 -->
-	<div id="upper" class="ui aligned container mb-5" id="imgContainer">
-		<button class="massive ui basic button" data-bs-toggle="modal" data-bs-target="#followerModal" style="border: 1px solid #E2E2E2; border-radius: 0.5rem; margin-right: 70px;">
-			<i class="fa-solid fa-user"></i> 팔로워
-		</button>
-
-		<button class="massive ui basic button" style="border: 1px solid #E2E2E2; border-radius: 0.5rem; margin-right: 50px;">
-			<i class="fa-solid fa-user-check"></i> 팔로잉
-		</button>
-
-		<img id="profilImage" class="ui circular image" src="/images/또복이 (1).jpg">
-
-		<button class="massive ui basic button" style="border: 2px solid #E2E2E2; border-radius: 0.5rem; margin-left: 50px; margin-right: 70px;">
-			<!-- <i class="fa-solid fa-envelope"></i> -->
-			<i class="fa-solid fa-paper-plane"></i> 메세지
-		</button>
-
-		<button class="massive ui basic button" style="border: 2px solid #E2E2E2; border-radius: 0.5rem;">
-			<i class="fa-solid fa-bolt"></i> 산책번개
-		</button>
-
-	</div>
 	
 		<!-- 프로필 이미지 -->
 		<div id="upper" class="ui aligned container mb-5" id="imgContainer">
@@ -112,22 +89,17 @@ img {
 		<a href="/feed/feedAdd">
 			<img src="/images/feedAddIcon.PNG" alt="" />
 
-			<c:forEach items="${fileList }" var="file">
-
-				<div class=item>
-					<a href="/feedId/${file.feedId }">
-
 		<c:forEach items="${fileList }" var="file">
-		
-	    	<div class=item>
-	    		<a href="/feedId/${file.feedId }">
-	    		
-	    		<img src="${bucketUrl }/feed/${file.feedId }/${file.fileName }" alt="" />
-	    		
-	    		</a>
-	    	</div> 
-    
-    </c:forEach>
+			
+		    <div class=item>
+		    	<a href="/feedId/${file.feedId }">
+		    		
+		    	<img src="${bucketUrl }/feed/${file.feedId }/${file.fileName }" alt="" />
+		    	
+		    	</a>
+		    </div> 
+	    
+	    </c:forEach>
    	
 	</div>
 

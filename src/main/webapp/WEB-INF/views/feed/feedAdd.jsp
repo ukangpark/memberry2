@@ -78,7 +78,7 @@
 			<input type="text" name="memberId" value="${authentication.getName() }" style="display: none">
 		</div>
 
-<!-- 			<!-- 이미지 파일 업로드 -->
+ 			<!-- 이미지 파일 업로드 -->
 			
 				<div class="" id="imgContainer">
 					<div id="imagePreview">
@@ -96,7 +96,7 @@
 					<h3 style="text-align: center">사진을 등록해 보세요!</h3>
 				</div>
 			
-			<br /> -->
+			<br /> 
 
 
 		<%-- 
@@ -142,14 +142,14 @@
 					<div class="ui pointing red basic label">내용을 입력해 주세요!</div>
 
 
-			 <div class="ui divider"></div>
+			 <%-- <div class="ui divider"></div>
 
 			<div class="ui form">
 				<div class="location">
 					<label></label> <input placeholder="장소를 태그하세요" type="text" name="location" value="${feed.location }" />
 				</div>
 			</div>
-			<br />
+			<br /> --%>
 
 			<div align="right">
 				<button class="btn btn-secondary" type="submit" form="addForm" id="addButton">추가하기</button>
