@@ -10,13 +10,25 @@ import com.example.demo.domain.Comment;
 public interface CommentMapper {
 
 	
-	 @Select(""" 
-	 	SELECT * 
-	 	FROM Comment 
+//	 @Select(""" 
+//	 	SELECT c.*, m.nickName, m.defaultPetId
+//	 	FROM Comment c LEFT JOIN Member m ON c.memberId = m.id
+//	 	WHERE feedId = #{feedId} 
+//	 	ORDER BY id DESC
+//	 		""")
+//	 List<Comment> selectAllByFeedId(Integer feedId);
+	
+	@Select("""
+	SELECT 
+			c.*, m.nickName, 
+			m.defaultPetId, 
+			CONCAT('/', p.id, '/', p.photo) profileImage
+		FROM Comment c LEFT JOIN Member m ON c.memberId = m.id
+				LEFT JOIN Pet p ON m.defaultPetId = p.id
 	 	WHERE feedId = #{feedId} 
 	 	ORDER BY id DESC
-	 		""")
-	 List<Comment> selectAllByFeedId(Integer feedId);
+			""")
+	List<Comment> selectAllByFeedId(Integer feedId);
 	
 	 @Insert("""
 	 		INSERT INTO Comment (feedId, content, memberId) 
