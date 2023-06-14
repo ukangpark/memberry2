@@ -1,5 +1,6 @@
 package com.example.demo.domain;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -24,7 +25,6 @@ public class Feed {
 	
 	private String profileImage;
 	private String nickName;
-
 	
 	public void setInserted(Date date) {
 		this.inserted = FeedTime.calculateTime(date); // 기존의 getter, setter에서 변경된 부분

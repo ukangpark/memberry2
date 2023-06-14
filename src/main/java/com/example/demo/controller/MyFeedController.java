@@ -24,6 +24,7 @@ import com.example.demo.domain.Feed;
 import com.example.demo.domain.File;
 import com.example.demo.domain.Like;
 import com.example.demo.service.MyFeedService;
+import com.example.demo.service.MyPetsService;
 
 @Controller
 @RequestMapping("/")
@@ -32,12 +33,13 @@ public class MyFeedController {
 	@Autowired
 	private MyFeedService service;
 
-	// 게시물 목록
+	// MyFeed 보기
 	@GetMapping("feed/myFeed")
 	@PreAuthorize("isAuthenticated()")
 	public String myFeed(Model model,
 			Authentication authentication) {
 		List<File> list = service.listMyFeed(authentication);
+		
 		model.addAttribute("fileList", list);
 		
 		return "feed/myFeed";

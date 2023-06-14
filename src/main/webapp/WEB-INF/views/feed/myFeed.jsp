@@ -51,7 +51,7 @@ img {
 		<h1 style="text-align: center;">My Feed</h1>
 	</div>
 	
-		<!-- 프로필 이미지 -->
+		<!-- 윗 부분 -->
 		<div id="upper" class="ui aligned container mb-5" id="imgContainer">
 			<button class="massive ui basic button" style="border: 2px solid #E2E2E2; border-radius: 0.5rem; margin-right:70px;">
 				  <i class="fa-solid fa-user"></i>
@@ -64,15 +64,22 @@ img {
 			</button>
 			
 			<!-- 프로필 이미지 -->
-			<c:if test="${logedInMember.profileImage ne null}">
-				<img class="ui circular image" id="profilImage" src="${bucketUrl }/pet${logedInMember.profileImage }"> 
-			</c:if>
-			<c:if test="${logedInMember.profileImage eq null}">
-				<img class="ui circular image" id="profilImage" src="/images/paw.png">
-			</c:if>
+			<div>
+				<c:if test="${logedInMember.profileImage ne null}">
+					<img class="ui circular image" id="profilImage" src="${bucketUrl }/pet${logedInMember.profileImage }"> 
+				</c:if>
+				<c:if test="${logedInMember.profileImage eq null}">
+					<img class="ui circular image" id="profilImage" src="/images/paw.png">
+				</c:if>	
+				
+				<div>
+					<p>${fileList[4].petName }</p>
+					<p>${fileList[5].type }</p>
+					<p>${fileList[6].birth }</p>
+				</div>
+			</div>
 			
 				<button class="massive ui basic button" style="border: 2px solid #E2E2E2; border-radius: 0.5rem; margin-left:50px; margin-right:70px;">
-				  <!-- <i class="fa-solid fa-envelope"></i> -->
 				  <i class="fa-solid fa-paper-plane"></i>
 				  메세지
 			</button>

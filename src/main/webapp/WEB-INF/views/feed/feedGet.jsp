@@ -46,21 +46,15 @@
 	display: flex;
 }
 
-#imageBox {
-	/* margin-left: 100px; */
-}
-
 #textContent {
-	/* flex-grow: 2;  */
 	margin-right: 10rem;
 	margin-left: 10rem;
 }
 
-
 #my-card {
 	 width: 600px; 
-	 height: 800px;
-	 margin-bottom: 25px;
+	 height: 810px;
+	 margin-bottom: 30px;
 }
 
 #profilImage {
@@ -69,9 +63,6 @@
 	width: 50px;
 }
 
-#inserted {
-	margin-top: 15px;
-}
 #commentTitle {
 	text-align: center;
 	font-weight: bold;
@@ -135,8 +126,7 @@
 				</div>
 				
 				<div class="ui card d-flex" id="my-card">
-					<div class="content">
-						<%-- <div id="inserted" class="right floated meta">${feed.inserted }</div> --%>
+					<div class="content" style="height: 3vh;">
 						<!-- 프로필 이미지 + 닉네임 -->
 						<c:if test="${logedInMember.profileImage ne null}">
 							<img class="ui avatar image" id="profilImage" src="${bucketUrl }/pet${feed.profileImage }"><span style="font-weight: bold;">${feed.nickName }</span> 
@@ -178,7 +168,7 @@
 
 
 					<!-- text content-->
-					<div class="content"">
+					<div class="content" style="padding-top: 5vh;">
 						<div style="font-weight: 700; font-size: large;">${feed.title }</div> <br /><br />
 						<div style="font-weight: 500;">${feed.content }</div>
 						<%-- <div class="ui segment" style="font-weight: 700;">장소 태그 : ${feed.location }</div> --%>
@@ -186,7 +176,6 @@
 					<!-- </div> -->
 				
 					<!-- 댓글 기능 -->
-					<!-- <div id="commentcontainer"> -->
 					<div id="commentTitle" class="content">
 						<h3>
 							<i class="fa-solid fa-comments"></i> 댓글
@@ -202,19 +191,21 @@
 					</c:if>
 
 				
-				<div class="content">
+				<div class="content" style="height: 5vh; padding-top: 30px;">
 					<!-- 좋아요 기능 -->
-					<span class="likeIcon" data-feed-id="${feed.id }"> 
+					<span class="likeIcon" data-feed-id="${feed.id }" style="margin-right: 0.3vw;" > 
 						<c:if test="${feed.liked }">
 							<img src="/images/bone.png">
 						</c:if> <c:if test="${not feed.liked }">
 							<img src="/images/olbone.png">
 						</c:if>
-					</span> <br />
-					<!-- 좋아요 숫자 -->
-					<span class="likeNumber" style="font-weight: 300; font-size: medium;">
-						${feed.likeCount }명이 ${logedInMember.nickName }님의 글을 좋아합니다.
 					</span> 
+					<!-- 좋아요 숫자 -->
+					<span class="likeNumber" style="font-weight: 300; font-size: medium; font-weight: bold;">
+						${feed.likeCount }명이 ${logedInMember.nickName }님의 글을 좋아합니다.
+					</span>
+					<!-- 작성 일시 --> 
+					<div id="inserted" style="margin-top: 2vh;">${feed.inserted }</div>
 				</div>
 				
 
@@ -235,38 +226,6 @@
 				
 			</div>
 		</div>
-
-			<%-- <!-- 수정/삭제 버튼 드랍다운 -->
-						<sec:authorize access="isAuthenticated()">
-							<sec:authentication property="name" var="userId" /> 
-								<c:if test="${userId eq feed.writer }">
-								
-									<div class="drop">
-										<button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-											<i class="fa-solid fa-ellipsis-vertical"></i>
-										</button>
-						
-										<ul class="dropdown-menu">
-											<!-- Dropdown menu links -->
-											<div style="text-align: center">
-												<a href="/modify/${feed.id }">수정하기</a>
-											</div>
-											<div style="text-align: center">
-												<a href="#" onclick="javascript:document.removeForm.submit();">삭제하기</a>
-											</div>
-										</ul>
-						
-										<!-- 삭제하기 기능 -->
-										<div class="d-none">
-											<form action="/remove" method="post" name="removeForm">
-												<input type="text" name="id" value="${feed.id }" />
-											</form>
-										</div>
-					
-									</div>
-								</c:if>
-						</sec:authorize> --%>
-				
 				
 			<!-- 댓글 삭제 모달 -->
 			<div class="modal fade" id="deleteCommentConfirmModal" tabindex="-1"
@@ -311,9 +270,6 @@
 						</div>
 					</div>
 
-			
-		<!— </div> —>
-		
 	</div>
 
 
