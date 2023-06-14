@@ -1,5 +1,6 @@
 package com.example.demo.mapper;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -19,7 +20,7 @@ public interface CalendarMapper {
 			FROM Calendar
 			WHERE memberId = #{memberId}
 			""")
-	Map<String, Calendar> selectAllByMemberId(String memberId);
+	Arrays selectAllByMemberId(String memberId);
 
 
 	

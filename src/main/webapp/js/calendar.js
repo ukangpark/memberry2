@@ -71,9 +71,9 @@ function getCalendar() {
 		url: "fullCalendar/getAll",
 		type: "post",
 		async: false, 
-		success: function(resp) {
-			console.log(resp);
-			arr = resp;
+		success: function(res) {
+			console.log(res);
+			arr = res;
 		},
 		error: function(){
 	 		alert("에러");

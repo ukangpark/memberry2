@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -28,9 +29,8 @@ public class CalendarController {
 	}
 	
 	@PostMapping("getAll")
-	public Map<String, Calendar> getall(Authentication authentication) {
-		Map<String, Calendar> map = service.getAllSchedule(authentication);
-		return map;
+	public Arrays getall(Authentication authentication) {
+		 return service.getAllSchedule(authentication);
 		
 	}
 	
