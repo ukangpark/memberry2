@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.*;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,31 +15,22 @@ import lombok.*;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("")
+@RequestMapping("fullCalendar")
 public class CalendarController {
 	
 	@Autowired
 	private CalendarService service;
 
 	//달력으로 이동
-	@GetMapping("fullCalendar")
+	@GetMapping("")
 	public String getTest() {
 		return "calendar";
 	}
 	
 	@PostMapping("getAll")
-	public void getall() {
-		Map<String, Calendar> cal = new HashMap<>();
-		
-		LocalDate date1 = LocalDate.of(2023, 05, 01);
-		LocalDate date2 = LocalDate.of(2023, 05, 26);
-		
-		Calendar calender = new Calendar();
-		calender.setTitle("event1");
-		calender.setStart(date1);
-		calender.setEnd(date2);
-		cal.put("ev1", calender);
-		
+	public Map<String, Calendar> getall(Authentication authentication) {
+		Map<String, Calendar> map = service.getAllSchedule(authentication);
+		return map;
 		
 	}
 	

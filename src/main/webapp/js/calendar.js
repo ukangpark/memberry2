@@ -37,7 +37,6 @@ document.addEventListener('DOMContentLoaded', function() {
               title: title,
               start: arg.start,
               end: arg.end,
-
               allDay: arg.allDay
 
             })
@@ -45,31 +44,35 @@ document.addEventListener('DOMContentLoaded', function() {
           calendar.unselect()
         },
 		events: {
-			url: '/',
-			method: 'POST',
-			extraParams: {
-				custom_param1: 'something',
-				custom_param2: 'somethingelse'
-			}
+			id: '123',
+			title: '이벤1',
+			start: '2023-06-13',
+			end: '2023-06-14'
+			
 			
 		}
 	});
-
+calendar.render();
+calendar.getEvents();
 	var arr = getCalendar();
 	$.each(arr, function(index, item) {
 		calendar.addEvent(item);
+		console.log(item);
 	});
 	calendar.render();
 });
+//Calendar DB데이터를 요청하는 함수
 function getCalendar() {
-	var arr = [{title: 'eve1', start:'ssss'}, {title: 'eve2', start:'123123'}];
+	var arr = new Array();
+	arr = null;	
 	$.ajax({
 		contentType: "application/json",
 		dataType : "json",
-		url: "calendar/getAll",
+		url: "fullCalendar/getAll",
 		type: "post",
 		async: false, 
 		success: function(resp) {
+			console.log(resp);
 			arr = resp;
 		},
 		error: function(){
