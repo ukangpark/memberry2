@@ -14,6 +14,7 @@
 	justify-content: center;
 	align-items: center;
 }
+
 </style>
 
 <my:top></my:top>
@@ -37,7 +38,7 @@
 					<div class="ui fluid labeled big input mt-5">
 						<div class="ui label">아이디</div>
 						<input id="inputId" type="text" class="form-control" name="id" value="${member.id}" 
-						style="font-size: 18px; text-align: center;" /> 
+						style="font-size: 18px; text-align: center;" placeholder="12자 이내로 작성해주세요"/> 
 						
 						<input id="availableIdMessage" class="d-none form-control" type="text" value="사용 가능한 아이디입니다." 
 						style="font-size: 18px; text-align: center; color: blue;" readonly/> 
@@ -86,7 +87,7 @@
 					<div class="ui fluid labeled big input mt-5">
 						<div class="ui label">이메일</div>
 						<input id="inputEmail" type="email" class="form-control" name="email" value="${member.email }" 
-						style="font-size: 18px; text-align: center;" placeholder="영문으로만 입력해주세요"/> 
+						style="font-size: 18px; text-align: center;"/> 
 						
 						<input id="availableEmailMessage" class="d-none form-control" type="text" value="사용 가능한 이메일입니다." 
 						style="font-size: 18px; text-align: center; color: blue;" readonly/> 

@@ -17,7 +17,7 @@
 }
 
 #img{
-	width : 400px;
+	width : 600px;
 }
 </style>
 </head>
@@ -26,9 +26,9 @@
 	<my:navBar current="memberInfo"></my:navBar>
 	<my:alert></my:alert>
 
-	<div style="margin-top: 100px; margin-bottom: 50px;">
+	<div style="margin-top: 100px; margin-bottom: 10px;">
 		<div class="ui aligned container" id="imgContainer">
-			<img class="ui centered medium circular image" src="/images/memberyLogo.png"  id="img">
+			<img class="ui centered medium circular image" src="/images/mypageLogo.png"  id="img">
 		</div>
 	</div>
 

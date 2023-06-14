@@ -78,7 +78,7 @@ public class MemberController {
 
 	// 경로: http://localhost:8080/member/list?page=3
 	@GetMapping("list")
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("hasAuthority('admin')")
 	public String list(Model model, 
 					 @RequestParam(value="page", defaultValue="1") Integer page) {
 //		List<Member> list = service.listMember(); // 페이지 처리 전
@@ -93,7 +93,7 @@ public class MemberController {
 	}
 
 	@GetMapping("info")
-	@PreAuthorize("isAuthenticated() and (authentication.name eq #id)")
+	@PreAuthorize("(isAuthenticated() and (authentication.name eq #id)) or hasAuthority('admin')")
 	public void info(String id, Model model) {
 
 		Member member = service.get(id);
@@ -101,7 +101,7 @@ public class MemberController {
 	}
 
 	@PostMapping("remove")
-	@PreAuthorize("isAuthenticated() and (authentication.name eq #member.id)")
+	@PreAuthorize("(isAuthenticated() and (authentication.name eq #member.id)) or hasAuthority('admin')")
 	public String remove(Member member, 
 						 RedirectAttributes rttr,
 						 HttpServletRequest request) throws Exception {
@@ -122,14 +122,14 @@ public class MemberController {
 	}
 
 	@GetMapping("modify")
-	@PreAuthorize("isAuthenticated() and (authentication.name eq #id)")
+	@PreAuthorize("(isAuthenticated() and (authentication.name eq #id)) or hasAuthority('admin')")
 	public void modifyForm(String id, Model model) {
 		Member member = service.get(id);
 		model.addAttribute("member", member);
 	}
  
 	@PostMapping("modify")
-	@PreAuthorize("isAuthenticated() and (authentication.name eq #member.id)")
+	@PreAuthorize("(isAuthenticated() and (authentication.name eq #member.id)) or hasAuthority('admin')")
 	public String modifyProcess(Member member, String oldPassword, RedirectAttributes rttr) {
 		boolean ok = service.modify(member, oldPassword);
 		if (ok) {
