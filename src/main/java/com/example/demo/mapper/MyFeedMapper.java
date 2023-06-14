@@ -40,8 +40,8 @@ public interface MyFeedMapper {
 				 WHERE feedId = fd.id) likeCount,
 				 (SELECT COUNT(*) FROM Comment WHERE feedId = fd.id) commentCount
 			FROM Feed fd LEFT JOIN File fl ON fd.id = fl.feedId
-						LEFT JOIN Member m ON m.id = fd.writer
-				LEFT JOIN Pet p ON m.defaultPetId = p.id
+						 LEFT JOIN Member m ON m.id = fd.writer
+				         LEFT JOIN Pet p ON m.defaultPetId = p.id
 			WHERE fd.id = #{id}
 			""")
 	@ResultMap("feedResultMap")
