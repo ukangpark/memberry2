@@ -14,11 +14,12 @@
 	});
 
 	$(function() {
-		$('#nav-container .up').on('click', function(e) {
-			e.preventDefault();
+		$('.up').on('click', function(e) {
+			/* e.preventDefault();
 			$('html,body').animate({
 				scrollTop : 0
-			}, 1000);
+			}, 1000); */
+			window.scrollTo({ top: 0, behavior: "smooth" }); 
 		});
 	});
 </script>
