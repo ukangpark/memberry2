@@ -82,7 +82,7 @@
 		<div class="ui container" id="imagePreview">
 			<img class="preview" src= "">
 			<div class="oldImage">
-				<img alt="" src="${bucketUrl }/${pet.id }/${pet.photo}">
+				<img alt="" src="${bucketUrl }/pet/${pet.id }/${pet.photo}">
 				<div class="border"></div>
 			</div>
 		</div>

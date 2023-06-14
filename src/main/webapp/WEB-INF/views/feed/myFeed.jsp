@@ -89,7 +89,6 @@ img {
 		<a href="/feed/feedAdd">
 			<img src="/images/feedAddIcon.PNG" alt="" />
 
-
 		<c:forEach items="${fileList }" var="file">
 			
 		    <div class=item>

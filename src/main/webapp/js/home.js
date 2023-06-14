@@ -9,6 +9,7 @@ function home() {
 // 댓글 js
 $(".btnTriggerModal").click(function() {
 	const feedId = $(this).attr("data-id");
+	const profileSrc = $("#profile").attr("src");
 	listComment();
 	function listComment() {
 
