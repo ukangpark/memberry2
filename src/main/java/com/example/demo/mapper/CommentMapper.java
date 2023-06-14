@@ -19,8 +19,9 @@ public interface CommentMapper {
 //	 List<Comment> selectAllByFeedId(Integer feedId);
 	
 	@Select("""
-	SELECT 
-			c.*, m.nickName, 
+		SELECT 
+			c.*, 
+			m.nickName, 
 			m.defaultPetId, 
 			CONCAT('/', p.id, '/', p.photo) profileImage
 		FROM Comment c LEFT JOIN Member m ON c.memberId = m.id
