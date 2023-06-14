@@ -10,5 +10,6 @@ public class Calendar {
 	private String title;
 	private LocalDate start;
 	private LocalDate end;
+	private Boolean allDay;
 	
 }

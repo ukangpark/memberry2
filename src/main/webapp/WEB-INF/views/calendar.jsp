@@ -20,10 +20,27 @@
   font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
   font-size: 14px;
 }
+ #header {
+	display: flex;
+	justify-content: center;
+} 
+#calendarWrapper {
+	/* display: flex; */
+	justify-content: space-around;
+	/* align-items: center; */
+	/* min-height: 100vh; */
+	background-color: #EEEEEE;
+	margin-right: 10%;
+	margin-left: 10%;
+	margin-top: 3%;
+	border-radius: 1.5rem;
+	/* position: relative; */
+}
 
 #calendar {
   max-width: 1100px;
-  margin: 40px auto;
+  margin:30px auto;
+  
 }
 
 .fc-daygrid  a{
@@ -44,17 +61,19 @@
 
 </head>
 
-<body style="padding:30px;">
+<body style="padding:30px; background-color: #FFF2F2;" >
 <my:navBar current="calendar"></my:navBar>
+	<div id="header">
+		<h1><span style="font-weight: bold">${logedInMember.nickName }</span>님 캘린더</h1>
+	</div>
 
-
-
-	<div id='calendar'></div>
+	<div id="calendarWrapper">
+		<div id='calendar'></div>
+	</div>
   
 
 
 <script src="/js/calendar.js"></script>
-
 <my:bottom></my:bottom>
 
 	 

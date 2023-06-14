@@ -26,6 +26,10 @@
 	position: relative;
 	z-index: 100;
 }
+
+#profile>img {
+	margin: auto;
+}
 </style>
 
 
@@ -34,21 +38,21 @@
 	<div class="ui position-fixed top-0 end-0">
 		<div class="ui dropdown" id="navBar">
 			<h4 id="profile">
-			
+
 				<sec:authorize access="isAuthenticated()">
 					<c:if test="${logedInMember.profileImage ne null}">
-					<img class="ui tiny image" id="nav-image" src="${bucketUrl }/pet${logedInMember.profileImage }">${logedInMember.nickName } 
+						<img class="ui tiny image" id="nav-image" src="${bucketUrl }/pet${logedInMember.profileImage }">${logedInMember.nickName }
 					</c:if>
 					<c:if test="${logedInMember.profileImage eq null}">
-					<img class="ui tiny image" id="nav-image" src="/images/paw.png">${logedInMember.nickName } 
+						<img class="ui tiny image" id="nav-image" src="/images/paw.png">${logedInMember.nickName } 
 					</c:if>
-					
+
 				</sec:authorize>
 				<sec:authorize access="not isAuthenticated()">
-					<img class="ui tiny image" id="nav-image" src="/images/paw.png">default 별명 
-				</sec:authorize>					
-					
+					<img class="ui tiny image" id="nav-image" src="/images/paw.png">membery 
+				</sec:authorize>
 			</h4>
+
 			<div class="ui vertical menu">
 				<div class="item">
 					<div class="ui input">
@@ -132,63 +136,7 @@
 	</div>
 </div>
 
-<!-- 
-<div>
-	<sec:authentication property="principal"/>
-</div>
- -->
-
-<!-- 
-<div class="d-flex flex-row-reverse mt-3"  >
-	<div class="ui inline dropdown">
-		<div class="text" id="profile">
-			<img class="ui avatar image" src="/images/genieLoki.jpeg">로키맘
-		</div>
-			<div class="menu">
-				<div class="item">
-					<a href="/home">홈피드</a>
-				</div>
-				<div class="item">
-					<a href="/myFeed">마이피드</a>
-				</div>
-				<div class="item">
-					<a href="/schedule">스케줄달력</a>
-				</div>
-				<div class="item">
-					<a href="">함께가기</a>
-				</div>
-				<div class="item">
-					<i class="left dropdown icon"></i> 
-					<span class="text">
-						<a href="/petsitter/main">펫시터</a>
-					</span>
-					<div class="menu">
-						<div class="item">
-							<a href="">펫시터지원</a>
-						</div>
-					</div>
-				</div>
-				<div class="item">
-					<a href="/registration">반려동물등록</a>
-				</div>
-				<div class="item">
-					<a href="/mypage">마이페이지</a>
-				</div>
-				<div class="item">
-					<a href="/login">로그인</a>
-				</div>
-				<div class="item">
-					<a href="/signin">회원가입</a>
-				</div>
-				<div class="item">
-					<a href="/logout">로그아웃</a>
-				</div>
-			</div>
-	</div>
-</div>
- -->
-
 <div class="up" style="position: fixed; bottom: 10px; right: 10px;">
-	<i class="fa-solid fa-circle-chevron-up fa-2x"></i>
+	<i style="cursor: pointer" class="fa-solid fa-circle-chevron-up fa-2x"></i>
 </div>
 

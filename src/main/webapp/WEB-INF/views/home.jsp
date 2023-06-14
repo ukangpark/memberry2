@@ -14,6 +14,12 @@
 
 <style>
 
+#linkCards {
+	display: flex;
+	justify-content: center;
+	
+}
+
  #header {
 	display: flex;
 	justify-content: center;
@@ -30,14 +36,22 @@
 	justify-content: space-around;
 	align-items: center;
 	min-height: 100vh;
-	margin-right: 10%;
-	margin-left: 10%;
+	margin-right: 10px;
+	margin-left: 10px;
 	border-radius: 1.5rem;
 	position: relative;
 }
 
 
+#li-imager {
+	width: 300px;
+	height: 350px;
+}
 
+#imager {
+	width: 100%;
+	height: 100%;
+}
 
 /* 댓글 모달 css */
 .modal-title {
@@ -90,12 +104,12 @@
 
 	<div class="wrapper">
 
-		<div class="ui center aligned container" id="container" style="z-index: 1">
-			<div class="ui link cards">
+		<div class="ui fluid container" id="container" style="z-index: 1">
+			<div class="ui link cards" id="linkCards">
 				<c:forEach items="${feedList}" var="feed">
 
 
-					<div class="ui card" style="margin: 30px;" >
+					<div class="ui card" style="margin: 10px;" >
 						<div class="content" >
 
 							<!-- 이미지 파일 출력 -->
@@ -103,8 +117,8 @@
 							<a href="/feedId/${feed.id}" > 
 								<ul class="slider" id="imgContainer">
 									<c:forEach items="${feed.fileName }" var="fileName">
-										<li>
-											<img class="ui medium rounded imager" src="${bucketUrl }/feed/${feed.id }/${fileName }" alt="" />
+										<li id="li-imager" >
+											<img id="imager" class="ui medium rounded imager" src="${bucketUrl }/feed/${feed.id }/${fileName }" alt="" />
 										</li>
 										
 	
