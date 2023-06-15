@@ -17,6 +17,7 @@ public interface MyFeedMapper {
 				p.petName,
 				p.type,
 				p.birth,
+				p.together,
 				CONCAT('/', p.id, '/', p.photo) profileImage 	
 			FROM File f JOIN  Pet p ON f.memberId = p.memberId
 					LEFT JOIN Member m ON m.defaultPetId = p.id
