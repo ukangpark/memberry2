@@ -35,7 +35,7 @@ img {
 	height: 300px;
 	border-radius: 50%;
 	border-style: solid;
-	border: 1px;
+	border: 5px;
 	align-items: center;
 	justify-content: center;
 	padding: 0px;
