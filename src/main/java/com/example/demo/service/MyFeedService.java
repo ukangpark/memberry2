@@ -46,8 +46,8 @@ public class MyFeedService {
 	
 
 	
-	public List<File> listMyFeed(Authentication authentication) {
-		List<File> file = mapper.selectAll(authentication.getName());
+	public List<File> listMyFeed(String userName) {
+		List<File> file = mapper.selectAll(userName);
 		return file;
 	}
 

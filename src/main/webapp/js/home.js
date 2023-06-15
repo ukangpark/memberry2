@@ -38,22 +38,29 @@ $(".btnTriggerModal").click(function() {
 						<div class="ms-2 me-auto">
 							<div class="fw-bold d-flex align-items-center"> 
 							<div>
-							
-						<img class="ui avatar image" id="nav-image" style="border: solid 1px;" src="https://lilysbucket0503.s3.ap-northeast-2.amazonaws.com/membery/pet${comment.profileImage}">
+
+								<c:if test="${comment.profileImage != null}">
+									<img class="ui avatar image" id = "nav-image" style = "border: solid 1px;" src = "https://lilysbucket0503.s3.ap-northeast-2.amazonaws.com/membery/pet${comment.profileImage}" >
+								</c:if>
+								<c:if test="${comment.profileImage == null}">
+									<img class="ui tiny image" id="nav-image" src="/images/paw.png">
+								</c:if>
+								
+							</div >
+
+					<div> ${comment.nickName}</div>
+							</div >
+					<div style="white-space: pre-wrap;">${comment.content}</div>
+						</div >
+					<div>
+						<span class="badge bg-secondary rounded-pill">${comment.inserted}</span>
+						<div class="text-end mt-2">
+							${comment.editable ? editButtons : ''}
+
+						</div>
 					</div>
-							
-							<div> ${comment.nickName}</div>
-							</div>
-							<div style="white-space: pre-wrap;">${comment.content}</div>
-						</div>
-						<div>
-							<span class="badge bg-secondary rounded-pill">${comment.inserted}</span>
-							<div class="text-end mt-2">
-								${comment.editable ? editButtons : ''}
-							</div>
-						</div>
-						
-					`);
+
+				`);
 				};
 
 				$(".commentDeleteButton").click(function() {

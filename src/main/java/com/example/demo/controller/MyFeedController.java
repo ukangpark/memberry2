@@ -1,5 +1,8 @@
 package com.example.demo.controller;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.ArrayList;
 import java.util.List;
 
 import java.util.Map;
@@ -23,6 +26,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.example.demo.domain.Feed;
 import com.example.demo.domain.File;
 import com.example.demo.domain.Like;
+import com.example.demo.domain.Registration;
 import com.example.demo.service.MyFeedService;
 import com.example.demo.service.MyPetsService;
 
@@ -32,15 +36,33 @@ public class MyFeedController {
 	
 	@Autowired
 	private MyFeedService service;
-
+	
 	// MyFeed 보기
-	@GetMapping("feed/myFeed")
+	@GetMapping("feed/myFeed/{userName}")
 	@PreAuthorize("isAuthenticated()")
 	public String myFeed(Model model,
-			Authentication authentication) {
-		List<File> list = service.listMyFeed(authentication);
+			@PathVariable("userName") String userName,
+			Authentication auth) {
+		List<File> list = service.listMyFeed(userName);
+		
+		String petName = list.get(0).getPetName();
+		String type = list.get(0).getType();
+		LocalDate birth = list.get(0).getBirth();
+		LocalDate together = list.get(0).getTogether();
+		
+		
+		var now = LocalDate.now();
+		Registration petList = new Registration(); 
+		petList.setPetName(petName);
+		petList.setType(type);
+		petList.setBirth(birth);
+		petList.setDiff(Period.between(together, now));
+		
+		String profileImage = list.get(0).getProfileImage();
 		
 		model.addAttribute("fileList", list);
+		model.addAttribute("proileImg", profileImage);
+		model.addAttribute("petList", petList);		
 		
 		return "feed/myFeed";
 	}

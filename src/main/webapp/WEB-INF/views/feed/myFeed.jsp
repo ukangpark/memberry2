@@ -50,64 +50,61 @@ img {
 	<div class="mb-5">
 		<h1 style="text-align: center;">My Feed</h1>
 	</div>
-	
-		<!-- 윗 부분 -->
-		<div id="upper" class="ui aligned container mb-5" id="imgContainer">
-			<button class="massive ui basic button" style="border: 2px solid #E2E2E2; border-radius: 0.5rem; margin-right:70px;">
-				  <i class="fa-solid fa-user"></i>
-				  팔로워
-			</button>
-			
-			<button class="massive ui basic button" style="border: 2px solid #E2E2E2; border-radius: 0.5rem; margin-right:50px;">
-				  <i class="fa-solid fa-user-check"></i>
-				  팔로잉
-			</button>
-			
-			<!-- 프로필 이미지 -->
+
+	<!-- 윗 부분 -->
+	<div id="upper" class="ui aligned container mb-5" id="imgContainer">
+		<button class="massive ui basic button" style="border: 2px solid #E2E2E2; border-radius: 0.5rem; margin-right: 70px;">
+			<i class="fa-solid fa-user"></i> 팔로워
+		</button>
+
+		<button class="massive ui basic button" style="border: 2px solid #E2E2E2; border-radius: 0.5rem; margin-right: 50px;">
+			<i class="fa-solid fa-user-check"></i> 팔로잉
+		</button>
+
+		<!-- 프로필 이미지 -->
+		<div>
+			<c:if test="${logedInMember.profileImage ne null}">
+				<img class="ui circular image" id="profilImage" src="${bucketUrl }/pet${proileImg}">
+			</c:if>
+			<c:if test="${logedInMember.profileImage eq null}">
+				<img class="ui circular image" id="profilImage" src="/images/paw.png">
+			</c:if>
+
 			<div>
-				<c:if test="${logedInMember.profileImage ne null}">
-					<img class="ui circular image" id="profilImage" src="${bucketUrl }/pet${logedInMember.profileImage }"> 
-				</c:if>
-				<c:if test="${logedInMember.profileImage eq null}">
-					<img class="ui circular image" id="profilImage" src="/images/paw.png">
-				</c:if>	
-				
-				<div>
-					<p>${fileList[4].petName }</p>
-					<p>${fileList[5].type }</p>
-					<p>${fileList[6].birth }</p>
-				</div>
+				<p>${petList.petName }</p>
+				<p>${petList.type }</p>
+				<p>
+					<i class="heart icon"></i>${petList.diff.years}년 ${petList.diff.months}개월째 함께 하는 중 입니다<i class="heart icon"></i>
+				</p>
 			</div>
-			
-				<button class="massive ui basic button" style="border: 2px solid #E2E2E2; border-radius: 0.5rem; margin-left:50px; margin-right:70px;">
-				  <i class="fa-solid fa-paper-plane"></i>
-				  메세지
-			</button>
-			
-			<button class="massive ui basic button" style="border: 2px solid #E2E2E2; border-radius: 0.5rem;">
-				  <i class="fa-solid fa-bolt"></i>
-				  산책번개
-			</button>
-			
 		</div>
+
+		<button class="massive ui basic button" style="border: 2px solid #E2E2E2; border-radius: 0.5rem; margin-left: 50px; margin-right: 70px;">
+			<i class="fa-solid fa-paper-plane"></i> 메세지
+		</button>
+
+		<button class="massive ui basic button" style="border: 2px solid #E2E2E2; border-radius: 0.5rem;">
+			<i class="fa-solid fa-bolt"></i> 산책번개
+		</button>
+
+	</div>
 
 	<div class="container">
 
 		<a href="/feed/feedAdd">
 			<img src="/images/feedAddIcon.PNG" alt="" />
 
-		<c:forEach items="${fileList }" var="file">
-			
-		    <div class=item>
-		    	<a href="/feedId/${file.feedId }">
-		    		
-		    	<img src="${bucketUrl }/feed/${file.feedId }/${file.fileName }" alt="" />
-		    	
-		    	</a>
-		    </div> 
-	    
-	    </c:forEach>
-   	
+			<c:forEach items="${fileList }" var="file">
+
+				<div class=item>
+					<a href="/feedId/${file.feedId }">
+
+						<img src="${bucketUrl }/feed/${file.feedId }/${file.fileName }" alt="" />
+
+					</a>
+				</div>
+
+			</c:forEach>
 	</div>
 
 
