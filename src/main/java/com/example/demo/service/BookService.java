@@ -85,6 +85,12 @@ public class BookService {
 		return mapper.getPet(userId);
 	}
 
+	//예약 취소
+	public boolean remove(Integer id) {
+		int cnt = mapper.deleteById(id);
+		return cnt==1;
+	}
+
 
 		
 

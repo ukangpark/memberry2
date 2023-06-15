@@ -14,6 +14,6 @@ public class Member {
 	private String email;
 	private String phoneNumber;
 	private LocalDateTime inserted;
-	
 	private String profileImage;
+	private List<String> authority;
 }

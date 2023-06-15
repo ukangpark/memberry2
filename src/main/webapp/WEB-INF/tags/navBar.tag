@@ -85,7 +85,6 @@
 							</sec:authorize>
 							<!-- 호스트가 보는 예약내역-->
 							<sec:authorize access="isAuthenticated()">
-								<a class="${current eq 'regiListHost' ? 'active' : '' } item" href="/book/list/host">예약요청목록</a>
 								<a class="${current eq 'regiListHost' ? 'active' : '' } item" href="/book/list/host">예약요청내역</a>
 							</sec:authorize>
 							<sec:authorize access="isAuthenticated()">
@@ -109,6 +108,10 @@
 					<a class="${current eq 'petList' ? 'active' : '' } item" href="/myPets/petList"> 나의반려동물 </a>
 				</sec:authorize>
 
+				<sec:authorize access="isAuthenticated()">
+					<a class="${current eq 'memberInfo' ? 'active' : '' } item" href="/member/info?id=<sec:authentication property="name" /> "> 마이페이지 </a>
+				</sec:authorize>
+
 				<sec:authorize access="isAnonymous()">
 					<a class="${current eq 'login' ? 'active' : '' } item" href="/member/login"> 로그인 </a>
 				</sec:authorize>
@@ -117,8 +120,7 @@
 					<a class="${current eq 'signup' ? 'active' : '' } item" href="/member/signup"> 회원가입 </a>
 				</sec:authorize>
 
-				<!-- 관리자 권한으로 변경해야함 -->
-				<sec:authorize access="isAuthenticated()">
+				<sec:authorize access="hasAuthority('admin')">
 					<a class="${current eq 'list' ? 'active' : '' } item" href="/member/list"> 회원목록 </a>
 				</sec:authorize>
 
