@@ -100,13 +100,20 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
+      <form action="/book/regiForm/${detail.id}" id="bookForm">
        <c:forEach items="${pet }" var="pet">
-       ${pet.id }
+		       <div class="form-check">
+		  <input class="form-check-input" type="radio" name="petId" id="flexRadioDefault1" value="${pet.id }">
+		  <label class="form-check-label" for="flexRadioDefault1">
+		    ${pet.petName }
+		  </label>
+		</div>
        </c:forEach>
+      </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-        <button type="button" class="btn btn-primary" onclick="location.href='/book/regiForm/${detail.id}'" >예약하기</button>
+        <button type="submit" class="btn btn-primary" form="bookForm" >예약하기</button>
       </div>
     </div>
   </div>

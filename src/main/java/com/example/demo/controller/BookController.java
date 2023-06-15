@@ -89,9 +89,9 @@ public class BookController {
 	
 	// 예약신청서 
 	@GetMapping("regiForm/{id}")
-	public String addRegi(@PathVariable("id") Integer id, Model model, Authentication authentication) {
+	public String addRegi(@PathVariable("id") Integer id, int petId, Model model, Authentication authentication) {
 		String userId = authentication.getName();
-		Registration pet = service.getPet(userId);
+		Registration pet = service.getPet(userId, petId);
 		model.addAttribute("pet", pet);
 		model.addAttribute("detailId", id);
 		return "book/regiForm";
@@ -102,8 +102,9 @@ public class BookController {
 
 	// 예약추가
 	@PostMapping("bookAdd")
-	public String addRegi(Book book, RedirectAttributes rttr) {
+	public String addRegi(Book book, RedirectAttributes rttr, Authentication authentication) {
 
+		book.setMemberId(authentication.getName());
 		service.addRegi(book);
 		return "redirect:/book/list";
 

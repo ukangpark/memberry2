@@ -16,7 +16,11 @@
 
 </head>
 <body>
+
+	<d:navBar current="regiFormModify" />
+	
 	<div class="container-lg">
+	<div style="margin: 100px 300px 300px 300px; border: 8px double lightblue;">
 	<h1>${book.petName }의 예약내역</h1>
 	<div>
 		체크인 : ${book.checkIn }
@@ -31,6 +35,7 @@
 		전하고 싶은 말 : <div>${book.message }</div>
 	</div>
 	
+	</div>
 	</div>
 
 	

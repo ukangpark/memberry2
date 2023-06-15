@@ -81,14 +81,19 @@ public class BookService {
 
 
 	// 펫 정보 가져오기
-	public Registration getPet(String userId) {
-		return mapper.getPet(userId);
+	public Registration getPet(String userId, int petId) {
+		return mapper.getPet(userId,petId);
 	}
 
 	//예약 취소
 	public boolean remove(Integer id) {
 		int cnt = mapper.deleteById(id);
 		return cnt==1;
+	}
+
+
+	public Registration getPet(String userId) {
+		return mapper.getPetModify(userId);
 	}
 
 

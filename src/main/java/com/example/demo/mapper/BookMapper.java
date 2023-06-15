@@ -107,8 +107,9 @@ public interface BookMapper {
 				weight
 			FROM Pet
 			WHERE Pet.memberId = #{userId}
+			AND	  id = #{petId}
 			""")
-	Registration getPet(String userId);
+	Registration getPet(String userId, int petId);
 
 	
 	@Delete("""
@@ -117,6 +118,20 @@ public interface BookMapper {
 		
 			""")
 	int deleteById(Integer id);
+
+	@Select("""
+			SELECT 
+				id,
+				petName,
+				type,
+				birth,
+				gender,
+				neutered,
+				weight
+			FROM Pet
+			WHERE Pet.memberId = #{userId}
+			""")
+	Registration getPetModify(String userId);
 
 	
 }
