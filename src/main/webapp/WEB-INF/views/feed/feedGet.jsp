@@ -128,12 +128,14 @@
 				<div class="ui card d-flex" id="my-card">
 					<div class="content" style="height: 3vh;">
 						<!-- 프로필 이미지 + 닉네임 -->
+						<a href="/feed/myFeed/${feed.writer}">
 						<c:if test="${logedInMember.profileImage ne null}">
 							<img class="ui avatar image" id="profilImage" src="${bucketUrl }/pet${feed.profileImage }"><span style="font-weight: bold;">${feed.nickName }</span> 
 						</c:if>
 						<c:if test="${logedInMember.profileImage eq null}">
 							<img class="ui avatar image" id="profilImage" src="/images/paw.png"><span style="font-weight: bold;">${feed.nickName }</span> 
 						</c:if>
+						</a>
 						
 						<!-- 수정/삭제 버튼 드랍다운 -->
 						<sec:authorize access="isAuthenticated()">

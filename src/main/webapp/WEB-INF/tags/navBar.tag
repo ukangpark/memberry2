@@ -33,18 +33,17 @@
 </style>
 
 
-
 <div class="ui fluid right aligned container" id="nav-container">
 	<div class="ui position-fixed top-0 end-0">
 		<div class="ui dropdown" id="navBar">
 			<h4 id="profile">
 
 				<sec:authorize access="isAuthenticated()">
-					<c:if test="${logedInMember.profileImage ne null}">
-						<img class="ui tiny image" id="nav-image" src="${bucketUrl }/pet${logedInMember.profileImage }">${logedInMember.nickName }
+					<c:if test="${sessionScope.logedInMember.profileImage ne null}">
+						<img class="ui tiny image" id="nav-image" src="${bucketUrl }/pet${sessionScope.logedInMember.profileImage }">${sessionScope.logedInMember.nickName }
 					</c:if>
-					<c:if test="${logedInMember.profileImage eq null}">
-						<img class="ui tiny image" id="nav-image" src="/images/paw.png">${logedInMember.nickName } 
+					<c:if test="${sessionScope.logedInMember.profileImage eq null}">
+						<img class="ui tiny image" id="nav-image" src="/images/paw.png">${sessionScope.logedInMember.nickName } 
 					</c:if>
 
 				</sec:authorize>
@@ -64,7 +63,8 @@
 
 
 				<sec:authorize access="isAuthenticated()">
-					<a class="${current eq 'myFeed' ? 'active' : '' } item" href="/feed/myFeed"> 마이피드 </a>
+					<sec:authentication property="name" var="userId"/>
+					<a class="${current eq 'myFeed' ? 'active' : '' } item" href="/feed/myFeed/${userId }"> 마이피드 </a>
 				</sec:authorize>
 
 				<sec:authorize access="isAuthenticated()">

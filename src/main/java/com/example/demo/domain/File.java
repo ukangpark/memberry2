@@ -14,4 +14,6 @@ public class File {
 	private String petName;
 	private String type;
 	private LocalDate birth;
+	
+	private String profileImage;
 }
