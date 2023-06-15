@@ -9,6 +9,7 @@ function home() {
 // 댓글 js
 $(".btnTriggerModal").click(function() {
 	const feedId = $(this).attr("data-id");
+	const profileSrc = $("#profile").attr("src");
 	listComment();
 	function listComment() {
 
@@ -35,7 +36,13 @@ $(".btnTriggerModal").click(function() {
 					$("#commentListContainer").append(`
 						<li class="list-group-item d-flex justify-content-between align-items-start">
 						<div class="ms-2 me-auto">
-							<div class="fw-bold"> <i class="fa-solid fa-user"></i> ${comment.memberId}</div>
+							<div class="fw-bold d-flex align-items-center"> 
+							<div>
+						<img class="ui avatar image" id="nav-image" style="border: solid 1px;" src="https://lilysbucket0503.s3.ap-northeast-2.amazonaws.com/membery/pet${comment.profileImage}">
+					</div>
+							
+							<div> ${comment.nickName}</div>
+							</div>
 							<div style="white-space: pre-wrap;">${comment.content}</div>
 						</div>
 						<div>

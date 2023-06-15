@@ -42,6 +42,8 @@ public class MyFeedService {
 	
 	@Autowired
 	private CommentMapper commentMapper;
+	
+	
 
 	
 	public List<File> listMyFeed(Authentication authentication) {

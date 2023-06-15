@@ -24,6 +24,7 @@ import com.example.demo.domain.Feed;
 import com.example.demo.domain.File;
 import com.example.demo.domain.Like;
 import com.example.demo.service.MyFeedService;
+import com.example.demo.service.MyPetsService;
 
 @Controller
 @RequestMapping("/")
@@ -32,17 +33,19 @@ public class MyFeedController {
 	@Autowired
 	private MyFeedService service;
 
-	// 게시물 목록
+	// MyFeed 보기
 	@GetMapping("feed/myFeed")
 	@PreAuthorize("isAuthenticated()")
 	public String myFeed(Model model,
 			Authentication authentication) {
 		List<File> list = service.listMyFeed(authentication);
+		
 		model.addAttribute("fileList", list);
 		
 		return "feed/myFeed";
-		
 	}
+	
+	
 	
 	@GetMapping("feed/feedAdd")
 	@PreAuthorize("isAuthenticated()")
@@ -85,7 +88,7 @@ public class MyFeedController {
 	
 	// 게시물 수정하는 폼 보여주기
 	@GetMapping("/modify/{feedId}")
-	@PreAuthorize("isAuthenticated() and @customSecurityChecker.checkFeedWriter(authentication, #id)")
+	@PreAuthorize("isAuthenticated() and @customSecurityChecker.checkFeedWriter(authentication, #feedId)")
 	public String modifyForm(@PathVariable("feedId") Integer feedId, Model model) {
 		model.addAttribute("feed", service.getPost(feedId));
 		return "feed/feedModify";

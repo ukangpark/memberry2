@@ -3,6 +3,7 @@ package com.example.demo.service;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.*;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.*;
 
 import com.example.demo.domain.*;
@@ -21,6 +22,12 @@ public class CalendarService {
 	public List<Calendar> getCalendar() throws Exception {
 		return calendardao.getCalendar();
 	}
+
+	public Arrays getAllSchedule(Authentication authentication) {
+		return mapper.selectAllByMemberId(authentication.getName());
+		
+	}
+	
 
 	
 	

@@ -93,3 +93,20 @@ UPDATE Feed SET writer = 'ukang0711' WHERE id = 82;
 
 ALTER TABLE Feed
 ADD FOREIGN KEY (writer) REFERENCES Member(id);
+
+UPDATE Feed SET writer = 'sohee.G' WHERE id = 106;
+
+SELECT * FROM Pet ORDER BY id DESC;
+DESC Pet;
+DESC Feed;
+DESC File;
+
+SELECT 
+				f.feedId, 	
+				f.fileName,
+				p.petName,
+				p.type,
+				p.birth 	
+			FROM File f JOIN  Pet p ON f.memberId = p.memberId
+			WHERE f.memberId = 'ukang0711'
+			GROUP BY f.feedId ORDER BY f.id DESC;

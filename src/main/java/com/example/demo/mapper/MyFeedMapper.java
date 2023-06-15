@@ -11,9 +11,15 @@ import com.example.demo.domain.*;
 public interface MyFeedMapper {
 	
 	@Select("""
-			SELECT feedId, fileName FROM File
-			WHERE memberId = #{memberId}
-			GROUP BY FeedId ORDER BY id DESC
+			SELECT 
+				f.feedId, 	
+				f.fileName,
+				p.petName,
+				p.type,
+				p.birth 	
+			FROM File f JOIN  Pet p ON f.memberId = p.memberId
+			WHERE f.memberId = #{memberId}
+			GROUP BY f.feedId ORDER BY f.id DESC
 			""")
 	List<File> selectAll(String memberId);
 
@@ -33,11 +39,15 @@ public interface MyFeedMapper {
 				fd.inserted,
 				fd.location,
 				fl.fileName,
+				m.nickName,
+				CONCAT('/', p.id, '/', p.photo) profileImage,
 				(SELECT COUNT(*) 
 				 FROM FeedLike 
 				 WHERE feedId = fd.id) likeCount,
 				 (SELECT COUNT(*) FROM Comment WHERE feedId = fd.id) commentCount
 			FROM Feed fd LEFT JOIN File fl ON fd.id = fl.feedId
+						 LEFT JOIN Member m ON m.id = fd.writer
+				         LEFT JOIN Pet p ON m.defaultPetId = p.id
 			WHERE fd.id = #{id}
 			""")
 	@ResultMap("feedResultMap")
@@ -53,9 +63,7 @@ public interface MyFeedMapper {
 			UPDATE Feed
 			SET
 				title = #{title},
-				content = #{content},
-				writer = #{writer},
-				location = #{location}
+				content = #{content}
 			WHERE 
 				id = #{id}
 			""")
