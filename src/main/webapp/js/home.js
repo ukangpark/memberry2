@@ -39,12 +39,8 @@ $(".btnTriggerModal").click(function() {
 							<div class="fw-bold d-flex align-items-center"> 
 							<div>
 
-								<c:if test="${comment.profileImage != null}">
-									<img class="ui avatar image" id = "nav-image" style = "border: solid 1px;" src = "https://lilysbucket0503.s3.ap-northeast-2.amazonaws.com/membery/pet${comment.profileImage}" >
-								</c:if>
-								<c:if test="${comment.profileImage == null}">
-									<img class="ui tiny image" id="nav-image" src="/images/paw.png">
-								</c:if>
+								
+								<img class="ui avatar image" style="border: solid 1px" src = ${comment.profileImage != null ? "https://lilysbucket0503.s3.ap-northeast-2.amazonaws.com/membery/pet" + comment.profileImage : "/images/paw.png"}   
 								
 							</div >
 
