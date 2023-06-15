@@ -47,6 +47,24 @@ $("#checkIdBtn").click(function() {
 	})
 })
 
+
+// 한글만 입력 가능하도록 처리
+$("#inputName").keyup(function(event) {
+
+	regexp = /[a-z0-9]|[ \[\]{}()<>?|`~!@#$%^&*-_+=,.;:\"'\\]/g;
+
+	v = $(this).val();
+
+	if (regexp.test(v)) {
+
+		alert("실명을 입력하여 주세요\n한글만 입력가능 합니다.");
+
+		$(this).val(v.replace(regexp, ''));
+
+	}
+
+});
+
 // input 닉네임에 keyup 이벤트 발생시
 $("#inputNickName").keyup(function() {
 	// 닉네임 중복확인 다시

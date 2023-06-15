@@ -3,7 +3,7 @@ main();
 function main() {
 	$('.slide_gallery').bxSlider({
 		mode: 'horizontal',
-		maxSlides: 4,
+		maxSlides: 2,
 		minSlides: 1,
 		moveSlides: 1,
 		slideMargin: 1,

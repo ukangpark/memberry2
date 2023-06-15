@@ -50,7 +50,8 @@ public interface PetsitterMapper {
 				dong, 
 				Host.title, 
 				Detail.id detail ,
-				profile
+				profile,
+				memberId
 			FROM Host LEFT JOIN Detail ON Host.id = Detail.hostId;
 			""")
 	List<Host> selectHostAll();
@@ -206,6 +207,16 @@ public interface PetsitterMapper {
 			SELECT * FROM Host WHERE memberId = #{memberId}
 			""")
 	Host selectHostByMemberId(String memberId);
+	
+	@Delete("""
+			DELETE FROM PetsitterComment WHERE detailId = #{detailId}
+			""")
+	Integer deleteCommentByDetailId(Integer detailId);
+	
+	@Delete("""
+			DELETE FROM Book WHERE detailId = #{detailId}
+			""")
+	Integer deleteBookByDetailId(Integer detailId);
 
 	@Select("""
 			SELECT * FROM Pet
