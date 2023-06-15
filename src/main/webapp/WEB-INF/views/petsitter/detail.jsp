@@ -43,7 +43,10 @@
 	</div>
 	<!-- 호스트 간략 정보 -->
 	<div class="container" style="width: 900px">
-		<h3 class="ui dividing header">Detail</h3>
+		<h3 class="ui dividing header">
+			Detail
+			<span class="d-none" id="detailIdText">${detail.id }</span>
+		</h3>
 		<div class="ui items">
 			<div class="item">
 				<div class="image">
@@ -117,9 +120,11 @@
 	</div>
 
 	<!-- 후기 -->
-	<div class="container" style="width: 900px; margin: 25px auto 50px;">
-		<div class="ui minimal comments">
-			<h3 class="ui dividing header">Comments</h3>
+
+	<div class="container" style="width: 900px; margin: 25px auto 50px;" id="commentContainer">
+		<!-- 후기 리스트  -->
+		<div class="ui comments" id="commentListContainer">
+			<h3 class="ui dividing header" style="width: 880px;">Comments</h3>
 			<div class="comment">
 				<a class="avatar">
 					<img src="https://www.walkerhillstory.com/wp-content/uploads/2020/09/2-1.jpg">
@@ -130,71 +135,25 @@
 						<span class="date">Today at 5:42PM</span>
 					</div>
 					<div class="text">How artistic!</div>
-					<div class="actions">
-						<a class="reply">Reply</a>
-					</div>
 				</div>
 			</div>
-			<div class="comment">
-				<a class="avatar">
-					<img src="https://www.walkerhillstory.com/wp-content/uploads/2020/09/2-1.jpg">
-				</a>
-				<div class="content">
-					<a class="author">Elliot Fu</a>
-					<div class="metadata">
-						<span class="date">Yesterday at 12:30AM</span>
+
+			<!-- 후기 입력란 -->
+			<div id="addCommentContainer">
+				<form class="ui reply form">
+					<div class="ui icon input">
+						<input type="text" placeholder="${userId }님 후기를 남겨주세요!" style="width: 850px;" id="commentTextArea">
+						<button type="button" class="ui icon button" id="sendCommentBtn">
+							<i class="paper plane outline icon"></i>
+						</button>
 					</div>
-					<div class="text">
-						<p>This has been very useful for my research. Thanks as well!</p>
-					</div>
-					<div class="actions">
-						<a class="reply">Reply</a>
-					</div>
-				</div>
-				<div class="comments">
-					<div class="comment">
-						<a class="avatar">
-							<img src="https://www.walkerhillstory.com/wp-content/uploads/2020/09/2-1.jpg">
-						</a>
-						<div class="content">
-							<a class="author">Jenny Hess</a>
-							<div class="metadata">
-								<span class="date">Just now</span>
-							</div>
-							<div class="text">Elliot you are always so right :)</div>
-							<div class="actions">
-								<a class="reply">Reply</a>
-							</div>
-						</div>
-					</div>
-				</div>
+				</form>
 			</div>
-			<div class="comment">
-				<a class="avatar">
-					<img src="https://www.walkerhillstory.com/wp-content/uploads/2020/09/2-1.jpg">
-				</a>
-				<div class="content">
-					<a class="author">Joe Henderson</a>
-					<div class="metadata">
-						<span class="date">5 days ago</span>
-					</div>
-					<div class="text">Dude, this is awesome. Thanks so much</div>
-					<div class="actions">
-						<a class="reply">Reply</a>
-					</div>
-				</div>
-			</div>
-			<form class="ui reply form">
-				<div class="field">
-					<textarea></textarea>
-				</div>
-				<div class="ui blue labeled submit icon button">
-					<i class="icon edit"></i>
-					Add Reply
-				</div>
-			</form>
+			<br>
+			<br>
 		</div>
 	</div>
+	
 
 	<!-- 집사진 모달  -->
 	<div class="modal fade" id="housePhotosModal" tabindex="-1" aria-labelledby="housePhotosModalLabel" aria-hidden="true">
@@ -291,5 +250,6 @@
 			document.getElementById("myModal").style.display = "block";
 		}
 	</script>
+	<script src="/js/petsitter/petsitterComment.js"></script>
 </body>
 </html>

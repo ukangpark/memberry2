@@ -258,6 +258,7 @@ public class PetsitterController {
 			Member member,
 			Authentication authentication,
 			RedirectAttributes rttr) {
+		//상세페이지 삭제 
 		member.setId(authentication.getName());
 		boolean ok = petsitterService.deleteDetailByHostId(hostId, member);
 		
