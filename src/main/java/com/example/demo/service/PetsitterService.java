@@ -81,6 +81,8 @@ public class PetsitterService {
 		// 상세페이지 정보 불러옴
 		Detail detail = petsitterMapper.selectDetailById(hostId);
 		
+		
+		
 		// 호스트 집사진 정보를 불러옴
 		if (detail != null) {
 			// 등록된 상세페이지가 있다면 정보 조회
@@ -356,6 +358,12 @@ public class PetsitterService {
 		List<Host> list = petsitterMapper.selectAllPaging(startIndex, rowPerPage, search);
 		return Map.of("pageInfo", pageInfo, "petsitterList", list);
 
+	}
+
+	// 반려견 정보 가져오기
+	public List<Registration> selectUserPet(String userId) {
+		
+		return petsitterMapper.selectUserPet(userId);
 	}
 
 }

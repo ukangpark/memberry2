@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
@@ -83,6 +84,33 @@
 		<div class="ui text container">
 			<p>${detail.body }</p>
 		</div>
+
+    <sec:authorize access="isAuthenticated()">
+		<div>
+			<button class="ui right floated inverted red button" data-bs-toggle="modal" data-bs-target="#exampleModal" >예약</button>
+		</div>
+		</sec:authorize>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">반려동물을 선택해주세요</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+       <c:forEach items="${pet }" var="pet">
+       ${pet.id }
+       </c:forEach>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+        <button type="button" class="btn btn-primary" onclick="location.href='/book/regiForm/${detail.id}'" >예약하기</button>
+      </div>
+    </div>
+  </div>
+</div>
 	</div>
 
 	<!-- 후기 -->

@@ -5,7 +5,6 @@ import java.util.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.security.access.prepost.*;
 import org.springframework.security.core.*;
-import org.springframework.security.web.*;
 import org.springframework.stereotype.*;
 import org.springframework.ui.*;
 import org.springframework.web.bind.annotation.*;
@@ -31,11 +30,21 @@ public class PetsitterController {
 	}
 
 	@GetMapping("detail")
-	public void detail(@RequestParam("id") Integer hostId , Model model) {
+	public void detail(@RequestParam("id") Integer hostId , Model model, Authentication authentication) {
 		// detail로 포워드
 		// 쿼리스트링으로 받은 id값을 받아서 해당 상세페이지를 읽음
 		Map<String, Object> info = petsitterService.selectByHostId(hostId);
 		model.addAllAttributes(info);
+		
+		List<Registration> pet = new ArrayList<>();
+		
+		// 사용자 반려견 정보 가져오기
+		if(authentication != null) {
+			String userId = authentication.getName();
+			pet = petsitterService.selectUserPet(userId);
+		}
+		
+		model.addAttribute("pet", pet);
 	}
 
 	@GetMapping("apply")

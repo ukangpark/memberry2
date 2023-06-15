@@ -38,7 +38,9 @@ public interface BookMapper {
 				checkIn = #{checkIn},
 				checkOut = #{checkOut},
 				hospital = #{hospital},
-				message = #{message}
+				message = #{message},
+				pottyTraining = #{pottyTraining}
+				
 			WHERE 
 				num =#{num}
 				
@@ -88,8 +90,8 @@ public interface BookMapper {
 
 	
 	@Insert("""
-			INSERT INTO Book (hospital, message, checkIn, checkOut, pottyTraining, detailId, petId, memberId)
-			VALUES (#{hospital}, #{message}, #{checkIn}, #{checkOut}, #{pottyTraining}, #{detailId}, #{petId}, #{memberId} )
+			INSERT INTO Book (hospital, message, checkIn, checkOut, pottyTraining, detailId, petId, memberId,accepted)
+			VALUES (#{hospital}, #{message}, #{checkIn}, #{checkOut}, #{pottyTraining}, #{detailId}, #{petId}, #{memberId}, #{accepted} )
 			""")
 	@Options(useGeneratedKeys = true, keyProperty="id")
 	int insert(Book book);
@@ -107,6 +109,14 @@ public interface BookMapper {
 			WHERE Pet.memberId = #{userId}
 			""")
 	Registration getPet(String userId);
+
+	
+	@Delete("""
+			DELETE FROM Book
+			WHERE num = #{num}
+		
+			""")
+	int deleteById(Integer id);
 
 	
 }

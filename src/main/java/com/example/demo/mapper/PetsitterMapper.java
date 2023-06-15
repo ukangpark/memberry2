@@ -151,7 +151,9 @@ public interface PetsitterMapper {
 			pet,
 			houseType,
 			species,
-			 (select count(*) from PetsitterComment where detailId = Detail.id) commentCount 
+			 (select count(*) from PetsitterComment where detailId = Detail.id) commentCount,
+			 Detail.id detailId,
+			 cover 
 		FROM Host, Detail
 		WHERE
 			Host.id = Detail.hostId
@@ -215,6 +217,12 @@ public interface PetsitterMapper {
 			DELETE FROM Book WHERE detailId = #{detailId}
 			""")
 	Integer deleteBookByDetailId(Integer detailId);
+
+	@Select("""
+			SELECT * FROM Pet
+			WHERE memberId = #{userId}
+			""")
+	List<Registration> selectUserPet(String userId);
 
 
 	
