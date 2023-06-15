@@ -103,9 +103,11 @@ public class PetsitterService {
 		// 호스트 정보 등록
 		if (petsitterMapper.selectHostByMemberId(host.getMemberId()) == null) {
 			// 호스트로 등록된 정보가 없으면 등록
+			
 			count = petsitterMapper.insertHost(host, file.getOriginalFilename());
 			
 			if(memberMapper.selectById(host.getMemberId()) == null) {
+				
 				// 호스트 등록하자마자 권한 등록
 			petsitterMapper.insertHostAuthority(host.getId());	
 			}

@@ -62,7 +62,7 @@ public class PetsitterController {
 			Authentication authentication)
 			throws Exception {
 		host.setMemberId(authentication.getName());
-	
+		System.out.println("controller host : " + host);
 		// host 정보 받아서 추가 
 		int count = petsitterService.insertHost(host, file);
 		if(count == 1) {
