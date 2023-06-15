@@ -32,15 +32,19 @@ public class MyFeedController {
 	
 	@Autowired
 	private MyFeedService service;
-
+	
 	// MyFeed 보기
-	@GetMapping("feed/myFeed")
+	@GetMapping("feed/myFeed/{userName}")
 	@PreAuthorize("isAuthenticated()")
 	public String myFeed(Model model,
-			Authentication authentication) {
-		List<File> list = service.listMyFeed(authentication);
+			@PathVariable("userName") String userName,
+			Authentication auth) {
+		List<File> list = service.listMyFeed(userName);
+		
+		String profileImage = list.get(0).getProfileImage();
 		
 		model.addAttribute("fileList", list);
+		model.addAttribute("proileImg", profileImage);
 		
 		return "feed/myFeed";
 	}
