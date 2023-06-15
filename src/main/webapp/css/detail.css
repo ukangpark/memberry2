@@ -8,6 +8,7 @@
 	height: 350px;
 	width: 550px;
 	overflow: hidden;
+	border-radius: 2%;
 }
 
 #coverImg {
@@ -20,6 +21,7 @@
 	height: 170px;
 	width: 315px;
 	overflow: hidden;
+	border-radius: 2%;
 }
 
 .housePhotos {
@@ -35,8 +37,8 @@
 	left: 20px;
 }
 
+
 .modalPhoto {
 	width: 1110px;
 	height: 625px;
 }
-

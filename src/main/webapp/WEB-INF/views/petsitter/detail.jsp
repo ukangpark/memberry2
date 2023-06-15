@@ -25,12 +25,18 @@
 			<i class="fa-solid fa-plus"></i>
 		</button>
 		<div class="ui billboard">
+			<!-- 대표 사진 -->
 			<div id="coverImgBox" class="ui images left floated">
-				<img id="coverImg" class="rounded" src="${bucketUrl }/cover/${detail.id }/${detail.cover }">
+				<label for="entireBtn">
+					<img id="coverImg" class="rounded" src="${bucketUrl }/cover/${detail.id }/${detail.cover }">
+				</label>
 			</div>
+			<!-- 상세 사진 -->
 			<c:forEach items="${hostHousePhoto }" var="hostHousePhoto" begin="1" end="2">
 				<div class="ui image right floated housePhotosBox">
-					<img class="rounded housePhotos" src="${bucketUrl }/hostHousePhoto/${detail.id }/${hostHousePhoto.housePhoto }">
+					<label for="entireBtn">
+						<img class="rounded housePhotos" src="${bucketUrl }/hostHousePhoto/${detail.id }/${hostHousePhoto.housePhoto }">
+					</label>
 				</div>
 			</c:forEach>
 		</div>
@@ -60,7 +66,9 @@
 							<a data-bs-toggle="modal" data-bs-target="#checkModal" class="ui right floated inverted green button">수정</a>
 						</c:when>
 						<c:when test="${userId ne host.memberId }">
-							<button class="ui right floated inverted green button" onclick="location.href='/book/regiForm/${detail.id}'">예약</button>
+							<sec:authorize access="isAuthenticated()">
+								<button class="ui right floated inverted green button" data-bs-toggle="modal" data-bs-target="#exampleModal">예약</button>
+							</sec:authorize>
 						</c:when>
 					</c:choose>
 					<a class="header">${host.hostName }</a>
@@ -85,32 +93,27 @@
 			<p>${detail.body }</p>
 		</div>
 
-    <sec:authorize access="isAuthenticated()">
-		<div>
-			<button class="ui right floated inverted red button" data-bs-toggle="modal" data-bs-target="#exampleModal" >예약</button>
-		</div>
-		</sec:authorize>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">반려동물을 선택해주세요</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-       <c:forEach items="${pet }" var="pet">
-       ${pet.id }
-       </c:forEach>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-        <button type="button" class="btn btn-primary" onclick="location.href='/book/regiForm/${detail.id}'" >예약하기</button>
-      </div>
-    </div>
-  </div>
-</div>
+		<!-- Modal -->
+		<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title fs-5" id="exampleModalLabel">반려동물을 선택해주세요</h1>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<c:forEach items="${pet }" var="pet">
+       						${pet.id }
+      					 </c:forEach>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+						<button type="button" class="btn btn-primary" onclick="location.href='/book/regiForm/${detail.id}'">예약하기</button>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 
 	<!-- 후기 -->
@@ -268,7 +271,7 @@
 						삭제를 확인하려면 비밀번호를 입력해주세요.
 					</div>
 					<!-- 삭제하기 정보 -->
-					<form action="/petsitter/hostDelete" method="post" id="deleteForm">
+					<form action="/petsitter/deleteDetail" method="post" id="deleteForm">
 						<input type="hidden" name="hostId" value="${host.id }">
 						<input class="form-control" type="text" name="password" id="passwordInput" placeholder="비밀번호를 입력해주세요.">
 					</form>

@@ -110,8 +110,6 @@ public class PetsitterService {
 			petsitterMapper.insertHostAuthority(host.getId());	
 			}
 			
-			System.out.println(host.getId());
-			System.out.println(petsitterMapper.insertHostAuthority(host.getId()));
 			// 호스트 프로필 사진 업로드
 			if (file.getSize() > 0) {
 				String key = "membery/hostProfile/" + host.getId() + "/" + file.getOriginalFilename();
@@ -157,6 +155,7 @@ public class PetsitterService {
 			if(ok) {
 				// 호스트 정보 삭제
 				count = petsitterMapper.deleteHostById(hostId);
+				//권한 테이블에서 정보 삭제
 				petsitterMapper.deleteHostAuthorityByMemberId(memberInfo.getId());
 			}
 		}
