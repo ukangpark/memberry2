@@ -2,6 +2,8 @@
 <%@ page import="java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -133,7 +135,7 @@
 					</div>
 					<!-- 삭제하기 정보 -->
 					<form action="/petsitter/hostDelete" method="post" id="deleteForm">
-						<input type="hidden" name="hostId" value="${hosasdasdt.id }">
+						<input type="hidden" name="hostId" value="${host.id }">
 						<input class="form-control" type="text" name="password" id="passwordInput" placeholder="비밀번호를 입력해주세요.">
 					</form>
 				</div>

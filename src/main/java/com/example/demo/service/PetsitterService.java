@@ -3,6 +3,7 @@ package com.example.demo.service;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.*;
+import org.springframework.security.crypto.password.*;
 import org.springframework.stereotype.*;
 import org.springframework.web.multipart.*;
 
@@ -24,6 +25,8 @@ public class PetsitterService {
 	private MemberMapper memberMapper;
 	@Value("${aws.s3.bucketName}")
 	private String bucketName;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	public Map<String, Object> selectAll() {
 		// 전체 호스트 정보 탐색
@@ -124,64 +127,29 @@ public class PetsitterService {
 					.acl(ObjectCannedACL.PUBLIC_READ).key(key).build();
 
 			s3.putObject(objectRequest, RequestBody.fromInputStream(profile.getInputStream(), profile.getSize()));
-
-			// 호스트 정보 수정
-			count = petsitterMapper.modifyHostById(host, profile.getOriginalFilename());
-
 		}
+		
+		// 호스트 정보 수정
+		count = petsitterMapper.modifyHostById(host, profile.getOriginalFilename());
+		
 		return count == 1;
 	}
 
 	public boolean deleteHostById(Integer hostId, Member member) {
 		Integer count = 0;
-
+		
 		Member memberInfo = memberMapper.selectById(member.getId());
-		System.out.println(member);
-		System.out.println(memberInfo);
-		if (memberInfo.getPassword().equals(member.getPassword())) {
+		
+		if (passwordEncoder.matches(member.getPassword(), memberInfo.getPassword())) {
 			// 암호가 같으면 삭제 진행
-
-			// detailId 값을 가져옴
-			Detail detail = petsitterMapper.selectDetailById(hostId);
-
-			if (detail != null) {
-				// 상세페이지를 등록했다면?
-
-				// 상세페이지 집사진 먼저 삭제
-				// 사진 이름 조회
-				List<HostHousePhoto> hostHousePhotoes = petsitterMapper.selectHostHousePhotoByDetailId(detail.getId());
-
-				for (HostHousePhoto hostHousePhoto : hostHousePhotoes) {
-					// aws에서 집사진 삭제
-					String key = "membery/hostHousePhoto/" + detail.getId() + "/" + hostHousePhoto.getHousePhoto();
-					DeleteObjectRequest deleteObjectRequest = DeleteObjectRequest.builder().bucket(bucketName).key(key)
-							.build();
-
-					s3.deleteObject(deleteObjectRequest);
-
-				}
-
-				// aws에서 커버 사진 삭제
-				String keyCover = "membery/cover/" + detail.getId() + "/" + detail.getCover();
-				DeleteObjectRequest deleteObjectRequestCover = DeleteObjectRequest.builder().bucket(bucketName)
-						.key(keyCover).build();
-
-				s3.deleteObject(deleteObjectRequestCover);
-
-				// 집사진 테이블에서 정보 삭제
-				Integer photoDeleteCount = petsitterMapper.deleteHostHousePhotoByDetailId(detail.getId());
-
-				// 해당 호스트 상세페이지 삭제
-				Integer detailCount = petsitterMapper.deleteDetailByHostId(hostId);
+			boolean ok = deleteDetailByHostId(hostId, member);
+			
+			if(ok) {
+				// 호스트 정보 삭제
+				count = petsitterMapper.deleteHostById(hostId);
 			}
-
-			// 호스트 정보 삭제
-			count = petsitterMapper.deleteHostById(hostId);
-
-		} else {
-			// 암호가 다르면 삭제 안됨
-
 		}
+		// 암호가 다르면 삭제 안됨
 
 		return count == 1;
 	}
@@ -207,16 +175,17 @@ public class PetsitterService {
 
 		// 상세페이지 아이디를 얻기 위한 메소드
 		Detail detail = petsitterMapper.selectDetailById(hostId);
-		System.out.println("insert service : "  + detail);
-		System.out.println("hostId service : " + hostId);
+		
 		// 대표 사진 추가
-		String coverKey = "membery/cover/" + detail.getId() + "/" + cover.getOriginalFilename();
-		PutObjectRequest objectRequestCover = PutObjectRequest.builder().bucket(bucketName).key(coverKey)
-				.acl(ObjectCannedACL.PUBLIC_READ).build();
-		s3.putObject(objectRequestCover, RequestBody.fromInputStream(cover.getInputStream(), cover.getSize()));
-		// 대표 사진 테이블 추가
-
-//		petsitterMapper.insertCover(detail.getId(), cover.getOriginalFilename());
+		if(cover.getSize() > 0) {
+			String coverKey = "membery/cover/" + detail.getId() + "/" + cover.getOriginalFilename();
+			PutObjectRequest objectRequestCover = PutObjectRequest.builder().bucket(bucketName).key(coverKey)
+					.acl(ObjectCannedACL.PUBLIC_READ).build();
+			s3.putObject(objectRequestCover, RequestBody.fromInputStream(cover.getInputStream(), cover.getSize()));
+			// 대표 사진 테이블 추가
+			
+			petsitterMapper.insertCover(detail.getId(), cover.getOriginalFilename());
+		}
 
 
 		// 상세페이지 집사진 추가
@@ -309,35 +278,52 @@ public class PetsitterService {
 		return count;
 	}
 
-	public boolean deleteDetailByHostId(Integer hostId) {
-		// 상세페이지 집사진 삭제
-		// detailId 값을 가져옴
-		Detail detail = petsitterMapper.selectDetailById(hostId);
-
-		// 집사진 이름 조회
-		List<HostHousePhoto> hostHousePhotoes = petsitterMapper.selectHostHousePhotoByDetailId(detail.getId());
-
-		for (HostHousePhoto hostHousePhoto : hostHousePhotoes) {
-			// aws에서 집사진 삭제
-			String key = "membery/hostHousePhoto/" + detail.getId() + "/" + hostHousePhoto.getHousePhoto();
-			DeleteObjectRequest deleteObjectRequest = DeleteObjectRequest.builder().bucket(bucketName).key(key).build();
-
-			s3.deleteObject(deleteObjectRequest);
-
+	public boolean deleteDetailByHostId(Integer hostId, Member member) {
+		//비밀번호 일치/불일치 확인
+		Integer count = 0;
+		
+		//기존의 정보 조회 
+		Member oldMember = memberMapper.selectById(member.getId());
+		
+		if(passwordEncoder.matches(member.getPassword(), oldMember.getPassword())) {
+			// 사용자가 입력한 비밀번호와 저장된 비밀번호가 같으면 작업 실행 
+			
+			// detailId 값을 가져옴
+			Detail detail = petsitterMapper.selectDetailById(hostId);
+			
+			// 상세페이지 집사진 삭제
+			// 집사진 이름 조회
+			List<HostHousePhoto> hostHousePhotoes = petsitterMapper.selectHostHousePhotoByDetailId(detail.getId());
+			
+			for (HostHousePhoto hostHousePhoto : hostHousePhotoes) {
+				// aws에서 집사진 삭제
+				String key = "membery/hostHousePhoto/" + detail.getId() + "/" + hostHousePhoto.getHousePhoto();
+				DeleteObjectRequest deleteObjectRequest = DeleteObjectRequest.builder().bucket(bucketName).key(key).build();
+				
+				s3.deleteObject(deleteObjectRequest);
+				
+			}
+			
+			// 집사진 테이블에서 정보 삭제
+			Integer photoDeleteCount = petsitterMapper.deleteHostHousePhotoByDetailId(detail.getId());
+			
+			// aws에 커버사진 삭제
+			String keyCover = "membery/cover/" + detail.getId() + "/" + detail.getCover();
+			DeleteObjectRequest deleteObjectRequestCover = DeleteObjectRequest.builder().bucket(bucketName).key(keyCover)
+					.build();
+			
+			s3.deleteObject(deleteObjectRequestCover);
+			
+			//petsitterComment 레코드 삭제 
+			petsitterMapper.deleteCommentByDetailId(detail.getId());
+			
+			//book 레코드 삭제 
+			petsitterMapper.deleteBookByDetailId(detail.getId());
+			
+			// 상세페이지 삭제
+			count = petsitterMapper.deleteDetailByHostId(hostId);
 		}
-
-		// aws에 커버사진 삭제
-		String keyCover = "membery/cover/" + detail.getId() + "/" + detail.getCover();
-		DeleteObjectRequest deleteObjectRequestCover = DeleteObjectRequest.builder().bucket(bucketName).key(keyCover)
-				.build();
-
-		s3.deleteObject(deleteObjectRequestCover);
-
-		// 집사진 테이블에서 정보 삭제
-		Integer photoDeleteCount = petsitterMapper.deleteHostHousePhotoByDetailId(detail.getId());
-
-		// 상세페이지 삭제
-		Integer count = petsitterMapper.deleteDetailByHostId(hostId);
+		
 
 		return count == 1;
 	}

@@ -1,0 +1,42 @@
+#imgBox {
+	width: 900px;
+	height: 430px;
+	position: relative;
+}
+
+#coverImgBox {
+	height: 350px;
+	width: 550px;
+	overflow: hidden;
+}
+
+#coverImg {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.housePhotosBox {
+	height: 170px;
+	width: 315px;
+	overflow: hidden;
+}
+
+.housePhotos {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+#entireBtn {
+	z-index: 10;
+	position: absolute;
+	top: 10px;
+	left: 20px;
+}
+
+.modalPhoto {
+	width: 1110px;
+	height: 625px;
+}
+

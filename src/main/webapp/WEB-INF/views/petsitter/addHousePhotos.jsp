@@ -40,7 +40,7 @@
 						</h2>
 					</div>
 					<div class="field">
-						<input class="form-control d-none" onchange="readURL(this);" id="cover" type="file" name="cover" accept="image/*" />
+						<input class="form-control d-none" onchange="readURL(this);" id="cover" type="file" name="cover" accept="image/*" required="required"/>
 					</div>
 					<!-- 대표 사진 / 미리보기 -->
 					<div class="field" style="position: relative;">
