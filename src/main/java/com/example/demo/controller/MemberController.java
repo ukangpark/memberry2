@@ -12,6 +12,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.example.demo.domain.Member;
 import com.example.demo.service.MemberService;
 
+import jakarta.servlet.http.*;
+
 @Controller
 @RequestMapping("member")
 public class MemberController {
@@ -65,7 +67,7 @@ public class MemberController {
 		try {
 			service.signup(member);
 			rttr.addFlashAttribute("message", "회원 가입되었습니다.");
-			return "redirect:/petsitter/main";
+			return "redirect:/member/login";
 		} catch (Exception e) {
 			e.printStackTrace();
 			rttr.addFlashAttribute("member", member);
@@ -76,7 +78,7 @@ public class MemberController {
 
 	// 경로: http://localhost:8080/member/list?page=3
 	@GetMapping("list")
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("hasAuthority('admin')")
 	public String list(Model model, 
 					 @RequestParam(value="page", defaultValue="1") Integer page) {
 //		List<Member> list = service.listMember(); // 페이지 처리 전
@@ -91,7 +93,7 @@ public class MemberController {
 	}
 
 	@GetMapping("info")
-	@PreAuthorize("isAuthenticated() and (authentication.name eq #id)")
+	@PreAuthorize("(isAuthenticated() and (authentication.name eq #id)) or hasAuthority('admin')")
 	public void info(String id, Model model) {
 
 		Member member = service.get(id);
@@ -100,13 +102,19 @@ public class MemberController {
 
 	@PostMapping("remove")
 	@PreAuthorize("isAuthenticated() and (authentication.name eq #member.id)")
-	public String remove(Member member, RedirectAttributes rttr) {
+	public String remove(Member member, 
+						 RedirectAttributes rttr,
+						 HttpServletRequest request) throws Exception {
 
 		boolean ok = service.remove(member);
 
 		if (ok) {
 			rttr.addFlashAttribute("message", "회원 탈퇴하였습니다.");
-			return "redirect:/petsitter/main";
+			
+			// 탈퇴되었으면 로그아웃되도록
+			request.logout();
+			
+			return "redirect:/home";
 		} else {
 			rttr.addFlashAttribute("message", "회원 탈퇴시 문제가 발생했습니다.");
 			return "redirect:/member/info?id=" + member.getId();
@@ -114,14 +122,14 @@ public class MemberController {
 	}
 
 	@GetMapping("modify")
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("isAuthenticated() and (authentication.name eq #id)")
 	public void modifyForm(String id, Model model) {
 		Member member = service.get(id);
 		model.addAttribute("member", member);
 	}
-
+ 
 	@PostMapping("modify")
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("isAuthenticated() and (authentication.name eq #member.id)")
 	public String modifyProcess(Member member, String oldPassword, RedirectAttributes rttr) {
 		boolean ok = service.modify(member, oldPassword);
 		if (ok) {

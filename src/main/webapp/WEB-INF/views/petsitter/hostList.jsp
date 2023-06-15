@@ -2,6 +2,8 @@
 <%@ page import="java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,7 +22,7 @@
 			<thead>
 				<tr>
 					<th>Name</th>
-					<th>Id</th>
+					<th>Id(memberId)</th>
 					<th>phone</th>
 					<th>detail</th>
 					<th>profile</th>
@@ -32,7 +34,7 @@
 						<td>
 							<a href="/petsitter/hostMyPage?id=${host.id }">${host.hostName }</a>
 						</td>
-						<td>${host.id }</td>
+						<td>${host.id } (${host.memberId })</td>
 						<td>${host.phone }</td>
 						<td>${host.detail eq 'true' ? '등록' : '미등록' }</td>
 						<td>${host.profile }</td>
