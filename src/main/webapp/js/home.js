@@ -36,12 +36,13 @@ $(".btnTriggerModal").click(function() {
 					$("#commentListContainer").append(`
 						<li class="list-group-item d-flex justify-content-between align-items-start">
 						<div class="ms-2 me-auto">
-							<div class="fw-bold"> 
+							<div class="fw-bold d-flex align-items-center"> 
+							<div>
+						<img class="ui avatar image" id="nav-image" style="border: solid 1px;" src="https://lilysbucket0503.s3.ap-northeast-2.amazonaws.com/membery/pet${comment.profileImage}">
+					</div>
 							
-						<img class="ui tiny image" id="nav-image" src="https://lilysbucket0503.s3.ap-northeast-2.amazonaws.com/membery/pet${comment.profileImage}">
-					
-							
-							 ${comment.nickName}</div>
+							<div> ${comment.nickName}</div>
+							</div>
 							<div style="white-space: pre-wrap;">${comment.content}</div>
 						</div>
 						<div>

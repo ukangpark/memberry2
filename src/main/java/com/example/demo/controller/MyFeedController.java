@@ -41,8 +41,9 @@ public class MyFeedController {
 		model.addAttribute("fileList", list);
 		
 		return "feed/myFeed";
-		
 	}
+	
+	
 	
 	@GetMapping("feed/feedAdd")
 	@PreAuthorize("isAuthenticated()")
