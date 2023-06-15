@@ -42,12 +42,11 @@ public class MyFeedController {
 	@PreAuthorize("isAuthenticated()")
 	public String myFeed(Model model,
 			@PathVariable("userName") String userName,
-			Authentication auth) {
+			Authentication authentication) {
 		List<File> list = service.listMyFeed(userName);
 		
 		String petName = list.get(0).getPetName();
 		String type = list.get(0).getType();
-		LocalDate birth = list.get(0).getBirth();
 		LocalDate together = list.get(0).getTogether();
 		
 		
@@ -55,7 +54,6 @@ public class MyFeedController {
 		Registration petList = new Registration(); 
 		petList.setPetName(petName);
 		petList.setType(type);
-		petList.setBirth(birth);
 		petList.setDiff(Period.between(together, now));
 		
 		String profileImage = list.get(0).getProfileImage();

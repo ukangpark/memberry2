@@ -151,7 +151,7 @@
 											<div style="text-align: center;">
 												<a href="/modify/${feed.id }" style="color: black;">수정하기</a>
 											</div>
-											<div style="text-align: center; color: black;">
+											<div style="text-align: center;">
 												<a href="#" onclick="javascript:document.removeForm.submit();" style="color: black;">삭제하기</a>
 											</div>
 										</ul>

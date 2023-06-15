@@ -34,6 +34,11 @@ img {
 	align-items: baseline;
 	width: 100%;
 }
+
+#addImage {
+	
+}
+
 </style>
 
 <meta charset="UTF-8">
@@ -91,20 +96,25 @@ img {
 
 	<div class="container">
 
-		<a href="/feed/feedAdd">
-			<img src="/images/feedAddIcon.PNG" alt="" />
+		<!-- 게시물 추가 이미지 -->
+		<span id="addImageBox">
+			<a href="/feed/feedAdd">
+				<img src="/images/feedAddIcon.PNG" alt="" />
+			</a>
+		</span>
+		
+		<c:forEach items="${fileList }" var="file">
 
-			<c:forEach items="${fileList }" var="file">
+			<div class=item>
+				<a href="/feedId/${file.feedId }">
 
-				<div class=item>
-					<a href="/feedId/${file.feedId }">
+					<img src="${bucketUrl }/feed/${file.feedId }/${file.fileName }" alt="" />
 
-						<img src="${bucketUrl }/feed/${file.feedId }/${file.fileName }" alt="" />
+				</a>
+			</div>
 
-					</a>
-				</div>
-
-			</c:forEach>
+		</c:forEach>
+		
 	</div>
 
 
