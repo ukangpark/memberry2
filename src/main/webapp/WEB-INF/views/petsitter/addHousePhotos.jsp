@@ -47,7 +47,7 @@
 						<div class="ui aligned container">
 							<img class="ui centered large bordered rounded image" id="preview" src="/images/defaultHome.jpeg" >
 							<label for="cover">
-								<i class="bars icon large button" style="position: absolute; top: 0.5lh; left: 20.1lh;"></i>
+								<i class="plus icon large button" style="position: absolute; top: 0.5lh; left: 20.1lh;"></i>
 							</label>
 						</div>
 						<div class="ui teal ribbon label" style="position: absolute; top: 10px; left: 118px;">대표 사진</div>

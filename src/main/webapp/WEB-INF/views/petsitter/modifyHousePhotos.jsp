@@ -33,7 +33,7 @@
 						</c:otherwise>
 					</c:choose>
 					<label for="addCover">
-						<i class="bars icon large button" style="position: absolute; top: 3.1lh; left: 20.1lh;"></i>
+						<i class="plus icon large button" style="position: absolute; top: 3.1lh; left: 20.1lh;"></i>
 					</label>
 					<div class="field">
 						<input id="addCover" type="file" name="addCover" onchange="readURL(this);">

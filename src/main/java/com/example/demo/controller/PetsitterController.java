@@ -62,9 +62,10 @@ public class PetsitterController {
 			Authentication authentication)
 			throws Exception {
 		host.setMemberId(authentication.getName());
-		System.out.println("controller host : " + host);
+
 		// host 정보 받아서 추가 
 		int count = petsitterService.insertHost(host, file);
+		
 		if(count == 1) {
 			rttr.addFlashAttribute("message", "호스트 등록이 완료되었습니다.");
 		} else {

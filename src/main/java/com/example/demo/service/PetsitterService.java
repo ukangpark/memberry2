@@ -105,8 +105,9 @@ public class PetsitterService {
 			// 호스트로 등록된 정보가 없으면 등록
 			
 			count = petsitterMapper.insertHost(host, file.getOriginalFilename());
+			System.out.println("service : " + memberMapper.selectById(host.getMemberId()));
 			
-			if(memberMapper.selectById(host.getMemberId()) == null) {
+			if(memberMapper.selectById(host.getMemberId()) != null) {
 				
 				// 호스트 등록하자마자 권한 등록
 			petsitterMapper.insertHostAuthority(host.getId());	
@@ -152,14 +153,17 @@ public class PetsitterService {
 		
 		if (passwordEncoder.matches(member.getPassword(), memberInfo.getPassword())) {
 			// 암호가 같으면 삭제 진행
-			boolean ok = deleteDetailByHostId(hostId, member);
 			
-			if(ok) {
+			if(selectByHostId(hostId).get("detail") != null) {
+				//등록된 상세페이지가 있으면 
+				//등록된 상세페이지 삭제 
+				boolean ok = deleteDetailByHostId(hostId, member);				
+			}
+
 				// 호스트 정보 삭제
 				count = petsitterMapper.deleteHostById(hostId);
 				//권한 테이블에서 정보 삭제
 				petsitterMapper.deleteHostAuthorityByMemberId(memberInfo.getId());
-			}
 		}
 		// 암호가 다르면 삭제 안됨
 
@@ -291,7 +295,6 @@ public class PetsitterService {
 	}
 
 	public boolean deleteDetailByHostId(Integer hostId, Member member) {
-		//비밀번호 일치/불일치 확인
 		Integer count = 0;
 		
 		//기존의 정보 조회 
