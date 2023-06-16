@@ -33,4 +33,9 @@ public class PetsitterCommentService {
 
 		return count == 1;
 	}
+
+	public void delete(Integer commentId, Authentication authentication) {
+		// 후기 삭제 
+		petsitterCommentMapper.delete(commentId);
+	}
 }

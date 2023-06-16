@@ -22,4 +22,9 @@ public interface PetsitterCommentMapper {
 			""")
 	Integer add(PetsitterComment petsitterComment);
 	
+	@Delete("""
+			DELETE FROM PetsitterComment WHERE id = #{commentId}
+			""")
+	Integer delete(Integer commentId);
+	
 }

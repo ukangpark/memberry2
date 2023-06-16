@@ -3,6 +3,7 @@ package com.example.demo.service;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.*;
+import org.springframework.security.core.*;
 import org.springframework.security.crypto.password.*;
 import org.springframework.stereotype.*;
 import org.springframework.web.multipart.*;
@@ -71,14 +72,17 @@ public class PetsitterService {
 		return info;
 	}
 
-	public Map<String, Object> selectByHostId(Integer hostId) {
+	public Map<String, Object> selectByHostId(Integer hostId, Authentication authentication) {
 		// 호스트 아이디로 상세페이지와 호스트 정보탐색
 		Map<String, Object> info = new HashMap<>();
+		
+		// 회원의 아이디로 회원 정보를 불러옴 
+		Member member = memberMapper.selectById(authentication.getName());
 
-		// 호스트의 정보를 불러옴
+		// hostId로 호스트의 정보를 불러옴
 		Host host = petsitterMapper.selectHostByHostId(hostId);
 		
-		// 상세페이지 정보 불러옴
+		// hostId로 상세페이지 정보 불러옴
 		Detail detail = petsitterMapper.selectDetailById(hostId);
 		
 		
@@ -94,6 +98,7 @@ public class PetsitterService {
 		// map타입 변수 info에 넣음
 		info.put("host", host);
 		info.put("detail", detail);
+		info.put("member", member);
 		return info;
 	}
 
@@ -146,7 +151,7 @@ public class PetsitterService {
 		return count == 1;
 	}
 
-	public boolean deleteHostById(Integer hostId, Member member) {
+	public boolean deleteHostById(Integer hostId, Member member, Authentication authentication) {
 		Integer count = 0;
 		
 		Member memberInfo = memberMapper.selectById(member.getId());
@@ -154,7 +159,7 @@ public class PetsitterService {
 		if (passwordEncoder.matches(member.getPassword(), memberInfo.getPassword())) {
 			// 암호가 같으면 삭제 진행
 			
-			if(selectByHostId(hostId).get("detail") != null) {
+			if(selectByHostId(hostId, authentication).get("detail") != null) {
 				//등록된 상세페이지가 있으면 
 				//등록된 상세페이지 삭제 
 				boolean ok = deleteDetailByHostId(hostId, member);				
@@ -170,14 +175,14 @@ public class PetsitterService {
 		return count == 1;
 	}
 
-	public boolean insertDetail(Detail detail, String memberId) throws Exception {
+	public boolean insertDetail(Detail detail, Authentication authentication) throws Exception {
 		// 상세페이지 등록
 		Integer count = 0;
-		Integer hostId = petsitterMapper.selectHostByMemberId(memberId).getId();
+		Integer hostId = petsitterMapper.selectHostByMemberId(authentication.getName()).getId();
 		detail.setHostId(hostId);
 
 		// 호스트 아이디로 상세페이지가 있는지 탐색
-		if (selectByHostId(hostId).get("detail") == null) {
+		if (selectByHostId(hostId, authentication).get("detail") == null) {
 			// 없으면 상세페이지 추가
 			count = petsitterMapper.insertDetail(detail);
 		}

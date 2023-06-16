@@ -21,12 +21,23 @@ function listComment() {
 					</div>
 					<div class="text">${petsitterComment.body}</div>
 					<div class="actions">
-						<a class="reply">Reply</a>
+						<a id="commentDeleteBtn${petsitterComment.id}" 
+							class="save commentDeleteBtn" class="btn btn-primary" 
+							data-bs-toggle="modal" 
+							data-bs-target="#deleteCommentModal"
+							comment-id="${petsitterComment.id}">
+						삭제
+						</a>
 					</div>
 				</div>
 				<br>
 				`)
 			}
+			
+			$(".commentDeleteBtn").click(function() {
+				const commentId = $(this).attr("comment-id");
+				$("#commentDeleteModalBtn").attr("comment-id", commentId);
+			})
 
 		}
 
@@ -52,4 +63,18 @@ $("#addCommentBtn").click(function() {
 			$("#commentBodyArea").val("");
 		}
 	});
+})
+
+$("#commentDeleteModalBtn").click(function() {
+	const commentId = $(this).attr("comment-id");
+	$.ajax("/petsitterComment/delete/" + commentId, {
+		method: "delete",
+		complete: function(){
+			listComment();
+		}
+	})
 }) 
+
+
+
+

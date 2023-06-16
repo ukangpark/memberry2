@@ -123,11 +123,12 @@
 	<div class="container" style="width: 900px; margin-top: 25px;">
 		<div class="ui comments">
 			<h3 class="ui dividing header" style="width: 880px;">Comments</h3>
-			<!-- 후기 리스트 -->
-			<div class="comment" style="width: 880px;" id="commentListContainer"></div>
+			<div class="comment" style="width: 880px;" id="commentListContainer">
+				<!-- 후기 리스트 -->
+			</div>
 			<!-- 후기 입력란 -->
 			<div class="input-group mb-3" style="width: 880px;">
-				<input type="text" id="commentBodyArea" name="body" class="form-control" placeholder="${host.hostName }님 후기를 남겨주세요." aria-label="Recipient's username" aria-describedby="button-addon2">
+				<input type="text" id="commentBodyArea" class="form-control" placeholder="${member.id }님 후기를 남겨주세요." aria-label="Recipient's username" aria-describedby="button-addon2">
 				<button class="btn btn-outline-secondary" id="addCommentBtn">Button</button>
 			</div>
 		</div>
@@ -151,7 +152,8 @@
 					</div>
 					<div class="text">내용</div>
 					<div class="actions">
-						<a class="reply">Reply</a>
+						<a class="reply">수정</a>
+						<a class="save" >삭제</a>
 					</div>
 				</div>
 				<br>
@@ -168,6 +170,25 @@
 	</div>
 	<br>
 	<br>
+
+
+	<!-- 후기 삭제 모달 -->
+	<div class="modal fade" id="deleteCommentModal" tabindex="-1" aria-labelledby="#deleteCommentModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="deleteCommentModalLabel"></h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">후기를 삭제하시겠습까?</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+					<button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="commentDeleteModalBtn">삭제</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
 
 
 	<!-- 집사진 모달  -->
