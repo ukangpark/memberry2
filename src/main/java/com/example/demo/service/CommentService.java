@@ -35,6 +35,7 @@ public class CommentService {
 		
 		var res  = new HashMap<String, Object>();
 		int cnt = mapper.insert(comment);
+		System.out.println(cnt);
 		
 		if (cnt == 1) {
 			res.put("message", "댓글 등록 완료");
@@ -73,36 +74,4 @@ public class CommentService {
 		return res;
 	 }
 	 
-	  
-	 
-	
-	 
-	
-
-	/*
-	 * public Comment get(Integer id) { return mapper.selectById(id); }
-	 * 
-	 * public Map<String, Object> add(Comment comment, Authentication
-	 * authentication) { comment.setMemberId(authentication.getName()); var res =
-	 * new HashMap<String, Object>(); int cnt = mapper.insert(comment);
-	 * 
-	 * if(cnt == 1) { res.put("messgae", "댓글이 등록되었습니다."); } else {
-	 * res.put("messgae", "댓글이 등록되지 않았습니다."); } return res; }
-	 * 
-	 * public Map<String, Object> remove(Integer id) { int cnt =
-	 * mapper.deleteById(id); var res = new HashMap<String, Object>();
-	 * 
-	 * if(cnt == 1) { res.put("messgae", "댓글이 삭제되었습니다."); } else {
-	 * res.put("messgae", "댓글이 삭제되지 않았습니다."); } return res;
-	 * 
-	 * }
-	 * 
-	 * public Map<String, Object> update(Comment comment) { int cnt =
-	 * mapper.update(comment); var res = new HashMap<String, Object>(); if(cnt == 1)
-	 * { res.put("messgae", "댓글이 수정되었습니다."); } else { res.put("messgae",
-	 * "댓글이 수정되지 않았습니다."); } return res;
-	 * 
-	 * }
-	 */
-
 }

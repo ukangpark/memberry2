@@ -16,33 +16,29 @@ import org.springframework.ui.*;
 import lombok.RequiredArgsConstructor;
 
 @Controller
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 @RequestMapping("fullCalendar")
 public class CalendarController {
-	
+
 	@Autowired
 	private CalendarService service;
 
-	//달력으로 이동
+	// 달력으로 이동
 	@GetMapping("")
-	public String getTest() {
-		return "calendar";
-	}
-	
-	@PostMapping("getAll")
-	public String getall(Authentication authentication, Model model) {
+	public String get(Authentication authentication, Model model) {
 		List<Calendar> schedules = service.getAllSchedule(authentication);
-		/* String aa = schedules.get(0).getTitle(); */
-		model.addAttribute("schedules", schedules);
-		/* model.addAttribute("title", aa); */
-		System.out.println(schedules);
+		model.addAttribute("aaa", schedules);
+
 		return "calendar";
 	}
-	
-
 
 	
+	  @GetMapping("list") 
+	  public List<Calendar> getall(Authentication authentication) { 
+		  List<Calendar> schedules = service.getAllSchedule(authentication);
+		 
+		  	return schedules; 
+	 }
+	 
 
-	
-	
 }

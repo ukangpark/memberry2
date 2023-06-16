@@ -13,7 +13,6 @@ public class FeedTime {
 	}
 	public static String calculateTime(Date date) {
 		long curTime = System.currentTimeMillis();
-		System.out.println(curTime);
 		long regTime = date.getTime();
 		long diffTime = (curTime - regTime) / 1000;
 		String msg = null;
@@ -35,7 +34,6 @@ public class FeedTime {
 		} else {
 			msg = (diffTime) + "년 전";
 		}
-		System.out.println(msg);
 		return msg;
 	}
 }

@@ -69,14 +69,17 @@
 		<h1><span style="font-weight: bold">${logedInMember.nickName }</span>님 캘린더</h1>
 	</div>
 
-	<div id="calendarWrapper">
+	<!-- <div id="calendarWrapper">
 		<div id='calendar'></div>
-	</div>
+	</div> -->
   	
+  	<ul class="list-group" id="scheduleContainer">
+
+	</ul>
   	
 
 
-<script src="/js/calendar.js"></script>
+ <script src="/js/calendar.js"></script>
 <my:bottom></my:bottom>
 
 	 

@@ -127,21 +127,22 @@
 						</div>
 
 						<div class="content">
-							<div class="header">${feed.title}</div>
+							<div class="header">${feed.title} <span id="feedId">${feed.id }</span></div>
 
 							<div class="description">${feed.content}</div>
 						</div>
 						<div class="extra content">
-							<span class="left floated"> <!-- 좋아요 기능 구현 --> <span class="likeIcon" data-feed-id="${feed.id }"> <c:if test="${feed.liked }">
+							<span class="left floated"> <!-- 좋아요 기능 구현 --> <span class="likeIcon" <%-- data-feed-id="${feed.id }" --%>> <c:if test="${feed.liked }">
 										<img src="/images/bone.png">
 									</c:if> <c:if test="${not feed.liked }">
 										<img src="/images/olbone.png">
 									</c:if>
-							</span> <span class="likeNumber"> ${feed.likeCount } </span> likes <!-- Button trigger modal -->
+							</span> <span class="likeNumber"> ${feed.likeCount } </span> likes 
+							<!-- Button trigger modal -->
 								<button type="button" class="btn btn-secondary-link btnTriggerModal position-relative" id="commentIcon" data-bs-toggle="modal" data-bs-target="#commentModal" data-id="${feed.id }">
 									<i class="fa-solid fa-comment"></i> 
 									<c:if test="${feed.commentCount > 0 }">
-									<span id="commentCnt" class="position-absolute top-20 start-70 translate-middle badge rounded-pill bg-danger-outline">
+									<span id="commentCnt" class="position-absolute top-0 start-70 translate-middle badge rounded-pill bg-danger" style="z-index: 100">
 									 ${feed.lastCommentInserted }
 									 </span>
 									</c:if>
