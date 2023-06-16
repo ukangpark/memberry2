@@ -19,6 +19,8 @@ public interface HomeMapper {
 				fd.writer,
 				fd.inserted,
 				fi.fileName,
+				(SELECT nickName FROM Member WHERE id = fd.writer)
+				nickName,
 				(SELECT COUNT(*) 
 				 FROM FeedLike 
 				 WHERE feedId = fd.id) likeCount,
