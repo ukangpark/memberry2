@@ -1,3 +1,4 @@
+//호스트가 예약 승인
 $("#acceptBtn").click(function(){
 	const num = $("#num").val();
 	

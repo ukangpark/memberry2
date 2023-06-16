@@ -47,7 +47,7 @@ public interface BookMapper {
 			""")
 	int update(Book book);
 
-	// 시큐리티 적용후 쿼리 변경 예정
+	// 예약요청목록 (호스트)
 	@Select("""
 			SELECT
 				petName,
@@ -68,14 +68,14 @@ public interface BookMapper {
 			""")
 	List<Book> selectAllPaging(Integer startIndex, Integer rowPerPage, String userId);
 
-	// 시큐리티 적용후 쿼리 변경 예정
+	// 예약요청목록 (호스트)
 	@Select("""
 			SELECT COUNT(*)
 			FROM Book,Pet,Host,Detail
 			WHERE Book.memberId = Pet.memberId
 			AND Detail.id = Book.detailId
 			AND Host.id = Detail.hostId
-			-- AND Pet.memberId = '시큐리티에 있는 아이디값'
+			-- AND Pet.memberId = #{userId}
 			""")
 	Integer countAll();
 
@@ -109,7 +109,7 @@ public interface BookMapper {
 			WHERE Pet.memberId = #{userId}
 			AND	  id = #{petId}
 			""")
-	Registration getPet(String userId, int petId);
+	Registration getPet(String userId, Integer petId);
 
 	
 	@Delete("""

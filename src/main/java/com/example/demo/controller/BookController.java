@@ -19,7 +19,7 @@ public class BookController {
 	@Autowired
 	private BookService service;
 
-	// 사용자가 보는 예약목록(마이페이지완성되면 이동예정), 페이지네이션
+	// 사용자가 보는 예약목록, 페이지네이션
 	@GetMapping("list")
 	public String bookList(Model model,  Authentication authentication,
 			@RequestParam(value = "page", defaultValue = "1") Integer page) {
@@ -35,19 +35,44 @@ public class BookController {
 	@GetMapping("/num/{num}")
 	public String bookList(@PathVariable("num") Integer id, Model model) {
 		Book book = service.getBook(id);
+		
 		model.addAttribute("book", book);
 		return "book/getBook";
 	}
 
 	// 예약수정
 	@GetMapping("/modify/{num}")
-	public String modifyForm(@PathVariable("num") Integer id, Model model, Authentication authentication) {
+	public String modifyForm(@PathVariable("num") Integer id, Integer petId, Model model, Authentication authentication) {
 		String userId = authentication.getName();
-		Registration pet = service.getPet(userId);
+		Registration pet = service.getPet(userId,petId);
 		model.addAttribute("pet", pet);
 		model.addAttribute("book", service.getBook(id));
 		return "book/regiFormModify";
 	}
+	
+	/*
+	 * // 예약신청서
+	 * 
+	 * @GetMapping("regiForm/{id}") 
+	 * public String addRegi(@PathVariable("id")
+	 * Integer id, int petId, Model model, Authentication authentication) { String
+	 * userId = authentication.getName(); 
+	 * Registration pet = service.getPet(userId,
+	 * petId); model.addAttribute("pet", pet); model.addAttribute("detailId", id);
+	 * return "book/regiForm";
+	 * 
+	 * }
+	 */
+	
+	// 예약수정 //원본
+//	@GetMapping("/modify/{num}")
+//	public String modifyForm(@PathVariable("num") Integer id, Model model, Authentication authentication) {
+//		String userId = authentication.getName();
+//		Registration pet = service.getPet(userId);
+//		model.addAttribute("pet", pet);
+//		model.addAttribute("book", service.getBook(id));
+//		return "book/regiFormModify";
+//	}
 	
 
 	// 수정되게

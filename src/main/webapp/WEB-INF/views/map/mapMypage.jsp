@@ -54,6 +54,11 @@
 						취소하기
 						</button></td>
 					</tr>
+					<div class="d-done">
+					 <form action="/map/remove" method="post" id="removeLike">
+			        <input type="hidden" name="id" value="${map.id }" />
+			        </form>
+			        </div>
 				</c:forEach>
 			</tbody>
 		</table>
@@ -113,7 +118,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-        <button type="button" class="btn btn-danger">확인</button>
+        <button type="submit" class="btn btn-danger" form="removeLike">확인</button>
       </div>
     </div>
   </div>

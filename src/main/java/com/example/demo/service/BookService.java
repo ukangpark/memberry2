@@ -81,7 +81,7 @@ public class BookService {
 
 
 	// 펫 정보 가져오기
-	public Registration getPet(String userId, int petId) {
+	public Registration getPet(String userId, Integer petId) {
 		return mapper.getPet(userId,petId);
 	}
 
@@ -91,7 +91,7 @@ public class BookService {
 		return cnt==1;
 	}
 
-
+	// 예약수정
 	public Registration getPet(String userId) {
 		return mapper.getPetModify(userId);
 	}
