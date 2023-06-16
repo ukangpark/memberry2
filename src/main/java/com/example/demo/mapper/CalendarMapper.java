@@ -13,6 +13,7 @@ public interface CalendarMapper {
 
 	@Select("""
 			SELECT 
+				id,
 				title,
 				start,
 				end,
@@ -20,7 +21,7 @@ public interface CalendarMapper {
 			FROM Calendar
 			WHERE memberId = #{memberId}
 			""")
-	Arrays selectAllByMemberId(String memberId);
+	List<Calendar> selectAllByMemberId(String memberId);
 
 
 	
