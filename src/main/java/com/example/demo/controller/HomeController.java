@@ -22,6 +22,7 @@ public class HomeController {
 	public String feed(Model model,
 			Authentication authentication) {
 		List<Feed> result = service.listFeed(authentication);
+		/* System.out.println(result.get(0).getLastCommentInserted()); */
 		model.addAttribute("feedList", result);
 		return "home";
 	}

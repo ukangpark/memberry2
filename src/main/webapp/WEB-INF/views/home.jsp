@@ -139,7 +139,13 @@
 									</c:if>
 							</span> <span class="likeNumber"> ${feed.likeCount } </span> likes <!-- Button trigger modal -->
 								<button type="button" class="btn btn-secondary-link btnTriggerModal position-relative" id="commentIcon" data-bs-toggle="modal" data-bs-target="#commentModal" data-id="${feed.id }">
-									<i class="fa-solid fa-comment"></i> <span id="commentCnt" class="position-absolute top-35 start-70 translate-middle badge rounded-pill bg-secondary"> ${feed.commentCount }</span>
+									<i class="fa-solid fa-comment"></i> 
+									<c:if test="${feed.commentCount > 0 }">
+									<span id="commentCnt" class="position-absolute top-35 start-70 translate-middle badge rounded-pill bg-danger">
+									 ${feed.lastCommentInserted }
+									 </span>
+									</c:if>
+									 <span class="badge text-bg-light">${feed.commentCount }</span>
 								</button> <i class="paw icon"></i>
 
 
