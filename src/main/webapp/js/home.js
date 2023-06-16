@@ -38,10 +38,7 @@ $(".btnTriggerModal").click(function() {
 						<div class="ms-2 me-auto">
 							<div class="fw-bold d-flex align-items-center"> 
 							<div>
-
-								
-								<img class="ui avatar image" style="border: solid 1px" src = ${comment.profileImage != null ? "https://lilysbucket0503.s3.ap-northeast-2.amazonaws.com/membery/pet" + comment.profileImage : "/images/paw.png"}   
-								
+								<img class="ui avatar image" style="border: solid 1px" src = ${comment.profileImage != null ? "https://lilysbucket0503.s3.ap-northeast-2.amazonaws.com/membery/pet" + comment.profileImage : "/images/paw.png"}>  
 							</div >
 
 					<div> ${comment.nickName}</div>

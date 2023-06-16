@@ -53,6 +53,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		}
 	});
 calendar.render();
+console.log($("#schedules"));
 calendar.getEvents();
 	var arr = getCalendar();
 	$.each(arr, function(index, item) {
@@ -64,7 +65,11 @@ calendar.getEvents();
 //Calendar DB데이터를 요청하는 함수
 function getCalendar() {
 	var arr = new Array();
-	arr = null;	
+	for(var i=0; i < $("#schedules").length; i++) {
+		arr[i] = schedules[i];
+		console.log(schedules[i]);
+	}
+	
 	$.ajax({
 		contentType: "application/json",
 		dataType : "json",

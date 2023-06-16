@@ -23,18 +23,18 @@ img {
 #profilImage {
 	height: 300px;
 	width: 300px;
-	border: 3px solid #E2E2E2;
+	border: 1px solid #cccccc;
 	padding: 5px;
-	margin-bottom: 50px;
+	margin-bottom: 0px;
 }
 
 #upper {
 	display: flex;
 	justify-content: center;
 	align-items: baseline;
-	width: 100%;
+	text-align: center;
 }
-
+  
 #addImage {
 	
 }
@@ -51,23 +51,23 @@ img {
 <body>
 
 	<my:navBar current="myFeed"></my:navBar>
-	<div style="margin-botton: 5px"></div>
-	<div class="mb-5">
+	<div class="ui container mb-3" id="myFeedTitle">
 		<h1 style="text-align: center;">My Feed</h1>
 	</div>
 
 	<!-- 윗 부분 -->
-	<div id="upper" class="ui aligned container mb-5" id="imgContainer">
-		<button class="massive ui basic button" style="border: 2px solid #E2E2E2; border-radius: 0.5rem; margin-right: 70px;">
-			<i class="fa-solid fa-user"></i> 팔로워
-		</button>
+	<div id="upper" class="ui container mb-5">
 
-		<button class="massive ui basic button" style="border: 2px solid #E2E2E2; border-radius: 0.5rem; margin-right: 50px;">
-			<i class="fa-solid fa-user-check"></i> 팔로잉
-		</button>
+		<div class="follower" style="margin: 0px 30px 0px 30px; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#followerModal">
+			<h3>팔로워 00명</h3>
+		</div>
+
+		<div class="following" style="margin: 0px 30px 0px 30px; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#followingModal">
+			<h3>팔로잉 00명</h3>
+		</div>
 
 		<!-- 프로필 이미지 -->
-		<div>
+		<div class="middleContainer" style="margin: 0px 30px 0px 30px">
 			<c:if test="${logedInMember.profileImage ne null}">
 				<img class="ui circular image" id="profilImage" src="${bucketUrl }/pet${proileImg}">
 			</c:if>
@@ -84,13 +84,23 @@ img {
 			</div>
 		</div>
 
-		<button class="massive ui basic button" style="border: 2px solid #E2E2E2; border-radius: 0.5rem; margin-left: 50px; margin-right: 70px;">
-			<i class="fa-solid fa-paper-plane"></i> 메세지
+		<div class="followBtn" style="margin: 0px 30px 0px 30px">
+		<button class="ui basic button">
+			<h3><i class="fa-solid fa-user"></i> 팔로우</h3>
 		</button>
 
-		<button class="massive ui basic button" style="border: 2px solid #E2E2E2; border-radius: 0.5rem;">
-			<i class="fa-solid fa-bolt"></i> 산책번개
-		</button>
+		<c:if test="">
+			<button class="ui basic button">
+				<h3><i class="fa-solid fa-user-check"></i> 팔로잉</h3>
+			</button>
+		</c:if>
+		</div>
+
+		<div class="messageBtn" style="margin: 0px 30px 0px 30px">
+			<button class="ui basic button" id="messageBtn">
+				<h3 onMouseover="this.style.color='#FFCC33';" onMouseout="this.style.color='gray';" ><i class="fa-solid fa-bolt"></i> 산책번개</h3>
+			</button>
+		</div>
 
 	</div>
 
@@ -125,24 +135,32 @@ img {
 	</c:if>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 	<!-- 팔로워 모달 -->
 	<div class="modal fade" id="followerModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h3 class="modal-title">팔로워</h3>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<c:if test="${logedInMember.profileImage ne null}">
+						<img class="ui middle aligned tiny inline image" id="nav-image" src="${bucketUrl }/pet${logedInMember.profileImage }">
+						<span style="font-size: 15pt; font-weight: bold;">${logedInMember.nickName }</span>
+					</c:if>
+					<c:if test="${logedInMember.profileImage eq null}">
+						<img class="ui tiny image" id="nav-image" src="/images/paw.png">${logedInMember.nickName } 
+					</c:if>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 팔로잉 모달 -->
+	<div class="modal fade" id="followingModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h3 class="modal-title">팔로잉</h3>
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
