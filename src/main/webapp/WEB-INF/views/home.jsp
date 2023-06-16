@@ -141,7 +141,7 @@
 								<button type="button" class="btn btn-secondary-link btnTriggerModal position-relative" id="commentIcon" data-bs-toggle="modal" data-bs-target="#commentModal" data-id="${feed.id }">
 									<i class="fa-solid fa-comment"></i> 
 									<c:if test="${feed.commentCount > 0 }">
-									<span id="commentCnt" class="position-absolute top-35 start-70 translate-middle badge rounded-pill bg-danger">
+									<span id="commentCnt" class="position-absolute top-20 start-70 translate-middle badge rounded-pill bg-danger-outline">
 									 ${feed.lastCommentInserted }
 									 </span>
 									</c:if>
