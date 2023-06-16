@@ -23,7 +23,7 @@ img {
 #profilImage {
 	height: 300px;
 	width: 300px;
-	border: 1px solid #cccccc;
+	border: 3px solid #cccccc;
 	padding: 5px;
 	margin-bottom: 0px;
 }
@@ -33,6 +33,44 @@ img {
 	justify-content: center;
 	align-items: baseline;
 	text-align: center;
+}
+
+#addImageBox {
+	position: relative;
+	cursor: pointer;
+	overflow:hidden;
+	
+}
+
+#addImageBox:hover #addImage {
+	bottom: 60px;
+}
+
+#addImage {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	z-index: 1;
+	-webkit-transition:all.5s ease;
+	transition: all.5s.ease;
+	bottom: 0px;
+	overflow: hidden;
+}
+
+#addImageDes {
+	width: 100%;
+	height: 50px;
+    padding: 10px;
+    position: absolute;
+    bottom: 0px;
+    text-align: center;
+    color: white;
+}
+
+#addImageBox:hover #addImageDes {
+	color: #C0C0C0;
+	font-weight: bold;
+	font-size: large;
 }
 
 </style>
@@ -109,10 +147,14 @@ img {
 	<div class="container">
 
 		<!-- 게시물 추가 이미지 -->
-		<span id="addImageBox"> <a href="/feed/feedAdd">
-				<img src="/images/feedAddIcon.PNG" alt="" />
-			</a>
-		</span>
+		<div id="addImageBox"> 
+			<div id="addImage">
+				<a href="/feed/feedAdd">
+					<img src="/images/feedAddIcon.PNG" alt="" />
+				</a>
+			</div>
+			<div id="addImageDes">피드를 추가해 보세요!</div>
+		</div>
 
 		<c:forEach items="${fileList }" var="file">
 
