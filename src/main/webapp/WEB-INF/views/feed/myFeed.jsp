@@ -34,10 +34,6 @@ img {
 	align-items: baseline;
 	text-align: center;
 }
-  
-#addImage {
-	
-}
 
 </style>
 
@@ -84,21 +80,27 @@ img {
 			</div>
 		</div>
 
-		<div class="followBtn" style="margin: 0px 30px 0px 30px">
-		<button class="ui basic button">
-			<h3><i class="fa-solid fa-user"></i> 팔로우</h3>
-		</button>
-
-		<c:if test="">
-			<button class="ui basic button">
-				<h3><i class="fa-solid fa-user-check"></i> 팔로잉</h3>
+		<div class="follow" style="margin: 0px 30px 0px 30px">
+			<button class="ui basic button" id="followBtn">
+				<h3>
+					<i class="fa-solid fa-user"></i> 팔로우
+				</h3>
 			</button>
-		</c:if>
+
+			<c:if test="">
+				<button class="ui basic button">
+					<h3>
+						<i class="fa-solid fa-user-check"></i> 팔로잉
+					</h3>
+				</button>
+			</c:if>
 		</div>
 
 		<div class="messageBtn" style="margin: 0px 30px 0px 30px">
 			<button class="ui basic button" id="messageBtn">
-				<h3 onMouseover="this.style.color='#FFCC33';" onMouseout="this.style.color='gray';" ><i class="fa-solid fa-bolt"></i> 산책번개</h3>
+				<h3 onMouseover="this.style.color='#FFCC33';" onMouseout="this.style.color='gray';">
+					<i class="fa-solid fa-bolt"></i> 산책번개
+				</h3>
 			</button>
 		</div>
 
@@ -107,12 +109,11 @@ img {
 	<div class="container">
 
 		<!-- 게시물 추가 이미지 -->
-		<span id="addImageBox">
-			<a href="/feed/feedAdd">
+		<span id="addImageBox"> <a href="/feed/feedAdd">
 				<img src="/images/feedAddIcon.PNG" alt="" />
 			</a>
 		</span>
-		
+
 		<c:forEach items="${fileList }" var="file">
 
 			<div class=item>
@@ -124,7 +125,7 @@ img {
 			</div>
 
 		</c:forEach>
-		
+
 	</div>
 
 

@@ -25,6 +25,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.domain.Feed;
 import com.example.demo.domain.File;
+import com.example.demo.domain.Follow;
 import com.example.demo.domain.Like;
 import com.example.demo.domain.Registration;
 import com.example.demo.service.MyFeedService;
@@ -33,52 +34,47 @@ import com.example.demo.service.MyPetsService;
 @Controller
 @RequestMapping("/")
 public class MyFeedController {
-	
+
 	@Autowired
 	private MyFeedService service;
-	
+
 	// MyFeed 보기
 	@GetMapping("feed/myFeed/{userName}")
 	@PreAuthorize("isAuthenticated()")
-	public String myFeed(Model model,
-			@PathVariable("userName") String userName,
-			Authentication authentication) {
+	public String myFeed(Model model, @PathVariable("userName") String userName, Authentication authentication) {
 		List<File> list = service.listMyFeed(userName);
-		
+
 		String petName = list.get(0).getPetName();
 		String type = list.get(0).getType();
 		LocalDate together = list.get(0).getTogether();
-		
-		
+
 		var now = LocalDate.now();
-		Registration petList = new Registration(); 
+		Registration petList = new Registration();
 		petList.setPetName(petName);
 		petList.setType(type);
 		petList.setDiff(Period.between(together, now));
-		
+
 		String profileImage = list.get(0).getProfileImage();
-		
+
 		model.addAttribute("fileList", list);
 		model.addAttribute("proileImg", profileImage);
-		model.addAttribute("petList", petList);		
-		
+		model.addAttribute("petList", petList);
+
 		return "feed/myFeed";
 	}
-	
-	
-	
+
 	@GetMapping("feed/feedAdd")
 	@PreAuthorize("isAuthenticated()")
 	public void addForm(Model model, Authentication authentication) {
 		// 게시물 작성 form(view)로 포워드
 		model.addAttribute("authentication", authentication);
 	}
-	
+
 	// 게시물 추가하기
 	@PostMapping("feed/feedAdd")
 	@PreAuthorize("isAuthenticated()")
-	public String addProcess(@RequestParam("files") MultipartFile[] files,
-			Feed feed, Authentication authentication,  RedirectAttributes rttr) throws Exception {
+	public String addProcess(@RequestParam("files") MultipartFile[] files, Feed feed, Authentication authentication,
+			RedirectAttributes rttr) throws Exception {
 		// 새 게시물 DB에 추가
 		feed.setWriter(authentication.getName());
 		boolean ok = service.addFeed(feed, files, authentication);
@@ -91,21 +87,18 @@ public class MyFeedController {
 			rttr.addFlashAttribute("feed", feed);
 			rttr.addFlashAttribute("message", "피드 등록에 실패하였습니다.");
 			return "redirect:/feed/feedAdd";
-		}  
+		}
 	}
-	
+
 	// 클릭한 게시물 보기
 	@GetMapping("/feedId/{feedId}")
-	public String post(
-			@PathVariable("feedId") Integer feedId, 
-			Model model,
-			Authentication authentication) {
+	public String post(@PathVariable("feedId") Integer feedId, Model model, Authentication authentication) {
 		Feed feed = service.getPost(feedId, authentication);
 		model.addAttribute("feed", feed);
-		
+
 		return "feed/feedGet";
 	}
-	
+
 	// 게시물 수정하는 폼 보여주기
 	@GetMapping("/modify/{feedId}")
 	@PreAuthorize("isAuthenticated() and @customSecurityChecker.checkFeedWriter(authentication, #feedId)")
@@ -113,30 +106,29 @@ public class MyFeedController {
 		model.addAttribute("feed", service.getPost(feedId));
 		return "feed/feedModify";
 	}
-	
+
 	// 게시물 수정한 값 업로드
 	@PostMapping("/modify/{feedId}")
 	@PreAuthorize("isAuthenticated() and @customSecurityChecker.checkFeedWriter(authentication, #feed.id)")
 	// 수정하려는 게시물의 id : feed.id
-	public String modifyProcess(Feed feed, 
-			File file, 
-			@RequestParam(value="removeFiles", required = false) List<String> removeFileNames,
-			@RequestParam(value="files", required = false) MultipartFile[] addFiles,
-			RedirectAttributes rttr) throws Exception {
-		
+	public String modifyProcess(Feed feed, File file,
+			@RequestParam(value = "removeFiles", required = false) List<String> removeFileNames,
+			@RequestParam(value = "files", required = false) MultipartFile[] addFiles, RedirectAttributes rttr)
+			throws Exception {
+
 		boolean ok = service.modify(feed, removeFileNames, addFiles);
-		
-		if (ok) { 
+
+		if (ok) {
 			// 수정이 잘 되면 작성한 게시물로 리디렉션
-			rttr.addAttribute("success", "modify"); 
+			rttr.addAttribute("success", "modify");
 			return "redirect:/feedId/" + file.getFeedId();
 		} else {
 			// 수정이 안 되면 수정하기 양식으로 리디렉션
-			rttr.addAttribute("fail", "fail"); 
+			rttr.addAttribute("fail", "fail");
 			return "redirect:/modify/" + file.getFeedId();
 		}
 	}
-	
+
 	@PostMapping("remove")
 	@PreAuthorize("isAuthenticated() and @customSecurityChecker.checkFeedWriter(authentication, #id)")
 	public String remove(Integer id, RedirectAttributes rttr) {
@@ -146,6 +138,16 @@ public class MyFeedController {
 		} else {
 			return "redirect:/id/" + id;
 		}
+	}
+
+	// follow
+	@PostMapping("/follow")
+	public ResponseEntity<Map<String, Object>> follow(@RequestBody Follow follow, Authentication auth) {
+		System.out.println(follow);
+
+		return ResponseEntity.ok().body(null);
+			//return ResponseEntity.ok().body(service.follow(follow, auth));
+
 	}
 
 }
