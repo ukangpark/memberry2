@@ -92,6 +92,7 @@
 <body id="body" style="background-color: #FFF2F2">
 
 	<my:navBar />
+	<my:alert></my:alert>
 
 	<!-- toast 알람 -->
 	<div class="toast-container position-fixed  top-0 start-50 translate-middle-x p-3">

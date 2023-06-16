@@ -26,7 +26,6 @@ public class CommentController {
 	@GetMapping("list")
 	@ResponseBody
 	public List<Comment> list(@RequestParam("myFeed") Integer feedId, Authentication authentication) {
-		System.out.println(feedId);
 		return service.list(feedId, authentication);
 	}
 	
