@@ -48,12 +48,12 @@ ON fd.id = fl.feedId
 WHERE fd.id = 11;
 
 SELECT * FROM File ORDER BY id DESC;
-DELETE FROM File WHERE feedId = 81 ;
+DELETE FROM File WHERE feedId = 116 ;
 SELECT fileName FROM File;
 
 SELECT * FROM File GROUP BY FeedId ORDER BY id DESC;
 
-DELETE FROM Feed WHERE id = 8;
+DELETE FROM Feed WHERE id = 116;
 
 SELECT * FROM FeedLike;
 
@@ -96,17 +96,18 @@ ADD FOREIGN KEY (writer) REFERENCES Member(id);
 
 UPDATE Feed SET writer = 'sohee.G' WHERE id = 106;
 
-SELECT * FROM Pet ORDER BY id DESC;
-DESC Pet;
-DESC Feed;
-DESC File;
-
-SELECT 
+			SELECT 
 				f.feedId, 	
 				f.fileName,
 				p.petName,
 				p.type,
-				p.birth 	
+				p.birth,
+				p.together,
+				CONCAT('/', p.id, '/', p.photo) profileImage 	
 			FROM File f JOIN  Pet p ON f.memberId = p.memberId
-			WHERE f.memberId = 'ukang0711'
+						LEFT JOIN Member m ON m.defaultPetId = p.id
+			WHERE f.memberId = 'sohee.G'
 			GROUP BY f.feedId ORDER BY f.id DESC;
+            
+ALTER TABLE Feed MODIFY COLUMN location VARCHAR(1000); 
+            

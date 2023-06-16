@@ -130,10 +130,10 @@
 						<!-- 프로필 이미지 + 닉네임 -->
 						<a href="/feed/myFeed/${feed.writer}">
 						<c:if test="${logedInMember.profileImage ne null}">
-							<img class="ui avatar image" id="profilImage" src="${bucketUrl }/pet${feed.profileImage }"><span style="font-weight: bold;">${feed.nickName }</span> 
+							<img class="ui avatar image" id="profilImage" src="${bucketUrl }/pet${feed.profileImage }"><span style="font-weight: bold; color: black;">${feed.nickName }</span> 
 						</c:if>
 						<c:if test="${logedInMember.profileImage eq null}">
-							<img class="ui avatar image" id="profilImage" src="/images/paw.png"><span style="font-weight: bold;">${feed.nickName }</span> 
+							<img class="ui avatar image" id="profilImage" src="/images/paw.png"><span style="font-weight: bold; color: black;">${feed.nickName }</span> 
 						</c:if>
 						</a>
 						
@@ -148,11 +148,11 @@
 						
 										<ul class="dropdown-menu">
 											<!-- Dropdown menu links -->
-											<div style="text-align: center">
-												<a href="/modify/${feed.id }">수정하기</a>
+											<div style="text-align: center;">
+												<a href="/modify/${feed.id }" style="color: black;">수정하기</a>
 											</div>
-											<div style="text-align: center">
-												<a href="#" onclick="javascript:document.removeForm.submit();">삭제하기</a>
+											<div style="text-align: center;">
+												<a href="#" onclick="javascript:document.removeForm.submit();" style="color: black;">삭제하기</a>
 											</div>
 										</ul>
 						

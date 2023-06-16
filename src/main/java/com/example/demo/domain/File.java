@@ -13,8 +13,8 @@ public class File {
 	
 	private String petName;
 	private String type;
-	private LocalDate birth;
 	private LocalDate together;
 	
 	private String profileImage;
 }
+
