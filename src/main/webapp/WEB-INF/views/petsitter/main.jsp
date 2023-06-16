@@ -56,6 +56,7 @@
 .image {
 	width: 353px;
 	height: 200px;
+	margin-bottom: 10px;
 }
 
 .imager {
@@ -73,13 +74,13 @@
 
 .post-slider .silder-title {
 	text-align: left;
-	margin: 50px 0px 10px 30px;
+	margin: 25px 0px 0px 30px;
 }
 
 .post-slider .next {
 	position: fixed;
-	top: 60%;
-	right: 300px;
+	top: 70%;
+	right: 100px;
 	font-size: 2em;
 	color: gray;
 	cursor: pointer;
@@ -87,8 +88,8 @@
 
 .post-slider .prev {
 	position: fixed;
-	top: 60%;
-	left: 300px;
+	top: 70%;
+	left: 100px;
 	font-size: 2em;
 	color: gray;
 	cursor: pointer;
@@ -161,7 +162,7 @@
 		<div class="page-wrapper" style="position: relative;">
 			<!--page slider -->
 			<div class="post-slider">
-				<h2 class="silder-title">인기 펫시터를 만나보세요</h2>
+				<div class="silder-title" style="font-size: 18px; font-weight: bold;">인기 펫시터를 만나보세요</div>
 				<i class="fas fa-chevron-left prev"></i> <i class="fas fa-chevron-right next"></i>
 				<div class="post-wrapper">
 					<div class="slick-wrapper ui link cards" id="cards">
@@ -193,6 +194,7 @@
 			<!--post slider-->
 		</div>
 	</div>
+	
 	
 	<my:bottom></my:bottom>
 	<script type="text/javascript" src="/slick/slick.min.js"></script>
