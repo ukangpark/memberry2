@@ -37,11 +37,25 @@ public class petsitterCommentController {
 	
 	@DeleteMapping("delete/{id}")
 	@PreAuthorize("isAuthenticated()")
-	public String delete(@PathVariable("id") Integer commentId, Authentication authentication) {
+	public String delete(@PathVariable("id") Integer commentId) {
 		//후기 삭제 
-		petsitterCommentService.delete(commentId, authentication);
+		petsitterCommentService.delete(commentId);
 		
 		return "ok";
 	}
 	
+	@GetMapping("get/{id}")
+	@ResponseBody
+	public PetsitterComment modify(@PathVariable("id") Integer commentId) {
+		PetsitterComment petsitterComment = petsitterCommentService.selectComment(commentId);
+		System.out.println(petsitterComment);
+		return petsitterComment;
+	}
+	
+	@PutMapping("modify")
+	@PreAuthorize("isAuthenticated()")
+	public String modify(PetsitterComment petsitterComment, Authentication authentication) {
+		petsitterCommentService.updateComment(petsitterComment, authentication);
+		return "ok";
+	}
 } 

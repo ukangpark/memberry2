@@ -127,9 +127,9 @@
 				<!-- 후기 리스트 -->
 			</div>
 			<!-- 후기 입력란 -->
-			<div class="input-group mb-3" style="width: 880px;">
-				<input type="text" id="commentBodyArea" class="form-control" placeholder="${member.id }님 후기를 남겨주세요." aria-label="Recipient's username" aria-describedby="button-addon2">
-				<button class="btn btn-outline-secondary" id="addCommentBtn">Button</button>
+			<div class="input-group mb-3" style="width: 880px;" id="commentInput">
+				<input id="commentModifyInput" type="text" id="commentBodyArea" class="form-control" placeholder="후기를 남겨주세요.">
+				<button style="width:65px;" class="btn btn-outline-secondary" id="addCommentBtn">추가</button>
 			</div>
 		</div>
 	</div>
@@ -153,16 +153,21 @@
 					<div class="text">내용</div>
 					<div class="actions">
 						<a class="reply">수정</a>
-						<a class="save" >삭제</a>
+						<a id="testBtn" test="test" onclick="test()">테스트</a>
 					</div>
 				</div>
 				<br>
 			</div>
 			<!-- 후기 입력란 -->
 			<form>
-				<div class="input-group mb-3" style="width: 880px;">
+				<div class="input-group " style="width: 880px;">
 					<input type="text" class="form-control" placeholder="${host.hostName }님 후기를 남겨주세요." aria-label="Recipient's username" aria-describedby="button-addon2">
 					<button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
+				</div>
+				<div class="input-group">
+					<input type="text" class="form-control">
+					<button class="btn btn-outline-secondary" type="button">Button</button>
+					<button class="btn btn-outline-secondary" type="button">Button</button>
 				</div>
 
 			</form>

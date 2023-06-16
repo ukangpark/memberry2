@@ -34,8 +34,20 @@ public class PetsitterCommentService {
 		return count == 1;
 	}
 
-	public void delete(Integer commentId, Authentication authentication) {
+	public void delete(Integer commentId) {
 		// 후기 삭제 
 		petsitterCommentMapper.delete(commentId);
+	}
+
+	public PetsitterComment selectComment(Integer commentId) {
+		PetsitterComment petsitterComment = petsitterCommentMapper.selectCommentByCommentId(commentId);
+		
+		return petsitterComment;
+	}
+	
+	public void updateComment(PetsitterComment petsitterComment, Authentication authentication) {
+		petsitterComment.setMemberId(authentication.getName());
+		System.out.println(petsitterComment);
+		petsitterCommentMapper.updateComment(petsitterComment);
 	}
 }

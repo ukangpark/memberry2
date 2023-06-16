@@ -27,4 +27,16 @@ public interface PetsitterCommentMapper {
 			""")
 	Integer delete(Integer commentId);
 	
+	@Select("""
+			SELECT * FROM PetsitterComment WHERE id = #{commentId}
+			""")
+	PetsitterComment selectCommentByCommentId(Integer commentId);
+	
+	@Update("""
+			UPDATE PetsitterComment
+			SET body = #{body}
+			WHERE id = #{id}
+			""")
+	Integer updateComment(PetsitterComment petsitterComment);
+	
 }
