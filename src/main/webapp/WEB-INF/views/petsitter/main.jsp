@@ -14,7 +14,6 @@
 <style>
 #memberyLogo {
 	width: 600px;
-	margin: 20px 0px 0px 0px;
 }
 
 .searchBar {
@@ -74,7 +73,7 @@
 
 .post-slider .silder-title {
 	text-align: left;
-	margin: 25px 0px 0px 30px;
+	margin: 30px 0px 5px 15px;
 }
 
 .post-slider .next {
@@ -162,7 +161,7 @@
 		<div class="page-wrapper" style="position: relative;">
 			<!--page slider -->
 			<div class="post-slider">
-				<div class="silder-title" style="font-size: 18px; font-weight: bold;">인기 펫시터를 만나보세요</div>
+				<div class="silder-title" style="font-size: 18px; font-weight: bold;"><i class="thumbs up outline icon"></i> 인기 펫시터를 만나보세요</div>
 				<i class="fas fa-chevron-left prev"></i> <i class="fas fa-chevron-right next"></i>
 				<div class="post-wrapper">
 					<div class="slick-wrapper ui link cards" id="cards">
