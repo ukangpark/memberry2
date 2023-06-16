@@ -17,7 +17,18 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=${apiKey }&libraries=services"></script>
 <link rel = "stylesheet" href="/css/mapMain.css" />
 
+<style>
+#header {
+	display: flex;
+	justify-content: center;
+	
+} 
 
+
+#함께가개Logo {
+	width: 350px;
+}
+</style>
 
 
 
@@ -27,9 +38,9 @@
 	<d:navBar current="mapMain" />
 	
 	<h1 style="margin-bottom:30px;">
-	<i class="fa fa-solid fa-paw"></i>
-	함께 가개
-	<i class="fa fa-solid fa-paw"></i>
+	<div id="header">
+		<img id="함께가개Logo" src="/images/함께가개Logo.png" alt="함께가개 logo">
+	</div> 
 	
 	</h1>
 	

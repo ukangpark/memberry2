@@ -81,8 +81,6 @@ public class PetsitterService {
 		// 상세페이지 정보 불러옴
 		Detail detail = petsitterMapper.selectDetailById(hostId);
 		
-		
-		
 		// 호스트 집사진 정보를 불러옴
 		if (detail != null) {
 			// 등록된 상세페이지가 있다면 정보 조회
