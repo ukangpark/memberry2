@@ -14,6 +14,7 @@
 		<result column="nickName" property="nickName" />
 		<result column="likeCount" property="likeCount" />
 		<result column="commentCount" property="commentCount" />
+		<result column="lastCommentInserted" property="lastCommentInserted"/>
 		<collection property="fileName" ofType="string">
 			<result column="fileName"/>
 		</collection>

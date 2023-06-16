@@ -24,7 +24,8 @@ public interface HomeMapper {
 				(SELECT COUNT(*) 
 				 FROM FeedLike 
 				 WHERE feedId = fd.id) likeCount,
-				 (SELECT COUNT(*) FROM Comment WHERE feedId = fd.id) commentCount
+				 (SELECT COUNT(*) FROM Comment WHERE feedId = fd.id) commentCount,
+				 (SELECT MAX(inserted) FROM Comment WHERE feedId = fd.id) lastCommentInserted
 			FROM Feed fd LEFT JOIN File fi ON fd.id = fi.feedId
 			ORDER BY fd.id DESC
 			""")
