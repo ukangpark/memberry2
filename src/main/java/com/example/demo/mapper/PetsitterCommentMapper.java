@@ -10,7 +10,7 @@ import com.example.demo.domain.*;
 public interface PetsitterCommentMapper {
 	
 	@Select("""
-			SELECT * FROM PetsitterComment WHERE detailId = #{detailId} ORDER BY id
+			SELECT * FROM PetsitterComment WHERE detailId = #{detailId}
 			""")
 	List<PetsitterComment> selectAllByDetailId(Integer detailId);
 	
@@ -20,6 +20,6 @@ public interface PetsitterCommentMapper {
 			VALUES
 				(#{detailId}, #{body}, #{memberId})
 			""")
-	Integer insert(PetsitterComment petsitterComment);
+	Integer add(PetsitterComment petsitterComment);
 	
 }

@@ -45,7 +45,7 @@
 	<div class="container" style="width: 900px">
 		<h3 class="ui dividing header">
 			Detail
-			<span class="d-none" id="detailIdText">${detail.id }</span>
+			<span class="" id="detailIdText">${detail.id }</span>
 		</h3>
 		<div class="ui items">
 			<div class="item">
@@ -120,40 +120,55 @@
 	</div>
 
 	<!-- 후기 -->
-
-	<div class="container" style="width: 900px; margin: 25px auto 50px;" id="commentContainer">
-		<!-- 후기 리스트  -->
-		<div class="ui comments" id="commentListContainer">
+	<div class="container" style="width: 900px; margin-top: 25px;">
+		<div class="ui comments">
 			<h3 class="ui dividing header" style="width: 880px;">Comments</h3>
-			<div class="comment">
-				<a class="avatar">
-					<img src="https://www.walkerhillstory.com/wp-content/uploads/2020/09/2-1.jpg">
-				</a>
-				<div class="content">
-					<a class="author">Matt</a>
-					<div class="metadata">
-						<span class="date">Today at 5:42PM</span>
-					</div>
-					<div class="text">How artistic!</div>
-				</div>
-			</div>
-
+			<!-- 후기 리스트 -->
+			<div class="comment" style="width: 880px;" id="commentListContainer"></div>
 			<!-- 후기 입력란 -->
-			<div id="addCommentContainer">
-				<form class="ui reply form">
-					<div class="ui icon input">
-						<input type="text" placeholder="${userId }님 후기를 남겨주세요!" style="width: 850px;" id="commentTextArea">
-						<button type="button" class="ui icon button" id="sendCommentBtn">
-							<i class="paper plane outline icon"></i>
-						</button>
-					</div>
-				</form>
+			<div class="input-group mb-3" style="width: 880px;">
+				<input type="text" id="commentBodyArea" name="body" class="form-control" placeholder="${host.hostName }님 후기를 남겨주세요." aria-label="Recipient's username" aria-describedby="button-addon2">
+				<button class="btn btn-outline-secondary" id="addCommentBtn">Button</button>
 			</div>
-			<br>
-			<br>
 		</div>
 	</div>
-	
+	<br>
+	<br>
+
+	<!-- 테스트 후기  -->
+	<div class="container" style="width: 900px; margin-top: 25px;">
+		<div class="ui comments">
+			<h3 class="ui dividing header" style="width: 880px;">Comments</h3>
+			<!-- 후기 리스트 -->
+			<div class="comment" style="width: 880px;" id="commentListContainer">
+				<a class="avatar">
+					<img src="/images/paw.png">
+				</a>
+				<div class="content">
+					<a class="author">아이디</a>
+					<div class="metadata">
+						<span class="date">작성일자 </span>
+					</div>
+					<div class="text">내용</div>
+					<div class="actions">
+						<a class="reply">Reply</a>
+					</div>
+				</div>
+				<br>
+			</div>
+			<!-- 후기 입력란 -->
+			<form>
+				<div class="input-group mb-3" style="width: 880px;">
+					<input type="text" class="form-control" placeholder="${host.hostName }님 후기를 남겨주세요." aria-label="Recipient's username" aria-describedby="button-addon2">
+					<button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
+				</div>
+
+			</form>
+		</div>
+	</div>
+	<br>
+	<br>
+
 
 	<!-- 집사진 모달  -->
 	<div class="modal fade" id="housePhotosModal" tabindex="-1" aria-labelledby="housePhotosModalLabel" aria-hidden="true">

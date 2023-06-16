@@ -8,7 +8,7 @@ import lombok.*;
 public class PetsitterComment {
 	private Integer id;
 	private Integer detailId;
-	private String memherId;
+	private String memberId;
 	private LocalDateTime inserted;
 	private String body;
 }

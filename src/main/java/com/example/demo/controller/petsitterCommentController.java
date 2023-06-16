@@ -20,14 +20,14 @@ public class petsitterCommentController {
 	@GetMapping("list")
 	@ResponseBody
 	public List<PetsitterComment> list(@RequestParam("detailId") Integer detailId) {
-		
+		//해당 상세페이지의 후기를 조회함 
 		return petsitterCommentService.list(detailId);
 	}
 	
 	@PostMapping("add")
 	@ResponseBody
 	public String add(@RequestBody PetsitterComment petsitterComment, Authentication authentication) {
-		
+		//후기 등록
 		petsitterCommentService.add(petsitterComment, authentication);
 		
 		return "ok";

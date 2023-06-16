@@ -1,48 +1,55 @@
 listComment();
 
-$("#sendCommentBtn").click(function() {
-	const boardId = $("#detailIdText").text().trim();
-	const content = $("#commentTextArea").val();
-	const data = { boardId, content };
+function listComment() {
+	const detailId = $("#detailIdText").text().trim();
+	console.log(detailId); //check
+	$.ajax("/petsitterComment/list?detailId=" + detailId, {
+		method: "get",
+		success: function(petsitterComments) {
+			console.log(petsitterComments); //check
+			$("#commentListContainer").empty();
+			for (const petsitterComment of petsitterComments) {
+				console.log(petsitterComment); //check
+				$("#commentListContainer").append(`
+				<a class="avatar">
+					<img src="/images/paw.png">
+				</a>
+				<div class="content">
+					<a class="author">${petsitterComment.memberId}</a>
+					<div class="metadata">
+						<span class="date">${petsitterComment.inserted}</span>
+					</div>
+					<div class="text">${petsitterComment.body}</div>
+					<div class="actions">
+						<a class="reply">Reply</a>
+					</div>
+				</div>
+				<br>
+				`)
+			}
+
+		}
+
+	});
+};
+
+$("#addCommentBtn").click(function() {
+	const detailId = $("#detailIdText").text().trim();
+	const body = $("#commentBodyArea").val();
+	const data = { detailId, body };
+
+	console.log(data); //check
 
 	$.ajax("/petsitterComment/add", {
 		method: "post",
 		contentType: "application/json",
 		data: JSON.stringify(data),
-		complete: function() {
+		complete: function(jqXHR) {
 			listComment();
-		}
-	})
-})
+			//$(".toast-body").text(jqXHR.responseJSON.message);
+			//toast.show();
 
-function listComment() {
-	const detailId = $("#detailIdText").text().trim();
-	$.ajax("/petsitterComment/list?detailId=" + detailId, {
-		method: "get", // 생략 가능
-		success: function(comments) {
-			// console.log(data);
-			$("#commentListContainer").empty();
-			for (const comment of comments) {
-				// console.log(comment);
-				$("#commentListContainer").append(`
-					<div>
-					<button 
-							id="commentDeleteBtn${comment.id}" 
-							class="commentDeleteButton" 
-							data-comment-id="${comment.id}">삭제</button>
-						${comment.content} 
-						: ${comment.memberId} 
-						: ${comment.inserted}
-					</div>
-				`);
-			}
-			$(".commentDeleteButton").click(function() {
-				const commentId = $(this).attr("data-comment-id");
-				$.ajax("/comment/id/" + commentId, {
-					method: "delete"
-				});
-			})
+			$("#commentBodyArea").val("");
 		}
 	});
-
-}
+}) 
