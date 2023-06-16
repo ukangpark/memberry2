@@ -87,7 +87,8 @@ $(".btnTriggerModal").click(function() {
 	}
 	
 	//댓글 등록 버튼 클릭시
-	$("#sendCommentBtn").click(function() {
+	$("#sendCommentBtn").off("click");
+	$("#sendCommentBtn").on("click", function() {
 		// const feedId = $("#feedId").text().trim();
 		const content = $("#commentTextArea").val();
 		const data = { feedId, content };
