@@ -8,9 +8,9 @@ function home() {
 
 
 // 댓글 js
-//$(".btnTriggerModal").click(function() {
-	const feedId = $("#feedId").text().trim();
-	const profileSrc = $("#profile").attr("src");
+$(".btnTriggerModal").click(function() {
+	const feedId = $(this).attr("data-id");
+	// const profileSrc = $("#profile").attr("src");
 	listComment();
 	function listComment() {
 
@@ -85,6 +85,29 @@ function home() {
 			}
 		})
 	}
+	
+	//댓글 등록 버튼 클릭시
+	$("#sendCommentBtn").off("click");
+	$("#sendCommentBtn").on("click", function() {
+		// const feedId = $("#feedId").text().trim();
+		const content = $("#commentTextArea").val();
+		const data = { feedId, content };
+		console.log(data);
+		$.ajax("/comment/add", {
+			method: "post",
+			contentType: "application/json",
+			data: JSON.stringify(data),
+			complete: function(jqXHR) {
+				listComment();
+				console.log(feedId);
+				//완료 시 메세지 토스트에 보이기
+				$(".toast-body").text(jqXHR.responseJSON.message);
+				toast.show();
+				// 댓글 등록 후 입력 창 비우기
+				$("#commentTextArea").val("");
+			}
+		});
+	})
 
 	
 	// (최종) 수정 버튼 클릭시
@@ -113,26 +136,6 @@ function home() {
 
 
 
-//})
-
-//댓글 등록 버튼 클릭시
-$("#sendCommentBtn").click(function() {
-	//const feedId = $("#feedId").text().trim();
-	const content = $("#commentTextArea").val();
-	const data = { feedId, content };
-	console.log(data);
-	$.ajax("/comment/add", {
-		method: "post",
-		contentType: "application/json",
-		data: JSON.stringify(data),
-		complete: function(jqXHR) {
-			listComment();
-			console.log(feedId);
-			//완료 시 메세지 토스트에 보이기
-			$(".toast-body").text(jqXHR.responseJSON.message);
-			toast.show();
-			// 댓글 등록 후 입력 창 비우기
-			$("#commentTextArea").val("");
-		}
-	});
 })
+
+
