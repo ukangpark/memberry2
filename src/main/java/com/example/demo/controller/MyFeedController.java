@@ -82,11 +82,12 @@ public class MyFeedController {
 		// 새 게시물 DB에 추가
 		feed.setWriter(authentication.getName());
 		boolean ok = service.addFeed(feed, files, authentication);
+		
 		if (ok) {
 			// 추가가 잘 되었으면 게시판으로 이동
 			rttr.addFlashAttribute("message", feed.getTitle() + "피드에 등록되었습니다.");
 			rttr.addFlashAttribute("feed", feed);
-			return "redirect:/feed/myFeed";
+			return "redirect:/feed/myFeed/" + feed.getWriter();
 		} else {
 			rttr.addFlashAttribute("feed", feed);
 			rttr.addFlashAttribute("message", "피드 등록에 실패하였습니다.");
@@ -139,10 +140,11 @@ public class MyFeedController {
 	
 	@PostMapping("remove")
 	@PreAuthorize("isAuthenticated() and @customSecurityChecker.checkFeedWriter(authentication, #id)")
-	public String remove(Integer id, RedirectAttributes rttr) {
+	public String remove(Integer id, RedirectAttributes rttr, 
+			Authentication authentication) {
 		boolean ok = service.remove(id);
 		if (ok) {
-			return "redirect:/feed/myFeed";
+			return "redirect:/feed/myFeed/" + authentication.getName() ;
 		} else {
 			return "redirect:/id/" + id;
 		}
