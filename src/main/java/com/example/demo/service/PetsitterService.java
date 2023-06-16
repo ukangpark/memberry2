@@ -141,7 +141,7 @@ public class PetsitterService {
 		
 		// 호스트 정보 수정
 		count = petsitterMapper.modifyHostById(host, profile.getOriginalFilename());
-		
+		 
 		return count == 1;
 	}
 

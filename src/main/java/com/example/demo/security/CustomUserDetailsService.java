@@ -21,9 +21,6 @@ public class CustomUserDetailsService implements UserDetailsService{
 		
 		Member member = mapper.selectById(username);
 		
-		System.out.println("----로그인 정보 확인-----");
-		System.out.println(member);
-		
 		if(member == null) {
 			throw new UsernameNotFoundException(username + "회원이 없습니다.");
 		}

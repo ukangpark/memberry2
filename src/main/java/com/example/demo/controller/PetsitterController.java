@@ -124,7 +124,7 @@ public class PetsitterController {
 		// 호스트 리스트 포워드
 		Map<String, Object> info = petsitterService.selectAll();
 		model.addAllAttributes(info);
-	}
+	} 
 
 	@PostMapping("hostDelete")
 	@PreAuthorize("isAuthenticated()")

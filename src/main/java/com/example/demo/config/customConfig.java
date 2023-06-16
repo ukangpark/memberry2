@@ -3,13 +3,12 @@ package com.example.demo.config;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
+import org.springframework.security.config.annotation.method.configuration.*;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.*;
 import org.springframework.security.crypto.password.*;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-
+import org.springframework.security.web.authentication.*;
 import jakarta.annotation.*;
 import jakarta.servlet.*;
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
@@ -36,6 +35,9 @@ public class customConfig {
 	@Autowired
 	private AuthenticationSuccessHandler loginSuccessHandler;
 	
+	@Autowired
+	private AuthenticationFailureHandler userLoginFailHandler;
+	
 	@PostConstruct
 	public void init( ) {
 		application.setAttribute("bucketUrl",bucketUrl);
@@ -50,7 +52,7 @@ public class customConfig {
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http.csrf().disable(); 
 		http.authorizeHttpRequests().anyRequest().permitAll();
-		http.formLogin().loginPage("/member/login").successHandler(loginSuccessHandler);
+		http.formLogin().loginPage("/member/login").successHandler(loginSuccessHandler).failureHandler(userLoginFailHandler);
 		http.logout().logoutUrl("/member/logout");
 		return http.build();
 	}
