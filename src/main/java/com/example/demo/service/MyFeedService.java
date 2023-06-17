@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.domain.Feed;
 import com.example.demo.domain.File;
+import com.example.demo.domain.Follow;
 import com.example.demo.domain.Like;
 import com.example.demo.mapper.CommentMapper;
 import com.example.demo.mapper.FeedLikeMapper;
@@ -175,6 +176,5 @@ public class MyFeedService {
 			remove(id);
 		}
 	}
-
 
 }

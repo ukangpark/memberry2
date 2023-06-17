@@ -23,8 +23,7 @@ img {
 #profilImage {
 	height: 300px;
 	width: 300px;
-	border: 3px solid #cccccc;
-	padding: 5px;
+	border: 1px solid #cccccc;
 	margin-bottom: 0px;
 }
 
@@ -38,8 +37,7 @@ img {
 #addImageBox {
 	position: relative;
 	cursor: pointer;
-	overflow:hidden;
-	
+	overflow: hidden;
 }
 
 #addImageBox:hover #addImage {
@@ -51,7 +49,7 @@ img {
 	height: 100%;
 	position: absolute;
 	z-index: 1;
-	-webkit-transition:all.5s ease;
+	-webkit-transition: all.5s ease;
 	transition: all.5s.ease;
 	bottom: 0px;
 	overflow: hidden;
@@ -60,11 +58,11 @@ img {
 #addImageDes {
 	width: 100%;
 	height: 50px;
-    padding: 10px;
-    position: absolute;
-    bottom: 0px;
-    text-align: center;
-    color: white;
+	padding: 10px;
+	position: absolute;
+	bottom: 0px;
+	text-align: center;
+	color: white;
 }
 
 #addImageBox:hover #addImageDes {
@@ -72,7 +70,6 @@ img {
 	font-weight: bold;
 	font-size: large;
 }
-
 </style>
 
 <meta charset="UTF-8">
@@ -110,15 +107,16 @@ img {
 			</c:if>
 
 			<div>
-				<p>${petList.petName }</p>
-				<p>${petList.type }</p>
-				<p>
+				<h5 style="margin: 0px">${petList.petName }(${petList.type })</h5>
+				<h5 style="margin: 0px">
 					<i class="heart icon"></i>${petList.diff.years}년 ${petList.diff.months}개월째 함께 하는 중 입니다<i class="heart icon"></i>
-				</p>
+				</h5>
 			</div>
 		</div>
 
 		<div class="follow" style="margin: 0px 30px 0px 30px">
+			<input id="feedId" name="feedId" value="${fileList[0].feedId }" style="display: none;">
+			<input id="memberId" name="memberId" value="${fileList[0].memberId }" style="display: none;">
 			<button class="ui basic button" id="followBtn">
 				<h3>
 					<i class="fa-solid fa-user"></i> 팔로우
@@ -147,7 +145,7 @@ img {
 	<div class="container">
 
 		<!-- 게시물 추가 이미지 -->
-		<div id="addImageBox"> 
+		<div id="addImageBox">
 			<div id="addImage">
 				<a href="/feed/feedAdd">
 					<img src="/images/feedAddIcon.PNG" alt="" />
@@ -220,6 +218,7 @@ img {
 	</div>
 
 	<my:bottom></my:bottom>
+	<script src="/js/feed/follow.js"></script>
 
 	<script>
 		$('.ui.modal').modal('show');

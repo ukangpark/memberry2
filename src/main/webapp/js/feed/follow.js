@@ -1,24 +1,21 @@
 $("#followBtn").click(function() {
-	// 게시물 번호 request body에 추가
-	const feedId = $("#data-feed-id").val();
-	console.log(feedId);
-	const data = { feedId };
+	const followBtn = $(this);
+	const feedId = $("#feedId").val();
+	const memberId = $("#memberId").val();
+	const data = { feedId: feedId, memberId: memberId };
 	$.ajax("/follow", {
 		method: "post",
 		contentType: "application/json",
-		data: JSON.stringify(data)
+		data: JSON.stringify(data),
 
-		/*success : function(data) {
-			if (data.like) {
-				//꽉찬 하트
-				$("#likeIcon").html(`<i class="fa-solid fa-heart"></i>`);
-				
-			} else {
-				//빈 하트
-				$("#likeIcon").html(`<i class="fa-regular fa-heart"></i>`);
+		success: function(data) {
+
+			if (data.follow) {
+				console.log(data.follow);
+				document.getElementById("followBtn").className = "ui blue basic button";
+				followBtn.html(`<h3><i class="fa-solid fa-user-check"></i> 팔로잉</h3>`);
 			}
-			$("#likeNumber").text(data.count);
-		}*/
+		}
 
 	})
 })

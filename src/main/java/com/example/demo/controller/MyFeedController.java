@@ -25,7 +25,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.domain.Feed;
 import com.example.demo.domain.File;
-import com.example.demo.domain.Follow;
 import com.example.demo.domain.Like;
 import com.example.demo.domain.Registration;
 import com.example.demo.service.MyFeedService;
@@ -141,15 +140,5 @@ public class MyFeedController {
 			return "redirect:/id/" + id;
 		}
 	}
-
-	// follow
-	@PostMapping("/follow")
-	public ResponseEntity<Map<String, Object>> follow(@RequestBody Follow follow, Authentication auth) {
-		System.out.println(follow);
-
-		return ResponseEntity.ok().body(null);
-			//return ResponseEntity.ok().body(service.follow(follow, auth));
-
-	}
-
+	
 }
