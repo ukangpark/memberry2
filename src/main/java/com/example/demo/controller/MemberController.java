@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.domain.Member;
+import com.example.demo.security.*;
 import com.example.demo.service.MemberService;
 
 import jakarta.servlet.http.*;
@@ -20,6 +21,13 @@ public class MemberController {
 
 	@Autowired
 	private MemberService service;
+	
+	@Autowired
+    private LoginAuthenticationSuccessHandler loginSuccessHandler;
+
+    @Autowired
+    private UserLoginFailHandler userLoginFailHandler;
+
 
 	@GetMapping("checkId/{id}")
 	@ResponseBody
