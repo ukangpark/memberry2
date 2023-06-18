@@ -16,6 +16,12 @@
 	width: 600px;
 	margin: 50px 0px 0px 0px;
 }
+
+.googleImage{
+	width: 30px;
+	height: 30px;
+	margin: 10px;
+}
 </style>
 </head>
 <body>
@@ -61,7 +67,7 @@
 					</c:if>
 				</span>
 				
-				<a href="/oauth2/authorization/google">google Login</a>
+				<a href="/oauth2/authorization/google"><img class="googleImage" src="/images/googleIcon.png" alt="" /></a>
 				
 			</div>
 		</div>

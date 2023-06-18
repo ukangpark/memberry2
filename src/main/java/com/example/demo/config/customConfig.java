@@ -75,7 +75,7 @@ public class customConfig {
 
 	@Bean
 	public S3Client s3client() {
-
+ 
 		AwsBasicCredentials credentials = AwsBasicCredentials.create(accessKeyId, secretAccessKey);
 		AwsCredentialsProvider provider = StaticCredentialsProvider.create(credentials);
 
