@@ -199,13 +199,17 @@
 					<span class="likeIcon" data-feed-id="${feed.id }" style="margin-right: 0.3vw;" > 
 						<c:if test="${feed.liked }">
 							<img src="/images/bone.png">
-						</c:if> <c:if test="${not feed.liked }">
+						</c:if> 
+						<c:if test="${not feed.liked }">
 							<img src="/images/olbone.png">
 						</c:if>
 					</span> 
 					<!-- 좋아요 숫자 -->
 					<span class="likeNumber" style="font-weight: 300; font-size: medium; font-weight: bold;">
-						${feed.likeCount }명이 ${logedInMember.nickName }님의 글을 좋아합니다.
+						${feed.likeCount }
+					</span>
+					<span>
+						명이 ${logedInMember.nickName }님의 글을 좋아합니다.
 					</span>
 					<!-- 작성 일시 --> 
 					<div id="inserted" style="margin-top: 2vh;">${feed.inserted }</div>
