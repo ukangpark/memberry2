@@ -18,6 +18,7 @@ $("#followBtn").click(function() {
 				//console.log(data.follow);
 				document.getElementById("followBtn").className = "ui basic button";
 				followBtn.html(`<h3><i class="fa-solid fa-user"></i> 팔로우</h3>`);
+				decrease();
 			}
 
 			//팔로우 수 업데이트(증가)
@@ -26,6 +27,15 @@ $("#followBtn").click(function() {
 				//console.log(count);
 				count = count + 1;
 				//console.log(count);
+				$(".followerCount").text(count);
+			}
+			
+			//팔로우 수 업데이트(감소)
+			function decrease() {
+				var count = parseInt($(".followerCount").text().trim());
+				console.log(count);
+				count = count - 1;
+				console.log(count);
 				$(".followerCount").text(count);
 			}
 		}
