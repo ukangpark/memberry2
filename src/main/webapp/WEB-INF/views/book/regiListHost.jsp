@@ -78,7 +78,7 @@ function handleButtonClick(event) {
 						<td>
 						<c:if test = "${book.accepted == 0 }">
 						<button id="acceptBtn_${book.num }" type="button" class="btn btn-secondary" onclick="handleButtonClick(event)">승인</button>
-						<button type="button" class="btn btn-danger" >거절</button>
+						<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">거절</button>
 						</c:if>
 						</td>
 					</tr>
@@ -86,6 +86,25 @@ function handleButtonClick(event) {
 			</tbody>
 		</table>
 	</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">거절 사유를 적어주세요.</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+       <textarea name="rejectMessage" rows="4" cols="60"></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+        <button type="button" class="btn btn-primary">확인</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 

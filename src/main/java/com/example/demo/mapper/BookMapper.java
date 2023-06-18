@@ -144,6 +144,7 @@ public interface BookMapper {
 				accepted,
 				detailId,
 				num,
+				reject,
 				Book.memberId
 			FROM Book,Pet,Host,Detail
 			WHERE Book.memberId = Pet.memberId
