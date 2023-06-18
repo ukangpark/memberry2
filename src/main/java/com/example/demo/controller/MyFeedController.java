@@ -44,6 +44,7 @@ public class MyFeedController {
 	public String myFeed(Model model, @PathVariable("userName") String userName, 
 										Authentication authentication) {
 		List<File> list = service.listMyFeed(userName, authentication);
+		System.out.println(list);
 		System.out.println(userName);
 		System.out.println(authentication.getName());
 		String petName = list.get(0).getPetName();

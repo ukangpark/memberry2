@@ -96,7 +96,10 @@ img {
 		</div>
 
 		<div class="following" style="margin: 0px 30px 0px 30px; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#followingModal">
-			<h3>팔로잉 00명</h3>
+			<h3>
+				팔로잉 <span class="followingCount">${fileList[0].followingCount}</span>
+			</h3>
+
 		</div>
 
 		<!-- 프로필 이미지 -->

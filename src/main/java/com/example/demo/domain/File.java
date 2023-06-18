@@ -18,6 +18,7 @@ public class File {
 	private String profileImage;
 	
 	private Integer followCount;
+	private Integer followingCount;
 	private Boolean followed;
 }
 

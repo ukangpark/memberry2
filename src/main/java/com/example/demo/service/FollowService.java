@@ -28,8 +28,14 @@ public class FollowService {
 			result.put("follow", true);
 		}
 		
-		Integer count = followMapper.countByfeedId(follow);
-		result.put("count", count);// 팔로우 개수 넘겨줌
+		// 팔로우 개수 넘겨줌
+		Integer followerCount = followMapper.followerCountByfeedOwner(follow);
+		result.put("followerNum", followerCount);
+		
+		// 팔로잉 개수 넘겨줌
+		Integer followingCount = followMapper.followingCountBymemberId(follow);
+		result.put("followingNum", followingCount);
+		
 		
 		return result;
 	}

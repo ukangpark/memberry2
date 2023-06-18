@@ -29,9 +29,8 @@ public interface FollowMapper {
 	@Select("""
 			SELECT COUNT(*) FROM Follow
 			WHERE feedOwner = #{feedOwner}
-					AND memberId = #{memberId}
 			""")
-	Integer countByfeedId(Follow follow);
+	Integer followerCountByfeedOwner(Follow follow);
 
 
 	@Select("""
@@ -40,6 +39,12 @@ public interface FollowMapper {
 					AND memberId = #{memberId}
 			""")
 	Follow select(String feedOwner, String memberId);
+
+	@Select("""
+			SELECT COUNT(*) FROM Follow
+			WHERE memberId = #{memberId}
+			""")
+	Integer followingCountBymemberId(Follow follow);
 
 
 
