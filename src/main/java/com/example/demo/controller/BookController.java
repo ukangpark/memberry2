@@ -128,5 +128,13 @@ public class BookController {
 		}
 		
 	}
+	
+	
+	// 예약 거절
+	@PostMapping("reject")
+	@ResponseBody
+	public void bookReject(@RequestBody Book book) {
+		service.bookReject(book);
+	}
 
 }

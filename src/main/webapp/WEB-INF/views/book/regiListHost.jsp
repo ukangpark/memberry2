@@ -16,7 +16,7 @@
 <body>
 
 <script>
-    // 클릭된 버튼의 id를 사용하여 원하는 동작 수행
+    // 예약승인
 function handleButtonClick(event) {
     var clickedButtonId = event.target.id;
     var num = clickedButtonId.split("_")[1];
@@ -29,6 +29,29 @@ function handleButtonClick(event) {
 		}
 	})
   }
+    //예약거절
+function handleButtonClick2() {
+    var rejectMessage = document.getElementById("rejectMessage").value;
+    var num = document.getElementById("rejectNum").value;
+    console.log(num);
+    $.ajax("/book/reject", {
+		method:"post",
+		contentType: "application/json",
+		data: JSON.stringify({"num" :num, "rejectMessage" : rejectMessage}),
+		success: function(){
+			location.reload();
+		}
+	})
+  }   
+    
+    
+    function openModal(event){
+    	  var clickedButtonId = event.target.id;
+    	  var num = clickedButtonId.split("_")[1];
+    	// 값을 모달 창에 설정
+    	  var modalValue = document.getElementById("rejectNum");
+    	  modalValue.value = num;
+    }
 </script>
 
 <d:navBar current="regiListHost" />
@@ -73,12 +96,13 @@ function handleButtonClick(event) {
 						<c:if test="${book.accepted == 0}">승인대기</c:if>
 						<c:if test="${book.accepted == 1}">결제대기</c:if>
 						<c:if test="${book.accepted == 2}">예약확정</c:if>
+						<c:if test="${book.accepted == 3}">예약거절</c:if>
 						</button>
 						</td>
 						<td>
 						<c:if test = "${book.accepted == 0 }">
 						<button id="acceptBtn_${book.num }" type="button" class="btn btn-secondary" onclick="handleButtonClick(event)">승인</button>
-						<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">거절</button>
+						<button id="rejectBtn_${book.num }" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="openModal(event)">거절</button>
 						</c:if>
 						</td>
 					</tr>
@@ -96,11 +120,12 @@ function handleButtonClick(event) {
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-       <textarea name="rejectMessage" rows="4" cols="60"></textarea>
+      <input type="hidden" id="rejectNum"/>
+       <textarea name="rejectMessage" id="rejectMessage" rows="4" cols="60"></textarea>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-        <button type="button" class="btn btn-primary">확인</button>
+        <button type="submit" class="btn btn-primary" onclick="handleButtonClick2()">확인</button>
       </div>
     </div>
   </div>

@@ -170,6 +170,18 @@ public interface BookMapper {
 	Integer countAllUser(String userId);
 
 	
+	//예약거절
+	@Update("""
+			UPDATE Book 
+			SET
+			accepted =3,
+			rejectMessage = #{rejectMessage}
+			WHERE 
+			num = #{num}
+			""")
+	void bookRejectUpdate(Book book);
+
+	
 }
 
 

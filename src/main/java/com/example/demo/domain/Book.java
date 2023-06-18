@@ -25,7 +25,7 @@ public class Book {
 	private LocalDate birth;
 	private String weight;
 	private int pottyTraining;
-	private String reject;
+	private String rejectMessage;
 	
 	
 	

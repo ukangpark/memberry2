@@ -132,6 +132,12 @@ public class BookService {
 		
 
 		}
+
+
+	// 예약거절
+	public void bookReject(Book book) {
+		mapper.bookRejectUpdate(book);
+	}
 }
 
 	
