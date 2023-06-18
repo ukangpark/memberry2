@@ -40,13 +40,13 @@ public class BookService {
 		return cnt ==1;
 	}
 
-	//페이지네이션
+	//페이지네이션, 예약 요청목록(호스트)
 	public Map<String, Object> bookList(Integer page,String userId) {
 		Integer rowPerPage = 4;
 		
 		Integer startIndex = (page-1) * rowPerPage;
 		
-		Integer numOfRecords =mapper.countAll();
+		Integer numOfRecords =mapper.countAll(userId);
 		// 마지막 페이지 번호
 		Integer lastPageNumber = (numOfRecords-1) / rowPerPage +1;
 		
@@ -97,9 +97,42 @@ public class BookService {
 	}
 
 
+	// 예약신청목록(사용자)
+	public Map<String, Object> bookListUser(Integer page, String userId) {
+		Integer rowPerPage = 4;
+		
+		Integer startIndex = (page-1) * rowPerPage;
+		
+		Integer numOfRecords =mapper.countAllUser(userId);
+		// 마지막 페이지 번호
+		Integer lastPageNumber = (numOfRecords-1) / rowPerPage +1;
+		
+		// 페이지네이션 왼쪽 번호
+		Integer leftPageNum = page - 5;
+		// 1보다 작을 수 없음
+		leftPageNum = Math.max(leftPageNum, 1);
+		
+		// 페이지네이션 오른쪽 번호
+		Integer rightPageNum = leftPageNum +9;  
+		// 마지막 페이지보다 클 수 없음
+		rightPageNum = Math.min(rightPageNum, lastPageNumber);
+		
+		Map<String, Object> pageInfo = new HashMap<>();
+		pageInfo.put("rightPageNum", rightPageNum);
+		pageInfo.put("leftPageNum", leftPageNum);
+		pageInfo.put("currentPageNum", page);
+		pageInfo.put("lastPageNum", lastPageNumber);
+		
+		// 게시물 목록 넘겨주고
+		List<Book> list = mapper.selectAllPagingUser(startIndex, rowPerPage, userId);
+				return Map.of("pageInfo", pageInfo,
+							  "bookList", list);
+
+
 		
 
 		}
+}
 
 	
 

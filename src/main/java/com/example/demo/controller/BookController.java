@@ -25,7 +25,7 @@ public class BookController {
 			@RequestParam(value = "page", defaultValue = "1") Integer page) {
 		 String userId = authentication.getName(); //인증서에 저장된 아이디 값 가져오기
 
-		Map<String, Object> result = service.bookList(page,userId);
+		Map<String, Object> result = service.bookListUser(page,userId);
 
 		model.addAllAttributes(result);
 		return "book/regiList";
@@ -40,39 +40,19 @@ public class BookController {
 		return "book/getBook";
 	}
 
-	// 예약수정
+	
+	
+	// 예약수정 
 	@GetMapping("/modify/{num}")
-	public String modifyForm(@PathVariable("num") Integer id, Integer petId, Model model, Authentication authentication) {
+	public String modifyForm(@PathVariable("num") Integer id, Model model, Authentication authentication) {
 		String userId = authentication.getName();
-		Registration pet = service.getPet(userId,petId);
+		 Book book = service.getBook(id);
+		Registration pet = service.getPet(userId,book.getPetId());
+		
 		model.addAttribute("pet", pet);
-		model.addAttribute("book", service.getBook(id));
+		model.addAttribute("book",book);
 		return "book/regiFormModify";
 	}
-	
-	/*
-	 * // 예약신청서
-	 * 
-	 * @GetMapping("regiForm/{id}") 
-	 * public String addRegi(@PathVariable("id")
-	 * Integer id, int petId, Model model, Authentication authentication) { String
-	 * userId = authentication.getName(); 
-	 * Registration pet = service.getPet(userId,
-	 * petId); model.addAttribute("pet", pet); model.addAttribute("detailId", id);
-	 * return "book/regiForm";
-	 * 
-	 * }
-	 */
-	
-	// 예약수정 //원본
-//	@GetMapping("/modify/{num}")
-//	public String modifyForm(@PathVariable("num") Integer id, Model model, Authentication authentication) {
-//		String userId = authentication.getName();
-//		Registration pet = service.getPet(userId);
-//		model.addAttribute("pet", pet);
-//		model.addAttribute("book", service.getBook(id));
-//		return "book/regiFormModify";
-//	}
 	
 
 	// 수정되게
@@ -137,8 +117,8 @@ public class BookController {
 	
 	
 	// 예약 취소
-	@PostMapping("remove")
-	public String remove(int num, RedirectAttributes rttr) {
+	@PostMapping("remove/{num}")
+	public String remove(@PathVariable(name = "num") int num, RedirectAttributes rttr) {
 		boolean ok =service.remove(num);
 		if(ok) {
 			rttr.addFlashAttribute("message", "예약이 취소되었습니다.");

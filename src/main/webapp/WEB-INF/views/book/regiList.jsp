@@ -12,6 +12,7 @@
 <link rel="stylesheet" type="text/css" href="/js/semantic/semantic.min.css">
 
 <d:top />
+<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 </head>
 <body>
 	 <d:navBar current="regiList" />  
@@ -48,6 +49,7 @@
 			</thead>
 			<tbody>
 				<c:forEach items="${bookList }" var="book">
+					<form action="/book/remove/${book.num }" method="post" id="removeForm_${book.num }">
 					<tr>
 						<td>
 						<a href="/book/num/${book.num }">
@@ -70,15 +72,12 @@
 						<td>
 						<c:if test = "${book.accepted == 0 }">
 						<button type="button" class="btn btn-secondary" onclick="location.href='/book/modify/${book.num}'">변경</button>
-						<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">삭제</button>
+						<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="openModal('${book.num }')">삭제</button>
 						</c:if>
 						</td>
 					</tr>
-					<div class="d-done">
-					<form action="/book/remove" method="post" id="removeForm">
 					<input type="hidden" name="num" value="${book.num }"/>
 					</form>
-					</div>	
 				</c:forEach>
 			</tbody>
 		</table>
@@ -95,8 +94,8 @@
         
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-danger" form="removeForm">확인</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+        <button type="submit" class="btn btn-danger">확인</button>
       </div>
   </div>
   </div>
@@ -143,5 +142,11 @@
 
 <d:bottom></d:bottom>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+function openModal(num) {
+	var submitButton = document.querySelector("#exampleModal button[type='submit']");
+	submitButton.setAttribute("form", "removeForm_" + num);
+  }
+</script>
 </body>
 </html>

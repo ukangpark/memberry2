@@ -15,6 +15,22 @@
 </head>
 <body>
 
+<script>
+    // 클릭된 버튼의 id를 사용하여 원하는 동작 수행
+function handleButtonClick(event) {
+    var clickedButtonId = event.target.id;
+    var num = clickedButtonId.split("_")[1];
+    $.ajax("/book/accept", {
+		method:"post",
+		contentType: "application/json",
+		data: JSON.stringify(num),
+		success: function(){
+			location.reload();
+		}
+	})
+  }
+</script>
+
 <d:navBar current="regiListHost" />
 
 	<div class="container-lg">
@@ -60,7 +76,7 @@
 						</td>
 						<td>
 						<c:if test = "${book.accepted == 0 }">
-						<button id="acceptBtn" type="button" class="btn btn-secondary">승인</button>
+						<button id="acceptBtn_${book.num }" type="button" class="btn btn-secondary" onclick="handleButtonClick(event)">승인</button>
 						<button type="button" class="btn btn-danger" >거절</button>
 						</c:if>
 						</td>
@@ -108,6 +124,5 @@
 
 <d:bottom></d:bottom>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="/js/book/book.js"></script>
 </body>
 </html>

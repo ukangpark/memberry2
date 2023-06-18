@@ -64,8 +64,8 @@ public class MapController {
 	}
 	
 	// 찜 취소
-	@PostMapping("remove")
-	public String remove(Integer id, RedirectAttributes rttr) {
+	@PostMapping("remove/{id}")
+	public String remove(@PathVariable(name = "id") int id, RedirectAttributes rttr) {
 		boolean ok = mapService.remove(id);
 		if(ok) {
 			rttr.addFlashAttribute("message", "찜 취소되었습니다.");

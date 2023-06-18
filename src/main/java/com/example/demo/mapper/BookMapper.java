@@ -29,6 +29,7 @@ public interface BookMapper {
 			FROM Book,Pet
 			WHERE num = #{num}
 			AND Book.memberId = Pet.memberId
+			AND Book.petId = Pet.Id
 			""")
 	Book selectById(Integer id);
 
@@ -62,7 +63,7 @@ public interface BookMapper {
 			WHERE Book.memberId = Pet.memberId
 			AND Detail.id = Book.detailId
 			AND Host.id = Detail.hostId
-			AND Pet.memberId = #{userId}
+			AND Host.memberId = #{userId}
 			ORDER BY Book.num DESC
 			LIMIT #{startIndex}, #{rowPerPage}
 			""")
@@ -75,9 +76,9 @@ public interface BookMapper {
 			WHERE Book.memberId = Pet.memberId
 			AND Detail.id = Book.detailId
 			AND Host.id = Detail.hostId
-			-- AND Pet.memberId = #{userId}
+			AND Host.memberId = #{userId}
 			""")
-	Integer countAll();
+	Integer countAll(String userId);
 
 	@Update("""
 			UPDATE Book 
@@ -132,6 +133,40 @@ public interface BookMapper {
 			WHERE Pet.memberId = #{userId}
 			""")
 	Registration getPetModify(String userId);
+
+	//예약요청목록(사용자)
+	@Select("""
+			SELECT
+				petName,
+				checkIn,
+				checkOut,
+				hostName,
+				accepted,
+				detailId,
+				num,
+				Book.memberId
+			FROM Book,Pet,Host,Detail
+			WHERE Book.memberId = Pet.memberId
+			AND Detail.id = Book.detailId
+			AND Host.id = Detail.hostId
+			AND Pet.memberId = #{userId}
+			AND Pet.id = Book.petId
+			ORDER BY Book.num DESC
+			LIMIT #{startIndex}, #{rowPerPage}
+			""")
+	List<Book> selectAllPagingUser(Integer startIndex, Integer rowPerPage, String userId);
+
+	// 예약신청내역(사용자)
+	@Select("""
+			SELECT COUNT(*)
+			FROM Book,Pet,Host,Detail
+			WHERE Book.memberId = Pet.memberId
+			AND Detail.id = Book.detailId
+			AND Host.id = Detail.hostId
+			AND Pet.memberId = #{userId}
+			AND Pet.id = Book.petId
+			""")
+	Integer countAllUser(String userId);
 
 	
 }
