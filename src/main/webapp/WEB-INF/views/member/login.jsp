@@ -55,13 +55,13 @@
 						<div class="ui vertical divider">Or</div>
 					</div>
 				</form>
-
-				<a href="/oauth2/authorization/google">google Login</a>
 				
 				<span> <c:if test="${error}">
 						<p id="valid" class="alert alert-danger">${exception}</p>
 					</c:if>
 				</span>
+				
+				<a href="/oauth2/authorization/google">google Login</a>
 				
 			</div>
 		</div>

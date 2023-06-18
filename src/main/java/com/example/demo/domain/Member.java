@@ -16,4 +16,6 @@ public class Member {
 	private LocalDateTime inserted;
 	private String profileImage;
 	private List<String> authority;
+	private String provider;
+	private String providerId;
 }
