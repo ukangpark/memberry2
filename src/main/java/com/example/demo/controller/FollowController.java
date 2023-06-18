@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +21,8 @@ public class FollowController {
 	private FollowService followService;
 	
 	// follow
-		@PostMapping("/follow")
+		@PostMapping("/follow/{userName}")
 		public ResponseEntity <Map<String,Object>> follow(@RequestBody Follow follow, Authentication auth) {
-			
-			System.out.println(follow);
 			
 			return ResponseEntity
 					.ok()

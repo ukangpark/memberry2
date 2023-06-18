@@ -27,7 +27,7 @@ public class Feed {
 	private String nickName;
 	
 	private String lastCommentInserted;
-
+	
 	
 	public void setInserted(Date date) {
 		this.inserted = FeedTime.calculateTime(date); // 기존의 getter, setter에서 변경된 부분

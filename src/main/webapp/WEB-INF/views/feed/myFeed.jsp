@@ -90,7 +90,9 @@ img {
 	<div id="upper" class="ui container mb-5">
 
 		<div class="follower" style="margin: 0px 30px 0px 30px; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#followerModal">
-			<h3>팔로워 00명</h3>
+			<h3>팔로워
+			<span class="followerCount">${fileList[0].followCount}</span>
+			</h3>
 		</div>
 
 		<div class="following" style="margin: 0px 30px 0px 30px; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#followingModal">
@@ -115,16 +117,17 @@ img {
 		</div>
 
 		<div class="follow" style="margin: 0px 30px 0px 30px">
-			<input id="feedId" name="feedId" value="${fileList[0].feedId }" style="display: none;">
-			<input id="memberId" name="memberId" value="${fileList[0].memberId }" style="display: none;">
-			<button class="ui basic button" id="followBtn">
-				<h3>
-					<i class="fa-solid fa-user"></i> 팔로우
-				</h3>
-			</button>
-
-			<c:if test="">
-				<button class="ui basic button">
+			<input id="userName" name="userName" value="${userName }" style="display: none;">
+			<input id="auth" name="auth" value="${authentication }" style="display: none;">
+			<c:if test="${not fileList[0].followed }">
+				<button class="ui basic button" id="followBtn">
+					<h3>
+						<i class="fa-solid fa-user"></i> 팔로우
+					</h3>
+				</button>
+			</c:if>
+			<c:if test="${fileList[0].followed }">
+				<button class="ui blue basic button" id="followBtn">
 					<h3>
 						<i class="fa-solid fa-user-check"></i> 팔로잉
 					</h3>

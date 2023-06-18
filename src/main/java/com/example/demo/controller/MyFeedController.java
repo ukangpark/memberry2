@@ -25,6 +25,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.domain.Feed;
 import com.example.demo.domain.File;
+import com.example.demo.domain.Follow;
 import com.example.demo.domain.Like;
 import com.example.demo.domain.Registration;
 import com.example.demo.service.MyFeedService;
@@ -40,8 +41,9 @@ public class MyFeedController {
 	// MyFeed 보기
 	@GetMapping("feed/myFeed/{userName}")
 	@PreAuthorize("isAuthenticated()")
-	public String myFeed(Model model, @PathVariable("userName") String userName, Authentication authentication) {
-		List<File> list = service.listMyFeed(userName);
+	public String myFeed(Model model, @PathVariable("userName") String userName, 
+										Authentication authentication) {
+		List<File> list = service.listMyFeed(userName, authentication);
 
 		String petName = list.get(0).getPetName();
 		String type = list.get(0).getType();
@@ -58,6 +60,8 @@ public class MyFeedController {
 		model.addAttribute("fileList", list);
 		model.addAttribute("proileImg", profileImage);
 		model.addAttribute("petList", petList);
+		model.addAttribute("userName", userName);
+		model.addAttribute("authentication", authentication.getName());
 
 		return "feed/myFeed";
 	}
