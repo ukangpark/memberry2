@@ -128,7 +128,7 @@
 			</div>
 			<!-- 후기 입력란 -->
 			<div class="input-group mb-3" style="width: 880px;" id="commentInput">
-				<input id="commentModifyInput" type="text" id="commentBodyArea" class="form-control" placeholder="후기를 남겨주세요.">
+				<input type="text" id="commentBodyArea" class="form-control" placeholder="후기를 남겨주세요.">
 				<button style="width:65px;" class="btn btn-outline-secondary" id="addCommentBtn">추가</button>
 			</div>
 		</div>

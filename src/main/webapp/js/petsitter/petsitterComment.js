@@ -2,15 +2,12 @@ listComment();
 
 function listComment() {
 	const detailId = $("#detailIdText").text().trim();
-	console.log(detailId); //check
-	
+
 	$.ajax("/petsitterComment/list?detailId=" + detailId, {
 		method: "get",
 		success: function(petsitterComments) {
-			console.log(petsitterComments); //check
 			$("#commentListContainer").empty();
-			for(const petsitterComment of petsitterComments) {
-				console.log(petsitterComment); //check
+			for (const petsitterComment of petsitterComments) {
 				$("#commentListContainer").append(`
 				<a class="avatar">
 					<img src="/images/paw.png">
@@ -39,14 +36,18 @@ function listComment() {
 				<br>
 				`)
 			}
-			
+
+			//댓글 아래 있는 삭제 버튼을 누르면 
 			$(".commentDeleteBtn").click(function() {
 				const commentId = $(this).attr("comment-id");
 				$("#commentDeleteModalBtn").attr("comment-id", commentId);
 			});
-			
+
+			//댓글 아래 있는 수정 버튼을 누르면 
 			$(".commentModifyBtn").click(function() {
 				const commentId = $(this).attr("comment-id");
+				// 해당 댓글의 내용을 조회함 
+				console.log(commentId); //check
 				$.ajax("/petsitterComment/get/" + commentId, {
 					success: function(comment) {
 						// 버튼을 바꿈
@@ -58,31 +59,29 @@ function listComment() {
 								<button id="cancleBtn" style="width:65px;" class="btn btn-outline-danger" type="button">취소</button>
 							</div>
 						`)
-						
+
 						//기존의 후기 내용을 넣어줌
 						$("#commentModifyInput").val(comment.body);
-						
+
 						//수정버튼을 누르면
 						$("#modifyBtn").click(function() {
 							const body = $("#commentModifyInput").val();
-							console.log(body);
+							console.log(body); //check 
 							const data = { id: commentId, body: body };
+							console.log(data);
 							$.ajax("/petsitterComment/modify", {
 								method: "put",
 								contentType: "application/json",
 								data: JSON.stringify(data),
-								complete: function(jqXHR) {
-									listComment();
-								}
 							})
 						})
-						
+
 						//취소버튼을 누르면 
-						$("#cancleBtn").click(function(){
+						$("#cancleBtn").click(function() {
 							$("#commentInput").empty();
 							$("#commentInput").append(`
 								<div class="input-group mb-3" style="width: 880px;" id="commentInput">
-									<input id="commentModifyInput" type="text" id="commentBodyArea" class="form-control" placeholder="후기를 남겨주세요." >
+									<input type="text" id="commentBodyArea" class="form-control" placeholder="후기를 남겨주세요." >
 									<button style="width:65px;" class="btn btn-outline-secondary" id="addCommentBtn">추가</button>
 								</div>
 							`);
@@ -91,17 +90,18 @@ function listComment() {
 				})
 			})
 		}
-	})	
+	})
 }
+
+
 
 
 $("#addCommentBtn").click(function() {
 	const detailId = $("#detailIdText").text().trim();
 	const body = $("#commentBodyArea").val();
 	const data = { detailId, body };
-	
-	console.log(data); //check
-	
+
+
 	$.ajax("/petsitterComment/add", {
 		method: "post",
 		contentType: "application/json",

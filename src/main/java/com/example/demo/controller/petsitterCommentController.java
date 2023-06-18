@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import com.example.demo.domain.*;
 import com.example.demo.service.*;
 
-@Controller
+@RestController
 @RequestMapping("petsitterComment")
 public class petsitterCommentController {
 	
@@ -19,19 +19,17 @@ public class petsitterCommentController {
 	private PetsitterCommentService petsitterCommentService;
 	
 	@GetMapping("list")
-	@ResponseBody
 	public List<PetsitterComment> list(@RequestParam("detailId") Integer detailId) {
 		//해당 상세페이지의 후기를 조회함 
 		return petsitterCommentService.list(detailId);
 	}
 	
 	@PostMapping("add")
-	@ResponseBody
 	@PreAuthorize("isAuthenticated()")
 	public String add(@RequestBody PetsitterComment petsitterComment, Authentication authentication) {
 		//후기 등록
 		petsitterCommentService.add(petsitterComment, authentication);
-		
+		System.out.println("add controller : " + petsitterComment);
 		return "ok";
 	}
 	
@@ -45,7 +43,6 @@ public class petsitterCommentController {
 	}
 	
 	@GetMapping("get/{id}")
-	@ResponseBody
 	public PetsitterComment modify(@PathVariable("id") Integer commentId) {
 		PetsitterComment petsitterComment = petsitterCommentService.selectComment(commentId);
 		System.out.println(petsitterComment);
@@ -55,7 +52,8 @@ public class petsitterCommentController {
 	@PutMapping("modify")
 	@PreAuthorize("isAuthenticated()")
 	public String modify(PetsitterComment petsitterComment, Authentication authentication) {
-		petsitterCommentService.updateComment(petsitterComment, authentication);
+		petsitterCommentService.modifyComment(petsitterComment, authentication);
+		System.out.println("controller : " + petsitterComment);
 		return "ok";
 	}
 } 

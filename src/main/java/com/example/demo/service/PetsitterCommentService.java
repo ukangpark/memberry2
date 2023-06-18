@@ -27,7 +27,7 @@ public class PetsitterCommentService {
 
 		// 자바빈에 memberId 넣어줌
 		petsitterComment.setMemberId(authentication.getName());
-		System.out.println(petsitterComment);
+		System.out.println("add service : " + petsitterComment);
 		// mapper를 통해서 데이터를 넣어줌
 		Integer count = petsitterCommentMapper.add(petsitterComment);
 
@@ -45,9 +45,9 @@ public class PetsitterCommentService {
 		return petsitterComment;
 	}
 	
-	public void updateComment(PetsitterComment petsitterComment, Authentication authentication) {
+	public void modifyComment(PetsitterComment petsitterComment, Authentication authentication) {
 		petsitterComment.setMemberId(authentication.getName());
-		System.out.println(petsitterComment);
+		System.out.println( "service : " + petsitterComment);
 		petsitterCommentMapper.updateComment(petsitterComment);
 	}
 }
