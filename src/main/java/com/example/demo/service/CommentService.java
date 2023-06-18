@@ -1,15 +1,17 @@
 package com.example.demo.service;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import org.springframework.beans.factory.annotation.*;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.*;
-import org.springframework.stereotype.*;
-import org.springframework.transaction.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import com.example.demo.domain.*;
-import com.example.demo.mapper.*;
+import com.example.demo.domain.Comment;
+import com.example.demo.mapper.AlarmMapper;
+import com.example.demo.mapper.CommentMapper;
 
 @Service
 @Transactional(rollbackFor = Exception.class)
@@ -18,6 +20,9 @@ public class CommentService {
 	
 	  @Autowired 
 	  private CommentMapper mapper;
+	  
+	  @Autowired
+	  private AlarmMapper alarmMapper;
 	  
 	  
 	  public List<Comment> list(Integer feedId, Authentication authentication) {
@@ -35,10 +40,10 @@ public class CommentService {
 		
 		var res  = new HashMap<String, Object>();
 		int cnt = mapper.insert(comment);
-		System.out.println(cnt);
 		
 		if (cnt == 1) {
 			res.put("message", "댓글 등록 완료");
+			alarmMapper.commentAdd(comment);
 		} else {
 			res.put("message", "댓글 등록 실패");
 		}

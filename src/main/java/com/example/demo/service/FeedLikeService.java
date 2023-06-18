@@ -16,6 +16,9 @@ public class FeedLikeService {
 	
 	@Autowired
 	private FeedLikeMapper likeMapper;
+	
+	@Autowired
+	private AlarmMapper alarmMapper;
 
 	public Map<String, Object> like(Like like, Authentication authentication) {
 		Map<String, Object> result = new HashMap<>();
@@ -28,6 +31,7 @@ public class FeedLikeService {
 		if (deleteCnt != 1) {
 			Integer insertCnt = likeMapper.insert(like);
 			result.put("like", true);
+			alarmMapper.likeAdd(like);
 		}
 		
 		// 게시물 번호 기준으로 좋아요 개수 읽어내기
