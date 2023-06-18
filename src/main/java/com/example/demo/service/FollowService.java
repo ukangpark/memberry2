@@ -28,7 +28,7 @@ public class FollowService {
 			result.put("follow", true);
 		}
 		
-		Integer count = followMapper.countByfeedId(follow.getFeedOwner());
+		Integer count = followMapper.countByfeedId(follow);
 		result.put("count", count);// 팔로우 개수 넘겨줌
 		
 		return result;

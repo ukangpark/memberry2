@@ -22,15 +22,16 @@ public interface FollowMapper {
 	@Delete("""
 			DELETE FROM Follow
 				WHERE feedOwner = #{feedOwner}
-						AND memberId = #{memberId}
+					AND memberId = #{memberId}
 			""")
 	Integer delete(Follow follow);
 
 	@Select("""
 			SELECT COUNT(*) FROM Follow
 			WHERE feedOwner = #{feedOwner}
+					AND memberId = #{memberId}
 			""")
-	Integer countByfeedId(String feedOwner);
+	Integer countByfeedId(Follow follow);
 
 
 	@Select("""
