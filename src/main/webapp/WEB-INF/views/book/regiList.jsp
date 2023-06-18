@@ -44,7 +44,7 @@
 					<th>체크아웃 날짜</th>
 					<th>펫시터 이름</th>
 					<th>예약 상태</th>
-					<th>예약 변경</th>
+					<th>예약 변경 / 결제</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -66,13 +66,17 @@
 						<td>
 						<button type="button" class="btn btn-warning">
 						<c:if test="${book.accepted == 0}">요청중</c:if>
-						<c:if test="${book.accepted == 1}">완료</c:if>
+						<c:if test="${book.accepted == 1}">결제대기</c:if>
+						<c:if test="${book.accepted == 2}">완료</c:if>
 						</button>
 						</td>
 						<td>
 						<c:if test = "${book.accepted == 0 }">
 						<button type="button" class="btn btn-secondary" onclick="location.href='/book/modify/${book.num}'">변경</button>
 						<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="openModal('${book.num }')">삭제</button>
+						</c:if>
+						<c:if test = "${book.accepted == 1 }">
+						<button type="button" class="btn btn-primary"  onclick="requestPay()">결제</button>
 						</c:if>
 						</td>
 					</tr>
@@ -140,6 +144,14 @@
 		</div>
 	</div>
 
+
+
+
+
+
+
+
+
 <d:bottom></d:bottom>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
@@ -147,6 +159,37 @@ function openModal(num) {
 	var submitButton = document.querySelector("#exampleModal button[type='submit']");
 	submitButton.setAttribute("form", "removeForm_" + num);
   }
+  
+  // 여기부터 결제기능관련 코드
+var IMP = window.IMP; // 생략 가능
+IMP.init('imp67575345'); // 본인 가맹점 코드
+
+function requestPay() {
+    // IMP.request_pay(param, callback) 결제창 호출
+    IMP.request_pay({ // param
+        pg: "html5_inicis",
+        pay_method: "card",
+        merchant_uid: "ORD20180131-0000011",
+        name: "노르웨이 회전 의자",
+        amount: 64900,
+        buyer_email: "gildong@gmail.com",
+        buyer_name: "홍길동",
+        buyer_tel: "010-4242-4242",
+        buyer_addr: "서울특별시 강남구 신사동",
+        buyer_postcode: "01181"
+    }, function (rsp) { // callback
+        if (rsp.success) {
+            ...,
+            // 결제 성공 시 로직,
+            ...
+        } else {
+            ...,
+            // 결제 실패 시 로직,
+            ...
+        }
+    });
+  }
+
 </script>
 </body>
 </html>

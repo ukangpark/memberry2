@@ -71,7 +71,8 @@ function handleButtonClick(event) {
 						<td>
 						<button type="button" class="btn btn-warning">
 						<c:if test="${book.accepted == 0}">승인대기</c:if>
-						<c:if test="${book.accepted == 1}">예약확정</c:if>
+						<c:if test="${book.accepted == 1}">결제대기</c:if>
+						<c:if test="${book.accepted == 2}">예약확정</c:if>
 						</button>
 						</td>
 						<td>
