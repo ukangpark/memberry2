@@ -151,11 +151,11 @@
 				<sec:authorize access="isAuthenticated()">
 					<a class="${current eq 'logout' ? 'active' : '' } item" href="/member/logout"> 로그아웃 </a>
 				</sec:authorize>
+        
 				<sec:authorize access="isAuthenticated()">
-					<a class="${current eq 'alarm' ? 'active' : '' } item" href="/alarm">
-						알림 <span class="badge text-bg-danger">4</span>
-					</a>
+					<a class="${current eq 'alarm' ? 'active' : '' } item" href="/alarm"> 알림 <span class="badge text-bg-danger">${logedInMember.alarmCount }</span> </a>
 				</sec:authorize>
+						
 
 
 			</div>
