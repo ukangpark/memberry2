@@ -41,24 +41,31 @@ public class MyFeedController {
 	// MyFeed 보기
 	@GetMapping("feed/myFeed/{userName}")
 	@PreAuthorize("isAuthenticated()")
-	public String myFeed(Model model, @PathVariable("userName") String userName, Authentication authentication) {
-		List<File> list = service.listMyFeed(userName);
-
+	public String myFeed(Model model, @PathVariable("userName") String userName, 
+										Authentication authentication) {
+		List<File> list = service.listMyFeed(userName, authentication);
+		
+		//마이피드에 펫정보 가져오기 용
 		String petName = list.get(0).getPetName();
 		String type = list.get(0).getType();
 		LocalDate together = list.get(0).getTogether();
-
+		
+		//마이피드에 펫정보 중 함께한날 날짜 계산하기 용
 		var now = LocalDate.now();
 		Registration petList = new Registration();
 		petList.setPetName(petName);
 		petList.setType(type);
 		petList.setDiff(Period.between(together, now));
 
+		//마이피드에 프로필이미지 가져오기 용
 		String profileImage = list.get(0).getProfileImage();
+		
 
 		model.addAttribute("fileList", list);
-		model.addAttribute("proileImg", profileImage);
+		model.addAttribute("profileImg", profileImage);
 		model.addAttribute("petList", petList);
+		model.addAttribute("userName", userName);
+		model.addAttribute("authentication", authentication.getName());
 
 		return "feed/myFeed";
 	}
@@ -141,15 +148,5 @@ public class MyFeedController {
 			return "redirect:/id/" + id;
 		}
 	}
-
-	// follow
-	@PostMapping("/follow")
-	public ResponseEntity<Map<String, Object>> follow(@RequestBody Follow follow, Authentication auth) {
-		System.out.println(follow);
-
-		return ResponseEntity.ok().body(null);
-			//return ResponseEntity.ok().body(service.follow(follow, auth));
-
-	}
-
+	
 }

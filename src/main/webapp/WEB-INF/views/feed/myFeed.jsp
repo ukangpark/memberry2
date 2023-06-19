@@ -23,8 +23,7 @@ img {
 #profilImage {
 	height: 300px;
 	width: 300px;
-	border: 3px solid #cccccc;
-	padding: 5px;
+	border: 1px solid #cccccc;
 	margin-bottom: 0px;
 }
 
@@ -38,8 +37,7 @@ img {
 #addImageBox {
 	position: relative;
 	cursor: pointer;
-	overflow:hidden;
-	
+	overflow: hidden;
 }
 
 #addImageBox:hover #addImage {
@@ -51,7 +49,7 @@ img {
 	height: 100%;
 	position: absolute;
 	z-index: 1;
-	-webkit-transition:all.5s ease;
+	-webkit-transition: all.5s ease;
 	transition: all.5s.ease;
 	bottom: 0px;
 	overflow: hidden;
@@ -60,11 +58,11 @@ img {
 #addImageDes {
 	width: 100%;
 	height: 50px;
-    padding: 10px;
-    position: absolute;
-    bottom: 0px;
-    text-align: center;
-    color: white;
+	padding: 10px;
+	position: absolute;
+	bottom: 0px;
+	text-align: center;
+	color: white;
 }
 
 #addImageBox:hover #addImageDes {
@@ -72,7 +70,6 @@ img {
 	font-weight: bold;
 	font-size: large;
 }
-
 </style>
 
 <meta charset="UTF-8">
@@ -92,47 +89,58 @@ img {
 	<!-- 윗 부분 -->
 	<div id="upper" class="ui container mb-5">
 
-		<div class="follower" style="margin: 0px 30px 0px 30px; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#followerModal">
-			<h3>팔로워 00명</h3>
+		<div class="follower" id="followerBtn" style="margin: 0px 30px 0px 30px; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#followerModal">
+			<h3>
+				<input id="userName" name="userName" value="${userName }" style="display: none;">
+				팔로워 <span class="followerCount">${fileList[0].followCount}</span>
+			</h3>
 		</div>
 
-		<div class="following" style="margin: 0px 30px 0px 30px; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#followingModal">
-			<h3>팔로잉 00명</h3>
+		<div class="following" id="followingBtn" style="margin: 0px 30px 0px 30px; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#followingModal">
+			<h3>
+				<input id="userName" name="userName" value="${userName }" style="display: none;">
+				팔로잉 <span class="followingCount">${fileList[0].followingCount}</span>
+			</h3>
+
 		</div>
 
 		<!-- 프로필 이미지 -->
 		<div class="middleContainer" style="margin: 0px 30px 0px 30px">
 			<c:if test="${logedInMember.profileImage ne null}">
-				<img class="ui circular image" id="profilImage" src="${bucketUrl }/pet${proileImg}">
+				<img class="ui circular image" id="profilImage" src="${bucketUrl }/pet${profileImg}">
 			</c:if>
 			<c:if test="${logedInMember.profileImage eq null}">
 				<img class="ui circular image" id="profilImage" src="/images/paw.png">
 			</c:if>
 
 			<div>
-				<p>${petList.petName }</p>
-				<p>${petList.type }</p>
-				<p>
+				<h5 style="margin: 0px">${petList.petName }(${petList.type })</h5>
+				<h5 style="margin: 0px">
 					<i class="heart icon"></i>${petList.diff.years}년 ${petList.diff.months}개월째 함께 하는 중 입니다<i class="heart icon"></i>
-				</p>
+				</h5>
 			</div>
 		</div>
 
-		<div class="follow" style="margin: 0px 30px 0px 30px">
-			<button class="ui basic button" id="followBtn">
-				<h3>
-					<i class="fa-solid fa-user"></i> 팔로우
-				</h3>
-			</button>
-
-			<c:if test="">
-				<button class="ui basic button">
-					<h3>
-						<i class="fa-solid fa-user-check"></i> 팔로잉
-					</h3>
-				</button>
-			</c:if>
-		</div>
+		<c:if test="${userName ne authentication }">
+			<div class="follow" style="margin: 0px 30px 0px 30px">
+				<input id="userName" name="userName" value="${userName }" style="display: none;">
+				<input id="auth" name="auth" value="${authentication }" style="display: none;">
+				<c:if test="${not fileList[0].followed }">
+					<button class="ui basic button" id="followBtn">
+						<h3>
+							<i class="fa-solid fa-user"></i> 팔로우
+						</h3>
+					</button>
+				</c:if>
+				<c:if test="${fileList[0].followed }">
+					<button class="ui blue basic button" id="followBtn">
+						<h3>
+							<i class="fa-solid fa-user-check"></i> 팔로잉
+						</h3>
+					</button>
+				</c:if>
+			</div>
+		</c:if>
 
 		<div class="messageBtn" style="margin: 0px 30px 0px 30px">
 			<button class="ui basic button" id="messageBtn">
@@ -147,7 +155,7 @@ img {
 	<div class="container">
 
 		<!-- 게시물 추가 이미지 -->
-		<div id="addImageBox"> 
+		<div id="addImageBox">
 			<div id="addImage">
 				<a href="/feed/feedAdd">
 					<img src="/images/feedAddIcon.PNG" alt="" />
@@ -187,13 +195,10 @@ img {
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
-					<c:if test="${logedInMember.profileImage ne null}">
-						<img class="ui middle aligned tiny inline image" id="nav-image" src="${bucketUrl }/pet${logedInMember.profileImage }">
-						<span style="font-size: 15pt; font-weight: bold;">${logedInMember.nickName }</span>
-					</c:if>
-					<c:if test="${logedInMember.profileImage eq null}">
-						<img class="ui tiny image" id="nav-image" src="/images/paw.png">${logedInMember.nickName } 
-					</c:if>
+					<div id="followerListContainer">
+					
+					
+					</div>
 				</div>
 			</div>
 		</div>
@@ -207,19 +212,17 @@ img {
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
-					<c:if test="${logedInMember.profileImage ne null}">
-						<img class="ui middle aligned tiny inline image" id="nav-image" src="${bucketUrl }/pet${logedInMember.profileImage }">
-						<span style="font-size: 15pt; font-weight: bold;">${logedInMember.nickName }</span>
-					</c:if>
-					<c:if test="${logedInMember.profileImage eq null}">
-						<img class="ui tiny image" id="nav-image" src="/images/paw.png">${logedInMember.nickName } 
-					</c:if>
+					<div id="followingListContainer">
+					
+					
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 
 	<my:bottom></my:bottom>
+	<script src="/js/feed/follow.js"></script>
 
 	<script>
 		$('.ui.modal').modal('show');

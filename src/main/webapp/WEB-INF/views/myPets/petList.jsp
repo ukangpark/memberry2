@@ -77,7 +77,9 @@ img {
 						<div class="ui huge header">${petsList.petName }</div>
 						<div class="description">
 							<p>${petsList.type }</p>
-							<p>${petsList.birth }</p>
+							<p>
+								<i class="birthday cake icon"></i>${petsList.birth }<i class="birthday cake icon"></i>
+							</p>
 							<p style="display: none">${petsList.memberId}</p>
 
 							<p>

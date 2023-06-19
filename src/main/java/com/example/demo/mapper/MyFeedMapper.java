@@ -12,13 +12,18 @@ public interface MyFeedMapper {
 	
 	@Select("""
 			SELECT 
+				f.id,
 				f.feedId, 	
 				f.fileName,
 				p.petName,
 				p.type,
 				p.together,
-				CONCAT('/', p.id, '/', p.photo) profileImage 	
-			FROM File f JOIN  Pet p ON f.memberId = p.memberId
+				f.memberId,
+				CONCAT('/', p.id, '/', p.photo) profileImage,
+				(SELECT COUNT(*) FROM Follow WHERE feedOwner = f.memberId) followCount,
+				(SELECT COUNT(*) FROM Follow WHERE memberId = #{memberId}) followingCount
+			FROM File f LEFT JOIN  Pet p ON f.memberId = p.memberId
+						LEFT JOIN Follow fw ON f.memberId = fw.memberId
 			WHERE f.memberId = #{memberId}
 			GROUP BY f.feedId ORDER BY f.id DESC
 			""")
@@ -101,8 +106,5 @@ public interface MyFeedMapper {
 			WHERE writer = #{writer}
 			""")
 	List<Integer> selectIdByWriter(String writer);
-	
-	
-
 
 }

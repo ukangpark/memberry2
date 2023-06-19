@@ -16,5 +16,9 @@ public class File {
 	private LocalDate together;
 	
 	private String profileImage;
+	
+	private Integer followCount;
+	private Integer followingCount;
+	private Boolean followed;
 }
 
