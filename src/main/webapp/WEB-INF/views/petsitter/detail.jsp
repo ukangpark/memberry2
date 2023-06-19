@@ -12,16 +12,14 @@
 <my:top></my:top>
 <link rel="stylesheet" type="text/css" href="/js/semantic/semantic.min.css">
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-<script src="/js/semantic/semantic.min.js"></script>
 <link rel="stylesheet" href="/css/detail.css" />
-<script>
-	var bucketUrl = '${bucketUrl}';
-</script>
+
 </head>
 <body>
 	<my:navBar></my:navBar>
 	<my:alert></my:alert>
-	<h1>로고 자리</h1>
+	<br>
+	<br>
 	<!-- 호스트의 집사진 -->
 	<div id="imgBox" class="container">
 		<button type="button" class="ui icon button inverted " id="entireBtn" data-bs-toggle="modal" data-bs-target="#housePhotosModal">
@@ -141,13 +139,52 @@
 			<!-- 후기 입력란 -->
 			<div class="input-group mb-3" style="width: 880px;" id="commentInput">
 				<input type="text" id="commentBodyArea" class="form-control" placeholder="후기를 남겨주세요.">
-				<button style="width: 65px;" class="btn btn-outline-secondary" id="addCommentBtn">추가</button>
+				<button style="width: 65px;" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#addCommentModal">추가</button>
 			</div>
 		</div>
 	</div>
+
 	<br>
 	<br>
 
+
+	<!-- 후기 모달 -->
+	<div class="modal fade" id="addCommentModal" tabindex="-1" aria-labelledby="addCommentModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="addCommentModalLabel">후기 작성</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<form action="">
+						<h3 class="ui header center aligned">
+							펫시터
+							<strong class="ui pink header">${host.hostName }님</strong>
+							의 서비스는 만족하셨나요?
+						</h3>
+						<br>
+						<div id="commentForStar"></div>
+						<br>
+						<div class="ui grid" id="starContainer">
+							<div class="row">
+								<div class="center aligned column">
+									<div class="ui star massive rating"></div>
+								</div>
+							</div>
+						</div>
+						<br>
+						<input type="hidden" name="rating" id="starRating">
+						<textarea id="commentBodyArea" class="form-control" placeholder="후기를 남겨주세요." rows="10"></textarea>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+					<button type="button" class="btn btn-primary">후기 남기기</button>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<!-- 후기 삭제 모달 -->
 	<div class="modal fade" id="deleteCommentModal" tabindex="-1" aria-labelledby="#deleteCommentModalLabel" aria-hidden="true">
@@ -256,13 +293,17 @@
 		</div>
 	</div>
 
+
 	<my:bottom></my:bottom>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script type="text/javascript">
 		function openModal() {
 			document.getElementById("myModal").style.display = "block";
 		}
+
+		var bucketUrl = '${bucketUrl}';
 	</script>
 	<script src="/js/petsitter/petsitterComment.js"></script>
+	<script src="/js/semantic/semantic.min.js"></script>
 </body>
 </html>

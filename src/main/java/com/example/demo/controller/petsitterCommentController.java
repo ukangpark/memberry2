@@ -22,7 +22,6 @@ public class petsitterCommentController {
 	public List<PetsitterComment> list(@RequestParam("detailId") Integer detailId) {
 		//해당 상세페이지의 후기를 조회함 
 		List<PetsitterComment> list = petsitterCommentService.list(detailId);
-		System.out.println(list);
 		return list;
 	}
 	
@@ -31,7 +30,6 @@ public class petsitterCommentController {
 	public String add(@RequestBody PetsitterComment petsitterComment, Authentication authentication) {
 		//후기 등록
 		petsitterCommentService.add(petsitterComment, authentication);
-		System.out.println("add controller : " + petsitterComment);
 		return "ok";
 	}
 	
@@ -47,7 +45,6 @@ public class petsitterCommentController {
 	@GetMapping("get/{id}")
 	public PetsitterComment modify(@PathVariable("id") Integer commentId) {
 		PetsitterComment petsitterComment = petsitterCommentService.selectComment(commentId);
-		System.out.println(petsitterComment);
 		return petsitterComment;
 	}
 	
@@ -55,7 +52,6 @@ public class petsitterCommentController {
 	@PreAuthorize("isAuthenticated()")
 	public String modify(@RequestBody PetsitterComment petsitterComment, Authentication authentication) {
 		petsitterCommentService.modifyComment(petsitterComment, authentication);
-		System.out.println("controller : " + petsitterComment);
 		return "ok";
 	}
 } 

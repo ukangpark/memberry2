@@ -8,9 +8,6 @@ function listComment() {
 		success: function(petsitterComments) {
 			$("#commentListContainer").empty();
 			for (const petsitterComment of petsitterComments) {
-				var photo = petsitterComment.defaultPetId;
-				var paw = '/images/paw.png';
-				console.log(photo);
 				$("#commentListContainer").append(`
 				<a class="avatar">
 					<img src="${bucketUrl}/pet/${petsitterComment.defaultPetId}/${petsitterComment.photo}">
@@ -83,7 +80,7 @@ function listComment() {
 									$("#commentInput").empty();
 									$("#commentInput").append(`
 										<div class="input-group mb-3" style="width: 880px;" id="commentInput">
-											<input type="text" id="commentBodyArea" class="form-control" placeholder="후기를 남겨주세요.">
+											<input type="text" id="commentBodyArea" class="form-control right" placeholder="후기를 남겨주세요.">
 											<button style="width:65px;" class="btn btn-outline-secondary" id="addCommentBtn">추가</button>
 										</div>
 										`)
@@ -166,6 +163,39 @@ $("#commentDeleteModalBtn").click(function() {
 
 
 
+$(document).ready(function() {
+	$('.ui.rating.star')
+	  .rating({
+	    initialRating: 0,
+	    maxRating: 5,
+	    onRate: function(rating) {
+	        $("#starRating").val(rating);
+	        
+	        if(rating <= 2) {
+				$("#commentForStar").empty();
+				$("#commentForStar").append(`
+					<h3 class="ui header center aligned">
+						그냥 그랬어요..
+					</h3>
+				`)
+			} else if(rating == 3) {
+				$("#commentForStar").empty();
+				$("#commentForStar").append(`
+					<h3 class="ui header center aligned">
+						좋았어요!!
+					</h3>
+				`)
+			} else if(rating >= 4) {
+				$("#commentForStar").empty();
+				$("#commentForStar").append(`
+					<h3 class="ui header center aligned">
+						최고였어요!!
+					</h3>
+				`)
+			}
+	    }
+	  })
+});
 
 
 

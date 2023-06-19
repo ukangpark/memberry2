@@ -42,7 +42,7 @@
 									</c:when>
 									<c:otherwise>
 										<img class="ui medium bordered centered circular image " id="preview" src="${bucketUrl }/hostProfile/${host.id }/${host.profile }">
-										<input class="form-control d-none" onchange="readURL(this);" type="file" id="file" name="file" accept="image/*"  />
+										<input class="form-control d-none" onchange="readURL(this);" type="file" id="file" name="file" accept="image/*" />
 									</c:otherwise>
 								</c:choose>
 								<label for="file" class="big circular ui icon button" id="addBtn">
@@ -65,13 +65,23 @@
 								<label>주소</label>
 								<div class="equal width fields">
 									<div class="field">
-										<input type="text" name="si" value="${host.si }">
+										<select class="ui fluid search dropdown" name="si" id="si">
+											<option value="서울시">서울시</option>
+										</select>
+									</div>
+									<div class="field" id="addressContainer">
+										<select class="ui fluid search dropdown" name="gu" id="gu">
+											<option value="강서구" id="gangseo">강서구</option>
+											<option value="마포구" id="mapo">마포구</option>
+											<option value="종로구" id="jongno">종로구</option>
+										</select>
 									</div>
 									<div class="field">
-										<input type="text" name="gu" value="${host.gu }">
-									</div>
-									<div class="field">
-										<input type="text" name="dong" value="${host.dong }">
+										<select class="ui fluid search dropdown" name="dong" id="dong">
+											<option value="내발산동">내발산동</option>
+											<option value="염창동">염창동</option>
+											<option value="화곡동">화곡동</option>
+										</select>
 									</div>
 								</div>
 							</div>
@@ -112,7 +122,7 @@
 		</div>
 	</div>
 
-	
+
 	<my:bottom></my:bottom>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="/js/semantic/semantic.min.js"></script>
@@ -130,7 +140,11 @@
 				document.getElementById('preview').src = "";
 			}
 		}
+		
+		$("#addressContainer").click(function() {
+			console.log("click");
+		})
 	</script>
-	
+
 </body>
 </html>

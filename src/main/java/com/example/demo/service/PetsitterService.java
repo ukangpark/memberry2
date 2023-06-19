@@ -56,19 +56,24 @@ public class PetsitterService {
 		Host host = petsitterMapper.selectHostByMemberId(memberId);
 		
 		// 상세페이지 정보 불러옴
-		Detail detail = petsitterMapper.selectDetailById(host.getId());
-		
-		// 호스트 집사진 정보를 불러옴
-		if (detail != null) {
-			// 등록된 상세페이지가 있다면 정보 조회
-			List<HostHousePhoto> hostHousePhoto = petsitterMapper.selectHostHousePhotoByDetailId(detail.getId());
-			info.put("hostHousePhoto", hostHousePhoto);
-
+		if(host != null) {
+			//호스트로 등록이 되어있으면 상세페이지 조회
+			Detail detail = petsitterMapper.selectDetailById(host.getId());	
+			info.put("detail", detail);
+			
+			// 호스트 집사진 정보를 불러옴
+			if (detail != null) {
+				// 등록된 상세페이지가 있다면 정보 조회
+				List<HostHousePhoto> hostHousePhoto = petsitterMapper.selectHostHousePhotoByDetailId(detail.getId());
+				info.put("hostHousePhoto", hostHousePhoto);
+				
+			}
 		}
+		
 
 		// map타입 변수 info에 넣음
 		info.put("host", host);
-		info.put("detail", detail);
+		info.put("member", member);
 		return info;
 	}
 

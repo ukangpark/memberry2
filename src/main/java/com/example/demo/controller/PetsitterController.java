@@ -49,8 +49,10 @@ public class PetsitterController {
 
 	@GetMapping("apply")
 	@PreAuthorize("isAuthenticated()")
-	public void applyForm() {
+	public void applyForm(Model model, Authentication authentication) {
 		// 호스트 등록 폼으로 포워드
+		Map<String, Object> info = petsitterService.selectByMemberId(authentication.getName());
+		model.addAllAttributes(info);
 	}
 
 	@PostMapping("apply")
