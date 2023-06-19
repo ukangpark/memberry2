@@ -8,7 +8,7 @@ import com.example.demo.domain.*;
 
 @Mapper
 public interface MemberMapper {
-
+		
 	@Insert("""
 			INSERT INTO Member (id, name, password, nickName, email, phoneNumber)
 			VALUES (#{id}, #{name}, #{password}, #{nickName}, #{email}, #{phoneNumber})
