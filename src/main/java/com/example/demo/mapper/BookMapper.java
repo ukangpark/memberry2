@@ -145,7 +145,8 @@ public interface BookMapper {
 				detailId,
 				num,
 				rejectMessage,
-				Book.memberId
+				Book.memberId,
+				Detail.hostId
 			FROM Book,Pet,Host,Detail
 			WHERE Book.memberId = Pet.memberId
 			AND Detail.id = Book.detailId

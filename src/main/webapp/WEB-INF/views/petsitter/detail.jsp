@@ -138,7 +138,6 @@
 			</div>
 			<!-- 후기 입력란 -->
 			<div class="input-group mb-3" style="width: 880px;" id="commentInput">
-				<input type="text" id="commentBodyArea" class="form-control" placeholder="후기를 남겨주세요.">
 				<button style="width: 65px;" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#addCommentModal">추가</button>
 			</div>
 		</div>
@@ -157,30 +156,28 @@
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
-					<form action="">
-						<h3 class="ui header center aligned">
-							펫시터
-							<strong class="ui pink header">${host.hostName }님</strong>
-							의 서비스는 만족하셨나요?
-						</h3>
-						<br>
-						<div id="commentForStar"></div>
-						<br>
-						<div class="ui grid" id="starContainer">
-							<div class="row">
-								<div class="center aligned column">
-									<div class="ui star massive rating"></div>
-								</div>
+					<h3 class="ui header center aligned">
+						펫시터
+						<strong class="ui pink header">${host.hostName }님</strong>
+						의 서비스는 만족하셨나요?
+					</h3>
+					<br>
+					<div id="commentForStar"></div>
+					<br>
+					<div class="ui grid" id="starContainer">
+						<div class="row">
+							<div class="center aligned column">
+								<div class="ui star massive rating"></div>
 							</div>
 						</div>
-						<br>
-						<input type="hidden" name="rating" id="starRating">
-						<textarea id="commentBodyArea" class="form-control" placeholder="후기를 남겨주세요." rows="10"></textarea>
-					</form>
+					</div>
+					<br>
+					<input type="hidden" name="star" id="starRating">
+					<textarea id="commentBodyArea" class="form-control" placeholder="후기를 남겨주세요." rows="10" name="body"></textarea>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-					<button type="button" class="btn btn-primary">후기 남기기</button>
+					<button type="button" class="btn btn-primary" id="addCommentBtn">후기 남기기</button>
 				</div>
 			</div>
 		</div>

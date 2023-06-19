@@ -44,28 +44,28 @@ function requestPay() {
 </script>
 </head>
 <body>
-	 <d:navBar current="regiList" />  
+	<d:navBar current="regiList" />
 
 
-<c:if test="${not empty message }">
-	<div class="container-lg">
-		<div class="alert alert-warning alert-dismissible fade show" role="alert">
-			${message }
-			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+	<c:if test="${not empty message }">
+		<div class="container-lg">
+			<div class="alert alert-warning alert-dismissible fade show" role="alert">
+				${message }
+				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			</div>
 		</div>
-	</div>
-</c:if>
-	
-	  
+	</c:if>
+
+
 	<div class="container-lg">
-	
-		<h2 style="margin-top: 60px; margin-bottom: 0px; text-align:center;">
-		<i class="fa fa-solid fa-paw"></i>
-		예약내역
-		<i class="fa fa-solid fa-paw"></i>
+
+		<h2 style="margin-top: 60px; margin-bottom: 0px; text-align: center;">
+			<i class="fa fa-solid fa-paw"></i>
+			예약내역
+			<i class="fa fa-solid fa-paw"></i>
 		</h2>
-		
-		<table class="table" style="margin-top:75px;">
+
+		<table class="table" style="margin-top: 75px;">
 			<thead>
 				<tr>
 					<th>pet 이름</th>
@@ -79,68 +79,64 @@ function requestPay() {
 			<tbody>
 				<c:forEach items="${bookList }" var="book">
 					<form action="/book/remove/${book.num }" method="post" id="removeForm_${book.num }">
-					<tr>
-						<td>
-						<a href="/book/num/${book.num }">
-						${book.petName }
-						</a>
-						</td>
-						<td>${book.checkIn }</td>
-						<td>${book.checkOut }</td>
-						<td>
-						<a href="/petsitter/detail?id=${book.detailId }">
-						${book.hostName }
-						</a>
-						</td>
-						<td>
-						<button type="button" class="btn btn-warning">
-						<c:if test="${book.accepted == 0}">요청중</c:if>
-						<c:if test="${book.accepted == 1}">결제대기</c:if>
-						<c:if test="${book.accepted == 2}">완료</c:if>
-						<c:if test="${book.accepted == 3}">예약거절</c:if>
-						</button>
-						</td>
-						<td>
-						<c:if test = "${book.accepted == 0 }">
-						<button type="button" class="btn btn-secondary" onclick="location.href='/book/modify/${book.num}'">변경</button>
-						<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="openModal('${book.num }')">삭제</button>
-						</c:if>
-						<c:if test = "${book.accepted == 1 }">
-						<button type="button" class="btn btn-primary" id="payBtn" onclick="requestPay()">결제</button>
-						</c:if>
-						</td>
-					</tr>
-					<input type="hidden" name="num" value="${book.num }"/>
+						<tr>
+							<td>
+								<a href="/book/num/${book.num }"> ${book.petName } </a>
+							</td>
+							<td>${book.checkIn }</td>
+							<td>${book.checkOut }</td>
+							<td>
+								<a href="/petsitter/detail?id=${book.detailId }"> ${book.hostName } </a>
+							</td>
+							<td>
+								<button type="button" class="btn btn-warning">
+									<c:if test="${book.accepted == 0}">요청중</c:if>
+									<c:if test="${book.accepted == 1}">결제대기</c:if>
+									<c:if test="${book.accepted == 2}">완료</c:if>
+									<c:if test="${book.accepted == 3}">예약거절</c:if>
+								</button>
+							</td>
+							<td>
+								<c:if test="${book.accepted == 0 }">
+									<button type="button" class="btn btn-secondary" onclick="location.href='/book/modify/${book.num}'">변경</button>
+									<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="openModal('${book.num }')">삭제</button>
+								</c:if>
+								<c:if test="${book.accepted == 1 }">
+									<button type="button" class="btn btn-primary" id="payBtn" onclick="requestPay()">결제</button>
+								</c:if>
+							</td>
+						</tr>
+						<input type="hidden" name="num" value="${book.num }" />
 					</form>
 				</c:forEach>
 			</tbody>
 		</table>
 	</div>
-	
-	
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-  <div class="modal-content">
-      <div class="modal-body">
-      <br />
-        확인을 누르시면 예약신청이 취소됩니다.
-        
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-        <button type="submit" class="btn btn-danger">확인</button>
-      </div>
-  </div>
-  </div>
-</div>
+
+
+	<!-- Modal -->
+	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-body">
+					<br />
+					확인을 누르시면 예약신청이 취소됩니다.
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+					<button type="submit" class="btn btn-danger">확인</button>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
 
 
 
 
-<div class="container-lg">
+	<div class="container-lg">
 		<div class="row">
 			<nav aria-label="Page navigation example">
 				<ul class="pagination justify-content-center">
@@ -150,14 +146,18 @@ function requestPay() {
 						<c:url value="list" var="pageLink">
 							<c:param name="page" value="${pageInfo.currentPageNum - 1}" />
 						</c:url>
-						<li class="page-item"><a class="page-link" href="${pageLink }">이전</a></li>
+						<li class="page-item">
+							<a class="page-link" href="${pageLink }">이전</a>
+						</li>
 					</c:if>
-					
+
 					<c:forEach begin="${pageInfo.leftPageNum }" end="${pageInfo.rightPageNum }" var="pageNum">
 						<c:url value="list" var="pageLink">
 							<c:param name="page" value="${pageNum}" />
 						</c:url>
-						<li class="page-item"><a class="page-link ${pageNum eq pageInfo.currentPageNum ? 'active' : '' }" href="${pageLink }">${pageNum}</a></li>
+						<li class="page-item">
+							<a class="page-link ${pageNum eq pageInfo.currentPageNum ? 'active' : '' }" href="${pageLink }">${pageNum}</a>
+						</li>
 					</c:forEach>
 
 					<!-- 다음 버튼 -->
@@ -165,10 +165,11 @@ function requestPay() {
 						<c:url value="list" var="pageLink">
 							<c:param name="page" value="${pageInfo.currentPageNum + 1}" />
 						</c:url>
-						<li class="page-item"><a class="page-link" href="${pageLink }">다음</a>
+						<li class="page-item">
+							<a class="page-link" href="${pageLink }">다음</a>
 						</li>
-						</c:if>
-						
+					</c:if>
+
 				</ul>
 			</nav>
 		</div>
@@ -182,9 +183,9 @@ function requestPay() {
 
 
 
-<d:bottom></d:bottom>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script>
+	<d:bottom></d:bottom>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script>
 function openModal(num) {
 	var submitButton = document.querySelector("#exampleModal button[type='submit']");
 	submitButton.setAttribute("form", "removeForm_" + num);
@@ -195,6 +196,7 @@ function openModal(num) {
 		requestPay();
 	})
 }) */
+
 
 </script>
 </body>

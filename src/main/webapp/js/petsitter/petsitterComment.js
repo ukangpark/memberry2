@@ -134,7 +134,7 @@ $("#addCommentBtn").click(function() {
 	const detailId = $("#detailIdText").text().trim();
 	const body = $("#commentBodyArea").val();
 	const data = { detailId, body };
-
+	console.log(detailId + ", " + body)
 
 	$.ajax("/petsitterComment/add", {
 		method: "post",
@@ -171,11 +171,18 @@ $(document).ready(function() {
 	    onRate: function(rating) {
 	        $("#starRating").val(rating);
 	        
-	        if(rating <= 2) {
+	        if(rating == 1) {
 				$("#commentForStar").empty();
 				$("#commentForStar").append(`
 					<h3 class="ui header center aligned">
-						그냥 그랬어요..
+						별로예요..
+					</h3>
+				`)
+			} else if(rating == 2) {
+				$("#commentForStar").empty();
+				$("#commentForStar").append(`
+					<h3 class="ui header center aligned">
+						그냥 그래요..
 					</h3>
 				`)
 			} else if(rating == 3) {
@@ -185,11 +192,18 @@ $(document).ready(function() {
 						좋았어요!!
 					</h3>
 				`)
-			} else if(rating >= 4) {
+			} else if(rating == 4) {
 				$("#commentForStar").empty();
 				$("#commentForStar").append(`
 					<h3 class="ui header center aligned">
-						최고였어요!!
+						추천해요!!!
+					</h3>
+				`)
+			} else if(rating == 5) {
+				$("#commentForStar").empty();
+				$("#commentForStar").append(`
+					<h3 class="ui header center aligned">
+						최고였어요!!🩷
 					</h3>
 				`)
 			}
