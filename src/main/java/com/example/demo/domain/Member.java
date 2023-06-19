@@ -3,8 +3,6 @@ package com.example.demo.domain;
 import java.time.*;
 import java.util.*;
 
-import org.springframework.boot.autoconfigure.domain.*;
-
 import lombok.*;
 
 @Data
