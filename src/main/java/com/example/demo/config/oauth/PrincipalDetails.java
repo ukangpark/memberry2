@@ -4,19 +4,29 @@ import java.util.*;
 
 import org.springframework.security.core.*;
 import org.springframework.security.core.userdetails.*;
+import org.springframework.security.oauth2.core.user.*;
 
 import com.example.demo.domain.*;
 
 import lombok.*;
 
 @Data
-public class PrincipalDetails implements UserDetails{
+public class PrincipalDetails implements UserDetails, OAuth2User{
 	
 	
 	private Member member;
 	
+	private Map<String, Object> attributes;
+	
+	// 일반 로그인에 사용하는 생성자
 	public PrincipalDetails(Member member) {
 		this.member = member;
+	}
+	
+	// OAuth2 로그인에 사용하는 생성자
+	public PrincipalDetails(Member member, Map<String, Object> attributes) {
+		this.member = member;
+		this.attributes = attributes;
 	}
 
 	@Override
@@ -58,5 +68,15 @@ public class PrincipalDetails implements UserDetails{
 	@Override
 	public boolean isEnabled() {
 		return true;
+	}
+
+	@Override
+	public Map<String, Object> getAttributes() {
+		return attributes;
+	}
+
+	@Override
+	public String getName() {
+		return null;
 	}
 }
