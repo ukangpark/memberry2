@@ -17,9 +17,9 @@ public class Alarm {
 	private String notiType; //comment 또는 like
 	private Boolean isChecked;  //확인 여부
 	private String inserted;
+	private String notiBody;
 	
 	private String nickName;
-	private Integer alarmCount;
 	
 	public void setInserted(Date date) {
 		this.inserted = FeedTime.calculateTime(date); // 기존의 getter, setter에서 변경된 부분
