@@ -40,9 +40,9 @@
 					</div>
 				</div>
 				<div class="field">
-					<h4 class="ui header">생년월일</h4>
-					<input type="text" name="birth" value="${pet.birth }" disabled />
-				</div>
+			<h4 class="ui header">생년월일</h4>
+			<input type="date" name="birth" value="${pet.birth }" disabled>
+		</div>
 
 
 
@@ -96,20 +96,36 @@
 			<input type="radio" value="2" class="btn-check" name="pottyTraining" id="btnradio6" autocomplete="off" <c:if test="${book.pottyTraining eq '2' }"> checked</c:if> disabled/> <label class="btn btn-outline-secondary" for="btnradio6" >미숙해요</label> 
 			<input type="radio" value="3" class="btn-check" name="pottyTraining" id="btnradio7" autocomplete="off" <c:if test="${book.pottyTraining eq '3' }"> checked</c:if> disabled/> <label class="btn btn-outline-secondary" for="btnradio7" >실외배변</label>
 		</div>
+		
+		
+	<h4 class="ui header">자주 다니는 동물병원 이름과 위치(동)</h4>
+				<div class="field">
+
+					<input type="text" name="hospital" value="${book.hospital }" disabled>
+
+				</div>
+
+
+				<h4 class="ui header">전하고 싶은 말</h4>
+				<div class="field">
+
+					<textarea name="message" value="${book.message }" rows="4" placeholder="특이사항, 주의사항 등등 자유롭게 적어주세요" disabled>${book.message }</textarea>
+				</div>
 	
 	
-	<div>
-		체크인 : ${book.checkIn }
-	</div>
-	<div>
-		체크아웃 : ${book.checkOut }
-	</div>
-	<div>
-		자주 다니는 동물병원 : <div>${book.hospital }</div>
-	</div>
-	<div>
-		전하고 싶은 말 : <div>${book.message }</div>
-	</div>
+	
+	<div style="display: flex; justify-content: flex-start;">
+					<div class="field">
+						<h4 class="ui header">체크인 날짜</h4>
+						<input type="date" name="checkIn" id="checkIn" value="${book.checkIn }" disabled>
+					</div>
+
+					<div class="field">
+						<h4 class="ui header">체크아웃 날짜</h4>
+						<input type="date" name="checkOut" id="checkOut" value="${book.checkOut }" disabled>
+					</div>
+				</div>
+	
 	
 	</div>
 	</div>

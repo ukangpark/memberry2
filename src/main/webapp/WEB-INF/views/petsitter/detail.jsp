@@ -100,7 +100,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-      <form action="/book/regiForm/${detail.id}" id="bookForm">
+      <form action="/book/regiForm/${detail.id}" id="bookForm" method="post">
        <c:forEach items="${pet }" var="pet">
 		       <div class="form-check">
 		  <input class="form-check-input" type="radio" name="petId" id="flexRadioDefault1" value="${pet.id }">

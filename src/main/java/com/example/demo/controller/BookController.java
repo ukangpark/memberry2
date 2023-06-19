@@ -33,9 +33,12 @@ public class BookController {
 
 	// 예약페이지 뜨게
 	@GetMapping("/num/{num}")
-	public String bookList(@PathVariable("num") Integer id, Model model) {
+	public String bookList(@PathVariable("num") Integer id, Model model, Authentication authentication) {
+		String userId = authentication.getName();
 		Book book = service.getBook(id);
+		Registration pet = service.getPet(userId,book.getPetId());
 		
+		model.addAttribute("pet", pet);
 		model.addAttribute("book", book);
 		return "book/getBook";
 	}
@@ -93,7 +96,7 @@ public class BookController {
 	}
 	
 	// 예약신청서 
-	@GetMapping("regiForm/{id}")
+	@PostMapping("regiForm/{id}")
 	public String addRegi(@PathVariable("id") Integer id, int petId, Model model, Authentication authentication) {
 		String userId = authentication.getName();
 		Registration pet = service.getPet(userId, petId);
