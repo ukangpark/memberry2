@@ -21,7 +21,7 @@
 <body>
 	<my:navBar></my:navBar>
 	<my:alert></my:alert>
-	<h1>로고 자리</h1>
+	<br><br>
 	<!-- 호스트의 집사진 -->
 	<div id="imgBox" class="container">
 		<button type="button" class="ui icon button inverted " id="entireBtn" data-bs-toggle="modal" data-bs-target="#housePhotosModal">

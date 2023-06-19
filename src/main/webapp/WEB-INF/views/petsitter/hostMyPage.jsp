@@ -38,20 +38,20 @@
 								<input type="text" name="phone" value="${host.phone }" readonly>
 							</div>
 							<div class="field">
-								<label>주민번호</label>
+								<label>생년월일</label>
 								<input type="text" name="idNumber" value="${host.idNumber }" readonly>
 							</div>
 							<div class="field">
 								<label>주소</label>
 								<div class="equal width fields">
 									<div class="field">
-										<input type="text" name="si" value="${host.si }시" readonly>
+										<input type="text" name="si" value="${host.si }" readonly>
 									</div>
 									<div class="field">
-										<input type="text" name="gu" value="${host.gu }구" readonly>
+										<input type="text" name="gu" value="${host.gu }" readonly>
 									</div>
 									<div class="field">
-										<input type="text" name="dong" value="${host.dong }동" readonly>
+										<input type="text" name="dong" value="${host.dong }" readonly>
 									</div>
 								</div>
 							</div>
