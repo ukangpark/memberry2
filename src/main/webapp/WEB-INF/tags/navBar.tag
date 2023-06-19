@@ -33,18 +33,18 @@
 </style>
 
 <div>
-	<sec:authentication property="principal"/>
+	<sec:authentication property="principal" />
 </div>
 
 <div class="ui fluid right aligned container" id="nav-container">
 	<div class="ui position-fixed top-0 end-0">
 
 		<!-- search -->
-		<div class="searchBtn" style="cursor:pointer; display: flex; float: left; margin: 30px 10px 0px 0px; align-items: center; align-content: center; text-align: center; justify-content: center;">
-			
-			<a href="/search"><i style="color:black;" class="search big icon"></i></a>
+		<div class="searchBtn" style="cursor: pointer; display: flex; float: left; margin: 30px 10px 0px 0px; align-items: center; align-content: center; text-align: center; justify-content: center;">
+
+			<a href="/search"><i style="color: black;" class="search big icon"></i></a>
 		</div>
-		
+
 		<!-- alarm -->
 		<div class="alarmBtn" style="display: flex; float: left; margin: 30px 10px 0px 0px; align-items: center; align-content: center; text-align: center; justify-content: center;">
 			<i class="bell big icon"></i>
@@ -109,7 +109,6 @@
 								<a class="${current eq 'hostMyPage' ? 'active' : '' } item" href="/petsitter/hostMyPage">호스트 마이페이지</a>
 							</sec:authorize>
 
-							<!-- 관리자 권한으로 변경해야함 -->
 							<sec:authorize access="hasAuthority('admin')">
 								<a class="${current eq 'hostList' ? 'active' : '' } item" href="/petsitter/hostList">호스트 리스트</a>
 							</sec:authorize>
@@ -142,6 +141,8 @@
 					<a class="${current eq 'signup' ? 'active' : '' } item" href="/member/signup"> 회원가입 </a>
 				</sec:authorize>
 
+				<a class="${current eq 'qna' ? 'active' : '' } item" href="/qna"> 질문과답변 </a>
+
 				<sec:authorize access="hasAuthority('admin')">
 					<a class="${current eq 'list' ? 'active' : '' } item" href="/member/list"> 회원목록 </a>
 				</sec:authorize>
@@ -149,11 +150,12 @@
 				<sec:authorize access="isAuthenticated()">
 					<a class="${current eq 'logout' ? 'active' : '' } item" href="/member/logout"> 로그아웃 </a>
 				</sec:authorize>
-        
+
 				<sec:authorize access="isAuthenticated()">
-					<a class="${current eq 'alarm' ? 'active' : '' } item" href="/alarm"> 알림 <span class="badge text-bg-danger">${logedInMember.alarmCount }</span> </a>
+					<a class="${current eq 'alarm' ? 'active' : '' } item" href="/alarm"> 알림 <span class="badge text-bg-danger">${logedInMember.alarmCount }</span>
+					</a>
 				</sec:authorize>
-						
+
 
 
 			</div>
