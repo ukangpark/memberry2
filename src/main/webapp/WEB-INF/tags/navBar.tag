@@ -37,8 +37,9 @@
 	<div class="ui position-fixed top-0 end-0">
 
 		<!-- search -->
-		<div class="searchBtn" style="display: flex; float: left; margin: 30px 10px 0px 0px; align-items: center; align-content: center; text-align: center; justify-content: center;">
-			<i class="search big icon"></i>
+		<div class="searchBtn" style="cursor:pointer; display: flex; float: left; margin: 30px 10px 0px 0px; align-items: center; align-content: center; text-align: center; justify-content: center;">
+			
+			<a href="/search"><i style="color:black;" class="search big icon"></i></a>
 		</div>
 		
 		<!-- alarm -->
@@ -69,14 +70,8 @@
 			</h4>
 
 			<div class="ui vertical menu">
-				<div class="item">
-					<div class="ui input">
-						<input type="text" placeholder="Search...">
-					</div>
-				</div>
 
 				<a class="${current eq 'home' ? 'active' : '' } item" href="/home"> 홈피드</a>
-
 
 				<sec:authorize access="isAuthenticated()">
 					<sec:authentication property="name" var="userId" />

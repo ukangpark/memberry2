@@ -84,9 +84,6 @@
 
 
 	<my:navBar current="home" />
-	<my:search></my:search>
-
-
 
 	<div class="toast-container position-fixed  top-0 start-50 translate-middle-x p-3">
 		<div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
