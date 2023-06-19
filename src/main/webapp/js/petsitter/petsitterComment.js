@@ -46,8 +46,8 @@ function listComment() {
 			//댓글 아래 있는 수정 버튼을 누르면 
 			$(".commentModifyBtn").click(function() {
 				const commentId = $(this).attr("comment-id");
+				
 				// 해당 댓글의 내용을 조회함 
-				console.log(commentId); //check
 				$.ajax("/petsitterComment/get/" + commentId, {
 					success: function(comment) {
 						// 버튼을 바꿈
@@ -69,12 +69,29 @@ function listComment() {
 							console.log(body); //check 
 							const data = { id: commentId, body: body };
 							console.log(data);
+							
+							//댓글 수정 요청 
 							$.ajax("/petsitterComment/modify", {
 								method: "put",
 								contentType: "application/json",
 								data: JSON.stringify(data),
+								success: function() {
+									// 원래의 댓글 창으로 돌아옴 
+									$("#commentInput").empty();
+									$("#commentInput").append(`
+										<div class="input-group mb-3" style="width: 880px;" id="commentInput">
+											<input type="text" id="commentBodyArea" class="form-control" placeholder="후기를 남겨주세요.">
+											<button style="width:65px;" class="btn btn-outline-secondary" id="addCommentBtn">추가</button>
+										</div>
+										`)
+									
+									listComment();
+								}
 							})
+							
+							
 						})
+						
 
 						//취소버튼을 누르면 
 						$("#cancleBtn").click(function() {
@@ -85,6 +102,26 @@ function listComment() {
 									<button style="width:65px;" class="btn btn-outline-secondary" id="addCommentBtn">추가</button>
 								</div>
 							`);
+
+							$("#addCommentBtn").click(function() {
+								const detailId = $("#detailIdText").text().trim();
+								const body = $("#commentBodyArea").val();
+								const data = { detailId, body };
+
+
+								$.ajax("/petsitterComment/add", {
+									method: "post",
+									contentType: "application/json",
+									data: JSON.stringify(data),
+									complete: function(jqXHR) {
+										listComment();
+										//$(".toast-body").text(jqXHR.responseJSON.message);
+										//toast.show();
+
+										$("#commentBodyArea").val("");
+									}
+								})
+							})
 						})
 					}
 				})

@@ -51,7 +51,7 @@ public class petsitterCommentController {
 	
 	@PutMapping("modify")
 	@PreAuthorize("isAuthenticated()")
-	public String modify(PetsitterComment petsitterComment, Authentication authentication) {
+	public String modify(@RequestBody PetsitterComment petsitterComment, Authentication authentication) {
 		petsitterCommentService.modifyComment(petsitterComment, authentication);
 		System.out.println("controller : " + petsitterComment);
 		return "ok";

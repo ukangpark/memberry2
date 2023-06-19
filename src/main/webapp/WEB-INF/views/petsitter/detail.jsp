@@ -136,46 +136,6 @@
 	<br>
 	<br>
 
-	<!-- 테스트 후기  -->
-	<div class="container" style="width: 900px; margin-top: 25px;">
-		<div class="ui comments">
-			<h3 class="ui dividing header" style="width: 880px;">Comments</h3>
-			<!-- 후기 리스트 -->
-			<div class="comment" style="width: 880px;" id="commentListContainer">
-				<a class="avatar">
-					<img src="/images/paw.png">
-				</a>
-				<div class="content">
-					<a class="author">아이디</a>
-					<div class="metadata">
-						<span class="date">작성일자 </span>
-					</div>
-					<div class="text">내용</div>
-					<div class="actions">
-						<a class="reply">수정</a>
-						<a id="testBtn" test="test" onclick="test()">테스트</a>
-					</div>
-				</div>
-				<br>
-			</div>
-			<!-- 후기 입력란 -->
-			<form>
-				<div class="input-group " style="width: 880px;">
-					<input type="text" class="form-control" placeholder="${host.hostName }님 후기를 남겨주세요." aria-label="Recipient's username" aria-describedby="button-addon2">
-					<button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
-				</div>
-				<div class="input-group">
-					<input type="text" class="form-control">
-					<button class="btn btn-outline-secondary" type="button">Button</button>
-					<button class="btn btn-outline-secondary" type="button">Button</button>
-				</div>
-
-			</form>
-		</div>
-	</div>
-	<br>
-	<br>
-
 
 	<!-- 후기 삭제 모달 -->
 	<div class="modal fade" id="deleteCommentModal" tabindex="-1" aria-labelledby="#deleteCommentModalLabel" aria-hidden="true">
