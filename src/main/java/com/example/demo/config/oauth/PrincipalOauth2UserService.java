@@ -28,7 +28,6 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService{
 		String provider = userRequest.getClientRegistration().getRegistrationId(); //google
 		String providerId = oauth2User.getAttribute("sub");
 		String id = provider + "_" + providerId;
-//		String password = passwordEncoder.encode("hellogoogle");
 		String email = oauth2User.getAttribute("email");
 		String name = oauth2User.getAttribute("name");
 		String password = "";
@@ -52,7 +51,6 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService{
 		}
 		
 		return new PrincipalDetails(oldMember);
-		
 		
 //		return super.loadUser(userRequest);
 	}
