@@ -14,7 +14,6 @@ import com.example.demo.domain.Like;
 @Mapper
 public interface AlarmMapper {
 
-
 	@Insert("""
 			INSERT INTO Alarm (userId, causedMemberId, feedId, content, notiType, notiBody)
 			VALUES ((SELECT writer FROM Feed WHERE id = #{feedId}), #{memberId}, #{feedId}, #{content}, 'comment',
