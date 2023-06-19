@@ -29,9 +29,9 @@ img {
 
 #upper {
 	display: flex;
-	justify-content: center;
 	align-items: baseline;
 	text-align: center;
+	margin-left: 300px;
 }
 
 #addImageBox {
@@ -82,12 +82,14 @@ img {
 <body>
 
 	<my:navBar current="myFeed"></my:navBar>
-	<div class="ui container mb-3" id="myFeedTitle">
-		<h1 style="text-align: center;">My Feed</h1>
+	<div class="titleContainer mb-3" id="myFeedTitle" style="justify-content: center;">
+		<h1 style="text-align: center; color: #FF9999">${nickName }
+			<span style="color: black"> 님의 피드</span>
+		</h1>
 	</div>
 
 	<!-- 윗 부분 -->
-	<div id="upper" class="ui container mb-5">
+	<div id="upper" class="upperContainer mb-5">
 
 		<div class="follower" id="followerBtn" style="margin: 0px 30px 0px 30px; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#followerModal">
 			<h3>
@@ -121,10 +123,10 @@ img {
 			</div>
 		</div>
 
-		<c:if test="${userName ne authentication }">
-			<div class="follow" style="margin: 0px 30px 0px 30px">
-				<input id="userName" name="userName" value="${userName }" style="display: none;">
-				<input id="auth" name="auth" value="${authentication }" style="display: none;">
+		<div class="follow" style="margin: 0px 30px 0px 30px">
+			<input id="userName" name="userName" value="${userName }" style="display: none;">
+			<input id="auth" name="auth" value="${authentication }" style="display: none;">
+			<c:if test="${userName ne authentication }">
 				<c:if test="${not fileList[0].followed }">
 					<button class="ui basic button" id="followBtn">
 						<h3>
@@ -139,17 +141,18 @@ img {
 						</h3>
 					</button>
 				</c:if>
-			</div>
-		</c:if>
-
-		<div class="messageBtn" style="margin: 0px 30px 0px 30px">
-			<button class="ui basic button" id="messageBtn">
-				<h3 onMouseover="this.style.color='#FFCC33';" onMouseout="this.style.color='gray';">
-					<i class="fa-solid fa-bolt"></i> 산책번개
-				</h3>
-			</button>
+			</c:if>
 		</div>
 
+		<div class="messageBtn" style="margin: 0px 30px 0px 30px">
+			<c:if test="${userName ne authentication }">
+				<button class="ui basic button" id="messageBtn">
+					<h3 onMouseover="this.style.color='#FFCC33';" onMouseout="this.style.color='gray';">
+						<i class="fa-solid fa-bolt"></i> 산책번개
+					</h3>
+				</button>
+			</c:if>
+		</div>
 	</div>
 
 	<div class="container">
@@ -195,10 +198,7 @@ img {
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
-					<div id="followerListContainer">
-					
-					
-					</div>
+					<div id="followerListContainer"></div>
 				</div>
 			</div>
 		</div>
@@ -212,10 +212,7 @@ img {
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
-					<div id="followingListContainer">
-					
-					
-					</div>
+					<div id="followingListContainer"></div>
 				</div>
 			</div>
 		</div>
