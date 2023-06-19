@@ -41,8 +41,9 @@
 			</thead>
 			<tbody>
 				<c:forEach items="${mapList }" var="map">
+					 <form action="/map/remove/${map.id}" method="post" id="removeLike_${map.id}">
 					<tr>
-						<input type="hidden" id="id" value="${map.id }" />
+					<%-- 	<input type="hidden" id="id" value="${map.id }" /> --%>
 						<td>
 						<a href="${map.url }">
 						${map.name }
@@ -50,10 +51,12 @@
 						</td>
 						<td>${map.address }</td>
 						<td>${map.phone }</td>
-						<td><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+						<td><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="openModal('${map.id }')">
 						취소하기
-						</button></td>
+						</button>
+						</td>
 					</tr>
+			        </form>
 				</c:forEach>
 			</tbody>
 		</table>
@@ -113,7 +116,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-        <button type="button" class="btn btn-danger">확인</button>
+        <button type="submit" class="btn btn-danger" >확인</button>
       </div>
     </div>
   </div>
@@ -131,10 +134,16 @@
 	<script src="semantic/dist/semantic.min.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=${apiKey }&libraries=services"></script>
 <script>
+function openModal(id) {
+	var submitButton = document.querySelector("#exampleModal button[type='submit']");
+	submitButton.setAttribute("form", "removeLike_" + id);
+  }
+
+
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
     mapOption = {
         center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-        level: 3 // 지도의 확대 레벨
+        level: 8 // 지도의 확대 레벨
     };  
 
 // 지도를 생성합니다    

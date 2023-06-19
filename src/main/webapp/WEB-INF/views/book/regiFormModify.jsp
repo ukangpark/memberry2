@@ -97,7 +97,9 @@
 
 				<h4 class="ui header">배변훈련(배변패드)</h4>
 				<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-					<input type="radio" value="1" class="btn-check" name="pottyTraining" id="btnradio5" autocomplete="off" <c:if test="${book.pottyTraining eq '1' }"> checked</c:if> /> <label class="btn btn-outline-secondary" for="btnradio5">잘해요</label> <input type="radio" value="2" class="btn-check" name="pottyTraining" id="btnradio6" autocomplete="off" <c:if test="${book.pottyTraining eq '2' }"> checked</c:if> /> <label class="btn btn-outline-secondary" for="btnradio6">미숙해요</label> <input type="radio" value="3" class="btn-check" name="pottyTraining" id="btnradio7" autocomplete="off" <c:if test="${book.pottyTraining eq '3' }"> checked</c:if> /> <label class="btn btn-outline-secondary" for="btnradio7">실외배변</label>
+					<input type="radio" value="1" class="btn-check" name="pottyTraining" id="btnradio5" autocomplete="off" <c:if test="${book.pottyTraining eq '1' }"> checked</c:if> /> <label class="btn btn-outline-secondary" for="btnradio5">잘해요</label> 
+					<input type="radio" value="2" class="btn-check" name="pottyTraining" id="btnradio6" autocomplete="off" <c:if test="${book.pottyTraining eq '2' }"> checked</c:if> /> <label class="btn btn-outline-secondary" for="btnradio6">미숙해요</label> 
+					<input type="radio" value="3" class="btn-check" name="pottyTraining" id="btnradio7" autocomplete="off" <c:if test="${book.pottyTraining eq '3' }"> checked</c:if> /> <label class="btn btn-outline-secondary" for="btnradio7">실외배변</label>
 				</div>
 
 

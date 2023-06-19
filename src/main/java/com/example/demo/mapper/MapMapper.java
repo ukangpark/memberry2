@@ -40,6 +40,12 @@ public interface MapMapper {
 			""")
 	Integer countAll(String userId);
 
+	@Delete("""
+			DELETE FROM MapList
+			WHERE id = #{id}
+			""")
+	int deleteById(Integer id);
+
 
 	
 
