@@ -1,6 +1,5 @@
 package com.example.demo.config.oauth;
 
-import org.springframework.beans.factory.annotation.*;
 import org.springframework.security.oauth2.client.userinfo.*;
 import org.springframework.security.oauth2.core.*;
 import org.springframework.security.oauth2.core.user.*;

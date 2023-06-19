@@ -67,8 +67,7 @@ public class customConfig {
 		http.csrf().disable();
 		http.authorizeHttpRequests().anyRequest().permitAll();
 		http.formLogin().loginPage("/member/login").successHandler(loginSuccessHandler).failureHandler(userLoginFailHandler);
-		http.oauth2Login().loginPage("/member/login")
-				.userInfoEndpoint().userService(principalOauth2UserService);
+		http.oauth2Login().loginPage("/member/login").userInfoEndpoint().userService(principalOauth2UserService);
 		http.logout().logoutUrl("/member/logout");
 		return http.build();
 	}
