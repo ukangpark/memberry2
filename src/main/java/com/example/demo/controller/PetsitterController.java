@@ -22,11 +22,11 @@ public class PetsitterController {
 	private PetsitterService petsitterService;
 
 	@GetMapping("main")
-	public void main(Model model) {
-		// main 페이지 포워드
-		// 모든 정보를 읽음
-		Map<String, Object> list = petsitterService.selectAll();
-		model.addAllAttributes(list);
+	public String main(Model model, @RequestParam(value = "page", defaultValue = "1") Integer page,
+			@RequestParam(value = "search", defaultValue = "") String search) {
+		Map<String, Object> result = petsitterService.listHost(page, search);
+		model.addAllAttributes(result);
+		return "petsitter/main";
 	}
 
 	@GetMapping("detail")
@@ -125,7 +125,7 @@ public class PetsitterController {
 		// 호스트 리스트 포워드
 		Map<String, Object> info = petsitterService.selectAll();
 		model.addAllAttributes(info);
-	}
+	} 
 
 	@PostMapping("hostDelete")
 	@PreAuthorize("isAuthenticated()")

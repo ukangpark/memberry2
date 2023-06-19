@@ -230,7 +230,7 @@ public interface PetsitterMapper {
 			FROM Host 
 			WHERE id = #{hostId}
 			""")
-	Integer insertHostAuthority(Integer hostId);
+	Integer insertHostAuthority(Integer hostId); 
 
 	@Delete("""
 			DELETE FROM MemberAuthority WHERE memberId = #{memberId}
