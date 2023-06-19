@@ -33,7 +33,7 @@ public class PetsitterController {
 	public void detail(@RequestParam("id") Integer hostId , Model model, Authentication authentication) {
 		// detail로 포워드
 		// 쿼리스트링으로 받은 id값을 받아서 해당 상세페이지를 읽음
-		Map<String, Object> info = petsitterService.selectByHostId(hostId);
+		Map<String, Object> info = petsitterService.selectByHostId(hostId, authentication);
 		model.addAllAttributes(info);
 		
 		List<Registration> pet = new ArrayList<>();
@@ -62,9 +62,10 @@ public class PetsitterController {
 			Authentication authentication)
 			throws Exception {
 		host.setMemberId(authentication.getName());
-	
+
 		// host 정보 받아서 추가 
 		int count = petsitterService.insertHost(host, file);
+		
 		if(count == 1) {
 			rttr.addFlashAttribute("message", "호스트 등록이 완료되었습니다.");
 		} else {
@@ -136,7 +137,7 @@ public class PetsitterController {
 		// 호스트 정보 삭제 과정
 		member.setId(authentication.getName());
 		
-		boolean ok = petsitterService.deleteHostById(hostId, member);
+		boolean ok = petsitterService.deleteHostById(hostId, member,  authentication);
 		
 		if(ok) {
 			rttr.addFlashAttribute("message", "호스트 정보를 삭제하였습니다.");
@@ -163,7 +164,7 @@ public class PetsitterController {
 			Detail detail, 
 			Authentication authentication) throws Exception {
 		// 상세페이지 등록 과정
-		boolean ok = petsitterService.insertDetail(detail, authentication.getName());
+		boolean ok = petsitterService.insertDetail(detail, authentication);
 	
 		return "redirect:/petsitter/addHousePhotos";
 	}
@@ -257,6 +258,7 @@ public class PetsitterController {
 			Member member,
 			Authentication authentication,
 			RedirectAttributes rttr) {
+		//상세페이지 삭제 
 		member.setId(authentication.getName());
 		boolean ok = petsitterService.deleteDetailByHostId(hostId, member);
 		
