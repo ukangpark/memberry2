@@ -14,6 +14,10 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 <script src="/js/semantic/semantic.min.js"></script>
 <link rel="stylesheet" href="/css/detail.css" />
+<script>
+var bucketUrl = '${bucketUrl}';
+
+</script>
 </head>
 <body>
 	<my:navBar></my:navBar>

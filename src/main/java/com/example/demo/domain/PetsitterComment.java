@@ -10,5 +10,7 @@ public class PetsitterComment {
 	private Integer detailId;
 	private String memberId;
 	private LocalDateTime inserted;
+	private Integer defaultPetId;
+	private String photo;
 	private String body;
 }

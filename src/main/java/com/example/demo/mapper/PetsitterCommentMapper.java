@@ -10,7 +10,10 @@ import com.example.demo.domain.*;
 public interface PetsitterCommentMapper {
 	
 	@Select("""
-			SELECT * FROM PetsitterComment WHERE detailId = #{detailId}
+			SELECT pc.id, pc.detailId, pc.inserted, pc.memberId, m.defaultPetId, p.photo, pc.body
+			FROM PetsitterComment pc LEFT JOIN Member m ON pc.memberId = m.id
+									 LEFT JOIN Pet p ON m.defaultPetId = p.id
+			WHERE detailId =  #{detailId}
 			""")
 	List<PetsitterComment> selectAllByDetailId(Integer detailId);
 	

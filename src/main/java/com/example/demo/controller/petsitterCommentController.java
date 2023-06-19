@@ -21,7 +21,9 @@ public class petsitterCommentController {
 	@GetMapping("list")
 	public List<PetsitterComment> list(@RequestParam("detailId") Integer detailId) {
 		//해당 상세페이지의 후기를 조회함 
-		return petsitterCommentService.list(detailId);
+		List<PetsitterComment> list = petsitterCommentService.list(detailId);
+		System.out.println(list);
+		return list;
 	}
 	
 	@PostMapping("add")

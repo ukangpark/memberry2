@@ -8,9 +8,12 @@ function listComment() {
 		success: function(petsitterComments) {
 			$("#commentListContainer").empty();
 			for (const petsitterComment of petsitterComments) {
+				var photo = petsitterComment.defaultPetId;
+				var paw = '/images/paw.png';
+				console.log(photo);
 				$("#commentListContainer").append(`
 				<a class="avatar">
-					<img src="/images/paw.png">
+					<img src="${bucketUrl}/pet/${petsitterComment.defaultPetId}/${petsitterComment.photo}">
 				</a>
 				<div class="content">
 					<a class="author">${petsitterComment.memberId}</a>
@@ -46,7 +49,7 @@ function listComment() {
 			//댓글 아래 있는 수정 버튼을 누르면 
 			$(".commentModifyBtn").click(function() {
 				const commentId = $(this).attr("comment-id");
-				
+
 				// 해당 댓글의 내용을 조회함 
 				$.ajax("/petsitterComment/get/" + commentId, {
 					success: function(comment) {
@@ -69,7 +72,7 @@ function listComment() {
 							console.log(body); //check 
 							const data = { id: commentId, body: body };
 							console.log(data);
-							
+
 							//댓글 수정 요청 
 							$.ajax("/petsitterComment/modify", {
 								method: "put",
@@ -84,16 +87,13 @@ function listComment() {
 											<button style="width:65px;" class="btn btn-outline-secondary" id="addCommentBtn">추가</button>
 										</div>
 										`)
-									
+
 									listComment();
 								}
 							})
-							
-							
 						})
-						
 
-						//취소버튼을 누르면 
+						//취소버튼을 누르면 입력창으로 돌아감 
 						$("#cancleBtn").click(function() {
 							$("#commentInput").empty();
 							$("#commentInput").append(`
