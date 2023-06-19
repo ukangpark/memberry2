@@ -15,8 +15,7 @@
 <script src="/js/semantic/semantic.min.js"></script>
 <link rel="stylesheet" href="/css/detail.css" />
 <script>
-var bucketUrl = '${bucketUrl}';
-
+	var bucketUrl = '${bucketUrl}';
 </script>
 </head>
 <body>
@@ -102,50 +101,35 @@ var bucketUrl = '${bucketUrl}';
 
 
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">반려동물을 선택해주세요</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-      <form action="/book/regiForm/${detail.id}" id="bookForm" method="post">
-       <c:forEach items="${pet }" var="pet">
-		       <div class="form-check">
-		  <input class="form-check-input" type="radio" name="petId" id="flexRadioDefault1" value="${pet.id }">
-		  <label class="form-check-label" for="flexRadioDefault1">
-		    ${pet.petName }
-		  </label>
-		</div>
-       </c:forEach>
-      </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-        <button type="submit" class="btn btn-primary" form="bookForm" >예약하기</button>
-      </div>
-    </div>
-  </div>
-</div>
-	</div>
-
-	
+		<!-- 예약 모달 -->
+		<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title fs-5" id="exampleModalLabel">반려동물을 선택해주세요</h1>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 					</div>
 					<div class="modal-body">
-						<c:forEach items="${pet }" var="pet">
-       						${pet.id }
-      					 </c:forEach>
+						<form action="/book/regiForm/${detail.id}" id="bookForm" method="post">
+							<c:forEach items="${pet }" var="pet">
+								<div class="form-check">
+									<input class="form-check-input" type="radio" name="petId" id="flexRadioDefault1" value="${pet.id }">
+									<label class="form-check-label" for="flexRadioDefault1"> ${pet.petName } </label>
+								</div>
+							</c:forEach>
+						</form>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-						<button type="button" class="btn btn-primary" onclick="location.href='/book/regiForm/${detail.id}'">예약하기</button>
+						<button type="submit" class="btn btn-primary" form="bookForm">예약하기</button>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+
+
+
 
 	<!-- 후기 -->
 	<div class="container" style="width: 900px; margin-top: 25px;">
@@ -157,7 +141,7 @@ var bucketUrl = '${bucketUrl}';
 			<!-- 후기 입력란 -->
 			<div class="input-group mb-3" style="width: 880px;" id="commentInput">
 				<input type="text" id="commentBodyArea" class="form-control" placeholder="후기를 남겨주세요.">
-				<button style="width:65px;" class="btn btn-outline-secondary" id="addCommentBtn">추가</button>
+				<button style="width: 65px;" class="btn btn-outline-secondary" id="addCommentBtn">추가</button>
 			</div>
 		</div>
 	</div>
