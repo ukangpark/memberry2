@@ -4,19 +4,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Bx slider</title>
+<title>PetsitterMain</title>
 <my:top></my:top>
-<!-- bxslider -->
-<link rel="stylesheet" href="http://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+<!-- slick slider -->
+<link rel="stylesheet" type="text/css" href="/slick/slick.css" />
+<link rel="stylesheet" type="text/css" href="/slick/slick-theme.css" />
 <style>
 #memberyLogo {
 	width: 600px;
-	margin: 20px 0px 0px 0px;
 }
 
 .searchBar {
@@ -47,108 +44,96 @@
 	outline: none;
 }
 
-#searchBtn{
+#searchBtn {
 	margin: 0px 6px;
 }
 
-#allButton{
+#allButton {
 	padding: 0px 6px;
 }
-/* 
-button {
-	margin-bottom: 15px;
-	padding: 10px;
-	border: none;
-	border-radius: 5px;
+
+.image {
+	width: 353px;
+	height: 200px;
+	margin-bottom: 10px;
+}
+
+.imager {
+	width: 100%;
+	height: 100%;
+}
+
+/* slick slider */
+/*post slider*/
+.post-slider {
+	width: 100%;
+	margin: 0px auto;
+	position: relative;
+}
+
+.post-slider .silder-title {
+	text-align: left;
+	margin: 30px 0px 5px 15px;
+}
+
+.post-slider .next {
+	position: fixed;
+	top: 70%;
+	right: 100px;
+	font-size: 2em;
+	color: gray;
 	cursor: pointer;
 }
- */
+
+.post-slider .prev {
+	position: fixed;
+	top: 70%;
+	left: 100px;
+	font-size: 2em;
+	color: gray;
+	cursor: pointer;
+}
+
+.post-slider .post-wrapper {
+	width: 100%;
+	height: 500px;
+	margin: 0px auto;
+	overflow: hidden;
+	padding: 10px 0px 10px 0px;
+}
+
+.post-slider .post-wrapper .ui link cards {
+	width: 300px;
+	height: 500px;
+	margin: 0px 10px;
+	display: inline-block;
+	background: white;
+	border-radius: 5px;
+}
+
+.post-slider .post-wrapper .ui link cards .post-info {
+	font-size: 15px;
+	height: 30%;
+	padding-left: 10px;
+}
+
+.post-slider .post-wrapper .ui link cards .slider-image {
+	width: 100%;
+	height: 175px;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+}
+
+/* slick slider */
 .ui.cards {
 	flex-wrap: wrap;
 }
-
-#cards {
-	margin: -150px 0px 0px 30px;
+  
+.card {
+	margin: 10px;
+	height: 350px;
 }
 
-#cardSet {
-	margin: 0px 20px;
-}
-
-/* 슬라이더 */
-.slider {
-	position: relative;
-	top: 200px;
-}
-
-.slider img {
-	display: block;
-	width: 350px;
-	margin: auto
-}
-
-.bx-wrapper {
-	position: relative;
-}
-
-.bx-controls-direction {
-	font-size: 30px;
-}
-
-.bx-controls-direction a {
-	position: absolute;
-	display: block;
-	width: 100px;
-	height: 150px;
-	overflow: hidden;
-	transform: translateY(10%);
-	color: #5a5a5a;
-	font-weight: normal;
-}
-
-.bx-controls-direction .bx-prev {
-	left: 0;
-}
-
-.bx-controls-direction .bx-next {
-	right: 0;
-}
-
-.bx-controls-direction .bx-prev:before {
-	content: "\e93d";
-	font-family: 'xeicon';
-}
-
-.bx-controls-direction .bx-next:before {
-	content: "\e940";
-	font-family: 'xeicon';
-}
-
-.bx-pager {
-	position: absolute;
-	left: 0;
-	bottom: -37px;
-	width: 100%;
-	text-align: center;
-}
-
-.bx-pager div {
-	display: inline-block;
-	padding: 0 5px;
-}
-
-.bx-pager div a {
-	display: block;
-	color: transparent;
-	width: 24px;
-	height: 3px;
-	background: #999;
-	font-size: 0;
-}
-
-.bx-pager div a.active {
-	background: #000;
-}
 </style>
 </head>
 <body>
@@ -162,52 +147,56 @@ button {
 
 		<div class="searchBar">
 			<form action="list" class="d-flex" role="search">
-				<input value="${param.search }" name="search" class="form-control me-2" type="search" 
-				placeholder="맡기고 싶은 지역을 검색해보세요" aria-label="Search" id="input-box">
+				<input value="${param.search }" name="search" class="form-control me-2" type="search" placeholder="맡기고 싶은 지역을 검색해보세요" aria-label="Search" id="input-box">
 				<button id="searchBtn" class="ui black button" type="submit" style="width: 50px; text-align: center;">
 					<i class="fa-solid i1 fa-magnifying-glass"></i>
 				</button>
 				<!-- 전체보기 버튼 -->
-				<button id="allButton" class="ui right labeled icon button" onclick="location.href='/petsitter/list'"
-						style="width: 140px;">
+				<button id="allButton" class="ui right labeled icon button" onclick="location.href='/petsitter/list'" style="width: 140px;">
 					<i class="right arrow icon"></i> 전체보기
 				</button>
+			</form>
 		</div>
 
-		<div class="slider">
-			<div class="ui link cards" id="cards">
-				<div class="ui cards" items="${host }" var="host" id="card">
-					<c:forEach items="${host }" var="host">
-						<div class="ui card inblock" id="cardSet">
-							<div class="ui slide masked reveal image">
-								<a href="/petsitter/detail"><img src="/images/petplanet1.png" class="visible content"> </a>
-							</div>
-							<div class="content">
-								<a class="header">${host.hostName }</a>
-								<div class="meta">
-									<span class="date">${host.si }시 ${host.gu }구 ${host.dong }동</span>
+		<div class="page-wrapper" style="position: relative;">
+			<!--page slider -->
+			<div class="post-slider">
+				<div class="silder-title" style="font-size: 18px; font-weight: bold;"><i class="thumbs up outline icon"></i> 인기 펫시터를 만나보세요</div>
+				<i class="fas fa-chevron-left prev"></i> <i class="fas fa-chevron-right next"></i>
+				<div class="post-wrapper">
+					<div class="slick-wrapper ui link cards" id="cards">
+						<c:forEach items="${petsitterList }" var="host" end="9">
+							<div class="card">
+								<div class="image">
+									<img class="imager" src="${bucketUrl }/${membery }cover/${host.detailId}/${host.cover}" alt="" />
 								</div>
-								<div class="description">경력 : ${host.experience }</div>
-								<div class="description">반려견 : ${host.pet }</div>
-
+								<div class="content">
+									<div class="header">${host.title }</div>
+									<div class="meta">
+										<a href="/petsitter/detail?id=${host.id }">${host.si } ${host.gu } ${host.dong }</a>
+									</div>
+									<div class="description">${host.houseType },${host.pet },${host.species }</div>
+								</div>
+								<div class="extra content">
+									<span class="right floated"> 하루 40,000원~ </span> 
+									<span> <i class="comments icon"></i> 후기 ${host.commentCount }개
+										<form class="right floated inblock" action="/petsitter/detail" id="idForm">
+											<input class="d-none" type="text" name="id" value="${host.id }"> <input class="ui secondary button" type="submit" value="상세보기">
+										</form>
+									</span>
+								</div>
 							</div>
-							<div class="extra content">
-								<a class="inblock"> <span> <i class="comments icon"></i> 후기 ${host.commentCount }개
-								</span>
-								</a>
-								<form class="right floated inblock" action="/petsitter/detail" id="idForm">
-									<input class="d-none" type="text" name="id" value="${host.id }"> <input class="ui secondary button" type="submit" value="상세보기">
-								</form>
-							</div>
-						</div>
-					</c:forEach>
+						</c:forEach>
+					</div>
 				</div>
 			</div>
+			<!--post slider-->
 		</div>
 	</div>
-
-	<script src="/js/main.js"></script>
-
+	
+	
 	<my:bottom></my:bottom>
+	<script type="text/javascript" src="/slick/slick.min.js"></script>
+	<script src="/js/main.js"></script>
 </body>
 </html>

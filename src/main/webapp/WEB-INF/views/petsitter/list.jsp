@@ -23,6 +23,19 @@ h1 {
 	/* 왜안댕.. */
 	font-family: fantasy;
 }
+
+#image{
+	position:relative;
+	width:290px;
+	height:200px;
+}
+
+#imager{
+	position:absolute;
+	width:100%;
+	height:100%;
+}
+
 </style>
 
 </head>
@@ -52,9 +65,9 @@ h1 {
 			<c:forEach items="${petsitterList }" var="host">
 				<div class="card">
 				
-					<div class="image">
-						
-						<img src="${bucketUrl }/${membery }cover/${host.detailId}/${host.cover}" alt=""  style="width:300; height:200;" />
+					<div id="image">
+					<a href="/petsitter/detail?id=${host.id }">
+						<img src="${bucketUrl }/${membery }cover/${host.detailId}/${host.cover}" alt="" id="imager" />
 						</a>
 					</div>
 					<div class="content">

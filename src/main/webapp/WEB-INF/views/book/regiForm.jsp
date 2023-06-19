@@ -222,9 +222,12 @@
       </div>
       
       <div class="modal-body">
-      <!-- 달력 칸수 곱해서 금액산출 -->
+      <!--  금액산출 -->
+      	호스트의 예약 승인 후 결제를 완료하셔야 예약이 완료됩니다.
+      	</br>
         총 결제 금액은 <span id="totalPrice"></span> 입니다.
-        예약하시겠습니까?
+        </br>
+        예약신청하시겠습니까?
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>

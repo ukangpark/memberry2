@@ -8,6 +8,7 @@ import org.springframework.security.core.*;
 import org.springframework.stereotype.*;
 import org.springframework.ui.*;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.*;
 
 import com.example.demo.domain.*;
 import com.example.demo.service.*;
@@ -37,6 +38,7 @@ public class MapController {
 		
 	}
 	
+	// 찜하기
 	@PostMapping("addPlace")
 	@ResponseBody
 	public ResponseEntity<String> bookAccept(@RequestBody Place place, Authentication authentication) {
@@ -59,6 +61,19 @@ public class MapController {
 			}
 			
 		}
+	}
+	
+	// 찜 취소
+	@PostMapping("remove/{id}")
+	public String remove(@PathVariable(name = "id") int id, RedirectAttributes rttr) {
+		boolean ok = mapService.remove(id);
+		if(ok) {
+			rttr.addFlashAttribute("message", "찜 취소되었습니다.");
+			return "redirect:/map/mapMypage";
+		} else {
+			return "redirect:/map/mapMypage";
+		}
+		
 	}
 	
 	

@@ -223,6 +223,19 @@ public interface PetsitterMapper {
 			WHERE memberId = #{userId}
 			""")
 	List<Registration> selectUserPet(String userId);
+	
+	@Insert("""
+			INSERT INTO MemberAuthority (memberId, authority)
+			SELECT memberId, 'host' 
+			FROM Host 
+			WHERE id = #{hostId}
+			""")
+	Integer insertHostAuthority(Integer hostId); 
+
+	@Delete("""
+			DELETE FROM MemberAuthority WHERE memberId = #{memberId}
+			""")
+	Integer deleteHostAuthorityByMemberId(String memberId);
 
 
 	

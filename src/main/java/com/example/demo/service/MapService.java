@@ -66,6 +66,12 @@ public class MapService {
 		return Map.of("mapList", list,
 					   "pageInfo", pageInfo);
 	}
+
+	// 찜 취소
+	public boolean remove(Integer id) {
+		int cnt = mapper.deleteById(id);
+		return cnt==1;
+	}
 	
 
 

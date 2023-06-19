@@ -1,13 +1,11 @@
-main();
-
-function main() {
-	$('.slide_gallery').bxSlider({
-		mode: 'horizontal',
-		maxSlides: 2,
-		minSlides: 1,
-		moveSlides: 1,
-		slideMargin: 1,
-		slideWidth : 450,
-		shrinkItems : true
+$(document).ready(function() {
+	$('.slick-wrapper').slick({
+		slidesToShow: 3,
+		slidesToScroll: 1,
+		autoplay: true,
+		autoplaySpeed: 1000,
+		nextArrow: $('.next'),
+		prevArrow: $('.prev'),
 	});
-};
+});
+

@@ -4,12 +4,16 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.*;
+import org.springframework.security.core.annotation.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.example.demo.config.oauth.*;
 import com.example.demo.domain.Member;
+import com.example.demo.security.*;
 import com.example.demo.service.MemberService;
 
 import jakarta.servlet.http.*;
@@ -20,6 +24,23 @@ public class MemberController {
 
 	@Autowired
 	private MemberService service;
+	
+	@Autowired
+    private LoginAuthenticationSuccessHandler loginSuccessHandler;
+
+    @Autowired
+    private UserLoginFailHandler userLoginFailHandler;
+
+    @GetMapping("/test/login")
+    public @ResponseBody String testLogin(
+    		Authentication authentication,
+    		@AuthenticationPrincipal PrincipalDetails userDetails) {
+    	System.out.println("/test/login---------------");
+    	PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
+    	System.out.println("authentication: " + principalDetails.getMember());
+    	System.out.println("userDetails: " + userDetails.getMember());
+    	return "세션 정보 확인하기";
+    }
 
 	@GetMapping("checkId/{id}")
 	@ResponseBody
@@ -50,9 +71,14 @@ public class MemberController {
 	}
 	
 	@GetMapping("login")
-	public void loginForm() {
-		
+	public String loginForm(@RequestParam(value = "error", required = false) String error,
+							@RequestParam(value = "exception", required = false) String exception,
+							Model model) {
+		model.addAttribute("error", error);
+		model.addAttribute("exception", exception);
+		return "member/login";
 	}
+	
 	
 	@GetMapping("signup")
 	@PreAuthorize("isAnonymous()")
