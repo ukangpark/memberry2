@@ -23,7 +23,7 @@ public class CalendarService {
 		return calendardao.getCalendar();
 	}
 
-	public Arrays getAllSchedule(Authentication authentication) {
+	public List<Calendar> getAllSchedule(Authentication authentication) {
 		return mapper.selectAllByMemberId(authentication.getName());
 		
 	}

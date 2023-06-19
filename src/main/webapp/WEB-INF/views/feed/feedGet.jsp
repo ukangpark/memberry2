@@ -92,6 +92,7 @@
 <body id="body" style="background-color: #FFF2F2">
 
 	<my:navBar />
+	<my:alert></my:alert>
 
 	<!-- toast 알람 -->
 	<div class="toast-container position-fixed  top-0 start-50 translate-middle-x p-3">
@@ -128,12 +129,14 @@
 				<div class="ui card d-flex" id="my-card">
 					<div class="content" style="height: 3vh;">
 						<!-- 프로필 이미지 + 닉네임 -->
+						<a href="/feed/myFeed/${feed.writer}">
 						<c:if test="${logedInMember.profileImage ne null}">
-							<img class="ui avatar image" id="profilImage" src="${bucketUrl }/pet${feed.profileImage }"><span style="font-weight: bold;">${feed.nickName }</span> 
+							<img class="ui avatar image" id="profilImage" src="${bucketUrl }/pet${feed.profileImage }"><span style="font-weight: bold; color: black;">${feed.nickName }</span> 
 						</c:if>
 						<c:if test="${logedInMember.profileImage eq null}">
-							<img class="ui avatar image" id="profilImage" src="/images/paw.png"><span style="font-weight: bold;">${feed.nickName }</span> 
+							<img class="ui avatar image" id="profilImage" src="/images/paw.png"><span style="font-weight: bold; color: black;">${feed.nickName }</span> 
 						</c:if>
+						</a>
 						
 						<!-- 수정/삭제 버튼 드랍다운 -->
 						<sec:authorize access="isAuthenticated()">
@@ -146,11 +149,11 @@
 						
 										<ul class="dropdown-menu">
 											<!-- Dropdown menu links -->
-											<div style="text-align: center">
-												<a href="/modify/${feed.id }">수정하기</a>
+											<div style="text-align: center;">
+												<a href="/modify/${feed.id }" style="color: black;">수정하기</a>
 											</div>
-											<div style="text-align: center">
-												<a href="#" onclick="javascript:document.removeForm.submit();">삭제하기</a>
+											<div style="text-align: center;">
+												<a href="#" onclick="javascript:document.removeForm.submit();" style="color: black;">삭제하기</a>
 											</div>
 										</ul>
 						
@@ -196,13 +199,17 @@
 					<span class="likeIcon" data-feed-id="${feed.id }" style="margin-right: 0.3vw;" > 
 						<c:if test="${feed.liked }">
 							<img src="/images/bone.png">
-						</c:if> <c:if test="${not feed.liked }">
+						</c:if> 
+						<c:if test="${not feed.liked }">
 							<img src="/images/olbone.png">
 						</c:if>
 					</span> 
 					<!-- 좋아요 숫자 -->
 					<span class="likeNumber" style="font-weight: 300; font-size: medium; font-weight: bold;">
-						${feed.likeCount }명이 ${logedInMember.nickName }님의 글을 좋아합니다.
+						${feed.likeCount }
+					</span>
+					<span>
+						명이 ${logedInMember.nickName }님의 글을 좋아합니다.
 					</span>
 					<!-- 작성 일시 --> 
 					<div id="inserted" style="margin-top: 2vh;">${feed.inserted }</div>

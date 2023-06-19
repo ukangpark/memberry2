@@ -1,43 +1,44 @@
 package com.example.demo.controller;
 
-import java.lang.reflect.Array;
-import java.time.LocalDate;
-import java.util.*;
+import java.util.List;
 
-import org.springframework.beans.factory.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.stereotype.*;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.domain.Calendar;
-import com.example.demo.service.*;
+import com.example.demo.service.CalendarService;
 
-import lombok.*;
+import org.springframework.ui.*;
+import lombok.RequiredArgsConstructor;
 
 @Controller
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 @RequestMapping("fullCalendar")
 public class CalendarController {
-	
+
 	@Autowired
 	private CalendarService service;
 
-	//달력으로 이동
+	// 달력으로 이동
 	@GetMapping("")
-	public String getTest() {
+	public String get(Authentication authentication, Model model) {
+		List<Calendar> schedules = service.getAllSchedule(authentication);
+		model.addAttribute("aaa", schedules);
+
 		return "calendar";
 	}
-	
-	@PostMapping("getAll")
-	public Arrays getall(Authentication authentication) {
-		 return service.getAllSchedule(authentication);
-		
-	}
-	
-
 
 	
+	  @GetMapping("list") 
+	  public List<Calendar> getall(Authentication authentication) { 
+		  List<Calendar> schedules = service.getAllSchedule(authentication);
+		 
+		  	return schedules; 
+	 }
+	 
 
-	
-	
 }

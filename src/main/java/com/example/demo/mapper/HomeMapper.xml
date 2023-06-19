@@ -11,8 +11,10 @@
 		<result column="inserted" property="inserted" />
 		<result column="writer" property="writer" />
 		<result column="location" property="location" />
+		<result column="nickName" property="nickName" />
 		<result column="likeCount" property="likeCount" />
 		<result column="commentCount" property="commentCount" />
+		<result column="lastCommentInserted" property="lastCommentInserted"/>
 		<collection property="fileName" ofType="string">
 			<result column="fileName"/>
 		</collection>

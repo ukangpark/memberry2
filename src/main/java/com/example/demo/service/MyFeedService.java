@@ -13,9 +13,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.domain.Feed;
 import com.example.demo.domain.File;
+import com.example.demo.domain.Follow;
 import com.example.demo.domain.Like;
 import com.example.demo.mapper.CommentMapper;
 import com.example.demo.mapper.FeedLikeMapper;
+import com.example.demo.mapper.FollowMapper;
 import com.example.demo.mapper.MyFeedMapper;
 
 import software.amazon.awssdk.core.sync.RequestBody;
@@ -43,11 +45,22 @@ public class MyFeedService {
 	@Autowired
 	private CommentMapper commentMapper;
 	
+	@Autowired
+	private FollowMapper followMapper;
+	
 	
 
 	
-	public List<File> listMyFeed(Authentication authentication) {
-		List<File> file = mapper.selectAll(authentication.getName());
+	public List<File> listMyFeed(String userName, Authentication authentication) {
+		List<File> file = mapper.selectAll(userName);
+		
+		if (authentication != null) {
+			Follow follow = followMapper.select(userName, authentication.getName());
+				if (follow != null) {
+					file.get(0).setFollowed(true);
+				}
+		}
+		
 		return file;
 	}
 
@@ -175,6 +188,4 @@ public class MyFeedService {
 			remove(id);
 		}
 	}
-
-
 }

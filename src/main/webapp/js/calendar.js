@@ -53,33 +53,37 @@ document.addEventListener('DOMContentLoaded', function() {
 		}
 	});
 calendar.render();
-calendar.getEvents();
-	var arr = getCalendar();
-	$.each(arr, function(index, item) {
-		calendar.addEvent(item);
-		console.log(item);
-	});
-	calendar.render();
-});
+getCalendar();
+//calendar.getEvents();
+	//var arr = getCalendar();
+	//$.each(arr, function(index, item) {
+		//calendar.addEvent(item);
+		//console.log(item);
+	//});
+	//calendar.render();
+//});
 //Calendar DB데이터를 요청하는 함수
 function getCalendar() {
-	var arr = new Array();
-	arr = null;	
-	$.ajax({
-		contentType: "application/json",
-		dataType : "json",
-		url: "fullCalendar/getAll",
-		type: "post",
-		async: false, 
-		success: function(res) {
-			console.log(res);
-			arr = res;
-		},
-		error: function(){
-	 		alert("에러");
- 		}	
+	
+	$.ajax("/fullCalendar/list", {
+		method: "get",
+		//contentType: "application/json",
+		//dataType : "json",
+		//async: false, 
+		success: function(schedules) {
+			$(".scheduleInfo").empty();
+			for(const schedule of schedules) {
+				$(".scheduleInfo").append(`
+					<li>${schedule.title}</li>
+				`);
+			}
+		}
+		//,
+		//error: function(){
+	 		//alert("에러");
+ 		//}	
  	});
- return arr;
+ //return arr;
 }
 //$("#btnAddTest").click(function(){
  //var arr = getCalendarDataInDB();
@@ -87,6 +91,5 @@ function getCalendar() {
   //calendar.addEvent( item );
  //});
  //calendar.render();
-//});
-
+});
 

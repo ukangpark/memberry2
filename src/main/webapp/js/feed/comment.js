@@ -47,7 +47,7 @@ function listComment() {
 	$.ajax("/comment/list?myFeed=" + feedId, {
 		method: "get", 
 		success: function(comments) {
-			// console.log(data);
+			console.log(comments);
 			$("#commentListContainer").empty();  //비우기
 			for (const comment of comments) {
 				const editButtons = `
@@ -75,7 +75,7 @@ function listComment() {
 						<div class="ms-2 me-auto">
 							<div class="fw-bold d-flex align-items-center" > 
 							<div>
-							<img class="ui avatar image" id="nav-image" src="https://lilysbucket0503.s3.ap-northeast-2.amazonaws.com/membery/pet${comment.profileImage}"> 
+								<img class="ui avatar image" style="border: solid 1px" src = ${comment.profileImage != null ? "https://lilysbucket0503.s3.ap-northeast-2.amazonaws.com/membery/pet" + comment.profileImage : "/images/paw.png"}>  
 							</div>
 							<div>
 							${comment.nickName}

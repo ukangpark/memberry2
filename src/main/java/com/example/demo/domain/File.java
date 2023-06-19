@@ -13,5 +13,12 @@ public class File {
 	
 	private String petName;
 	private String type;
-	private LocalDate birth;
+	private LocalDate together;
+	
+	private String profileImage;
+	
+	private Integer followCount;
+	private Integer followingCount;
+	private Boolean followed;
 }
+

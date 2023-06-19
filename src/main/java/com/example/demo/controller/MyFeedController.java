@@ -1,5 +1,8 @@
 package com.example.demo.controller;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.ArrayList;
 import java.util.List;
 
 import java.util.Map;
@@ -22,70 +25,88 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.domain.Feed;
 import com.example.demo.domain.File;
+import com.example.demo.domain.Follow;
 import com.example.demo.domain.Like;
+import com.example.demo.domain.Registration;
 import com.example.demo.service.MyFeedService;
 import com.example.demo.service.MyPetsService;
 
 @Controller
 @RequestMapping("/")
 public class MyFeedController {
-	
+
 	@Autowired
 	private MyFeedService service;
 
 	// MyFeed 보기
-	@GetMapping("feed/myFeed")
+	@GetMapping("feed/myFeed/{userName}")
 	@PreAuthorize("isAuthenticated()")
-	public String myFeed(Model model,
-			Authentication authentication) {
-		List<File> list = service.listMyFeed(authentication);
+	public String myFeed(Model model, @PathVariable("userName") String userName, 
+										Authentication authentication) {
+		List<File> list = service.listMyFeed(userName, authentication);
 		
+		//마이피드에 펫정보 가져오기 용
+		String petName = list.get(0).getPetName();
+		String type = list.get(0).getType();
+		LocalDate together = list.get(0).getTogether();
+		
+		//마이피드에 펫정보 중 함께한날 날짜 계산하기 용
+		var now = LocalDate.now();
+		Registration petList = new Registration();
+		petList.setPetName(petName);
+		petList.setType(type);
+		petList.setDiff(Period.between(together, now));
+
+		//마이피드에 프로필이미지 가져오기 용
+		String profileImage = list.get(0).getProfileImage();
+		
+
 		model.addAttribute("fileList", list);
-		
+		model.addAttribute("profileImg", profileImage);
+		model.addAttribute("petList", petList);
+		model.addAttribute("userName", userName);
+		model.addAttribute("authentication", authentication.getName());
+
 		return "feed/myFeed";
 	}
-	
-	
-	
+
 	@GetMapping("feed/feedAdd")
 	@PreAuthorize("isAuthenticated()")
 	public void addForm(Model model, Authentication authentication) {
 		// 게시물 작성 form(view)로 포워드
 		model.addAttribute("authentication", authentication);
 	}
-	
+
 	// 게시물 추가하기
 	@PostMapping("feed/feedAdd")
 	@PreAuthorize("isAuthenticated()")
-	public String addProcess(@RequestParam("files") MultipartFile[] files,
-			Feed feed, Authentication authentication,  RedirectAttributes rttr) throws Exception {
+	public String addProcess(@RequestParam("files") MultipartFile[] files, Feed feed, Authentication authentication,
+			RedirectAttributes rttr) throws Exception {
 		// 새 게시물 DB에 추가
 		feed.setWriter(authentication.getName());
 		boolean ok = service.addFeed(feed, files, authentication);
+		
 		if (ok) {
 			// 추가가 잘 되었으면 게시판으로 이동
 			rttr.addFlashAttribute("message", feed.getTitle() + "피드에 등록되었습니다.");
 			rttr.addFlashAttribute("feed", feed);
-			return "redirect:/feed/myFeed";
+			return "redirect:/feed/myFeed/" + feed.getWriter();
 		} else {
 			rttr.addFlashAttribute("feed", feed);
 			rttr.addFlashAttribute("message", "피드 등록에 실패하였습니다.");
 			return "redirect:/feed/feedAdd";
-		}  
+		}
 	}
-	
+
 	// 클릭한 게시물 보기
 	@GetMapping("/feedId/{feedId}")
-	public String post(
-			@PathVariable("feedId") Integer feedId, 
-			Model model,
-			Authentication authentication) {
+	public String post(@PathVariable("feedId") Integer feedId, Model model, Authentication authentication) {
 		Feed feed = service.getPost(feedId, authentication);
 		model.addAttribute("feed", feed);
-		
+
 		return "feed/feedGet";
 	}
-	
+
 	// 게시물 수정하는 폼 보여주기
 	@GetMapping("/modify/{feedId}")
 	@PreAuthorize("isAuthenticated() and @customSecurityChecker.checkFeedWriter(authentication, #feedId)")
@@ -93,39 +114,39 @@ public class MyFeedController {
 		model.addAttribute("feed", service.getPost(feedId));
 		return "feed/feedModify";
 	}
-	
+
 	// 게시물 수정한 값 업로드
 	@PostMapping("/modify/{feedId}")
 	@PreAuthorize("isAuthenticated() and @customSecurityChecker.checkFeedWriter(authentication, #feed.id)")
 	// 수정하려는 게시물의 id : feed.id
-	public String modifyProcess(Feed feed, 
-			File file, 
-			@RequestParam(value="removeFiles", required = false) List<String> removeFileNames,
-			@RequestParam(value="files", required = false) MultipartFile[] addFiles,
-			RedirectAttributes rttr) throws Exception {
-		
+	public String modifyProcess(Feed feed, File file,
+			@RequestParam(value = "removeFiles", required = false) List<String> removeFileNames,
+			@RequestParam(value = "files", required = false) MultipartFile[] addFiles, RedirectAttributes rttr)
+			throws Exception {
+
 		boolean ok = service.modify(feed, removeFileNames, addFiles);
-		
-		if (ok) { 
+
+		if (ok) {
 			// 수정이 잘 되면 작성한 게시물로 리디렉션
-			rttr.addAttribute("success", "modify"); 
+			rttr.addAttribute("success", "modify");
 			return "redirect:/feedId/" + file.getFeedId();
 		} else {
 			// 수정이 안 되면 수정하기 양식으로 리디렉션
-			rttr.addAttribute("fail", "fail"); 
+			rttr.addAttribute("fail", "fail");
 			return "redirect:/modify/" + file.getFeedId();
 		}
 	}
-	
+
 	@PostMapping("remove")
 	@PreAuthorize("isAuthenticated() and @customSecurityChecker.checkFeedWriter(authentication, #id)")
-	public String remove(Integer id, RedirectAttributes rttr) {
+	public String remove(Integer id, RedirectAttributes rttr, 
+			Authentication authentication) {
 		boolean ok = service.remove(id);
 		if (ok) {
-			return "redirect:/feed/myFeed";
+			return "redirect:/feed/myFeed/" + authentication.getName() ;
 		} else {
 			return "redirect:/id/" + id;
 		}
 	}
-
+	
 }

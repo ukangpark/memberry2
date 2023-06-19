@@ -33,18 +33,21 @@
 </style>
 
 
-
 <div class="ui fluid right aligned container" id="nav-container">
 	<div class="ui position-fixed top-0 end-0">
 		<div class="ui dropdown" id="navBar">
 			<h4 id="profile">
 
 				<sec:authorize access="isAuthenticated()">
-					<c:if test="${logedInMember.profileImage ne null}">
-						<img class="ui tiny image" id="nav-image" src="${bucketUrl }/pet${logedInMember.profileImage }">${logedInMember.nickName }
+					<c:if test="${sessionScope.logedInMember.profileImage ne null}">
+						<img class="ui tiny image btn-primary position-relative"" id="nav-image" src="${bucketUrl }/pet${sessionScope.logedInMember.profileImage }">
+						<span class="position-absolute top-20 start-0 ht rounded-circle"><i class="fa-solid fa-bell" style="color:red;"></i></span></img>
+  						 
+						${sessionScope.logedInMember.nickName }
+					
 					</c:if>
-					<c:if test="${logedInMember.profileImage eq null}">
-						<img class="ui tiny image" id="nav-image" src="/images/paw.png">${logedInMember.nickName } 
+					<c:if test="${sessionScope.logedInMember.profileImage eq null}">
+						<img class="ui tiny image" id="nav-image" src="/images/paw.png">${sessionScope.logedInMember.nickName } 
 					</c:if>
 
 				</sec:authorize>
@@ -64,7 +67,8 @@
 
 
 				<sec:authorize access="isAuthenticated()">
-					<a class="${current eq 'myFeed' ? 'active' : '' } item" href="/feed/myFeed"> 마이피드 </a>
+					<sec:authentication property="name" var="userId"/>
+					<a class="${current eq 'myFeed' ? 'active' : '' } item" href="/feed/myFeed/${userId }"> 마이피드 </a>
 				</sec:authorize>
 
 				<sec:authorize access="isAuthenticated()">
@@ -111,6 +115,10 @@
 				<sec:authorize access="isAuthenticated()">
 					<a class="${current eq 'petList' ? 'active' : '' } item" href="/myPets/petList"> 나의반려동물 </a>
 				</sec:authorize>
+				
+				<sec:authorize access="isAuthenticated()">
+					<a class="${current eq 'chatRoom' ? 'active' : '' } item" href="/chat/chatRoom"> 메세지 </a>
+				</sec:authorize>
 
 				<sec:authorize access="isAuthenticated()">
 					<a class="${current eq 'memberInfo' ? 'active' : '' } item" href="/member/info?id=<sec:authentication property="name" /> "> 마이페이지 </a>
@@ -130,6 +138,9 @@
 
 				<sec:authorize access="isAuthenticated()">
 					<a class="${current eq 'logout' ? 'active' : '' } item" href="/member/logout"> 로그아웃 </a>
+				</sec:authorize>
+				<sec:authorize access="isAuthenticated()">
+					<a class="${current eq 'alarm' ? 'active' : '' } item" href="/alarm"> 알림 <span class="badge text-bg-danger">4</span> </a>
 				</sec:authorize>
 
 

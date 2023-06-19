@@ -4,12 +4,13 @@ function home() {
 	$('.slider').bxSlider();
 };
 
+	
 
 
 // 댓글 js
 $(".btnTriggerModal").click(function() {
 	const feedId = $(this).attr("data-id");
-	const profileSrc = $("#profile").attr("src");
+	// const profileSrc = $("#profile").attr("src");
 	listComment();
 	function listComment() {
 
@@ -38,21 +39,22 @@ $(".btnTriggerModal").click(function() {
 						<div class="ms-2 me-auto">
 							<div class="fw-bold d-flex align-items-center"> 
 							<div>
-						<img class="ui avatar image" id="nav-image" style="border: solid 1px;" src="https://lilysbucket0503.s3.ap-northeast-2.amazonaws.com/membery/pet${comment.profileImage}">
+								<img class="ui avatar image" style="border: solid 1px" src = ${comment.profileImage != null ? "https://lilysbucket0503.s3.ap-northeast-2.amazonaws.com/membery/pet" + comment.profileImage : "/images/paw.png"}>  
+							</div >
+
+					<div> ${comment.nickName}</div>
+							</div >
+					<div style="white-space: pre-wrap;">${comment.content}</div>
+						</div >
+					<div>
+						<span class="badge bg-secondary rounded-pill">${comment.inserted}</span>
+						<div class="text-end mt-2">
+							${comment.editable ? editButtons : ''}
+
+						</div>
 					</div>
-							
-							<div> ${comment.nickName}</div>
-							</div>
-							<div style="white-space: pre-wrap;">${comment.content}</div>
-						</div>
-						<div>
-							<span class="badge bg-secondary rounded-pill">${comment.inserted}</span>
-							<div class="text-end mt-2">
-								${comment.editable ? editButtons : ''}
-							</div>
-						</div>
-						
-					`);
+					</li>
+				`);
 				};
 
 				$(".commentDeleteButton").click(function() {
@@ -83,19 +85,21 @@ $(".btnTriggerModal").click(function() {
 			}
 		})
 	}
-
+	
 	//댓글 등록 버튼 클릭시
-	$("#sendCommentBtn").click(function() {
-
+	$("#sendCommentBtn").off("click");
+	$("#sendCommentBtn").on("click", function() {
+		// const feedId = $("#feedId").text().trim();
 		const content = $("#commentTextArea").val();
 		const data = { feedId, content };
-
+		console.log(data);
 		$.ajax("/comment/add", {
 			method: "post",
 			contentType: "application/json",
 			data: JSON.stringify(data),
 			complete: function(jqXHR) {
 				listComment();
+				console.log(feedId);
 				//완료 시 메세지 토스트에 보이기
 				$(".toast-body").text(jqXHR.responseJSON.message);
 				toast.show();
@@ -104,6 +108,8 @@ $(".btnTriggerModal").click(function() {
 			}
 		});
 	})
+
+	
 	// (최종) 수정 버튼 클릭시
 	$("#updateCommentBtn").click(function() {
 

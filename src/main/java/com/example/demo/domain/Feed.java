@@ -26,10 +26,16 @@ public class Feed {
 	private String profileImage;
 	private String nickName;
 	
+	private String lastCommentInserted;
+	
+	
 	public void setInserted(Date date) {
 		this.inserted = FeedTime.calculateTime(date); // 기존의 getter, setter에서 변경된 부분
 	}
 	
+	public void setLastCommentInserted(Date date) {
+		this.lastCommentInserted = FeedTime.calculateTime(date); // 기존의 getter, setter에서 변경된 부분
+	}
 
 }
 

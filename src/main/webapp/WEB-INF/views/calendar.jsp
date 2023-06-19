@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="jakarta.tags.core"%>
     <%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
+    <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -64,16 +66,18 @@
 <body style="padding:30px; background-color: #FFF2F2;" >
 <my:navBar current="calendar"></my:navBar>
 	<div id="header">
-		<h1><span style="font-weight: bold">${logedInMember.nickName }</span>님 캘린더</h1>
+		<h1><span style="font-weight: bold"> 캘린더</h1>
 	</div>
 
-	<div id="calendarWrapper">
+	 <div id="calendarWrapper">
 		<div id='calendar'></div>
 	</div>
-  
+  	
+  	
+  	
 
 
-<script src="/js/calendar.js"></script>
+ <script src="/js/calendar.js"></script>
 <my:bottom></my:bottom>
 
 	 
