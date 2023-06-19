@@ -127,7 +127,7 @@
 						</div>
 
 						<div class="content">
-							<div class="header">${feed.title} <span id="feedId">${feed.id }</span></div>
+							<div class="header">${feed.title}</div>
 
 							<div class="description">${feed.content}</div>
 						</div>

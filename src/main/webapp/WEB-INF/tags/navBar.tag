@@ -40,7 +40,11 @@
 
 				<sec:authorize access="isAuthenticated()">
 					<c:if test="${sessionScope.logedInMember.profileImage ne null}">
-						<img class="ui tiny image" id="nav-image" src="${bucketUrl }/pet${sessionScope.logedInMember.profileImage }">${sessionScope.logedInMember.nickName }
+						<img class="ui tiny image btn-primary position-relative"" id="nav-image" src="${bucketUrl }/pet${sessionScope.logedInMember.profileImage }">
+						<span class="position-absolute top-20 start-0 ht rounded-circle"><i class="fa-solid fa-bell" style="color:red;"></i></span></img>
+  						 
+						${sessionScope.logedInMember.nickName }
+					
 					</c:if>
 					<c:if test="${sessionScope.logedInMember.profileImage eq null}">
 						<img class="ui tiny image" id="nav-image" src="/images/paw.png">${sessionScope.logedInMember.nickName } 
@@ -134,6 +138,9 @@
 
 				<sec:authorize access="isAuthenticated()">
 					<a class="${current eq 'logout' ? 'active' : '' } item" href="/member/logout"> 로그아웃 </a>
+				</sec:authorize>
+				<sec:authorize access="isAuthenticated()">
+					<a class="${current eq 'alarm' ? 'active' : '' } item" href="/alarm"> 알림 <span class="badge text-bg-danger">4</span> </a>
 				</sec:authorize>
 
 
