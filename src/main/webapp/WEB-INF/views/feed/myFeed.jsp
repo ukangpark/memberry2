@@ -107,7 +107,7 @@ img {
 		<!-- 프로필 이미지 -->
 		<div class="middleContainer" style="margin: 0px 30px 0px 30px">
 			<c:if test="${logedInMember.profileImage ne null}">
-				<img class="ui circular image" id="profilImage" src="${bucketUrl }/pet${proileImg}">
+				<img class="ui circular image" id="profilImage" src="${bucketUrl }/pet${profileImg}">
 			</c:if>
 			<c:if test="${logedInMember.profileImage eq null}">
 				<img class="ui circular image" id="profilImage" src="/images/paw.png">
