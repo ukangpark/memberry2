@@ -134,7 +134,7 @@
 						<div class="extra content">
 							<span class="left floated"> 
 							<!-- 좋아요 기능 구현 --> 
-							<span class="likeIcon"  data-feed-id="${feed.id }"> 
+							<span class="likeIcon" data-feed-id="${feed.id }"> 
 							<c:if test="${feed.liked }">
 										<img src="/images/bone.png">
 									</c:if> <c:if test="${not feed.liked }">

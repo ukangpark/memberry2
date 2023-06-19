@@ -115,6 +115,10 @@
 				<sec:authorize access="isAuthenticated()">
 					<a class="${current eq 'petList' ? 'active' : '' } item" href="/myPets/petList"> 나의반려동물 </a>
 				</sec:authorize>
+				
+				<sec:authorize access="isAuthenticated()">
+					<a class="${current eq 'chatRoom' ? 'active' : '' } item" href="/chat/chatRoom"> 메세지 </a>
+				</sec:authorize>
 
 				<sec:authorize access="isAuthenticated()">
 					<a class="${current eq 'memberInfo' ? 'active' : '' } item" href="/member/info?id=<sec:authentication property="name" /> "> 마이페이지 </a>
