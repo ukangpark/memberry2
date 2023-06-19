@@ -18,4 +18,5 @@ public class Member {
 	private List<String> authority;
 	private String provider;
 	private String providerId;
+	private Integer alarmCount;
 }
