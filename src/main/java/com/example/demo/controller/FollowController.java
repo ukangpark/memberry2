@@ -35,5 +35,14 @@ public class FollowController {
 	public List<Follow> followerList(@PathVariable("feedOwner") String feedOwner, Authentication authentication) {
 		return followService.followerlist(feedOwner, authentication);
 	}
+	
+	//followingList
+	@GetMapping("/following/list/{feedOwner}")
+	@ResponseBody
+	public List<Follow> followingList(@PathVariable("feedOwner") String feedOwner, Authentication authentication) {
+		return followService.followinglist(feedOwner, authentication);
+	}
+	
+	
 
 }

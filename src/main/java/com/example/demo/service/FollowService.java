@@ -45,4 +45,9 @@ public class FollowService {
 		return follower;
 
 	}
+
+	public List<Follow> followinglist(String feedOwner, Authentication authentication) {
+		List<Follow> following = followMapper.selectAllByFollowing(feedOwner, authentication.getName());
+		return following;
+	}
 }

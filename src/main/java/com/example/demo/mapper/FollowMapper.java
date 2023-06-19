@@ -11,10 +11,9 @@ import org.springframework.security.core.Authentication;
 
 import com.example.demo.domain.Follow;
 
-
 @Mapper
 public interface FollowMapper {
-	
+
 	@Insert("""
 			INSERT INTO Follow
 				VALUES (#{feedOwner}, #{memberId})
@@ -34,7 +33,6 @@ public interface FollowMapper {
 			""")
 	Integer followerCountByfeedOwner(Follow follow);
 
-
 	@Select("""
 			SELECT * FROM Follow
 			WHERE feedOwner = #{feedOwner}
@@ -49,7 +47,7 @@ public interface FollowMapper {
 	Integer followingCountBymemberId(Follow follow);
 
 	@Select("""
-			SELECT 
+			SELECT
 				fw.*,
 				CONCAT('/', m.defaultPetId, '/', p.photo) profileImage
 			FROM Follow fw LEFT JOIN  Pet p ON fw.memberId = p.memberId
@@ -58,6 +56,14 @@ public interface FollowMapper {
 			""")
 	List<Follow> selectAllByFollower(String feedOwner, String memberId);
 
-
+	@Select("""
+			SELECT
+				fw.*,
+				CONCAT('/', m.defaultPetId, '/', p.photo) profileImage
+			FROM Follow fw LEFT JOIN  Member m ON fw.feedOwner = m.id
+						LEFT JOIN Pet p ON m.defaultPetId = p.id
+			WHERE fw.memberId = #{feedOwner};
+			""")
+	List<Follow> selectAllByFollowing(String feedOwner, String name);
 
 }
