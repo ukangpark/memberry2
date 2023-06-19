@@ -84,6 +84,7 @@
 
 
 	<my:navBar current="home" />
+	<my:search></my:search>
 
 
 

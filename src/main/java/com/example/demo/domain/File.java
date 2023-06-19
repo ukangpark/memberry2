@@ -10,6 +10,7 @@ public class File {
 	private Integer feedId;
 	private String fileName;
 	private String memberId;
+	private String nickName;
 	
 	private String petName;
 	private String type;
@@ -20,5 +21,6 @@ public class File {
 	private Integer followCount;
 	private Integer followingCount;
 	private Boolean followed;
+	
 }
 

@@ -47,12 +47,12 @@ public interface FollowMapper {
 	Integer followingCountBymemberId(Follow follow);
 
 	@Select("""
-			SELECT
+			SELECT 
 				fw.*,
 				CONCAT('/', m.defaultPetId, '/', p.photo) profileImage
-			FROM Follow fw LEFT JOIN  Pet p ON fw.memberId = p.memberId
-						LEFT JOIN Member m ON m.id = fw.memberId
-			WHERE feedOwner = #{feedOwner}
+			FROM Follow fw LEFT JOIN  Member m ON fw.memberId = m.id
+						LEFT JOIN Pet p ON m.defaultPetId = p.id
+			WHERE feedOwner = #{feedOwner}; 
 			""")
 	List<Follow> selectAllByFollower(String feedOwner, String memberId);
 
