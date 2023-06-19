@@ -19,6 +19,17 @@
 	</properties>
 	<dependencies>
 		
+		<!-- json simple  -->
+		<dependency>
+		  <groupId>com.googlecode.json-simple</groupId>
+		  <artifactId>json-simple</artifactId>
+		  <version>1.1.1</version>
+		</dependency>
+		 <!-- Spring Websocket -->
+    	<dependency>
+        	<groupId>org.springframework.boot</groupId>
+        	<artifactId>spring-boot-starter-websocket</artifactId>
+    	</dependency>
 		<!-- security tag library -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>

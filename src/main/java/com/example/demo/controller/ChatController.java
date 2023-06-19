@@ -6,32 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import com.example.demo.domain.Chat;
-import com.example.demo.service.ChatService;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/")
 public class ChatController {
 	
-	@Autowired
-	private ChatService chatService;
-	
-	// 대화 내용 가져오기
-	@GetMapping("chat/chatRoom")
-	public ArrayList<Chat> chatRoom() {
-		ArrayList<Chat> chatList = chatService.getChatList();
-		
-		return chatList;
+	@RequestMapping("/chat/chatRoom")
+	public ModelAndView chatRoom() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("chat/chatRoom");
+		return mv;
 	}
-	
-	// 최근 대화 내용 가져오기
-	@GetMapping("chat/recentChat")
-	public ArrayList<Chat> recentChat() {
-		ArrayList<Chat> chatList = chatService.getRecentChatList();
-		
-		return chatList;
-	}
-	
-	
 }
