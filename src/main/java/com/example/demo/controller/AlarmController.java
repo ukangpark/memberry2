@@ -7,13 +7,14 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.domain.Alarm;
 import com.example.demo.service.AlarmService;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("alarm")
@@ -28,8 +29,8 @@ public class AlarmController {
 	
 	@GetMapping("list")
 	@ResponseBody
-	public List<Alarm> list(@RequestParam("id") String id,  Authentication authentication) {
-		return service.list(authentication);
+	public List<Alarm> list(@RequestParam("id") String id,  Authentication authentication, HttpSession session) {
+		return service.list(authentication, session);
 	}
 	
 	@GetMapping("check/{id}")

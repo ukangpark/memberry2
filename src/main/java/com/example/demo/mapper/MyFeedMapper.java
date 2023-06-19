@@ -19,11 +19,13 @@ public interface MyFeedMapper {
 				p.type,
 				p.together,
 				f.memberId,
+				m.nickName,
 				CONCAT('/', p.id, '/', p.photo) profileImage,
 				(SELECT COUNT(*) FROM Follow WHERE feedOwner = f.memberId) followCount,
 				(SELECT COUNT(*) FROM Follow WHERE memberId = #{memberId}) followingCount
 			FROM File f LEFT JOIN  Pet p ON f.memberId = p.memberId
 						LEFT JOIN Follow fw ON f.memberId = fw.memberId
+						LEFT JOIN Member m ON m.id = f.memberId
 			WHERE f.memberId = #{memberId}
 			GROUP BY f.feedId ORDER BY f.id DESC
 			""")

@@ -13,6 +13,7 @@
 		<result property="phoneNumber" column="phoneNumber"></result>
 		<result property="inserted" column="inserted"></result>
 		<result property="profileImage" column="profileImage"></result>
+		<result property="alarmCount" column="alarmCount"></result>
 		<collection property="authority" ofType="string">
 			<result column="authority"></result>
 		</collection>

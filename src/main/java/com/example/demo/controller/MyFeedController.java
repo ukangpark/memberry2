@@ -44,6 +44,7 @@ public class MyFeedController {
 	public String myFeed(Model model, @PathVariable("userName") String userName, 
 										Authentication authentication) {
 		List<File> list = service.listMyFeed(userName, authentication);
+		System.out.println(list);
 		
 		//마이피드에 펫정보 가져오기 용
 		String petName = list.get(0).getPetName();
@@ -60,10 +61,14 @@ public class MyFeedController {
 		//마이피드에 프로필이미지 가져오기 용
 		String profileImage = list.get(0).getProfileImage();
 		
+		//마이피드에 닉네임 보여주기 용
+		String nickName = list.get(0).getNickName();
+		
 
 		model.addAttribute("fileList", list);
 		model.addAttribute("profileImg", profileImage);
 		model.addAttribute("petList", petList);
+		model.addAttribute("nickName", nickName);
 		model.addAttribute("userName", userName);
 		model.addAttribute("authentication", authentication.getName());
 

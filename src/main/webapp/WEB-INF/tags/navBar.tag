@@ -35,13 +35,26 @@
 
 <div class="ui fluid right aligned container" id="nav-container">
 	<div class="ui position-fixed top-0 end-0">
-		<div class="ui dropdown" id="navBar">
+
+		<!-- search -->
+		<div class="searchBtn" style="cursor:pointer; display: flex; float: left; margin: 30px 10px 0px 0px; align-items: center; align-content: center; text-align: center; justify-content: center;">
+			
+			<a href="/search"><i style="color:black;" class="search big icon"></i></a>
+		</div>
+		
+		<!-- alarm -->
+		<div class="alarmBtn" style="display: flex; float: left; margin: 30px 10px 0px 0px; align-items: center; align-content: center; text-align: center; justify-content: center;">
+			<i class="bell big icon"></i>
+		</div>
+
+		<div class="ui dropdown" id="navBar" style="display: flex; float: right; align-items: center; align-content: center; text-align: center; justify-content: center;">
 			<h4 id="profile">
 
 				<sec:authorize access="isAuthenticated()">
 					<c:if test="${sessionScope.logedInMember.profileImage ne null}">
-						<img class="ui tiny image btn-primary position-relative"" id="nav-image" src="${bucketUrl }/pet${sessionScope.logedInMember.profileImage }">
-						<span class="position-absolute top-20 start-0 ht rounded-circle"><i class="fa-solid fa-bell" style="color:red;"></i></span></img>
+						<img class="ui tiny image btn-primary position-relative" id="nav-image" src="${bucketUrl }/pet${sessionScope.logedInMember.profileImage }">
+						<span class="position-absolute top-20 start-0 ht rounded-circle"><i class="fa-solid fa-bell" style="color: red;"></i></span>
+						</img>
   						 
 						${sessionScope.logedInMember.nickName }
 					
@@ -57,17 +70,11 @@
 			</h4>
 
 			<div class="ui vertical menu">
-				<div class="item">
-					<div class="ui input">
-						<input type="text" placeholder="Search...">
-					</div>
-				</div>
 
 				<a class="${current eq 'home' ? 'active' : '' } item" href="/home"> 홈피드</a>
 
-
 				<sec:authorize access="isAuthenticated()">
-					<sec:authentication property="name" var="userId"/>
+					<sec:authentication property="name" var="userId" />
 					<a class="${current eq 'myFeed' ? 'active' : '' } item" href="/feed/myFeed/${userId }"> 마이피드 </a>
 				</sec:authorize>
 
@@ -115,7 +122,7 @@
 				<sec:authorize access="isAuthenticated()">
 					<a class="${current eq 'petList' ? 'active' : '' } item" href="/myPets/petList"> 나의반려동물 </a>
 				</sec:authorize>
-				
+
 				<sec:authorize access="isAuthenticated()">
 					<a class="${current eq 'chatRoom' ? 'active' : '' } item" href="/chat/chatRoom"> 메세지 </a>
 				</sec:authorize>
@@ -139,9 +146,11 @@
 				<sec:authorize access="isAuthenticated()">
 					<a class="${current eq 'logout' ? 'active' : '' } item" href="/member/logout"> 로그아웃 </a>
 				</sec:authorize>
+        
 				<sec:authorize access="isAuthenticated()">
-					<a class="${current eq 'alarm' ? 'active' : '' } item" href="/alarm"> 알림 <span class="badge text-bg-danger">4</span> </a>
+					<a class="${current eq 'alarm' ? 'active' : '' } item" href="/alarm"> 알림 <span class="badge text-bg-danger">${logedInMember.alarmCount }</span> </a>
 				</sec:authorize>
+						
 
 
 			</div>
