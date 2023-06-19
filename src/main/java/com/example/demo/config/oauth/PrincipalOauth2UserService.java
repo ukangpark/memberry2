@@ -5,25 +5,36 @@ import org.springframework.security.oauth2.core.*;
 import org.springframework.security.oauth2.core.user.*;
 import org.springframework.stereotype.*;
 
-@Service
-public class PrincipalOauth2UserService extends DefaultOAuth2UserService{
+import com.example.demo.repository.*;
 
+import jakarta.servlet.http.*;
+
+@Service
+public class PrincipalOauth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User>{
+
+	private final UserRepository userRepository;
+	private final HttpSession httpSession;
+	
+	public PrincipalOauth2UserService(UserRepository userRepository, HttpSession httpSession) {
+		this.userRepository = userRepository;
+		this.httpSession = httpSession;
+	}
+	
 	@Override
 	public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
 
-		System.out.println("getClientRegistration: "+ userRequest.getClientRegistration());
-		System.out.println("getAccessToken: "+ userRequest.getAccessToken());
+		OAuth2UserService<OAuth2UserRequest, OAuth2User> delegate = new DefaultOAuth2UserService();
+		OAuth2User oAuthUser = delegate.loadUser(userRequest);
+		
+		String registrationId = userRequest.getClientRegistration().getRegistrationId();
+		String userNameAttributeName = userRequest.getClientRegistration().getProviderDetails().getUserInfoEndpoint().getUserNameAttributeName();
+		
+		OAuthAttributes attributes = OAuthAttributes.of(registrationId, userNameAttributeName, oAuth2User.getAttributes());
 		
 		// 회원가입 강제 진행
 		OAuth2User oauth2User = super.loadUser(userRequest);
 		System.out.println("getAttributes: "+ super.loadUser(userRequest).getAttributes());
 
-//		String provider = userRequest.getClientRegistration().getRegistrationId(); //google
-//		String providerId = oauth2User.getAttribute("sub");
-//		String username = provider + "_" + providerId;
-//		String password = passwordEncoder.encode("hellogoogle");
-//		String email = oauth2User.getAttribute("email");
-		
 		return super.loadUser(userRequest);
 	}
 	 

@@ -17,7 +17,7 @@
 	margin: 50px 0px 0px 0px;
 }
 
-.googleImage{
+.googleImage {
 	width: 30px;
 	height: 30px;
 	margin: 10px;
@@ -49,6 +49,11 @@
 											<i class="lock icon"></i> <input type="password" name="password" placeholder="비밀번호" />
 										</div>
 									</div>
+									<hr />
+									<div class="field">
+										<h5>소셜 계정으로 로그인</h5>
+										<a href="/oauth2/authorization/google"><img class="googleImage" src="/images/googleIcon.png" alt="" /></a>
+									</div>
 									<button type="submit" class="ui secondary submit button">로그인</button>
 								</div>
 							</div>
@@ -61,14 +66,12 @@
 						<div class="ui vertical divider">Or</div>
 					</div>
 				</form>
-				
+
 				<span> <c:if test="${error}">
 						<p id="valid" class="alert alert-danger">${exception}</p>
 					</c:if>
 				</span>
-				
-				<a href="/oauth2/authorization/google"><img class="googleImage" src="/images/googleIcon.png" alt="" /></a>
-				
+
 			</div>
 		</div>
 	</div>

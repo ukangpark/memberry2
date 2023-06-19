@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.config.oauth.*;
 import com.example.demo.domain.Member;
+import com.example.demo.repository.*;
 import com.example.demo.security.*;
 import com.example.demo.service.MemberService;
 
@@ -22,6 +23,9 @@ import jakarta.servlet.http.*;
 @RequestMapping("member")
 public class MemberController {
 
+	@Autowired
+	private UserRepository userRepository;
+	
 	@Autowired
 	private MemberService service;
 	
