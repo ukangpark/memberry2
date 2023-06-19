@@ -17,7 +17,6 @@ public class AlarmService {
 
 	public List<Alarm> list(Authentication authentication) {
 		List<Alarm> alarms = mapper.selectAllByMemberId(authentication.getName());
-		
 		return alarms;
 	}
 

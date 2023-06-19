@@ -26,7 +26,7 @@
 	
 	<div class="header" style="text-align: center;">
 		<h2> <span id="memberId">${logedInMember.id }</span>
-		<i class="fa-solid fa-bell"></i> 알림 </h2>
+		<i class="fa-solid fa-bell"></i> 알림</h2>
 	</div>
 
 	<div class="container-lg">

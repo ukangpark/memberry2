@@ -30,7 +30,9 @@ public interface AlarmMapper {
 	@Select("""
 			SELECT 
 				a.*,
-				m.nickName	
+				m.nickName,
+				(SELECT COUNT(*) FROM Alarm 
+				WHERE a.userId = #{memberId} AND isChecked = false) alarmCount 
 			FROM Alarm a LEFT JOIN Member m ON a.causedMemberId = m.id
 			WHERE a.userId = #{memberId} AND a.userId <> a.causedMemberId  
 			ORDER BY id DESC
