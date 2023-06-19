@@ -43,39 +43,33 @@
 					</div>
 					<div class="field">
 						<label for="hostName">이름</label>
-						<input id="hostName" type="text" name="hostName" placeholder="이름을 입력해주세요.">
+						<input id="hostName" type="text" name="hostName" value="${member.name }" readonly>
 					</div>
 					<div class="field">
 						<label for="phone">전화번호</label>
 						<input id="phone" type="text" name="phone" placeholder="예)01012341234">
 					</div>
 					<div class="field">
-						<label for="idNumber">주민번호</label>
-						<input id="idNumber" type="text" name="idNumber" placeholder="-를 빼고 입력해주세요.">
+						<label for="idNumber">생년월일</label>
+						<input id="idNumber" type="text" name="idNumber" placeholder="생년월일 6자리를 적어주세요.">
 					</div>
 					<div class="field">
 						<label>주소</label>
 						<div class="equal width fields">
 							<div class="field">
 								<select class="ui fluid search dropdown" name="si" id="si">
-									<option value="서울시">서울시</option>
-									<option value="부산시">부산시</option>
-									<option value="대구시">대구시</option>
-									<option value="인천시">인천시</option>
+									<option >시</option>
+									<option value="서울시" id="seoul">서울시</option>
 								</select>
 							</div>
 							<div class="field">
 								<select class="ui fluid search dropdown" name="gu" id="gu">
-									<option value="종로구">종로구</option>
-									<option value="강서구">강서구</option>
-									<option value="마포구">마포구</option>
+									<option>구</option>
 								</select>
 							</div>
 							<div class="field">
 								<select class="ui fluid search dropdown" name="dong" id="dong">
-									<option value="내발산동">내발산동</option>
-									<option value="염창동">염창동</option>
-									<option value="화곡동">화곡동</option>
+									<option>동</option>
 								</select>
 							</div>
 						</div>
@@ -150,20 +144,80 @@
 		</div>
 	</div>
 	<my:bottom></my:bottom>
-	<script>
-		$('.ui.dropdown').dropdown();
+	<script src="/js/petsitter/apply.js"></script>
+	<script type="text/javascript">
+    const options = {
+    	      서울: {
+    	        강남구: ['압구정동', '논현1동', '논현2동', '청담동'],
+    	        강동구: ['둔촌1동', '둔촌2동', '상일동', '명일동'],
+    	        // 여기에 더 많은 구와 동 옵션 추가
+    	      },
+    	      부산: {
+    	        해운대구: ['중동', '반여1동', '반여2동', '반여3동'],
+    	        사하구: ['괴정1동', '괴정2동', '당리동', '하단동'],
+    	        // 여기에 더 많은 구와 동 옵션 추가
+    	      }
+    	      // 여기에 더 많은 시 추가
+    	    };
 
-		function readURL(input) {
-			if (input.files && input.files[0]) {
-				var reader = new FileReader();
-				reader.onload = function(e) {
-					document.getElementById('preview').src = e.target.result;
-				};
-				reader.readAsDataURL(input.files[0]);
-			} else {
-				document.getElementById('preview').src = "";
-			}
-		}
+    	    // select 요소에 대한 참조를 가져옵니다.
+    	    const siSelect = document.getElementById('si');
+    	    const guSelect = document.getElementById('gu');
+    	    const dongSelect = document.getElementById('dong');
+
+    	    // 시와 구 select 요소에 이벤트 리스너를 추가합니다.
+    	    siSelect.addEventListener('change', populateGu);
+    	    guSelect.addEventListener('change', populateDong);
+
+    	    // 선택된 시에 따라 구 옵션을 채우는 함수입니다.
+    	    function populateGu() {
+    	      // 기존 옵션을 지웁니다.
+    	      guSelect.innerHTML = '<option value="">선택하세요</option>';
+    	      dongSelect.innerHTML = '<option value="">선택하세요</option>';
+
+    	      // 선택된 시를 가져옵니다.
+    	      const selectedSi = siSelect.value;
+
+    	      // 선택된 시에 대한 옵션이 있는지 확인합니다.
+    	      if (selectedSi && options[selectedSi]) {
+    	        // 선택된 시의 구들을 가져옵니다.
+    	        const gu = Object.keys(options[selectedSi]);
+
+    	        // 구 옵션을 채웁니다.
+    	        gu.forEach(function(gu) {
+    	          const option = document.createElement('option');
+    	          option.value = gu;
+    	          option.textContent = gu;
+    	          guSelect.appendChild(option);
+    	        });
+    	      }
+    	    }
+
+    	    // 선택된 구에 따라 동 옵션을 채우는 함수입니다.
+    	    function populateDong() {
+    	      // 기존 옵션을 지웁니다.
+    	      dongSelect.innerHTML = '<option value="">선택하세요</option>';
+
+    	      // 선택된 시와 구를 가져옵니다.
+    	      const selectedSi = siSelect.value;
+    	      const selectedGu = guSelect.value;
+
+    	      // 선택된 시와 구에 대한 옵션이 있는지 확인합니다.
+    	      if (selectedSi && selectedGu && options[selectedSi][selectedGu]) {
+    	        // 선택된 시와 구에 대한 동들을 가져옵니다.
+    	        const dong = options[selectedSi][selectedGu];
+
+    	        // 동 옵션을 채웁니다.
+    	        dong.forEach(function(dong) {
+    	          const option = document.createElement('option');
+    	          option.value = dong;
+    	          option.textContent = dong;
+    	          dongSelect.appendChild(option);
+    	        });
+    	      }
+    		}
+
 	</script>
+
 </body>
 </html>
