@@ -1,11 +1,13 @@
 package com.example.demo.mapper;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.springframework.security.core.Authentication;
 
 import com.example.demo.domain.Follow;
 
@@ -45,6 +47,16 @@ public interface FollowMapper {
 			WHERE memberId = #{memberId}
 			""")
 	Integer followingCountBymemberId(Follow follow);
+
+	@Select("""
+			SELECT 
+				fw.*,
+				CONCAT('/', m.defaultPetId, '/', p.photo) profileImage
+			FROM Follow fw LEFT JOIN  Pet p ON fw.memberId = p.memberId
+						LEFT JOIN Member m ON m.id = fw.memberId
+			WHERE feedOwner = #{feedOwner}
+			""")
+	List<Follow> selectAllByFollower(String feedOwner, String memberId);
 
 
 

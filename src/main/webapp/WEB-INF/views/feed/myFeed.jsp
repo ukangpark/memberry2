@@ -89,8 +89,9 @@ img {
 	<!-- 윗 부분 -->
 	<div id="upper" class="ui container mb-5">
 
-		<div class="follower" style="margin: 0px 30px 0px 30px; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#followerModal">
+		<div class="follower" id="followerBtn" style="margin: 0px 30px 0px 30px; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#followerModal">
 			<h3>
+				<input id="userName" name="userName" value="${userName }" style="display: none;">
 				팔로워 <span class="followerCount">${fileList[0].followCount}</span>
 			</h3>
 		</div>
@@ -193,13 +194,12 @@ img {
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
-					<c:if test="${logedInMember.profileImage ne null}">
-						<img class="ui middle aligned tiny inline image" id="nav-image" src="${bucketUrl }/pet${logedInMember.profileImage }">
-						<span style="font-size: 15pt; font-weight: bold;">${logedInMember.nickName }</span>
-					</c:if>
-					<c:if test="${logedInMember.profileImage eq null}">
-						<img class="ui tiny image" id="nav-image" src="/images/paw.png">${logedInMember.nickName } 
-					</c:if>
+				<div id="followerListContainer">
+				
+				
+				</div>
+
+
 				</div>
 			</div>
 		</div>

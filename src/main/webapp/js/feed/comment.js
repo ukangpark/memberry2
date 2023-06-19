@@ -47,7 +47,7 @@ function listComment() {
 	$.ajax("/comment/list?myFeed=" + feedId, {
 		method: "get", 
 		success: function(comments) {
-			// console.log(data);
+			console.log(comments);
 			$("#commentListContainer").empty();  //비우기
 			for (const comment of comments) {
 				const editButtons = `

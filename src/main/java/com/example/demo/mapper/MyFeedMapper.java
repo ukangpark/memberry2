@@ -107,8 +107,4 @@ public interface MyFeedMapper {
 			""")
 	List<Integer> selectIdByWriter(String writer);
 
-	
-	
-
-
 }

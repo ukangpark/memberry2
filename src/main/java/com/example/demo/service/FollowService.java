@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,17 +28,21 @@ public class FollowService {
 			Integer insertCnt = followMapper.insert(follow);
 			result.put("follow", true);
 		}
-		
+
 		// 팔로우 개수 넘겨줌
 		Integer followerCount = followMapper.followerCountByfeedOwner(follow);
 		result.put("followerNum", followerCount);
-		
+
 		// 팔로잉 개수 넘겨줌
 		Integer followingCount = followMapper.followingCountBymemberId(follow);
 		result.put("followingNum", followingCount);
-		
-		
+
 		return result;
 	}
 
+	public List<Follow> followerlist(String feedOwner, Authentication authentication) {
+		List<Follow> follower = followMapper.selectAllByFollower(feedOwner, authentication.getName());
+		return follower;
+
+	}
 }

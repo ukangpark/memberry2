@@ -7,4 +7,5 @@ public class Follow {
 	private String feedOwner;
 	private String memberId;
 
+	private String profileImage;
 }
