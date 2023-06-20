@@ -35,6 +35,7 @@ img {
 }
 
 #addImageBox {
+	height: 300px;
 	position: relative;
 	cursor: pointer;
 	/* overflow: hidden; */
@@ -52,7 +53,7 @@ img {
 	-webkit-transition: all.5s ease;
 	transition: all.5s.ease;
 	bottom: 0px;
-	/* overflow: hidden; */
+	overflow: hidden;
 }
 
 #addImageDes {
@@ -90,7 +91,7 @@ img {
 	</div>
 
 	<!-- 윗 부분 -->
-	<div id="upper" class="upperContainer mb-5" style="">
+	<div id="upper" class="upperContainer mb-5" style="margin-left: 300px">
 
 		<div class="follower" id="followerBtn" style="margin: 0px 30px 0px 30px; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#followerModal">
 			<h3>
@@ -162,7 +163,7 @@ img {
 		<div id="addImageBox">
 			<div id="addImage">
 				<a href="/feed/feedAdd">
-					<img src="/images/feedAddIcon.PNG" alt="" />
+					<img style="height: 300px" src="/images/feedAddIcon.PNG" alt="" />
 				</a>
 			</div>
 			<div id="addImageDes">피드를 추가해 보세요!</div>
