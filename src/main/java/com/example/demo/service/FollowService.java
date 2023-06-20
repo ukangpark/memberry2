@@ -9,6 +9,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.domain.Follow;
+import com.example.demo.mapper.AlarmMapper;
 import com.example.demo.mapper.FollowMapper;
 
 @Service
@@ -16,6 +17,9 @@ public class FollowService {
 
 	@Autowired
 	private FollowMapper followMapper;
+	
+	@Autowired
+	private AlarmMapper alarmMapper;
 
 	public Map<String, Object> follow(Follow follow, Authentication auth) {
 		Map<String, Object> result = new HashMap<>();
@@ -27,6 +31,10 @@ public class FollowService {
 		if (deleteCnt != 1) {
 			Integer insertCnt = followMapper.insert(follow);
 			result.put("follow", true);
+			
+			if (insertCnt == 1) {
+				alarmMapper.followAdd(follow);
+			}
 		}
 
 		// 팔로우 개수 넘겨줌
