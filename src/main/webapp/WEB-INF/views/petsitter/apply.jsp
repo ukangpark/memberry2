@@ -12,8 +12,7 @@
 <my:top></my:top>
 <link rel="stylesheet" type="text/css" href="/js/semantic/semantic.min.css">
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="/js/semantic/semantic.min.js"></script>
+
 <style type="text/css">
 #imgContainer {
 	position: relative;
@@ -56,10 +55,11 @@
 					</div>
 					<div class="field">
 						<label>주소</label>
+						<my:address></my:address>
 						<div class="equal width fields">
 							<div class="field">
 								<select class="ui fluid search dropdown" name="si" id="si">
-									<option >시</option>
+									<option>시</option>
 									<option value="서울시" id="seoul">서울시</option>
 								</select>
 							</div>
@@ -73,7 +73,7 @@
 									<option>동</option>
 								</select>
 							</div>
-						</div>
+						</div> 
 					</div>
 					<div class="field">
 						<label for="address">상세 주소</label>
@@ -147,78 +147,78 @@
 	<my:bottom></my:bottom>
 	<script src="/js/petsitter/apply.js"></script>
 	<script type="text/javascript">
-    const options = {
-    	      서울: {
-    	        강남구: ['압구정동', '논현1동', '논현2동', '청담동'],
-    	        강동구: ['둔촌1동', '둔촌2동', '상일동', '명일동'],
-    	        // 여기에 더 많은 구와 동 옵션 추가
-    	      },
-    	      부산: {
-    	        해운대구: ['중동', '반여1동', '반여2동', '반여3동'],
-    	        사하구: ['괴정1동', '괴정2동', '당리동', '하단동'],
-    	        // 여기에 더 많은 구와 동 옵션 추가
-    	      }
-    	      // 여기에 더 많은 시 추가
-    	    };
+		const options = {
+			서울 : {
+				강남구 : [ '압구정동', '논현1동', '논현2동', '청담동' ],
+				강동구 : [ '둔촌1동', '둔촌2동', '상일동', '명일동' ],
+			// 여기에 더 많은 구와 동 옵션 추가
+			},
+			부산 : {
+				해운대구 : [ '중동', '반여1동', '반여2동', '반여3동' ],
+				사하구 : [ '괴정1동', '괴정2동', '당리동', '하단동' ],
+			// 여기에 더 많은 구와 동 옵션 추가
+			}
+		// 여기에 더 많은 시 추가
+		};
 
-    	    // select 요소에 대한 참조를 가져옵니다.
-    	    const siSelect = document.getElementById('si');
-    	    const guSelect = document.getElementById('gu');
-    	    const dongSelect = document.getElementById('dong');
+		// select 요소에 대한 참조를 가져옵니다.
+		const siSelect = document.getElementById('si');
+		const guSelect = document.getElementById('gu');
+		const dongSelect = document.getElementById('dong');
 
-    	    // 시와 구 select 요소에 이벤트 리스너를 추가합니다.
-    	    siSelect.addEventListener('change', populateGu);
-    	    guSelect.addEventListener('change', populateDong);
+		// 시와 구 select 요소에 이벤트 리스너를 추가합니다.
+		siSelect.addEventListener('change', populateGu);
+		guSelect.addEventListener('change', populateDong);
 
-    	    // 선택된 시에 따라 구 옵션을 채우는 함수입니다.
-    	    function populateGu() {
-    	      // 기존 옵션을 지웁니다.
-    	      guSelect.innerHTML = '<option value="">선택하세요</option>';
-    	      dongSelect.innerHTML = '<option value="">선택하세요</option>';
+		// 선택된 시에 따라 구 옵션을 채우는 함수입니다.
+		function populateGu() {
+			// 기존 옵션을 지웁니다.
+			guSelect.innerHTML = '<option value="">선택하세요</option>';
+			dongSelect.innerHTML = '<option value="">선택하세요</option>';
 
-    	      // 선택된 시를 가져옵니다.
-    	      const selectedSi = siSelect.value;
+			// 선택된 시를 가져옵니다.
+			const selectedSi = siSelect.value;
 
-    	      // 선택된 시에 대한 옵션이 있는지 확인합니다.
-    	      if (selectedSi && options[selectedSi]) {
-    	        // 선택된 시의 구들을 가져옵니다.
-    	        const gu = Object.keys(options[selectedSi]);
+			// 선택된 시에 대한 옵션이 있는지 확인합니다.
+			if (selectedSi && options[selectedSi]) {
+				// 선택된 시의 구들을 가져옵니다.
+				const gu = Object.keys(options[selectedSi]);
 
-    	        // 구 옵션을 채웁니다.
-    	        gu.forEach(function(gu) {
-    	          const option = document.createElement('option');
-    	          option.value = gu;
-    	          option.textContent = gu;
-    	          guSelect.appendChild(option);
-    	        });
-    	      }
-    	    }
+				// 구 옵션을 채웁니다.
+				gu.forEach(function(gu) {
+					const option = document.createElement('option');
+					option.value = gu;
+					option.textContent = gu;
+					guSelect.appendChild(option);
+				});
+			}
+		}
 
-    	    // 선택된 구에 따라 동 옵션을 채우는 함수입니다.
-    	    function populateDong() {
-    	      // 기존 옵션을 지웁니다.
-    	      dongSelect.innerHTML = '<option value="">선택하세요</option>';
+		// 선택된 구에 따라 동 옵션을 채우는 함수입니다.
+		function populateDong() {
+			// 기존 옵션을 지웁니다.
+			dongSelect.innerHTML = '<option value="">선택하세요</option>';
 
-    	      // 선택된 시와 구를 가져옵니다.
-    	      const selectedSi = siSelect.value;
-    	      const selectedGu = guSelect.value;
+			// 선택된 시와 구를 가져옵니다.
+			const selectedSi = siSelect.value;
+			const selectedGu = guSelect.value;
 
-    	      // 선택된 시와 구에 대한 옵션이 있는지 확인합니다.
-    	      if (selectedSi && selectedGu && options[selectedSi][selectedGu]) {
-    	        // 선택된 시와 구에 대한 동들을 가져옵니다.
-    	        const dong = options[selectedSi][selectedGu];
+			// 선택된 시와 구에 대한 옵션이 있는지 확인합니다.
+			if (selectedSi && selectedGu && options[selectedSi][selectedGu]) {
+				// 선택된 시와 구에 대한 동들을 가져옵니다.
+				const dong = options[selectedSi][selectedGu];
 
-    	        // 동 옵션을 채웁니다.
-    	        dong.forEach(function(dong) {
-    	          const option = document.createElement('option');
-    	          option.value = dong;
-    	          option.textContent = dong;
-    	          dongSelect.appendChild(option);
-    	        });
-    	      }
-    		}
-
+				// 동 옵션을 채웁니다.
+				dong.forEach(function(dong) {
+					const option = document.createElement('option');
+					option.value = dong;
+					option.textContent = dong;
+					dongSelect.appendChild(option);
+				});
+			}
+		}
 	</script>
-
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="/js/semantic/semantic.min.js"></script>
 </body>
 </html>

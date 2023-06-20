@@ -21,7 +21,6 @@ function listComment() {
 					});
 				});
 				// 각 후기의 별점이 보이게 하지위한 코드 
-
 				$("#commentListContainer").append(`
 				<a class="avatar">
 					<img src="${bucketUrl}/pet/${petsitterComment.defaultPetId}/${petsitterComment.photo}">
