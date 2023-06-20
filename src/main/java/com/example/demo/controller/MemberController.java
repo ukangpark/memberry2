@@ -31,17 +31,6 @@ public class MemberController {
     @Autowired
     private UserLoginFailHandler userLoginFailHandler;
 
-    @GetMapping("/test/login")
-    public @ResponseBody String testLogin(
-    		Authentication authentication,
-    		@AuthenticationPrincipal PrincipalDetails userDetails) {
-    	System.out.println("/test/login---------------");
-    	PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
-    	System.out.println("authentication: " + principalDetails.getMember());
-    	System.out.println("userDetails: " + userDetails.getMember());
-    	return "세션 정보 확인하기";
-    }
-
 	@GetMapping("checkId/{id}")
 	@ResponseBody
 	public Map<String, Object> checkId(@PathVariable("id") String id){
