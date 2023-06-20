@@ -11,56 +11,52 @@
 <my:top></my:top>
 
 
-	<style>
-		.pageName {
-			height: 120px;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-		}
-		
-		.wrapper {
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			min-height: 75vh;
+<style>
+.pageName {
+	height: 120px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
 
-		}
-		
-		.back {
-			min-height: 75vh;
-			margin-right: 15%;
-			margin-left: 15%;
-			border-radius: 1.5rem;
-		}
-		
-		#imgContainer {
-			position: relative;
-			
-		}
-		
-		#addBtn {
-			position: absolute;
-			top: 75%;
-			left: 58%;
-			
-		}
-		
-		#add {
-			
-		} 
-		
-		#content {
-			flex-grow: 3;
-			margin-right: 10rem;
-			margin-left: 10rem;
-		}
-		
-		#previewCircle {
-			
-		}
-		
-	</style>
+.wrapper {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 75vh;
+}
+
+.back {
+	min-height: 75vh;
+	margin-right: 15%;
+	margin-left: 15%;
+	border-radius: 1.5rem;
+}
+
+#imgContainer {
+	position: relative;
+}
+
+#addBtn {
+	position: absolute;
+	top: 75%;
+	left: 58%;
+}
+
+#add {
+	
+}
+
+#content {
+	flex-grow: 3;
+	margin-right: 10rem;
+	margin-left: 10rem;
+}
+
+#previewCircle {
+	
+}
+</style>
 </head>
 <body style="background-color: #FFF2F2">
 
@@ -74,33 +70,32 @@
 	<div class="back" style="background-color: #EEEEEE">
 		<form class="wrapper" method="post" enctype="multipart/form-data" id="addForm">
 
-		<!--  로그인 id 불러오기 -->
-		<div>
-			<input type="text" name="memberId" value="${authentication.getName() }" style="display: none">
-		</div>
+			<!--  로그인 id 불러오기 -->
+			<div>
+				<input type="text" name="memberId" value="${authentication.getName() }" style="display: none">
+			</div>
 
- 			<!-- 이미지 파일 업로드 -->
-			
-				<div class="" id="imgContainer">
-					<div id="imagePreview">
-						<div id="previewCircle" class="ui centered medium bordered circular image">
-						<img class="preview" >
-						</div>
-						<div class="defaultImage">	
-						<img class="ui centered medium bordered circular image" src="/images/투명발바닥.png">
-						</div> 
+			<!-- 이미지 파일 업로드 -->
+
+			<div class="" id="imgContainer">
+				<div id="imagePreview">
+					<div id="previewCircle" class="ui centered medium bordered circular image">
+						<img class="preview">
 					</div>
-					
-					<label for="fileInput" class="big circular ui icon button" id="addBtn">
-					<i class="large plus icon"></i></label> 
-					<input multiple class="form-control" type="file" id="fileInput" name="files" accept="image/*" />
-					<h3 style="text-align: center">사진을 등록해 보세요!</h3>
+					<div class="defaultImage">
+						<img class="ui centered medium bordered circular image" src="/images/투명발바닥.png">
+					</div>
 				</div>
-			
-			<br /> 
+
+				<label for="fileInput" class="big circular ui icon button" id="addBtn"> <i class="large plus icon"></i></label>
+				<input multiple class="form-control" type="file" id="fileInput" name="files" accept="image/*" />
+				<h3 style="text-align: center">사진을 등록해 보세요!</h3>
+			</div>
+
+			<br />
 
 
-		<%-- 
+			<%-- 
 			<!-- 이미지 파일 업로드 -->
 			<div id="add">
 				<div class="" id="imgContainer">
@@ -131,7 +126,8 @@
 
 				<div class="ui fluid form">
 					<div class="field">
-						<label align="left" style="color: red; font-weight: bolder;">필수</label> <input placeholder="title" type="text" name="title" value="${feed.title }">
+						<label align="left" style="color: red; font-weight: bolder;">필수</label>
+						<input placeholder="title" type="text" name="title" value="${feed.title }">
 						<div class="ui pointing label">제목을 입력해 주세요!</div>
 					</div>
 
@@ -142,8 +138,22 @@
 					<textarea placeholder="content" name="content">${feed.content }</textarea>
 					<div class="ui pointing red basic label">내용을 입력해 주세요!</div>
 
+					<!-- 태그입력 -->
+					<div class="field">
+						<div class="ui divider"></div>
+						<label align="left" style="color: gray; font-weight: bolder;">태그를 추가 해 보세요:)</label>
+						<div class="ui right labeled left icon input">
+							<i class="tags icon"></i>
+							<input type="text" id="tagInput" placeholder="Enter tags" >
+							<a type="submit" class="ui tag label" id="addTag">Add Tag</a>
+						</div>
+						<div class="tagsContainer mt-2">
+						
+						
+						</div>
+					</div>
 
-			 <%-- <div class="ui divider"></div>
+					<%-- <div class="ui divider"></div>
 
 			<div class="ui form">
 				<div class="location">
@@ -152,16 +162,17 @@
 			</div>
 			<br /> --%>
 
-			<div align="right">
-				<button class="btn btn-secondary" type="submit" form="addForm" id="addButton">추가하기</button>
-			</div>
+					<div align="right">
+						<button class="btn btn-secondary mt-3" type="submit" form="addForm" id="addButton">추가하기</button>
+					</div>
 
+				</div>
 			</div>
-		
 		</form>
 	</div>
 
 	<my:bottom></my:bottom>
+	<script src="/js/feed/tag.js"></script>
 
 	<script>
 		/* 엔터키 치면 전송되는 것 방지 */
@@ -172,7 +183,7 @@
 			;
 
 		})
-	
+
 		/* 첨부파일 이미지 변경 */
 		const fileInput = document.getElementById("fileInput");
 		const previewContainer = document.getElementById("imagePreview");
@@ -198,7 +209,6 @@
 			}
 
 		})
-		
 	</script>
 </body>
 </html>
