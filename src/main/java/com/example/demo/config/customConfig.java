@@ -30,16 +30,25 @@ public class customConfig {
 	private String secretAccessKey;
 	@Value("${aws.bucketUrl}")
 	private String bucketUrl;
+//	google
 	@Value("${spring.security.oauth2.client.registration.google.client-id}")
 	private String clientId;
 	@Value("${spring.security.oauth2.client.registration.google.client-secret}")
     private String clientSecret;
+//	naver
 	@Value("${spring.security.oauth2.client.registration.naver.client-id}")
 	private String naverClientId;
 	@Value("${spring.security.oauth2.client.registration.naver.client-secret}")
     private String naverClientSecret;
 	@Value("${spring.security.oauth2.client.registration.naver.redirect-uri}")
-    private String redirectUri;
+    private String naverRedirectUri;
+//	kakao
+	@Value("${spring.security.oauth2.client.registration.kakao.client-id}")
+	private String kakaoClientId;
+	@Value("${spring.security.oauth2.client.registration.kakao.client-secret}")
+    private String kakaoClientSecret;
+	@Value("${spring.security.oauth2.client.registration.kakao.redirect-uri}")
+    private String kakaoRedirectUri;
 	
 	@Autowired
 	private ServletContext application;

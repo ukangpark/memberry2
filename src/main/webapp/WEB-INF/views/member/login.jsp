@@ -28,6 +28,12 @@
 	height: 32px;
 	margin: 10px;
 }
+
+.kakaoLogo {
+	width: 33px;
+	height: 33px;
+	margin: 10px;
+}
 </style>
 </head>
 <body>
@@ -61,6 +67,7 @@
 										<h5>소셜 계정으로 로그인</h5>
 										<a href="/oauth2/authorization/google"><img class="googleLogo" src="/images/googleLogo.png" alt="" /></a>
 										<a href="/oauth2/authorization/naver"><img class="naverLogo" src="/images/naverLogo.png" alt="" /></a>
+										<a href="/oauth2/authorization/kakao"><img class="kakaoLogo" src="/images/kakaoLogo.png" alt="" /></a>
 									</div>
 								</div>
 							</div>
