@@ -1,8 +1,7 @@
 listAlarm();
 
 function listAlarm() {
-	const memberId = $("#memberId").text().trim();
-	$.ajax("/alarm/list?id=" + memberId, {
+	$.ajax("/alarm/list", {
 		method: "get",
 		success: function(alarms) {
 			$("#alarmListContainer").empty();
@@ -20,19 +19,20 @@ function listAlarm() {
 				</a>`
 					
 				);
-			$("#aLi").click(function(){
-				const id = $(this).attr("data-alarm-id");
-				$.ajax("/alarm/check/" + id, {
-					success: function() {
-						console.log("알람 확인");
-					}
-				})
-			});
-			( $(alarm.isChecked) ? $("#alarmBg").addClass("d-none") : '');
-			}
+			
 		}
 	});
 }
+$("#lilLnk").click(function() {
+	const id = $(this).attr("data-alarm-id");
+	$.ajax("/alarm/check/" + id, {
+		success: function() {
+			$("#lilLnk").removeClass("active");
+			listAlarm();
+		}
+	})
+});
+
 
 
 

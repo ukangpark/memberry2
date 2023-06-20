@@ -17,14 +17,13 @@ public class AlarmService {
 	@Autowired
 	private AlarmMapper mapper;
 
-	public List<Alarm> list(Authentication authentication, HttpSession session) {
-		List<Alarm> alarms = mapper.selectAllByMemberId(authentication.getName());
+	public List<Alarm> list(String memberId) {
+		List<Alarm> alarms = mapper.selectAllByMemberId(memberId);
 		return alarms;
 	}
 
 	public Boolean checked(Integer id) {
 		int cnt = mapper.UpdateCheckedById(id);
-		System.out.println("확인");
 		return cnt == 1;
 	}
 
