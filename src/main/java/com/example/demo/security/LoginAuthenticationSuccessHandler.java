@@ -34,10 +34,15 @@ public class LoginAuthenticationSuccessHandler implements AuthenticationSuccessH
 		
 		Member member = mapper.selectById(authentication.getName());
 		
-		session.setAttribute("logedInMember", member);
+		updateMemberInSession(member, session);
 		
 		response.sendRedirect("/");
 
+	}
+	
+	public void updateMemberInSession(Member member, HttpSession session) {
+		session.setAttribute("logedInMember", member);
+		
 	}
 
 }

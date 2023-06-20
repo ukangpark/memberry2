@@ -145,10 +145,11 @@ public class MemberController {
  
 	@PostMapping("modify")
 	@PreAuthorize("isAuthenticated() and (authentication.name eq #member.id)")
-	public String modifyProcess(Member member, String oldPassword, RedirectAttributes rttr) {
+	public String modifyProcess(Member member, String oldPassword, RedirectAttributes rttr, HttpSession session) {
 		boolean ok = service.modify(member, oldPassword);
 		if (ok) {
 			rttr.addFlashAttribute("message", "회원 정보가 수정되었습니다.");
+			loginSuccessHandler.updateMemberInSession(service.get(member.getId()), session);
 			return "redirect:/member/info?id=" + member.getId();
 		} else {
 			rttr.addFlashAttribute("message", "회원 정보 수정 중 문제가 발생했습니다.");
