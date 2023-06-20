@@ -21,7 +21,7 @@
 	padding: 0px;
 }
 
-.border {
+.myPetsBorder {
 	position: absolute;
 	width: 300px;
 	height: 300px;
@@ -83,7 +83,7 @@
 			<img class="preview" src= "">
 			<div class="oldImage">
 				<img alt="" src="${bucketUrl }/pet/${pet.id }/${pet.photo}">
-				<div class="border"></div>
+				<div class="myPetsBorder"></div>
 			</div>
 		</div>
 		<label for="fileInput" class="big circular ui icon button" id="addBtn"><i class="large plus icon"></i></label>

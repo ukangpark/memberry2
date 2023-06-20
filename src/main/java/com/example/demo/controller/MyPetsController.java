@@ -25,6 +25,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.example.demo.domain.Like;
 import com.example.demo.domain.Member;
 import com.example.demo.domain.Registration;
+import com.example.demo.security.LoginAuthenticationSuccessHandler;
+import com.example.demo.security.UserLoginFailHandler;
 import com.example.demo.service.MemberService;
 import com.example.demo.service.MyPetsService;
 
@@ -39,6 +41,12 @@ public class MyPetsController {
 	
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+    private LoginAuthenticationSuccessHandler loginSuccessHandler;
+
+    @Autowired
+    private UserLoginFailHandler userLoginFailHandler;
 
 	// 나의반려동물 리스트 보기
 	@GetMapping("myPets/petList")
@@ -73,7 +81,7 @@ public class MyPetsController {
 	// @PreAuthorize("isAuthenticated() and
 	// @customSecurityChecker.checkBoardWriter(authentication, #id)")
 	public String modifyProcess(Registration registration,
-			@RequestParam(value = "file", required = false) MultipartFile addFile, RedirectAttributes rttr)
+			@RequestParam(value = "file", required = false) MultipartFile addFile, RedirectAttributes rttr, HttpSession session)
 			throws Exception {
 		boolean ok = service.modify(registration, addFile);// 서비스에게 넘김
 
@@ -81,6 +89,7 @@ public class MyPetsController {
 		if (ok) {
 			// 해당 펫정보보기로 돌아가게 만들래 (리다이렉션)
 			rttr.addFlashAttribute("message", registration.getPetName() + " 정보가 수정되었습니다.");
+			loginSuccessHandler.updateMemberInSession(memberService.get(registration.getMemberId()), session);
 			return "redirect:/id/" + registration.getId();
 		} else {
 			// 잘못수정이 되었을 때는 수정페이지로 돌아가게 만들래

@@ -30,11 +30,9 @@ public class FollowService {
 
 		if (deleteCnt != 1) {
 			Integer insertCnt = followMapper.insert(follow);
+			Integer cnt = alarmMapper.followAdd(follow);
 			result.put("follow", true);
 			
-			if (insertCnt == 1) {
-				alarmMapper.followAdd(follow);
-			}
 		}
 
 		// 팔로우 개수 넘겨줌
