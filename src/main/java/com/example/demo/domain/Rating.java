@@ -7,6 +7,6 @@ public class Rating {
 
 	private Integer id;
 	private Integer star;
-	private Integer cpmmandId;
+	private Integer commentId;
 	
 }

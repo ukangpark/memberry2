@@ -18,6 +18,7 @@
 <body>
 	<my:navBar></my:navBar>
 	<my:alert></my:alert>
+	<my:logo></my:logo>
 	<br>
 	<br>
 	<!-- 호스트의 집사진 -->
@@ -136,18 +137,16 @@
 			<div class="comment" style="width: 880px;" id="commentListContainer">
 				<!-- 후기 리스트 -->
 			</div>
-			<!-- 후기 입력란 -->
+			<!-- 후기 등록 버튼 -->
 			<div class="input-group mb-3" style="width: 880px;" id="commentInput">
-				<button style="width: 65px;" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#addCommentModal">추가</button>
+				<button onclick="addCommentBtn()" style="width: 65px;" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#addCommentModal">추가</button>
 			</div>
 		</div>
 	</div>
 
 	<br>
 	<br>
-
-
-	<!-- 후기 모달 -->
+	<!-- 후기 추가 모달 -->
 	<div class="modal fade" id="addCommentModal" tabindex="-1" aria-labelledby="addCommentModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
@@ -162,7 +161,7 @@
 						의 서비스는 만족하셨나요?
 					</h3>
 					<br>
-					<div id="commentForStar"></div>
+					<div class="commentForStar" id="addCommentStar" data-rating="0"></div>
 					<br>
 					<div class="ui grid" id="starContainer">
 						<div class="row">
@@ -172,12 +171,12 @@
 						</div>
 					</div>
 					<br>
-					<input type="hidden" name="star" id="starRating">
+					<input type="hidden" name="star" class="starRating" id="addStarRating">
 					<textarea id="commentBodyArea" class="form-control" placeholder="후기를 남겨주세요." rows="10" name="body"></textarea>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-					<button type="button" class="btn btn-primary" id="addCommentBtn">후기 남기기</button>
+					<button type="button" class="btn btn-primary" id="addCommentModalBtn" data-bs-dismiss="modal">후기 남기기</button>
 				</div>
 			</div>
 		</div>
@@ -195,6 +194,38 @@
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
 					<button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="commentDeleteModalBtn">삭제</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 후기 수정 모달 -->
+	<div class="modal fade" id="modifyCommentModal" tabindex="-1" aria-labelledby="#modifyCommentModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="modifyCommentModalLabel">후기 작성</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<h3 class="ui header center aligned">후기를 수정하시겠습니까?</h3>
+					<br>
+					<div id="commentForAddStar"></div>
+					<br>
+					<div class="ui grid" id="starContainerModify">
+						<div class="row">
+							<div class="center aligned column">
+								<div class="ui star massive rating" id="modifyStar"></div>
+							</div>
+						</div>
+					</div>
+					<br>
+					<input type="hidden" name="star" class="starRating" id="starRatingModify">
+					<textarea id="commentBodyAreaModify" class="form-control" placeholder="후기를 남겨주세요." rows="10" name="body"></textarea>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+					<button type="button" class="btn btn-primary" id="commentModifyModalBtn" data-bs-dismiss="modal">후기 수정하기</button>
 				</div>
 			</div>
 		</div>
@@ -290,8 +321,8 @@
 		</div>
 	</div>
 
-
 	<my:bottom></my:bottom>
+	<script src="/js/petsitter/petsitterComment.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script type="text/javascript">
 		function openModal() {
@@ -300,7 +331,7 @@
 
 		var bucketUrl = '${bucketUrl}';
 	</script>
-	<script src="/js/petsitter/petsitterComment.js"></script>
+
 	<script src="/js/semantic/semantic.min.js"></script>
 </body>
 </html>

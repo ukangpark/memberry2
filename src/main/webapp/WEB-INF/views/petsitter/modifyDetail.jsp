@@ -15,6 +15,7 @@
 <body>
 
 	<my:navBar></my:navBar>
+	<my:logo></my:logo>
 	<br>
 	<!-- 수정 정보 form -->
 	<div class="ui centered equal width grid">

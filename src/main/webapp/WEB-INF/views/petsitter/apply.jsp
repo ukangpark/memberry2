@@ -28,6 +28,7 @@
 </head>
 <body>
 	<my:navBar current="apply"></my:navBar>
+	<my:logo></my:logo>
 	<br>
 	<div class="ui centered equal width grid">
 		<div class="eight wide column">

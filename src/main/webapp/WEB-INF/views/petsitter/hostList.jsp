@@ -16,6 +16,7 @@
 </head>
 <body>
 	<my:navBar current="hostList"></my:navBar>
+	<my:logo></my:logo>
 	<div class="container">
 		<h1>호스트 리스트</h1>
 		<table class="ui fixed single line celled table">
