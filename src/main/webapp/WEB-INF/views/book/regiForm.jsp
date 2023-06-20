@@ -80,6 +80,7 @@
 <div style="margin:100px 300px 300px 300px; border: 8px double lightblue;">
 	<form class="ui form" style="margin:100px 100px 100px 100px" method="post" id="bookForm" action="/book/bookAdd">
 	<input type="hidden" name="detailId" value="${detailId}" />
+	<input type="hidden" name="hostId" value="${Detail.hostId}" />
 	<input type="hidden" name="petId" value="${pet.id}" />
 	<%-- <input type="hidden" name="memberId" value="${pet.memberId}" /> --%>
 	<input type="hidden" name="accepted" value=0 />
