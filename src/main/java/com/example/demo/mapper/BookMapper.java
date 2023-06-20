@@ -91,8 +91,8 @@ public interface BookMapper {
 
 	
 	@Insert("""
-			INSERT INTO Book (hospital, message, checkIn, checkOut, pottyTraining, detailId, petId, memberId,accepted)
-			VALUES (#{hospital}, #{message}, #{checkIn}, #{checkOut}, #{pottyTraining}, #{detailId}, #{petId}, #{memberId}, #{accepted})
+			INSERT INTO Book (hospital, message, checkIn, checkOut, pottyTraining, hostId, detailId, petId, memberId,accepted)
+			VALUES (#{hospital}, #{message}, #{checkIn}, #{checkOut}, #{pottyTraining}, #{hostId}, #{detailId}, #{petId}, #{memberId}, #{accepted})
 			""")
 	@Options(useGeneratedKeys = true, keyProperty="id")
 	int insert(Book book);
@@ -144,6 +144,7 @@ public interface BookMapper {
 				accepted,
 				detailId,
 				num,
+				Book.hostId,
 				rejectMessage,
 				Book.memberId,
 				Detail.hostId

@@ -13,16 +13,17 @@
 
 <d:top />
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+
 <script>
 // 여기부터 결제기능관련 코드
-function requestPay() {
+/* function requestPay() {
 	var IMP = window.IMP; // 생략 가능
 	IMP.init("imp67575345"); // 본인 가맹점 코드
 	console.log("func");
     // IMP.request_pay(param, callback) 결제창 호출
     IMP.request_pay({ // param
         pg: "kakaopay.TC0ONETIME", 
-       /*  pg: "KG이니시스 인증.MIIiasTest", */
+       //  pg: "KG이니시스 인증.MIIiasTest", 
         pay_method: "card",
         merchant_uid: "ORD20180131-0000011",
         name: "membery_펫시터",
@@ -33,14 +34,59 @@ function requestPay() {
         buyer_addr: "서울특별시 강남구 신사동",
         buyer_postcode: "01181"
     }, function (rsp) { // callback
-       /*  if (rsp.success) { */
+       //  if (rsp.success) { 
             // 결제 성공 시 로직,
             console.log("success");
-       /*  } else { */
+       //  } else { 
             // 결제 실패 시 로직,
-        /* } */
+        // } 
     });
-  }
+  } */
+  
+  
+  $("#check_module").click(function () {
+		var IMP = window.IMP; // 생략가능
+		IMP.init("imp67575345"); 
+		// i'mport 관리자 페이지 -> 내정보 -> 가맹점식별코드
+		// ''안에 띄어쓰기 없이 가맹점 식별코드를 붙여넣어주세요. 안그러면 결제창이 안뜹니다.
+		IMP.request_pay({
+			pg: 'kakao',
+			pay_method: 'card',
+			merchant_uid: 'merchant_' + new Date().getTime(),
+			/* 
+			 *  merchant_uid에 경우 
+			 *  https://docs.iamport.kr/implementation/payment
+			 *  위에 url에 따라가시면 넣을 수 있는 방법이 있습니다.
+			 */
+			name: '주문명 : 아메리카노',
+			// 결제창에서 보여질 이름
+			// name: '주문명 : ${auction.a_title}',
+			// 위와같이 model에 담은 정보를 넣어 쓸수도 있습니다.
+			amount: 2000,
+			// amount: ${bid.b_bid},
+			// 가격 
+			buyer_name: '이름',
+			// 구매자 이름, 구매자 정보도 model값으로 바꿀 수 있습니다.
+			// 구매자 정보에 여러가지도 있으므로, 자세한 내용은 맨 위 링크를 참고해주세요.
+			buyer_postcode: '123-456',
+			}, function (rsp) {
+				console.log(rsp);
+			if (rsp.success) {
+				var msg = '결제가 완료되었습니다.';
+				msg += '결제 금액 : ' + rsp.paid_amount;
+				// success.submit();
+				// 결제 성공 시 정보를 넘겨줘야한다면 body에 form을 만든 뒤 위의 코드를 사용하는 방법이 있습니다.
+				// 자세한 설명은 구글링으로 보시는게 좋습니다.
+			} else {
+				var msg = '결제에 실패하였습니다.';
+				msg += '에러내용 : ' + rsp.error_msg;
+			}
+			alert(msg);
+		});
+	});
+  
+  
+  
 </script>
 </head>
 <body>
@@ -79,34 +125,39 @@ function requestPay() {
 			<tbody>
 				<c:forEach items="${bookList }" var="book">
 					<form action="/book/remove/${book.num }" method="post" id="removeForm_${book.num }">
-						<tr>
-							<td>
-								<a href="/book/num/${book.num }"> ${book.petName } </a>
-							</td>
-							<td>${book.checkIn }</td>
-							<td>${book.checkOut }</td>
-							<td>
-								<a href="/petsitter/detail?id=${book.detailId }"> ${book.hostName } </a>
-							</td>
-							<td>
-								<button type="button" class="btn btn-warning">
-									<c:if test="${book.accepted == 0}">요청중</c:if>
-									<c:if test="${book.accepted == 1}">결제대기</c:if>
-									<c:if test="${book.accepted == 2}">완료</c:if>
-									<c:if test="${book.accepted == 3}">예약거절</c:if>
-								</button>
-							</td>
-							<td>
-								<c:if test="${book.accepted == 0 }">
-									<button type="button" class="btn btn-secondary" onclick="location.href='/book/modify/${book.num}'">변경</button>
-									<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="openModal('${book.num }')">삭제</button>
-								</c:if>
-								<c:if test="${book.accepted == 1 }">
-									<button type="button" class="btn btn-primary" id="payBtn" onclick="requestPay()">결제</button>
-								</c:if>
-							</td>
-						</tr>
-						<input type="hidden" name="num" value="${book.num }" />
+
+					<tr>
+						<td>
+						<a href="/book/num/${book.num }">
+						${book.petName }
+						</a>
+						</td>
+						<td>${book.checkIn }</td>
+						<td>${book.checkOut }</td>
+						<td>
+						<a href="/petsitter/detail?id="${book.hostId }">
+						${book.hostName }
+						</a>
+						</td>
+						<td>
+						<button type="button" class="btn btn-warning">
+						<c:if test="${book.accepted == 0}">요청중</c:if>
+						<c:if test="${book.accepted == 1}">결제대기</c:if>
+						<c:if test="${book.accepted == 2}">완료</c:if>
+						<c:if test="${book.accepted == 3}">예약거절</c:if>
+						</button>
+						</td>
+						<td>
+						<c:if test = "${book.accepted == 0 }">
+						<button type="button" class="btn btn-secondary" onclick="location.href='/book/modify/${book.num}'">변경</button>
+						<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="openModal('${book.num }')">삭제</button>
+						</c:if>
+						<c:if test = "${book.accepted == 1 }">
+						<button type="button" class="btn btn-primary" id="payBtn" onclick="requestPay()">결제</button>
+						</c:if>
+						</td>
+					</tr>
+					<input type="hidden" name="num" value="${book.num }"/>
 					</form>
 				</c:forEach>
 			</tbody>
