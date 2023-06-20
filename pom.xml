@@ -18,18 +18,18 @@
 		<java.version>17</java.version>
 	</properties>
 	<dependencies>
-		<!-- web socket -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-websocket</artifactId>
-			<version>5.0.7.RELEASE</version>
-		</dependency>
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
-			<version>2.11.3</version>
-		</dependency>
 		
+		<!-- json simple  -->
+		<dependency>
+		  <groupId>com.googlecode.json-simple</groupId>
+		  <artifactId>json-simple</artifactId>
+		  <version>1.1.1</version>
+		</dependency>
+		 <!-- Spring Websocket -->
+    	<dependency>
+        	<groupId>org.springframework.boot</groupId>
+        	<artifactId>spring-boot-starter-websocket</artifactId>
+    	</dependency>
 		<!-- security tag library -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>

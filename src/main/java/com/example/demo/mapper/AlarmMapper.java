@@ -41,7 +41,7 @@ public interface AlarmMapper {
 	@Update("""
 			UPDATE Alarm
 			SET 
-				isChecked = 1
+				isChecked = true
 			WHERE id = #{id}
 			""")
 	Integer UpdateCheckedById(Integer id);

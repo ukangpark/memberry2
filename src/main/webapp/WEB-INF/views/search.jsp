@@ -28,18 +28,20 @@
 		<img id="memberyLogo" src="/images/memberyLogo.png" alt="Membery logo" onclick="location.href='home'" style="cursor: pointer">
 	</div>
 
-	<div class="ui center aligned container" style="margin-top: 20px">
-		<div class="ui big fluid action input">
-			<input type="text" placeholder="Search...">
-			<select class="ui compact selection dropdown" id="search-dropdown">
-				<option value="all">피드</option>
-				<option value="products">펫시터</option>
-			</select>
-			<div class="ui button">
-				<i class="search large icon"></i>
+	<form class="ui form" method="post" style="margin: 20px 200px 0px 200px; justify-content: center;">
+		<div class="field">
+			<div class="ui large fluid action input">
+				<input type="text" name="search" placeholder="Search">
+				<select class="ui compact selection dropdown" name="title" id="search-dropdown">
+					<option value="Feed">피드</option>
+					<option value="Petsitter">펫시터</option>
+				</select>
+				<button class="ui button" type="submit">
+					<i class="search icon"></i>
+				</button>
 			</div>
 		</div>
-	</div>
+	</form>
 
 
 	<!-- 검색한 피드 찾기 -->

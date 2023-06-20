@@ -22,6 +22,9 @@ public class Registration {
 	
 	private Integer defaultPetId;
 	
+	private String profileImage;
+	private String nickName;
+	
 	private Boolean checked;
 	
 
