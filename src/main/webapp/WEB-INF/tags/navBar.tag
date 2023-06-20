@@ -42,9 +42,11 @@
 }
 </style>
 
+
 <div>
 	<sec:authentication property="principal" />
 </div>
+
 
 <div class="ui fluid right aligned container" id="nav-container">
 	<div class="ui position-fixed top-0 end-0">
