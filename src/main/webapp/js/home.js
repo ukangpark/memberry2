@@ -4,7 +4,7 @@ function home() {
 	$('.slider').bxSlider();
 };
 
-	
+
 
 
 // 댓글 js

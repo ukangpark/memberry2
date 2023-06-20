@@ -1,15 +1,20 @@
 package com.example.demo.controller;
 
-import java.util.*;
+import java.util.List;
 
-import org.springframework.beans.factory.annotation.*;
-import org.springframework.security.core.*;
-import org.springframework.stereotype.*;
-import org.springframework.ui.*;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.demo.domain.*;
-import com.example.demo.service.*;
+import com.example.demo.domain.Alarm;
+import com.example.demo.domain.Feed;
+import com.example.demo.service.AlarmService;
+import com.example.demo.service.HomeService;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping({"/", "home"})
@@ -18,13 +23,22 @@ public class HomeController {
 	@Autowired
 	private HomeService service;
 	
+	@Autowired 
+	private AlarmService alarmService;
+	
 	@GetMapping("")
 	public String feed(Model model,
-			Authentication authentication) {
+			Authentication authentication, HttpSession session) {
 		List<Feed> result = service.listFeed(authentication);
-		/* System.out.println(result.get(0).getLastCommentInserted()); */
 		model.addAttribute("feedList", result);
+		
+		if (authentication != null) {
+			List<Alarm> alarms = alarmService.list(authentication.getName());
+			session.setAttribute("alarms", alarms);
+		}
 		return "home";
 	}
+	
+	
 	
 }
