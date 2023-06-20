@@ -1,7 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="jakarta.tags.core"%>
-<%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,132 +10,155 @@
 <title>Insert title here</title>
 <meta charset="UTF-8">
 <my:top></my:top>
-</head>
-	<style>
 
-		.chating{
-			margin: 80px 0px 0px 20px;
-			background-color: #FFF2F2;
-			width: 67vw;
-			height: 82vh;
+	<style>
+		*{
+			margin:0;
+			padding:0;
+		}
+		.container{
+			width: 500px;
+			margin: 0 auto;
+			padding: 25px
+		}
+		.container h1{
+			text-align: left;
+			padding: 5px 5px 5px 15px;
+			color: #FFF2F2;
+			border-left: 3px solid #FFF2F2;
+			margin-bottom: 20px;
+		}
+		.roomContainer{
+			background-color: #F6F6F6;
+			width: 500px;
+			height: 500px;
 			overflow: auto;
 		}
-		.chating p{
-			color: grey;
-			background-color: #EEEEEE;
-			font-size: 20px;
-			border-radius: 1rem;
-			text-align: left;
+		.roomList{
+			border: none;
 		}
-	
+		.roomList th{
+			border: 1px solid #FFF2F2;
+			background-color: #fff;
+			color: #FFF2F2;
+		}
+		.roomList td{
+			border: 1px solid #FFF2F2;
+			background-color: #fff;
+			text-align: left;
+			color: #FFF2F2;
+		}
+		.roomList .num{
+			width: 75px;
+			text-align: center;
+		}
+		.roomList .room{
+			width: 350px;
+		}
+		.roomList .go{
+			width: 71px;
+			text-align: center;
+		}
+		button{
+			background-color: #FFF2F2;
+			font-size: 14px;
+			color: #000;
+			border: 1px solid #000;
+			border-radius: 5px;
+			padding: 3px;
+			margin: 3px;
+		}
+		.inputTable th{
+			padding: 5px;
+		}
+		.inputTable input{
+			width: 330px;
+			height: 25px;
+		}
 	</style>
-	
+</head>
+
 <script type="text/javascript">
-
 	var ws;
-
-	function wsOpen() {
-		ws = new WebSocket("ws://" + location.host + "/chating");
-		wsEvt();
+	window.onload = function(){
+		getRoom();
+		createRoom();
 	}
 
-	function wsEvt() {
-		ws.onopen = function(data) {
-			//소켓이 열리면 동작
-		}
+	function getRoom(){
+		commonAjax('/getChatRoom', "", 'post', function(result){
+			createChatingRoom(result);
+		});
+	}
+	
+	function createRoom(){
+		$("#createRoom").click(function(){
+			var msg = {	roomName : $('#roomName').val()	};
 
-		ws.onmessage = function(data) {
-			//메시지를 받으면 동작
-			var msg = data.data;
-			if (msg != null && msg.trim() != '') {
-				var d = JSON.parse(msg);
-				if (d.type == "getId") {
-					var si = d.sessionId != null ? d.sessionId : "";
-					if (si != '') {
-						$("#sessionId").val(si);
-					}
-				} else if (d.type == "message") {
-					if (d.sessionId == $("#sessionId").val()) {
-						$("#chating").append(
-								"<p class='me'>나 :" + d.msg + "</p>");
-					} else {
-						$("#chating").append(
-								"<p class='others'>" + d.userName + " :"
-										+ d.msg + "</p>");
-					}
+			commonAjax('/createChatRoom', msg, 'post', function(result){
+				createChatingRoom(result);
+			});
 
-				} else {
-					console.warn("unknown type!")
-				}
-			}
-		}
-
-		document.addEventListener("keypress", function(e) {
-			if (e.keyCode == 13) { //enter press
-				send();
-			}
+			$("#roomName").val("");
 		});
 	}
 
-	function chatName() {
-		var userName = $("#userName").val();
-		if (userName == null || userName.trim() == "") {
-			alert("사용자 이름을 입력해주세요.");
-			$("#userName").focus();
-		} else {
-			wsOpen();
-			$("#yourName").hide();
-			$("#yourMsg").show();
+	function goRoom(number, name){
+		location.href="/moveChating?roomName="+name+"&"+"roomNumber="+number;
+	}
+
+	function createChatingRoom(res){
+		if(res != null){
+			var tag = "<tr><th class='num'>순서</th><th class='room'>방 이름</th><th class='go'></th></tr>";
+			res.forEach(function(d, idx){
+				var rn = d.roomName.trim();
+				var roomNumber = d.roomNumber;
+				tag += "<tr>"+
+							"<td class='num'>"+(idx+1)+"</td>"+
+							"<td class='room'>"+ rn +"</td>"+
+							"<td class='go'><button type='button' onclick='goRoom(\""+roomNumber+"\", \""+rn+"\")'>참여</button></td>" +
+						"</tr>";	
+			});
+			$("#roomList").empty().append(tag);
 		}
 	}
 
-	function send() {
-		var option = {
-			type : "message",
-			sessionId : $("#sessionId").val(),
-			userName : $("#userName").val(),
-			msg : $("#chatting").val()
-		}
-		ws.send(JSON.stringify(option))
-		$('#chatting').val("");
+	function commonAjax(url, parameter, type, calbak, contentType){
+		$.ajax({
+			url: url,
+			data: parameter,
+			type: type,
+			contentType : contentType!=null?contentType:'application/x-www-form-urlencoded; charset=UTF-8',
+			success: function (res) {
+				calbak(res);
+			},
+			error : function(err){
+				console.log('error');
+				calbak(err);
+			}
+		});
 	}
 </script>
 
 <body>
+
 	<my:navBar current="chatRoom"></my:navBar>
 	
 	<my:alert></my:alert>
-
-	<div id="chatContainer" class="d-flex">
 	
-		<!-- 현재의 세선값을 저장해놓기 위해 -->
-		<input type="hidden" id="sessionId" value="">
-	
-		<!-- 채팅 목록 -->
-		<div id="chatList" style="background-color: #EEEEEE; height: 100vh; width: 25vw;">
-		
+	<div class="container">
+		<h1>메세지 목록</h1>
+		<div id="roomContainer" class="roomContainer">
+			<table id="roomList" class="roomList"></table>
 		</div>
-			
-		<div id="chatBack" style="background-color: #FFF2F2; height: 100vh; width: 75vw;">
-			
-			<!-- 채팅창 -->
-			<div id="chating" class="chating">
-				
-			</div>
-			
-			<div id="yourName" class="ui action input" style="font-size: 20px; height: 50px; width: 70vw; margin: 20px 0px 0px 20px;"> 
-				<input type="text" name="userName" id="userName" style="border-top-left-radius: 2rem; border-bottom-left-radius: 2rem;" placeholder="  사용자를 입력해 주세요.">
-					<button onclick="chatName()" id="startBtn" class="ui action button" style="border-top-right-radius: 2em; border-bottom-right-radius: 2rem;">
-						<i class="fa-solid fa-paper-plane"></i>
-					</button>
-			</div>
-				
-			<div id="yourMsg" class="ui action input" style="display: none; font-size: 20px; height: 50px; width: 70vw; margin: 20px 0px 0px 20px;">
-				<input id="chatting" placeholder="메세지를 입력해 주세요." style="border-top-left-radius: 2rem; border-bottom-left-radius: 2rem;">
-					<button onclick="send()" id="sendBtn" class="ui action button" style="border-top-right-radius: 2em; border-bottom-right-radius: 2rem;">
-						<i class="fa-solid fa-paper-plane"></i>
-					</button>
-			</div>
+		<div>
+			<table class="inputTable">
+				<tr>
+					<th>방 제목</th>
+					<th><input type="text" name="roomName" id="roomName"></th>
+					<th><button id="createRoom">방 만들기</button></th>
+				</tr>
+			</table>
 		</div>
 	</div>
 
@@ -145,7 +167,6 @@
 	<script>
 		$('.ui.modal').modal('show');
 	</script>
-
 
 </body>
 </html>
