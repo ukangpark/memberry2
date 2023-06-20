@@ -9,7 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Insert title here</title>
 <my:top></my:top>
-</head>
+
 
 	<style>
 		.pageName {
@@ -61,7 +61,8 @@
 		}
 		
 	</style>
-<body>
+</head>
+<body style="background-color: #FFF2F2">
 
 	<my:navBar />
 

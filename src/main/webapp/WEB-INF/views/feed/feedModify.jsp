@@ -66,7 +66,7 @@
 		
 	</style>
 	
-<body>
+<body style="background-color: #FFF2F2">
 
 	<my:navBar></my:navBar>
 		

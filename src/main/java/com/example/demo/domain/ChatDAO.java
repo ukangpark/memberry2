@@ -114,7 +114,36 @@ public class ChatDAO {
 		}
 		
 		return chatList;
+		
+	}
+	
+	public int submit(String fromId, String toId, String chatContent) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String SQL = "INSERT INTO Chat VALUES (NULL, ?, ?, ?, NOW())";
+		try {
+			conn = dataSource.getConnection();
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1, fromId);
+			pstmt.setString(2, toId);
+			pstmt.setString(3, chatContent);
+			return pstmt.executeUpdate();
 			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try { 
+				if(rs != null) rs.close();
+				if(pstmt != null) pstmt.close();
+				if(conn != null) conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return -1; // 데이터베이스 오류
+		
 	}
 	
 }

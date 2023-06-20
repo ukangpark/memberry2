@@ -31,7 +31,7 @@ img {
 	display: flex;
 	align-items: baseline;
 	text-align: center;
-	margin-left: 300px;
+	margin-left: 500px;
 }
 
 #addImageBox {
@@ -82,6 +82,7 @@ img {
 <body>
 
 	<my:navBar current="myFeed"></my:navBar>
+	
 	<div class="titleContainer mb-3" id="myFeedTitle" style="justify-content: center;">
 		<h1 style="text-align: center; color: #FF9999">${nickName }
 			<span style="color: black"> 님의 피드</span>
@@ -89,7 +90,7 @@ img {
 	</div>
 
 	<!-- 윗 부분 -->
-	<div id="upper" class="upperContainer mb-5">
+	<div id="upper" class="upperContainer mb-5" style="">
 
 		<div class="follower" id="followerBtn" style="margin: 0px 30px 0px 30px; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#followerModal">
 			<h3>
@@ -107,7 +108,7 @@ img {
 		</div>
 
 		<!-- 프로필 이미지 -->
-		<div class="middleContainer" style="margin: 0px 30px 0px 30px">
+		<div class="middleContainers" style="margin: 0px 30px 0px 30px">
 			<c:if test="${logedInMember.profileImage ne null}">
 				<img class="ui circular image" id="profilImage" src="${bucketUrl }/pet${profileImg}">
 			</c:if>
@@ -115,7 +116,7 @@ img {
 				<img class="ui circular image" id="profilImage" src="/images/paw.png">
 			</c:if>
 
-			<div>
+			<div class="mt-3">
 				<h5 style="margin: 0px">${petList.petName }(${petList.type })</h5>
 				<h5 style="margin: 0px">
 					<i class="heart icon"></i>${petList.diff.years}년 ${petList.diff.months}개월째 함께 하는 중 입니다<i class="heart icon"></i>

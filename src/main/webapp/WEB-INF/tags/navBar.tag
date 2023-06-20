@@ -43,12 +43,6 @@
 }
 </style>
 
-
-<div>
-	<sec:authentication property="principal" />
-</div>
-
-
 <div class="ui fluid right aligned container" id="nav-container">
 	<div class="ui position-fixed top-0 end-0">
 
@@ -192,8 +186,11 @@
 				</sec:authorize>
 
 				<sec:authorize access="isAuthenticated()">
-					<a class="${current eq 'chatRoom' ? 'active' : '' } item"
-						href="/chat/chatRoom"> 메세지 </a>
+					<a class="${current eq 'chat' ? 'active' : '' } item" href="/chat/chat"> 메세지 </a>
+				</sec:authorize>
+
+				<sec:authorize access="isAuthenticated()">
+					<a class="${current eq 'chatRoom' ? 'active' : '' } item" href="/chat/chatRoom"> 메세지 목록 </a>
 				</sec:authorize>
 
 				<sec:authorize access="isAuthenticated()">
@@ -232,4 +229,5 @@
 </div>
 
 <script src="/js/alarm.js"></script>
+
 
