@@ -24,6 +24,8 @@ public class PetsitterService {
 	private PetsitterMapper petsitterMapper;
 	@Autowired
 	private MemberMapper memberMapper;
+	@Autowired
+	private BookMapper bookMapper;
 	@Value("${aws.s3.bucketName}")
 	private String bucketName;
 	@Autowired
@@ -89,6 +91,7 @@ public class PetsitterService {
 		
 		// hostId로 상세페이지 정보 불러옴
 		Detail detail = petsitterMapper.selectDetailById(hostId);
+		System.out.println(detail);
 		
 		// 호스트 집사진 정보를 불러옴
 		if (detail != null) {
@@ -97,11 +100,17 @@ public class PetsitterService {
 			info.put("hostHousePhoto", hostHousePhoto);
 
 		}
+		
+		//상세페이지의 예약 정보 
+		List<Book> book = bookMapper.selectByDetailId(detail.getId());
+		System.out.println("예약정보 : " + book);
+		System.out.println(detail.getId());
 
 		// map타입 변수 info에 넣음
 		info.put("host", host);
 		info.put("detail", detail);
 		info.put("member", member);
+		info.put("book", book);
 		return info;
 	}
 

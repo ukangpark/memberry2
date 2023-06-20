@@ -17,6 +17,7 @@
 <body>
 	<my:navBar></my:navBar>
 	<my:alert></my:alert>
+	<my:logo></my:logo>
 	<br>
 	<div class="ui centered equal width grid">
 		<div class="eight wide column">
@@ -80,10 +81,11 @@
 								</div>
 								<div class="field">
 									<div class="ui mini transparent input">
-										<c:if test="${detail.id ne null }">
+										<c:if test="${detail.id ne null }" var="status">
 											<a class="ui basic huge label" href="/petsitter/detail?id=${host.id }">상세페이지 보기</a>
+											<input type="text" value="${status ? '등록된 상세페이지가 있습니다.' : '등록된 상세페이지가 없습니다.' }" disabled>
+											<a class="ui basic right huge label" href="/book/list/host">예약 확인</a>
 										</c:if>
-										<input type="text" value="${detail.id eq null ? '등록된 상세페이지가 없습니다.' : '등록된 상세페이지가 있습니다.' }" disabled>
 									</div>
 								</div>
 							</div>

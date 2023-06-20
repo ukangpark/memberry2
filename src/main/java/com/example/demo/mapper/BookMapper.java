@@ -146,7 +146,8 @@ public interface BookMapper {
 				num,
 				Book.hostId,
 				rejectMessage,
-				Book.memberId
+				Book.memberId,
+				Detail.hostId
 			FROM Book,Pet,Host,Detail
 			WHERE Book.memberId = Pet.memberId
 			AND Detail.id = Book.detailId
@@ -181,6 +182,11 @@ public interface BookMapper {
 			num = #{num}
 			""")
 	void bookRejectUpdate(Book book);
+	
+	@Select("""
+			SELECT * FROM Book WHERE detailId = #{detailId}
+			""")
+	List<Book> selectByDetailId(Integer detailId);
 
 	
 }
