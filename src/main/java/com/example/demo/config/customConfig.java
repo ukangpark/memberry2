@@ -34,6 +34,12 @@ public class customConfig {
 	private String clientId;
 	@Value("${spring.security.oauth2.client.registration.google.client-secret}")
     private String clientSecret;
+	@Value("${spring.security.oauth2.client.registration.naver.client-id}")
+	private String naverClientId;
+	@Value("${spring.security.oauth2.client.registration.naver.client-secret}")
+    private String naverClientSecret;
+	@Value("${spring.security.oauth2.client.registration.naver.redirect-uri}")
+    private String redirectUri;
 	
 	@Autowired
 	private ServletContext application;

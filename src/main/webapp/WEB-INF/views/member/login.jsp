@@ -17,9 +17,15 @@
 	margin: 50px 0px 0px 0px;
 }
 
-.googleImage {
+.googleLogo {
 	width: 30px;
 	height: 30px;
+	margin: 10px;
+}
+
+.naverLogo {
+	width: 32px;
+	height: 32px;
 	margin: 10px;
 }
 </style>
@@ -52,7 +58,8 @@
 									<hr />
 									<div class="field">
 										<h5>소셜 계정으로 로그인</h5>
-										<a href="/oauth2/authorization/google"><img class="googleImage" src="/images/googleIcon.png" alt="" /></a>
+										<a href="/oauth2/authorization/google"><img class="googleLogo" src="/images/googleLogo.png" alt="" /></a>
+										<a href="/oauth2/authorization/naver"><img class="naverLogo" src="/images/naverLogo.png" alt="" /></a>
 									</div>
 									<button type="submit" class="ui secondary submit button">로그인</button>
 								</div>
