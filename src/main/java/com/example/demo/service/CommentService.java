@@ -56,6 +56,7 @@ public class CommentService {
 		 
 		 if(cnt == 1) {
 			res.put("message", "댓글 삭제 완료");
+			
 		}else {
 			res.put("message", "댓글 삭제 오류");
 		}

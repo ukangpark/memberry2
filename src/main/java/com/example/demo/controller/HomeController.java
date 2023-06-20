@@ -31,7 +31,6 @@ public class HomeController {
 			Authentication authentication, HttpSession session) {
 		List<Feed> result = service.listFeed(authentication);
 		model.addAttribute("feedList", result);
-		
 		if (authentication != null) {
 			List<Alarm> alarms = alarmService.list(authentication.getName());
 			session.setAttribute("alarms", alarms);

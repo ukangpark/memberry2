@@ -29,14 +29,7 @@
 	z-index: 100;
 }
 
-.alarmContainer {
-	overflow-y: initial !important
-}
 
-.alarmListContainer {
-	height: 250px;
-	overflow-y: auto;
-}
 
 #profile>img {
 	margin: auto;
@@ -59,17 +52,17 @@
 
 		<!-- alarm -->
 		<sec:authorize access="isAuthenticated()">
-			<div class="alarmBtn ui dropdown"
+			<div class="alarmBtn ui scrolling dropdown"
 				style="display: flex; float: left; margin: 30px 10px 0px 0px; align-items: center; align-content: center; text-align: center; justify-content: center;">
 				<i class="bell big icon position-relative"> 
 				<c:if test="${sessionScope.logedInMember.alarmCount > 0 }">
 						<span
 							class="position-absolute top-20 start-5 translate-middle p-1 bg-danger border border-light rounded-circle"
-							style="font-size: 0.3em; font-weight: bold; color: white;">${sessionScope.logedInMember.alarmCount}</span>
+							style="font-size: 0.3em; font-weight: bold; color: white;"><%-- ${sessionScope.logedInMember.alarmCount} --%></span>
 					</c:if>
 				</i>
 
-				<div class="ui vertical menu" id="alarmContainer">
+				<div class="ui vertical menu" id="alarmContainer" style="margin-top: 10px;">
 					<div class="item">
 						<ul class="list-group" id="alarmListContainer">
 							<c:forEach items="${sessionScope.alarms }" var="alarm">
@@ -77,7 +70,9 @@
 									<a href="/feedId/${alarm.feedId}" id="liLink"
 										class="list-group-item " data-alarm-id="${alarm.id}" onclick="javascript:document.checkForm.submit();"> <i
 										class="fa-solid fa-comments" style="color: #a0a0a0"></i>
-										<div id="aLi" style="font-weight: bold">${alarm.notiBody}</div>
+										<div id="aLi" style="font-weight: bold">
+											${alarm.notiBody}
+										</div>
 										<small class="text-body-secondary">${alarm.inserted}</small>
 									</a>
 								</c:if>
@@ -86,7 +81,9 @@
 									<a href="/feedId/${alarm.feedId}" id="liLink"
 										class="list-group-item " data-alarm-id="${alarm.id}" onclick="javascript:document.checkForm.submit();"> <i
 										class="fa-solid fa-bone" style="color: #a0a0a0"></i>
-										<div id="aLi" style="font-weight: bold">${alarm.notiBody}</div>
+										<div id="aLi" style="font-weight: bold" >
+										${alarm.notiBody}
+										</div>
 										<small class="text-body-secondary">${alarm.inserted}</small>
 									</a>
 								</c:if>
@@ -98,13 +95,13 @@
 										<small class="text-body-secondary">${alarm.inserted}</small>
 									</a>
 								</c:if>
-
 							</c:forEach>
 
 						</ul>
+
 						<div class="d-none">
-							<form action="/alarm" method="post" name="checkForm">
-								<input type="text" value="$(this).attr('data-alarm-id')" />
+							<form action="alarm/check" method="post" name="checkForm">
+								<input type="text" value="$(this).attr('data-alarm-id=')" />
 							</form>
 						</div>
 					</div>

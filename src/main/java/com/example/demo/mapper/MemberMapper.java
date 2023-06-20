@@ -26,7 +26,8 @@ public interface MemberMapper {
 
 	@Select("""
 			SELECT m.*, ma.authority, CONCAT('/', p.id, '/', p.photo) profileImage,
-					(SELECT COUNT(*) FROM Alarm a WHERE a.userId = m.id AND isChecked = false) alarmCount
+					(SELECT COUNT(*) FROM Alarm a 
+					WHERE a.userId = m.id AND isChecked = false AND a.userId <> a.causedMemberId) alarmCount
 			FROM Member m LEFT JOIN Pet p ON m.defaultPetId = p.id
 						  LEFT JOIN MemberAuthority ma ON m.id = ma.memberId
 			WHERE m.id = #{id}
