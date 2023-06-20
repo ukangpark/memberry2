@@ -13,4 +13,6 @@ public class PetsitterComment {
 	private Integer defaultPetId;
 	private String photo;
 	private String body;
+	private Integer star;
+	private boolean editable;
 }

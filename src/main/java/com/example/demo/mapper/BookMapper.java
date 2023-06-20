@@ -91,8 +91,8 @@ public interface BookMapper {
 
 	
 	@Insert("""
-			INSERT INTO Book (hospital, message, checkIn, checkOut, pottyTraining, detailId, petId, memberId,accepted)
-			VALUES (#{hospital}, #{message}, #{checkIn}, #{checkOut}, #{pottyTraining}, #{detailId}, #{petId}, #{memberId}, #{accepted})
+			INSERT INTO Book (hospital, message, checkIn, checkOut, pottyTraining, hostId, detailId, petId, memberId,accepted)
+			VALUES (#{hospital}, #{message}, #{checkIn}, #{checkOut}, #{pottyTraining}, #{hostId}, #{detailId}, #{petId}, #{memberId}, #{accepted})
 			""")
 	@Options(useGeneratedKeys = true, keyProperty="id")
 	int insert(Book book);
@@ -144,8 +144,10 @@ public interface BookMapper {
 				accepted,
 				detailId,
 				num,
+				Book.hostId,
 				rejectMessage,
-				Book.memberId
+				Book.memberId,
+				Detail.hostId
 			FROM Book,Pet,Host,Detail
 			WHERE Book.memberId = Pet.memberId
 			AND Detail.id = Book.detailId
@@ -180,6 +182,11 @@ public interface BookMapper {
 			num = #{num}
 			""")
 	void bookRejectUpdate(Book book);
+	
+	@Select("""
+			SELECT * FROM Book WHERE detailId = #{detailId}
+			""")
+	List<Book> selectByDetailId(Integer detailId);
 
 	
 }
