@@ -66,8 +66,5 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
 			}
 
 			return new PrincipalDetails(oldMember);
-
-//		return super.loadUser(userRequest);
-
 		}
-	}
+	} 

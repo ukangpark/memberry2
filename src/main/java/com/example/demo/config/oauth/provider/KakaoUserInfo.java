@@ -8,8 +8,6 @@ public class KakaoUserInfo implements OAuth2UserInfo{
 	
 	public KakaoUserInfo(Map<String, Object> attributes) {
 		this.attributes = attributes;
-		System.out.println("카카오 유저 인포");
-		System.out.println(attributes);
 	}
 	
 	@Override
