@@ -25,6 +25,7 @@
 </head>
 <body>
 	<my:navBar></my:navBar>
+	<my:logo></my:logo>
 	<br>
 	<div class="ui centered equal width grid" id="fullDiv">
 		<div class="eight wide column">

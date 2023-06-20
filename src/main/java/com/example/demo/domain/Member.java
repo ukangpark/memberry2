@@ -19,4 +19,10 @@ public class Member {
 	private String provider;
 	private String providerId;
 	private Integer alarmCount;
+
+    public Member() {
+    	this.authority = new ArrayList<>();
+    }
+    
+    
 }

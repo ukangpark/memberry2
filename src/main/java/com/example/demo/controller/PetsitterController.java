@@ -20,6 +20,8 @@ public class PetsitterController {
 
 	@Autowired
 	private PetsitterService petsitterService;
+	@Autowired
+	private MapService mapService;
 
 	@GetMapping("main")
 	public String main(Model model, @RequestParam(value = "page", defaultValue = "1") Integer page,
@@ -32,19 +34,27 @@ public class PetsitterController {
 	@GetMapping("detail")
 	public void detail(@RequestParam("id") Integer hostId , Model model, Authentication authentication) {
 		// detail로 포워드
-		// 쿼리스트링으로 받은 id값을 받아서 해당 상세페이지를 읽음
-		Map<String, Object> info = petsitterService.selectByHostId(hostId, authentication);
-		model.addAllAttributes(info);
 		
-		List<Registration> pet = new ArrayList<>();
-		
-		// 사용자 반려견 정보 가져오기
-		if(authentication != null) {
-			String userId = authentication.getName();
-			pet = petsitterService.selectUserPet(userId);
-		}
-		
-		model.addAttribute("pet", pet);
+			// 쿼리스트링으로 받은 id값을 받아서 해당 상세페이지를 읽음
+			Map<String, Object> info = petsitterService.selectByHostId(hostId, authentication);
+			
+			//지도 정보 
+			String apiKey = mapService.getKakao_javaScript_key();
+			info.put("apiKey", apiKey);
+			
+			model.addAllAttributes(info);
+			
+			List<Registration> pet = new ArrayList<>();
+			
+			// 사용자 반려견 정보 가져오기
+			if(authentication != null) {
+				String userId = authentication.getName();
+				pet = petsitterService.selectUserPet(userId);
+			}
+			
+			model.addAttribute("pet", pet);	
+			
+			
 	}
 
 	@GetMapping("apply")
