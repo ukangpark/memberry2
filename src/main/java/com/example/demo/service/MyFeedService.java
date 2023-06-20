@@ -15,6 +15,7 @@ import com.example.demo.domain.Feed;
 import com.example.demo.domain.File;
 import com.example.demo.domain.Follow;
 import com.example.demo.domain.Like;
+import com.example.demo.domain.Registration;
 import com.example.demo.mapper.CommentMapper;
 import com.example.demo.mapper.FeedLikeMapper;
 import com.example.demo.mapper.FollowMapper;
@@ -187,5 +188,9 @@ public class MyFeedService {
 		for (Integer id : idList) {
 			remove(id);
 		}
+	}
+
+	public Registration listProfile(String userName, Authentication authentication) {
+		return mapper.selectAllByProfile(userName, authentication);
 	}
 }
