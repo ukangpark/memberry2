@@ -67,6 +67,7 @@
 					<sec:authentication property="name" var="userId" />
 					<c:choose>
 						<c:when test="${userId eq host.memberId }">
+							<a class="ui right floated inverted blue button" href="/book/list/host">예약 확인</a>
 							<a data-bs-toggle="modal" data-bs-target="#deleteModal" class="ui right floated inverted red button">삭제</a>
 							<a data-bs-toggle="modal" data-bs-target="#checkModal" class="ui right floated inverted green button">수정</a>
 						</c:when>
@@ -127,9 +128,6 @@
 		</div>
 	</div>
 
-
-
-
 	<!-- 후기 -->
 	<div class="container" style="width: 900px; margin-top: 25px;">
 		<div class="ui comments">
@@ -138,9 +136,17 @@
 				<!-- 후기 리스트 -->
 			</div>
 			<!-- 후기 등록 버튼 -->
-			<div class="input-group mb-3" style="width: 880px;" id="commentInput">
-				<button onclick="addCommentBtn()" style="width: 65px;" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#addCommentModal">추가</button>
-			</div>
+			<!-- 예약했던 상세페이지이고 예약 완료상태이면 후기 추가버튼이 활성화 -->
+			<c:set var="foundMatch" value="false" />
+
+			<c:forEach items="${book}" var="book">
+				<c:if test="${!foundMatch && userId eq book.memberId && book.accepted == 2}">
+					<div class="input-group mb-3" style="width: 880px;" id="commentInput">
+						<button onclick="addCommentBtn()" style="width: 80px;" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#addCommentModal">후기 추가</button>
+					</div>
+					<c:set var="foundMatch" value="true" />
+				</c:if>
+			</c:forEach>
 		</div>
 	</div>
 

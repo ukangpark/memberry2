@@ -181,6 +181,11 @@ public interface BookMapper {
 			num = #{num}
 			""")
 	void bookRejectUpdate(Book book);
+	
+	@Select("""
+			SELECT * FROM Book WHERE detailId = #{detailId}
+			""")
+	List<Book> selectByDetailId(Integer detailId);
 
 	
 }
