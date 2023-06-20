@@ -109,4 +109,15 @@ public interface MyFeedMapper {
 			""")
 	List<Integer> selectIdByWriter(String writer);
 
+	@Select("""
+			SELECT p.*,
+					m.defaultPetId,
+					m.nickName,
+					CONCAT('/', p.id, '/', p.photo) profileImage
+			 FROM Pet p 
+					LEFT JOIN Member m ON m.defaultPetId = p.id
+			WHERE m.id = #{userName}
+			""")
+	Registration selectAllByProfile(String userName, Authentication authentication);
+
 }

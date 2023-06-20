@@ -67,6 +67,7 @@
 <my:navBar current="calendar"></my:navBar>
 	<div id="header">
 		<h1><span style="font-weight: bold"> 캘린더</h1>
+	
 	</div>
 
 	 <div id="calendarWrapper">

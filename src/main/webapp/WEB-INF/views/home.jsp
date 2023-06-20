@@ -217,7 +217,6 @@
 	</div>
 
 
-
 	<script src="/js/home.js"></script>
 
 	<my:bottom></my:bottom>
