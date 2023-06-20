@@ -91,9 +91,9 @@
 									</a>
 								</c:if>
 								<c:if test="${alarm.notiType eq 'follow' }">
-									<a href="#" id="liLink"
-										class="list-group-item " data-alarm-id="${alarm.id}" onclick="javascript:document.checkForm.submit();"> <i
-										class="fa-solid fa-bone" style="color: #a0a0a0"></i>
+									<a href="/feed/myFeed/${alarm.causedMemberId }" id="liLink"
+										class="list-group-item " data-alarm-id="${alarm.id}" onclick="javascript:document.checkForm.submit();"> 
+										<i class="fa-solid fa-user" style="color: #a0a0a0"></i>
 										<div id="aLi" style="font-weight: bold">${alarm.notiBody}</div>
 										<small class="text-body-secondary">${alarm.inserted}</small>
 									</a>

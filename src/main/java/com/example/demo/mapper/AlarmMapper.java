@@ -50,7 +50,7 @@ public interface AlarmMapper {
 
 	@Update("""
 			INSERT INTO Alarm (userId, causedMemberId, notiType, notiBody)
-			VALUES (#{feedOwner}, #{memberId}, 'follow', #{memberId}님이 #{feedOwner}'님을 팔로우하기 시작했습니다.')
+			VALUES (#{feedOwner}, #{memberId}, 'follow', #{memberId}'님이' #{feedOwner}'님을 팔로우하기 시작했습니다.')
 			""")
 	Integer followAdd(Follow follow);
 
