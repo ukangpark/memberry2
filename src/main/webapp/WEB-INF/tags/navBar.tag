@@ -61,8 +61,8 @@
 		<sec:authorize access="isAuthenticated()">
 			<div class="alarmBtn ui dropdown"
 				style="display: flex; float: left; margin: 30px 10px 0px 0px; align-items: center; align-content: center; text-align: center; justify-content: center;">
-				<i class="bell big icon position-relative"> <c:if
-						test="${sessionScope.logedInMember.alarmCount > 0 }">
+				<i class="bell big icon position-relative"> 
+				<c:if test="${sessionScope.logedInMember.alarmCount > 0 }">
 						<span
 							class="position-absolute top-20 start-5 translate-middle p-1 bg-danger border border-light rounded-circle"
 							style="font-size: 0.3em; font-weight: bold; color: white;">${sessionScope.logedInMember.alarmCount}</span>
@@ -75,8 +75,7 @@
 							<c:forEach items="${sessionScope.alarms }" var="alarm">
 								<c:if test="${alarm.notiType eq 'comment' }">
 									<a href="/feedId/${alarm.feedId}" id="liLink"
-										class="list-group-item " data-alarm-id="${alarm.id}"
-										onclick="javascript:document.checkedForm.submit();"> <i
+										class="list-group-item " data-alarm-id="${alarm.id}" onclick="javascript:document.checkForm.submit();"> <i
 										class="fa-solid fa-comments" style="color: #a0a0a0"></i>
 										<div id="aLi" style="font-weight: bold">${alarm.notiBody}</div>
 										<small class="text-body-secondary">${alarm.inserted}</small>
@@ -85,8 +84,15 @@
 
 								<c:if test="${alarm.notiType eq 'like' }">
 									<a href="/feedId/${alarm.feedId}" id="liLink"
-										class="list-group-item " data-alarm-id="${alarm.id}"
-										onclick="javascript:document.checkedForm.submit();"> <i
+										class="list-group-item " data-alarm-id="${alarm.id}" onclick="javascript:document.checkForm.submit();"> <i
+										class="fa-solid fa-bone" style="color: #a0a0a0"></i>
+										<div id="aLi" style="font-weight: bold">${alarm.notiBody}</div>
+										<small class="text-body-secondary">${alarm.inserted}</small>
+									</a>
+								</c:if>
+								<c:if test="${alarm.notiType eq 'follow' }">
+									<a href="#" id="liLink"
+										class="list-group-item " data-alarm-id="${alarm.id}" onclick="javascript:document.checkForm.submit();"> <i
 										class="fa-solid fa-bone" style="color: #a0a0a0"></i>
 										<div id="aLi" style="font-weight: bold">${alarm.notiBody}</div>
 										<small class="text-body-secondary">${alarm.inserted}</small>
@@ -94,10 +100,11 @@
 								</c:if>
 
 							</c:forEach>
+
 						</ul>
 						<div class="d-none">
-							<form action="/alarm/check" method="post" name="checkedForm">
-								<input type="text"  value="$(this).attr('data-alarm-id')" />
+							<form action="/alarm" method="post" name="checkForm">
+								<input type="text" value="$(this).attr('data-alarm-id')" />
 							</form>
 						</div>
 					</div>
