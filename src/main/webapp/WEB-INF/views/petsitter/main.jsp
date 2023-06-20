@@ -14,6 +14,8 @@
 <style>
 #memberyLogo {
 	width: 600px;
+	margin-top: 50px;
+	margin-bottom: 10px;
 }
 
 .searchBar {
@@ -21,6 +23,7 @@
 	align-items: center;
 	justify-content: center;
 	text-align: center;
+	margin-bottom: 50px;
 }
 
 #input-box {
@@ -73,13 +76,13 @@
 
 .post-slider .silder-title {
 	text-align: left;
-	margin: 30px 0px 5px 15px;
+	margin: 30px 0px 10px 15px;
 }
 
 .post-slider .next {
 	position: fixed;
-	top: 70%;
-	right: 100px;
+	top: 68%;
+	right: 250px;
 	font-size: 2em;
 	color: gray;
 	cursor: pointer;
@@ -87,8 +90,8 @@
 
 .post-slider .prev {
 	position: fixed;
-	top: 70%;
-	left: 100px;
+	top: 68%;
+	left: 250px;
 	font-size: 2em;
 	color: gray;
 	cursor: pointer;
