@@ -37,7 +37,7 @@ img {
 #addImageBox {
 	position: relative;
 	cursor: pointer;
-	overflow: hidden;
+	/* overflow: hidden; */
 }
 
 #addImageBox:hover #addImage {
@@ -52,7 +52,7 @@ img {
 	-webkit-transition: all.5s ease;
 	transition: all.5s.ease;
 	bottom: 0px;
-	overflow: hidden;
+	/* overflow: hidden; */
 }
 
 #addImageDes {
