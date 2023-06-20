@@ -32,7 +32,7 @@ img {
 	height: 100%;
 }
 
-.border {
+.myPetsBorder {
 	position: absolute;
 	width: 300px;
 	height: 300px;
@@ -67,7 +67,7 @@ label {
 	<div class="profileContainer">
 		<div class="profile">
 			<img id="imageByPet" src="${bucketUrl }/pet/${pet.id }/${pet.photo}">
-			<div class="border"></div>
+			<div class="myPetsBorder"></div>
 		</div>
 	</div>
 
