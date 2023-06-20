@@ -7,6 +7,7 @@
 
 
 
+
 <style>
 #profile {
 	text-align: center;
@@ -74,7 +75,7 @@
 					 <ul class="list-group" id="alarmListContainer"> 
 						 <c:forEach items="${sessionScope.alarms }" var="alarm">
 							<c:if test="${alarm.notiType eq 'comment' }">
-								<a href="/feedId/${alarm.feedId}" id="lilLnk" class="list-group-item " data-alarm-id="${alarm.id}">
+								<a href="/feedId/${alarm.feedId}" id="liLink" class="list-group-item " data-alarm-id="${alarm.id}">
 									<i class="fa-solid fa-comments" style="color: #a0a0a0"></i>
 									<div id="aLi" style="font-weight: bold">${alarm.notiBody}</div> 
 									<small class="text-body-secondary">${alarm.inserted}</small>
@@ -82,7 +83,7 @@
 							</c:if>
 							
 							<c:if test="${alarm.notiType eq 'like' }">
-								<a href="/feedId/${alarm.feedId}" id="lilLnk" class="list-group-item " data-alarm-id="${alarm.id}" >
+								<a href="/feedId/${alarm.feedId}" id="liLink" class="list-group-item " data-alarm-id="${alarm.id}" >
 									<i class="fa-solid fa-bone" style="color: #a0a0a0"></i>
 									<div id="aLi" style="font-weight: bold">${alarm.notiBody}</div> 
 									<small class="text-body-secondary">${alarm.inserted}</small>
