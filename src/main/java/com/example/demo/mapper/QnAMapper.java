@@ -33,4 +33,17 @@ public interface QnAMapper {
 			WHERE id = #{id}
 			""")
 	int update(QnA qna);
+
+	@Delete("""
+			DELETE FROM QnA
+			WHERE id = #{id}
+			""")
+	int deleteById(Integer id);
+
+	@Insert("""
+			INSERT INTO QnA (title, body, writer)
+			VALUES (#{title}, #{body}, #{writer})
+			""")
+	@Options(useGeneratedKeys = true, keyProperty = "id")
+	int insert(QnA qna);
 }

@@ -24,6 +24,8 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
 
 			// 회원가입 강제 진행
 			OAuth2User oauth2User = super.loadUser(userRequest);
+			System.out.println("getClientRegistration: " + userRequest.getClientRegistration());
+			System.out.println("getAccessToken : " + userRequest.getAccessToken());
 			System.out.println("getAttribute: " + oauth2User.getAttributes());
 
 			OAuth2UserInfo oAuth2UserInfo = null;
@@ -33,8 +35,11 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
 			} else if(userRequest.getClientRegistration().getRegistrationId().equals("naver")) {
 				System.out.println("네이버 로그인 요청");
 				oAuth2UserInfo = new NaverUserInfo((Map)oauth2User.getAttributes().get("response"));
+			} else if(userRequest.getClientRegistration().getRegistrationId().equals("kakao")) {
+				System.out.println("카카오 로그인 요청");
+				oAuth2UserInfo = new KakaoUserInfo((Map)oauth2User.getAttributes());
 			} else {
-				System.out.println("구글과 네이버 로그인만 지원합니다.");
+				System.out.println("구글과 네이버, 카카오 로그인만 지원합니다.");
 			}
 			
 			String provider = oAuth2UserInfo.getProvider();
@@ -63,8 +68,5 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
 			}
 
 			return new PrincipalDetails(oldMember);
-
-//		return super.loadUser(userRequest);
-
 		}
-	}
+	} 

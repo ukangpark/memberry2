@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +13,6 @@
 #img {
 	width: 600px;
 }
-
 
 table {
 	min-width: 800px;
@@ -30,6 +30,9 @@ tr, th {
 	<my:alert></my:alert>
 	<div class="ui aligned container-lg">
 		<img class="ui centered medium circular image" src="/images/QnALogo.png" id="img">
+		<button class="ui basic button">
+			<a href="/qna/add">QnA 작성</a>
+		</button>
 		<div class="tableSet">
 			<table class="ui single line table" style="width: 1300px;">
 				<colgroup>

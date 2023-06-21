@@ -3,6 +3,8 @@ package com.example.demo.controller;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.*;
+import org.springframework.security.access.prepost.*;
+import org.springframework.security.core.*;
 import org.springframework.stereotype.*;
 import org.springframework.ui.*;
 import org.springframework.web.bind.annotation.*;
@@ -27,13 +29,16 @@ public class QnAController {
 	}
 	
 	@GetMapping("/id/{id}")
-	public String qna(@PathVariable("id") Integer id, Model model) {
-		QnA qna = service.getQnA(id);
+	public String qna(@PathVariable("id") Integer id, 
+					  Model model,
+					  Authentication authentication) {
+		QnA qna = service.getQnA(id, authentication);
 		model.addAttribute("qna", qna);
 		return "qnaforwhat";
 	}
 	
 	@GetMapping("/modify/{id}")
+	@PreAuthorize("isAuthenticated() and @customSecurityChecker.checkQnAWriter(authentication, #id)")
 	public String modifyForm(
 							 @PathVariable("id") Integer id, Model model) {
 		model.addAttribute("qna", service.getQnA(id));
@@ -41,6 +46,7 @@ public class QnAController {
 	}
 	
 	@PostMapping("/modify/{id}")
+	@PreAuthorize("isAuthenticatied() and @customSecurityChecker.checkQnAWriter(authentication, #qna.id)")
 	public String modifyProcess(QnA qna, 
 								RedirectAttributes rttr) {
 
@@ -55,4 +61,40 @@ public class QnAController {
 		}
 	}
 	
+	@PostMapping("remove")
+	@PreAuthorize("isAuthenticated() and @customSecurityChecker.checkQnAWriter(authentication, #id)")
+	public String remove(@RequestParam Integer id, RedirectAttributes rttr) {
+		boolean ok = service.remove(id);
+		
+		if(ok) {
+			rttr.addFlashAttribute("message", id + "번 QnA가 삭제되었습니다.");
+			return "redirect:/qna";
+		} else {
+			return "redirect:/qna/id/" + id;
+		}
+	}
+	
+	@GetMapping("add")
+	@PreAuthorize("isAuthenticated()")
+	public void addForm(Model model, Authentication auth) {
+		model.addAttribute("auth", auth);
+	}
+	
+	@PostMapping("add")
+	@PreAuthorize("isAuthenticated()")
+	public String addProcess(QnA qna, RedirectAttributes rttr,
+							Authentication auth) throws Exception{
+		qna.setWriter(auth.getName());		
+	    boolean ok = service.addQnA(qna);
+		
+		if(ok) {
+			rttr.addFlashAttribute("message", qna.getId() + "번 QnA가 등록되었습니다.");
+			return "redirect:/qna/id/" + qna.getId();
+		} else {
+			rttr.addFlashAttribute("message", "QnA 등록 중 문제가 발생하였습니다.");
+			rttr.addFlashAttribute("qna", qna);
+			return "redirect:/qna/add";
+		}
+	}
+
 }
