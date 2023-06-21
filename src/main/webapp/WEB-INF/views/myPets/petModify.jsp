@@ -71,6 +71,7 @@
 <body>
 
 	<my:navBar></my:navBar>
+	<my:logo></my:logo>
 
 	<!-- 상단 공백 -->
 	<div style="margin-bottom: 5px"></div>

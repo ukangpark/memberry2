@@ -143,7 +143,7 @@
 <body>
 
 	<my:navBar current="chatRoom"></my:navBar>
-	
+	<my:logo></my:logo>
 	<my:alert></my:alert>
 	
 	<div class="container">

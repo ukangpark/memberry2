@@ -89,6 +89,7 @@
 <body id="body" style="background-color: #FFF2F2">
 
 	<my:navBar />
+	<my:logo></my:logo>
 	<my:alert></my:alert>
 
 	<!-- toast 알람 -->
