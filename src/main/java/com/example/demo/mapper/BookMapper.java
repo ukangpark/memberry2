@@ -89,7 +89,7 @@ public interface BookMapper {
 			WHERE 
 			num = #{num}
 			""")
-	void bookAcceptUpdate(int num);
+	Integer bookAcceptUpdate(int num);
 
 	
 	@Insert("""
@@ -183,7 +183,7 @@ public interface BookMapper {
 			WHERE 
 			num = #{num}
 			""")
-	void bookRejectUpdate(Book book);
+	Integer bookRejectUpdate(Book book);
 	
 	@Select("""
 			SELECT * FROM Book WHERE detailId = #{detailId}

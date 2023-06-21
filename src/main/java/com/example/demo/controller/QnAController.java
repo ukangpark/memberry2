@@ -13,6 +13,8 @@ import org.springframework.web.servlet.mvc.support.*;
 import com.example.demo.domain.*;
 import com.example.demo.service.*;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("qna")
 public class QnAController {
@@ -20,20 +22,31 @@ public class QnAController {
 	@Autowired
 	private QnAService service;
 	
+	@Autowired
+	private AlarmService alarmService;
+	
 	@GetMapping("")
 	public String list(Model model) {
 		
 		List<QnA> list = service.qnaList();
 		model.addAttribute("qnaList", list);
+		
 		return "qna";
 	}
 	
 	@GetMapping("/id/{id}")
 	public String qna(@PathVariable("id") Integer id, 
 					  Model model,
-					  Authentication authentication) {
+					  Authentication authentication, HttpSession session) {
 		QnA qna = service.getQnA(id, authentication);
 		model.addAttribute("qna", qna);
+		
+		// 알림창 업데이트
+		if(authentication != null) {
+			List<Alarm> alarms = alarmService.list(authentication.getName());
+			session.setAttribute("alarms", alarms);
+		}
+		
 		return "qnaforwhat";
 	}
 	

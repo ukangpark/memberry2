@@ -30,7 +30,7 @@ public class CommentService {
 	  
 	  @Autowired
 	  private MemberMapper memberMapper;
-	  
+	
 	  
 	  public List<Comment> list(Integer feedId, Authentication authentication) {
 		  List<Comment> comments = mapper.selectAllByFeedId(feedId);
@@ -42,17 +42,20 @@ public class CommentService {
 		  return comments;
 	  }
 
-	public  Map<String, Object> add(Comment comment, Authentication authentication) {
+	public  Map<String, Object> add(Comment comment, Authentication authentication, HttpSession session) {
 		comment.setMemberId(authentication.getName());
-		
-		
 		
 		var res  = new HashMap<String, Object>();
 		int cnt = mapper.insert(comment);
 		
 		if (cnt == 1) {
 			res.put("message", "댓글 등록 완료");
-			alarmMapper.commentAdd(comment);
+			Integer alarmCnt = alarmMapper.commentAdd(comment);
+			
+			if (alarmCnt == 1) {
+				Member member = memberMapper.selectById(authentication.getName());
+				session.setAttribute("logedInMember", member);				
+			}
 			
 		} else {
 			res.put("message", "댓글 등록 실패");

@@ -22,9 +22,9 @@ public class AlarmService {
 		return alarms;
 	}
 
-	public Boolean checked(Integer id) {
+	public Integer checked(Integer id) {
 		int cnt = mapper.UpdateCheckedById(id);
-		return cnt == 1;
+		return cnt;
 	}
 
 
