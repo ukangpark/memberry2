@@ -65,7 +65,11 @@ public class MyFeedService {
 
 	public boolean addFeed(Feed feed, MultipartFile[] files, Authentication authentication) throws Exception {
 		// 게시물 insert
-		int cnt = mapper.insert(feed);
+		
+		int cnt = 0;
+		if (feed.getFileName() != null) {
+			mapper.insert(feed);
+		}
 
 		for (MultipartFile file : files) {
 			if (file.getSize() > 0) {
