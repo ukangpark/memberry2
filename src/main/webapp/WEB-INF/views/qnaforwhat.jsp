@@ -30,7 +30,10 @@
 				<a href="/qna"><img class="qna" src="/images/qnaDetailLogo.png" alt="" /></a>
 				<div class="d-flex">
 					<div class="no">
-						<h1>${qna.writer }님의 질문</h1>
+						<h1>
+							<span id="qnaIdText">${qna.writer }</span> 
+							님의 질문
+						</h1>
 					</div>
 				</div>
 				<div class="mb-3">
@@ -55,6 +58,18 @@
 						</div>
 					</c:if>
 				</sec:authorize>
+				
+				<div id="commentContainer">
+					<div id="addQnACommentContainer"> 
+						<textarea id="qnaCommentTextArea" ></textarea>
+						<button id="qnaCommentBtn">전송</button>
+					</div>
+					<div id="qnaCommentListContainer">
+						<div>댓글 1 내용 : 누가 : 언제</div>
+					</div>
+				
+				
+				</div>
 			</div>
 		</div>
 	</div>
@@ -87,6 +102,8 @@
 			</div>
 		</c:if>
 	</sec:authorize>
+	
+	<script src="/js/qna/qnaComment.js"></script>
 	<my:bottom />
 </body>
 </html>
