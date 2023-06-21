@@ -28,27 +28,27 @@ public class QnAController {
 		return "qna";
 	}
 	
-	@GetMapping("/id/{writer}")
-	public String qna(@PathVariable("writer") String writer, 
+	@GetMapping("/id/{id}")
+	public String qna(@PathVariable("id") Integer id, 
 					  Model model,
 					  Authentication authentication) {
-		QnA qna = service.getQnA(writer, authentication);
+		QnA qna = service.getQnA(id, authentication);
 		model.addAttribute("qna", qna);
 		return "qnaforwhat";
 	}
 	
 	@GetMapping("/modify/{id}")
-	@PreAuthorize("isAuthenticated() and @customSecurityChecker.checkQnAWriter(authentication, #writer)")
+	@PreAuthorize("isAuthenticated() and @customSecurityChecker.checkQnAWriter(authentication, #id)")
 	public String modifyForm(
-							 @PathVariable("writer") String writer, Model model) {
-		model.addAttribute("qna", service.getQnA(writer));
+							 @PathVariable("id") Integer id, Model model) {
+		model.addAttribute("qna", service.getQnA(id));
 		return "qnaModify";
 	}
 	
 	@PostMapping("/modify/{id}")
-	@PreAuthorize("isAuthenticatied() and @customSecurityChecker.checkQnAWriter(authentication, #qna.writer)")
+	@PreAuthorize("isAuthenticated() and @customSecurityChecker.checkQnAWriter(authentication, #qna.id)")
 	public String modifyProcess(QnA qna, 
-								RedirectAttributes rttr) {
+								RedirectAttributes rttr) throws Exception{
 
 		boolean ok = service.modify(qna);
 		
@@ -84,11 +84,12 @@ public class QnAController {
 	@PreAuthorize("isAuthenticated()")
 	public String addProcess(QnA qna, RedirectAttributes rttr,
 							Authentication auth) throws Exception{
-		qna.setWriter(auth.getName());		
+		qna.setWriter(auth.getName());	
+		System.out.println(qna);
 	    boolean ok = service.addQnA(qna);
 		
 		if(ok) {
-			rttr.addFlashAttribute("message", qna.getId() + "번 QnA가 등록되었습니다.");
+			rttr.addFlashAttribute("message", qna.getWriter() + "의 QnA가 등록되었습니다.");
 			return "redirect:/qna/id/" + qna.getId();
 		} else {
 			rttr.addFlashAttribute("message", "QnA 등록 중 문제가 발생하였습니다.");

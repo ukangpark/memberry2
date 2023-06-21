@@ -5,6 +5,16 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+.qna {
+	width: 350px;
+	margin-left: 150px;
+}
+.no{
+	margin:0px 0px 20px 0px;
+}
+</style>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>QnAModify</title>
@@ -14,12 +24,16 @@
 	<my:navBar current="qnaModify"></my:navBar>
 	<my:alert></my:alert>
 	<div class="container-lg">
-
 		<div class="row justify-content-center">
 			<div class="col-12 col-md-8 col-lg-6">
-				<h1>no.${qna.id } QnA 수정</h1>
+			<a href="/qna"><img class="qna" src="/images/qnaDetailLogo.png" alt="" /></a>
+				<div class="d-flex">
+					<div class="no">
+						<h1>${qna.writer }님의 질문 수정 페이지</h1>
+					</div>
+				</div>
 				<form method="post">
-					<input type="hidden" name="id" value="${qna.id }" />
+					<input type="hidden" name="writer" value="${qna.writer }" />
 					<div class="mb-3">
 						<label for="titleInput" class="form-label">제목</label> <input class="form-control" id="titleInput" type="text" name="title" value="${qna.title }" />
 					</div>
@@ -35,6 +49,8 @@
 					</div>
 				</form>
 			</div>
-			<my:bottom />
+		</div>
+	</div>
+	<my:bottom />
 </body>
 </html>
