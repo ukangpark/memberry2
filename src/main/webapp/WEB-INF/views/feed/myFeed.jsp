@@ -91,7 +91,7 @@ img {
 	</div>
 
 	<!-- 윗 부분 -->
-	<div id="upper" class="upperContainer mb-5" style="margin-left: 300px">
+	<div id="upper" class="upperContainer mb-5" style="margin-left: 20%">
 
 		<div class="follower" id="followerBtn" style="margin: 0px 30px 0px 30px; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#followerModal">
 			<h3>
@@ -162,7 +162,7 @@ img {
 		<!-- 게시물 추가 이미지 -->
 		<div id="addImageBox">
 			<div id="addImage">
-				<a href="/feed/feedAdd">
+				<a href="/feed/feedAdd/${fileList[0].feedId }">
 					<img style="height: 300px" src="/images/feedAddIcon.PNG" alt="" />
 				</a>
 			</div>

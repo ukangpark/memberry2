@@ -23,7 +23,7 @@
 	padding: 0px;
 }
 
-.border {
+.myPetsborder {
 	position: absolute;
 	width: 300px;
 	height: 300px;
@@ -86,7 +86,7 @@
 			<img class="preview" src="">
 			<div class="defaultImage">
 				<img alt="" src="images/paw.png">
-				<div class="border"></div>
+				<div class="myPetsborder"></div>
 			</div>
 		</div>
 		<label for="fileInput" class="big circular ui icon button" id="addBtn"><i class="large plus icon"></i></label>

@@ -20,12 +20,14 @@ public interface MyFeedMapper {
 				p.together,
 				f.memberId,
 				m.nickName,
+				t.keyword,
 				CONCAT('/', p.id, '/', p.photo) profileImage,
 				(SELECT COUNT(*) FROM Follow WHERE feedOwner = f.memberId) followCount,
 				(SELECT COUNT(*) FROM Follow WHERE memberId = #{memberId}) followingCount
 			FROM File f LEFT JOIN  Pet p ON f.memberId = p.memberId
 						LEFT JOIN Follow fw ON f.memberId = fw.memberId
 						LEFT JOIN Member m ON m.id = f.memberId
+						LEFT JOIN Tags t ON t.memberId = f.memberId
 			WHERE f.memberId = #{memberId}
 			GROUP BY f.feedId ORDER BY f.id DESC
 			""")
@@ -48,6 +50,7 @@ public interface MyFeedMapper {
 				fd.location,
 				fl.fileName,
 				m.nickName,
+				t.keyword,
 				CONCAT('/', p.id, '/', p.photo) profileImage,
 				(SELECT COUNT(*) 
 				 FROM FeedLike 
@@ -55,6 +58,7 @@ public interface MyFeedMapper {
 				 (SELECT COUNT(*) FROM Comment WHERE feedId = fd.id) commentCount
 			FROM Feed fd LEFT JOIN File fl ON fd.id = fl.feedId
 						 LEFT JOIN Member m ON m.id = fd.writer
+				         LEFT JOIN Tags t ON t.memberId = m.id
 				         LEFT JOIN Pet p ON m.defaultPetId = p.id
 			WHERE fd.id = #{id}
 			""")
@@ -119,5 +123,17 @@ public interface MyFeedMapper {
 			WHERE m.id = #{userName}
 			""")
 	Registration selectAllByProfile(String userName, Authentication authentication);
+
+	@Insert("""
+			INSERT INTO Tags (memberId, keyword)
+			VALUES (#{name}, #{tagInput})
+			""")
+	Integer insertTag(String tagInput, String name);
+
+	@Select("""
+			SELECT * FROM Tags
+			WHERE memberId = #{name}
+			""")
+	List<Tag> selectTag(String name);
 
 }
