@@ -163,7 +163,7 @@
 							<a class="${current eq 'main' ? 'active' : '' } item"
 								href="/petsitter/main">펫시터홈</a>
 
-							<sec:authorize access="isAuthenticated()">
+							<sec:authorize access="isAuthenticated() and !hasAuthority('host')">
 								<a class="${current eq 'apply' ? 'active' : '' } item"
 									href="/petsitter/apply">펫시터지원</a>
 							</sec:authorize>
