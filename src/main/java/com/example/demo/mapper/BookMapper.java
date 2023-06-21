@@ -58,12 +58,14 @@ public interface BookMapper {
 				accepted,
 				detailId,
 				num,
+				Pet.id,
 				Book.memberId
 			FROM Book,Pet,Host,Detail
 			WHERE Book.memberId = Pet.memberId
 			AND Detail.id = Book.detailId
 			AND Host.id = Detail.hostId
 			AND Host.memberId = #{userId}
+			AND Book.petId = Pet.id
 			ORDER BY Book.num DESC
 			LIMIT #{startIndex}, #{rowPerPage}
 			""")
@@ -134,7 +136,7 @@ public interface BookMapper {
 			""")
 	Registration getPetModify(String userId);
 
-	//예약요청목록(사용자)
+	//예약목록(사용자)
 	@Select("""
 			SELECT
 				petName,
