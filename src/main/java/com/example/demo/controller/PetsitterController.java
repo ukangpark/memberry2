@@ -132,7 +132,7 @@ public class PetsitterController {
 	}
 
 	@GetMapping("hostList")
-//	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("isAuthenticated()")
 	public void hostList(
 			Model model,
 			@RequestParam(value = "page", defaultValue = "1") Integer page) {
