@@ -1,4 +1,6 @@
 
+<div class="ui position-fixed top-0 start-0" style="z-index: 100; border-radius: 50%; width: 90px;">
 <a href="/home">
-	<img alt="" src="/images/logo.png" style="position: absolute; z-index: 100; top: -20px; left:-120px; border-radius: 50%; width: 350px; ">
+	<img style="width: 100%" alt="" src="/images/logo.png">
 </a>
+</div>
