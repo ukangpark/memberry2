@@ -81,7 +81,7 @@
 
 .post-slider .next {
 	position: fixed;
-	top: 68%;
+	top: 60%;
 	right: 250px;
 	font-size: 2em;
 	color: gray;
@@ -90,7 +90,7 @@
 
 .post-slider .prev {
 	position: fixed;
-	top: 68%;
+	top: 60%;
 	left: 250px;
 	font-size: 2em;
 	color: gray;
