@@ -24,10 +24,9 @@ public class AlarmController {
 	private AlarmService service;
 	
 	
-	@GetMapping("check/{id}")
+	@GetMapping("check")
 	@ResponseBody
-	public Boolean checked(@PathVariable("id") Integer id) {
-		System.out.println("컨트롤러로 요청옴");
+	public Boolean checked(@RequestParam("id") Integer id) {
 		return service.checked(id);
 	}
 }
