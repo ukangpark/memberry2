@@ -28,8 +28,8 @@ public class CustomSecurityChecker {
 		return username.equals(writer);
 	}
 	
-	public boolean checkQnAWriter(Authentication authentication, Integer qnaId) {
-		QnA qna = qnaMapper.selectById(qnaId);
+	public boolean checkQnAWriter(Authentication authentication, String qnaWriter) {
+		QnA qna = qnaMapper.selectById(qnaWriter);
 		return qna.getWriter().equals(authentication.getName());
 	}
 	

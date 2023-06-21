@@ -20,8 +20,8 @@ public class QnAService {
 		return list;
 	}
 
-	public QnA getQnA(Integer id, Authentication authentication) {
-		QnA qna = mapper.selectById(id);
+	public QnA getQnA(String writer, Authentication authentication) {
+		QnA qna = mapper.selectById(writer);
 		return qna;
 	}
 
@@ -41,9 +41,9 @@ public class QnAService {
 		return cnt == 1;
 	}
 
-	public QnA getQnA(Integer id) {
+	public QnA getQnA(String writer) {
 		
-		return getQnA(id, null);
+		return getQnA(writer, null);
 	}
 	
 }
