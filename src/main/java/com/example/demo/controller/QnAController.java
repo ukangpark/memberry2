@@ -28,25 +28,25 @@ public class QnAController {
 		return "qna";
 	}
 	
-	@GetMapping("/id/{id}")
-	public String qna(@PathVariable("id") Integer id, 
+	@GetMapping("/id/{writer}")
+	public String qna(@PathVariable("writer") String writer, 
 					  Model model,
 					  Authentication authentication) {
-		QnA qna = service.getQnA(id, authentication);
+		QnA qna = service.getQnA(writer, authentication);
 		model.addAttribute("qna", qna);
 		return "qnaforwhat";
 	}
 	
 	@GetMapping("/modify/{id}")
-	@PreAuthorize("isAuthenticated() and @customSecurityChecker.checkQnAWriter(authentication, #id)")
+	@PreAuthorize("isAuthenticated() and @customSecurityChecker.checkQnAWriter(authentication, #writer)")
 	public String modifyForm(
-							 @PathVariable("id") Integer id, Model model) {
-		model.addAttribute("qna", service.getQnA(id));
+							 @PathVariable("writer") String writer, Model model) {
+		model.addAttribute("qna", service.getQnA(writer));
 		return "qnaModify";
 	}
 	
 	@PostMapping("/modify/{id}")
-	@PreAuthorize("isAuthenticatied() and @customSecurityChecker.checkQnAWriter(authentication, #qna.id)")
+	@PreAuthorize("isAuthenticatied() and @customSecurityChecker.checkQnAWriter(authentication, #qna.writer)")
 	public String modifyProcess(QnA qna, 
 								RedirectAttributes rttr) {
 
