@@ -92,11 +92,11 @@
 							
 								</c:if>
 								<c:if test="${alarm.notiType eq 'follow' }">
-									<a href="/feedId/${alarm.feedId}" 
+									<a href="/feed/myFeed/${alarm.causedMemberId}" 
 										class="list-group-item "  onclick="alarmCheck(${alarm.id});"> 
 										<i class="fa-solid fa-user" style="color: #a0a0a0"></i>
 										<div id="aLi" style="font-weight: bold; <c:if test="${alarm.isChecked eq 'true' }">color: #a0a0a0</c:if>">
-										${alarm.notiBody}</div>
+										 ${alarm.notiBody}</div>
 										<small class="text-body-secondary">${alarm.inserted}</small>
 									</a>
 								</c:if>

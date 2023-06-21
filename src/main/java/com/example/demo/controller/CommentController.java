@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 import com.example.demo.domain.Comment;
 import com.example.demo.service.CommentService;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("comment")
 public class CommentController {
@@ -39,6 +41,7 @@ public class CommentController {
 			return ResponseEntity.status(401).body(null);
 		} else {
 			Map<String, Object> res = service.add(comment, authentication); 
+			
 			return ResponseEntity.ok().body(res); 
 		}
 				 
