@@ -31,7 +31,7 @@
 							<img class="ui medium bordered centered circular image " src="${bucketUrl }/hostProfile/${host.id }/${host.profile }">
 						</c:otherwise>
 					</c:choose>
-					<h1 class="ui center aligned header">${host.hostName }님정보입니다.</h1>
+					<h1 class="ui center aligned header"><span style="color: #FF9999;">${host.hostName }</span>님 정보입니다.</h1>
 					<div>
 						<form class="ui big form" id="checkForm">
 							<div class="field">
