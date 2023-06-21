@@ -47,7 +47,7 @@
 					</div>
 					<div class="field">
 						<label for="phone">전화번호</label>
-						<input id="phone" type="text" name="phone" placeholder="예)01012341234">
+						<input id="phone" type="text" name="phone" value="${member.phoneNumber }" readonly>
 					</div>
 					<div class="field">
 						<label for="idNumber">생년월일</label>

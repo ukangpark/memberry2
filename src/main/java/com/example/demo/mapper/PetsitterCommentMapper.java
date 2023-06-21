@@ -33,7 +33,7 @@ public interface PetsitterCommentMapper {
 	Integer delete(Integer commentId);
 	
 	@Select("""
-			SELECT pc.id, detailId, body, inserted, memberId, r.star 
+			SELECT pc.id, pc.detailId, body, inserted, memberId, r.star 
 			FROM PetsitterComment pc JOIN Rating r ON pc.id = r.commentId 
 			WHERE pc.id = #{commentId};
 			""")
