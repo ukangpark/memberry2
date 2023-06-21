@@ -65,7 +65,7 @@
 
 			<div class="d-none">
 				<form action="/qna/remove" method="post" id="removeForm">
-					<input type="text" name="id" value="${qna.writer }" />
+					<input type="text" name="id" value="${qna.id }" />
 				</form>
 			</div>
 

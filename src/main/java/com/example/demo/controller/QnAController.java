@@ -76,8 +76,8 @@ public class QnAController {
 	
 	@GetMapping("add")
 	@PreAuthorize("isAuthenticated()")
-	public void addForm(Model model, Authentication auth) {
-		model.addAttribute("auth", auth);
+	public void addForm() {
+		
 	}
 	
 	@PostMapping("add")
