@@ -137,9 +137,9 @@
 					<!-- 지도 위 위치박스  -->
 					<span class="title">호스트 위치</span>
 					<span id="centerAddr"></span>
-					<span id="mapSi">${host.si } </span>
-					<span id="mapGu">${host.gu } </span>
-					<span id="mapDong">${host.dong } </span>
+					<span id="mapSi">${host.si }</span>
+					<span id="mapGu">${host.gu }</span>
+					<span id="mapDong">${host.dong }</span>
 				</div>
 			</div>
 		</div>
@@ -325,7 +325,7 @@
 				</div>
 				<div class="modal-body">
 					<div class="mb-3">
-						호스트 등록 정보를 정말 삭제하시겠습니까?
+						상세페이지 정보를 정말 삭제하시겠습니까?
 						<br>
 						삭제를 확인하려면 비밀번호를 입력해주세요.
 					</div>

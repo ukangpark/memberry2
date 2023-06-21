@@ -82,10 +82,11 @@
 								<div class="field">
 									<div class="ui mini transparent input">
 										<c:if test="${detail.id ne null }" var="status">
+											<a class="ui basic huge label" href="/book/list/host">예약 확인</a>
 											<a class="ui basic huge label" href="/petsitter/detail?id=${host.id }">상세페이지 보기</a>
 											<input type="text" value="${status ? '등록된 상세페이지가 있습니다.' : '등록된 상세페이지가 없습니다.' }" disabled>
-											<a class="ui basic right huge label" href="/book/list/host">예약 확인</a>
 										</c:if>
+											<input type="text" value="${detail.id eq null ? '등록된 상세페이지가 없습니다.' : '' }" disabled>
 									</div>
 								</div>
 							</div>
@@ -138,7 +139,7 @@
 					<!-- 삭제하기 정보 -->
 					<form action="/petsitter/hostDelete" method="post" id="deleteForm">
 						<input type="hidden" name="hostId" value="${host.id }">
-						<input class="form-control" type="text" name="password" id="passwordInput" placeholder="비밀번호를 입력해주세요.">
+						<input class="form-control" type="password" name="password" id="passwordInput" placeholder="비밀번호를 입력해주세요.">
 					</form>
 				</div>
 				<div class="modal-footer">

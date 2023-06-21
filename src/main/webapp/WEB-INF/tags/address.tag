@@ -6,6 +6,7 @@
 		<select class="ui fluid search dropdown" name="si" id="si">
 			<option>시</option>
 			<option value="서울시" id="seoul">서울시</option>
+			<option value="부산시" id="busan">부산시</option>
 		</select>
 	</div>
 	<div class="field">

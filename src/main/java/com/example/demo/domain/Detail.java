@@ -12,5 +12,6 @@ public class Detail {
 	private LocalDate inserted;
 	private Integer hostId;
 	private String cover;
+	private String memberId;
 	
 }

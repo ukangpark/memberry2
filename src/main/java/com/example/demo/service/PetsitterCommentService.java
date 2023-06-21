@@ -44,7 +44,7 @@ public class PetsitterCommentService {
 		Integer countComment = petsitterCommentMapper.add(petsitterComment);
 
 		// 별점 넣기
-		Integer countStar = petsitterCommentMapper.addStar(petsitterComment.getStar(), petsitterComment.getId());
+		Integer countStar = petsitterCommentMapper.addStar(petsitterComment.getStar(), petsitterComment.getId(), petsitterComment.getDetailId());
 
 		System.out.println("add service : " + petsitterComment);
 
@@ -77,7 +77,7 @@ public class PetsitterCommentService {
 
 	}
 
-	public PetsitterComment selectComment(Integer commentId) {
+	public PetsitterComment selectCommentByCommentId(Integer commentId) {
 		PetsitterComment petsitterComment = petsitterCommentMapper.selectCommentByCommentId(commentId);
 		
 		System.out.println("selectCommnet service : " + petsitterComment);
