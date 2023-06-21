@@ -18,6 +18,9 @@
 		<collection property="fileName" ofType="string">
 			<result column="fileName"/>
 		</collection>
+		<collection property="keyword" ofType="String">
+			<result column="keyword"/>
+		</collection>
 	</resultMap>
   	
   </mapper>

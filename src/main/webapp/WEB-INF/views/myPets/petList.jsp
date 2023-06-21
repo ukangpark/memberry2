@@ -29,7 +29,7 @@ img {
 	height: 100%;
 }
 
-.border {
+.myPetsBorder {
 	position: absolute;
 	width: 300px;
 	height: 300px;
@@ -71,7 +71,7 @@ img {
 				<div class="item" onclick="location.href='/id/${petsList.id }'">
 					<div class="profile">
 						<img src="${bucketUrl }/pet/${petsList.id }/${petsList.photo}">
-						<div class="border"></div>
+						<div class="myPetsBorder"></div>
 					</div>
 					<div class="content">
 						<div class="ui huge header">${petsList.petName }</div>

@@ -29,14 +29,7 @@
 	z-index: 100;
 }
 
-.alarmContainer {
-	overflow-y: initial !important
-}
 
-.alarmListContainer {
-	height: 250px;
-	overflow-y: auto;
-}
 
 #profile>img {
 	margin: auto;
@@ -58,42 +51,64 @@
 		</div>
 
 		<!-- alarm -->
-	<sec:authorize access="isAuthenticated()">
-		<div class="alarmBtn ui dropdown"
-			style="display: flex; float: left; margin: 30px 10px 0px 0px; align-items: center; align-content: center; text-align: center; justify-content: center;">
-			<i class="bell big icon position-relative"> 
-			<c:if test="${sessionScope.logedInMember.alarmCount > 0 }">
-				<span class="position-absolute top-20 start-5 translate-middle p-1 bg-danger border border-light rounded-circle" style="font-size: 0.3em; font-weight: bold; color:white;">${sessionScope.logedInMember.alarmCount}</span>
-			</c:if>
-			</i>
+		<sec:authorize access="isAuthenticated()">
+		
+			<div class="alarmBtn ui scrolling dropdown"
+				style="display: flex; float: left; margin: 30px 10px 0px 0px; align-items: center; align-content: center; text-align: center; justify-content: center;">
+				<i class="bell big icon position-relative"> 
+				<c:if test="${sessionScope.logedInMember.alarmCount > 0 }">
+						<span
+							class="position-absolute top-20 start-5 translate-middle p-1 bg-danger border border-light rounded-circle"
+							style="font-size: 0.3em; font-weight: bold; color: white;"><%-- ${sessionScope.logedInMember.alarmCount} --%></span>
+					</c:if>
+				</i>
 
-			<div class="ui vertical menu" id="alarmContainer">
-				  <div class="item">  
-					 <ul class="list-group" id="alarmListContainer"> 
-						 <c:forEach items="${sessionScope.alarms }" var="alarm">
-							<c:if test="${alarm.notiType eq 'comment' }">
-								<a href="/feedId/${alarm.feedId}" id="liLink" class="list-group-item " data-alarm-id="${alarm.id}">
-									<i class="fa-solid fa-comments" style="color: #a0a0a0"></i>
-									<div id="aLi" style="font-weight: bold">${alarm.notiBody}</div> 
-									<small class="text-body-secondary">${alarm.inserted}</small>
-								</a>
-							</c:if>
+				<div class="ui vertical menu" id="alarmContainer" style="margin-top: 10px;">
+					<div class="item">
+						<ul class="list-group" id="alarmListContainer">
+							<c:forEach items="${sessionScope.alarms }" var="alarm">
+								<c:if test="${alarm.notiType eq 'comment' }">
+									 <a href="/feedId/${alarm.feedId}" 
+										class="list-group-item "  onclick="alarmCheck(${alarm.id});"> <i
+										class="fa-solid fa-comments" style="color: #a0a0a0"></i>
+										<div id="aLi" style="font-weight: bold; <c:if test="${alarm.isChecked eq 'true' }">color: #a0a0a0</c:if>">
+											${alarm.notiBody}
+										</div>
+										<small class="text-body-secondary">${alarm.inserted}</small>
+									</a> 
+									
+								</c:if>
+
+								<c:if test="${alarm.notiType eq 'like' }">
+									 <a href="/feedId/${alarm.feedId}" 
+										class="list-group-item " data-alarm-id="${alarm.id}" onclick="alarmCheck(${alarm.id});"> <i
+										class="fa-solid fa-bone" style="color: #a0a0a0"></i>
+										<div id="aLi" style="font-weight: bold; <c:if test="${alarm.isChecked eq 'true' }">color: #a0a0a0</c:if>">
+										${alarm.notiBody}
+										</div>
+										<small class="text-body-secondary">${alarm.inserted}</small>
+									</a> 
+									
 							
-							<c:if test="${alarm.notiType eq 'like' }">
-								<a href="/feedId/${alarm.feedId}" id="liLink" class="list-group-item " data-alarm-id="${alarm.id}" >
-									<i class="fa-solid fa-bone" style="color: #a0a0a0"></i>
-									<div id="aLi" style="font-weight: bold">${alarm.notiBody}</div> 
-									<small class="text-body-secondary">${alarm.inserted}</small>
-								</a>
-							</c:if>
-							
-						</c:forEach> 
+								</c:if>
+								<c:if test="${alarm.notiType eq 'follow' }">
+									<a href="/feedId/${alarm.feedId}" 
+										class="list-group-item "  onclick="alarmCheck(${alarm.id});"> 
+										<i class="fa-solid fa-user" style="color: #a0a0a0"></i>
+										<div id="aLi" style="font-weight: bold; <c:if test="${alarm.isChecked eq 'true' }">color: #a0a0a0</c:if>">
+										${alarm.notiBody}</div>
+										<small class="text-body-secondary">${alarm.inserted}</small>
+									</a>
+								</c:if>
 						
-					 </ul> 
-				</div>
-			</div> 
+							</c:forEach>
 
-		</div>
+						</ul>
+
+					</div>
+				</div>
+
+			</div>
 		</sec:authorize>
 
 
@@ -188,11 +203,13 @@
 				</sec:authorize>
 
 				<sec:authorize access="isAuthenticated()">
-					<a class="${current eq 'chat' ? 'active' : '' } item" href="/chat/chat"> 메세지 </a>
+					<a class="${current eq 'chat' ? 'active' : '' } item"
+						href="/chat/chat"> 메세지 </a>
 				</sec:authorize>
 
 				<sec:authorize access="isAuthenticated()">
-					<a class="${current eq 'chatRoom' ? 'active' : '' } item" href="/chat/chatRoom"> 메세지 목록 </a>
+					<a class="${current eq 'chatRoom' ? 'active' : '' } item"
+						href="/chat/chatRoom"> 메세지 목록 </a>
 				</sec:authorize>
 
 				<sec:authorize access="isAuthenticated()">
@@ -211,7 +228,8 @@
 						href="/member/signup"> 회원가입 </a>
 				</sec:authorize>
 
-				<a class="${current eq 'qna' ? 'active' : '' } item" href="/qna"> 질문과답변 </a>
+				<a class="${current eq 'qna' ? 'active' : '' } item" href="/qna">
+					질문과답변 </a>
 
 				<sec:authorize access="hasAuthority('admin')">
 					<a class="${current eq 'list' ? 'active' : '' } item"
@@ -223,7 +241,7 @@
 					<a class="${current eq 'logout' ? 'active' : '' } item"
 						href="/member/logout"> 로그아웃 </a>
 				</sec:authorize>
-				
+
 
 			</div>
 		</div>
@@ -234,6 +252,16 @@
 	<i style="cursor: pointer" class="fa-solid fa-circle-chevron-up fa-2x"></i>
 </div>
 
-<script src="/js/alarm.js"></script>
+<script>
+function alarmCheck(alarmId) {
+	console.log(alarmId);
+	$.ajax("/alarm/check?id=" + alarmId, {
+		method: "get",
+		success: function() {
+			console.log("알림 확인");
+		}
+	})
+}
+</script>
 
 

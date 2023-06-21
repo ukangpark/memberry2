@@ -14,18 +14,34 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.domain.Follow;
+import com.example.demo.security.LoginAuthenticationSuccessHandler;
 import com.example.demo.service.FollowService;
+import com.example.demo.service.MemberService;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class FollowController {
 
 	@Autowired
 	private FollowService followService;
+	
+	@Autowired
+	private MemberService memberService;
+	
+	@Autowired
+    private LoginAuthenticationSuccessHandler loginSuccessHandler;
+	
+
 
 	// follow
 	@PostMapping("/follow/{userName}")
-	public ResponseEntity<Map<String, Object>> follow(@RequestBody Follow follow, Authentication auth) {
-
+	public ResponseEntity<Map<String, Object>> follow(@RequestBody Follow follow,
+			Authentication auth/* , HttpSession session */) {
+		/*
+		 * loginSuccessHandler.updateMemberInSession(memberService.get(follow.
+		 * getFeedOwner()), session);
+		 */
 		return ResponseEntity.ok().body(followService.follow(follow, auth));
 	}
 	

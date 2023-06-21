@@ -22,5 +22,7 @@ public class File {
 	private Integer followingCount;
 	private Boolean followed;
 	
+	private String keyword;
+	
 }
 
