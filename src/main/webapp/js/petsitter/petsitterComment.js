@@ -205,7 +205,7 @@ geocoder.addressSearch(address, callback); //주소 정보에 해당하는 좌�
 
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 	mapOption = {
-		center: new kakao.maps.LatLng(lat, lng), // 지도의 중심좌표
+		center: new kakao.maps.LatLng(37.58172878042, 126.96920900565), // 지도의 중심좌표
 		level: 3, // 지도의 확대 레벨
 		mapTypeId: kakao.maps.MapTypeId.ROADMAP // 지도종류
 	};
@@ -225,7 +225,7 @@ kakao.maps.event.addListener(map, 'center_changed', function() {
 var customOverlay = new kakao.maps.CustomOverlay({
 	map: map,
 	content: '<div style="padding:0 5px;background:#fff;">호스트 위치</div>',
-	position: new kakao.maps.LatLng(lat, lng), // 커스텀 오버레이를 표시할 좌표
+	position: new kakao.maps.LatLng(37.58172878042, 126.96920900565), // 커스텀 오버레이를 표시할 좌표
 	xAnchor: 4.6, // 컨텐츠의 x 위치
 	yAnchor: 7.7 // 컨텐츠의 y 위치
 });
@@ -233,7 +233,7 @@ var customOverlay = new kakao.maps.CustomOverlay({
 // 지도에 원을 표시한다
 var circle = new kakao.maps.Circle({
 	map: map, // 원을 표시할 지도 객체
-	center: new kakao.maps.LatLng(lat, lng), // 지도의 중심 좌표
+	center: new kakao.maps.LatLng(37.58172878042, 126.96920900565), // 지도의 중심 좌표
 	radius: 100, // 원의 반지름 (단위 : m)
 	fillColor: '#00a0e9', // 채움 색
 	fillOpacity: 0.5, // 채움 불투명도

@@ -115,7 +115,7 @@ public class PetsitterService {
 
 		// hostId로 상세페이지 정보 불러옴
 		Detail detail = petsitterMapper.selectDetailById(hostId);
-		System.out.println(detail);
+		System.out.println("여기 : " + detail);
 
 		// 호스트 집사진 정보를 불러옴
 		if (detail != null) {
@@ -126,15 +126,18 @@ public class PetsitterService {
 		}
 
 		// 상세페이지의 예약 정보
-		List<Book> book = bookMapper.selectByDetailId(detail.getId());
-		System.out.println("예약정보 : " + book);
-		System.out.println(detail.getId());
+		if(detail != null) {
+			List<Book> book = bookMapper.selectByDetailId(detail.getId());
+			System.out.println("예약정보 : " + book);
+			System.out.println(detail.getId());
+			
+			info.put("book", book);
+		}
 
 		// map타입 변수 info에 넣음
 		info.put("host", host);
 		info.put("detail", detail);
 		info.put("member", member);
-		info.put("book", book);
 		return info;
 	}
 
@@ -199,6 +202,7 @@ public class PetsitterService {
 				// 등록된 상세페이지가 있으면
 				// 등록된 상세페이지 삭제
 				boolean ok = deleteDetailByHostId(hostId, member);
+				
 			}
 
 			// 호스트 정보 삭제
@@ -212,9 +216,11 @@ public class PetsitterService {
 	}
 
 	public boolean insertDetail(Detail detail, Authentication authentication) throws Exception {
+		System.out.println( "add service detail : " + detail);
 		// 상세페이지 등록
 		Integer count = 0;
-		Integer hostId = petsitterMapper.selectHostByMemberId(authentication.getName()).getId();
+		//Integer hostId = petsitterMapper.selectHostByMemberId(authentication.getName()).getId();
+		Integer hostId = detail.getHostId();
 		detail.setHostId(hostId);
 
 		// 호스트 아이디로 상세페이지가 있는지 탐색
@@ -366,6 +372,9 @@ public class PetsitterService {
 					.key(keyCover).build();
 
 			s3.deleteObject(deleteObjectRequestCover);
+			
+			//별점 삭제
+			petsitterMapper.deleteStarByDetailId(detail.getId());
 
 			// petsitterComment 레코드 삭제
 			petsitterMapper.deleteCommentByDetailId(detail.getId());

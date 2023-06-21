@@ -58,32 +58,13 @@
 								<input type="text" name="phone" value="${host.phone }">
 							</div>
 							<div class="field">
-								<label>주민번호</label>
+								<label>생년월일</label>
 								<input type="text" name="idNumber" value="${host.idNumber }" disabled>
 							</div>
 							<div class="field">
 								<label>주소</label>
-								<div class="equal width fields">
-									<div class="field">
-										<select class="ui fluid search dropdown" name="si" id="si">
-											<option value="서울시">서울시</option>
-										</select>
-									</div>
-									<div class="field" id="addressContainer">
-										<select class="ui fluid search dropdown" name="gu" id="gu">
-											<option value="강서구" id="gangseo">강서구</option>
-											<option value="마포구" id="mapo">마포구</option>
-											<option value="종로구" id="jongno">종로구</option>
-										</select>
-									</div>
-									<div class="field">
-										<select class="ui fluid search dropdown" name="dong" id="dong">
-											<option value="내발산동">내발산동</option>
-											<option value="염창동">염창동</option>
-											<option value="화곡동">화곡동</option>
-										</select>
-									</div>
-								</div>
+								<my:address></my:address>
+
 							</div>
 							<div class="field">
 								<label>상세주소</label>
@@ -92,22 +73,38 @@
 							<div class="field">
 								<div class="equal width fields">
 									<div class="field">
-										<label>주거형태</label>
-										<input type="text" name="houseType" value="${host.houseType }">
+										<label for="houseType">거주지 형태 </label>
+										<select class="ui fluid search dropdown" name="houseType" id="houseType">
+											<option value="10평 이하">10평 이하</option>
+											<option value="11 - 20평 이하">11 - 20평 이하</option>
+											<option value="21 - 30평 이하">21 - 30평 이하</option>
+											<option value="31평 이상">31평 이상</option>
+										</select>
 									</div>
 									<div class="field">
-										<label>반려동물</label>
-										<input type="text" name="pet" value="${host.pet }">
+										<label for="pet">반려 경험 유무</label>
+										<select class="ui fluid search dropdown" name="pet" id="pet">
+											<option value="있음">있음</option>
+											<option value="없음">없음</option>
+										</select>
 									</div>
 									<div class="field">
-										<label>반려동물 크기</label>
-										<input type="text" name="species" value="${host.species }">
+										<label for="species">반려견 크기</label>
+										<select class="ui fluid search dropdown" name="species" id="species">
+											<option value="소형견">소형견</option>
+											<option value="중형견">중형견</option>
+											<option value="대형견">대형견</option>
+										</select>
 									</div>
 								</div>
-								<div class="field">
-									<label>펫시터 경험</label>
-									<input type="text" name="experience" value="${host.experience }">
-								</div>
+							</div>
+							<div class="field">
+								<label for="experience">펫시터 활동 경력</label>
+								<select class="ui fluid search dropdown" name="experience" id="experience">
+									<option value="과거에 활동했지만, 현재는 활동하지 않음">과거에 활동했지만, 현재는 활동하지 않음</option>
+									<option value="현재도 활동하고 있음">현재도 활동하고 있음</option>
+									<option value="펫시터로 활동을 해본 적이 없음">펫시터로 활동을 해본 적이 없음</option>
+								</select>
 							</div>
 						</form>
 					</div>
@@ -145,6 +142,9 @@
 			console.log("click");
 		})
 	</script>
+	<script src="/js/petsitter/address.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="/js/semantic/semantic.min.js"></script>
 
 </body>
 </html>
