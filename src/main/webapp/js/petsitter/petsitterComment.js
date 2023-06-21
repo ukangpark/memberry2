@@ -71,10 +71,12 @@ function listComment() {
 						console.log(comment.star);
 						console.log(comment.id);
 						console.log(createStarText(comment.star));
+						console.log(comment.body);
 
 						$("#commentBodyAreaModify").val(comment.body); //후기 내용 조회해서 넣기 
 						$("#starRatingModify").val(comment.star); //별점수 조회해서 input에 넣기 
 						var text = createStarText(comment.star);
+						$("#commentForAddStar").empty();
 						$("#commentForAddStar").append(`<h3 class="ui header center aligned">${text}</h3>`); //별점수에 따른 코멘트 넣기 
 						$(".star")
 							.rating({
