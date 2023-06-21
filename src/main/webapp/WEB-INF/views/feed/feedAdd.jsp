@@ -142,6 +142,7 @@
 					<div class="field">
 						<div class="ui divider"></div>
 						<label align="left" style="color: gray; font-weight: bolder;">태그를 추가 해 보세요:)</label>
+						<input type="text" id="feedId" name="feedId" value="${feedId }" style="display: none;">
 						<div class="ui right labeled left icon input">
 							<i class="tags icon"></i>
 							<input type="text" id="tagInput" placeholder="Enter tags" >

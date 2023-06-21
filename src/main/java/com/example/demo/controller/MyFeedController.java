@@ -45,6 +45,7 @@ public class MyFeedController {
 	public String myFeed(Model model, @PathVariable("userName") String userName, Authentication authentication) {
 		List<File> list = service.listMyFeed(userName, authentication);
 		Registration profileList = service.listProfile(userName, authentication);
+		System.out.println(list);
 
 		// 마이피드에 펫정보 가져오기 용
 		String petName = profileList.getPetName();
@@ -74,15 +75,18 @@ public class MyFeedController {
 		return "feed/myFeed";
 	}
 
-	@GetMapping("feed/feedAdd")
+	@GetMapping("feed/feedAdd/{feedId}")
 	@PreAuthorize("isAuthenticated()")
-	public void addForm(Model model, Authentication authentication) {
+	public String addForm(@PathVariable("feedId") int feedId, Model model, Authentication authentication) {
 		// 게시물 작성 form(view)로 포워드
 		model.addAttribute("authentication", authentication);
+		model.addAttribute("feedId", feedId);
+		
+		return "feed/feedAdd";
 	}
 
 	// 게시물 추가하기
-	@PostMapping("feed/feedAdd")
+	@PostMapping("feed/feedAdd/{feedId}")
 	@PreAuthorize("isAuthenticated()")
 	public String addProcess(@RequestParam("files") MultipartFile[] files, Feed feed, Authentication authentication,
 			RedirectAttributes rttr) throws Exception {
@@ -98,7 +102,7 @@ public class MyFeedController {
 		} else {
 			rttr.addFlashAttribute("feed", feed);
 			rttr.addFlashAttribute("message", "피드 등록에 실패하였습니다.");
-			return "redirect:/feed/feedAdd";
+			return "redirect:/feed/feedAdd/{feedId}";
 		}
 	}
 
@@ -154,7 +158,7 @@ public class MyFeedController {
 	}
 
 	// 태그
-	@GetMapping("/tag/list/{tagInput}")
+	@GetMapping("/tag/list/{feedId}/{tagInput}")
 	@ResponseBody
 	public List<Tag> tag(@PathVariable("tagInput") String tagInput, Authentication auth) {
 		List<Tag> result = service.tag(tagInput, auth);
