@@ -71,7 +71,7 @@
 	<my:navBar></my:navBar>
 		
 	<div class="pageName">
-		<h1>${feed.id }번 게시물 수정하기</h1>
+		<%-- <h1>${feed.id }번 게시물 수정하기</h1> --%>
 	</div>
 
 	<div class="back" style="background-color: #EEEEEE">
