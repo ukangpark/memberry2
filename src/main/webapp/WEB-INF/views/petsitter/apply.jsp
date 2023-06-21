@@ -56,24 +56,7 @@
 					<div class="field">
 						<label>주소</label>
 						<my:address></my:address>
-						<div class="equal width fields">
-							<div class="field">
-								<select class="ui fluid search dropdown" name="si" id="si">
-									<option>시</option>
-									<option value="서울시" id="seoul">서울시</option>
-								</select>
-							</div>
-							<div class="field">
-								<select class="ui fluid search dropdown" name="gu" id="gu">
-									<option>구</option>
-								</select>
-							</div>
-							<div class="field">
-								<select class="ui fluid search dropdown" name="dong" id="dong">
-									<option>동</option>
-								</select>
-							</div>
-						</div> 
+						
 					</div>
 					<div class="field">
 						<label for="address">상세 주소</label>
@@ -220,5 +203,6 @@
 	</script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="/js/semantic/semantic.min.js"></script>
+	<script src="/js/petsitter/address.js"></script>
 </body>
 </html>

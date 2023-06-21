@@ -31,9 +31,30 @@ public class PetsitterService {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
-	public Map<String, Object> selectAll() {
+	public Map<String, Object> selectAll(Integer page) {
+		// 페이지네이션
+		Integer rowPerPage = 10; //페이지당 행의 수
+
+		// 쿼리 LIMIT 절에 사용할 시작 인덱스
+		Integer startIndex = (page - 1) * rowPerPage;
+
+		// 페이지네이션이 필요한 정보
+		// 전체 레코드 수
+		Integer numOfRecords = petsitterMapper.countAllHost();
+		// 마지막 페이지 번호
+		Integer lastPageNumber = (numOfRecords - 1) / rowPerPage + 1;
+		// 페이지네이션 왼쪽번호
+		Integer leftPageNum = page - 5;
+		// 1보다 작을 수 없음
+		leftPageNum = Math.max(leftPageNum, 1);
+
+		// 페이지네이션 오른쪽번호
+		Integer rightPageNum = leftPageNum + 9;
+		// 마지막페이지보다 클 수 없음
+		rightPageNum = Math.min(rightPageNum, lastPageNumber);
+
 		// 전체 호스트 정보 탐색
-		List<Host> host = petsitterMapper.selectHostAll();
+		List<Host> host = petsitterMapper.selectHostAll(startIndex, rowPerPage);
 		// 전체 상세페이지 정보 탐색
 		List<Detail> detail = petsitterMapper.selectDetailAll();
 		// 전체 집사진 정보 탐색
@@ -43,6 +64,10 @@ public class PetsitterService {
 		info.put("host", host);
 		info.put("detail", detail);
 		info.put("hostHousePhoto", hostHousePhoto);
+		info.put("rightPageNum", rightPageNum);
+		info.put("leftPageNum", leftPageNum);
+		info.put("currentPageNum", page);
+		info.put("lastPageNum", lastPageNumber);
 
 		return info;
 	}
@@ -51,27 +76,26 @@ public class PetsitterService {
 		// 호스트 아이디로 상세페이지와 호스트 정보탐색
 		Map<String, Object> info = new HashMap<>();
 
-		// 회원정보를 불러옴  
+		// 회원정보를 불러옴
 		Member member = memberMapper.selectById(memberId);
-		
+
 		// 호스트의 정보를 불러옴
 		Host host = petsitterMapper.selectHostByMemberId(memberId);
-		
+
 		// 상세페이지 정보 불러옴
-		if(host != null) {
-			//호스트로 등록이 되어있으면 상세페이지 조회
-			Detail detail = petsitterMapper.selectDetailById(host.getId());	
+		if (host != null) {
+			// 호스트로 등록이 되어있으면 상세페이지 조회
+			Detail detail = petsitterMapper.selectDetailById(host.getId());
 			info.put("detail", detail);
-			
+
 			// 호스트 집사진 정보를 불러옴
 			if (detail != null) {
 				// 등록된 상세페이지가 있다면 정보 조회
 				List<HostHousePhoto> hostHousePhoto = petsitterMapper.selectHostHousePhotoByDetailId(detail.getId());
 				info.put("hostHousePhoto", hostHousePhoto);
-				
+
 			}
 		}
-		
 
 		// map타입 변수 info에 넣음
 		info.put("host", host);
@@ -82,17 +106,17 @@ public class PetsitterService {
 	public Map<String, Object> selectByHostId(Integer hostId, Authentication authentication) {
 		// 호스트 아이디로 상세페이지와 호스트 정보탐색
 		Map<String, Object> info = new HashMap<>();
-		
-		// 회원의 아이디로 회원 정보를 불러옴 
+
+		// 회원의 아이디로 회원 정보를 불러옴
 		Member member = memberMapper.selectById(authentication.getName());
 
 		// hostId로 호스트의 정보를 불러옴
 		Host host = petsitterMapper.selectHostByHostId(hostId);
-		
+
 		// hostId로 상세페이지 정보 불러옴
 		Detail detail = petsitterMapper.selectDetailById(hostId);
 		System.out.println(detail);
-		
+
 		// 호스트 집사진 정보를 불러옴
 		if (detail != null) {
 			// 등록된 상세페이지가 있다면 정보 조회
@@ -100,8 +124,8 @@ public class PetsitterService {
 			info.put("hostHousePhoto", hostHousePhoto);
 
 		}
-		
-		//상세페이지의 예약 정보 
+
+		// 상세페이지의 예약 정보
 		List<Book> book = bookMapper.selectByDetailId(detail.getId());
 		System.out.println("예약정보 : " + book);
 		System.out.println(detail.getId());
@@ -120,16 +144,16 @@ public class PetsitterService {
 		// 호스트 정보 등록
 		if (petsitterMapper.selectHostByMemberId(host.getMemberId()) == null) {
 			// 호스트로 등록된 정보가 없으면 등록
-			
+
 			count = petsitterMapper.insertHost(host, file.getOriginalFilename());
 			System.out.println("service : " + memberMapper.selectById(host.getMemberId()));
-			
-			if(memberMapper.selectById(host.getMemberId()) != null) {
-				
+
+			if (memberMapper.selectById(host.getMemberId()) != null) {
+
 				// 호스트 등록하자마자 권한 등록
-			petsitterMapper.insertHostAuthority(host.getId());	
+				petsitterMapper.insertHostAuthority(host.getId());
 			}
-			
+
 			// 호스트 프로필 사진 업로드
 			if (file.getSize() > 0) {
 				String key = "membery/hostProfile/" + host.getId() + "/" + file.getOriginalFilename();
@@ -156,31 +180,31 @@ public class PetsitterService {
 
 			s3.putObject(objectRequest, RequestBody.fromInputStream(profile.getInputStream(), profile.getSize()));
 		}
-		
+
 		// 호스트 정보 수정
 		count = petsitterMapper.modifyHostById(host, profile.getOriginalFilename());
-		 
+
 		return count == 1;
 	}
 
 	public boolean deleteHostById(Integer hostId, Member member, Authentication authentication) {
 		Integer count = 0;
-		
+
 		Member memberInfo = memberMapper.selectById(member.getId());
-		
+
 		if (passwordEncoder.matches(member.getPassword(), memberInfo.getPassword())) {
 			// 암호가 같으면 삭제 진행
-			
-			if(selectByHostId(hostId, authentication).get("detail") != null) {
-				//등록된 상세페이지가 있으면 
-				//등록된 상세페이지 삭제 
-				boolean ok = deleteDetailByHostId(hostId, member);				
+
+			if (selectByHostId(hostId, authentication).get("detail") != null) {
+				// 등록된 상세페이지가 있으면
+				// 등록된 상세페이지 삭제
+				boolean ok = deleteDetailByHostId(hostId, member);
 			}
 
-				// 호스트 정보 삭제
-				count = petsitterMapper.deleteHostById(hostId);
-				//권한 테이블에서 정보 삭제
-				petsitterMapper.deleteHostAuthorityByMemberId(memberInfo.getId());
+			// 호스트 정보 삭제
+			count = petsitterMapper.deleteHostById(hostId);
+			// 권한 테이블에서 정보 삭제
+			petsitterMapper.deleteHostAuthorityByMemberId(memberInfo.getId());
 		}
 		// 암호가 다르면 삭제 안됨
 
@@ -208,18 +232,17 @@ public class PetsitterService {
 
 		// 상세페이지 아이디를 얻기 위한 메소드
 		Detail detail = petsitterMapper.selectDetailById(hostId);
-		
+
 		// 대표 사진 추가
-		if(cover.getSize() > 0) {
+		if (cover.getSize() > 0) {
 			String coverKey = "membery/cover/" + detail.getId() + "/" + cover.getOriginalFilename();
 			PutObjectRequest objectRequestCover = PutObjectRequest.builder().bucket(bucketName).key(coverKey)
 					.acl(ObjectCannedACL.PUBLIC_READ).build();
 			s3.putObject(objectRequestCover, RequestBody.fromInputStream(cover.getInputStream(), cover.getSize()));
 			// 대표 사진 테이블 추가
-			
+
 			petsitterMapper.insertCover(detail.getId(), cover.getOriginalFilename());
 		}
-
 
 		// 상세페이지 집사진 추가
 		for (MultipartFile housePhoto : housePhotos) {
@@ -253,12 +276,9 @@ public class PetsitterService {
 		return count == 1;
 	}
 
-	public Integer modifyDetailHousePhotos(
-			MultipartFile addCover, 
-			MultipartFile[] addPhotos, 
-			List<String> removePhotos,
+	public Integer modifyDetailHousePhotos(MultipartFile addCover, MultipartFile[] addPhotos, List<String> removePhotos,
 			Detail detail) throws Exception {
-		
+
 		Integer count = 0;
 		// 커버사진 수정
 		if (addCover.getSize() > 0) {
@@ -313,49 +333,49 @@ public class PetsitterService {
 
 	public boolean deleteDetailByHostId(Integer hostId, Member member) {
 		Integer count = 0;
-		
-		//기존의 정보 조회 
+
+		// 기존의 정보 조회
 		Member oldMember = memberMapper.selectById(member.getId());
-		
-		if(passwordEncoder.matches(member.getPassword(), oldMember.getPassword())) {
-			// 사용자가 입력한 비밀번호와 저장된 비밀번호가 같으면 작업 실행 
-			
+
+		if (passwordEncoder.matches(member.getPassword(), oldMember.getPassword())) {
+			// 사용자가 입력한 비밀번호와 저장된 비밀번호가 같으면 작업 실행
+
 			// detailId 값을 가져옴
 			Detail detail = petsitterMapper.selectDetailById(hostId);
-			
+
 			// 상세페이지 집사진 삭제
 			// 집사진 이름 조회
 			List<HostHousePhoto> hostHousePhotoes = petsitterMapper.selectHostHousePhotoByDetailId(detail.getId());
-			
+
 			for (HostHousePhoto hostHousePhoto : hostHousePhotoes) {
 				// aws에서 집사진 삭제
 				String key = "membery/hostHousePhoto/" + detail.getId() + "/" + hostHousePhoto.getHousePhoto();
-				DeleteObjectRequest deleteObjectRequest = DeleteObjectRequest.builder().bucket(bucketName).key(key).build();
-				
+				DeleteObjectRequest deleteObjectRequest = DeleteObjectRequest.builder().bucket(bucketName).key(key)
+						.build();
+
 				s3.deleteObject(deleteObjectRequest);
-				
+
 			}
-			
+
 			// 집사진 테이블에서 정보 삭제
 			Integer photoDeleteCount = petsitterMapper.deleteHostHousePhotoByDetailId(detail.getId());
-			
+
 			// aws에 커버사진 삭제
 			String keyCover = "membery/cover/" + detail.getId() + "/" + detail.getCover();
-			DeleteObjectRequest deleteObjectRequestCover = DeleteObjectRequest.builder().bucket(bucketName).key(keyCover)
-					.build();
-			
+			DeleteObjectRequest deleteObjectRequestCover = DeleteObjectRequest.builder().bucket(bucketName)
+					.key(keyCover).build();
+
 			s3.deleteObject(deleteObjectRequestCover);
-			
-			//petsitterComment 레코드 삭제 
+
+			// petsitterComment 레코드 삭제
 			petsitterMapper.deleteCommentByDetailId(detail.getId());
-			
-			//book 레코드 삭제 
+
+			// book 레코드 삭제
 			petsitterMapper.deleteBookByDetailId(detail.getId());
-			
+
 			// 상세페이지 삭제
 			count = petsitterMapper.deleteDetailByHostId(hostId);
 		}
-		
 
 		return count == 1;
 	}
@@ -392,7 +412,7 @@ public class PetsitterService {
 
 	// 반려견 정보 가져오기
 	public List<Registration> selectUserPet(String userId) {
-		
+
 		return petsitterMapper.selectUserPet(userId);
 	}
 

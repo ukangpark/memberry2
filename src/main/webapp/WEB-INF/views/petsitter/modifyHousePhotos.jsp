@@ -12,6 +12,23 @@
 <my:top></my:top>
 <link rel="stylesheet" type="text/css" href="/js/semantic/semantic.min.css">
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+<style type="text/css">
+#preview {
+	position: relative;
+}
+
+#coverLabel {
+	position: absolute;
+	top: 110px;
+	left: 220px;
+}
+
+#plus {
+	position: absolute;
+	top: 100px;
+	left: 650px;
+}
+</style>
 </head>
 <body>
 	<my:navBar></my:navBar>
@@ -22,25 +39,32 @@
 			<div class="ui segment">
 				<form id="modifyDetailForm" class="ui big form" method="post" action="/petsitter/modifyHousePhotos" enctype="multipart/form-data">
 					<h1 class="ui dividing header">집사진 수정하기</h1>
-					<div>대표 사진</div>
+					<h1 class="ui header center aligned">
+						<div class="sub header ">대표 사진을 수정할 수 있습니다.</div>
+					</h1>
 					<c:choose>
 						<c:when test="${detail.cover eq null or detail.cover eq '' }">
 							<img style="position: relative;" class="ui centered large bordered rounded image" id="preview" src="/images/defaultHome.jpeg">
 							<div class="ui teal ribbon label" style="position: absolute; top: 90px; left: 118px;">대표 사진</div>
 						</c:when>
 						<c:otherwise>
-							<img style="position: relative;" class="ui centered large bordered rounded image " src="${bucketUrl }/cover/${detail.id }/${detail.cover }" id="preview">
-							<div class="ui teal ribbon label" style="position: absolute; top: 90px; left: 118px;">대표 사진</div>
+							<div class="image-container">
+								<img class="ui centered large bordered rounded image " src="${bucketUrl }/cover/${detail.id }/${detail.cover }" id="preview">
+								<div class="ui teal ribbon label" id="coverLabel">대표 사진</div>
+							</div>
 						</c:otherwise>
 					</c:choose>
 					<label for="addCover">
-						<i class="plus icon large button" style="position: absolute; top: 3.1lh; left: 20.1lh;"></i>
+						<i class="plus icon large button" id="plus"></i>
 					</label>
 					<div class="field">
 						<input id="addCover" type="file" name="addCover" onchange="readURL(this);">
 					</div>
 					<hr>
 					<div class="field">
+						<h1 class="ui header center aligned">
+							<div class="sub header ">기존 집 사진을 삭제하려면 선택해주세요.</div>
+						</h1>
 						<c:forEach items="${hostHousePhoto }" var="hostHousePhoto" varStatus="status">
 							<label for="housePhoto${status.index }">
 								<img style="width: 100px;" src="${bucketUrl }/hostHousePhoto/${detail.id }/${hostHousePhoto.housePhoto }">
@@ -90,17 +114,17 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="/js/semantic/semantic.min.js"></script>
 	<script type="text/javascript">
-	function readURL(input) {
-		if (input.files && input.files[0]) {
-			var reader = new FileReader();
-			reader.onload = function(e) {
-				document.getElementById('preview').src = e.target.result;
-			};
-			reader.readAsDataURL(input.files[0]);
-		} else {
-			document.getElementById('preview').src = "";
+		function readURL(input) {
+			if (input.files && input.files[0]) {
+				var reader = new FileReader();
+				reader.onload = function(e) {
+					document.getElementById('preview').src = e.target.result;
+				};
+				reader.readAsDataURL(input.files[0]);
+			} else {
+				document.getElementById('preview').src = "";
+			}
 		}
-	}
 	</script>
 </body>
 </html>

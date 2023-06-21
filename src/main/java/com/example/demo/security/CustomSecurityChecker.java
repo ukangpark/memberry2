@@ -16,6 +16,9 @@ public class CustomSecurityChecker {
 	@Autowired
 	private CommentMapper commentMapper;
 	
+	@Autowired
+	private QnAMapper qnaMapper;
+	
 	public boolean checkFeedWriter(Authentication authentication, Integer feedId) {
 		Feed feed = mapper.selectById(feedId);
 		
@@ -23,6 +26,11 @@ public class CustomSecurityChecker {
 		String writer = feed.getWriter();
 		
 		return username.equals(writer);
+	}
+	
+	public boolean checkQnAWriter(Authentication authentication, String qnaWriter) {
+		QnA qna = qnaMapper.selectById(qnaWriter);
+		return qna.getWriter().equals(authentication.getName());
 	}
 	
 	public boolean checkCommentWriter(Authentication authentication, Integer commentId) {

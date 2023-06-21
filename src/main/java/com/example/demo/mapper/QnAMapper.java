@@ -21,9 +21,9 @@ public interface QnAMapper {
 	@Select("""
 			SELECT *
 			FROM QnA
-			WHERE id = #{id}
+			WHERE writer = #{id}
 			""")
-	QnA selectById(Integer id);
+	QnA selectById(String writer);
 
 	@Update("""
 			UPDATE QnA
@@ -33,4 +33,17 @@ public interface QnAMapper {
 			WHERE id = #{id}
 			""")
 	int update(QnA qna);
+
+	@Delete("""
+			DELETE FROM QnA
+			WHERE id = #{id}
+			""")
+	int deleteById(Integer id);
+
+	@Insert("""
+			INSERT INTO QnA (title, body, writer)
+			VALUES (#{title}, #{body}, #{writer})
+			""")
+	@Options(useGeneratedKeys = true, keyProperty = "id")
+	int insert(QnA qna);
 }

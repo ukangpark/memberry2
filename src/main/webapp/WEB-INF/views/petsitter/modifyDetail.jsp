@@ -32,10 +32,10 @@
 						<textarea id="body" type="text" name="body" rows="20">${detail.body }</textarea>
 					</div>
 					<div class="field">
-						<input type="text" name="hostId" value="${host.id }">
+						<input type="hidden" name="hostId" value="${host.id }">
 					</div>
 					<div class="field">
-						<input type="text" name="detailId" value="${detail.id }">
+						<input type="hidden" name="detailId" value="${detail.id }">
 					</div>
 				</form>
 			</div>

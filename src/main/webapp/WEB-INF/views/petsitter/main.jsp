@@ -151,7 +151,7 @@
 		<div class="searchBar">
 			<form action="list" class="d-flex" role="search">
 				<input value="${param.search }" name="search" class="form-control me-2" type="search" placeholder="맡기고 싶은 지역을 검색해보세요" aria-label="Search" id="input-box">
-				<button id="searchBtn" class="ui black button" type="submit" style="width: 50px; text-align: center;">
+				<button id="searchBtn" class="ui black button" type="submit" style="width: 55px; text-align: center;">
 					<i class="fa-solid i1 fa-magnifying-glass"></i>
 				</button>
 				<!-- 전체보기 버튼 -->

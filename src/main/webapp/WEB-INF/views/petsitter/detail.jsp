@@ -46,7 +46,7 @@
 	<div class="container" style="width: 900px">
 		<h3 class="ui dividing header">
 			Detail
-			<span class="" id="detailIdText">${detail.id }</span>
+			<span class="d-none" id="detailIdText">${detail.id }</span>
 		</h3>
 		<div class="ui items">
 			<div class="item">
@@ -76,9 +76,9 @@
 							</sec:authorize>
 						</c:when>
 					</c:choose>
-					<a class="header">${host.hostName }</a>
+					<a class="header">${host.hostName }님</a>
 					<div class="meta">
-						<span>주소 : ${host.si }시 ${host.gu }구 ${host.dong }동</span>
+						<span>주소 : ${host.si } ${host.gu } ${host.dong }</span>
 						<br>
 						<span>번호 : ${host.phone }</span>
 					</div>
@@ -133,9 +133,13 @@
 			<h3 class="ui dividing header" style="width: 880px;">Map</h3>
 			<div class="map_wrap">
 				<div class="rounded container" style="width: 880px; height: 200px;" id="map"></div>
-				<div class="hAddr"> <!-- 지도 위 위치박스  -->
+				<div class="hAddr">
+					<!-- 지도 위 위치박스  -->
 					<span class="title">호스트 위치</span>
-					<span id="centerAddr">${host.si } ${host.gu } ${host.dong }</span>
+					<span id="centerAddr"></span>
+					<span id="mapSi">${host.si } </span>
+					<span id="mapGu">${host.gu } </span>
+					<span id="mapDong">${host.dong } </span>
 				</div>
 			</div>
 		</div>
@@ -265,17 +269,14 @@
 					<!-- 사진들 -->
 					<div id="carouselExampleIndicators" class="carousel slide">
 						<div class="carousel-indicators">
-							<c:forEach items="${hostHousePhoto }" var="hostHousePhoto" varStatus="status">
-								<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="${status }" class="active" aria-current="true" aria-label="Slide ${status }"></button>
+							<c:forEach items="${hostHousePhoto}" var="hostHousePhoto" varStatus="number">
+								<button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="${number.index}" class="${number.index == 0 ? 'active' : ''}" aria-current="true" aria-label="Slide ${number.index + 1}"></button>
 							</c:forEach>
 						</div>
-						<div class="carousel-inner modalPhoto">
-							<div class="carousel-item active">
-								<img src="${bucketUrl }/cover/${detail.id }/${detail.cover }" class="d-block w-100 housePhotos">
-							</div>
-							<c:forEach items="${hostHousePhoto }" var="hostHousePhoto">
-								<div class="carousel-item">
-									<img class="rounded housePhotos" src="${bucketUrl }/hostHousePhoto/${detail.id }/${hostHousePhoto.housePhoto }">
+						<div class="carousel-inner">
+							<c:forEach items="${hostHousePhoto}" var="hostHousePhoto" varStatus="number">
+								<div class="carousel-item ${number.index == 0 ? 'active' : ''}">
+									<img src="${bucketUrl }/hostHousePhoto/${detail.id }/${hostHousePhoto.housePhoto }" class="d-block" style="width: 100%; height: 650px;; object-fit: cover;" alt="...">
 								</div>
 							</c:forEach>
 						</div>
@@ -295,6 +296,7 @@
 			</div>
 		</div>
 	</div>
+
 
 	<!-- 상세페이지 수정 모달 -->
 	<div class="modal fade" id="checkModal" tabindex="-1" aria-labelledby="checkModalLabel" aria-hidden="true">
@@ -342,10 +344,10 @@
 	</div>
 
 	<my:bottom></my:bottom>
-	<script src="/js/petsitter/petsitterComment.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=${apiKey }&libraries=services"></script>
 	<script async src="http://t1.daumcdn.net/mapjsapi/js/main/4.4.8/kakao.js"></script>
+	<script src="/js/petsitter/petsitterComment.js"></script>
 
 	<script type="text/javascript">
 		function openModal() {
@@ -354,107 +356,7 @@
 
 		var bucketUrl = '${bucketUrl}';
 
-		var script = document.createElement('script');
-		script.src = 'http://t1.daumcdn.net/mapjsapi/js/main/4.4.8/kakao.js';
-		document.head.appendChild(script);
 
-		//지도
-		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-		mapOption = {
-			center : new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표(위도, 경도)
-			level : 3
-		// 지도의 확대 레벨
-		};
-
-		// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
-		var map = new kakao.maps.Map(mapContainer, mapOption);
-
-		// 지도에 표시할 원을 생성합니다
-		var circle = new kakao.maps.Circle({
-			center : new kakao.maps.LatLng(33.450701, 126.570667), // 원의 중심좌표 입니다 
-			radius : 90, // 미터 단위의 원의 반지름입니다 
-			strokeWeight : 3, // 선의 두께입니다 
-			strokeColor : '#75B8FA', // 선의 색깔입니다
-			strokeOpacity : 1, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
-			strokeStyle : 'border', // 선의 스타일 입니다
-			fillColor : '#CFE7FF', // 채우기 색깔입니다
-			fillOpacity : 0.5
-		// 채우기 불투명도 입니다   
-		});
-
-		// 지도에 원을 표시합니다 
-		circle.setMap(map);
-
-		getInfo();
-
-		function getInfo() {
-			// 지도의 현재 중심좌표를 얻어옵니다 
-			var center = map.getCenter();
-
-			// 지도의 현재 레벨을 얻어옵니다
-			var level = map.getLevel();
-
-			// 지도타입을 얻어옵니다
-			var mapTypeId = map.getMapTypeId();
-
-			// 지도의 현재 영역을 얻어옵니다 
-			var bounds = map.getBounds();
-
-			// 영역의 남서쪽 좌표를 얻어옵니다 
-			var swLatLng = bounds.getSouthWest();
-
-			// 영역의 북동쪽 좌표를 얻어옵니다 
-			var neLatLng = bounds.getNorthEast();
-
-			// 영역정보를 문자열로 얻어옵니다. ((남,서), (북,동)) 형식입니다
-			var boundsStr = bounds.toString();
-
-			var message = '지도 중심좌표는 위도 ' + center.getLat() + ', <br>';
-			message += '경도 ' + center.getLng() + ' 이고 <br>';
-			message += '지도 레벨은 ' + level + ' 입니다 <br> <br>';
-			message += '지도 타입은 ' + mapTypeId + ' 이고 <br> ';
-			message += '지도의 남서쪽 좌표는 ' + swLatLng.getLat() + ', '
-					+ swLatLng.getLng() + ' 이고 <br>';
-			message += '북동쪽 좌표는 ' + neLatLng.getLat() + ', '
-					+ neLatLng.getLng() + ' 입니다';
-
-			// 개발자도구를 통해 직접 message 내용을 확인해 보세요.
-			console.log(message);
-		}
-
-		// 현재 지도 중심좌표로 주소를 검색해서 지도 좌측 상단에 표시합니다
-		searchAddrFromCoords(map.getCenter(), displayCenterInfo);
-
-		// 중심 좌표나 확대 수준이 변경됐을 때 지도 중심 좌표에 대한 주소 정보를 표시하도록 이벤트를 등록합니다
-		kakao.maps.event.addListener(map, 'idle', function() {
-			searchAddrFromCoords(map.getCenter(), displayCenterInfo);
-		});
-
-		function searchAddrFromCoords(coords, callback) {
-			// 좌표로 행정동 주소 정보를 요청합니다
-			geocoder.coord2RegionCode(coords.getLng(), coords.getLat(),
-					callback);
-		}
-
-		function searchDetailAddrFromCoords(coords, callback) {
-			// 좌표로 법정동 상세 주소 정보를 요청합니다
-			geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
-		}
-
-		// 지도 좌측상단에 지도 중심좌표에 대한 주소정보를 표출하는 함수입니다
-		function displayCenterInfo(result, status) {
-			if (status === kakao.maps.services.Status.OK) {
-				var infoDiv = document.getElementById('centerAddr');
-
-				for (var i = 0; i < result.length; i++) {
-					// 행정동의 region_type 값은 'H' 이므로
-					if (result[i].region_type === 'H') {
-						infoDiv.innerHTML = result[i].address_name;
-						break;
-					}
-				}
-			}
-		}
 	</script>
 
 	<script src="/js/semantic/semantic.min.js"></script>

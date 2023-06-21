@@ -2,11 +2,11 @@ package com.example.demo.config.oauth.provider;
 
 import java.util.*;
 
-public class NaverUserInfo implements OAuth2UserInfo{
+public class KakaoUserInfo implements OAuth2UserInfo{
 
 	private Map<String, Object> attributes; //이 attributes는 PrincipalOauth2UserService의 oauth2User.getAttributes()의 값
 	
-	public NaverUserInfo(Map<String, Object> attributes) {
+	public KakaoUserInfo(Map<String, Object> attributes) {
 		this.attributes = attributes;
 	}
 	
@@ -17,17 +17,18 @@ public class NaverUserInfo implements OAuth2UserInfo{
 
 	@Override
 	public String getProvider() {
-		return "naver";
+		return "kakao";
 	}
 
 	@Override
 	public String getEmail() {
-		return attributes.get("email").toString();
+		return ((Map)attributes.get("kakao_account")).get("email").toString();
 	}
 
 	@Override
 	public String getName() {
-		return attributes.get("name").toString();
-	}
+		return ((Map)((Map)attributes.get("kakao_account")).get("profile")).get("nickname").toString();
+	} 
 
 }
+ 
