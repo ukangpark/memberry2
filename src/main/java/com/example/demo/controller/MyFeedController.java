@@ -160,7 +160,9 @@ public class MyFeedController {
 	// 태그
 	@GetMapping("/tag/list/{feedId}/{tagInput}")
 	@ResponseBody
-	public List<Tag> tag(@PathVariable("tagInput") String tagInput, Authentication auth) {
+	public List<Tag> tag(@PathVariable("feedId") Integer feedId,
+							@PathVariable("tagInput") String tagInput, 
+							Authentication auth) {
 		List<Tag> result = service.tag(tagInput, auth);
 		System.out.println(result);
 		return result;

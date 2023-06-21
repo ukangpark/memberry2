@@ -73,6 +73,7 @@
 <body>
 
 	<my:navBar current="registration"></my:navBar>
+	<my:logo></my:logo>
 	<my:alert></my:alert>
 
 	<!-- 상단 공백 -->

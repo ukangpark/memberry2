@@ -61,7 +61,7 @@
 <body style="background-color: #FFF2F2">
 
 	<my:navBar />
-
+	<my:logo></my:logo>
 
 	<div class="pageName">
 		<h1>새로운 스토리를 추가해 보세요!</h1>

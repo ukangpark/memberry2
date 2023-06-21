@@ -69,9 +69,9 @@
 <body style="background-color: #FFF2F2">
 
 	<my:navBar></my:navBar>
-		
+	<my:logo></my:logo>
 	<div class="pageName">
-		<h1>${feed.id }번 게시물 수정하기</h1>
+		<%-- <h1>${feed.id }번 게시물 수정하기</h1> --%>
 	</div>
 
 	<div class="back" style="background-color: #EEEEEE">

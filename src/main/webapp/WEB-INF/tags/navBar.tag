@@ -202,10 +202,10 @@
 						href="/myPets/petList"> 나의반려동물 </a>
 				</sec:authorize>
 
-				<sec:authorize access="isAuthenticated()">
+				<%-- <sec:authorize access="isAuthenticated()">
 					<a class="${current eq 'chat' ? 'active' : '' } item"
 						href="/chat/chat"> 메세지 </a>
-				</sec:authorize>
+				</sec:authorize> --%>
 
 				<sec:authorize access="isAuthenticated()">
 					<a class="${current eq 'chatRoom' ? 'active' : '' } item"
