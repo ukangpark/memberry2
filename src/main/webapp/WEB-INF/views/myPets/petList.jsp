@@ -51,6 +51,7 @@ img {
 <body>
 
 	<my:navBar current="petList"></my:navBar>
+	<my:logo></my:logo>
 	<my:alert></my:alert>
 
 	<!-- security test -->

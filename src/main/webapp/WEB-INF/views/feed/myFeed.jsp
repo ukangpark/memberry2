@@ -83,7 +83,7 @@ img {
 <body>
 
 	<my:navBar current="myFeed"></my:navBar>
-	
+	<my:logo></my:logo>
 	<div class="titleContainer mb-3" id="myFeedTitle" style="justify-content: center;">
 		<h1 style="text-align: center; color: #FF9999">${nickName }
 			<span style="color: black"> 님의 피드</span>

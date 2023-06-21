@@ -59,7 +59,8 @@
 					}
 				}else if(d.type == "message"){
 					if(d.sessionId == $("#sessionId").val()){
-						$("#chating").append("<p class='me'>me : " + d.msg + "</p>");	
+						
+						$("#chating").append("<p class='me'> " + d.userName + " : " + d.msg + "</p>");	
 					}else{
 						$("#chating").append("<p class='others'>" + d.userName + " : " + d.msg + "</p>");
 					}
@@ -105,9 +106,9 @@
 
 <body>
 	<my:navBar current="chat"></my:navBar>
-	
+	<my:logo></my:logo>
 	<my:alert></my:alert>
-
+	
 	<div id="chatContainer" class="d-flex">
 		
 		<!-- 현재의 세선값을 저장해놓기 위해 -->
@@ -126,11 +127,10 @@
 			<h1>${roomName}의 채팅방</h1>
 			<!-- 채팅창 -->
 			<div id="chating" class="chating">
-				
 			</div>
 			
 			<div id="yourName" class="ui action input" style="font-size: 20px; height: 50px; width: 70vw; margin: 0px 0px 0px 20px;"> 
-				<input type="text" name="userName" id="userName" style="border-top-left-radius: 2rem; border-bottom-left-radius: 2rem;" placeholder="  사용자를 입력해 주세요.">
+				<input type="text" name="userName" id="userName" style="border-top-left-radius: 2rem; border-bottom-left-radius: 2rem;" placeholder=" <sec:authentication property="name"/>" value="<sec:authentication property="name"/>" name="userId">
 					<button onclick="chatName()" id="startBtn" class="ui action button" style="border-top-right-radius: 2em; border-bottom-right-radius: 2rem;">
 						<i class="fa-solid fa-paper-plane"></i>
 					</button>

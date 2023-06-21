@@ -58,6 +58,7 @@ label {
 <body>
 
 	<my:navBar></my:navBar>
+	<my:logo></my:logo>
 	<my:alert></my:alert>
 
 	<!-- 상단 공백 -->
