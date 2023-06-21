@@ -57,7 +57,7 @@ public class petsitterCommentController {
 
 	@GetMapping("get/{id}")
 	public PetsitterComment modify(@PathVariable("id") Integer commentId) {
-		PetsitterComment petsitterComment = petsitterCommentService.selectComment(commentId);
+		PetsitterComment petsitterComment = petsitterCommentService.selectCommentByCommentId(commentId);
 		System.out.println("get controller : " + petsitterComment);
 		return petsitterComment;
 	}

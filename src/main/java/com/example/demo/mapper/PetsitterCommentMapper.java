@@ -14,7 +14,7 @@ public interface PetsitterCommentMapper {
 			FROM PetsitterComment pc LEFT JOIN Member m ON pc.memberId = m.id
 									 LEFT JOIN Pet p ON m.defaultPetId = p.id
                                      LEFT JOIN Rating r ON r.commentId = pc.id
-			WHERE detailId =  #{detailId}
+			WHERE pc.detailId =  #{detailId}
 			""")
 	List<PetsitterComment> selectAllByDetailId(Integer detailId);
 	
@@ -33,7 +33,7 @@ public interface PetsitterCommentMapper {
 	Integer delete(Integer commentId);
 	
 	@Select("""
-			SELECT pc.id, detailId, body, inserted, memberId, r.star 
+			SELECT pc.id, pc.detailId, body, inserted, memberId, r.star 
 			FROM PetsitterComment pc JOIN Rating r ON pc.id = r.commentId 
 			WHERE pc.id = #{commentId};
 			""")
@@ -48,11 +48,11 @@ public interface PetsitterCommentMapper {
 
 	@Insert("""
 			INSERT INTO Rating
-				(star, commentId)
+				(star, commentId, detailId)
 			VALUES
-				(#{star}, #{commentId})
+				(#{star}, #{commentId}, ${detailId})
 			""")
-	Integer addStar(Integer star, Integer commentId);
+	Integer addStar(Integer star, Integer commentId, Integer detailId);
 	
 	@Update("""
 			UPDATE Rating

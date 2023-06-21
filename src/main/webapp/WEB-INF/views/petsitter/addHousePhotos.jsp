@@ -32,7 +32,7 @@
 			<div class="ui segment">
 				<form id="addDetailForm" action="/petsitter/addHousePhotos" class="ui big form" method="post" enctype="multipart/form-data">
 					<h1 class="ui dividing header">집사진 등록하기</h1>
-					<input type="text" name="hostId" value="${host.id }">
+					<input type="hidden" name="hostId" value="${host.id }">
 					<div class="field">
 						<h2 class="ui center aligned icon header">
 							<i class="circular camera retro icon"></i>
@@ -48,15 +48,15 @@
 						<div class="ui aligned container">
 							<img class="ui centered large bordered rounded image" id="preview" src="/images/defaultHome.jpeg" >
 							<label for="cover">
-								<i class="plus icon large button" style="position: absolute; top: 0.5lh; left: 20.1lh;"></i>
+								<i class="plus icon large button" style="position: absolute; top: 0.5lh; left: 23.5lh;"></i>
 							</label>
 						</div>
-						<div class="ui teal ribbon label" style="position: absolute; top: 10px; left: 118px;">대표 사진</div>
+						<div class="ui teal ribbon label" style="position: absolute; top: 10px; left: 219px;">대표 사진</div>
 					</div>
 
 					<!-- 이미지 미리보기  -->
 					<div style="position: relative;" id="imagePreview" class="field">
-						<div id="imgContainer" class="field ui aligned container segment" data-placeholder='파일을 첨부 하려면 파일 선택 버튼을 클릭하세요. 대표 사진은 위 삼단바 버튼을 눌러주세요.'></div>
+						<div id="imgContainer" class="field ui aligned container segment" data-placeholder='파일을 첨부 하려면 파일 선택 버튼을 클릭하세요. 대표 사진은 위 더하기 버튼을 눌러주세요.'></div>
 						<br>
 						<input class="form-control" type="file" id="housePhotos" name="housePhotos" multiple="multiple" accept="image/*" />
 						<div class="ui teal right ribbon label" style="bottom: 125px;">상세 사진</div>

@@ -121,7 +121,7 @@
 				     
 				    
 				      var trashIcon = document.createElement("i");
-				      trashIcon.classList.add("trash", "alternate", "outline", "icon");
+				      trashIcon.classList.add("fa-regular", "fa-trash-can");
 				      imgdiv.appendChild(img)
 				      imgdiv.append(btn)
 				      //btn.innerText("삭제")

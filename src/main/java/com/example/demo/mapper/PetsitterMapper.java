@@ -243,6 +243,11 @@ public interface PetsitterMapper {
 			SELECT COUNT(*) FROM Host
 			""")
 	Integer countAllHost();
+	
+	@Delete("""
+			DELETE FROM Rating WHERE detailId = #{detailId}
+			""")
+	Integer deleteStarByDetailId(Integer detailId);
 
 
 	

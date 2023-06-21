@@ -21,9 +21,9 @@ public interface QnAMapper {
 	@Select("""
 			SELECT *
 			FROM QnA
-			WHERE writer = #{id}
+			WHERE id = #{id}
 			""")
-	QnA selectById(String writer);
+	QnA selectById(Integer id);
 
 	@Update("""
 			UPDATE QnA

@@ -179,7 +179,7 @@ public class PetsitterController {
 			Authentication authentication) throws Exception {
 		// 상세페이지 등록 과정
 		boolean ok = petsitterService.insertDetail(detail, authentication);
-	
+		System.out.println(ok);
 		return "redirect:/petsitter/addHousePhotos";
 	}
 

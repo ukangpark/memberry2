@@ -30,7 +30,7 @@
 				<a href="/qna"><img class="qna" src="/images/qnaDetailLogo.png" alt="" /></a>
 				<div class="d-flex">
 					<div class="no">
-						<h1>no.${qna.id }</h1>
+						<h1>${qna.writer }님의 질문</h1>
 					</div>
 				</div>
 				<div class="mb-3">
@@ -65,7 +65,7 @@
 
 			<div class="d-none">
 				<form action="/qna/remove" method="post" id="removeForm">
-					<input type="text" name="id" value="${qna.writer }" />
+					<input type="text" name="id" value="${qna.id }" />
 				</form>
 			</div>
 

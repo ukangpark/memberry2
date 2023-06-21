@@ -28,6 +28,8 @@
 						<label for="body">소개글</label>
 						<textarea id="body" type="text" name="body" rows="20" placeholder="소개글을 입력해주세요."></textarea>
 					</div>
+					<input type="hidden" name="hostId" value="${host.id }">
+					<input type="hidden" name="memberId" value="${member.id }">
 				</form>
 			</div>
 
