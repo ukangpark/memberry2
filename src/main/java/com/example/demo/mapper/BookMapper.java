@@ -93,8 +93,8 @@ public interface BookMapper {
 
 	
 	@Insert("""
-			INSERT INTO Book (hospital, message, checkIn, checkOut, pottyTraining, hostId, detailId, petId, memberId,accepted)
-			VALUES (#{hospital}, #{message}, #{checkIn}, #{checkOut}, #{pottyTraining}, #{hostId}, #{detailId}, #{petId}, #{memberId}, #{accepted})
+			INSERT INTO Book (hospital, message, checkIn, checkOut, pottyTraining, hostId, detailId, petId, memberId, accepted, money)
+			VALUES (#{hospital}, #{message}, #{checkIn}, #{checkOut}, #{pottyTraining}, #{hostId}, #{detailId}, #{petId}, #{memberId}, #{accepted}, #{money})
 			""")
 	@Options(useGeneratedKeys = true, keyProperty="id")
 	int insert(Book book);
@@ -149,7 +149,8 @@ public interface BookMapper {
 				Detail.hostId,
 				rejectMessage,
 				Book.memberId,
-				Detail.hostId
+				Detail.hostId,
+				money
 			FROM Book,Pet,Host,Detail
 			WHERE Book.memberId = Pet.memberId
 			AND Detail.id = Book.detailId

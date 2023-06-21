@@ -67,6 +67,7 @@
 		
 		var totalPrice = price * durationInDays; // 총 금액 계산
 		  $('#totalPrice').text(totalPrice + '원'); // 결제 금액을 보여주는 요소 업데이트
+		  $('#money').val(totalPrice);
 		
 	}
 	
@@ -84,6 +85,7 @@
 	<input type="hidden" name="petId" value="${pet.id}" />
 	<%-- <input type="hidden" name="memberId" value="${pet.memberId}" /> --%>
 	<input type="hidden" name="accepted" value=0 />
+	<input type="hidden" name="money" id="money"/>
 	
 		<h2 class="ui dividing header" style = "text-align:center">
 		<i class="fa fa-solid fa-paw"></i>예약 신청서
