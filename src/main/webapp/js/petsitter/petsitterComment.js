@@ -180,6 +180,7 @@ var si = $("#mapSi").text().trim();
 var gu = $("#mapGu").text().trim();
 var dong = $("#mapDong").text().trim();
 var address = si + gu + dong;
+console.log(address);
 
 //주소-좌표간 변환 서비스 객체 생성
 var geocoder = new kakao.maps.services.Geocoder();
@@ -195,13 +196,12 @@ var callback = function(result, status) {
         console.log(lat + ", " + lng);
         
         // 좌표를 사용하여 지도 및 원을 생성하는 작업을 수행한다
-        createMapWithCircle(lat, lng);
+        //createMapWithCircle(lat, lng);
     }
 };
+console.log(lat + ", " + lng);
 
-console.log(lat);
-
-geocoder.addressSearch(address, callback);
+geocoder.addressSearch(address, callback); //주소 정보에 해당하는 좌표값을 요청함 
 
 var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 	mapOption = {

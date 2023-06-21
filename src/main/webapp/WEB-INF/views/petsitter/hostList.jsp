@@ -30,15 +30,15 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${host }" var="host">
+				<c:forEach items="${host }" var="hostList">
 					<tr>
 						<td>
-							<a href="/petsitter/hostMyPage?id=${host.id }">${host.hostName }</a>
+							<a href="/petsitter/hostMyPage?id=${hostList.id }">${hostList.hostName }</a>
 						</td>
-						<td>${host.id }(${host.memberId })</td>
-						<td>${host.phone }</td>
-						<td>${host.detail eq 'true' ? '등록' : '미등록' }</td>
-						<td>${host.inserted }</td>
+						<td>${hostList.id }(${hostList.memberId })</td>
+						<td>${hostList.phone }</td>
+						<td>${hostList.detail eq 'true' ? '등록' : '미등록' }</td>
+						<td>${hostList.inserted }</td>
 					</tr>
 				</c:forEach>
 
@@ -46,41 +46,40 @@
 		</table>
 
 		<!-- 페이지네이션  -->
-		<nav aria-label="Page navigation example">
-			<ul class="pagination">
-				<!-- 이전 버튼 -->
-				<c:if test="${leftPageNum > 1}">
-					<c:url value="/petsitter/hostList" var="prevPageLink">
-						<c:param name="page" value="${leftPageNum - 1}" />
-					</c:url>
-					<li class="page-item">
-						<a class="page-link" href="${prevPageLink}" aria-label="Previous">
-							<span aria-hidden="true">&laquo;</span>
-						</a>
-					</li>
-				</c:if>
-				<c:forEach begin="${leftPageNum}" end="${rightPageNum}" var="pageNum">
-					<c:url value="/petsitter/hostList" var="pageLink">
-						<c:param name="page" value="${pageNum}" />
-					</c:url>
-					<li class="page-item">
-						<a class="page-link ${pageNum == currentPageNum ? 'active' : ''}" href="${pageLink}">${pageNum}</a>
-					</li>
-				</c:forEach>
-				<!-- 다음 버튼 -->
-				<c:if test="${currentPageNum < lastPageNum}">
-					<c:url value="/petsitter/hostList" var="nextPageLink">
-						<c:param name="page" value="${rightPageNum + 1}" />
-					</c:url>
-					<li class="page-item">
-						<a class="page-link" href="${nextPageLink}" aria-label="Next">
-							<span aria-hidden="true">&raquo;</span>
-						</a>
-					</li>
-				</c:if>
-			</ul>
-		</nav>
-
+			<nav aria-label="Page navigation example">
+				<ul class="pagination">
+					<!-- 이전 버튼 -->
+					<c:if test="${leftPageNum > 1}">
+						<c:url value="/petsitter/hostList" var="prevPageLink">
+							<c:param name="page" value="${leftPageNum - 1}" />
+						</c:url>
+						<li class="page-item">
+							<a class="page-link" href="${prevPageLink}" aria-label="Previous">
+								<span aria-hidden="true">&laquo;</span>
+							</a>
+						</li>
+					</c:if>
+					<c:forEach begin="${leftPageNum}" end="${rightPageNum}" var="pageNum">
+						<c:url value="/petsitter/hostList" var="pageLink">
+							<c:param name="page" value="${pageNum}" />
+						</c:url>
+						<li class="page-item">
+							<a class="page-link ${pageNum == currentPageNum ? 'active' : ''}" href="${pageLink}">${pageNum}</a>
+						</li>
+					</c:forEach>
+					<!-- 다음 버튼 -->
+					<c:if test="${currentPageNum < lastPageNum}">
+						<c:url value="/petsitter/hostList" var="nextPageLink">
+							<c:param name="page" value="${rightPageNum + 1}" />
+						</c:url>
+						<li class="page-item">
+							<a class="page-link" href="${nextPageLink}" aria-label="Next">
+								<span aria-hidden="true">&raquo;</span>
+							</a>
+						</li>
+					</c:if>
+				</ul>
+			</nav>
 
 	</div>
 
