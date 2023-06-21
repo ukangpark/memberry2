@@ -78,7 +78,7 @@
 					</c:choose>
 					<a class="header">${host.hostName }님</a>
 					<div class="meta">
-						<span>주소 : ${host.si } ${host.gu } ${host.dong }</span>
+						<span>주소 : ${host.si }${host.gu } ${host.dong }</span>
 						<br>
 						<span>번호 : ${host.phone }</span>
 					</div>
@@ -97,7 +97,6 @@
 		<div class="ui text container">
 			<p>${detail.body }</p>
 		</div>
-
 
 
 		<!-- 예약 모달 -->
