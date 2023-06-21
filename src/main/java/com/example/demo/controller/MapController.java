@@ -18,7 +18,7 @@ import com.example.demo.service.*;
 public class MapController {
 	
 	@Autowired
-	public MapService mapService;
+	private MapService mapService;
 	
 	@GetMapping("mapMain")
 	public void mapMain(ModelMap model) {
