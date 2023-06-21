@@ -133,9 +133,11 @@ public class PetsitterController {
 
 	@GetMapping("hostList")
 	@PreAuthorize("isAuthenticated()")
-	public void hostList(Model model) {
+	public void hostList(
+			Model model,
+			@RequestParam(value = "page", defaultValue = "1") Integer page) {
 		// 호스트 리스트 포워드
-		Map<String, Object> info = petsitterService.selectAll();
+		Map<String, Object> info = petsitterService.selectAll(page);
 		model.addAllAttributes(info);
 	} 
 

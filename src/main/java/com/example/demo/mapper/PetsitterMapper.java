@@ -52,9 +52,11 @@ public interface PetsitterMapper {
 				Detail.id detail ,
 				profile,
 				memberId
-			FROM Host LEFT JOIN Detail ON Host.id = Detail.hostId;
+			FROM Host LEFT JOIN Detail ON Host.id = Detail.hostId
+			ORDER BY Host.inserted DESC
+			LIMIT #{startIndex}, #{rowPerPage}
 			""")
-	List<Host> selectHostAll();
+	List<Host> selectHostAll(Integer startIndex, Integer rowPerPage);
 
 	@Update("""
 			UPDATE Host
@@ -236,6 +238,11 @@ public interface PetsitterMapper {
 			DELETE FROM MemberAuthority WHERE memberId = #{memberId}
 			""")
 	Integer deleteHostAuthorityByMemberId(String memberId);
+	
+	@Select("""
+			SELECT COUNT(*) FROM Host
+			""")
+	Integer countAllHost();
 
 
 	
