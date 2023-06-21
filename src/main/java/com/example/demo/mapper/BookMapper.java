@@ -144,7 +144,7 @@ public interface BookMapper {
 				accepted,
 				detailId,
 				num,
-				Book.hostId,
+				Detail.hostId,
 				rejectMessage,
 				Book.memberId,
 				Detail.hostId
