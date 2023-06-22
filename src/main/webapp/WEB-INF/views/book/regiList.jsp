@@ -150,13 +150,21 @@
 						</a>
 						</td>
 						<td>
-						<button type="button" class="btn btn-warning">
-						<c:if test="${book.accepted == 0}">요청중</c:if>
-						<c:if test="${book.accepted == 1}">결제대기</c:if>
-						<c:if test="${book.accepted == 2}">완료</c:if>
-						<c:if test="${book.accepted == 3}">예약거절</c:if>
-						</button>
+						
+						<c:if test="${book.accepted == 0}">
+						<button type="button" class="btn btn-warning">요청중</button>
+						</c:if>
+						<c:if test="${book.accepted == 1}">
+						<button type="button" class="btn btn-warning">결제대기</button>
+						</c:if>
+						<c:if test="${book.accepted == 2}">
+						<button type="button" class="btn btn-warning">완료</button>
+						</c:if>
+						<c:if test="${book.accepted == 3}">
+						<button type="button" class="btn btn-warning" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="메세지">예약거절</button>
+						</c:if>
 						</td>
+						
 						<td>
 						<c:if test = "${book.accepted == 0 }">
 						<button type="button" class="btn btn-secondary" onclick="location.href='/book/modify/${book.num}'">변경</button>

@@ -58,11 +58,19 @@
 				
 				<div id="commentContainer">
 					<div id="addQnACommentContainer"> 
-						<textarea id="qnaCommentTextArea" ></textarea>
+						<textarea id="qnaCommentTextArea"></textarea>
 						<button id="qnaCommentBtn">전송</button>
+					</div>
+					<div id="commentUpdateContainer">
+						<h6>수정</h6>
+						<input type="hidden" id="commentUpdateIdInput" />
+						<textarea id="qnaCommentUpdateTextArea" ></textarea>
+						<button id="qnaCommentUpdateBtn">수정</button>
 					</div>
 					<div id="qnaCommentListContainer">
 						<div>댓글 1 내용 : 누가 : 언제</div>
+						<div>댓글 2 내용 : 누가 : 언제</div>
+						<div>댓글 3 내용 : 누가 : 언제</div>
 					</div>
 				
 				

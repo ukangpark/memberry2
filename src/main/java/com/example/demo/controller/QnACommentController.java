@@ -16,6 +16,28 @@ public class QnACommentController {
 	@Autowired
 	private QnACommentService service;
 	
+	@PutMapping("update")
+	@ResponseBody
+	public String update(@RequestBody QnAComment qnacomment) {
+		service.update(qnacomment);
+		
+		return "ok";
+	}
+	
+	@GetMapping("id/{id}")
+	@ResponseBody
+	public QnAComment get(@PathVariable("id") Integer id) {
+		return service.get(id);
+	}
+	
+	@DeleteMapping("id/{id}")
+	@ResponseBody
+	public String remove(@PathVariable("id") Integer id) {
+		service.remove(id);
+		
+		return "ok";
+	}
+	
 	@PostMapping("add")
 	@ResponseBody
 	public String add(@RequestBody QnAComment qnacomment) {
@@ -31,6 +53,4 @@ public class QnACommentController {
 		
 		return service.list(qnaId);
 	}
-	
-	
 }

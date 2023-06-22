@@ -27,18 +27,23 @@
 					<th>전화번호</th>
 					<th>상세페이지</th>
 					<th>등록날짜</th>
+					<th>호스트 정보 수정</th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach items="${host }" var="hostList">
 					<tr>
 						<td>
-							<a href="/petsitter/hostMyPage?id=${hostList.id }">${hostList.hostName }</a>
+							<a href="/petsitter/hostMyPage?hostId=${hostList.id }">${hostList.memberId }</a>
 						</td>
 						<td>${hostList.id }(${hostList.memberId })</td>
 						<td>${hostList.phone }</td>
 						<td>${hostList.detail eq 'true' ? '등록' : '미등록' }</td>
 						<td>${hostList.inserted }</td>
+						<td>
+							<a href="/petsitter/hostModify?hostId=${hostList.id }" class="ui green basic button">수정</a>
+							<a class="ui red basic button">삭제</a>
+						</td>
 					</tr>
 				</c:forEach>
 
