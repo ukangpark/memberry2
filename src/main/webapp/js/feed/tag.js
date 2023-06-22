@@ -2,6 +2,7 @@ $("#addTag").click(function() {
 	const feedId = $("#feedId").val();
 	const tagInput = $("#tagInput").val();
 	console.log(tagInput);
+	$("#tagInput").val('');
 	tagList();
 	function tagList() {
 		$.ajax("/tag/list/" + feedId + "/" + tagInput, {
@@ -16,4 +17,14 @@ $("#addTag").click(function() {
 			}
 		});
 	}
-})
+});
+
+$("#tagInput").on("keyup", function(event) {
+    if (event.keyCode === 13) { // Enter 키의 keyCode는 13
+        $("#addTag").click(); // Add Tag 버튼 클릭 이벤트를 실행
+    }
+});
+
+$(document).on("click", ".icon.mini.close", function() {
+    $(this).closest(".ui.tag.blue.tiny.label").remove();
+});
