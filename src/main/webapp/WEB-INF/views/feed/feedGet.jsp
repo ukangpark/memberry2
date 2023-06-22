@@ -39,10 +39,6 @@
 	position: relative;
 }
 
-.leftContainer {
-	display: flex;
-}
-
 #textContent {
 	margin-right: 10rem;
 	margin-left: 10rem;
@@ -112,10 +108,11 @@
 
 		<!-- 이미지 파일 출력 -->
 		<div id="imageBox" style="margin-top: 40px">
-			<!-- class="content" -->
 			<ul class="bxslider">
 				<c:forEach items="${feed.fileName }" var="fileName">
-					<li id="li-imager"><img id="imager" class="ui medium rounded imager" src="${bucketUrl }/feed/${feed.id }/${fileName }" alt="" /></li>
+					<li id="li-imager">
+					<img id="imager" class="ui medium rounded imager" src="${bucketUrl }/feed/${feed.id }/${fileName }" alt="" />
+					</li>
 				</c:forEach>
 			</ul>
 		</div>
