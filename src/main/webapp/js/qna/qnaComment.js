@@ -45,10 +45,8 @@ function listQnAComment() {
 			//console.log(data);
 			$("#qnaCommentListContainer").empty();
 			for (const qnaComment of qnaComments) {
-				//console.log(qnaComment);
-				$("#qnaCommentListContainer").append(`
-				<div>
-					<button 
+				const editButtons = `
+				<button 
 						id="qnaCommentDeleteBtn${qnaComment.id}" 
 						class="qnaCommentDeleteButton"
 						qnaData-comment-id="${qnaComment.id}"> 삭제 </button>
@@ -57,6 +55,11 @@ function listQnAComment() {
 						id="qnaCommentUpdateBtn${qnaComment.id}"
 						class="qnaCommentUpdateButton"
 						qnaData-comment-id="${qnaComment.id}"> 수정 </button>
+				`;
+				//console.log(qnaComment);
+				$("#qnaCommentListContainer").append(`
+				<div>
+					${qnaComment.editable ? editButtons : ''}
 					: ${qnaComment.content} 
 					: ${qnaComment.memberId} 
 					: ${qnaComment.inserted}

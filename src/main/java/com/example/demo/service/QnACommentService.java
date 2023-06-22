@@ -3,6 +3,7 @@ package com.example.demo.service;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.*;
+import org.springframework.security.core.*;
 import org.springframework.stereotype.*;
 import org.springframework.transaction.annotation.*;
 
@@ -16,12 +17,20 @@ public class QnACommentService {
 	@Autowired
 	private QnACommentMapper mapper;
 	
-	public List<QnAComment> list(Integer qnaId) {
-		return mapper.selectAllByQnAId(qnaId);
+	public List<QnAComment> list(Integer qnaId, Authentication auth) {
+		List<QnAComment> comments = mapper.selectAllByQnAId(qnaId);
+		
+		if(auth != null) {
+			for (QnAComment comment : comments) {
+				comment.setEditable(comment.getMemberId().equals(auth.getName()));
+			}
+		}
+		
+		return comments;
 	}
 
-	public Map<String, Object> add(QnAComment qnacomment) {
-		qnacomment.setMemberId("star");
+	public Map<String, Object> add(QnAComment qnacomment, Authentication auth) {
+		qnacomment.setMemberId(auth.getName());
 		
 		var res = new HashMap<String, Object>();
 		

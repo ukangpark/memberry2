@@ -83,7 +83,7 @@ tr, th {
 					<i class="right arrow icon"></i> 문의글 작성 OR
 				</button>
 			<form action="qna" class="d-flex" role="search">
-				<input value="${param.search }" name="search" class="form-control me-2" type="search" placeholder="작성하기 전에 다른 이용자의 질문을 확인해보세요" aria-label="Search" id="input-box">
+				<input value="${param.search }" name="search" class="form-control me-2" type="search" placeholder="문의글 작성 전에 다른 이용자의 질문을 확인해보세요" aria-label="Search" id="input-box">
 				<button id="searchBtn" class="ui button" type="submit" style="width: 55px; text-align: center;">
 					<i class="fa-solid i1 fa-magnifying-glass"></i>
 				</button>

@@ -67,10 +67,12 @@
 				</sec:authorize>
 				
 				<div id="commentContainer">
-					<div id="addQnACommentContainer"> 
-						<textarea id="qnaCommentTextArea"></textarea>
-						<button id="qnaCommentBtn">전송</button>
-					</div>
+					<sec:authorize access="hasAuthority('admin')">
+						<div id="addQnACommentContainer">
+							<textarea id="qnaCommentTextArea"></textarea>
+							<button id="qnaCommentBtn">전송</button>
+						</div>
+					</sec:authorize>
 					<div id="commentUpdateContainer">
 						<h6>수정</h6>
 						<input type="hidden" id="commentUpdateIdInput" />
