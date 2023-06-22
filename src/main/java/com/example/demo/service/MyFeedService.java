@@ -68,6 +68,7 @@ public class MyFeedService {
 		
 		int cnt = mapper.insert(feed);
 
+
 		for (MultipartFile file : files) {
 			if (file.getSize() > 0) {
 				// S3 저장소 사용을 위한 키
