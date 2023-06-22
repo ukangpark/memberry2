@@ -42,7 +42,7 @@ public class CommentService {
 		  return comments;
 	  }
 
-	public  Map<String, Object> add(Comment comment, Authentication authentication, HttpSession session) {
+	public  Map<String, Object> add(Comment comment, Authentication authentication) {
 		comment.setMemberId(authentication.getName());
 		
 		var res  = new HashMap<String, Object>();
@@ -50,13 +50,7 @@ public class CommentService {
 		
 		if (cnt == 1) {
 			res.put("message", "댓글 등록 완료");
-			Integer alarmCnt = alarmMapper.commentAdd(comment);
-			
-			if (alarmCnt == 1) {
-				Member member = memberMapper.selectById(authentication.getName());
-				session.setAttribute("logedInMember", member);				
-			}
-			
+			alarmMapper.commentAdd(comment);
 		} else {
 			res.put("message", "댓글 등록 실패");
 		}

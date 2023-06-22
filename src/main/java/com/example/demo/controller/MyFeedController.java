@@ -50,10 +50,8 @@ public class MyFeedController {
 			List<Alarm> alarms = alarmService.list(authentication.getName());
 			session.setAttribute("alarms", alarms);
 		}
-		System.out.println(list);
 
-
-		//File feedId = service.feedId(userName, authentication);
+		Integer feedId = service.feedId(userName, authentication);
 		//System.out.println(feedId);
 		
 		// 마이피드에 펫정보 가져오기 용
@@ -80,7 +78,7 @@ public class MyFeedController {
 		model.addAttribute("petList", petList);
 		model.addAttribute("userName", userName);
 		model.addAttribute("authentication", authentication.getName());
-		//model.addAttribute("feedId", feedId);
+		model.addAttribute("feedId", feedId);
 		return "feed/myFeed";
 	}
 
@@ -176,7 +174,7 @@ public class MyFeedController {
 	public List<Tag> tag(@PathVariable("feedId") Integer feedId,
 							@PathVariable("tagInput") String tagInput, 
 							Authentication auth) {
-		List<Tag> result = service.tag(tagInput, auth);
+		List<Tag> result = service.tag(feedId, tagInput, auth);
 		System.out.println(result);
 		return result;
 				

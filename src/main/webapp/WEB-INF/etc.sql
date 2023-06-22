@@ -53,7 +53,6 @@ SELECT fileName FROM File;
 
 SELECT * FROM File GROUP BY FeedId ORDER BY id DESC;
 
-DELETE FROM Feed WHERE id = 116;
 
 SELECT * FROM FeedLike;
 
@@ -89,6 +88,7 @@ SET SQL_SAFE_UPDATES = 0;
 UPDATE Feed SET writer = 'playkim';
 
 SELECT * FROM Feed ORDER BY id DESC;
+DELETE FROM Feed WHERE id = 202;
 UPDATE Feed SET writer = 'ukang0711' WHERE id = 82;
 
 ALTER TABLE Feed
@@ -111,3 +111,4 @@ UPDATE Feed SET writer = 'sohee.G' WHERE id = 106;
             
 ALTER TABLE Feed MODIFY COLUMN location VARCHAR(1000); 
             
+SELECT * FROM Comment ORDER BY id DESC;

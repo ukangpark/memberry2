@@ -24,8 +24,18 @@
 			display: flex;
 			justify-content: center;
 			align-items: center;
-			min-height: 75vh;
+			min-height: 100vh;
+			background-color: #EEEEEE;
+			margin-right: 10%;
+			margin-left: 10%;
+			border-radius: 1.5rem;
+			position: relative;
 
+		}
+		
+		#imager {
+			width: 100%;
+			height: 100%;
 		}
 		
 		.back {
@@ -61,7 +71,7 @@
          
     	.removeFilesBtn {
           	position:absolute; 
-          
+          	
          } 
 		
 	</style>
@@ -80,22 +90,22 @@
 			<input type="hidden" name="id" value="${feed.id }" />
 
 		<!-- 기존 이미지 파일 보이기 -->
-		<div id="add">
+		<div id="add" align="center">
 			<ul class="bxslider">
 				<c:forEach items="${feed.fileName }" var="fileName" varStatus="status">
-					<li id="imageList${status.index }">
+					<li id="imageList${status.index }" align="left">
 						<%-- <input type="checkbox" name="removeFiles" value="${fileName }" id="" /><i class="fa-regular fa-circle-trash"></i> --%>
-						<%-- <button data-target-list="#imageList${status.index }" type="button" class=" removeFilesBtn btn btn-outline-dark" name="removeFiles" value="${fileName }"><i class="fa-solid fa-trash"></i></button> --%>
-						<button type="button" class="removeFilesBtn btn btn-dark" name="removeFiles" value="${fileName }"><i class="trash alternate icon"></i></button>
-						<img class="ui medium rounded imager" src="${bucketUrl }/feed/${feed.id }/${fileName }" alt="" />
+						<button data-target-list="#imageList${status.index }" type="button" class="removeFilesBtn btn btn-dark" name="removeFiles" value="${fileName }"><i class="trash alternate icon"></i></button>
+						<%-- <button type="button" class="removeFilesBtn btn btn-dark" name="removeFiles" value="${fileName }"><i class="trash alternate icon"></i></button> --%>
+						<img id="imager" class="ui medium rounded imager" src="${bucketUrl }/feed/${feed.id }/${fileName }" alt="" />
 					</li>
 				</c:forEach>
 			</ul>
 		
 			<!-- 새 이미지 파일 추가 input -->
-			<div align="center">
+			<div >
 				<h3>사진을 추가해보세요! </h3>
-				<input type="file" multiple name="files" accept="image/*" />
+				<input style="margin-left: 60px;" type="file" multiple name="files" accept="image/*"  required/>
 			</div>
 			
 		</div>
@@ -148,11 +158,11 @@
 			  slideWidth: 400
 		  });
 		  
-		  /* $(".removeFilesBtn").click(function() {
+		  $(".removeFilesBtn").click(function() {
 			 const target = $(this).attr("data-target-list");
 			 $(target).remove();
 			 slider.reloadSlider();
-		  }); */
+		  });
 		}); 
 		
 		/* 엔터키 치면 전송되는 것 방지 */

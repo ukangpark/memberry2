@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.domain.Comment;
 import com.example.demo.domain.Member;
+import com.example.demo.security.LoginAuthenticationSuccessHandler;
 import com.example.demo.service.CommentService;
 import com.example.demo.service.MemberService;
 
@@ -33,6 +34,8 @@ public class CommentController {
 	  private CommentService service;
 	  @Autowired
 	  private MemberService memberService;
+	  @Autowired
+	  private LoginAuthenticationSuccessHandler loginSuccessHandler;
 	
 	
 	//댓글 리스트 불러오기
@@ -51,7 +54,8 @@ public class CommentController {
 			Map<String, Object> res = Map.of("message","로그인 후 댓글 작성 가능합니다.");
 			return ResponseEntity.status(401).body(null);
 		} else {
-			Map<String, Object> res = service.add(comment, authentication, session); 
+			Map<String, Object> res = service.add(comment, authentication); 
+			loginSuccessHandler.updateMemberInSession(memberService.get(authentication.getName()), session);
 			return ResponseEntity.ok().body(res); 
 		}
 				 
