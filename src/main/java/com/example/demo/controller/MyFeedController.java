@@ -44,6 +44,7 @@ public class MyFeedController {
 	public String myFeed(Model model, @PathVariable("userName") String userName, Authentication authentication, HttpSession session) {
 		List<File> list = service.listMyFeed(userName, authentication);
 		Registration profileList = service.listProfile(userName, authentication);
+
 		
 		if(authentication != null) {
 			List<Alarm> alarms = alarmService.list(authentication.getName());
@@ -51,6 +52,10 @@ public class MyFeedController {
 		}
 		System.out.println(list);
 
+
+		//File feedId = service.feedId(userName, authentication);
+		//System.out.println(feedId);
+		
 		// 마이피드에 펫정보 가져오기 용
 		String petName = profileList.getPetName();
 		String type = profileList.getType();
@@ -75,7 +80,7 @@ public class MyFeedController {
 		model.addAttribute("petList", petList);
 		model.addAttribute("userName", userName);
 		model.addAttribute("authentication", authentication.getName());
-
+		//model.addAttribute("feedId", feedId);
 		return "feed/myFeed";
 	}
 
@@ -114,7 +119,6 @@ public class MyFeedController {
 	@GetMapping("/feedId/{feedId}")
 	public String post(@PathVariable("feedId") Integer feedId, Model model, Authentication authentication, HttpSession session) {
 		Feed feed = service.getPost(feedId, authentication);
-		System.out.println(feed);
 		model.addAttribute("feed", feed);
 		
 		if(authentication != null) {

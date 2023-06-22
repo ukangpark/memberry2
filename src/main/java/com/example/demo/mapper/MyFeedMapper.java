@@ -136,4 +136,12 @@ public interface MyFeedMapper {
 			""")
 	List<Tag> selectTag(String name);
 
+	@Insert("""
+			INSERT INTO Feed (id)
+			WHERE id = #{id}
+			ORDER BY id DESC
+			""")
+	@Options(useGeneratedKeys = true, keyProperty = "id")
+	File selectFeedId(String memberId);
+
 }
