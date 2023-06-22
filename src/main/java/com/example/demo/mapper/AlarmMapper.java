@@ -81,7 +81,9 @@ public interface AlarmMapper {
 	//펫시터 예약요청 알림
 	@Insert("""
 			INSERT INTO Alarm (userId, causedMemberId, feedId, notiType, notiBody)
-			VALUES ((SELECT writer FROM Detail WHERE id = #{detailId}), #{memberId}, #{detailId}, 'bookRegi',
+			VALUES ((SELECT h.memberId FROM Book b LEFT JOIN Detail d ON d.id = b.detailId
+					LEFT JOIN Host h ON h.id = d.hostId WHERE b.detailId = #{detailId}),
+			#{memberId}, #{detailId}, 'bookRegi',
 			'회원님께 펫시터 예약 요청이 왔습니다.')
 			""")
 	void bookRegiAdd(Book book);
@@ -96,13 +98,15 @@ public interface AlarmMapper {
 				( SELECT detailId FROM Book WHERE num = #{num} ), 
 				'bookAccept',
 				'회원님의 펫시터 예약이 승인되었습니다.')
+				SELECT hostName FROM Detail d LEFT JOIN Book b d.id = b.detaiId
+							LEFT JOIN Host h h.id = d.hostId WHERE b.num = #{num} ) 
 			""")
 	void bookAcceptAdd(int num);
 	
 	//펫시터 예약거절 알림
 	@Insert("""
 			INSERT INTO Alarm (userId, causedMemberId, feedId, notiType, notiBody)
-			VALUES (#{memberId}, (SELECT writer FROM Detail WHERE id = #{detailId}, #{detailId}, 'bookReject',
+			VALUES (#{memberId}, (SELECT hostId FROM Detail WHERE id = #{detailId}, #{detailId}, 'bookReject',
 			'회원님의 펫시터 예약이 거절되었습니다.')
 			""")
 	void bookRejectAdd(Book book);

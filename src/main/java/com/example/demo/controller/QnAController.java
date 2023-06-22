@@ -31,6 +31,7 @@ public class QnAController {
 		List<QnA> list = service.qnaList();
 		model.addAttribute("qnaList", list);
 		
+		
 		return "qna";
 	}
 	
