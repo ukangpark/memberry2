@@ -4,7 +4,9 @@ import java.util.*;
 
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.security.access.prepost.*;
+import org.springframework.security.config.annotation.method.configuration.*;
 import org.springframework.security.core.*;
+import org.springframework.security.core.context.*;
 import org.springframework.stereotype.*;
 import org.springframework.ui.*;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +16,7 @@ import org.springframework.web.servlet.mvc.support.*;
 import com.example.demo.domain.*;
 import com.example.demo.service.*;
 
-import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.*;
 
 @Controller
 @RequestMapping("petsitter")
@@ -39,10 +41,11 @@ public class PetsitterController {
 	public void detail(
 			@RequestParam("id") Integer hostId, 
 			Model model, 
-			Authentication authentication, 
 			HttpSession session) {
 		// detail로 포워드
-
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		//로그인한 사용자의 로그인 정보 불러오는 객체
+		
 		// 쿼리스트링으로 받은 id값을 받아서 해당 상세페이지를 읽음
 		Map<String, Object> info = petsitterService.selectByHostId(hostId, authentication); 
 
@@ -96,19 +99,37 @@ public class PetsitterController {
 	}
 
 	@GetMapping("hostMyPage")
-	@PreAuthorize("isAuthenticated()")
-	public void hostMyPage(Authentication authentication, Model model) {
+	@PreAuthorize("isAuthenticated() or hasAuthority('admin')")
+	public void hostMyPage(
+			Authentication authentication, 
+			Model model,
+			@RequestParam(value = "hostId", required = false) Integer hostId) {
 		// 호스트 마이페이지 포워드
-		Map<String, Object> info = petsitterService.selectByMemberId(authentication.getName());
-		model.addAllAttributes(info);
+		if(hostId == null) {
+			Map<String, Object> info = petsitterService.selectByMemberId(authentication.getName());			
+			model.addAllAttributes(info);
+		} else {
+			Map<String, Object> info = petsitterService.selectByHostId(hostId, authentication);
+			model.addAllAttributes(info);
+		}
+		
+		System.out.println("controller hostId ; " + hostId);
 	}
 
 	@GetMapping("hostModify")
-	@PreAuthorize("isAuthenticated()")
-	public void hostModifyForm(Authentication authentication, Model model) {
+	@PreAuthorize("(isAuthenticated() and @customSecurityChecker.checkPetsitterWriter(authentication, #hostId)) or hasAuthority('admin')")
+	public void hostModifyForm(
+			Authentication authentication, 
+			Model model,
+			@RequestParam("hostId") Integer hostId) {
 		// 호스트 정보 수정폼 포워드
-		Map<String, Object> info = petsitterService.selectByMemberId(authentication.getName());
-		model.addAllAttributes(info);
+		if(hostId != null) {
+			Map<String, Object> info = petsitterService.selectByHostId(hostId, authentication);
+			model.addAllAttributes(info);			
+		} else {
+			Map<String, Object> info = petsitterService.selectByMemberId(authentication.getName());
+			model.addAllAttributes(info);			
+		}
 	}
 
 	@PostMapping("hostModify")
