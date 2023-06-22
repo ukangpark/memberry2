@@ -13,6 +13,7 @@ public interface QnACommentMapper {
 			SELECT *
 			FROM QnAComment
 			WHERE qnaId = #{qnaId}
+			ORDER BY id
 			""")
 	List<QnAComment> selectAllByQnAId(Integer qnaId);
 
@@ -21,6 +22,26 @@ public interface QnACommentMapper {
 			VALUES(#{qnaId}, #{content}, #{memberId})
 			""")
 	Integer insert(QnAComment qnacomment);
+
+	@Delete("""
+			DELETE FROM QnAComment
+			WHERE id = #{id}
+			""")
+	Integer deleteById(Integer id);
+
+	@Select("""
+			SELECT *
+			FROM QnAComment
+			WHERE id = #{id}
+			""")
+	QnAComment selectById(Integer id);
+
+	@Update("""
+			UPDATE QnAComment 
+			SET content = #{content}
+			WHERE id = #{id} 
+			""")
+	Integer update(QnAComment qnacomment);
 	
 	
 	
