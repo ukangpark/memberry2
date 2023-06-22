@@ -53,6 +53,7 @@ public class PetsitterCommentService {
 
 		if (countComment == 1 && countStar == 1) {
 			res.put("message", "댓글이 등록되었습니다.");
+
 		} else {
 			res.put("message", "댓글이 등록되지 않았습니다.");
 		}

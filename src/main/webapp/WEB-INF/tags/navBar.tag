@@ -213,13 +213,13 @@
 							<a class="${current eq 'main' ? 'active' : '' } item"
 								href="/petsitter/main">펫시터홈</a>
 
-							<sec:authorize access="isAuthenticated() and !hasAuthority('host')">
+							<sec:authorize access="isAuthenticated() and !hasAuthority('host') and !hasAuthority('admin')">
 								<a class="${current eq 'apply' ? 'active' : '' } item"
 									href="/petsitter/apply">펫시터지원</a>
 							</sec:authorize>
 
 							<!-- 사용자 예약내역 -->
-							<sec:authorize access="isAuthenticated()">
+							<sec:authorize access="isAuthenticated() and !hasAuthority('admin')">
 								<a class="${current eq 'regiList' ? 'active' : '' } item"
 									href="/book/list">예약신청내역</a>
 							</sec:authorize>

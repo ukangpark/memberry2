@@ -38,7 +38,7 @@
 					<div class="ui fluid labeled big input mt-5">
 						<div class="ui label">아이디</div>
 						<input id="inputId" type="text" class="form-control" name="id" value="${member.id}" 
-						style="font-size: 18px; text-align: center;" placeholder="12자 이내로 작성해주세요"/> 
+						style="font-size: 18px; text-align: center;" /> 
 						
 						<input id="availableIdMessage" class="d-none form-control" type="text" value="사용 가능한 아이디입니다." 
 						style="font-size: 18px; text-align: center; color: blue;" readonly/> 
@@ -51,7 +51,8 @@
 
 					<div class="ui fluid labeled big input mt-5">
 						<div class="ui label">이름</div>
-						<input id="inputName" type="text" class="form-control" name="name" value="${member.name }" style="font-size: 18px; text-align: center;" />
+						<input id="inputName" type="text" class="form-control" name="name" value="${member.name }" 
+						style="font-size: 18px; text-align: center;" placeholder="실명으로 작성해주세요" />
 					</div>
 
 					<div class="ui fluid labeled big input mt-5">
