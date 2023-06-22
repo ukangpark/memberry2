@@ -32,7 +32,7 @@ img {
 	margin: 0 auto;
 	align-items: baseline;
 	text-align: center;
-	margin-left: 500px;
+	margin-left: 520px;
 }
 
 #addImageBox {
