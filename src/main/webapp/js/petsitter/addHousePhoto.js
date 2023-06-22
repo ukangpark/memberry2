@@ -69,7 +69,7 @@
 				    
 
 				    
-				    /*첨부된 이미리즐을 배열에 넣고 미리보기 */
+				    /*첨부된 이미리들을 배열에 넣고 미리보기 */
 				    imageLoader = function(file){
 				      sel_files.push(file);
 				      var reader = new FileReader();

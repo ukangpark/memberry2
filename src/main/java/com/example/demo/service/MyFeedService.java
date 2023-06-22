@@ -67,13 +67,6 @@ public class MyFeedService {
 		// 게시물 insert
 		
 		int cnt = mapper.insert(feed);
-<<<<<<< HEAD
-<<<<<<< HEAD
-		
-=======
->>>>>>> e38bf28ebdb50bdc5585377b50d8d2db0856b935
-=======
->>>>>>> e38bf28ebdb50bdc5585377b50d8d2db0856b935
 
 		for (MultipartFile file : files) {
 			if (file.getSize() > 0) {
