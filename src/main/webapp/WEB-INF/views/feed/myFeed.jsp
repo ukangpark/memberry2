@@ -32,7 +32,8 @@ img {
 	margin: 0 auto;
 	align-items: baseline;
 	text-align: center;
-	margin-left: 20vw;
+	margin-left: 520px;
+
 }
 
 #addImageBox {

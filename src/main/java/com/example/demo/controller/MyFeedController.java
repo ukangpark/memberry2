@@ -50,8 +50,6 @@ public class MyFeedController {
 			List<Alarm> alarms = alarmService.list(authentication.getName());
 			session.setAttribute("alarms", alarms);
 		}
-		//System.out.println(list);
-
 
 		Integer feedId = service.feedId(userName, authentication);
 		//System.out.println(feedId);
