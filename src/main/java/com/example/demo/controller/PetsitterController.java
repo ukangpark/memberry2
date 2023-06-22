@@ -36,8 +36,11 @@ public class PetsitterController {
 	}
 
 	@GetMapping("detail")
-	public void detail(@RequestParam("id") Integer hostId, Model model, 
-			Authentication authentication, HttpSession session) {
+	public void detail(
+			@RequestParam("id") Integer hostId, 
+			Model model, 
+			Authentication authentication, 
+			HttpSession session) {
 		// detail로 포워드
 
 		// 쿼리스트링으로 받은 id값을 받아서 해당 상세페이지를 읽음
