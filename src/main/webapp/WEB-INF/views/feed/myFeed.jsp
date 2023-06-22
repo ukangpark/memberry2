@@ -35,6 +35,7 @@ img {
 	margin-left: 520px;
 }
 
+
 #addImageBox {
 	height: 250px;
 	position: relative;
