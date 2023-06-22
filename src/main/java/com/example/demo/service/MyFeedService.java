@@ -190,6 +190,10 @@ public class MyFeedService {
 		return file;
 	}
 
+	public void tagDelete(Integer feedId, String tagKeyword, Authentication auth) {
+		mapper.deleteTag(feedId, tagKeyword);
+	}
+
 //	public List<Follow> listFollow(String userName, Authentication authentication) {
 //		List<Follow> followResult = mapper.selectAllByFollow(userName, authentication.getName());
 //

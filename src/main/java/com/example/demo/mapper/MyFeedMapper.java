@@ -152,4 +152,9 @@ public interface MyFeedMapper {
 			""")
 	Follow selectAllByFollow(String memberId);
 
+	@Delete("""
+			DELETE FROM Tags WHERE keyword = #{tagKeyword}
+			""")
+	void deleteTag(Integer feedId, String tagKeyword);
+
 }

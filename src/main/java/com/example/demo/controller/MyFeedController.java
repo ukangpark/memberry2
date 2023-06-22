@@ -187,5 +187,14 @@ public class MyFeedController {
 		return result;
 				
 	}
+	
+	// 태그 삭제
+	@PostMapping("/tag/delete/{feedId}/{tagKeyword}")
+	@ResponseBody
+	public void tagDelete(@PathVariable("feedId")Integer feedId,
+							@PathVariable("tagKeyword") String tagKeyword,
+							Authentication auth) {
+		service.tagDelete(feedId, tagKeyword, auth);
+	}
 
 }
