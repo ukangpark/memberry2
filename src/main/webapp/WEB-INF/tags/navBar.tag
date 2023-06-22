@@ -102,7 +102,7 @@
 								</c:if>
 								<!-- 예약 요청 알림 -->
 								<c:if test="${alarm.notiType eq 'bookRegi' }">
-									<a href="/list/host" 
+									<a href="/book/list/host" 
 										class="list-group-item "  onclick="alarmCheck(${alarm.id});"> 
 										<i class="fa-solid fa-paw" style="color: #a0a0a0"></i>
 										<div id="aLi" style="font-weight: bold; <c:if test="${alarm.isChecked eq 'true' }">color: #a0a0a0</c:if>">
@@ -112,7 +112,7 @@
 								</c:if>
 								<!-- 예약 승인 알림 -->
 								<c:if test="${alarm.notiType eq 'bookAccept' }">
-									<a href="/petsitter/detail?id=${alarm.feedId}" 
+									<a href="/book/list" 
 										class="list-group-item "  onclick="alarmCheck(${alarm.id});"> 
 										<i class="fa-solid fa-paw" style="color: #a0a0a0"></i>
 										<div id="aLi" style="font-weight: bold; <c:if test="${alarm.isChecked eq 'true' }">color: #a0a0a0</c:if>">
@@ -122,7 +122,7 @@
 								</c:if>
 								<!-- 예약 거절 알림 -->
 								<c:if test="${alarm.notiType eq 'bookReject' }">
-									<a href="/petsitter/detail?id=${alarm.feedId}" 
+									<a href="/book/list" 
 										class="list-group-item "  onclick="alarmCheck(${alarm.id});"> 
 										<i class="fa-solid fa-paw" style="color: #a0a0a0"></i>
 										<div id="aLi" style="font-weight: bold; <c:if test="${alarm.isChecked eq 'true' }">color: #a0a0a0</c:if>">
