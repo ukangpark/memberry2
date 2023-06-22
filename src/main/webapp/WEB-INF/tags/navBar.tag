@@ -59,7 +59,7 @@
 				<c:if test="${sessionScope.logedInMember.alarmCount > 0 }">
 						<span
 							class="position-absolute top-20 start-5 translate-middle p-1 bg-danger border border-light rounded-circle"
-							style="font-size: 0.3em; font-weight: bold; color: white;">${sessionScope.logedInMember.alarmCount}</span>
+							style="font-size: 0.3em; font-weight: bold; color: white;"><%-- ${sessionScope.logedInMember.alarmCount} --%></span>
 					</c:if>
 				</i>
 
