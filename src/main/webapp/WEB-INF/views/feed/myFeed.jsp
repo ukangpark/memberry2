@@ -32,17 +32,7 @@ img {
 	margin: 0 auto;
 	align-items: baseline;
 	text-align: center;
-<<<<<<< HEAD
-<<<<<<< HEAD
-	margin-left: 20%;
-=======
 	margin-left: 520px;
-
->>>>>>> e38bf28ebdb50bdc5585377b50d8d2db0856b935
-=======
-	margin-left: 520px;
-
->>>>>>> e38bf28ebdb50bdc5585377b50d8d2db0856b935
 }
 
 #addImageBox {
@@ -107,14 +97,14 @@ img {
 		<div class="follower" id="followerBtn" style="margin: 0px 30px 0px 30px; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#followerModal">
 			<h3>
 				<input id="userName" name="userName" value="${userName }" style="display: none;">
-				팔로워 <span class="followerCount">${fileList[0].followCount}</span>
+				팔로워 <span class="followerCount">${follow[0].followCount}</span>
 			</h3>
 		</div>
 
 		<div class="following" id="followingBtn" style="margin: 0px 30px 0px 30px; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#followingModal">
 			<h3>
 				<input id="userName" name="userName" value="${userName }" style="display: none;">
-				팔로잉 <span class="followingCount">${fileList[0].followingCount}</span>
+				팔로잉 <span class="followingCount">${follow[0].followingCount}</span>
 			</h3>
 
 		</div>
@@ -140,14 +130,14 @@ img {
 			<input id="userName" name="userName" value="${userName }" style="display: none;">
 			<input id="auth" name="auth" value="${authentication }" style="display: none;">
 			<c:if test="${userName ne authentication }">
-				<c:if test="${not fileList[0].followed }">
+				<c:if test="${not follow.followed }">
 					<button class="ui basic button" id="followBtn">
 						<h3>
 							<i class="fa-solid fa-user"></i> 팔로우
 						</h3>
 					</button>
 				</c:if>
-				<c:if test="${fileList[0].followed }">
+				<c:if test="${follow.followed }">
 					<button class="ui blue basic button" id="followBtn">
 						<h3>
 							<i class="fa-solid fa-user-check"></i> 팔로잉

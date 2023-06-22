@@ -9,11 +9,11 @@ import com.example.demo.domain.*;
 
 @Mapper
 public interface MyFeedMapper {
-	
+
 	@Select("""
-			SELECT 
+			SELECT
 				f.id,
-				f.feedId, 	
+				f.feedId,
 				f.fileName,
 				p.petName,
 				p.type,
@@ -21,11 +21,9 @@ public interface MyFeedMapper {
 				f.memberId,
 				m.nickName,
 				t.keyword,
-				CONCAT('/', p.id, '/', p.photo) profileImage,
-				(SELECT COUNT(*) FROM Follow WHERE feedOwner = f.memberId) followCount,
-				(SELECT COUNT(*) FROM Follow WHERE memberId = #{memberId}) followingCount
+				CONCAT('/', p.id, '/', p.photo) profileImage
+				
 			FROM File f LEFT JOIN  Pet p ON f.memberId = p.memberId
-						LEFT JOIN Follow fw ON f.memberId = fw.memberId
 						LEFT JOIN Member m ON m.id = f.memberId
 						LEFT JOIN Tags t ON t.memberId = f.memberId
 			WHERE f.memberId = #{memberId}
@@ -41,7 +39,7 @@ public interface MyFeedMapper {
 	int insert(Feed feed);
 
 	@Select("""
-			SELECT 
+			SELECT
 				fd.id,
 				fd.title,
 				fd.content,
@@ -52,8 +50,8 @@ public interface MyFeedMapper {
 				m.nickName,
 				t.keyword,
 				CONCAT('/', p.id, '/', p.photo) profileImage,
-				(SELECT COUNT(*) 
-				 FROM FeedLike 
+				(SELECT COUNT(*)
+				 FROM FeedLike
 				 WHERE feedId = fd.id) likeCount,
 				 (SELECT COUNT(*) FROM Comment WHERE feedId = fd.id) commentCount
 			FROM Feed fd LEFT JOIN File fl ON fd.id = fl.feedId
@@ -64,19 +62,19 @@ public interface MyFeedMapper {
 			""")
 	@ResultMap("feedResultMap")
 	Feed selectById(Integer id);
-	
+
 	@Insert("""
 			INSERT INTO File (feedId, fileName, memberId)
 			VALUES (#{feedId}, #{fileName}, #{memberId})
 			""")
 	Integer insertFileName(Integer feedId, String fileName, String memberId);
 
-	@Update(""" 
+	@Update("""
 			UPDATE Feed
 			SET
 				title = #{title},
 				content = #{content}
-			WHERE 
+			WHERE
 				id = #{id}
 			""")
 	int update(Feed feed);
@@ -107,7 +105,7 @@ public interface MyFeedMapper {
 	void deleteFileNameByFeedIdAndFileName(Integer feedId, String fileName);
 
 	@Select("""
-			SELECT id 
+			SELECT id
 			FROM Feed
 			WHERE writer = #{writer}
 			""")
@@ -118,7 +116,7 @@ public interface MyFeedMapper {
 					m.defaultPetId,
 					m.nickName,
 					CONCAT('/', p.id, '/', p.photo) profileImage
-			 FROM Pet p 
+			 FROM Pet p
 					LEFT JOIN Member m ON m.defaultPetId = p.id
 			WHERE m.id = #{userName}
 			""")
@@ -141,5 +139,13 @@ public interface MyFeedMapper {
 			WHERE table_schema='membery' AND table_name='Feed';
 			""")
 	Integer selectFeedId(String memberId);
+
+	@Select("""
+			SELECT
+				(SELECT COUNT(*) FROM Follow WHERE feedOwner = #{memberId}) followCount,
+				(SELECT COUNT(*) FROM Follow WHERE memberId = #{user}) followingCount
+			FROM Follow where feedOwner = #{memberId};
+			""")
+	List<Follow> selectAllByFollow(String memberId, String user);
 
 }
