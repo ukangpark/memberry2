@@ -26,10 +26,10 @@ public class CustomUserDetailsService implements UserDetailsService{
 			throw new UsernameNotFoundException(username + "회원이 없습니다.");
 		}
 
-		List<CustomGrantedAuthority> authorityList = new ArrayList<>();
+		List<SimpleGrantedAuthority> authorityList = new ArrayList<>();
 		
 		for (String auth : member.getAuthority()) {
-            authorityList.add(new CustomGrantedAuthority(auth));
+            authorityList.add(new SimpleGrantedAuthority(auth));
         }
 		
 		//username이 있으면 UserDetails만들어서 잘 넘겨주면 됨
