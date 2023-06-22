@@ -1,35 +1,42 @@
 listQnAComment();
 
-$("#qnaCommentBtn").click(function(){
+$("#qnaCommentBtn").click(function() {
 	const qnaId = $("#qnaIdText").text().trim();
 	const content = $("#qnaCommentTextArea").val();
-	const data = {qnaId, content};
-	
+	const data = { qnaId, content };
+
 	$.ajax("/qnaComment/add", {
 		method: "post",
 		contentType: "application/json",
 		data: JSON.stringify(data),
-		complete: function(){
+		complete: function(jqXHR) {
 			listQnAComment();
+			$(".toast-body").text(jqXHR.responseJSON.message);
+			toast.show();
 		}
 	});
 })
 
-$("#qnaCommentUpdateBtn").click(function(){
+$("#qnaCommentUpdateBtn").click(function() {
 	const commentId = $("#commentUpdateIdInput").val();
 	const content = $("#qnaCommentUpdateTextArea").val();
 	const data = {
-		id : commentId,
-		content : content
+		id: commentId,
+		content: content
 	}
 	$.ajax("/qnaComment/update", {
 		method: "put",
 		contentType: "application/json",
-		data: JSON.stringify(data)
+		data: JSON.stringify(data),
+		complete: function(jqXHR) {
+			listQnAComment();
+			$(".toast-body").text(jqXHR.responseJSON.message);
+			toast.show();
+		}
 	})
 })
 
-function listQnAComment(){
+function listQnAComment() {
 	const qnaId = $("#qnaIdText").text().trim();
 
 	$.ajax("/qnaComment/list?qna=" + qnaId, {
@@ -56,27 +63,29 @@ function listQnAComment(){
 				</div>
 			`);
 			};
-			
-			$(".qnaCommentUpdateButton").click(function(){
+
+			$(".qnaCommentUpdateButton").click(function() {
 				const id = $(this).attr("qnaData-comment-id");
 				$.ajax("/qnaComment/id/" + id, {
-					success: function(data){
+					success: function(data) {
 						$("#commentUpdateIdInput").val(data.id);
 						$("#qnaCommentUpdateTextArea").val(data.content);
 					}
 				})
 			});
-			
-			$(".qnaCommentDeleteButton").click(function(){
+
+			$(".qnaCommentDeleteButton").click(function() {
 				const qnaCommentId = $(this).attr("qnaData-comment-id");
 				$.ajax("/qnaComment/id/" + qnaCommentId, {
 					method: "delete",
-					complete: function(){
+					complete: function(jqXHR) {
 						listQnAComment();
+						$(".toast-body").text(jqXHR.responseJSON.message);
+						toast.show();
 					}
 				});
 			})
 		}
-	});	
+	});
 }
 

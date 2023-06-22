@@ -21,10 +21,11 @@ public class QnAController {
 	private QnAService service;
 	
 	@GetMapping("")
-	public String list(Model model) {
+	public String list(Model model,
+					   @RequestParam(value="page", defaultValue = "1") Integer page) {
 		
-		List<QnA> list = service.qnaList();
-		model.addAttribute("qnaList", list);
+		Map<String, Object> result = service.qnaList(page);
+		model.addAllAttributes(result);
 
 		return "qna";
 	}

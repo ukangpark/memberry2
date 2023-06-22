@@ -3,6 +3,8 @@ package com.example.demo.controller;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.*;
+import org.springframework.http.*;
+import org.springframework.security.access.prepost.*;
 import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,11 +19,9 @@ public class QnACommentController {
 	private QnACommentService service;
 	
 	@PutMapping("update")
-	@ResponseBody
-	public String update(@RequestBody QnAComment qnacomment) {
-		service.update(qnacomment);
-		
-		return "ok";
+	public ResponseEntity<Map<String, Object>> update(@RequestBody QnAComment qnacomment) {
+		Map<String, Object> res = service.update(qnacomment);
+		return ResponseEntity.ok().body(res);
 	}
 	
 	@GetMapping("id/{id}")
@@ -31,20 +31,19 @@ public class QnACommentController {
 	}
 	
 	@DeleteMapping("id/{id}")
-	@ResponseBody
-	public String remove(@PathVariable("id") Integer id) {
-		service.remove(id);
+	public ResponseEntity<Map<String, Object>> remove(@PathVariable("id") Integer id) {
+		Map<String, Object> res = service.remove(id);
 		
-		return "ok";
+		return ResponseEntity.ok().body(res);
 	}
 	
 	@PostMapping("add")
-	@ResponseBody
-	public String add(@RequestBody QnAComment qnacomment) {
+//	@PreAuthorize("authenticated")
+	public ResponseEntity<Map<String, Object>> add(@RequestBody QnAComment qnacomment) {
 		
-		service.add(qnacomment);
+		Map<String, Object> res = service.add(qnacomment);
 		
-		return "ok";
+		return ResponseEntity.ok().body(res);
 	}
 	
 	@GetMapping("list")

@@ -46,4 +46,22 @@ public interface QnAMapper {
 			""")
 	@Options(useGeneratedKeys = true, keyProperty = "id")
 	int insert(QnA qna);
+
+	@Select("""
+			SELECT COUNT(*)
+			FROM QnA
+			""")
+	Integer countAll();
+
+	@Select("""
+			SELECT id,
+				   title,
+				   body,
+				   writer,
+				   inserted
+			FROM QnA
+			ORDER BY inserted DESC
+			LIMIT #{startIndex}, #{recordsInQnA}
+			""")
+	List<QnA> selectAllPage(Integer startIndex, Integer recordsInQnA);
 }

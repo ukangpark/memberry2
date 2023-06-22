@@ -18,9 +18,30 @@ public class QnAService {
 	@Autowired
 	private AlarmMapper alarmMapper;
 	
-	public List<QnA> qnaList(){
-		List<QnA> list = mapper.selectAll();
-		return list;
+	public Map<String, Object> qnaList(Integer page){
+		Integer recordsInQnA = 10;
+		
+		Integer startIndex = (page -1) * recordsInQnA;
+		
+		Integer countAllQnA = mapper.countAll();
+		
+		Integer lastPageNum = (countAllQnA - 1) / recordsInQnA + 1;
+		
+		Integer leftPageNum = page - 3;
+		leftPageNum = Math.max(leftPageNum, 1);
+		
+		Integer rightPageNum = page + 2;
+		rightPageNum = Math.min(rightPageNum, lastPageNum);
+		
+		Map<String, Object> pageInfo = new HashMap<>();
+		pageInfo.put("leftPageNum", leftPageNum);
+		pageInfo.put("rightPageNum", rightPageNum);
+		pageInfo.put("currentPageNum", page);
+		pageInfo.put("lastPageNum", lastPageNum);
+		
+		List<QnA> list = mapper.selectAllPage(startIndex, recordsInQnA);
+		return Map.of("pageInfo", pageInfo,
+					  "qnaList", list);
 	}
 
 	public QnA getQnA(Integer id, Authentication authentication) {
