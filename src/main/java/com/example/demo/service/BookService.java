@@ -14,6 +14,9 @@ public class BookService {
 	@Autowired
 	private BookMapper mapper;
 	
+	@Autowired
+	private AlarmMapper alarmMapper;
+	
 	
 	//예약목록
 	public List<Book> bookList() {
@@ -24,7 +27,10 @@ public class BookService {
 	
 	//예약신청서
 	public void addRegi(Book book) {
-		 mapper.insert(book);
+		 int cnt = mapper.insert(book);
+		 if(cnt == 1) {
+			 alarmMapper.bookRegiAdd(book);
+		 }
 	}
 
 	
@@ -75,8 +81,10 @@ public class BookService {
 
 	// 예약승인
 	public void bookAccept(int num) {
-		mapper.bookAcceptUpdate(num);
-		
+		Integer cnt = mapper.bookAcceptUpdate(num);
+		if(cnt == 1) {
+			alarmMapper.bookAcceptAdd(num);
+		}
 	}
 
 
@@ -136,7 +144,11 @@ public class BookService {
 
 	// 예약거절
 	public void bookReject(Book book) {
-		mapper.bookRejectUpdate(book);
+		Integer cnt = mapper.bookRejectUpdate(book);
+		
+		if(cnt == 1) {
+			alarmMapper.bookRejectAdd(book);
+		}
 	}
 }
 

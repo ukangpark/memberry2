@@ -16,6 +16,9 @@ public class PetsitterCommentService {
 
 	@Autowired
 	private PetsitterCommentMapper petsitterCommentMapper;
+	
+	@Autowired
+	private AlarmMapper alarmMapper;
 
 	public List<PetsitterComment> list(Integer detailId, Authentication authentication) {
 		// 상세페이지id를 통해 후기 전체 조회
@@ -50,6 +53,7 @@ public class PetsitterCommentService {
 
 		if (countComment == 1 && countStar == 1) {
 			res.put("message", "댓글이 등록되었습니다.");
+			alarmMapper.petsitterCommentAdd(petsitterComment);
 		} else {
 			res.put("message", "댓글이 등록되지 않았습니다.");
 		}

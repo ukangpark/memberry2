@@ -9,7 +9,7 @@
 .container {
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-	grid-template-rows: masonry; /* this will do the magic */
+	grid-template-rows: masonry;
 	grid-gap: 10px;
 	margin-left: 5%;
 	margin-right: 5%;
@@ -29,13 +29,14 @@ img {
 
 #upper {
 	display: flex;
+	margin: 0 auto;
 	align-items: baseline;
 	text-align: center;
 	margin-left: 500px;
 }
 
 #addImageBox {
-	height: 300px;
+	height: 250px;
 	position: relative;
 	cursor: pointer;
 	/* overflow: hidden; */
@@ -91,7 +92,7 @@ img {
 	</div>
 
 	<!-- 윗 부분 -->
-	<div id="upper" class="upperContainer mb-5" style="margin-left: 20%">
+	<div id="upper" class="upperContainer mb-5" >
 
 		<div class="follower" id="followerBtn" style="margin: 0px 30px 0px 30px; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#followerModal">
 			<h3>

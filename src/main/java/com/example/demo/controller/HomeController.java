@@ -34,6 +34,7 @@ public class HomeController {
 		if (authentication != null) {
 			List<Alarm> alarms = alarmService.list(authentication.getName());
 			session.setAttribute("alarms", alarms);
+			
 		}
 		return "home";
 	}
