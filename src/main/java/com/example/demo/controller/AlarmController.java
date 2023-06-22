@@ -1,19 +1,16 @@
 package com.example.demo.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.example.demo.domain.Alarm;
+import com.example.demo.domain.Member;
 import com.example.demo.service.AlarmService;
+import com.example.demo.service.MemberService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -22,11 +19,19 @@ import jakarta.servlet.http.HttpSession;
 public class AlarmController {
 	@Autowired
 	private AlarmService service;
-	
+	@Autowired
+	private MemberService memberService;
 	
 	@GetMapping("check")
 	@ResponseBody
-	public Boolean checked(@RequestParam("id") Integer id) {
-		return service.checked(id);
+	public void checked(@RequestParam("id") Integer id, 
+			Authentication authentication, HttpSession session) {
+		Integer cnt = service.checked(id);
+		if (cnt == 1 ) {
+			//알림 확인시 개수 새로고침
+			Member member = memberService.get(authentication.getName());		
+			session.setAttribute("logedInMember", member);
+		}
+		
 	}
 }

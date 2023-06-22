@@ -55,11 +55,11 @@
 		
 			<div class="alarmBtn ui scrolling dropdown"
 				style="display: flex; float: left; margin: 30px 10px 0px 0px; align-items: center; align-content: center; text-align: center; justify-content: center;">
-				<i class="bell big icon position-relative"> 
+				 <i class="bell big icon position-relative">  
 				<c:if test="${sessionScope.logedInMember.alarmCount > 0 }">
 						<span
 							class="position-absolute top-20 start-5 translate-middle p-1 bg-danger border border-light rounded-circle"
-							style="font-size: 0.3em; font-weight: bold; color: white;"><%-- ${sessionScope.logedInMember.alarmCount} --%></span>
+							style="font-size: 0.3em; font-weight: bold; color: white;">${sessionScope.logedInMember.alarmCount}</span>
 					</c:if>
 				</i>
 
@@ -67,6 +67,7 @@
 					<div class="item">
 						<ul class="list-group" id="alarmListContainer">
 							<c:forEach items="${sessionScope.alarms }" var="alarm">
+								<!-- 피드댓글 알림 -->
 								<c:if test="${alarm.notiType eq 'comment' }">
 									 <a href="/feedId/${alarm.feedId}" 
 										class="list-group-item "  onclick="alarmCheck(${alarm.id});"> <i
@@ -78,7 +79,7 @@
 									</a> 
 									
 								</c:if>
-
+								<!-- 피드 좋아요 알림 -->
 								<c:if test="${alarm.notiType eq 'like' }">
 									 <a href="/feedId/${alarm.feedId}" 
 										class="list-group-item " data-alarm-id="${alarm.id}" onclick="alarmCheck(${alarm.id});"> <i
@@ -88,15 +89,64 @@
 										</div>
 										<small class="text-body-secondary">${alarm.inserted}</small>
 									</a> 
-									
-							
 								</c:if>
+								<!-- 팔로우 알림 -->
 								<c:if test="${alarm.notiType eq 'follow' }">
-									<a href="/feedId/${alarm.feedId}" 
+									<a href="/feed/myFeed/${alarm.causedMemberId}" 
 										class="list-group-item "  onclick="alarmCheck(${alarm.id});"> 
 										<i class="fa-solid fa-user" style="color: #a0a0a0"></i>
 										<div id="aLi" style="font-weight: bold; <c:if test="${alarm.isChecked eq 'true' }">color: #a0a0a0</c:if>">
-										${alarm.notiBody}</div>
+										 ${alarm.notiBody}</div>
+										<small class="text-body-secondary">${alarm.inserted}</small>
+									</a>
+								</c:if>
+								<!-- 예약 요청 알림 -->
+								<c:if test="${alarm.notiType eq 'bookRegi' }">
+									<a href="/list/host" 
+										class="list-group-item "  onclick="alarmCheck(${alarm.id});"> 
+										<i class="fa-solid fa-paw" style="color: #a0a0a0"></i>
+										<div id="aLi" style="font-weight: bold; <c:if test="${alarm.isChecked eq 'true' }">color: #a0a0a0</c:if>">
+										 ${alarm.notiBody}</div>
+										<small class="text-body-secondary">${alarm.inserted}</small>
+									</a>
+								</c:if>
+								<!-- 예약 승인 알림 -->
+								<c:if test="${alarm.notiType eq 'bookAccept' }">
+									<a href="/petsitter/detail?id=${alarm.feedId}" 
+										class="list-group-item "  onclick="alarmCheck(${alarm.id});"> 
+										<i class="fa-solid fa-paw" style="color: #a0a0a0"></i>
+										<div id="aLi" style="font-weight: bold; <c:if test="${alarm.isChecked eq 'true' }">color: #a0a0a0</c:if>">
+										 ${alarm.notiBody}</div>
+										<small class="text-body-secondary">${alarm.inserted}</small>
+									</a>
+								</c:if>
+								<!-- 예약 거절 알림 -->
+								<c:if test="${alarm.notiType eq 'bookReject' }">
+									<a href="/petsitter/detail?id=${alarm.feedId}" 
+										class="list-group-item "  onclick="alarmCheck(${alarm.id});"> 
+										<i class="fa-solid fa-paw" style="color: #a0a0a0"></i>
+										<div id="aLi" style="font-weight: bold; <c:if test="${alarm.isChecked eq 'true' }">color: #a0a0a0</c:if>">
+										 ${alarm.notiBody}</div>
+										<small class="text-body-secondary">${alarm.inserted}</small>
+									</a>
+								</c:if>
+								<!-- 상세페이지 후기 알림 -->
+								<c:if test="${alarm.notiType eq 'petsitterComment' }">
+									<a href="/petsitter/detail?id=${alarm.feedId}" 
+										class="list-group-item "  onclick="alarmCheck(${alarm.id});"> 
+										<i class="fa-solid fa-comments" style="color: #a0a0a0"></i>
+										<div id="aLi" style="font-weight: bold; <c:if test="${alarm.isChecked eq 'true' }">color: #a0a0a0</c:if>">
+										 ${alarm.notiBody}</div>
+										<small class="text-body-secondary">${alarm.inserted}</small>
+									</a>
+								</c:if>
+								<!-- qna 알림 -->
+								<c:if test="${alarm.notiType eq 'qna' }">
+									<a href="/qna/id/${alarm.feedId}" 
+										class="list-group-item "  onclick="alarmCheck(${alarm.id});"> 
+										<i class="fa-solid fa-magnifying-glass" style="color: #a0a0a0"></i>
+										<div id="aLi" style="font-weight: bold; <c:if test="${alarm.isChecked eq 'true' }">color: #a0a0a0</c:if>">
+										 ${alarm.notiBody}</div>
 										<small class="text-body-secondary">${alarm.inserted}</small>
 									</a>
 								</c:if>

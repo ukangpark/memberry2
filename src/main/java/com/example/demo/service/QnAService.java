@@ -15,6 +15,9 @@ public class QnAService {
 	@Autowired
 	private QnAMapper mapper;
 	
+	@Autowired
+	private AlarmMapper alarmMapper;
+	
 	public List<QnA> qnaList(){
 		List<QnA> list = mapper.selectAll();
 		return list;
@@ -38,6 +41,9 @@ public class QnAService {
 
 	public boolean addQnA(QnA qna) throws Exception{
 		int cnt = mapper.insert(qna);
+		if (cnt == 1) {
+			alarmMapper.qnaAdd(qna);
+		}
 		return cnt == 1;
 	}
 

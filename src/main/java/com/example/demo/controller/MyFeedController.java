@@ -2,13 +2,9 @@ package com.example.demo.controller;
 
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.ArrayList;
 import java.util.List;
 
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -16,21 +12,21 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.example.demo.domain.Alarm;
 import com.example.demo.domain.Feed;
 import com.example.demo.domain.File;
-import com.example.demo.domain.Follow;
-import com.example.demo.domain.Like;
 import com.example.demo.domain.Registration;
 import com.example.demo.domain.Tag;
+import com.example.demo.service.AlarmService;
 import com.example.demo.service.MyFeedService;
-import com.example.demo.service.MyPetsService;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/")
@@ -38,13 +34,24 @@ public class MyFeedController {
 
 	@Autowired
 	private MyFeedService service;
+	
+	@Autowired
+	private AlarmService alarmService;
 
 	// MyFeed 보기
 	@GetMapping("feed/myFeed/{userName}")
 	@PreAuthorize("isAuthenticated()")
-	public String myFeed(Model model, @PathVariable("userName") String userName, Authentication authentication) {
+	public String myFeed(Model model, @PathVariable("userName") String userName, Authentication authentication, HttpSession session) {
 		List<File> list = service.listMyFeed(userName, authentication);
 		Registration profileList = service.listProfile(userName, authentication);
+
+		
+		if(authentication != null) {
+			List<Alarm> alarms = alarmService.list(authentication.getName());
+			session.setAttribute("alarms", alarms);
+		}
+		System.out.println(list);
+
 
 		//File feedId = service.feedId(userName, authentication);
 		//System.out.println(feedId);
@@ -110,9 +117,14 @@ public class MyFeedController {
 
 	// 클릭한 게시물 보기
 	@GetMapping("/feedId/{feedId}")
-	public String post(@PathVariable("feedId") Integer feedId, Model model, Authentication authentication) {
+	public String post(@PathVariable("feedId") Integer feedId, Model model, Authentication authentication, HttpSession session) {
 		Feed feed = service.getPost(feedId, authentication);
 		model.addAttribute("feed", feed);
+		
+		if(authentication != null) {
+			List<Alarm> alarms = alarmService.list(authentication.getName());
+			session.setAttribute("alarms", alarms);
+		}
 
 		return "feed/feedGet";
 	}
