@@ -86,7 +86,7 @@
 					<li id="imageList${status.index }">
 						<%-- <input type="checkbox" name="removeFiles" value="${fileName }" id="" /><i class="fa-regular fa-circle-trash"></i> --%>
 						<%-- <button data-target-list="#imageList${status.index }" type="button" class=" removeFilesBtn btn btn-outline-dark" name="removeFiles" value="${fileName }"><i class="fa-solid fa-trash"></i></button> --%>
-						<button type="button" class="removeFilesBtn btn btn-outline-dark" name="removeFiles" value="${fileName }"><i class="trash alternate icon"></i></button>
+						<button type="button" class="removeFilesBtn btn btn-dark" name="removeFiles" value="${fileName }"><i class="trash alternate icon"></i></button>
 						<img class="ui medium rounded imager" src="${bucketUrl }/feed/${feed.id }/${fileName }" alt="" />
 					</li>
 				</c:forEach>
