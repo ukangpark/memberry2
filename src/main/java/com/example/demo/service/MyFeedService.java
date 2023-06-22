@@ -66,10 +66,7 @@ public class MyFeedService {
 	public boolean addFeed(Feed feed, MultipartFile[] files, Authentication authentication) throws Exception {
 		// 게시물 insert
 		
-		int cnt = 0;
-		if (feed.getFileName() != null) {
-			mapper.insert(feed);
-		}
+		int cnt = mapper.insert(feed);
 
 		for (MultipartFile file : files) {
 			if (file.getSize() > 0) {
@@ -181,16 +178,15 @@ public class MyFeedService {
 		return mapper.selectAllByProfile(userName, authentication);
 	}
 
-	public List<Tag> tag(String tagInput, Authentication auth) {
-		Integer insert = mapper.insertTag(tagInput, auth.getName());
-		// result.put("tag", insert);
+	public List<Tag> tag(Integer feedId, String tagInput, Authentication auth) {
+		Integer insert = mapper.insertTag(feedId, tagInput, auth.getName());
 
-		List<Tag> tags = mapper.selectTag(auth.getName());
+		List<Tag> tags = mapper.selectTag(feedId, auth.getName());
 		return tags;
 	}
 
-	public File feedId(String userName, Authentication authentication) {
-		File file = mapper.selectFeedId(userName);
+	public Integer feedId(String userName, Authentication authentication) {
+		Integer file = mapper.selectFeedId(userName);
 		return file;
 	}
 }

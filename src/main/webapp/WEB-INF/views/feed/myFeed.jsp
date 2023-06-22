@@ -32,7 +32,7 @@ img {
 	margin: 0 auto;
 	align-items: baseline;
 	text-align: center;
-	margin-left: 500px;
+	margin-left: 20vw;
 }
 
 #addImageBox {
@@ -163,7 +163,7 @@ img {
 		<!-- 게시물 추가 이미지 -->
 		<div id="addImageBox">
 			<div id="addImage">
-				<a href="/feed/feedAdd/${fileList[0].feedId }">
+				<a href="/feed/feedAdd/${feedId}">
 					<img style="height: 300px" src="/images/feedAddIcon.PNG" alt="" />
 				</a>
 			</div>
