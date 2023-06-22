@@ -125,23 +125,21 @@ public interface MyFeedMapper {
 	Registration selectAllByProfile(String userName, Authentication authentication);
 
 	@Insert("""
-			INSERT INTO Tags (memberId, keyword)
-			VALUES (#{name}, #{tagInput})
+			INSERT INTO Tags (memberId, keyword, feedId)
+			VALUES (#{name}, #{tagInput}, #{feedId})
 			""")
-	Integer insertTag(String tagInput, String name);
+	Integer insertTag(Integer feedId, String tagInput, String name);
 
 	@Select("""
 			SELECT * FROM Tags
-			WHERE memberId = #{name}
+			WHERE feedId = #{feedId}
 			""")
-	List<Tag> selectTag(String name);
+	List<Tag> selectTag(Integer feedId, String name);
 
-	@Insert("""
-			INSERT INTO Feed (id)
-			WHERE id = #{id}
-			ORDER BY id DESC
+	@Select("""
+			SELECT auto_increment FROM information_schema.tables
+			WHERE table_schema='membery' AND table_name='Feed';
 			""")
-	@Options(useGeneratedKeys = true, keyProperty = "id")
-	File selectFeedId(String memberId);
+	Integer selectFeedId(String memberId);
 
 }
