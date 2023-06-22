@@ -157,7 +157,7 @@ public interface BookMapper {
 			AND Host.id = Detail.hostId
 			AND Pet.memberId = #{userId}
 			AND Pet.id = Book.petId
-			ORDER BY Book.num DESC
+			ORDER BY Book.checkIn DESC
 			LIMIT #{startIndex}, #{rowPerPage}
 			""")
 	List<Book> selectAllPagingUser(Integer startIndex, Integer rowPerPage, String userId);

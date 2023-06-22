@@ -62,7 +62,7 @@
 			  pg_mid = 'kcp.IOfds34';
 		  }
 	  }
-	  alert(pg_mid);
+	 // alert(pg_mid);
 	  
 	  //step 3
 	  const data = {
@@ -77,7 +77,7 @@
 	  };
 	  
 	  IMP.request_pay(data, response => {
-		  alert('callback!: '+JSON.stringify(response));
+		 // alert('callback!: '+JSON.stringify(response));
 	  
 		  //step 4
 		  jQuery.ajax({
@@ -87,7 +87,7 @@
 			  data: JSON.stringify(response)
 		  }).done(function (data) {
 			  // step 6
-		  alert("please, Check your payment result page");
+		//  alert("please, Check your payment result page");
 		  	})
 		  });
 	  }
