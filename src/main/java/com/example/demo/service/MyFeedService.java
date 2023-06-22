@@ -53,12 +53,12 @@ public class MyFeedService {
 	public List<File> listMyFeed(String userName, Authentication authentication) {
 		List<File> file = mapper.selectAll(userName);
 
-//		if (authentication != null) {
-//			Follow follow = followMapper.select(userName, authentication.getName());
-//			if (follow != null) {
-//				file.get(0).setFollowed(true);
-//			}
-//		}
+		if (authentication != null) {
+			Follow follow = followMapper.select(userName, authentication.getName());
+			if (follow != null) {
+				file.get(0).setFollowed(true);
+			}
+		}
 
 		return file;
 	}
@@ -190,18 +190,18 @@ public class MyFeedService {
 		return file;
 	}
 
-	public List<Follow> listFollow(String userName, Authentication authentication) {
-		List<Follow> followResult = mapper.selectAllByFollow(userName, authentication.getName());
-
-		if (authentication != null) {
-			Follow follow = followMapper.select(userName, authentication.getName());
-			if (follow != null) {
-				follow.setFollowed(true);
-			}
-		}
-
-		return followResult;
-	}
+//	public List<Follow> listFollow(String userName, Authentication authentication) {
+//		List<Follow> followResult = mapper.selectAllByFollow(userName, authentication.getName());
+//
+//		if (authentication != null) {
+//			Follow follow = followMapper.select(userName, authentication.getName());
+//			if (follow != null) {
+//				follow.setFollowed(true);
+//			}
+//		}
+//
+//		return followResult;
+//	}
 
 	
 }

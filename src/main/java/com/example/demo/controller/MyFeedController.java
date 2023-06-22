@@ -45,8 +45,8 @@ public class MyFeedController {
 	public String myFeed(Model model, @PathVariable("userName") String userName, Authentication authentication, HttpSession session) {
 		List<File> list = service.listMyFeed(userName, authentication);
 		Registration profileList = service.listProfile(userName, authentication);
-		List<Follow> follow = service.listFollow(userName, authentication);
-		System.out.println(follow);
+		//List<Follow> follow = service.listFollow(userName, authentication);
+		//System.out.println(follow);
 		
 		if(authentication != null) {
 			List<Alarm> alarms = alarmService.list(authentication.getName());
@@ -86,7 +86,7 @@ public class MyFeedController {
 		model.addAttribute("userName", userName);
 		model.addAttribute("authentication", authentication.getName());
 		model.addAttribute("feedId", feedId);
-		model.addAttribute("follow", follow);
+		//model.addAttribute("follow", follow);
 		return "feed/myFeed";
 	}
 

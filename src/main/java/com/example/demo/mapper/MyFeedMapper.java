@@ -21,9 +21,11 @@ public interface MyFeedMapper {
 				f.memberId,
 				m.nickName,
 				t.keyword,
-				CONCAT('/', p.id, '/', p.photo) profileImage
-				
+				CONCAT('/', p.id, '/', p.photo) profileImage,
+				(SELECT COUNT(*) FROM Follow WHERE feedOwner = f.memberId) followCount,
+				(SELECT COUNT(*) FROM Follow WHERE memberId = #{memberId}) followingCount
 			FROM File f LEFT JOIN  Pet p ON f.memberId = p.memberId
+						LEFT JOIN Follow fw ON f.memberId = fw.memberId
 						LEFT JOIN Member m ON m.id = f.memberId
 						LEFT JOIN Tags t ON t.memberId = f.memberId
 			WHERE f.memberId = #{memberId}
@@ -55,8 +57,8 @@ public interface MyFeedMapper {
 				 WHERE feedId = fd.id) likeCount,
 				 (SELECT COUNT(*) FROM Comment WHERE feedId = fd.id) commentCount
 			FROM Feed fd LEFT JOIN File fl ON fd.id = fl.feedId
+				         LEFT JOIN Tags t ON t.feedId = fd.id
 						 LEFT JOIN Member m ON m.id = fd.writer
-				         LEFT JOIN Tags t ON t.memberId = m.id
 				         LEFT JOIN Pet p ON m.defaultPetId = p.id
 			WHERE fd.id = #{id}
 			""")
@@ -142,10 +144,12 @@ public interface MyFeedMapper {
 
 	@Select("""
 			SELECT
+				SELECT
+				
 				(SELECT COUNT(*) FROM Follow WHERE feedOwner = #{memberId}) followCount,
-				(SELECT COUNT(*) FROM Follow WHERE memberId = #{user}) followingCount
+				(SELECT COUNT(*) FROM Follow WHERE memberId = #{memberId}) followingCount
 			FROM Follow where feedOwner = #{memberId};
 			""")
-	List<Follow> selectAllByFollow(String memberId, String user);
+	Follow selectAllByFollow(String memberId);
 
 }
