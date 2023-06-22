@@ -22,7 +22,7 @@ $("#qnaCommentUpdateBtn").click(function(){
 		id : commentId,
 		content : content
 	}
-	$.ajax("/comment/update", {
+	$.ajax("/qnaComment/update", {
 		method: "put",
 		contentType: "application/json",
 		data: JSON.stringify(data)
