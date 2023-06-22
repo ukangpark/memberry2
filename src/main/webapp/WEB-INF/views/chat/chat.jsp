@@ -17,17 +17,26 @@
 		.chating{
 			margin: 80px 0px 0px 20px;
 			background-color: #FFF2F2;
-			width: 67vw;
+			width: 50vw;
 			height: 82vh;
 			overflow: auto;
 		}
 		.chating p{
 			color: grey;
-			background-color: #EEEEEE;
 			font-size: 20px;
 			border-radius: 1rem;
-			text-align: left;
+			
 		}
+		
+		.me {
+		text-align: right;
+		background-color: white;
+		}
+		
+		.others {
+        text-align: left;
+        background-color: #EEEEEE;
+    }
 	
 	</style>
 </head>
@@ -59,8 +68,7 @@
 					}
 				}else if(d.type == "message"){
 					if(d.sessionId == $("#sessionId").val()){
-						
-						$("#chating").append("<p class='me'> " + d.userName + " : " + d.msg + "</p>");	
+						$("#chating").append($("#profileImg") + "<p class='me'>" + d.userName + " : " + d.msg + "</p>");	
 					}else{
 						$("#chating").append("<p class='others'>" + d.userName + " : " + d.msg + "</p>");
 					}
@@ -116,6 +124,12 @@
 		<!-- 방의 번호값을 모델에서 저장하고 그 값을 jstl을 통해 파싱 -->
 		<!-- 접속한 방의 이름을 모델에 저정한 값을 가져아서 채팅방 이름 추가 -->
 		<input type="hidden" id="roomNumber" value="${roomNumber}">
+		
+		<div style="display: none;">
+		<c:if test="${sessionScope.logedInMember.profileImage ne null}">
+			<img id="profileImg" class="ui tiny image btn-primary position-relative" src="${bucketUrl }/pet${sessionScope.logedInMember.profileImage }"></img>
+		</c:if>
+		</div>
 	
 		<!-- 채팅 목록 -->
 		<div id="chatList" style="background-color: #EEEEEE; height: 100vh; width: 25vw;">
@@ -129,10 +143,10 @@
 			<div id="chating" class="chating">
 			</div>
 			
-			<div id="yourName" class="ui action input" style="font-size: 20px; height: 50px; width: 70vw; margin: 0px 0px 0px 20px;"> 
+			<div id="yourName" class="ui action input" style="font-size: 20px; height: 50px; width: 20vw; margin: 0px 0px 0px 20px;"> 
 				<input type="text" name="userName" id="userName" style="border-top-left-radius: 2rem; border-bottom-left-radius: 2rem;" placeholder=" <sec:authentication property="name"/>" value="<sec:authentication property="name"/>" name="userId">
 					<button onclick="chatName()" id="startBtn" class="ui action button" style="border-top-right-radius: 2em; border-bottom-right-radius: 2rem;">
-						<i class="fa-solid fa-paper-plane"></i>
+						START
 					</button>
 			</div>
 				

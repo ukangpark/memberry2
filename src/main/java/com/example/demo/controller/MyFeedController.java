@@ -46,7 +46,6 @@ public class MyFeedController {
 		List<File> list = service.listMyFeed(userName, authentication);
 		Registration profileList = service.listProfile(userName, authentication);
 		List<Follow> follow = service.listFollow(userName, authentication);
-		System.out.println(follow);
 		
 		if(authentication != null) {
 			List<Alarm> alarms = alarmService.list(authentication.getName());

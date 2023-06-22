@@ -12,10 +12,7 @@
 <my:top></my:top>
 
 	<style>
-		*{
-			margin:0;
-			padding:0;
-		}
+	
 		.container{
 			width: 500px;
 			margin: 0 auto;
@@ -24,8 +21,8 @@
 		.container h1{
 			text-align: left;
 			padding: 5px 5px 5px 15px;
-			color: #FFF2F2;
-			border-left: 3px solid #FFF2F2;
+			color: black;
+			border-left: 3px solid black;
 			margin-bottom: 20px;
 		}
 		.roomContainer{
@@ -38,15 +35,15 @@
 			border: none;
 		}
 		.roomList th{
-			border: 1px solid #FFF2F2;
+			border: 1px solid black;
 			background-color: #fff;
-			color: #FFF2F2;
+			color: black;
 		}
 		.roomList td{
-			border: 1px solid #FFF2F2;
+			border: 1px solid black;
 			background-color: #fff;
 			text-align: left;
-			color: #FFF2F2;
+			color: black;
 		}
 		.roomList .num{
 			width: 75px;

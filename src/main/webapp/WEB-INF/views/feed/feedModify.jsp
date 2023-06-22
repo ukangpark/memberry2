@@ -47,22 +47,20 @@
       }
       
       .bxslider {
-         width:1000%; 
-         position: relative; 
          overflow: hidden;
          transition-duration: 0.2s; 
          transform: translate3d(-390px, 0px, 0px);
       }
       
-      /* .bxslider > li > img { 
-            position:absolute;
+       #imageList { 
+         position: relative;
+		}
          
-         }  */
-         
-       .removeFilesBtn {
-             position:absolute; 
+       #removeCheck {
+          position: absolute; 
+          top: 0; left: 0;
           
-         } 
+        }  
       
    </style>
    
@@ -83,11 +81,18 @@
       <div id="add" align="center">
          <ul class="bxslider">
             <c:forEach items="${feed.fileName }" var="fileName" varStatus="status">
-               <li id="imageList${status.index }" align="left">
-                  <%-- <input type="checkbox" name="removeFiles" value="${fileName }" id="" /><i class="fa-regular fa-circle-trash"></i> --%>
-                  <%-- <button data-target-list="#imageList${status.index }" type="button" class=" removeFilesBtn btn btn-outline-dark" name="removeFiles" value="${fileName }"><i class="fa-solid fa-trash"></i></button> --%>
-                  <button type="button" class="removeFilesBtn btn btn-dark" name="removeFiles" value="${fileName }"><i class="trash alternate icon"></i></button>
-                  <img class="ui medium rounded imager" src="${bucketUrl }/feed/${feed.id }/${fileName }" alt="" />
+              <li id="imageList${status.index }" align="left">
+               <div id="removeCheck" class="d-flex">
+	               <i class="trash alternate icon"></i>
+	               <div class="form-check form-switch">         
+	                  <input name="removeFiles" value="${fileName }" class="form-check-input" type="checkbox" role="switch" id="removeCheckBox${status.index }">
+	                  </label>
+	               </div>
+	           </div>
+	                   <label class="form-check-label" for="removeCheckBox${status.index }">
+	                  <%-- <button data-target-list="#imageList${status.index }" type="button" class=" removeFilesBtn btn btn-outline-dark" name="removeFiles" value="${fileName }"><i class="fa-solid fa-trash"></i></button> --%>
+	                  <%--  <button type="button" class="removeFilesBtn btn btn-dark" name="removeFiles" value="${fileName }"><i class="trash alternate icon"></i></button> --%>
+	                  <img class="ui medium rounded imager" src="${bucketUrl }/feed/${feed.id }/${fileName }" alt="" />
                </li>
             </c:forEach>
          </ul>
@@ -100,10 +105,6 @@
          
       </div>
 
-      
-   <!-- <div>
-         사진을 추가해보세요! <br /> <input type="file" multiple name="files" accept="image/*" />
-      </div> -->
       
       <!-- 글 수정 부분 -->
       <div id="content" >
