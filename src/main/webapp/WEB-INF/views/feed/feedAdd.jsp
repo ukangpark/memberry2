@@ -35,6 +35,7 @@
 
 #imgContainer {
 	position: relative;
+	flex-grow: 2;
 }
 
 #addBtn {
@@ -43,9 +44,6 @@
 	left: 58%;
 }
 
-#add {
-	
-}
 
 #content {
 	flex-grow: 3;
@@ -53,9 +51,41 @@
 	margin-left: 10rem;
 }
 
-#previewCircle {
-	
+#imagePreview {
+	position: relative;
+	width: 300px;
+	height: 300px;
+	border-radius: 50%;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0px;
 }
+
+.defaultImage {
+	position: relative;
+	width: 300px;
+	height: 300px;
+	border-radius: 50%;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0px;
+}
+
+.defaultImage>img {
+	width: 100%;
+	height: 100%;
+}
+
+.preview {
+	display: none;
+	width: 100%;
+	height: 100%;
+}
+
 </style>
 </head>
 <body style="background-color: #FFF2F2">
@@ -78,12 +108,10 @@
 			<!-- 이미지 파일 업로드 -->
 
 			<div class="" id="imgContainer">
-				<div id="imagePreview">
-					<div id="previewCircle" class="ui centered medium bordered circular image">
-						<img class="preview">
-					</div>
+				<div id="imagePreview" class="ui container">
+						<img class="preview" src="">
 					<div class="defaultImage">
-						<img class="ui centered medium bordered circular image" src="/images/투명발바닥.png">
+						<img src="/images/투명발바닥.png">
 					</div>
 				</div>
 

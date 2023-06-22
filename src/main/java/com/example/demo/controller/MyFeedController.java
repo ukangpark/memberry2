@@ -45,6 +45,7 @@ public class MyFeedController {
 	public String myFeed(Model model, @PathVariable("userName") String userName, Authentication authentication) {
 		List<File> list = service.listMyFeed(userName, authentication);
 		Registration profileList = service.listProfile(userName, authentication);
+
 		//File feedId = service.feedId(userName, authentication);
 		//System.out.println(feedId);
 		
@@ -111,7 +112,6 @@ public class MyFeedController {
 	@GetMapping("/feedId/{feedId}")
 	public String post(@PathVariable("feedId") Integer feedId, Model model, Authentication authentication) {
 		Feed feed = service.getPost(feedId, authentication);
-		System.out.println(feed);
 		model.addAttribute("feed", feed);
 
 		return "feed/feedGet";
