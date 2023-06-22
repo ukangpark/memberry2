@@ -115,8 +115,8 @@
 					</div>
 				</div>
 
-				<label for="fileInput" class="big circular ui icon button" id="addBtn"> <i class="large plus icon"></i></label>
-				<input multiple class="form-control" type="file" id="fileInput" name="files" accept="image/*" required/>
+				<!-- <label for="fileInput" class="big circular ui icon button" id="addBtn"> <i class="large plus icon"></i></label> -->
+				<input style="width:300px; margin-left: 10%" multiple class="form-control" type="file" id="fileInput" name="files" accept="image/*" required/>
 				<h3 style="text-align: center">사진을 등록해 보세요!</h3>
 			</div>
 

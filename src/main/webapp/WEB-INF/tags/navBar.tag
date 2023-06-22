@@ -111,7 +111,7 @@
 									</a>
 								</c:if>
 								<!-- 예약 승인 알림 -->
-								<c:if test="${alarm.notiType eq 'bookAccept' }">
+								<c:if test="${alarm.notiType eq 'bookAccept'}">
 									<a href="/book/list" 
 										class="list-group-item "  onclick="alarmCheck(${alarm.id});"> 
 										<i class="fa-solid fa-paw" style="color: #a0a0a0"></i>

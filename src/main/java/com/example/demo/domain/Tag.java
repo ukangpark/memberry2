@@ -7,4 +7,5 @@ public class Tag {
 	private Integer id;
 	private String memberId;
 	private String keyword;
+	private Integer feedId;
 }

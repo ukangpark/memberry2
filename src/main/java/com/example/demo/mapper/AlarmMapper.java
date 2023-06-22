@@ -65,7 +65,9 @@ public interface AlarmMapper {
 	//펫시터 댓글 알림
 	@Insert("""
 			INSERT INTO Alarm (userId, causedMemberId, feedId, content, notiType, notiBody)
-			VALUES ((SELECT hostId FROM Detail WHERE id = #{detailId}), #{memberId}, #{detailId}, #{body}, 'petsitterComment',
+			VALUES ((SELECT h.hostName FROM PetsitterComment pc LEFT JOIN Detail d ON pc.detailId = d.id 
+					LEFT JOIN Host h ON h.id = d.hostId WHERE pc.id = #{id}), 
+			#{memberId}, #{detailId}, #{body}, 'detailCom',
 			(#{memberId}'님이 회원님의 펫시터 상세페이지에 후기가 달렸습니다 : '#{body}))
 			""")
 	Integer petsitterCommentAdd(PetsitterComment petsitterComment);
@@ -82,7 +84,7 @@ public interface AlarmMapper {
 	@Insert("""
 			INSERT INTO Alarm (userId, causedMemberId, feedId, notiType, notiBody)
 			VALUES ((SELECT h.memberId FROM Book b LEFT JOIN Detail d ON d.id = b.detailId
-					LEFT JOIN Host h ON h.id = d.hostId WHERE b.detailId = #{detailId}),
+					LEFT JOIN Host h ON h.id = d.hostId WHERE b.detailId = #{detailId} AND b.num = #{id}),
 			#{memberId}, #{detailId}, 'bookRegi',
 			'회원님께 펫시터 예약 요청이 왔습니다.')
 			""")
@@ -91,22 +93,19 @@ public interface AlarmMapper {
 	
 	//펫시터 예약승인 알림
 	@Insert("""
-			INSERT INTO Alarm (userId, causedMemberId, feedId, notiType, notiBody)
+			INSERT INTO Alarm (userId, feedId, notiType, notiBody)
 			VALUES (
 				( SELECT memberId FROM Book WHERE num = #{num} ), 
-				( SELECT d.writer FROM Book b LEFT JOIN Datail ON b.detailId = d.id WHERE b.num = #{num} ), 
 				( SELECT detailId FROM Book WHERE num = #{num} ), 
 				'bookAccept',
 				'회원님의 펫시터 예약이 승인되었습니다.')
-				SELECT hostName FROM Detail d LEFT JOIN Book b d.id = b.detaiId
-							LEFT JOIN Host h h.id = d.hostId WHERE b.num = #{num} ) 
 			""")
 	void bookAcceptAdd(int num);
 	
 	//펫시터 예약거절 알림
 	@Insert("""
-			INSERT INTO Alarm (userId, causedMemberId, feedId, notiType, notiBody)
-			VALUES (#{memberId}, (SELECT hostId FROM Detail WHERE id = #{detailId}, #{detailId}, 'bookReject',
+			INSERT INTO Alarm (userId, feedId, notiType, notiBody)
+			VALUES (#{memberId}, #{detailId}, 'bookReject',
 			'회원님의 펫시터 예약이 거절되었습니다.')
 			""")
 	void bookRejectAdd(Book book);
