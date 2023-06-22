@@ -136,6 +136,9 @@ public class MyFeedService {
 	}
 
 	public boolean remove(Integer id) {
+		
+		// 태그 테이블 지우기
+		mapper.deleteTagByFeedId(id);
 
 		// 댓글 테이블 지우기
 		commentMapper.deleteByFeedID(id);

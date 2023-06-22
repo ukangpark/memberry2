@@ -142,19 +142,24 @@ public interface MyFeedMapper {
 			""")
 	Integer selectFeedId(String memberId);
 
-	@Select("""
-			SELECT
-				SELECT
-				
-				(SELECT COUNT(*) FROM Follow WHERE feedOwner = #{memberId}) followCount,
-				(SELECT COUNT(*) FROM Follow WHERE memberId = #{memberId}) followingCount
-			FROM Follow where feedOwner = #{memberId};
-			""")
-	Follow selectAllByFollow(String memberId);
+//	@Select("""
+//			SELECT
+//				SELECT
+//				
+//				(SELECT COUNT(*) FROM Follow WHERE feedOwner = #{memberId}) followCount,
+//				(SELECT COUNT(*) FROM Follow WHERE memberId = #{memberId}) followingCount
+//			FROM Follow where feedOwner = #{memberId};
+//			""")
+//	Follow selectAllByFollow(String memberId);
 
 	@Delete("""
 			DELETE FROM Tags WHERE keyword = #{tagKeyword}
 			""")
 	void deleteTag(Integer feedId, String tagKeyword);
+
+	@Delete("""
+			DELETE FROM Tags WHERE feedId = #{feedId}
+			""")
+	void deleteTagByFeedId(Integer feedId);
 
 }
