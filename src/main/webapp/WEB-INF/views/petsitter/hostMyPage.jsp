@@ -9,7 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Insert title here</title>
+<title>호스트 마이페이지</title>
 <my:top></my:top>
 <link rel="stylesheet" type="text/css" href="/js/semantic/semantic.min.css">
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
@@ -31,7 +31,7 @@
 							<img class="ui medium bordered centered circular image " src="${bucketUrl }/hostProfile/${host.id }/${host.profile }">
 						</c:otherwise>
 					</c:choose>
-					<h1 class="ui center aligned header">${host.hostName }님정보입니다.</h1>
+					<h1 class="ui center aligned header"><span style="color: #FF9999;">${host.hostName }</span>님 정보입니다.</h1>
 					<div>
 						<form class="ui big form" id="checkForm">
 							<div class="field">

@@ -1,5 +1,4 @@
 		function testFunction() {
-			console.log("hi")
 			const node = document.getElementById("imgContainer");
 			const clone = node.cloneNode(true);
 			console.log(node);

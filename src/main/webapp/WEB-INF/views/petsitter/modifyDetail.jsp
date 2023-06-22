@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Insert title here</title>
+<title>상세페이지 수정하기</title>
 <my:top></my:top>
 <link rel="stylesheet" type="text/css" href="/js/semantic/semantic.min.css">
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
@@ -66,7 +66,7 @@
 					<form class="ui form" action="/petsitter/deleteDetail" id="deleteDetailForm" method="post">
 						<input type="hidden" name="hostId" value="${host.id }">
 						<div class="field">
-						<input type="text" name="password" placeholder="비밀번호 입력">						
+						<input type="password" name="password" placeholder="비밀번호 입력">						
 						</div>
 					</form>
 				</div>

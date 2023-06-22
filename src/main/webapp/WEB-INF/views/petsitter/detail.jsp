@@ -78,12 +78,12 @@
 					</c:choose>
 					<a class="header">${host.hostName }님</a>
 					<div class="meta">
-						<span>주소 : ${host.si } ${host.gu } ${host.dong }</span>
+						<span>${host.si } ${host.gu } ${host.dong }</span>
 						<br>
-						<span>번호 : ${host.phone }</span>
+						<span>${host.phone }</span>
 					</div>
 					<div class="description">
-						<p>한 줄 소개 : ${detail.title }</p>
+						<p>${detail.title }</p>
 					</div>
 					<div class="extra">#매일 산책 가능 #샤워 가능 #간식 있음</div>
 
@@ -97,7 +97,6 @@
 		<div class="ui text container">
 			<p>${detail.body }</p>
 		</div>
-
 
 
 		<!-- 예약 모달 -->
@@ -348,6 +347,7 @@
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=${apiKey }&libraries=services"></script>
 	<script async src="http://t1.daumcdn.net/mapjsapi/js/main/4.4.8/kakao.js"></script>
 	<script src="/js/petsitter/petsitterComment.js"></script>
+	<script src="/js/petsitter/detailMap.js"></script>
 
 	<script type="text/javascript">
 		function openModal() {
@@ -355,8 +355,6 @@
 		}
 
 		var bucketUrl = '${bucketUrl}';
-
-
 	</script>
 
 	<script src="/js/semantic/semantic.min.js"></script>
