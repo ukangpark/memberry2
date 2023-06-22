@@ -38,7 +38,7 @@ public class QnAController {
 	}
 	
 	@GetMapping("/modify/{id}")
-	@PreAuthorize("isAuthenticated() and @customSecurityChecker.checkQnAWriter(authentication, #id)")
+	@PreAuthorize("(isAuthenticated() and @customSecurityChecker.checkQnAWriter(authentication, #id)) or hasAuthority('admin')")
 	public String modifyForm(
 							 @PathVariable("id") Integer id, Model model) {
 		model.addAttribute("qna", service.getQnA(id));
@@ -46,7 +46,7 @@ public class QnAController {
 	}
 	
 	@PostMapping("/modify/{id}")
-	@PreAuthorize("isAuthenticated() and @customSecurityChecker.checkQnAWriter(authentication, #qna.id)")
+	@PreAuthorize("(isAuthenticated() and @customSecurityChecker.checkQnAWriter(authentication, #qna.id)) or hasAuthority('admin')")
 	public String modifyProcess(QnA qna, 
 								RedirectAttributes rttr) throws Exception{
 
@@ -62,7 +62,7 @@ public class QnAController {
 	}
 	
 	@PostMapping("remove")
-	@PreAuthorize("isAuthenticated() and @customSecurityChecker.checkQnAWriter(authentication, #id)")
+	@PreAuthorize("(isAuthenticated() and @customSecurityChecker.checkQnAWriter(authentication, #id)) or hasAuthority('admin')")
 	public String remove(@RequestParam Integer id, RedirectAttributes rttr) {
 		boolean ok = service.remove(id);
 		
