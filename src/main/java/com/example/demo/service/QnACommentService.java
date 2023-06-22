@@ -15,6 +15,8 @@ public class QnACommentService {
 
 	@Autowired
 	private QnACommentMapper mapper;
+	@Autowired
+	private AlarmMapper alarmMapper;
 	
 	public List<QnAComment> list(Integer qnaId) {
 		return mapper.selectAllByQnAId(qnaId);
@@ -22,7 +24,10 @@ public class QnACommentService {
 
 	public void add(QnAComment qnacomment) {
 		qnacomment.setMemberId("star");
-		mapper.insert(qnacomment);
+		Integer cnt = mapper.insert(qnacomment);
+		if(cnt == 1) {
+			alarmMapper.qnaCommentAdd(qnacomment);
+		}
 	}
 
 	public void remove(Integer id) {
