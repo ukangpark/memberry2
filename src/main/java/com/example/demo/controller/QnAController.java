@@ -13,8 +13,6 @@ import org.springframework.web.servlet.mvc.support.*;
 import com.example.demo.domain.*;
 import com.example.demo.service.*;
 
-import jakarta.servlet.http.HttpSession;
-
 @Controller
 @RequestMapping("qna")
 public class QnAController {
@@ -22,36 +20,25 @@ public class QnAController {
 	@Autowired
 	private QnAService service;
 	
-	@Autowired
-	private AlarmService alarmService;
-	
 	@GetMapping("")
 	public String list(Model model) {
 		
 		List<QnA> list = service.qnaList();
 		model.addAttribute("qnaList", list);
-		
 		return "qna";
 	}
 	
 	@GetMapping("/id/{id}")
 	public String qna(@PathVariable("id") Integer id, 
 					  Model model,
-					  Authentication authentication, HttpSession session) {
+					  Authentication authentication) {
 		QnA qna = service.getQnA(id, authentication);
 		model.addAttribute("qna", qna);
-		
-		// 알림창 업데이트
-		if(authentication != null) {
-			List<Alarm> alarms = alarmService.list(authentication.getName());
-			session.setAttribute("alarms", alarms);
-		}
-		
 		return "qnaforwhat";
 	}
 	
 	@GetMapping("/modify/{id}")
-	@PreAuthorize("(isAuthenticated() and @customSecurityChecker.checkQnAWriter(authentication, #id)) or hasAuthority('admin')")
+	@PreAuthorize("isAuthenticated() and @customSecurityChecker.checkQnAWriter(authentication, #id)")
 	public String modifyForm(
 							 @PathVariable("id") Integer id, Model model) {
 		model.addAttribute("qna", service.getQnA(id));
@@ -59,7 +46,7 @@ public class QnAController {
 	}
 	
 	@PostMapping("/modify/{id}")
-	@PreAuthorize("(isAuthenticated() and @customSecurityChecker.checkQnAWriter(authentication, #qna.id)) or hasAuthority('admin')")
+	@PreAuthorize("isAuthenticated() and @customSecurityChecker.checkQnAWriter(authentication, #qna.id)")
 	public String modifyProcess(QnA qna, 
 								RedirectAttributes rttr) throws Exception{
 

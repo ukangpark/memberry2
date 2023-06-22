@@ -23,7 +23,7 @@
 <body>
 	<my:navBar current="qnaForWhat"></my:navBar>
 	<my:alert></my:alert>
-
+	
 	<div class="container-lg">
 		<div class="row justify-content-center">
 			<div class="col-12 col-md-8 col-lg-6">
@@ -31,8 +31,8 @@
 				<div class="d-flex">
 					<div class="no">
 						<h1>
-							<span id="qnaIdText">${qna.writer }</span> 
-							님의 질문
+							<span id="qnaWriter">${qna.writer }</span> 
+							님의 질문 <span class="" id="qnaIdText">${qna.id }</span>
 						</h1>
 					</div>
 				</div>
@@ -49,14 +49,11 @@
 				<div class="mb-3">
 					<label for="" class="form-label">작성일시</label> <input type="text" readonly class="form-control" value="${qna.inserted }" />
 				</div>
-				<sec:authorize access="isAuthenticated()">
-					<sec:authentication property="name" var="userId" />
-					<c:if test="${userId eq qna.writer }">
-						<div>
-							<a class="btn btn-secondary" href="/qna/modify/${qna.id }">수정</a>
-							<button id="removeButton" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteConfirmModal">삭제</button>
-						</div>
-					</c:if>
+				<sec:authorize access="hasAuthority('admin') or (isAuthenticated() and (authentication.name eq #qna.writer))">
+					<div>
+						<a class="btn btn-secondary" href="/qna/modify/${qna.id }">수정</a>
+						<button id="removeButton" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteConfirmModal">삭제</button>
+					</div>
 				</sec:authorize>
 				
 				<div id="commentContainer">
@@ -74,36 +71,34 @@
 		</div>
 	</div>
 
-	<sec:authorize access="isAuthenticated()">
-		<sec:authentication property="name" var="userId" />
-		<c:if test="${userId eq qna.writer }">
+	<sec:authorize access="hasAuthority('admin') or (isAuthenticated() and (authentication.name eq #qna.writer))">
 
-			<div class="d-none">
-				<form action="/qna/remove" method="post" id="removeForm">
-					<input type="text" name="id" value="${qna.id }" />
-				</form>
-			</div>
 
-			<!-- Modal -->
-			<div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h1 class="modal-title fs-5" id="exampleModalLabel">삭제 확인</h1>
-							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-						</div>
-						<div class="modal-body">삭제 하시겠습니까?</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-							<button type="submit" class="btn btn-danger" form="removeForm">삭제</button>
-						</div>
+		<div class="d-none">
+			<form action="/qna/remove" method="post" id="removeForm">
+				<input type="text" name="id" value="${qna.id }" />
+			</form>
+		</div>
+	
+		<!-- Modal -->
+		<div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title fs-5" id="exampleModalLabel">삭제 확인</h1>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">삭제 하시겠습니까?</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+						<button type="submit" class="btn btn-danger" form="removeForm">삭제</button>
 					</div>
 				</div>
 			</div>
-		</c:if>
+		</div>
 	</sec:authorize>
 	
-	<script src="/js/qna/qnaComment.js"></script>
 	<my:bottom />
+	<script src="/js/qna/qnaComment.js"></script>
 </body>
 </html>
