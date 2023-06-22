@@ -33,7 +33,12 @@ img {
 	align-items: baseline;
 	text-align: center;
 <<<<<<< HEAD
+<<<<<<< HEAD
 	margin-left: 20%;
+=======
+	margin-left: 520px;
+
+>>>>>>> e38bf28ebdb50bdc5585377b50d8d2db0856b935
 =======
 	margin-left: 520px;
 

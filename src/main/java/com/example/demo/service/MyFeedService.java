@@ -68,7 +68,10 @@ public class MyFeedService {
 		
 		int cnt = mapper.insert(feed);
 <<<<<<< HEAD
+<<<<<<< HEAD
 		
+=======
+>>>>>>> e38bf28ebdb50bdc5585377b50d8d2db0856b935
 =======
 >>>>>>> e38bf28ebdb50bdc5585377b50d8d2db0856b935
 
