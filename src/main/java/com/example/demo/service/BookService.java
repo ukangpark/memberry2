@@ -143,10 +143,6 @@ public class BookService {
 	// 예약거절
 	public void bookReject(Book book) {
 		Integer cnt = mapper.bookRejectUpdate(book);
-		
-		if(cnt == 1) {
-			alarmMapper.bookRejectAdd(book);
-		}
 	}
 }
 
