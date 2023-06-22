@@ -137,8 +137,6 @@ public class BookService {
 							  "bookList", list);
 
 
-		
-
 		}
 
 
