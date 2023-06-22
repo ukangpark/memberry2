@@ -22,9 +22,10 @@ public class QnAController {
 	
 	@GetMapping("")
 	public String list(Model model,
-					   @RequestParam(value="page", defaultValue = "1") Integer page) {
+					   @RequestParam(value="page", defaultValue = "1") Integer page,
+					   @RequestParam(value = "search", defaultValue = "") String search) {
 		
-		Map<String, Object> result = service.qnaList(page);
+		Map<String, Object> result = service.qnaList(page, search);
 		model.addAllAttributes(result);
 
 		return "qna";

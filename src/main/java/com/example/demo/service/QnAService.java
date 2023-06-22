@@ -18,7 +18,7 @@ public class QnAService {
 	@Autowired
 	private AlarmMapper alarmMapper;
 	
-	public Map<String, Object> qnaList(Integer page){
+	public Map<String, Object> qnaList(Integer page, String search){
 		Integer recordsInQnA = 10;
 		
 		Integer startIndex = (page -1) * recordsInQnA;
@@ -39,7 +39,7 @@ public class QnAService {
 		pageInfo.put("currentPageNum", page);
 		pageInfo.put("lastPageNum", lastPageNum);
 		
-		List<QnA> list = mapper.selectAllPage(startIndex, recordsInQnA);
+		List<QnA> list = mapper.selectAllPage(startIndex, recordsInQnA, search);
 		return Map.of("pageInfo", pageInfo,
 					  "qnaList", list);
 	}
