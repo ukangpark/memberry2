@@ -48,7 +48,7 @@ public class BookService {
 
 	//페이지네이션, 예약 요청목록(호스트)
 	public Map<String, Object> bookList(Integer page,String userId) {
-		Integer rowPerPage = 4;
+		Integer rowPerPage = 6;
 		
 		Integer startIndex = (page-1) * rowPerPage;
 		
@@ -107,7 +107,7 @@ public class BookService {
 
 	// 예약신청목록(사용자)
 	public Map<String, Object> bookListUser(Integer page, String userId) {
-		Integer rowPerPage = 4;
+		Integer rowPerPage = 6;
 		
 		Integer startIndex = (page-1) * rowPerPage;
 		

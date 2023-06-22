@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Insert title here</title>
+<title>상세페이지 수정하기</title>
 
 <my:top></my:top>
 <link rel="stylesheet" type="text/css" href="/js/semantic/semantic.min.css">
@@ -27,6 +27,16 @@
 	position: absolute;
 	top: 100px;
 	left: 650px;
+}
+
+#imgContainer {
+	height: 300%;
+}
+
+#imgContainer:empty:before {
+	content: attr(data-placeholder);
+	color: #999;
+	font-size: .9em;
 }
 </style>
 </head>
@@ -58,30 +68,43 @@
 						<i class="plus icon large button" id="plus"></i>
 					</label>
 					<div class="field">
-						<input id="addCover" type="file" name="addCover" onchange="readURL(this);">
+						<input id="addCover" type="file" name="addCover" onchange="readURL(this);" class="d-none">
 					</div>
 					<hr>
+					<!-- 기존 집 사진 삭제 -->
 					<div class="field">
-						<h1 class="ui header center aligned">
-							<div class="sub header ">기존 집 사진을 삭제하려면 선택해주세요.</div>
+						<h1 class="ui header center aligned" style="margin-bottom: 30px; margin-top: 10px;">
+							<div class="sub header">기존 집 사진을 삭제하려면 선택해주세요.</div>
 						</h1>
-						<c:forEach items="${hostHousePhoto }" var="hostHousePhoto" varStatus="status">
-							<label for="housePhoto${status.index }">
-								<img style="width: 100px;" src="${bucketUrl }/hostHousePhoto/${detail.id }/${hostHousePhoto.housePhoto }">
-							</label>
-							<input type="checkbox" name="removePhotos" value="${hostHousePhoto.housePhoto }" id="housePhoto${status.index }">
-						</c:forEach>
+						<div class="ui two column grid">
+							<c:forEach items="${hostHousePhoto }" var="hostHousePhoto" varStatus="status">
+								<label for="housePhoto${status.index }">
+									<img style="width: 300px;" src="${bucketUrl }/hostHousePhoto/${detail.id }/${hostHousePhoto.housePhoto }">
+								</label>
+								<input type="checkbox" name="removePhotos" value="${hostHousePhoto.housePhoto }" id="housePhoto${status.index }">
+							</c:forEach>
+						</div>
 					</div>
+					<br>
+					<hr>
+					<!-- 새로운 집사진 등록 -->
+					<h1 class="ui header center aligned" style="margin-bottom: 30px; margin-top: 10px;">
+						<div class="sub header">
+							<label for="housePhotos">새로운 집사진을 등록하려면 사진을 선택해주세요.</label>
+						</div>
+					</h1>
 					<div class="field">
-						<label for="housePhotos">새로운 집사진 등록</label>
 						<input id="housePhotos" type="file" name="addPhotos" multiple>
 					</div>
-					<div class="field d-none">
-						<input type="text" name="hostId" value="${host.id }">
+
+					<!-- 이미지 미리보기 -->
+					<div style="position: relative;" id="imagePreview" class="field">
+						<div id="imgContainer" class="field ui aligned container segment" data-placeholder='파일을 첨부 하려면 파일 선택 버튼을 클릭하세요. 대표 사진은 위 더하기 버튼을 눌러주세요.'></div>
+						<br>
+						<div class="ui teal right ribbon label" style="bottom: 125px;">상세 사진</div>
 					</div>
-					<div class="field d-none">
-						<input type="text" name="id" value="${detail.id }">
-					</div>
+					<input type="hidden" name="hostId" value="${host.id }">
+					<input type="hidden" name="id" value="${detail.id }">
 				</form>
 			</div>
 			<!-- 버튼 -->
@@ -126,5 +149,6 @@
 			}
 		}
 	</script>
+	<script src="/js/petsitter/addHousePhoto.js"></script>
 </body>
 </html>

@@ -44,7 +44,7 @@
   } */
   
   
-   	function payment(pg_provider, mode, payment_method){
+   	function payment(pg_provider, mode, payment_method, money){
 	  
 	  IMP.init("imp67575345"); // 본인 가맹점 코드
 	  var pg_mid;
@@ -62,7 +62,7 @@
 			  pg_mid = 'kcp.IOfds34';
 		  }
 	  }
-	  alert(pg_mid);
+	 // alert(pg_mid);
 	  
 	  //step 3
 	  const data = {
@@ -70,14 +70,14 @@
 			  pay_method: payment_method,
 			  merchant_uid: "ORD20180131-0000021",
 			  name: "membery_펫시터",
-			  amount: 40000,
+			  amount: money,
 		      buyer_email: "gildong@gmail.com",
 		      buyer_name: "홍길동",
 		      buyer_tel: "010-4242-4242"
 	  };
 	  
 	  IMP.request_pay(data, response => {
-		  alert('callback!: '+JSON.stringify(response));
+		 // alert('callback!: '+JSON.stringify(response));
 	  
 		  //step 4
 		  jQuery.ajax({
@@ -87,7 +87,7 @@
 			  data: JSON.stringify(response)
 		  }).done(function (data) {
 			  // step 6
-		  alert("please, Check your payment result page");
+		//  alert("please, Check your payment result page");
 		  	})
 		  });
 	  }
@@ -163,7 +163,7 @@
 						<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="openModal('${book.num }')">삭제</button>
 						</c:if>
 						<c:if test = "${book.accepted == 1 }">
-						<button type="button" class="btn btn-primary" id="payBtn" onclick="payment('kcp','test', 'card')">결제</button>
+						<button type="button" class="btn btn-primary" id="payBtn" onclick="payment('kcp','test', 'card','${book.money}')">결제</button>
 						</c:if>
 						</td>
 					</tr>
