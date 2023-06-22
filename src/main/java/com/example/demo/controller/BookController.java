@@ -94,10 +94,9 @@ public class BookController {
 		model.addAllAttributes(result);
 
 		// 알림창 업데이트
-		if (authentication != null) {
-			List<Alarm> alarms = alarmService.list(authentication.getName());
-			session.setAttribute("alarms", alarms);
-		}
+		List<Alarm> alarms = alarmService.list(authentication.getName());
+		session.setAttribute("alarms", alarms);
+		
 		return "book/regiListHost";
 	}
 
@@ -147,6 +146,7 @@ public class BookController {
 	@ResponseBody
 	public void bookReject(@RequestBody Book book) {
 		service.bookReject(book);
+		
 	}
 
 }

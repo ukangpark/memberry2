@@ -17,6 +17,8 @@ public class petsitterCommentController {
 
 	@Autowired
 	private PetsitterCommentService petsitterCommentService;
+	@Autowired
+	private AlarmService alarmService;
 
 	@GetMapping("list")
 	public List<PetsitterComment> list(@RequestParam("detailId") Integer detailId, Authentication authentication) {
@@ -39,7 +41,7 @@ public class petsitterCommentController {
 		} else {
 			// 후기 등록
 			Map<String, Object> res = petsitterCommentService.add(petsitterComment, authentication);
-
+			alarmService.addPetSitterComment(petsitterComment);
 			return ResponseEntity.ok().body(res);
 		}
 

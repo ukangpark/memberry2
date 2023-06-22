@@ -7,6 +7,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.domain.Alarm;
+import com.example.demo.domain.PetsitterComment;
 import com.example.demo.mapper.AlarmMapper;
 
 import jakarta.servlet.http.HttpSession;
@@ -25,6 +26,11 @@ public class AlarmService {
 	public Integer checked(Integer id) {
 		int cnt = mapper.UpdateCheckedById(id);
 		return cnt;
+	}
+
+	public void addPetSitterComment(PetsitterComment petsitterComment) {
+		mapper.petsitterCommentAdd(petsitterComment);
+		
 	}
 
 
