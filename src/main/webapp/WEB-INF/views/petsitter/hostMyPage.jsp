@@ -98,7 +98,7 @@
 				<div class="ui three buttons">
 					<button data-bs-toggle="modal" data-bs-target="#deleteModal" class="ui red basic button">삭제하기</button>
 					<button data-bs-toggle="modal" data-bs-target="#checkModal" class="ui blue basic button">상세페이지 ${detail.id eq null ? '등록하기' : '수정 및 삭제하기' }</button>
-					<a href="/petsitter/hostModify?id=${host.id }" class="ui green basic button">나의 정보 수정하기</a>
+					<a href="/petsitter/hostModify?hostId=${host.id }" class="ui green basic button">나의 정보 수정하기</a>
 				</div>
 			</div>
 		</div>

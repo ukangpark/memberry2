@@ -33,7 +33,7 @@
 					<h4 class="ui grey center aligned header">수정정보를 입력해주세요.</h4>
 					<h1 class="ui center aligned header">${host.hostName }님정보입니다.</h1>
 					<div>
-						<form action="/petsitter/hostModify?id=${host.id }" class="ui big form" id="checkForm" method="post" enctype="multipart/form-data">
+						<form action="/petsitter/hostModify" class="ui big form" id="checkForm" method="post" enctype="multipart/form-data">
 							<div class="ui aligned container" id="imgContainer">
 								<c:choose>
 									<c:when test="${host.profile eq null or host.profile eq '' }">
