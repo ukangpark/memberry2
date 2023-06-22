@@ -184,4 +184,9 @@ public class MyFeedService {
 		List<Tag> tags = mapper.selectTag(auth.getName());
 		return tags;
 	}
+
+	public File feedId(String userName, Authentication authentication) {
+		File file = mapper.selectFeedId(userName);
+		return file;
+	}
 }

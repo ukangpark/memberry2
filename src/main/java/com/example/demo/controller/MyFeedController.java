@@ -45,8 +45,9 @@ public class MyFeedController {
 	public String myFeed(Model model, @PathVariable("userName") String userName, Authentication authentication) {
 		List<File> list = service.listMyFeed(userName, authentication);
 		Registration profileList = service.listProfile(userName, authentication);
-		System.out.println(list);
-
+		//File feedId = service.feedId(userName, authentication);
+		//System.out.println(feedId);
+		
 		// 마이피드에 펫정보 가져오기 용
 		String petName = profileList.getPetName();
 		String type = profileList.getType();
@@ -71,7 +72,7 @@ public class MyFeedController {
 		model.addAttribute("petList", petList);
 		model.addAttribute("userName", userName);
 		model.addAttribute("authentication", authentication.getName());
-
+		//model.addAttribute("feedId", feedId);
 		return "feed/myFeed";
 	}
 
