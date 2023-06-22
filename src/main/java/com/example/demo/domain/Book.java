@@ -26,6 +26,7 @@ public class Book {
 	private String weight;
 	private int pottyTraining;
 	private String rejectMessage;
+	private String money;
 	
 	
 	
