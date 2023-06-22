@@ -44,7 +44,7 @@ public class PetsitterController {
 		// detail로 포워드
 
 		// 쿼리스트링으로 받은 id값을 받아서 해당 상세페이지를 읽음
-		Map<String, Object> info = petsitterService.selectByHostId(hostId, authentication);
+		Map<String, Object> info = petsitterService.selectByHostId(hostId, authentication); 
 
 		// 지도 정보
 		String apiKey = mapService.getKakao_javaScript_key();
