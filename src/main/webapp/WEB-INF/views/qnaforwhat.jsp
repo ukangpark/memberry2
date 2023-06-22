@@ -63,6 +63,8 @@
 					</div>
 					<div id="qnaCommentListContainer">
 						<div>댓글 1 내용 : 누가 : 언제</div>
+						<div>댓글 2 내용 : 누가 : 언제</div>
+						<div>댓글 3 내용 : 누가 : 언제</div>
 					</div>
 				
 				

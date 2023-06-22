@@ -16,14 +16,14 @@ public class QnACommentController {
 	@Autowired
 	private QnACommentService service;
 	
-	@PostMapping("add")
-	@ResponseBody
-	public String add(@RequestBody QnAComment qnacomment) {
-		
-		service.add(qnacomment);
-		
-		return "ok";
-	}
+//	@PostMapping("add")
+//	@ResponseBody
+//	public String add(@RequestBody QnAComment qnacomment) {
+//		
+//		service.add(qnacomment);
+//		
+//		return "ok";
+//	}
 	
 	@GetMapping("list")
 	@ResponseBody
@@ -31,6 +31,4 @@ public class QnACommentController {
 		
 		return service.list(qnaId);
 	}
-	
-	
 }

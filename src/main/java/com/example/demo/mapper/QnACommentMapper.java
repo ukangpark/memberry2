@@ -11,10 +11,10 @@ public interface QnACommentMapper {
 
 	@Select("""
 			SELECT *
-			FROM QnA
-			WHERE id = #{id}
+			FROM QnAComment
+			WHERE qnaId = #{qnaId}
 			""")
-	List<QnAComment> selectAllByQnAId(Integer id);
+	List<QnAComment> selectAllByQnAId(Integer qnaId);
 
 	@Insert("""
 			INSERT INTO QnAComment(qnaId, content, memberId)
