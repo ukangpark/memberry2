@@ -42,7 +42,7 @@
 				<div class="d-flex">
 					<div class="no">
 						<h1>
-							<span id="qnaWriter">${qna.writer }</span> 님의 질문 <span class="" id="qnaIdText">${qna.id }</span>
+							<span id="qnaWriter">${qna.writer }</span> 님의 질문 <span class="" id="qnaIdText" style="visibility: hidden;">${qna.id }</span>
 						</h1>
 					</div>
 				</div>
@@ -72,8 +72,8 @@
 
 							<div class="input-group">
 								<div class="form-floating">
-									<textarea style="height: 50px" placeholder="댓글을 남겨주세요" class="form-control" id="qnaCommentTextArea"></textarea>
-									<label for="floatingTextarea">댓글을 남겨주세요</label>
+									<textarea style="height: 50px" placeholder="관리자의 답변" class="form-control" id="qnaCommentTextArea"></textarea>
+									<label for="floatingTextarea">관리자의 답변</label>
 								</div>
 								<button class="btn btn-outline-primary" id="qnaCommentBtn">
 									<i class="fa-regular fa-paper-plane"></i>

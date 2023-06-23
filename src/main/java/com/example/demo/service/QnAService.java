@@ -16,6 +16,9 @@ public class QnAService {
 	private QnAMapper mapper;
 	
 	@Autowired
+	private QnACommentMapper cmapper;
+	
+	@Autowired
 	private AlarmMapper alarmMapper;
 	
 	public Map<String, Object> qnaList(Integer page, String search){
@@ -56,6 +59,10 @@ public class QnAService {
 	}
 
 	public boolean remove(Integer id) {
+		
+		// 댓글 테이블 지우기
+		cmapper.deleteByQnAId(id);
+		
 		int cnt = mapper.deleteById(id);
 		return cnt == 1;
 	}

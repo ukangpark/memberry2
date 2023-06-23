@@ -42,6 +42,13 @@ public interface QnACommentMapper {
 			WHERE id = #{id} 
 			""")
 	Integer update(QnAComment qnacomment);
+
+	
+	@Delete("""
+			DELETE FROM QnAComment
+			WHERE qnaId = #{qnaId}
+			""")
+	Integer deleteByQnAId(Integer qnaId);
 	
 	
 	
