@@ -115,7 +115,6 @@ public class PetsitterService {
 
 		// hostId로 상세페이지 정보 불러옴
 		Detail detail = petsitterMapper.selectDetailById(hostId);
-		System.out.println("여기 : " + detail);
 
 		// 호스트 집사진 정보를 불러옴
 		if (detail != null) {
