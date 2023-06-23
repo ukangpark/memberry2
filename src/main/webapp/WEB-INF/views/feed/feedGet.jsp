@@ -118,11 +118,11 @@
 		</div>
 
 		<div class="ui card d-flex" id="my-card">
-			<div class="content" style="height: 3vh;">
+			<div class="content" style="height: 3vh; margin-bottom: 2vh;">
 				<!-- 프로필 이미지 + 닉네임 -->
 				<a href="/feed/myFeed/${feed.writer}">
 					<c:if test="${logedInMember.profileImage ne null}">
-						<img class="ui avatar image" id="profilImage" src="${bucketUrl }/pet${feed.profileImage }">
+						<img class="ui avatar image" id="profilImage" src="${bucketUrl }/pet${feed.profileImage }" >
 						<span style="font-weight: bold; color: black;">${feed.nickName }</span>
 					</c:if>
 					<c:if test="${logedInMember.profileImage eq null}">
@@ -206,7 +206,7 @@
 				<!-- 좋아요 숫자 -->
 				<span class="likeNumber" style="font-weight: 300; font-size: medium; font-weight: bold;"> ${feed.likeCount } </span> <span> 명이 ${feed.nickName}님의 글을 좋아합니다. </span>
 				<!-- 작성 일시 -->
-				<div id="inserted" style="margin-top: 2vh;">${feed.inserted }</div>
+				<div id="inserted" style="margin-top: 1vh; font-weight: bold;">${feed.inserted }</div>
 			</div>
 
 

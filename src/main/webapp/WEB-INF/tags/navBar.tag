@@ -259,10 +259,10 @@
 						href="/chat/chat"> 메세지 </a>
 				</sec:authorize> --%>
 
-				<sec:authorize access="isAuthenticated()">
+				<%-- <sec:authorize access="isAuthenticated()">
 					<a class="${current eq 'chatRoom' ? 'active' : '' } item"
 						href="/chat/chatRoom"> 메세지 목록 </a>
-				</sec:authorize>
+				</sec:authorize> --%>
 
 				<sec:authorize access="isAuthenticated()">
 					<a class="${current eq 'memberInfo' ? 'active' : '' } item"

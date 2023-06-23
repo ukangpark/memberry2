@@ -150,9 +150,11 @@ img {
 		<div class="messageBtn" style="margin: 0px 30px 0px 30px">
 			<c:if test="${userName ne authentication }">
 				<button class="ui basic button" id="messageBtn">
-					<h3 onMouseover="this.style.color='#FFCC33';" onMouseout="this.style.color='gray';">
-						<a href="/chat/chat"><i class="fa-solid fa-bolt"></i> 산책번개</a>
-					</h3>
+					<a href="/chat/chat" style="color: gray;">
+						<h3 onMouseover="this.style.color='#FFCC33';" onMouseout="this.style.color='gray';">
+							<i class="fa-solid fa-bolt"></i> 산책번개
+						</h3>
+					</a>
 				</button>
 			</c:if>
 		</div>

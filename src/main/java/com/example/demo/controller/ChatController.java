@@ -22,6 +22,7 @@ public class ChatController {
 		return mv;
 	}
 	
+/*
 	// 채팅방 페이지
 	@RequestMapping("/chat/chatRoom")
 	public ModelAndView chatroom() {
@@ -66,5 +67,6 @@ public class ChatController {
 		}
 		return mv;
 	}
-
+*/
+	
 }
