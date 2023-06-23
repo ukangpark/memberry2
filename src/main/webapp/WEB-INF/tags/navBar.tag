@@ -59,7 +59,7 @@
 				<c:if test="${sessionScope.logedInMember.alarmCount > 0 }">
 						<span
 							class="position-absolute top-20 start-5 translate-middle p-1 bg-danger border border-light rounded-circle"
-							style="font-size: 0.3em; font-weight: bold; color: white;">${sessionScope.logedInMember.alarmCount}</span>
+							style="font-size: 0.3em; font-weight: bold; color: white;"><%-- ${sessionScope.logedInMember.alarmCount} --%></span>
 					</c:if>
 				</i>
 
@@ -67,6 +67,7 @@
 					<div class="item">
 						<ul class="list-group" id="alarmListContainer">
 							<c:forEach items="${sessionScope.alarms }" var="alarm">
+							
 								<!-- 피드댓글 알림 -->
 								<c:if test="${alarm.notiType eq 'comment' }">
 									 <a href="/feedId/${alarm.feedId}" 
@@ -75,8 +76,9 @@
 										<div id="aLi" style="font-weight: bold; <c:if test="${alarm.isChecked eq 'true' }">color: #a0a0a0</c:if>">
 											${alarm.notiBody}
 										</div>
-										<small class="text-body-secondary">${alarm.inserted}</small>
-									</a> 
+										<small class="text-body-secondary">${alarm.inserted}</small>									
+									</a>  
+									
 									
 								</c:if>
 								<!-- 피드 좋아요 알림 -->
@@ -91,7 +93,7 @@
 									</a> 
 								</c:if>
 								<!-- 팔로우 알림 -->
-								<c:if test="${alarm.notiType eq 'follow' }">
+								<c:if test="${alarm.notiType eq 'follow' } ">
 									<a href="/feed/myFeed/${alarm.causedMemberId}" 
 										class="list-group-item "  onclick="alarmCheck(${alarm.id});"> 
 										<i class="fa-solid fa-user" style="color: #a0a0a0"></i>
@@ -141,7 +143,7 @@
 									</a>
 								</c:if>
 								<!-- qna 알림 -->
-								<c:if test="${alarm.notiType eq 'qna' }">
+								<c:if test="${alarm.notiType eq 'qna' || alarm.notiType eq 'qnaCom'}">
 									<a href="/qna/id/${alarm.feedId}" 
 										class="list-group-item "  onclick="alarmCheck(${alarm.id});"> 
 										<i class="fa-solid fa-magnifying-glass" style="color: #a0a0a0"></i>
@@ -257,10 +259,10 @@
 						href="/chat/chat"> 메세지 </a>
 				</sec:authorize> --%>
 
-				<sec:authorize access="isAuthenticated()">
+				<%-- <sec:authorize access="isAuthenticated()">
 					<a class="${current eq 'chatRoom' ? 'active' : '' } item"
 						href="/chat/chatRoom"> 메세지 목록 </a>
-				</sec:authorize>
+				</sec:authorize> --%>
 
 				<sec:authorize access="isAuthenticated()">
 					<a class="${current eq 'memberInfo' ? 'active' : '' } item"
@@ -304,7 +306,6 @@
 
 <script>
 function alarmCheck(alarmId) {
-	console.log(alarmId);
 	$.ajax("/alarm/check?id=" + alarmId, {
 		method: "get",
 		success: function() {
@@ -312,6 +313,8 @@ function alarmCheck(alarmId) {
 		}
 	})
 }
+
+
 </script>
 
 

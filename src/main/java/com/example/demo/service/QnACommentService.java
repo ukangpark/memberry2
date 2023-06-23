@@ -16,6 +16,8 @@ public class QnACommentService {
 
 	@Autowired
 	private QnACommentMapper mapper;
+	@Autowired
+	private AlarmMapper alarmMapper;
 	
 	public List<QnAComment> list(Integer qnaId, Authentication auth) {
 		List<QnAComment> comments = mapper.selectAllByQnAId(qnaId);
@@ -28,6 +30,7 @@ public class QnACommentService {
 		
 		return comments;
 	}
+
 
 	public Map<String, Object> add(QnAComment qnacomment, Authentication auth) {
 		qnacomment.setMemberId(auth.getName());
@@ -42,6 +45,7 @@ public class QnACommentService {
 		}
 		
 		return res; 
+
 	}
 
 	public Map<String, Object> remove(Integer id) {

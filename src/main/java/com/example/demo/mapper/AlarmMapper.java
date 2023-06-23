@@ -15,6 +15,9 @@ import com.example.demo.domain.Follow;
 import com.example.demo.domain.Like;
 import com.example.demo.domain.PetsitterComment;
 import com.example.demo.domain.QnA;
+import com.example.demo.domain.QnAComment;
+
+import retrofit2.http.DELETE;
 
 @Mapper
 public interface AlarmMapper {
@@ -42,7 +45,7 @@ public interface AlarmMapper {
 	@Insert("""
 			INSERT INTO Alarm (userId, causedMemberId, feedId, content, notiType, notiBody)
 			VALUES ((SELECT writer FROM Feed WHERE id = #{feedId}), #{memberId}, #{feedId}, #{content}, 'comment',
-			(#{memberId}'님이 회원님의 피드에 댓글을 달았습니다 : '#{content}))
+			(#{memberId}'님이 회원님의 피드에 댓글을 남겼습니다: '#{content}))
 			""")
 	Integer commentAdd(Comment comment);
 
@@ -72,13 +75,22 @@ public interface AlarmMapper {
 			""")
 	Integer petsitterCommentAdd(PetsitterComment petsitterComment);
 
-	//qna 알림
+	//qna 게시판 등록 알림
 	@Insert("""
 			INSERT INTO Alarm (userId, causedMemberId, feedId, notiType, notiBody)
 			VALUES ('membow', #{writer}, #{id}, 'qna',
 			(#{writer}'님이 QnA 게시판에 글을 등록하였습니다.'))
 			""")
 	Integer qnaAdd(QnA qna);
+	
+	//qna 게시판 댓글 알림
+	@Insert("""
+			INSERT INTO Alarm (userId, causedMemberId, feedId, notiType, notiBody)
+			VALUES ((SELECT writer FROM QnA q WHERE q.id = #{qnaId}), #{memberId},
+					#{qnaId}, 'qnaCom', '회원님의 QnA게시판에 댓글이 달렸습니다.')
+			""")
+	Integer qnaCommentAdd(QnAComment qnacomment);
+	
 	
 	//펫시터 예약요청 알림
 	@Insert("""
@@ -88,27 +100,34 @@ public interface AlarmMapper {
 			#{memberId}, #{detailId}, 'bookRegi',
 			'회원님께 펫시터 예약 요청이 왔습니다.')
 			""")
-	void bookRegiAdd(Book book);
+	Integer bookRegiAdd(Book book);
 	
 	
 	//펫시터 예약승인 알림
 	@Insert("""
-			INSERT INTO Alarm (userId, feedId, notiType, notiBody)
+			INSERT INTO Alarm (userId, causedMemberId, feedId, notiType, notiBody)
 			VALUES (
 				( SELECT memberId FROM Book WHERE num = #{num} ), 
+				( SELECT h.memberId FROM Book b LEFT JOIN Detail d ON b.detailId = d.id
+							LEFT JOIN Host h ON d.hostId = h.id WHERE b.num = #{num}),
 				( SELECT detailId FROM Book WHERE num = #{num} ), 
 				'bookAccept',
 				'회원님의 펫시터 예약이 승인되었습니다.')
 			""")
-	void bookAcceptAdd(int num);
+	Integer bookAcceptAdd(int num);
 	
 	//펫시터 예약거절 알림
 	@Insert("""
-			INSERT INTO Alarm (userId, feedId, notiType, notiBody)
-			VALUES (#{memberId}, #{detailId}, 'bookReject',
+			INSERT INTO Alarm (userId, causedMemberId, feedId, notiType, notiBody)
+			VALUES ( (SELECT memberId FROM Book WHERE num = #{num}) , 
+			(SELECT h.memberId FROM Book b LEFT JOIN Detail d ON b.detailId = d.id
+							LEFT JOIN Host h ON d.hostId = h.id WHERE b.num = #{num}),
+			#{detailId}, 'bookReject',
 			'회원님의 펫시터 예약이 거절되었습니다.')
 			""")
-	void bookRejectAdd(Book book);
+	Integer bookRejectAdd(Book book);
+	
+	
 	
 	
 

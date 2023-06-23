@@ -33,5 +33,7 @@ public class AlarmController {
 			session.setAttribute("logedInMember", member);
 		}
 		
+		
 	}
+	
 }

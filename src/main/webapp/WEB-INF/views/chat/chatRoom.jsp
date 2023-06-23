@@ -12,20 +12,17 @@
 <my:top></my:top>
 
 	<style>
-		*{
-			margin:0;
-			padding:0;
-		}
+	
 		.container{
-			width: 500px;
+			width: 600px;
 			margin: 0 auto;
 			padding: 25px
 		}
 		.container h1{
 			text-align: left;
 			padding: 5px 5px 5px 15px;
-			color: #FFF2F2;
-			border-left: 3px solid #FFF2F2;
+			color: black;
+			border-left: 3px solid black;
 			margin-bottom: 20px;
 		}
 		.roomContainer{
@@ -38,15 +35,15 @@
 			border: none;
 		}
 		.roomList th{
-			border: 1px solid #FFF2F2;
+			border: 1px solid black;
 			background-color: #fff;
-			color: #FFF2F2;
+			color: black;
 		}
 		.roomList td{
-			border: 1px solid #FFF2F2;
+			border: 1px solid black;
 			background-color: #fff;
 			text-align: left;
-			color: #FFF2F2;
+			color: black;
 		}
 		.roomList .num{
 			width: 75px;
@@ -155,7 +152,7 @@
 			<table class="inputTable">
 				<tr>
 					<th>방 제목</th>
-					<th><input type="text" name="roomName" id="roomName"></th>
+					<th><input type="text" name="roomName" id="roomName" placeholder="방 이름을 먼저 입력해 주세요."></th>
 					<th><button id="createRoom">방 만들기</button></th>
 				</tr>
 			</table>

@@ -3,18 +3,24 @@ package com.example.demo.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Select;
 
 import com.example.demo.domain.Feed;
+import com.example.demo.domain.Search;
 
 @Mapper
 public interface SearchMapper {
 
 	@Select("""
-			SELECT * FROM Pet p 
-				LEFT JOIN Feed f ON p.memberId = f.writer
-				WHERE type LIKE '#{search}'
-			""")
-	List<Feed> selectAllBySearch(String search, String title);
+			SELECT 
+				fi.feedId,
+				fi.fileName
+			FROM Feed fd LEFT JOIN File fi ON fd.id = fi.feedId
+						LEFT JOIN Tags t ON fd.id = t.feedId
+			WHERE t.keyword LIKE '%' #{search} '%'
+			ORDER BY fd.id DESC;
+						""")
+	List<Search> selectAllBySearch(String search);
 
 }

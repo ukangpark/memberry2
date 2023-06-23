@@ -60,7 +60,7 @@
          }  */
          
        .removeFilesBtn {
-             position:absolute; 
+          position:absolute; 
           
          } 
       
