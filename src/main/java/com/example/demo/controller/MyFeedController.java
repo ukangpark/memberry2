@@ -86,22 +86,23 @@ public class MyFeedController {
 		return "feed/myFeed";
 	}
 
-	@GetMapping("feed/feedAdd/{feedId}")
+	@GetMapping("feed/feedAdd")
 	@PreAuthorize("isAuthenticated()")
-	public String addForm(@PathVariable("feedId") int feedId, Model model, Authentication authentication) {
+	public String addForm(Model model, Authentication authentication) {
 		// 게시물 작성 form(view)로 포워드
 		model.addAttribute("authentication", authentication);
-		model.addAttribute("feedId", feedId);
 		
 		return "feed/feedAdd";
 	}
 
 	// 게시물 추가하기
-	@PostMapping("feed/feedAdd/{feedId}")
+	@PostMapping("feed/feedAdd")
 	@PreAuthorize("isAuthenticated()")
 	public String addProcess(@RequestParam("files") MultipartFile[] files, Feed feed, Authentication authentication,
 			RedirectAttributes rttr) throws Exception {
 		// 새 게시물 DB에 추가
+		System.out.println(feed);
+		
 		feed.setWriter(authentication.getName());
 		boolean ok = service.addFeed(feed, files, authentication);
 
@@ -113,7 +114,7 @@ public class MyFeedController {
 		} else {
 			rttr.addFlashAttribute("feed", feed);
 			rttr.addFlashAttribute("message", "피드 등록에 실패하였습니다.");
-			return "redirect:/feed/feedAdd/{feedId}";
+			return "redirect:/feed/feedAdd";
 		}
 	}
 
@@ -173,15 +174,13 @@ public class MyFeedController {
 	}
 
 	// 태그
-	@GetMapping("/tag/list/{feedId}/{tagInput}")
+	@GetMapping("/tag/list/{tagInput}")
 	@ResponseBody
-	public List<Tag> tag(@PathVariable("feedId") Integer feedId,
-							@PathVariable("tagInput") String tagInput, 
-							Authentication auth) {
-		System.out.println(feedId);
-		List<Tag> result = service.tag(feedId, tagInput, auth);
-		System.out.println(result);
-		return result;
+	public void tag(@PathVariable("tagInput") String tagInput) {
+		System.out.println(tagInput);
+		//List<Tag> result = service.tag(feedId, tagInput, auth);
+		//System.out.println(result);
+		//return result;
 				
 	}
 	
