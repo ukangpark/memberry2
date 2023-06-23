@@ -1,10 +1,12 @@
 listQnAComment();
 
+const toastElement = document.querySelector("#liveToast")
+const toast = bootstrap.Toast.getOrCreateInstance(toastElement);
 $("#qnaCommentBtn").click(function() {
 	const qnaId = $("#qnaIdText").text().trim();
 	const content = $("#qnaCommentTextArea").val();
 	const data = { qnaId, content };
-
+	
 	$.ajax("/qnaComment/add", {
 		method: "post",
 		contentType: "application/json",
@@ -13,6 +15,7 @@ $("#qnaCommentBtn").click(function() {
 			listQnAComment();
 			$(".toast-body").text(jqXHR.responseJSON.message);
 			toast.show();
+			
 		}
 	});
 })

@@ -19,22 +19,22 @@ public class QnACommentController {
 	@Autowired
 	private QnACommentService service;
 	
-	@PutMapping("update")
-	@PreAuthorize("authenticated and @customSecurityChecker.checkQnACommentWriter(authentication.#qnacomment.id)")
-	public ResponseEntity<Map<String, Object>> update(@RequestBody QnAComment qnacomment) {
-		Map<String, Object> res = service.update(qnacomment);
-		return ResponseEntity.ok().body(res);
-	}
-	
 	@GetMapping("id/{id}")
 	@ResponseBody
 	public QnAComment get(@PathVariable("id") Integer id) {
 		return service.get(id);
 	}
 	
+	@PutMapping("update")
+	@PreAuthorize("authenticated and @customSecurityChecker.checkQnACommentWriter(authentication, #qnacomment.id)")
+	public ResponseEntity<Map<String, Object>> update(@RequestBody QnAComment qnacomment) {
+		Map<String, Object> res = service.update(qnacomment);
+		return ResponseEntity.ok().body(res);
+	}
+	
 	@DeleteMapping("id/{id}")
 	@ResponseBody
-	@PreAuthorize("authenticated and @customSecurityChecker.checkQnACommentWriter(authentication.#id)")
+	@PreAuthorize("authenticated and @customSecurityChecker.checkQnACommentWriter(authentication, #id)")
 	public ResponseEntity<Map<String, Object>> remove(@PathVariable("id") Integer id) {
 		Map<String, Object> res = service.remove(id);
 		
