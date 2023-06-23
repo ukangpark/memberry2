@@ -1,10 +1,17 @@
+let tagInputs = [];
+
 $("#addTag").click(function() {
 	const tagInput = $("#tagInput").val();
 	//$("#tagInput").val('');
-
+	tagInputs.push(tagInput); // tagInput의 값을 배열에 추가
+	//console.log(tagInputs);
+	
 	$(".tagsContainer").append(`
    		<span class="ui tag blue tiny label" style="margin: 2px 6px 2px 6px">${tagInput} <i class="icon mini close"></i></span>
     `);
+    $("#addForm").append(`
+    	<input type="text" name="keyword" value="${tagInput}" style="display:none">
+    `)
 	//tagList();
 
 });

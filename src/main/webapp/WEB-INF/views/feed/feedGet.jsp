@@ -175,7 +175,7 @@
 			
 			<!-- tag content -->
 			<div class="content">
-				<c:forEach items="${feed.keyword }" var="keyword">
+				<c:forEach items="${feed.keyword}" var="keyword">
 					<span class="ui tag blue tiny label" style="margin: 2px 6px 2px 6px">${keyword}</span>
 				</c:forEach>
 			</div>
