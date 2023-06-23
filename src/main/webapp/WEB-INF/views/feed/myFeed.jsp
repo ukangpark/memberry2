@@ -165,7 +165,7 @@ img {
 		<!-- 게시물 추가 이미지 -->
 		<div id="addImageBox">
 			<div id="addImage">
-				<a href="/feed/feedAdd/${feedId}">
+				<a href="/feed/feedAdd">
 					<img style="height: 300px" src="/images/feedAddIcon.PNG" alt="" />
 				</a>
 			</div>

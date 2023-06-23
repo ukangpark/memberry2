@@ -99,7 +99,7 @@ public class MyFeedService {
 		return feed;
 	}
 
-	public boolean modify(Feed feed, List<String> removeFileNames, MultipartFile[] addFiles) throws Exception {
+	public boolean modify(Feed feed, List<String> removeFileNames, MultipartFile[] addFiles, File file) throws Exception {
 
 		// FileName 테이블 삭제
 		if (removeFileNames != null && !removeFileNames.isEmpty()) {
@@ -118,7 +118,7 @@ public class MyFeedService {
 		for (MultipartFile newFile : addFiles) {
 			if (newFile.getSize() > 0) {
 				// 테이블에 파일명 추가
-				mapper.insertFileName(feed.getId(), newFile.getOriginalFilename(), newFile.getName());
+				mapper.insertFileName(feed.getId(), newFile.getOriginalFilename(),file.getMemberId() );
 
 				// s3에 파일(객체) 업로드
 				String objectKey = "membery/feed/" + feed.getId() + "/" + newFile.getOriginalFilename();

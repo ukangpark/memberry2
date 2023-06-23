@@ -66,6 +66,8 @@ getCalendar();
 function getCalendar() {
 	
 	$.ajax("/fullCalendar/list", {
+		//var arr = [{title: '펫시터 예약', start: '2023-06-25', end:'2023-06-27'}, {title: '미용맡기기', start: '2023-06-30', end: '2023-06-30'}, {title: '산책번개', start: '2023-06-02', end:'2023-06-02'}];
+
 		method: "get",
 		//contentType: "application/json",
 		//dataType : "json",
