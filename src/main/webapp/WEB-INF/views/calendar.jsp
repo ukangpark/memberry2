@@ -67,7 +67,9 @@
 <my:navBar current="calendar"></my:navBar>
 <my:logo></my:logo>
 	<div id="header">
-		<h1><span style="font-weight: bold"> 캘린더</h1>
+		<h1><span style="font-weight: bold"> 
+		<span style="color: #FF9999">${logedInMember.nickName }</span>
+		 캘린더</h1>
 	
 	</div>
 

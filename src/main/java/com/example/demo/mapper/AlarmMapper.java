@@ -86,7 +86,7 @@ public interface AlarmMapper {
 	//qna 게시판 댓글 알림
 	@Insert("""
 			INSERT INTO Alarm (userId, causedMemberId, feedId, notiType, notiBody)
-			VALUES ((SELECT writer FROM QnA q WHERE q.id = #{qnaId}), #{memberId},
+			VALUES ((SELECT writer FROM QnA q WHERE q.id = #{qnaId}), 'membow',
 					#{qnaId}, 'qnaCom', '회원님의 QnA게시판에 댓글이 달렸습니다.')
 			""")
 	Integer qnaCommentAdd(QnAComment qnacomment);

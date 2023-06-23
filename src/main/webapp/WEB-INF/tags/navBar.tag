@@ -91,6 +91,7 @@
 										</div>
 										<small class="text-body-secondary">${alarm.inserted}</small>
 									</a> 
+									
 								</c:if>
 								<!-- 팔로우 알림 -->
 								<c:if test="${alarm.notiType eq 'follow' } ">
@@ -313,7 +314,6 @@ function alarmCheck(alarmId) {
 		}
 	})
 }
-
 
 </script>
 
