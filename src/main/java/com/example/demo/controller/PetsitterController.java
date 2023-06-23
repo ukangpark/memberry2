@@ -209,6 +209,7 @@ public class PetsitterController {
 		System.out.println(member);
 
 		boolean ok = petsitterService.deleteHostById(hostId, member, authentication);
+		System.out.println(ok);
 
 		if (ok) {
 			rttr.addFlashAttribute("message", "호스트 정보를 삭제하였습니다.");
