@@ -17,6 +17,7 @@
 <body>
 	<my:navBar current="hostList"></my:navBar>
 	<my:logo></my:logo>
+	<my:alert></my:alert>
 	<div class="container" style="margin-top: 50px;">
 		<h1>호스트 리스트</h1>
 		<table class="ui fixed single line celled table">
@@ -53,8 +54,8 @@
 		</table>
 
 		<!-- 페이지네이션  -->
-		<div class="ui center aligned">
-			<nav aria-label="Page navigation example">
+		<div class="">
+			<nav aria-label="Page navigation example mx-auto">
 				<ul class="pagination">
 					<!-- 이전 버튼 -->
 					<c:if test="${leftPageNum > 1}">
