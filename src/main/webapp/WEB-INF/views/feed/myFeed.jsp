@@ -35,7 +35,6 @@ img {
 	margin-left: 520px;
 }
 
-
 #addImageBox {
 	height: 250px;
 	position: relative;
@@ -98,14 +97,14 @@ img {
 		<div class="follower" id="followerBtn" style="margin: 0px 30px 0px 30px; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#followerModal">
 			<h3>
 				<input id="userName" name="userName" value="${userName }" style="display: none;">
-				팔로워 <span class="followerCount">${follow[0].followCount}</span>
+				팔로워 <span class="followerCount">${fileList[0].followCount}</span>
 			</h3>
 		</div>
 
 		<div class="following" id="followingBtn" style="margin: 0px 30px 0px 30px; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#followingModal">
 			<h3>
 				<input id="userName" name="userName" value="${userName }" style="display: none;">
-				팔로잉 <span class="followingCount">${follow[0].followingCount}</span>
+				팔로잉 <span class="followingCount">${fileList[0].followingCount}</span>
 			</h3>
 
 		</div>

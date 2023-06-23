@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core"%>
 <%@ taglib prefix="my" tagdir="/WEB-INF/tags"%>
 <!DOCTYPE html>
@@ -123,73 +122,92 @@
                         <textarea placeholder="내용을 입력하세요" name="content">${feed.content }</textarea>
                 </div>
                 <br />
-               
-               <%-- div class="ui form">
+
+					<div class="ui form">
+						<div class="content">
+						<!-- 태그입력 -->
+						<div class="ui divider"></div>
+						<label align="left" style="color: gray; font-weight: bolder;">태그를 수정 해 보세요:)</label>
+						<input type="text" id="feedId" name="feedId" value="${feedId }" style="display: none;">
+						<div class="ui right labeled left icon input">
+							<i class="tags icon"></i>
+							<input type="text" id="tagInput" placeholder="Enter tags" >
+							<a type="submit" class="ui tag label" id="addTag">Add Tag</a>
+						</div>
+							<div class="tagsContainer mt-2">
+								<c:forEach items="${feed.keyword }" var="keyword">
+									<span class="ui tag blue tiny label" style="margin: 2px 6px 2px 6px">${keyword}</span>
+								</c:forEach>
+							</div>
+						</div>
+					</div>
+          
+					<%-- div class="ui form">
                    <div class="location">
                      <label></label>
                      <input placeholder="장소를 태그하세요" type="text" name="location" value="${feed.location }" />
                    </div>
                </div>
                <br /> --%>
-               
-         </form>
-         
-         <div align="right">
-            <button class="btn btn-secondary" type="submit" form="modifyForm" id="modifyButton">수정하기</button>
-         </div>
-      
-   </div>
-   <my:bottom></my:bottom>
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.min.js"></script>
-   
-   <script type="text/javascript">
-      $(document).ready(function(){
-        let slider = $('.bxslider').bxSlider({
-           slideWidth: 400
-        });
-        
-        $(".removeFilesBtn").click(function() {
-          const target = $(this).attr("data-target-list");
-          $(target).remove();
-          slider.reloadSlider();
-        }); 
-      }); 
-      
-      /* 엔터키 치면 전송되는 것 방지 */
-      $('input[type="text"]').keydown(function() {
-         if (event.keyCode == 13) {
-            event.preventDefault();
-         };
+		</form>
 
-      })
-      
-      /* 첨부파일 이미지 변경 */
-      const fileInput = document.getElementById("fileInput");
-      const previewContainer = document.getElementById("imagePreview");
-      const previewImage = previewContainer.querySelector(".preview");
-      const previewDefaultImage = previewContainer
-            .querySelector(".defaultImage");
+		<div align="right">
+			<button class="btn btn-secondary" type="submit" form="modifyForm" id="modifyButton">수정하기</button>
+		</div>
 
-      fileInput.addEventListener("change", function() {
-         const file = this.files[0];
-         //console.log(file);
+	</div>
+	<my:bottom></my:bottom>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bxslider/4.2.15/jquery.bxslider.min.js"></script>
+	<script src="/js/feed/tag.js"></script>
 
-         if (file) {
-            const reader = new FileReader();
+	<script type="text/javascript">
+		$(document).ready(function() {
+			let slider = $('.bxslider').bxSlider({
+				slideWidth : 400
+			});
 
-            previewDefaultImage.style.display = "none";
-            previewImage.style.display = "block";
+			$(".removeFilesBtn").click(function() {
+				const target = $(this).attr("data-target-list");
+				$(target).remove();
+				slider.reloadSlider();
+			});
+		});
 
-            reader.addEventListener("load", function() {
-               previewImage.setAttribute("src", this.result);
-            });
+		/* 엔터키 치면 전송되는 것 방지 */
+		$('input[type="text"]').keydown(function() {
+			if (event.keyCode == 13) {
+				event.preventDefault();
+			}
+			;
 
-            reader.readAsDataURL(file);
-         }
+		})
 
-      })
-      
-   </script>
+		/* 첨부파일 이미지 변경 */
+		const fileInput = document.getElementById("fileInput");
+		const previewContainer = document.getElementById("imagePreview");
+		const previewImage = previewContainer.querySelector(".preview");
+		const previewDefaultImage = previewContainer
+				.querySelector(".defaultImage");
+
+		fileInput.addEventListener("change", function() {
+			const file = this.files[0];
+			//console.log(file);
+
+			if (file) {
+				const reader = new FileReader();
+
+				previewDefaultImage.style.display = "none";
+				previewImage.style.display = "block";
+
+				reader.addEventListener("load", function() {
+					previewImage.setAttribute("src", this.result);
+				});
+
+				reader.readAsDataURL(file);
+			}
+
+		})
+	</script>
 </body>
 </html>

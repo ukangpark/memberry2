@@ -14,8 +14,8 @@ public class SearchService {
 	@Autowired
 	private SearchMapper mapper;
 	
-	public List<Feed> search(String search, String title) {
-		return mapper.selectAllBySearch(search, title);
+	public List<Feed> search(String search) {
+		return mapper.selectAllBySearch(search);
 	}
 
 }

@@ -45,15 +45,12 @@ public class MyFeedController {
 	public String myFeed(Model model, @PathVariable("userName") String userName, Authentication authentication, HttpSession session) {
 		List<File> list = service.listMyFeed(userName, authentication);
 		Registration profileList = service.listProfile(userName, authentication);
-		List<Follow> follow = service.listFollow(userName, authentication);
+		//List<Follow> follow = service.listFollow(userName, authentication);
 		
 		if(authentication != null) {
 			List<Alarm> alarms = alarmService.list(authentication.getName());
 			session.setAttribute("alarms", alarms);
 		}
-		
-		// 팔로우 용
-		
 		
 
 		// 태그 용
@@ -85,7 +82,7 @@ public class MyFeedController {
 		model.addAttribute("userName", userName);
 		model.addAttribute("authentication", authentication.getName());
 		model.addAttribute("feedId", feedId);
-		model.addAttribute("follow", follow);
+		//model.addAttribute("follow", follow);
 		return "feed/myFeed";
 	}
 
@@ -185,6 +182,15 @@ public class MyFeedController {
 		System.out.println(result);
 		return result;
 				
+	}
+	
+	// 태그 삭제
+	@PostMapping("/tag/delete/{feedId}/{tagKeyword}")
+	@ResponseBody
+	public void tagDelete(@PathVariable("feedId")Integer feedId,
+							@PathVariable("tagKeyword") String tagKeyword,
+							Authentication auth) {
+		service.tagDelete(feedId, tagKeyword, auth);
 	}
 
 }
