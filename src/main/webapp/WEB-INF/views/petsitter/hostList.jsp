@@ -54,8 +54,8 @@
 		</table>
 
 		<!-- 페이지네이션  -->
-		<div class="ui center aligned">
-			<nav aria-label="Page navigation example">
+		<div class="">
+			<nav aria-label="Page navigation example mx-auto">
 				<ul class="pagination">
 					<!-- 이전 버튼 -->
 					<c:if test="${leftPageNum > 1}">
