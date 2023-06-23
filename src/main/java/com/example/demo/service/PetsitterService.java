@@ -191,23 +191,19 @@ public class PetsitterService {
 
 	public boolean deleteHostById(Integer hostId, Member member, Authentication authentication) {
 		Integer count = 0;
-		System.out.println("member 자바빈 : " + member);
-		System.out.println(hostId);
-		// 호스트가 본인의 정보를 삭제할 때
-
+		//member 자바빈에는 관리자가 입력한 비밀번호의 정보를 담고 있음 
+		
 		// 회원의 권한을 조회함
 		List<String> authorities = petsitterMapper.selectMemberAuthority(authentication.getName());
 
 		// 권한을 모두 비교함
 		for (String authorityCheck : authorities) {
-			System.out.println("권한 확인 : " + authorityCheck + " " + authorityCheck.equals("admin"));
+			
 			if (authorityCheck.equals("host")) {
-				System.out.println("호스트 조건문 실행  ");
 				// 권한이 호스트라면
 
 				// 호스트 회원 정보를 조회함
 				Member hostMemberInfo = memberMapper.selectById(member.getId());
-				System.out.println(hostMemberInfo);
 
 				if (passwordEncoder.matches(member.getPassword(), hostMemberInfo.getPassword())) {
 					// 암호가 같으면 삭제 진행
@@ -219,23 +215,20 @@ public class PetsitterService {
 
 					} // 상세페이지 없으면 아무것도 진행 안함
 
-					// 호스트 정보 삭제
-					count = petsitterMapper.deleteHostById(hostId);
 					// 권한 테이블에서 정보 삭제
-					count += petsitterMapper.deleteHostAuthorityByMemberId(hostMemberInfo.getId());
-					System.out.println("count : " + count);
+					count = petsitterMapper.deleteHostAuthorityByMemberId(hostMemberInfo.getId());
+					
+					// 호스트 정보 삭제
+					count += petsitterMapper.deleteHostById(hostId);
 				}
 
 			} else if (authorityCheck.equals("admin")) {
-				System.out.println("관리자 조건문 실행 ");
 				// 권한이 admin이라면
-				System.out.println("관리자 권한으로 호스트 삭제 중");
 				// 관리자 회원 정보 조회
-				Member adminMemberInfo = memberMapper.selectById(member.getId());
-				System.out.println(adminMemberInfo);
-
+				Member adminMemberInfo = memberMapper.selectById(member.getId()); //관리자의 회원 정보 조회 
+				
 				if (passwordEncoder.matches(member.getPassword(), adminMemberInfo.getPassword())) {
-					// 관리자의 비밀번호를 입력해서 일치하면
+					// 관리자가 입력한 비밀번호와 기존의 비밀번호가 일치하면
 
 					if (selectByHostId(hostId, authentication).get("detail") != null) {
 						// 해당 호스트의
@@ -245,21 +238,22 @@ public class PetsitterService {
 
 					} // 상세페이지 없으면 아무것도 진행 안함
 
-					// 해당 호스트 정보 삭제
-					count = petsitterMapper.deleteHostById(hostId);
-
 					// 해당 호스트의 권한 삭제
 					// 호스트 정보를 찾아서
 					Host host = petsitterMapper.selectHostByHostId(hostId);
+					
 					// host 자바빈 안에 있는 memberId로 권한 삭제 진행
-					count += petsitterMapper.deleteHostAuthorityByMemberId(host.getMemberId());
-					System.out.println("count" + count);
+					count = petsitterMapper.deleteHostAuthorityByMemberId(host.getMemberId());
+					
+					// 해당 호스트 정보 삭제
+					count += petsitterMapper.deleteHostById(hostId);
+					System.out.println(count);
 				}
 			}
 		}
 		// 암호가 다르면 삭제 안됨
 
-		return count == 1;
+		return count == 2;
 	}
 
 	public boolean insertDetail(Detail detail, Authentication authentication) throws Exception {

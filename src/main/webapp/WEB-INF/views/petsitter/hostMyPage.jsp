@@ -31,7 +31,10 @@
 							<img class="ui medium bordered centered circular image " src="${bucketUrl }/hostProfile/${host.id }/${host.profile }">
 						</c:otherwise>
 					</c:choose>
-					<h1 class="ui center aligned header"><span style="color: #FF9999;">${host.hostName }</span>님 정보입니다.</h1>
+					<h1 class="ui center aligned header">
+						<span style="color: #FF9999;">${host.hostName }</span>
+						님 정보입니다.
+					</h1>
 					<div>
 						<form class="ui big form" id="checkForm">
 							<div class="field">
@@ -86,7 +89,7 @@
 											<a class="ui basic huge label" href="/petsitter/detail?id=${host.id }">상세페이지 보기</a>
 											<input type="text" value="${status ? '등록된 상세페이지가 있습니다.' : '등록된 상세페이지가 없습니다.' }" disabled>
 										</c:if>
-											<input type="text" value="${detail.id eq null ? '등록된 상세페이지가 없습니다.' : '' }" disabled>
+										<input type="text" value="${detail.id eq null ? '등록된 상세페이지가 없습니다.' : '' }" disabled>
 									</div>
 								</div>
 							</div>
@@ -95,11 +98,13 @@
 				</div>
 			</div>
 			<div class="extra content">
-				<div class="ui three buttons">
-					<button data-bs-toggle="modal" data-bs-target="#deleteModal" class="ui red basic button">삭제하기</button>
-					<button data-bs-toggle="modal" data-bs-target="#checkModal" class="ui blue basic button">상세페이지 ${detail.id eq null ? '등록하기' : '수정 및 삭제하기' }</button>
-					<a href="/petsitter/hostModify?hostId=${host.id }" class="ui green basic button">나의 정보 수정하기</a>
-				</div>
+				<sec:authorize access="hasAuthority('host') or isAuthenticated()">
+					<div class="ui three buttons">
+						<button data-bs-toggle="modal" data-bs-target="#deleteModal" class="ui red basic button">삭제하기</button>
+						<button data-bs-toggle="modal" data-bs-target="#checkModal" class="ui blue basic button">상세페이지 ${detail.id eq null ? '등록하기' : '수정 및 삭제하기' }</button>
+						<a href="/petsitter/hostModify?hostId=${host.id }" class="ui green basic button">나의 정보 수정하기</a>
+					</div>
+				</sec:authorize>
 			</div>
 		</div>
 	</div>
