@@ -249,8 +249,10 @@ public interface PetsitterMapper {
 			""")
 	Integer deleteStarByDetailId(Integer detailId);
 
-
-	
+	@Select("""
+			SELECT authority FROM MemberAuthority WHERE memberId = #{memberId}
+			""")
+	List<String> selectMemberAuthority(String memberId);
 	
 	
 }
