@@ -85,20 +85,25 @@ public class PetsitterController {
 			Host host, 
 			RedirectAttributes rttr, 
 			@RequestParam("file") MultipartFile file,
-			Authentication authentication) throws Exception {
+			Authentication authentication,
+			HttpServletRequest request) throws Exception {
 		host.setMemberId(authentication.getName());
 
 		// host 정보 받아서 추가
 		int count = petsitterService.insertHost(host, file);
 
+		rttr.addFlashAttribute("host", host);
+		
 		if (count == 1) {
-			rttr.addFlashAttribute("message", "호스트 등록이 완료되었습니다.");
+			rttr.addFlashAttribute("message", "호스트 등록이 완료되었습니다. 다시 로그인해주세요.");
+			
+			request.logout();
+			return "redirect:/member/login";
 		} else {
 			rttr.addFlashAttribute("message", "이미 호스트 등록이 되어있습니다.");
+			return "redirect:/petsitter/hostMyPage";
 		}
-		rttr.addFlashAttribute("host", host);
 
-		return "redirect:/petsitter/hostMyPage";
 	}
 
 	@GetMapping("hostMyPage")

@@ -19,7 +19,9 @@
 	<my:logo></my:logo>
 	<my:alert></my:alert>
 	<div class="container" style="margin-top: 50px;">
-		<h1>호스트 리스트</h1>
+		<div class="d-flex justify-content-center">
+			<img alt="" src="/images/hostListLogo.png" style="width: 500px;">
+		</div>
 		<table class="ui fixed single line celled table">
 			<thead>
 				<tr>
@@ -37,9 +39,7 @@
 						<td>
 							<a href="/petsitter/hostMyPage?hostId=${hostList.id }">${hostList.memberId }</a>
 						</td>
-						<td>
-							${hostList.id } (${hostList.memberId })
-						</td>
+						<td>${hostList.id } (${hostList.memberId })</td>
 						<td>${hostList.phone }</td>
 						<td>${hostList.detail eq 'true' ? '등록' : '미등록' }</td>
 						<td>${hostList.inserted }</td>
@@ -54,7 +54,7 @@
 		</table>
 
 		<!-- 페이지네이션  -->
-		<div class="">
+		<div class="d-flex justify-content-center">
 			<nav aria-label="Page navigation example mx-auto">
 				<ul class="pagination">
 					<!-- 이전 버튼 -->
@@ -125,10 +125,10 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="semantic/dist/semantic.min.js"></script>
 	<script type="text/javascript">
-	$(".hostBtn").click(function() {
-		var hostId = $(this).attr("host-id");
-		
-		$("#hostIdInput").val(hostId);
+		$(".hostBtn").click(function() {
+			var hostId = $(this).attr("host-id");
+
+			$("#hostIdInput").val(hostId);
 
 		})
 	</script>

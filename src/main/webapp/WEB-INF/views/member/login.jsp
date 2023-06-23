@@ -38,12 +38,14 @@
 </head>
 <body>
 	<my:navBar current="login"></my:navBar>
-
+	<my:alert></my:alert>
 	<div class="ui center aligned container" id="container">
 
 		<div class="row justify-content-center">
 			<div class="col-12 col-md-8 ">
-				<a href="/home"><img id="memberyLogo" src="/images/memberyLogo.png" alt="Membery logo"></a>
+				<a href="/home">
+					<img id="memberyLogo" src="/images/memberyLogo.png" alt="Membery logo">
+				</a>
 				<h1 style="margin: 0px 0px 50px 0px;">로그인</h1>
 
 				<form method="post">
@@ -53,27 +55,36 @@
 								<div class="ui form">
 									<div class="field">
 										<div class="ui left icon input">
-											<i class="user icon"></i> <input type="text" name="username" placeholder="아이디" />
+											<i class="user icon"></i>
+											<input type="text" name="username" placeholder="아이디" />
 										</div>
 									</div>
 									<div class="field">
 										<div class="ui left icon input">
-											<i class="lock icon"></i> <input type="password" name="password" placeholder="비밀번호" />
+											<i class="lock icon"></i>
+											<input type="password" name="password" placeholder="비밀번호" />
 										</div>
 									</div>
 									<button type="submit" class="ui secondary submit button">로그인</button>
 									<hr />
 									<div class="field">
 										<h5>소셜 계정으로 로그인</h5>
-										<a href="/oauth2/authorization/google"><img class="googleLogo" src="/images/googleLogo.png" alt="" /></a>
-										<a href="/oauth2/authorization/naver"><img class="naverLogo" src="/images/naverLogo.png" alt="" /></a>
-										<a href="/oauth2/authorization/kakao"><img class="kakaoLogo" src="/images/kakaoLogo.png" alt="" /></a>
+										<a href="/oauth2/authorization/google">
+											<img class="googleLogo" src="/images/googleLogo.png" alt="" />
+										</a>
+										<a href="/oauth2/authorization/naver">
+											<img class="naverLogo" src="/images/naverLogo.png" alt="" />
+										</a>
+										<a href="/oauth2/authorization/kakao">
+											<img class="kakaoLogo" src="/images/kakaoLogo.png" alt="" />
+										</a>
 									</div>
 								</div>
 							</div>
 							<div class="middle aligned column">
 								<div class="ui big button">
-									<i class="handshake outline icon"></i> <a href="/member/signup" style="color: black;">회원가입</a>
+									<i class="handshake outline icon"></i>
+									<a href="/member/signup" style="color: black;">회원가입</a>
 								</div>
 							</div>
 						</div>
@@ -81,7 +92,8 @@
 					</div>
 				</form>
 
-				<span> <c:if test="${error}">
+				<span>
+					<c:if test="${error}">
 						<p id="valid" class="alert alert-danger">${exception}</p>
 					</c:if>
 				</span>
