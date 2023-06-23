@@ -16,6 +16,7 @@ $("#qnaCommentBtn").click(function() {
 			$(".toast-body").text(jqXHR.responseJSON.message);
 			toast.show();
 
+			$("#qnaCommentTextArea").val("");
 		}
 	});
 })
@@ -49,20 +50,22 @@ function listQnAComment() {
 			$("#qnaCommentListContainer").empty();
 			for (const qnaComment of qnaComments) {
 				const editButtons = `
+				<button
+						id="qnaCommentUpdateBtn${qnaComment.id}"
+						class="qnaCommentUpdateButton ui olive button"
+						data-bs-toggle="modal" data-bs-target="#commentUpdateModal"
+						qnaData-comment-id="${qnaComment.id}"> 수정 </button>
 				<button 
 						id="qnaCommentDeleteBtn${qnaComment.id}" 
-						class="qnaCommentDeleteButton"
+						class="qnaCommentDeleteButton ui red button"
+						data-bs-toggle="modal" data-bs-target="#deleteCommentConfirmModal"
 						qnaData-comment-id="${qnaComment.id}"> 삭제 </button>
-					: 
-					<button
-						id="qnaCommentUpdateBtn${qnaComment.id}"
-						class="qnaCommentUpdateButton"
-						qnaData-comment-id="${qnaComment.id}"> 수정 </button>
+					
 				`;
 				//console.log(qnaComment);
 				$("#qnaCommentListContainer").append(`
 					<div class="item">
-						<img class="ui avatar image" src="/images/logo.png" alt="" />
+						<img class="ui avatar image" src="/images/commentLogo.png" alt="" />
 							<div class="content">
 								<a class="header">${qnaComment.memberId} </a>
 								<div class="description">${qnaComment.content}
@@ -71,8 +74,9 @@ function listQnAComment() {
 										${qnaComment.editable ? editButtons : ''}
 									</span>
 								</div>
-					</div>
-			`);
+							</div>
+						</div>
+				`);
 			};
 
 			$(".qnaCommentUpdateButton").click(function() {
@@ -85,18 +89,24 @@ function listQnAComment() {
 				})
 			});
 
+
 			$(".qnaCommentDeleteButton").click(function() {
 				const qnaCommentId = $(this).attr("qnaData-comment-id");
-				$.ajax("/qnaComment/id/" + qnaCommentId, {
-					method: "delete",
-					complete: function(jqXHR) {
-						listQnAComment();
-						$(".toast-body").text(jqXHR.responseJSON.message);
-						toast.show();
-					}
-				});
-			})
+				$("#deleteCommentModalButton").attr("qnaData-comment-id", qnaCommentId);
+			});
 		}
 	});
 }
 
+$("#deleteCommentModalButton").click(function() {
+	const qnaCommentId = $(this).attr("qnaData-comment-id");
+	$.ajax("/qnaComment/id/" + qnaCommentId, {
+		method: "delete",
+		complete: function(jqXHR) {
+			listQnAComment();
+			$(".toast-body").text(jqXHR.responseJSON.message);
+			toast.show();
+		}
+	});
+
+})

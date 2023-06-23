@@ -42,7 +42,7 @@
 				<div class="d-flex">
 					<div class="no">
 						<h1>
-							<span id="qnaWriter">${qna.writer }</span> 님의 질문 <span class="" id="qnaIdText">${qna.id }</span>
+							<span id="qnaWriter">${qna.writer }</span> 님의 질문 <span class="" id="qnaIdText" style="visibility: hidden;">${qna.id }</span>
 						</h1>
 					</div>
 				</div>
@@ -61,24 +61,26 @@
 				</div>
 				<sec:authorize access="hasAuthority('admin') or (isAuthenticated() and (authentication.name eq #qna.writer))">
 					<div>
-						<a class="btn btn-secondary" href="/qna/modify/${qna.id }">수정</a>
-						<button id="removeButton" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteConfirmModal">삭제</button>
+						<a class="ui black button" href="/qna/modify/${qna.id }">수정</a>
+						<button id="removeButton" class="ui red button" data-bs-toggle="modal" data-bs-target="#deleteConfirmModal">삭제</button>
 					</div>
 				</sec:authorize>
 
 				<div id="commentContainer">
 					<sec:authorize access="hasAuthority('admin')">
 						<div id="addQnACommentContainer">
-							<textarea id="qnaCommentTextArea"></textarea>
-							<button id="qnaCommentBtn">전송</button>
+
+							<div class="input-group">
+								<div class="form-floating">
+									<textarea style="height: 50px" placeholder="관리자의 답변" class="form-control" id="qnaCommentTextArea"></textarea>
+									<label for="floatingTextarea">관리자의 답변</label>
+								</div>
+								<button class="btn btn-outline-primary" id="qnaCommentBtn">
+									<i class="fa-regular fa-paper-plane"></i>
+								</button>
+							</div>
 						</div>
 					</sec:authorize>
-					<div id="commentUpdateContainer">
-						<h6>수정</h6>
-						<input type="hidden" id="commentUpdateIdInput" />
-						<textarea id="qnaCommentUpdateTextArea"></textarea>
-						<button id="qnaCommentUpdateBtn">수정</button>
-					</div>
 
 					<div class="ui list" id="qnaCommentListContainer">
 						<!--<img class="image" src="/images/logo.png" alt="" />  -->
@@ -115,6 +117,48 @@
 		</div>
 	</sec:authorize>
 
+	<!-- 댓글 수정 -->
+	<sec:authorize access="hasAuthority('admin')">
+	<div class="modal fade" id="commentUpdateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title fs-5">댓글 수정</h1>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<div id="commentUpdateContainer">
+							<input type="hidden" id="commentUpdateIdInput" />
+							<textarea class="form-control" id="qnaCommentUpdateTextArea"></textarea>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+						<button type="button" class="btn btn-primary" id="qnaCommentUpdateBtn" data-bs-dismiss="modal">수정</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- 댓글 삭제 -->
+		<div class="modal fade" id="deleteCommentConfirmModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title fs-5">댓글 삭제 확인</h1>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">삭제 하시겠습니까?</div>
+					<div class="modal-footer">
+						<button type="button" class="ui black button" data-bs-dismiss="modal">닫기</button>
+						<button id="deleteCommentModalButton" data-bs-dismiss="modal" type="submit" class="ui red button">삭제</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</sec:authorize>
+		
 	<my:bottom />
 	<script src="/js/qna/qnaComment.js"></script>
 </body>

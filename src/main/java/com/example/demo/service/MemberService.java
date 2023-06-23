@@ -29,8 +29,6 @@ public class MemberService {
 	@Autowired
 	private CommentMapper commentMapper;
 	
-
-	
 	public boolean signup(Member member) {
 
 		// 암호 암호화
@@ -66,6 +64,7 @@ public class MemberService {
 
 			// 이 회원이 좋아요한 레코드 삭제
 			likeMapper.deleteByMemberId(member.getId());
+			
 		}
 
 		return cnt == 1;
