@@ -128,6 +128,7 @@ public interface MyFeedMapper {
 			INSERT INTO Tags (memberId, keyword, feedId)
 			VALUES (#{name}, #{tagInput}, #{feedId})
 			""")
+	//@Options(useGeneratedKeys = true, keyProperty = "feedId")
 	Integer insertTag(Integer feedId, String tagInput, String name);
 
 	@Select("""

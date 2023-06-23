@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Select;
 
 import com.example.demo.domain.Feed;
+import com.example.demo.domain.Search;
 
 @Mapper
 public interface SearchMapper {
@@ -20,7 +21,6 @@ public interface SearchMapper {
 			WHERE t.keyword LIKE '%' #{search} '%'
 			ORDER BY fd.id DESC;
 						""")
-	//@ResultMap("searchResultMap")
-	List<Feed> selectAllBySearch(String search);
+	List<Search> selectAllBySearch(String search);
 
 }
