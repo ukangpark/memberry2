@@ -98,7 +98,7 @@
 				</div>
 			</div>
 			<div class="extra content">
-				<sec:authorize access="hasAuthority('host')">
+				<sec:authorize access="hasAuthority('host') or isAuthenticated()">
 					<div class="ui three buttons">
 						<button data-bs-toggle="modal" data-bs-target="#deleteModal" class="ui red basic button">삭제하기</button>
 						<button data-bs-toggle="modal" data-bs-target="#checkModal" class="ui blue basic button">상세페이지 ${detail.id eq null ? '등록하기' : '수정 및 삭제하기' }</button>
