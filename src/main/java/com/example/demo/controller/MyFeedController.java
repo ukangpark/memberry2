@@ -143,12 +143,13 @@ public class MyFeedController {
 	@PostMapping("/modify/{feedId}")
 	@PreAuthorize("isAuthenticated() and @customSecurityChecker.checkFeedWriter(authentication, #feed.id)")
 	// 수정하려는 게시물의 id : feed.id
-	public String modifyProcess(Feed feed, File file,
+	public String modifyProcess(Feed feed, File file, Authentication authentication,
 			@RequestParam(value = "removeFiles", required = false) List<String> removeFileNames,
 			@RequestParam(value = "files", required = false) MultipartFile[] addFiles, RedirectAttributes rttr)
 			throws Exception {
-
-		boolean ok = service.modify(feed, removeFileNames, addFiles);
+		
+		file.setMemberId(authentication.getName());
+		boolean ok = service.modify(feed, removeFileNames, addFiles, file);
 
 		if (ok) {
 			// 수정이 잘 되면 작성한 게시물로 리디렉션

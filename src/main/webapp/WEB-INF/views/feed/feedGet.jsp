@@ -118,7 +118,7 @@
 		</div>
 
 		<div class="ui card d-flex" id="my-card">
-			<div class="content" style="height: 3vh; margin-bottom: 2vh;">
+			<div class="content" style="height: 1vh;">
 				<!-- 프로필 이미지 + 닉네임 -->
 				<a href="/feed/myFeed/${feed.writer}">
 					<c:if test="${logedInMember.profileImage ne null}">
