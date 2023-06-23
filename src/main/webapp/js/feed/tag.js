@@ -6,6 +6,7 @@ $("#addTag").click(function() {
    		<span class="ui tag blue tiny label" style="margin: 2px 6px 2px 6px">${tagInput} <i class="icon mini close"></i></span>
     `);
 	//tagList();
+
 });
 
 // 엔터 시, add tag버튼 실행
