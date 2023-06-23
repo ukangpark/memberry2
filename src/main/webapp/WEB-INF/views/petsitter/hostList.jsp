@@ -27,22 +27,24 @@
 					<th>전화번호</th>
 					<th>상세페이지</th>
 					<th>등록날짜</th>
-					<th>호스트 정보 수정</th>
+					<th>호스트 정보 관리</th>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${host }" var="hostList">
+				<c:forEach items="${host }" var="hostList" varStatus="status">
 					<tr>
 						<td>
 							<a href="/petsitter/hostMyPage?hostId=${hostList.id }">${hostList.memberId }</a>
 						</td>
-						<td>${hostList.id }(${hostList.memberId })</td>
+						<td>
+							${hostList.id } (${hostList.memberId })
+						</td>
 						<td>${hostList.phone }</td>
 						<td>${hostList.detail eq 'true' ? '등록' : '미등록' }</td>
 						<td>${hostList.inserted }</td>
 						<td>
 							<a href="/petsitter/hostModify?hostId=${hostList.id }" class="ui green basic button">수정</a>
-							<a class="ui red basic button">삭제</a>
+							<button host-id="${hostList.id }" data-bs-toggle="modal" data-bs-target="#deleteModal" class="ui red basic button hostBtn">삭제</button>
 						</td>
 					</tr>
 				</c:forEach>
@@ -51,6 +53,7 @@
 		</table>
 
 		<!-- 페이지네이션  -->
+		<div class="ui center aligned">
 			<nav aria-label="Page navigation example">
 				<ul class="pagination">
 					<!-- 이전 버튼 -->
@@ -85,12 +88,48 @@
 					</c:if>
 				</ul>
 			</nav>
+		</div>
+	</div>
 
+	<!-- 삭제하기 모달 -->
+	<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="deleteModalLabel">삭제 확인</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div class="mb-3">
+						호스트 등록 정보를 정말 삭제하시겠습니까?
+						<br>
+						삭제를 확인하려면 비밀번호를 입력해주세요.
+					</div>
+					<!-- 삭제하기 정보 -->
+					<form action="/petsitter/hostDelete" method="post" id="deleteForm">
+						<input type="hidden" name="hostId" value="" id="hostIdInput">
+						<input class="form-control" type="password" name="password" id="passwordInput" placeholder="비밀번호를 입력해주세요.">
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소하기</button>
+					<button type="submit" class="btn btn-danger" form="deleteForm">삭제하기</button>
+				</div>
+			</div>
+		</div>
 	</div>
 
 
 	<my:bottom></my:bottom>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src="semantic/dist/semantic.min.js"></script>
+	<script type="text/javascript">
+	$(".hostBtn").click(function() {
+		var hostId = $(this).attr("host-id");
+		
+		$("#hostIdInput").val(hostId);
+
+		})
+	</script>
 </body>
 </html>

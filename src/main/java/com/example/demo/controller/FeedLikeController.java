@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import com.example.demo.domain.*;
 import com.example.demo.service.*;
 
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("/")
 public class FeedLikeController {

@@ -119,7 +119,7 @@
 			
 		</div> 
 		
- 		<%-- <!-- 기존 이미지 파일 보이기 -->
+ 		<%-- <!-- 기존 이미지 파일 보이기_휴지통 버튼 -->
 		<div id="add" align="center">
 			<ul class="bxslider">
 				<c:forEach items="${feed.fileName }" var="fileName" varStatus="status">
@@ -136,8 +136,8 @@
 			<div>
 				<h3>사진을 추가해보세요! </h3>
 				<input style="margin-left: 60px;" type="file" multiple name="files" accept="image/*"  required/>
-			</div>
- --%>
+			</div> --%>
+
 		
 		<!-- 글 수정 부분 -->
 		<div id="content" >

@@ -35,7 +35,6 @@ img {
 	margin-left: 520px;
 }
 
-
 #addImageBox {
 	height: 250px;
 	position: relative;
@@ -98,14 +97,14 @@ img {
 		<div class="follower" id="followerBtn" style="margin: 0px 30px 0px 30px; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#followerModal">
 			<h3>
 				<input id="userName" name="userName" value="${userName }" style="display: none;">
-				팔로워 <span class="followerCount">${follow[0].followCount}</span>
+				팔로워 <span class="followerCount">${fileList[0].followCount}</span>
 			</h3>
 		</div>
 
 		<div class="following" id="followingBtn" style="margin: 0px 30px 0px 30px; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#followingModal">
 			<h3>
 				<input id="userName" name="userName" value="${userName }" style="display: none;">
-				팔로잉 <span class="followingCount">${follow[0].followingCount}</span>
+				팔로잉 <span class="followingCount">${fileList[0].followingCount}</span>
 			</h3>
 
 		</div>
@@ -151,9 +150,11 @@ img {
 		<div class="messageBtn" style="margin: 0px 30px 0px 30px">
 			<c:if test="${userName ne authentication }">
 				<button class="ui basic button" id="messageBtn">
-					<h3 onMouseover="this.style.color='#FFCC33';" onMouseout="this.style.color='gray';">
-						<i class="fa-solid fa-bolt"></i> 산책번개
-					</h3>
+					<a href="/chat/chat" style="color: gray;">
+						<h3 onMouseover="this.style.color='#FFCC33';" onMouseout="this.style.color='gray';">
+							<i class="fa-solid fa-bolt"></i> 산책번개
+						</h3>
+					</a>
 				</button>
 			</c:if>
 		</div>

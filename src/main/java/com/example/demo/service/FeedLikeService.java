@@ -9,6 +9,9 @@ import org.springframework.transaction.annotation.*;
 
 import com.example.demo.domain.*;
 import com.example.demo.mapper.*;
+import com.example.demo.security.LoginAuthenticationSuccessHandler;
+
+import jakarta.servlet.http.HttpSession;
 
 @Service
 @Transactional(rollbackFor = Exception.class)
@@ -19,6 +22,10 @@ public class FeedLikeService {
 	
 	@Autowired
 	private AlarmMapper alarmMapper;
+	@Autowired
+	private MemberMapper memberMapper;
+	@Autowired
+    private LoginAuthenticationSuccessHandler loginSuccessHandler;
 
 	public Map<String, Object> like(Like like, Authentication authentication) {
 		Map<String, Object> result = new HashMap<>();

@@ -36,7 +36,7 @@ public class CalendarController {
 	  @GetMapping("list") 
 	  public List<Calendar> getall(Authentication authentication) { 
 		  List<Calendar> schedules = service.getAllSchedule(authentication);
-		 
+		  System.out.println(schedules);
 		  	return schedules; 
 	 }
 	 

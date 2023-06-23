@@ -47,7 +47,7 @@
 
 	function wsOpen() {
 		//웹소켓 전송 시 현재 방의 번호를 넘겨서 보내기
-		ws = new WebSocket("ws://" + location.host + "/chating");
+		ws = new WebSocket("ws://" + location.host + "/chating/" + $("#roomNumber").val());
 		wsEvt();
 	}
 
@@ -68,7 +68,7 @@
 					}
 				}else if(d.type == "message"){
 					if(d.sessionId == $("#sessionId").val()){
-						$("#chating").append("<p class='me'>" + d.msg + "</p>");	
+						$("#chating").append(/* $("#profileImg") + */ "<p class='me'>" + d.userName + " : " + d.msg + "</p>");	
 					}else{
 						$("#chating").append("<p class='others'>" + d.userName + " : " + d.msg + "</p>");
 					}
@@ -102,6 +102,7 @@
 	function send() {
 		var option ={
 			type: "message",
+			roomNumber: $("#roomNumber").val(),
 			sessionId : $("#sessionId").val(),
 			userName : $("#userName").val(),
 			msg : $("#chatting").val()
@@ -121,6 +122,8 @@
 		<!-- 현재의 세선값을 저장해놓기 위해 -->
 		<input type="hidden" id="sessionId" value="">
 		<!-- 방의 번호값을 모델에서 저장하고 그 값을 jstl을 통해 파싱 -->
+		<!-- 접속한 방의 이름을 모델에 저정한 값을 가져아서 채팅방 이름 추가 -->
+		<input type="hidden" id="roomNumber" value="${roomNumber}">
 		
 		<div style="display: none;">
 		<c:if test="${sessionScope.logedInMember.profileImage ne null}">
@@ -134,7 +137,8 @@
 		</div>
 			
 		<div id="chatBack" style="background-color: #FFF2F2; height: 100vh; width: 75vw;">
-
+			
+			<h1>${roomName}의 채팅방</h1>
 			<!-- 채팅창 -->
 			<div id="chating" class="chating">
 			</div>

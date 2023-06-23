@@ -4,9 +4,6 @@ function home() {
 	$('.slider').bxSlider();
 };
 
-
-
-
 // 댓글 js
 $(".btnTriggerModal").click(function() {
 	const feedId = $(this).attr("data-id");
@@ -85,14 +82,13 @@ $(".btnTriggerModal").click(function() {
 			}
 		})
 	}
-	
+
 	//댓글 등록 버튼 클릭시
 	$("#sendCommentBtn").off("click");
 	$("#sendCommentBtn").on("click", function() {
 		// const feedId = $("#feedId").text().trim();
 		const content = $("#commentTextArea").val();
 		const data = { feedId, content };
-		console.log(data);
 		$.ajax("/comment/add", {
 			method: "post",
 			contentType: "application/json",
@@ -109,7 +105,7 @@ $(".btnTriggerModal").click(function() {
 		});
 	})
 
-	
+
 	// (최종) 수정 버튼 클릭시
 	$("#updateCommentBtn").click(function() {
 

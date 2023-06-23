@@ -7,6 +7,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.domain.Alarm;
+import com.example.demo.domain.Book;
 import com.example.demo.domain.PetsitterComment;
 import com.example.demo.mapper.AlarmMapper;
 
@@ -30,6 +31,11 @@ public class AlarmService {
 
 	public void addPetSitterComment(PetsitterComment petsitterComment) {
 		mapper.petsitterCommentAdd(petsitterComment);
+		
+	}
+
+	public void bookRejectAlarm(Book book) {
+		mapper.bookRejectAdd(book);
 		
 	}
 

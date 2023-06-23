@@ -17,8 +17,6 @@ public class PetsitterCommentService {
 	@Autowired
 	private PetsitterCommentMapper petsitterCommentMapper;
 	
-	@Autowired
-	private AlarmMapper alarmMapper;
 
 	public List<PetsitterComment> list(Integer detailId, Authentication authentication) {
 		// 상세페이지id를 통해 후기 전체 조회
