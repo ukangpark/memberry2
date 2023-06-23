@@ -152,7 +152,7 @@ img {
 			<c:if test="${userName ne authentication }">
 				<button class="ui basic button" id="messageBtn">
 					<h3 onMouseover="this.style.color='#FFCC33';" onMouseout="this.style.color='gray';">
-						<i class="fa-solid fa-bolt"></i> 산책번개
+						<a href="/chat/chat"><i class="fa-solid fa-bolt"></i> 산책번개</a>
 					</h3>
 				</button>
 			</c:if>

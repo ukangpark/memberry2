@@ -14,7 +14,7 @@
 	<style>
 	
 		.container{
-			width: 500px;
+			width: 600px;
 			margin: 0 auto;
 			padding: 25px
 		}
@@ -152,7 +152,7 @@
 			<table class="inputTable">
 				<tr>
 					<th>방 제목</th>
-					<th><input type="text" name="roomName" id="roomName"></th>
+					<th><input type="text" name="roomName" id="roomName" placeholder="방 이름을 먼저 입력해 주세요."></th>
 					<th><button id="createRoom">방 만들기</button></th>
 				</tr>
 			</table>
