@@ -46,4 +46,28 @@ public interface QnAMapper {
 			""")
 	@Options(useGeneratedKeys = true, keyProperty = "id")
 	int insert(QnA qna);
+
+	@Select("""
+			SELECT COUNT(*)
+			FROM QnA
+			""")
+	Integer countAll();
+
+	@Select("""
+			<script>
+			<bind name="pattern" value="'%' + search + '%'" />
+			SELECT id,
+				   title,
+				   body,
+				   writer,
+				   inserted
+			FROM QnA
+			WHERE (title LIKE #{pattern})
+				OR (body LIKE #{pattern})
+				OR (writer LIKE #{pattern})
+			ORDER BY inserted DESC
+			LIMIT #{startIndex}, #{recordsInQnA}
+			</script>
+			""")
+	List<QnA> selectAllPage(Integer startIndex, Integer recordsInQnA, String search);
 }
