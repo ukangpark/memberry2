@@ -150,7 +150,7 @@
 									 </span>
 									</c:if>
 									 <span id="commentCnt" class="badge text-bg-light">${feed.commentCount }</span>
-								</button> <i class="paw icon"></i>
+								</button>
 
 
 							</span> <span class="right floated">${feed.inserted}</span>

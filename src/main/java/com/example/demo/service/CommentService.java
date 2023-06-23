@@ -50,7 +50,9 @@ public class CommentService {
 		
 		if (cnt == 1) {
 			res.put("message", "댓글 등록 완료");
-			alarmMapper.commentAdd(comment);
+			if(comment.getMemberId() != authentication.getName()) {
+				alarmMapper.commentAdd(comment);
+			}
 		} else {
 			res.put("message", "댓글 등록 실패");
 		}

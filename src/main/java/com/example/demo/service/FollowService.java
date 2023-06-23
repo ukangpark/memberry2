@@ -31,6 +31,7 @@ public class FollowService {
 		if (deleteCnt != 1) {
 			Integer insertCnt = followMapper.insert(follow);
 			Integer cnt = alarmMapper.followAdd(follow);
+			
 			result.put("follow", true);
 			
 		}
