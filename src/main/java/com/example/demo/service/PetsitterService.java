@@ -33,7 +33,7 @@ public class PetsitterService {
 
 	public Map<String, Object> selectAll(Integer page) {
 		// 페이지네이션
-		Integer rowPerPage = 10; //페이지당 행의 수
+		Integer rowPerPage = 10; // 페이지당 행의 수
 
 		// 쿼리 LIMIT 절에 사용할 시작 인덱스
 		Integer startIndex = (page - 1) * rowPerPage;
@@ -125,11 +125,11 @@ public class PetsitterService {
 		}
 
 		// 상세페이지의 예약 정보
-		if(detail != null) {
+		if (detail != null) {
 			List<Book> book = bookMapper.selectByDetailId(detail.getId());
 			System.out.println("예약정보 : " + book);
 			System.out.println(detail.getId());
-			
+
 			info.put("book", book);
 		}
 
@@ -191,23 +191,71 @@ public class PetsitterService {
 
 	public boolean deleteHostById(Integer hostId, Member member, Authentication authentication) {
 		Integer count = 0;
+		System.out.println("member 자바빈 : " + member);
+		System.out.println(hostId);
+		// 호스트가 본인의 정보를 삭제할 때
 
-		Member memberInfo = memberMapper.selectById(member.getId());
+		// 회원의 권한을 조회함
+		List<String> authorities = petsitterMapper.selectMemberAuthority(authentication.getName());
 
-		if (passwordEncoder.matches(member.getPassword(), memberInfo.getPassword())) {
-			// 암호가 같으면 삭제 진행
+		// 권한을 모두 비교함
+		for (String authorityCheck : authorities) {
+			System.out.println("권한 확인 : " + authorityCheck + " " + authorityCheck.equals("admin"));
+			if (authorityCheck.equals("host")) {
+				System.out.println("호스트 조건문 실행  ");
+				// 권한이 호스트라면
 
-			if (selectByHostId(hostId, authentication).get("detail") != null) {
-				// 등록된 상세페이지가 있으면
-				// 등록된 상세페이지 삭제
-				boolean ok = deleteDetailByHostId(hostId, member);
-				
+				// 호스트 회원 정보를 조회함
+				Member hostMemberInfo = memberMapper.selectById(member.getId());
+				System.out.println(hostMemberInfo);
+
+				if (passwordEncoder.matches(member.getPassword(), hostMemberInfo.getPassword())) {
+					// 암호가 같으면 삭제 진행
+
+					if (selectByHostId(hostId, authentication).get("detail") != null) {
+						// 등록된 상세페이지가 있으면
+						// 등록된 상세페이지 삭제
+						boolean ok = deleteDetailByHostId(hostId, member);
+
+					} // 상세페이지 없으면 아무것도 진행 안함
+
+					// 호스트 정보 삭제
+					count = petsitterMapper.deleteHostById(hostId);
+					// 권한 테이블에서 정보 삭제
+					count += petsitterMapper.deleteHostAuthorityByMemberId(hostMemberInfo.getId());
+					System.out.println("count : " + count);
+				}
+
+			} else if (authorityCheck.equals("admin")) {
+				System.out.println("관리자 조건문 실행 ");
+				// 권한이 admin이라면
+				System.out.println("관리자 권한으로 호스트 삭제 중");
+				// 관리자 회원 정보 조회
+				Member adminMemberInfo = memberMapper.selectById(member.getId());
+				System.out.println(adminMemberInfo);
+
+				if (passwordEncoder.matches(member.getPassword(), adminMemberInfo.getPassword())) {
+					// 관리자의 비밀번호를 입력해서 일치하면
+
+					if (selectByHostId(hostId, authentication).get("detail") != null) {
+						// 해당 호스트의
+						// 등록된 상세페이지가 있으면
+						// 등록된 상세페이지 삭제
+						boolean ok = deleteDetailByHostId(hostId, member);
+
+					} // 상세페이지 없으면 아무것도 진행 안함
+
+					// 해당 호스트 정보 삭제
+					count = petsitterMapper.deleteHostById(hostId);
+
+					// 해당 호스트의 권한 삭제
+					// 호스트 정보를 찾아서
+					Host host = petsitterMapper.selectHostByHostId(hostId);
+					// host 자바빈 안에 있는 memberId로 권한 삭제 진행
+					count += petsitterMapper.deleteHostAuthorityByMemberId(host.getMemberId());
+					System.out.println("count" + count);
+				}
 			}
-
-			// 호스트 정보 삭제
-			count = petsitterMapper.deleteHostById(hostId);
-			// 권한 테이블에서 정보 삭제
-			petsitterMapper.deleteHostAuthorityByMemberId(memberInfo.getId());
 		}
 		// 암호가 다르면 삭제 안됨
 
@@ -215,10 +263,11 @@ public class PetsitterService {
 	}
 
 	public boolean insertDetail(Detail detail, Authentication authentication) throws Exception {
-		System.out.println( "add service detail : " + detail);
+		System.out.println("add service detail : " + detail);
 		// 상세페이지 등록
 		Integer count = 0;
-		//Integer hostId = petsitterMapper.selectHostByMemberId(authentication.getName()).getId();
+		// Integer hostId =
+		// petsitterMapper.selectHostByMemberId(authentication.getName()).getId();
 		Integer hostId = detail.getHostId();
 		detail.setHostId(hostId);
 
@@ -371,8 +420,8 @@ public class PetsitterService {
 					.key(keyCover).build();
 
 			s3.deleteObject(deleteObjectRequestCover);
-			
-			//별점 삭제
+
+			// 별점 삭제
 			petsitterMapper.deleteStarByDetailId(detail.getId());
 
 			// petsitterComment 레코드 삭제

@@ -102,16 +102,18 @@ public class PetsitterController {
 	}
 
 	@GetMapping("hostMyPage")
-	@PreAuthorize("(isAuthenticated() and @customSecurityChecker.checkPetsitterWriter(authentication, #hostId)) or hasAuthority('admin')")
+	@PreAuthorize("isAuthenticated() or hasAuthority('admin')")
 	public void hostMyPage(
 			Authentication authentication, 
 			Model model,
 			@RequestParam(value = "hostId", required = false) Integer hostId) {
 		// 호스트 마이페이지 포워드
 		if(hostId == null) {
+			//호스트가 네브바에서 호스트 마이페이지 접근 시
 			Map<String, Object> info = petsitterService.selectByMemberId(authentication.getName());			
 			model.addAllAttributes(info);
 		} else {
+			//관리자가 호스트리스트에서 해당 호스트 마이페이지 접근 시
 			Map<String, Object> info = petsitterService.selectByHostId(hostId, authentication);
 			model.addAllAttributes(info);
 		}		
@@ -202,7 +204,9 @@ public class PetsitterController {
 		}
 		
 		// 호스트 정보 삭제 과정
+		// member자바빈에 인증 아이디 넣어줌
 		member.setId(authentication.getName());
+		System.out.println(member);
 
 		boolean ok = petsitterService.deleteHostById(hostId, member, authentication);
 

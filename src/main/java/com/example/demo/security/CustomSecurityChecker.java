@@ -43,8 +43,8 @@ public class CustomSecurityChecker {
 	
 	public boolean checkPetsitterWriter(Authentication authentication, Integer hostId) {
 		Host host = petsitterMapper.selectHostByHostId(hostId);
-		System.out.println("custom security : " + hostId + ", " +  authentication.getName());
 		return host.getMemberId().equals(authentication.getName());
 	}
+	
 	
 }
