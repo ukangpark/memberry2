@@ -130,14 +130,14 @@ img {
 			<input id="userName" name="userName" value="${userName }" style="display: none;">
 			<input id="auth" name="auth" value="${authentication }" style="display: none;">
 			<c:if test="${userName ne authentication }">
-				<c:if test="${not follow.followed }">
+				<c:if test="${not fileList[0].followed }">
 					<button class="ui basic button" id="followBtn">
 						<h3>
 							<i class="fa-solid fa-user"></i> 팔로우
 						</h3>
 					</button>
 				</c:if>
-				<c:if test="${follow.followed }">
+				<c:if test="${fileList[0].followed }">
 					<button class="ui blue basic button" id="followBtn">
 						<h3>
 							<i class="fa-solid fa-user-check"></i> 팔로잉

@@ -126,10 +126,10 @@ public interface MyFeedMapper {
 
 	@Insert("""
 			INSERT INTO Tags (memberId, keyword, feedId)
-			VALUES (#{name}, #{tagInput}, #{feedId})
+			VALUES (#{feed.writer}, #{keyword}, #{feed.id})
 			""")
 	//@Options(useGeneratedKeys = true, keyProperty = "feedId")
-	Integer insertTag(Integer feedId, String tagInput, String name);
+	Integer insertTag(String keyword, Feed feed);
 
 	@Select("""
 			SELECT * FROM Tags
