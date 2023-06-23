@@ -52,46 +52,38 @@ document.addEventListener('DOMContentLoaded', function() {
 			
 		}
 	});
-calendar.render();
+//calendar.render();
 getCalendar();
-//calendar.getEvents();
-	//var arr = getCalendar();
-	//$.each(arr, function(index, item) {
-		//calendar.addEvent(item);
-		//console.log(item);
-	//});
-	//calendar.render();
-//});
+calendar.getEvents();
+	var arr = getCalendar();
+	$.each(arr, function(index, item) {
+		calendar.addEvent(item);
+		console.log(item);
+	});
+	calendar.render();
+});
 //Calendar DB데이터를 요청하는 함수
 function getCalendar() {
+	var arr = [{title: '펫시터 예약', start: '2023-06-05', end:'2023-06-07'}, {title: '미용맡기기', start: '2023-06-29', end: '2023-06-29'}, {title: '산책번개', start: '2023-06-15', end:'2023-06-15'}];
 	
 	$.ajax("/fullCalendar/list", {
-		//var arr = [{title: '펫시터 예약', start: '2023-06-25', end:'2023-06-27'}, {title: '미용맡기기', start: '2023-06-30', end: '2023-06-30'}, {title: '산책번개', start: '2023-06-02', end:'2023-06-02'}];
-
-		method: "get",
+		method: "post",
 		//contentType: "application/json",
 		//dataType : "json",
 		//async: false, 
 		success: function(schedules) {
-			$(".scheduleInfo").empty();
-			for(const schedule of schedules) {
-				$(".scheduleInfo").append(`
-					<li>${schedule.title}</li>
-				`);
-			}
-		}
-		//,
-		//error: function(){
-	 		//alert("에러");
- 		//}	
+			arr = schedules;
+		}	
  	});
- //return arr;
+	 return arr;
 }
+
+
 //$("#btnAddTest").click(function(){
  //var arr = getCalendarDataInDB();
  //$.each(arr, function(index, item){
   //calendar.addEvent( item );
  //});
  //calendar.render();
-});
+
 

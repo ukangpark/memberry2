@@ -13,11 +13,9 @@ public interface CalendarMapper {
 
 	@Select("""
 			SELECT 
-				id,
 				title,
 				start,
-				end,
-				allDay
+				end
 			FROM Calendar
 			WHERE memberId = #{memberId}
 			""")
