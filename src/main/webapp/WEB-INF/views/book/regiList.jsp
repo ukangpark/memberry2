@@ -14,6 +14,7 @@
 <d:top />
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 
+
 <script type="text/javascript">
 // 여기부터 결제기능관련 코드
 /* function requestPay() {
@@ -161,7 +162,9 @@
 						<button type="button" class="btn btn-warning">완료</button>
 						</c:if>
 						<c:if test="${book.accepted == 3}">
-						<button type="button" class="btn btn-warning" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="메세지">예약거절</button>
+						<div class="ui button" data-tooltip="${book.rejectMessage }" data-position="top center">
+						 예약거절
+						</div>
 						</c:if>
 						</td>
 						

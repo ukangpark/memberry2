@@ -25,10 +25,12 @@ public class QnAController {
 	private AlarmService alarmService;
 	
 	@GetMapping("")
-	public String list(Model model) {
+	public String list(Model model,
+					   @RequestParam(value="page", defaultValue = "1") Integer page,
+					   @RequestParam(value = "search", defaultValue = "") String search) {
 		
-		List<QnA> list = service.qnaList();
-		model.addAttribute("qnaList", list);
+		Map<String, Object> result = service.qnaList(page, search);
+		model.addAllAttributes(result);
 
 		return "qna";
 	}

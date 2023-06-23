@@ -127,7 +127,6 @@
 	border-top-right-radius: 5px;
 }
 
-/* slick slider */
 .ui.cards {
 	flex-wrap: wrap;
 }

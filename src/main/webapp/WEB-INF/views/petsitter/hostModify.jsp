@@ -106,6 +106,7 @@
 									<option value="펫시터로 활동을 해본 적이 없음">펫시터로 활동을 해본 적이 없음</option>
 								</select>
 							</div>
+							<input type="hidden" name="id" value="${host.id }">
 						</form>
 					</div>
 				</div>

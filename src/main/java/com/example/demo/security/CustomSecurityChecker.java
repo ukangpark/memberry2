@@ -20,6 +20,9 @@ public class CustomSecurityChecker {
 	private QnAMapper qnaMapper;
 	
 	@Autowired
+	private QnACommentMapper qnacommentMapper;
+	
+	@Autowired
 	private PetsitterMapper petsitterMapper;
 	
 	public boolean checkFeedWriter(Authentication authentication, Integer feedId) {
@@ -36,6 +39,11 @@ public class CustomSecurityChecker {
 		return qna.getWriter().equals(authentication.getName());
 	}
 	
+	public boolean checkQnACommentWriter(Authentication authentication, Integer qnacommentId) {
+		QnAComment qnacomment = qnacommentMapper.selectById(qnacommentId);
+		return qnacomment.getMemberId().equals(authentication.getName());
+	}
+	
 	public boolean checkCommentWriter(Authentication authentication, Integer commentId) {
 		Comment comment = commentMapper.selectById(commentId);
 		return comment.getMemberId().equals(authentication.getName());
@@ -43,8 +51,8 @@ public class CustomSecurityChecker {
 	
 	public boolean checkPetsitterWriter(Authentication authentication, Integer hostId) {
 		Host host = petsitterMapper.selectHostByHostId(hostId);
-		System.out.println("custom security : " + hostId + ", " +  authentication.getName());
 		return host.getMemberId().equals(authentication.getName());
 	}
+	
 	
 }
