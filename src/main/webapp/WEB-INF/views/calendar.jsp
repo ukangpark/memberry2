@@ -73,9 +73,9 @@
 
 	 <div id="calendarWrapper">
 		<div id='calendar'></div>
-	</div>  
+	</div>   
   	
-  	<!-- <ul class="scheduleInfo">
+  	 <!-- <ul class="scheduleInfo">
   	
   	</ul> -->
   	
