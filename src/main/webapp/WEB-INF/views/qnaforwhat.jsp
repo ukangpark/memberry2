@@ -10,8 +10,9 @@
 	width: 350px;
 	margin-left: 150px;
 }
-.no{
-	margin:0px 0px 20px 0px;
+
+.no {
+	margin: 0px 0px 20px 0px;
 }
 </style>
 
@@ -23,7 +24,7 @@
 <body>
 	<my:navBar current="qnaForWhat"></my:navBar>
 	<my:alert></my:alert>
-	
+
 	<!-- toast -->
 	<div class="toast-container position-fixed top-0 start-50 translate-middle-x p-3">
 		<div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
@@ -33,7 +34,7 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<div class="container-lg">
 		<div class="row justify-content-center">
 			<div class="col-12 col-md-8 col-lg-6">
@@ -41,8 +42,7 @@
 				<div class="d-flex">
 					<div class="no">
 						<h1>
-							<span id="qnaWriter">${qna.writer }</span> 
-							님의 질문 <span class="" id="qnaIdText">${qna.id }</span>
+							<span id="qnaWriter">${qna.writer }</span> 님의 질문 <span class="" id="qnaIdText">${qna.id }</span>
 						</h1>
 					</div>
 				</div>
@@ -65,7 +65,7 @@
 						<button id="removeButton" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteConfirmModal">삭제</button>
 					</div>
 				</sec:authorize>
-				
+
 				<div id="commentContainer">
 					<sec:authorize access="hasAuthority('admin')">
 						<div id="addQnACommentContainer">
@@ -76,16 +76,13 @@
 					<div id="commentUpdateContainer">
 						<h6>수정</h6>
 						<input type="hidden" id="commentUpdateIdInput" />
-						<textarea id="qnaCommentUpdateTextArea" ></textarea>
+						<textarea id="qnaCommentUpdateTextArea"></textarea>
 						<button id="qnaCommentUpdateBtn">수정</button>
 					</div>
-					<div id="qnaCommentListContainer">
-						<div>댓글 1 내용 : 누가 : 언제</div>
-						<div>댓글 2 내용 : 누가 : 언제</div>
-						<div>댓글 3 내용 : 누가 : 언제</div>
+
+					<div class="ui list" id="qnaCommentListContainer">
+						<!--<img class="image" src="/images/logo.png" alt="" />  -->
 					</div>
-				
-				
 				</div>
 			</div>
 		</div>
@@ -99,7 +96,7 @@
 				<input type="text" name="id" value="${qna.id }" />
 			</form>
 		</div>
-	
+
 		<!-- Modal -->
 		<div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
@@ -117,7 +114,7 @@
 			</div>
 		</div>
 	</sec:authorize>
-	
+
 	<my:bottom />
 	<script src="/js/qna/qnaComment.js"></script>
 </body>

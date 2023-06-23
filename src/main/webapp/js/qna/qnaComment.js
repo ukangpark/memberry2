@@ -6,7 +6,7 @@ $("#qnaCommentBtn").click(function() {
 	const qnaId = $("#qnaIdText").text().trim();
 	const content = $("#qnaCommentTextArea").val();
 	const data = { qnaId, content };
-	
+
 	$.ajax("/qnaComment/add", {
 		method: "post",
 		contentType: "application/json",
@@ -15,7 +15,7 @@ $("#qnaCommentBtn").click(function() {
 			listQnAComment();
 			$(".toast-body").text(jqXHR.responseJSON.message);
 			toast.show();
-			
+
 		}
 	});
 })
@@ -61,12 +61,17 @@ function listQnAComment() {
 				`;
 				//console.log(qnaComment);
 				$("#qnaCommentListContainer").append(`
-				<div>
-					${qnaComment.editable ? editButtons : ''}
-					: ${qnaComment.content} 
-					: ${qnaComment.memberId} 
-					: ${qnaComment.inserted}
-				</div>
+					<div class="item">
+						<img class="ui avatar image" src="/images/logo.png" alt="" />
+							<div class="content">
+								<a class="header">${qnaComment.memberId} </a>
+								<div class="description">${qnaComment.content}
+									<a class="ui tag label">${qnaComment.inserted} </a>
+									<span>
+										${qnaComment.editable ? editButtons : ''}
+									</span>
+								</div>
+					</div>
 			`);
 			};
 
