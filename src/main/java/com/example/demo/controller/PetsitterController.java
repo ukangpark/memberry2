@@ -72,7 +72,7 @@ public class PetsitterController {
 	}
 
 	@GetMapping("apply")
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("isAuthenticated() and !hasAuthority('host') and !hasAuthority('admin')")
 	public void applyForm(Model model, Authentication authentication) {
 		// 호스트 등록 폼으로 포워드
 		Map<String, Object> info = petsitterService.selectByMemberId(authentication.getName());
@@ -80,8 +80,11 @@ public class PetsitterController {
 	}
 
 	@PostMapping("apply")
-	@PreAuthorize("isAuthenticated()")
-	public String applyProcess(Host host, RedirectAttributes rttr, @RequestParam("file") MultipartFile file,
+	@PreAuthorize("isAuthenticated() and !hasAuthority('host') and !hasAuthority('admin')")
+	public String applyProcess(
+			Host host, 
+			RedirectAttributes rttr, 
+			@RequestParam("file") MultipartFile file,
 			Authentication authentication) throws Exception {
 		host.setMemberId(authentication.getName());
 
@@ -106,14 +109,14 @@ public class PetsitterController {
 			@RequestParam(value = "hostId", required = false) Integer hostId) {
 		// 호스트 마이페이지 포워드
 		if(hostId == null) {
+			//호스트가 네브바에서 호스트 마이페이지 접근 시
 			Map<String, Object> info = petsitterService.selectByMemberId(authentication.getName());			
 			model.addAllAttributes(info);
 		} else {
+			//관리자가 호스트리스트에서 해당 호스트 마이페이지 접근 시
 			Map<String, Object> info = petsitterService.selectByHostId(hostId, authentication);
 			model.addAllAttributes(info);
-		}
-		
-		System.out.println("controller hostId ; " + hostId);
+		}		
 	}
 
 	@GetMapping("hostModify")
@@ -133,9 +136,24 @@ public class PetsitterController {
 	}
 
 	@PostMapping("hostModify")
-	@PreAuthorize("isAuthenticated()")
-	public String hostModifyProcess(Host host, @RequestParam(value = "file", required = false) MultipartFile file,
+	@PreAuthorize("(isAuthenticated() and @customSecurityChecker.checkPetsitterWriter(authentication, #host.id)) or hasAuthority('admin')")
+	public String hostModifyProcess(
+			Host host, 
+			@RequestParam(value = "file", required = false) MultipartFile file,
 			RedirectAttributes rttr) throws Exception {
+		//redirect 경로
+		String redirect = "redirect:/petsitter/hostMyPage";
+		
+		//관리자인지 확인하기 위한 코드
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		
+		for(GrantedAuthority grantedAuthority : authentication.getAuthorities()) {
+			boolean check = grantedAuthority.getAuthority().equals("admin");
+			if(check) {
+				redirect = "redirect:/petsitter/hostList";				
+			}
+		}
+		
 		// 호스트 정보 수정 과정
 		boolean ok = petsitterService.modifyHostById(host, file);
 
@@ -144,7 +162,8 @@ public class PetsitterController {
 		} else {
 			rttr.addFlashAttribute("message", "정보를 수정하지 못했습니다.");
 		}
-		return "redirect:/petsitter/hostMyPage";
+	
+		return redirect;
 	}
 
 	// 펫시터 전체목록보기, 페이지네이션, 검색
@@ -157,7 +176,7 @@ public class PetsitterController {
 	}
 
 	@GetMapping("hostList")
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("hasAuthority('admin')")
 	public void hostList(Model model, @RequestParam(value = "page", defaultValue = "1") Integer page) {
 		// 호스트 리스트 포워드
 		Map<String, Object> info = petsitterService.selectAll(page);
@@ -165,10 +184,29 @@ public class PetsitterController {
 	}
 
 	@PostMapping("hostDelete")
-	@PreAuthorize("isAuthenticated()")
-	public String hostDelete(Integer hostId, Member member, Authentication authentication, RedirectAttributes rttr) {
+	@PreAuthorize("(isAuthenticated() and @customSecurityChecker.checkPetsitterWriter(authentication, #hostId)) or hasAuthority('admin')")
+	public String hostDelete(
+			Integer hostId, 
+			Member member, 
+			Authentication authentication, 
+			RedirectAttributes rttr) {
+		
+		//redirect 경로
+		String redirect = "redirect:/petsitter/main";
+		
+		//관리자인지 확인 
+		for(GrantedAuthority grantedAuthority : authentication.getAuthorities()) {
+			boolean check = grantedAuthority.getAuthority().equals("admin");
+			
+			if(check) {
+				redirect = "redirect:/petsitter/hostList";
+			}
+		}
+		
 		// 호스트 정보 삭제 과정
+		// member자바빈에 인증 아이디 넣어줌
 		member.setId(authentication.getName());
+		System.out.println(member);
 
 		boolean ok = petsitterService.deleteHostById(hostId, member, authentication);
 
@@ -178,11 +216,11 @@ public class PetsitterController {
 			rttr.addFlashAttribute("message", "호스트 정보를 삭제하지 못했습니다.");
 		}
 
-		return "redirect:/petsitter/main";
+		return redirect;
 	}
 
 	@GetMapping("addDetail")
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("hasAuthority('host')")
 	public void addDetailForm(Authentication authentication, Model model) {
 		// 상세페이지 등록폼 view 포워드
 		Map<String, Object> info = petsitterService.selectByMemberId(authentication.getName());
@@ -190,7 +228,7 @@ public class PetsitterController {
 	}
 
 	@PostMapping("addDetail")
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("hasAuthority('host')")
 	public String addDetailProcess(Detail detail, Authentication authentication) throws Exception {
 		// 상세페이지 등록 과정
 		boolean ok = petsitterService.insertDetail(detail, authentication);
@@ -199,7 +237,7 @@ public class PetsitterController {
 	}
 
 	@GetMapping("addHousePhotos")
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("hasAuthority('host')")
 	public void addHousePhotosForm(Authentication authentication, Model model) {
 		// 상세페이지에 집사진 등록하는 폼 포워드
 		Map<String, Object> info = petsitterService.selectByMemberId(authentication.getName());
@@ -207,7 +245,7 @@ public class PetsitterController {
 	}
 
 	@PostMapping("addHousePhotos")
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("hasAuthority('host')")
 	public String addHousePhotosProgress(@RequestParam("cover") MultipartFile cover,
 			@RequestParam(value = "housePhotos", required = false) MultipartFile[] housePhotos, Integer hostId,
 			RedirectAttributes rttr) throws Exception {
@@ -226,7 +264,7 @@ public class PetsitterController {
 	}
 
 	@GetMapping("modifyDetail")
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("hasAuthority('host')")
 	public void modifyDetailForm(Authentication authentication, Model model) {
 		// 상세페이지 수정폼 view 포워드
 
@@ -237,16 +275,16 @@ public class PetsitterController {
 	}
 
 	@PostMapping("modifyDetail")
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("hasAuthority('host')")
 	public String modifyProcess(Detail detail) throws Exception {
 		// 상세페이지 수정 process
 		boolean ok = petsitterService.modifyDetailDescription(detail);
-
+		System.out.println("modify detail : " + detail);
 		return "redirect:/petsitter/modifyHousePhotos";
 	}
 
 	@GetMapping("modifyHousePhotos")
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("hasAuthority('host')")
 	public void modifuHousePhtosForm(Authentication authentication, Model model) {
 		// 상세페이지 집사진 수정폼 view 포워드
 
@@ -257,7 +295,7 @@ public class PetsitterController {
 	}
 
 	@PostMapping("modifyHousePhotos")
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("hasAuthority('host')")
 	public String modifyHousePhotosProcess(Detail detail,
 			@RequestParam(value = "addCover", required = false) MultipartFile addCover,
 			@RequestParam(value = "removePhotos", required = false) List<String> removePhotos,
@@ -277,7 +315,7 @@ public class PetsitterController {
 	}
 
 	@PostMapping("deleteDetail")
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("hasAuthority('host')")
 	public String deleteDetail(Integer hostId, Member member, Authentication authentication, RedirectAttributes rttr) {
 		// 상세페이지 삭제
 		member.setId(authentication.getName());
