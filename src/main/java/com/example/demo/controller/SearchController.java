@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.domain.Feed;
+import com.example.demo.domain.Search;
 import com.example.demo.service.SearchService;
 
 @Controller
@@ -28,13 +29,12 @@ public class SearchController {
 	}
 	
 	@GetMapping("/text")
-	public String searchProcess(@RequestParam("search") String search, RedirectAttributes rttr
-							) {
-		System.out.println(search);
-		List<Feed> searchResult = service.search(search);
-		System.out.println(searchResult);
+	public String searchProcess(@RequestParam("search") String search, Model model) {
+		//System.out.println(search);
+		List<Search> searchResult = service.search(search);
+		//System.out.println(searchResult);
 		
-		rttr.addFlashAttribute("search", searchResult);
+		model.addAttribute("search", searchResult);
 		
 		return "search";
 	}

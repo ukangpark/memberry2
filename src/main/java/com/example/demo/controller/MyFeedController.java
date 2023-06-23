@@ -178,6 +178,7 @@ public class MyFeedController {
 	public List<Tag> tag(@PathVariable("feedId") Integer feedId,
 							@PathVariable("tagInput") String tagInput, 
 							Authentication auth) {
+		System.out.println(feedId);
 		List<Tag> result = service.tag(feedId, tagInput, auth);
 		System.out.println(result);
 		return result;
