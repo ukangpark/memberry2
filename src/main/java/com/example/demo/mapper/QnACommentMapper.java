@@ -49,7 +49,4 @@ public interface QnACommentMapper {
 			WHERE qnaId = #{qnaId}
 			""")
 	Integer deleteByQnAId(Integer qnaId);
-	
-	
-	
 }
