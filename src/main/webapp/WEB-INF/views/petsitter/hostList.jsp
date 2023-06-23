@@ -54,7 +54,7 @@
 		</table>
 
 		<!-- 페이지네이션  -->
-		<div class="">
+		<div class="d-flex justify-content-center">
 			<nav aria-label="Page navigation example mx-auto">
 				<ul class="pagination">
 					<!-- 이전 버튼 -->
