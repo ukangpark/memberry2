@@ -24,33 +24,29 @@
 
 	<my:navBar></my:navBar>
 
+	<!-- 상단로고 -->
 	<div id="header">
 		<img id="memberyLogo" src="/images/memberyLogo.png" alt="Membery logo" onclick="location.href='home'" style="cursor: pointer">
 	</div>
 
-	<form class="ui form" method="post" style="margin: 20px 200px 0px 200px; justify-content: center;">
-		<div class="field">
-			<div class="ui large fluid action input">
-				<input type="text" name="search" placeholder="Search">
-				<select class="ui compact selection dropdown" name="title" id="search-dropdown">
-					<option value="Feed">피드</option>
-					<option value="Petsitter">펫시터</option>
-				</select>
-				<button class="ui button" type="submit">
-					<i class="search icon"></i>
-				</button>
-			</div>
+	<!-- 검색창 -->
+	<form action="/search/text" class="ui form" style="margin: 20px 300px 20px 300px; justify-content: center;">
+		<div class="ui big icon fluid input">
+			<input type="text" name="search" value="" placeholder="Search...">
+			<i class="search icon"></i>
 		</div>
 	</form>
 
-
-	<!-- 검색한 피드 찾기 -->
+	<div class="searchImage">
+		<a href="/feedId/${search.id}">
+			<ul class="slider" id="imgContainer">
+				<c:forEach items="${search.fileName }" var="fileName">
+					<li id="li-imager"><img id="imager" class="ui medium rounded imager" src="${bucketUrl }/feed/${search.id }/${fileName }" alt="" /></li>
+				</c:forEach>
+			</ul>
+		</a>
+	</div>
 
 	<my:bottom />
-	<script>
-		$('#search-dropdown').dropdown({
-			direction : 'auto'
-		});
-	</script>
 </body>
 </html>

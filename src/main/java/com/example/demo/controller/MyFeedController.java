@@ -53,9 +53,6 @@ public class MyFeedController {
 			session.setAttribute("alarms", alarms);
 		}
 		
-		// 팔로우 용
-		
-		
 
 		// 태그 용
 		Integer feedId = service.feedId(userName, authentication);
