@@ -22,21 +22,33 @@
 			overflow: auto;
 		}
 		.chating p{
-			color: grey;
-			font-size: 20px;
+			color: black;
+			font-size: 40px;
+			font-width: bold;
 			border-radius: 1rem;
-			
+			border: 2px solid gray;
+			margin-bottom: 10px;
 		}
 		
 		.me {
-		text-align: right;
-		background-color: white;
+		  /* text-align: right; */
+		  background-color: white;
+		  padding: 10px;
+		  float:right;
 		}
 		
 		.others {
-        text-align: left;
-        background-color: #EEEEEE;
-    }
+          /* text-align: left; */
+          background-color: #EEEEEE; 
+ 		  padding: 10px;
+ 		  float:left;
+   		}
+   		
+		.chating div {
+		 
+		  clear:both;
+		  
+		}
 	
 	</style>
 </head>
@@ -68,9 +80,9 @@
 					}
 				}else if(d.type == "message"){
 					if(d.sessionId == $("#sessionId").val()){
-						$("#chating").append("<p class='me'>" + d.msg + "</p>");	
+						$("#chating").append("<div><p class='me'>" + d.msg + "</p></div>");	
 					}else{
-						$("#chating").append("<p class='others'>" + d.userName + " : " + d.msg + "</p>");
+						$("#chating").append("<div><p class='others'>" + d.userName + " : " + d.msg + "</p></div>");
 					}
 						
 				}else{
@@ -135,6 +147,7 @@
 			
 		<div id="chatBack" style="background-color: #FFF2F2; height: 100vh; width: 75vw;">
 
+
 			<!-- 채팅창 -->
 			<div id="chating" class="chating">
 			</div>
@@ -152,6 +165,8 @@
 						<i class="fa-solid fa-paper-plane"></i>
 					</button>
 			</div>
+			
+			
 		</div>
 	</div>
 

@@ -24,7 +24,7 @@
          justify-content: center;
          align-items: center;
          min-height: 75vh;
-
+		 position: relative;
       }
       
       .back {
@@ -45,14 +45,9 @@
          margin-left: 10rem;
       }
       
-      .bxslider {
-         overflow: hidden;
-         transition-duration: 0.2s; 
-         transform: translate3d(-390px, 0px, 0px);
-      }
-      
        #imageList { 
-         position: relative;
+         width: 400px;
+         height:400px;
 		}
          
        #removeCheck {
@@ -60,6 +55,11 @@
           top: 0; left: 0;
           
         }  
+        
+        #imager {
+          width: 400px;
+          height:400px;
+        }
       
    </style>
    
@@ -80,6 +80,7 @@
       <div id="add" align="center">
          <ul class="bxslider">
             <c:forEach items="${feed.fileName }" var="fileName" varStatus="status">
+            <!-- <div id="imageDiv"> -->
               <li id="imageList${status.index }" align="left">
                <div id="removeCheck" class="d-flex">
 	               <i class="trash alternate icon"></i>
@@ -91,15 +92,16 @@
 	                   <label class="form-check-label" for="removeCheckBox${status.index }">
 	                  <%-- <button data-target-list="#imageList${status.index }" type="button" class=" removeFilesBtn btn btn-outline-dark" name="removeFiles" value="${fileName }"><i class="fa-solid fa-trash"></i></button> --%>
 	                  <%--  <button type="button" class="removeFilesBtn btn btn-dark" name="removeFiles" value="${fileName }"><i class="trash alternate icon"></i></button> --%>
-	                  <img class="ui medium rounded imager" src="${bucketUrl }/feed/${feed.id }/${fileName }" alt="" />
+	                  <img id="imager" class="ui medium rounded imager" src="${bucketUrl }/feed/${feed.id }/${fileName }" alt="" />
                </li>
+               <!-- </div> -->
             </c:forEach>
          </ul>
       
          <!-- 새 이미지 파일 추가 input -->
          <div align="center">
             <h3>사진을 추가해보세요! </h3>
-            <input style="margin-left: 60px;" type="file" multiple name="files" accept="image/*" />
+            <input style="margin-left: 60px;" type="file" multiple name="files" accept="image/*" required/>
          </div>
          
       </div>
