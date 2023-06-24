@@ -32,7 +32,6 @@ public class SearchController {
 	public String searchProcess(@RequestParam("search") String search, Model model) {
 		//System.out.println(search);
 		List<Search> searchResult = service.search(search);
-		System.out.println(searchResult);
 		
 		model.addAttribute("search", searchResult);
 		
