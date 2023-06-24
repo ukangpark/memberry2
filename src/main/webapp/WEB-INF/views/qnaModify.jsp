@@ -45,7 +45,8 @@
 						<label for="" class="form-label">작성일시</label> <input class="form-control" type="text" value="${qna.inserted }" readonly />
 					</div>
 					<div class="mb-3">
-						<input class="btn btn-secondary" type="submit" value="수정" />
+						<input class="ui toggle right floated large button" style="background-color: #6699cc" type="submit" value="수정하기" />
+						<div class="ui right floated large button" style="background-color: #cccccc" onclick="location.href='/qna/id/${qna.id}'">취소하기</div>
 					</div>
 				</form>
 			</div>

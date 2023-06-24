@@ -42,7 +42,8 @@
 					</div>
 					
 					<div class="mb-3">
-						<input class="btn btn-primary" type="submit" value="등록" />
+						<input class="ui toggle right floated large button" style="background-color: #6699cc" type="submit" value="등록하기" />
+						<div class="ui right floated large button" style="background-color: #cccccc" onclick="location.href='/qna'">취소하기</div>
 					</div>
 				</form>
 			</div>
