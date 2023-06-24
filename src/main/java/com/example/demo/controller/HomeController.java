@@ -30,6 +30,7 @@ public class HomeController {
 	public String feed(Model model,
 			Authentication authentication, HttpSession session) {
 		List<Feed> result = service.listFeed(authentication);
+		System.out.println(result);
 		model.addAttribute("feedList", result);
 		if (authentication != null) {
 			List<Alarm> alarms = alarmService.list(authentication.getName());
