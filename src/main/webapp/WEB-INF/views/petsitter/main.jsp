@@ -58,7 +58,7 @@
 .image {
 	width: 353px;
 	height: 200px;
-	margin-bottom: 10px;
+	margin-bottom: 12px;
 }
 
 .imager {
@@ -137,7 +137,7 @@
 }
 
 #idForm{
-	margin: 10px 0px;
+	margin: 8px 0px;
 }
 
 </style>
