@@ -28,7 +28,7 @@
 			<a href="/qna"><img class="qna" src="/images/qnaDetailLogo.png" alt="" /></a>
 				<div class="d-flex">
 					<div class="no">
-						<h1>질문 작성 페이지</h1>
+						<h1>문의글 작성 페이지</h1>
 					</div>
 				</div>
 				<form method="post">
