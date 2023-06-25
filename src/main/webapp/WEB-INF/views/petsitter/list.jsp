@@ -13,15 +13,15 @@
 <d:top></d:top>
 <link rel="stylesheet" type="text/css" href="/js/semantic/semantic.min.css">
 
-
-
-
-
 <style>
 h1 {
 	text-align: center;
 	/* 왜안댕.. */
 	font-family: fantasy;
+}
+
+#petsitterListLogo {
+	width: 500px;
 }
 
 #image{
@@ -44,13 +44,11 @@ h1 {
 
 
 	<div class="container-lg">
-		<a href="list" style="color: black">
-			<br />
-			<h1>
-				<i class="fa fa-solid fa-paw"></i> 펫시터 목록 <i class="fa fa-solid fa-paw"></i>
-			</h1>
+	<h1 style="margin-bottom:0px;">
+		<a href="/petsitter/main">
+			<img id="petsitterListLogo" src="/images/petsitterListLogo.png" alt="List logo">
 		</a>
-		<br /> <br /> <br /> <br />
+	</h1>
 
 		<form action="list" class="d-flex" role="search">
 			<input value="${param.search }" name="search" class="form-control me-2" type="search" placeholder="맡기고 싶은 지역을 검색해보세요" aria-label="Search">
