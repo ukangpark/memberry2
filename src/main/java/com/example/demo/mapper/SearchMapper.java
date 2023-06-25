@@ -21,6 +21,7 @@ public interface SearchMapper {
 			WHERE t.keyword LIKE '%' #{search} '%'
 			ORDER BY fd.id DESC;
 						""")
+	@ResultMap("SearchResultMap")
 	List<Search> selectAllBySearch(String search);
 
 }
