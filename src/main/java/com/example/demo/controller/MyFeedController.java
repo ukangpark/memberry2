@@ -151,6 +151,7 @@ public class MyFeedController {
       
       file.setMemberId(authentication.getName());
       boolean ok = service.modify(feed, removeFileNames, addFiles, file);
+      System.out.println(feed);
 
       if (ok) {
          // 수정이 잘 되면 작성한 게시물로 리디렉션

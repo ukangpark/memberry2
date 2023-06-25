@@ -123,20 +123,20 @@
 
 				<div class="ui form">
 					<div class="content">
-						<label align="left" style="color: gray; font-weight: bolder;">태그를 추가 해 보세요:)</label>
+						<%-- <label align="left" style="color: gray; font-weight: bolder;">태그를 추가 해 보세요:)</label>
 						<input type="text" id="writer" name="writer" value="${feed.writer }" style="display: none;">
 						<div class="ui right labeled left icon input">
 							<i class="tags icon"></i>
 							<input type="text" id="tagInput" placeholder="Enter tags">
 							<a type="submit" class="ui tag label" id="addTag">Add Tag</a>
 						</div>
-						<div class="tagsContainer mt-2">
+						<div class="tagsContainer mt-2"> --%>
 							<c:forEach items="${feed.keyword}" var="keyword">
 								<span class="ui tag blue tiny label" style="margin: 2px 6px 2px 6px">${keyword}</span>
 							</c:forEach>
-						</div>
+						<!-- </div>
 					</div>
-				</div>
+ -->				</div>
 			</div>
 			<%-- <div class="ui form">
                    <div class="location">

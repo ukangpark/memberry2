@@ -125,7 +125,7 @@ public class MyFeedService {
 			if (newFile.getSize() > 0) {
 				// 테이블에 파일명 추가
 				mapper.insertFileName(feed.getId(), newFile.getOriginalFilename(), file.getMemberId());
-
+				System.out.println("피드:" +feed);
 				// s3에 파일(객체) 업로드
 				String objectKey = "membery/feed/" + feed.getId() + "/" + newFile.getOriginalFilename();
 				PutObjectRequest por = PutObjectRequest.builder().acl(ObjectCannedACL.PUBLIC_READ).bucket(bucketName)
@@ -137,12 +137,13 @@ public class MyFeedService {
 		}
 
 		// 새 태그 추가
-		for (String keyword : feed.getKeyword()) {
-
-			if (keyword.length() > 0) {
-				mapper.insertTag(keyword, feed);
-			}
-		}
+//		for (String keyword : feed.getKeyword()) {
+//
+//			if (keyword.length() > 0) {
+//				mapper.insertTag(keyword, feed);
+//				System.out.println("태그:" +keyword);
+//			}
+//		}
 
 		// 게시물(Feed) 테이블 수정
 		int cnt = mapper.update(feed);
