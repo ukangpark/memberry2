@@ -58,7 +58,7 @@
 .image {
 	width: 353px;
 	height: 200px;
-	margin-bottom: 10px;
+	margin-bottom: 12px;
 }
 
 .imager {
@@ -136,6 +136,10 @@
 	height: 350px;
 }
 
+#idForm{
+	margin: 8px 0px;
+}
+
 </style>
 </head>
 <body>
@@ -181,7 +185,6 @@
 								</div>
 								<div class="extra content">
 									<span class="right floated"> 하루 40,000원~ </span> 
-									<span> <i class="comments icon"></i> 후기 ${host.commentCount }개
 										<form class="right floated inblock" action="/petsitter/detail" id="idForm">
 											<input class="d-none" type="text" name="id" value="${host.id }"> <input class="ui secondary button" type="submit" value="상세보기">
 										</form>

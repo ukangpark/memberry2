@@ -14,6 +14,14 @@
 .no {
 	margin: 0px 0px 20px 0px;
 }
+
+.item{
+	border-style: solid;
+	border-color: #e8e8e8;
+	border-radius: 7px;
+	margin: 10px 0px 10px 0px;
+}
+
 </style>
 
 <meta charset="UTF-8">
@@ -60,9 +68,10 @@
 					<label for="" class="form-label">작성일시</label> <input type="text" readonly class="form-control" value="${qna.inserted }" />
 				</div>
 				<sec:authorize access="hasAuthority('admin') or (isAuthenticated() and (authentication.name eq #qna.writer))">
-					<div>
-						<a class="ui black button" href="/qna/modify/${qna.id }">수정</a>
-						<button id="removeButton" class="ui red button" data-bs-toggle="modal" data-bs-target="#deleteConfirmModal">삭제</button>
+					<div style="margin-bottom: 10px">
+						<div class="ui toggle right floated large button" style="background-color: #cc6666" data-bs-toggle="modal" data-bs-target="#deleteConfirmModal">삭제하기</div>
+						<div class="ui toggle right floated large button" style="background-color: #6699cc" onclick="location.href='/qna/modify/${qna.id }'">수정하기</div>
+						<div class="ui right floated large button" style="background-color: #cccccc" onclick="location.href='/qna'">목록보기</div>
 					</div>
 				</sec:authorize>
 
@@ -72,11 +81,11 @@
 
 							<div class="input-group">
 								<div class="form-floating">
-									<textarea style="height: 50px" placeholder="관리자의 답변" class="form-control" id="qnaCommentTextArea"></textarea>
+									<textarea style="height: 50px;" placeholder="관리자의 답변" class="form-control" id="qnaCommentTextArea"></textarea>
 									<label for="floatingTextarea">관리자의 답변</label>
 								</div>
 								<button class="btn btn-outline-primary" id="qnaCommentBtn">
-									<i class="fa-regular fa-paper-plane"></i>
+									<i class="check icon"></i>
 								</button>
 							</div>
 						</div>
@@ -109,8 +118,8 @@
 					</div>
 					<div class="modal-body">삭제 하시겠습니까?</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-						<button type="submit" class="btn btn-danger" form="removeForm">삭제</button>
+						<button type="button" class="ui black button" data-bs-dismiss="modal">닫기</button>
+						<button type="submit" class="ui red button" form="removeForm">삭제</button>
 					</div>
 				</div>
 			</div>
@@ -133,8 +142,8 @@
 						</div>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-						<button type="button" class="btn btn-primary" id="qnaCommentUpdateBtn" data-bs-dismiss="modal">수정</button>
+						<button type="button" class="ui button" data-bs-dismiss="modal">취소</button>
+						<button type="button" class="ui olive button" id="qnaCommentUpdateBtn" data-bs-dismiss="modal">수정</button>
 					</div>
 				</div>
 			</div>
