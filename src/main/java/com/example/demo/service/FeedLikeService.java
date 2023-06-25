@@ -38,9 +38,8 @@ public class FeedLikeService {
 		if (deleteCnt != 1) {
 			Integer insertCnt = likeMapper.insert(like);
 			result.put("like", true);
-			if(like.getMemberId() != authentication.getName()) {
-				alarmMapper.likeAdd(like);
-			}
+			alarmMapper.likeAdd(like);
+			
 		}
 		
 		// 게시물 번호 기준으로 좋아요 개수 읽어내기
