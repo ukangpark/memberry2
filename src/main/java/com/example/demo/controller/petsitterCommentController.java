@@ -41,9 +41,7 @@ public class petsitterCommentController {
 		} else {
 			// 후기 등록
 			Map<String, Object> res = petsitterCommentService.add(petsitterComment, authentication);
-			
-			  if(petsitterComment.getMemberId() != authentication.getName()) {
-			  alarmService.addPetSitterComment(petsitterComment); }
+			alarmService.addPetSitterComment(petsitterComment); 
 			 
 			return ResponseEntity.ok().body(res);
 		}
