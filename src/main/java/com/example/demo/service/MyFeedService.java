@@ -65,11 +65,11 @@ public class MyFeedService {
 
 	public boolean addFeed(Feed feed, MultipartFile[] files, Authentication authentication) throws Exception {
 		// 게시물 insert
-		
+
 		int cnt = mapper.insert(feed);
-		//int tagCnt = mapper.insertTag(feed);
-		
-		for (int i=0; i<feed.getKeyword().size(); i++) {
+		// int tagCnt = mapper.insertTag(feed);
+
+		for (int i = 0; i < feed.getKeyword().size(); i++) {
 			mapper.insertTag(feed.getKeyword().get(i), feed);
 		}
 
@@ -104,7 +104,8 @@ public class MyFeedService {
 		return feed;
 	}
 
-	public boolean modify(Feed feed, List<String> removeFileNames, MultipartFile[] addFiles, File file) throws Exception {
+	public boolean modify(Feed feed, List<String> removeFileNames, MultipartFile[] addFiles, File file)
+			throws Exception {
 
 		// FileName 테이블 삭제
 		if (removeFileNames != null && !removeFileNames.isEmpty()) {
@@ -123,7 +124,7 @@ public class MyFeedService {
 		for (MultipartFile newFile : addFiles) {
 			if (newFile.getSize() > 0) {
 				// 테이블에 파일명 추가
-				mapper.insertFileName(feed.getId(), newFile.getOriginalFilename(),file.getMemberId() );
+				mapper.insertFileName(feed.getId(), newFile.getOriginalFilename(), file.getMemberId());
 
 				// s3에 파일(객체) 업로드
 				String objectKey = "membery/feed/" + feed.getId() + "/" + newFile.getOriginalFilename();
@@ -135,13 +136,21 @@ public class MyFeedService {
 			}
 		}
 
+		// 새 태그 추가
+		for (String keyword : feed.getKeyword()) {
+
+			if (keyword.length() > 0) {
+				mapper.insertTag(keyword, feed);
+			}
+		}
+
 		// 게시물(Feed) 테이블 수정
 		int cnt = mapper.update(feed);
 		return cnt == 1;
 	}
 
 	public boolean remove(Integer id) {
-		
+
 		// 태그 테이블 지우기
 		mapper.deleteTagByFeedId(id);
 
@@ -215,5 +224,4 @@ public class MyFeedService {
 //		return followResult;
 //	}
 
-	
 }
